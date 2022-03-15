@@ -8,6 +8,8 @@ This project is written in Java/JavaFx and is built using Maven. Unit test are w
 Students:
 
 • Federico Vaona
+
 • Chiara Peruzzi
+
 • Tristan Van den Weghe
 
