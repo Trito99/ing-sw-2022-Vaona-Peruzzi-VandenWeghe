@@ -9,6 +9,9 @@ public class IslandCard {
     private boolean towerIsOnIsland;
     private TColour towerOnIsland;
 
+    public IslandCard() {
+    }
+
     public int getIdIsland() {
         return this.idIsland;
     }
