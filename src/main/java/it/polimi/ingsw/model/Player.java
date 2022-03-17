@@ -24,11 +24,11 @@ public class Player {
     }
 
     public PlayerNumber getPlayerNumber() {
-        return PlayerNumber;
+        return this.PlayerNumber;
     }
 
     public TurnState getTurnState() {
-        return TurnState;
+        return this.TurnState;
     }
 
     public void setTurnState(TurnState turnState) {
@@ -36,19 +36,19 @@ public class Player {
     }
 
     public School getPersonalSchool() {
-        return PersonalSchool;
+        return this.PersonalSchool;
     }
 
     public AssistentCard getTrash(AssistentCard.AssistentName, AssistentCard.TurnValue) {
-        return Trash;
+        return this.Trash;
     }
 
     public Team getTeam() {
-        return Team;
+        return this.Team;
     }
 
     public int getCoinScore() {
-        return CoinScore;
+        return this.CoinScore;
     }
 
     public int decreaseCoinScore(){

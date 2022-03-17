@@ -1,11 +1,11 @@
 package it.polimi.ingsw.model;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Table {
 
-    private List<CloudCard> cloudNumber;
-    private List<IslandCard> idIsland;
+    private ArrayList<CloudCard> cloudNumber;
+    private ArrayList<IslandCard> idIsland;
     private int coinsOnTable;
 
     public ArrayList<CloudCard> getCloudNumber() {
