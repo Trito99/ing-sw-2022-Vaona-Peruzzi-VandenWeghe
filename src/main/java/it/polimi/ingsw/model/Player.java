@@ -1,6 +1,4 @@
-package src.main.java.it.polimi.ingsw.model;
-
-import it.polimi.ingsw.model.AssistentCard;
+package it.polimi.ingsw.model;
 
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;

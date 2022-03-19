@@ -14,8 +14,10 @@ public class DeckAssistent {
     }
 
     public boolean CheckIsEmpty() {
-        if (this.AssistentCard != null){
-            return this.AssistentCard;
+        if (this.AssistentCard != null)
+            return false;
+        else
+            return true;
         }
     }
 }

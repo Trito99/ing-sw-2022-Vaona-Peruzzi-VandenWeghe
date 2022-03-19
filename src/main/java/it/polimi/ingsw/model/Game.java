@@ -1,12 +1,12 @@
-package src.main.java.it.polimi.ingsw.model;
+package it.polimi.ingsw.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
 
-    private int GameId;
-    private GameMode GameMode;
+    private int gameId;
+    private GameMode gameMode;
     private ArrayList<Player> ListOfPlayer;
     private int ActivePlayer;
     private int NumberOfPlayers;

@@ -158,8 +158,10 @@ public class School {
     }
 
     public boolean checkTowerIsEmpty() {
-        if (this.Tower != null){
-            return this.Tower;
+        if (this.Tower != null)
+            return false;
+        else
+            return true;
         }
     }
 
