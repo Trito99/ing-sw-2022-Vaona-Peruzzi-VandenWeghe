@@ -5,6 +5,6 @@ public class Prof {
     private SColour sColour;
 
     public SColour getSColour() {
-        return this.SColour;
+        return this.sColour;
     }
 }

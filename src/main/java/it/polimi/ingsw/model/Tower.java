@@ -10,7 +10,7 @@ public class Tower {
     }
 
     public TColour getTColour(){
-        return this.TColour;
+        return this.tColour;
     }
 
 }

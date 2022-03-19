@@ -14,48 +14,48 @@ public class Game {
     private ArrayList<Player> round;
 
     public void addPlayer(){
-        ListOfPlayer  = ListOfPlayer+1;
+        listOfPlayer  = listOfPlayer+1;
         //modo per scannerizzare nuovo Player
     }
 
     public GameMode getGameMode() {
-        return this.GameMode;
+        return this.gameMode;
     }
 
     public ArrayList<Player> getListOfPlayer{
-
+            //da fare
     }
 
     public int getGameId(){
-        return this.GameId;
+        return this.gameId;
     }
 
     public int getNumberOfPlayers(){
-        return this.NumberOfPlayers;
+        return this.numberOfPlayers;
     }
 
     public Player getActivePlayer(){
-        return this.ActivePlayer;
+        return this.activePlayer;
     }
 
     public void setActivePlayer(){
-        this.ActivePlayer = ActivePlayer;
+        this.activePlayer = activePlayer;
     }
 
     public State getState(){
-        return this.State;
+        return this.state;
     }
 
     public void setState(){
-        this.State = State;
+        this.state = state;
     }
 
     public ArrayList<Player> getRound(){
-        return this.Round;
+        return this.round;
     }
 
     public ArrayList<Player> setRound(){
-        this.Round = Round;
+        this.round = round;
     }
 
     public Player winnerIs(){

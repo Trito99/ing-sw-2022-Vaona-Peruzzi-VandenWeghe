@@ -7,7 +7,7 @@ public class MotherEarth {
     private int position;
 
     public int getPosition() {
-        return this.Position;
+        return this.position;
     }
 
     public int movePosition() {

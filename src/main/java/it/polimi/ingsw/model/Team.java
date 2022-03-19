@@ -7,6 +7,6 @@ public class Team {
     private ArrayList<Player> team;
 
     public ArrayList<Player> getTeam() {
-        return this.Team;
+        return this.team;
     }
 }

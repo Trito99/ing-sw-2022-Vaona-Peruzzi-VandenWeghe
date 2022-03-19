@@ -15,8 +15,8 @@ public class Bag {
     }
 
     public boolean CheckIsEmpty(){
-        if (this.Bag != null){
-            return this.Bag;
+        if (this.bag != null){
+            return this.bag;
         }
     }
 

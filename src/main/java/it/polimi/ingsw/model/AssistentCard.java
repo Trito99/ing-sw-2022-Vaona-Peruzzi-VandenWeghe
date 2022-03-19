@@ -9,14 +9,14 @@ public class AssistentCard {
     private int turnValue;
 
     public String getAssistentName() {
-        return this.AssistentName;
+        return this.assistentName;
     }
 
     public int getStepMotherEarth() {
-        return this.StepMotherEarth;
+        return this.stepMotherEarth;
     }
 
     public int getTurnValue() {
-        return this.TurnValue;
+        return this.turnValue;
     }
 }

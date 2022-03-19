@@ -24,36 +24,43 @@ public class Player {
     }
 
     public PlayerNumber getPlayerNumber() {
-        return this.PlayerNumber;
+        return this.playerNumber;
     }
 
     public TurnState getTurnState() {
-        return this.TurnState;
+        return this.turnState;
     }
 
     public void setTurnState(TurnState turnState) {
-        this.TurnState = TurnState;
+        this.turnState = turnState;
     }
 
     public School getPersonalSchool() {
-        return this.PersonalSchool;
+        return this.personalSchool;
     }
 
-    public AssistentCard getTrash(AssistentCard.AssistentName, AssistentCard.TurnValue) {
-        return this.Trash;
+    public AssistentCard getTrash(String AssistentCard.assistentName, int AssistentCard.turnValue) {
+        return this.trash;
     }
 
     public Team getTeam() {
-        return this.Team;
+        return this.team;
     }
 
     public int getCoinScore() {
-        return this.CoinScore;
+        return this.coinScore;
+    }
+
+    public int increaseCoinScore(){
+        coinScore = getCoinScore();
+        coinScore = coinScore + 1;
+        return this.coinScore;
     }
 
     public int decreaseCoinScore(){
-        //...
-        return this.CoinScore;
+        coinScore = getCoinScore();
+        coinScore = coinScore - 1;
+        return this.coinScore;
     }
 
 }

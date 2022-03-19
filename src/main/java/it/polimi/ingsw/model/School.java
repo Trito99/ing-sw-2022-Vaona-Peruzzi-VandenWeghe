@@ -22,8 +22,9 @@ public class School {
     }
 
     public ArrayList<Student> addStudent() {
-        ArrayList<Student> = ArrayList<Student> + 1;
-        // implementare lo scan dei nuovi studenti
+        entry = entry + 1;
+        // ?? in school o in entry ??
+        // SERVE ?
     }
 
     public ArrayList<Student> moveStudentInHall(){
@@ -75,7 +76,9 @@ public class School {
     }
 
     public int increaseCoinScore(){
-        Player.coinScore +1 ;
+        int coinScore = Player.getCoinScore();
+        coinScore = Player.increaseCoinScore();
+        return coinScore;
     }
 
     public boolean getProfGInHall(){

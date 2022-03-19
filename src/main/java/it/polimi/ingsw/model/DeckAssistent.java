@@ -6,15 +6,15 @@ public class DeckAssistent {
     private List<DeckAssistent> assistentCard;
 
     public List<DeckAssistent> getAssistentCard() {
-        return this.AssistentCard;
+        return this.assistentCard;
     }
 
     public List<DeckAssistent> updateDeck() {
-        return this.AssistentCard;
+        return this.assistentCard;
     }
 
     public boolean checkIsEmpty() {
-        if (this.AssistentCard != null)
+        if (this.assistentCard != null)
             return false;
         else
             return true;
