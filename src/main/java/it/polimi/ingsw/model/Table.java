@@ -21,7 +21,7 @@ public class Table {
     }
 
     public ArrayList<idIsland> joinIsland(){
-
+        //da fare
     }
 
     public boolean checkListOfIsland(){

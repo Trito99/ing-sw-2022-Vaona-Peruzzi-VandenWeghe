@@ -1,5 +1,7 @@
 package src.main.java.it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.AssistentCard;
+
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 
@@ -32,7 +34,7 @@ public class Player {
     }
 
     public void setTurnState(TurnState turnState) {
-        this.TurnState = turnState;
+        this.TurnState = TurnState;
     }
 
     public School getPersonalSchool() {
