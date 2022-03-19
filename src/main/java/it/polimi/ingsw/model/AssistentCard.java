@@ -4,9 +4,9 @@ import java.util.List;
 
 public class AssistentCard {
 
-    private String AssistentName;
-    private int StepMotherEarth;
-    private int TurnValue;
+    private String assistentName;
+    private int stepMotherEarth;
+    private int turnValue;
 
     public String getAssistentName() {
         return this.AssistentName;

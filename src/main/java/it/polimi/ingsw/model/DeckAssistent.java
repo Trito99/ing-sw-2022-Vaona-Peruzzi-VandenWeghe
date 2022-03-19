@@ -3,7 +3,7 @@ package it.polimi.ingsw.model;
 import java.util.List;
 
 public class DeckAssistent {
-    private List<DeckAssistent> AssistentCard;
+    private List<DeckAssistent> assistentCard;
 
     public List<DeckAssistent> getAssistentCard() {
         return this.AssistentCard;
@@ -13,7 +13,7 @@ public class DeckAssistent {
         return this.AssistentCard;
     }
 
-    public boolean CheckIsEmpty() {
+    public boolean checkIsEmpty() {
         if (this.AssistentCard != null)
             return false;
         else

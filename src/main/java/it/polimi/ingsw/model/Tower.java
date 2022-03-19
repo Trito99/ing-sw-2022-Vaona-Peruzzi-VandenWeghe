@@ -3,7 +3,7 @@ package it.polimi.ingsw.model;
 public class Tower {
 
     private int idTower;
-    private TColour TColour;
+    private TColour tColour;
 
     public int getIdTower() {
         return this.idTower;

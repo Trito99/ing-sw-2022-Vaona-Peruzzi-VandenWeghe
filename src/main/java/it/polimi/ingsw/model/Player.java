@@ -9,10 +9,10 @@ public class Player {
     private String age;               // CONTROLLARE LIBRERIA DATA
     private PlayerNumber playerNumber;
     private TurnState turnState;
-    private School PersonalSchool;
-    private AssistentCard Trash;
-    private Team Team;
-    private int CoinScore;
+    private School personalSchool;
+    private AssistentCard trash;
+    private Team team;
+    private int coinScore;
 
 
     public String getNickname() {

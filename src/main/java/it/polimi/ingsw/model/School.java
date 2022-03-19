@@ -4,21 +4,21 @@ import java.util.ArrayList;
 
 public class School {
 
-    private ArrayList<Student> Entry;
+    private ArrayList<Student> entry;
     private ArrayList<Student> GTable;
     private ArrayList<Student> RTable;
     private ArrayList<Student> YTable;
     private ArrayList<Student> PTable;
     private ArrayList<Student> BTable;
-    private boolean ProfGInHall;
-    private boolean ProfRInHall;
-    private boolean ProfYInHall;
-    private boolean ProfPInHall;
-    private boolean ProfBInHall;
-    private ArrayList<Tower> Tower;
+    private boolean profGInHall;
+    private boolean profRInHall;
+    private boolean profYInHall;
+    private boolean profPInHall;
+    private boolean profBInHall;
+    private ArrayList<Tower> tower;
 
     public ArrayList<Student> getEntry() {
-        return this.Entry;
+        return this.entry;
     }
 
     public ArrayList<Student> addStudent() {
@@ -75,90 +75,90 @@ public class School {
     }
 
     public int increaseCoinScore(){
-        Player.CoinScore +1 ;
+        Player.coinScore +1 ;
     }
 
     public boolean getProfGInHall(){
-        return this.ProfGInHall;
+        return this.profGInHall;
     }
 
     public boolean getProfRInHall(){
-        return this.ProfRInHall;
+        return this.profRInHall;
     }
 
     public boolean getProfYInHall(){
-        return this.ProfYInHall;
+        return this.profYInHall;
     }
 
     public boolean getProfPInHall(){
-        return this.ProfPInHall;
+        return this.profPInHall;
     }
 
     public boolean getProfBInHall(){
-        return this.ProfBInHall;
+        return this.profBInHall;
     }
 
     public boolean setProfGInHall(){
         if(getProfGInHall()==false){
-            return ProfGInHall()=true;
+            return profGInHall()=true;
         }
         if(getProfGInHall()==true){
-            return ProfGInHall()=false;
+            return profGInHall()=false;
         }
     }
 
     public boolean setProfRInHall(){
         if(getProfRInHall()==false){
-            return ProfRInHall()=true;
+            return profRInHall()=true;
         }
         if(getProfRInHall()==true){
-            return ProfRInHall()=false;
+            return profRInHall()=false;
         }
     }
 
     public boolean setProfYInHall(){
         if(getProfYInHall()==false){
-            return ProfYInHall()=true;
+            return profYInHall()=true;
         }
         if(getProfYInHall()==true){
-            return ProfYInHall()=false;
+            return profYInHall()=false;
         }
     }
 
     public boolean setProfPInHall(){
         if(getProfPInHall()==false){
-            return ProfPInHall()=true;
+            return profPInHall()=true;
         }
         if(getProfPInHall()==true){
-            return ProfPInHall()=false;
+            return profPInHall()=false;
         }
     }
 
     public boolean setProfBInHall(){
         if(getProfBInHall()==false){
-            return ProfBInHall()=true;
+            return profBInHall()=true;
         }
         if(getProfBInHall()==true){
-            return ProfBInHall()=false;
+            return profBInHall()=false;
         }
     }
 
     public ArrayList<Tower> getTower() {
-        return this.Tower;
+        return this.tower;
     }
 
     public ArrayList<Tower> addTower() {
         ArrayList<Tower> = ArrayList<Tower> + 1;
-        return this.Tower;
+        return this.tower;
     }
 
     public ArrayList<Tower> removeTower() {
         ArrayList<Tower> = ArrayList<Tower> - 1;
-        return this.Tower;
+        return this.tower;
     }
 
     public boolean checkTowerIsEmpty() {
-        if (this.Tower != null)
+        if (this.tower != null)
             return false;
         else
             return true;

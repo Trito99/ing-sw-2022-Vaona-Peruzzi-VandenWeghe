@@ -2,7 +2,7 @@ package it.polimi.ingsw.model;
 
 public class Prof {
 
-    private SColour SColour;
+    private SColour sColour;
 
     public SColour getSColour() {
         return this.SColour;

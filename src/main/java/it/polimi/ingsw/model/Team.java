@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Team {
 
-    private ArrayList<Player> Team;
+    private ArrayList<Player> team;
 
     public ArrayList<Player> getTeam() {
         return this.Team;

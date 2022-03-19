@@ -7,11 +7,11 @@ public class Game {
 
     private int gameId;
     private GameMode gameMode;
-    private ArrayList<Player> ListOfPlayer;
-    private int ActivePlayer;
-    private int NumberOfPlayers;
-    private State State;
-    private ArrayList<Player> Round;
+    private ArrayList<Player> listOfPlayer;
+    private int activePlayer;
+    private int numberOfPlayers;
+    private State state;
+    private ArrayList<Player> round;
 
     public void addPlayer(){
         ListOfPlayer  = ListOfPlayer+1;
@@ -58,7 +58,7 @@ public class Game {
         this.Round = Round;
     }
 
-    public Player WinnerIs(){
+    public Player winnerIs(){
         //da fare
     }
 
