@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model;
 
-public class GameMode {
-    2PLAYERS,
-    3PLAYERS,
+public enum GameMode {
+    TWOPLAYERS,
+    THREEPLAYERS,
     COOP
 }

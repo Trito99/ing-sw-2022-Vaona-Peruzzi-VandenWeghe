@@ -9,8 +9,8 @@ public class Player {
 
     private String nickname;
     private String age;               // CONTROLLARE LIBRERIA DATA
-    private PlayerNumber PlayerNumber;
-    private TurnState TurnState;
+    private PlayerNumber playerNumber;
+    private TurnState turnState;
     private School PersonalSchool;
     private AssistentCard Trash;
     private Team Team;
