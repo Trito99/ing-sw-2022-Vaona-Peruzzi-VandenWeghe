@@ -5,12 +5,10 @@ import java.util.ArrayList;
 public class IslandCard {
 
     private int idIsland;
-    private ArrayList<Student> studentOnIsland;
+    private ArrayList<Student> studentOnIsland = new ArrayList<>();
     private boolean towerIsOnIsland;
     private TColour towerOnIsland;
 
-    public IslandCard() {
-    }
 
     public int getIdIsland() {
         return this.idIsland;

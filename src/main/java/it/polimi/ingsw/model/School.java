@@ -4,18 +4,18 @@ import java.util.ArrayList;
 
 public class School {
 
-    private ArrayList<Student> entry;
-    private ArrayList<Student> GTable;
-    private ArrayList<Student> RTable;
-    private ArrayList<Student> YTable;
-    private ArrayList<Student> PTable;
-    private ArrayList<Student> BTable;
+    private ArrayList<Student> entry  = new ArrayList<>(7);
+    private ArrayList<Student> GTable = new ArrayList<>();
+    private ArrayList<Student> RTable = new ArrayList<>();
+    private ArrayList<Student> YTable = new ArrayList<>();
+    private ArrayList<Student> PTable = new ArrayList<>();
+    private ArrayList<Student> BTable = new ArrayList<>();
     private boolean profGInHall;
     private boolean profRInHall;
     private boolean profYInHall;
     private boolean profPInHall;
     private boolean profBInHall;
-    private ArrayList<Tower> tower;
+    private ArrayList<Tower> tower = new ArrayList<>();
 
     public ArrayList<Student> getEntry() {
         return this.entry;

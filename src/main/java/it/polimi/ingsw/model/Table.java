@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Table {
 
-    private ArrayList<CloudCard> cloudNumber;
-    private ArrayList<IslandCard> idIsland;
+    private ArrayList<CloudCard> cloudNumber = new ArrayList<>(2);
+    private ArrayList<IslandCard> idIsland = new ArrayList<>(12);
     private int coinsOnTable;
 
     public ArrayList<CloudCard> getCloudNumber() {

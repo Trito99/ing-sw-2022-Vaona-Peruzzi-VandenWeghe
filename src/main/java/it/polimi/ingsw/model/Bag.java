@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Bag {
 
-    private ArrayList<Student> bag;
+    private ArrayList<Student> bag = new ArrayList<>(130);;
 
     public ArrayList<Student> shuffleBag(){
         //da fare

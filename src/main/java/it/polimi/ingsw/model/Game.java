@@ -7,11 +7,11 @@ public class Game {
 
     private int gameId;
     private GameMode gameMode;
-    private ArrayList<Player> listOfPlayer;
+    private ArrayList<Player> listOfPlayer = new ArrayList<>(2);
     private int activePlayer;
     private int numberOfPlayers;
     private State state;
-    private ArrayList<Player> round;
+    private ArrayList<Player> round = new ArrayList<>();
 
     public void addPlayer(){
         listOfPlayer  = listOfPlayer+1;

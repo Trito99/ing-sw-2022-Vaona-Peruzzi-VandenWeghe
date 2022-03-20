@@ -28,7 +28,6 @@ public class CharacterCard {
     }
 
     public int increaseCostCharachter(){
-
             costCharacter = getCostCharacter();
             costCharacter = costCharacter + 1;
             return this.costCharacter;
