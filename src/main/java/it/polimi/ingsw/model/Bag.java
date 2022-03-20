@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Bag {
 
-    private ArrayList<Student> bag = new ArrayList<>(130);;
+    private ArrayList<Student> bag = new ArrayList<>(130);
 
     public ArrayList<Student> shuffleBag(){
         //da fare
@@ -12,13 +12,15 @@ public class Bag {
     }
 
     public ArrayList<Student> extractStudent(){
-        //da fare
+
         return this.bag;
     }
 
     public boolean CheckIsEmpty(){
-        if (this.bag != null){
-            return 0;
+        if (bag.toArray().length != 0){
+            return true;
+        }else{
+            return false;
         }
     }
 

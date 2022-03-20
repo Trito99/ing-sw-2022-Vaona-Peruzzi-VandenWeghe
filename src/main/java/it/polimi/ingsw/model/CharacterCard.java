@@ -2,10 +2,17 @@ package it.polimi.ingsw.model;
 
 public class CharacterCard {
 
-    private int idCharacter;
-    private int costCharacter;
-    private CardEffect cardEffect;
+    private final int idCharacter;
+    private final int costCharacter;
+    private final CardEffect cardEffect;
     private boolean coinOnCard;
+
+    public CharacterCard (int idCharacter, int costCharacter, CardEffect cardEffect, boolean coinOnCard){
+        this.idCharacter = idCharacter;
+        this.costCharacter = costCharacter;
+        this.cardEffect = cardEffect;
+        this.coinOnCard = coinOnCard;
+    }
 
     public int getIdCharacter() {
         return this.idCharacter;

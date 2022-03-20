@@ -2,14 +2,14 @@ package it.polimi.ingsw.model;
 
 import java.util.List;
 
-public class AssistentCard {
+public class AssistantCard {
 
-    private String assistentName;
+    private String assistantName;
     private int stepMotherEarth;
     private int turnValue;
 
-    public String getAssistentName() {
-        return this.assistentName;
+    public String getAssistantName() {
+        return this.assistantName;
     }
 
     public int getStepMotherEarth() {

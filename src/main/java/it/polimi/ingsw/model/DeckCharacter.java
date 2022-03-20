@@ -6,7 +6,7 @@ public class DeckCharacter {
 
     private ArrayList<CharacterCard> characterCards = new ArrayList<>(12); //10 o 12??
 
-    public ArrayList<CharacterCard> getAssistentCard(){
+    public ArrayList<CharacterCard> getAssistantCard(){
         return this.characterCards;
     }
 
