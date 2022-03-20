@@ -31,7 +31,7 @@ public class CharacterCard {
     }
 
     public void setCoinOnCard(boolean coinOnCard) {
-        if (this.coinOnCard == false) {
+        if (!this.coinOnCard) {
             this.coinOnCard = true;
         }
         else return;

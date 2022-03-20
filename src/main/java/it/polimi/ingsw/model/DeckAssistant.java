@@ -3,7 +3,7 @@ package it.polimi.ingsw.model;
 import java.util.ArrayList;
 
 public class CloudCard {
-    private ArrayList<Student> studentOnCloud = new ArrayList<>(3);;
+    private ArrayList<Student> studentOnCloud = new ArrayList<>(3);
     private int numberOfSpaces;
     private int studentCount;
 
