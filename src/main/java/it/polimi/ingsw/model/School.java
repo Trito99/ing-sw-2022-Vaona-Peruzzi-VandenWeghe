@@ -26,6 +26,7 @@ public class School {
         // ci sarà una notify observer
         // ?? in school o in entry ??
         // SERVE ?
+        return entry;
     }
 
     public ArrayList<Student> moveStudentInHall(){
@@ -58,6 +59,7 @@ public class School {
 
     public boolean calculateGInfluence() {
         //da fare
+
     }
 
     public boolean calculateRInfluence() {
@@ -102,49 +104,24 @@ public class School {
         return this.profBInHall;
     }
 
-    public boolean setProfGInHall(){
-        if(getProfGInHall()==false){
-            return profGInHall()=true;
-        }
-        if(getProfGInHall()==true){
-            return profGInHall()=false;
-        }
+    public boolean setProfGInHall(boolean profGInHall){
+        return this.profGInHall = profGInHall;
     }
 
-    public boolean setProfRInHall(){
-        if(getProfRInHall()==false){
-            return profRInHall()=true;
-        }
-        if(getProfRInHall()==true){
-            return profRInHall()=false;
-        }
+    public boolean setProfRInHall(boolean profRInHall){
+        return this.profRInHall = profRInHall;
     }
 
-    public boolean setProfYInHall(){
-        if(getProfYInHall()==false){
-            return profYInHall()=true;
-        }
-        if(getProfYInHall()==true){
-            return profYInHall()=false;
-        }
+    public boolean setProfYInHall(boolean profYInHall){
+       return this.profYInHall = profYInHall;
     }
 
-    public boolean setProfPInHall(){
-        if(getProfPInHall()==false){
-            return profPInHall()=true;
-        }
-        if(getProfPInHall()==true){
-            return profPInHall()=false;
-        }
+    public boolean setProfPInHall(boolean profPInHall){
+        return this.profPInHall = profPInHall;
     }
 
-    public boolean setProfBInHall(){
-        if(getProfBInHall()==false){
-            return profBInHall()=true;
-        }
-        if(getProfBInHall()==true){
-            return profBInHall()=false;
-        }
+    public boolean setProfBInHall(boolean profBInHall){
+        return this.profBInHall = profBInHall;
     }
 
     public ArrayList<Tower> getTower() {
@@ -169,5 +146,9 @@ public class School {
             return true;
         }
     }
+
+
+
+
 
 }

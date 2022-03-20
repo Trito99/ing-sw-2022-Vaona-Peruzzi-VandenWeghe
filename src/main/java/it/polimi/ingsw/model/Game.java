@@ -39,7 +39,7 @@ public class Game {
         return this.activePlayer;
     }
 
-    public void setActivePlayer(){
+    public void setActivePlayer(int activePlayer){
         this.activePlayer = activePlayer;
     }
 
@@ -47,7 +47,7 @@ public class Game {
         return this.state;
     }
 
-    public void setState(){
+    public void setState(state State){
         this.state = state;
     }
 
@@ -56,7 +56,10 @@ public class Game {
     }
 
     public ArrayList<Player> setRound(){
-        this.round = round;
+        for (Player player : this.round = round) {
+
+        }
+
     }
 
     public Player winnerIs(){

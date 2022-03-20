@@ -1,21 +1,19 @@
 package it.polimi.ingsw.model;
 
-import java.util.ArrayList;
+public class DeckAssistant {
 
-public class CloudCard {
-    private ArrayList<Student> studentOnCloud = new ArrayList<>(3);
-    private int numberOfSpaces;
-    private int studentCount;
+    private List<AssistantCard> assistentCard = new ArrayList<>(10);
 
-    public ArrayList<Student> getStudentOnCloud() {
-        return this.studentOnCloud;
+    public List<AssistantCard> getAssistentCard() {
+        return this.assistentCard;
     }
 
-    public int getNumberOfSpaces() {
-        return this.numberOfSpaces;
+    public List<AssistantCard> updateDeck() {
+        return this.assistentCard;
     }
 
-    public int getStudentCount() {
-        return this.studentCount;
+    public boolean checkIsEmpty() {
+        return this.assistentCard == null;
     }
+
 }
