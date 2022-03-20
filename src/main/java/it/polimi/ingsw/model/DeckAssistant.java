@@ -1,14 +1,16 @@
 package it.polimi.ingsw.model;
 
+import java.util.ArrayList;
+
 public class DeckAssistant {
 
-    private List<AssistantCard> assistentCard = new ArrayList<>(10);
+    private ArrayList<AssistantCard> assistentCard = new ArrayList<>(10);
 
-    public List<AssistantCard> getAssistentCard() {
+    public ArrayList<AssistantCard> getAssistentCard() {
         return this.assistentCard;
     }
 
-    public List<AssistantCard> updateDeck() {
+    public ArrayList<AssistantCard> updateDeck() {
         return this.assistentCard;
     }
 

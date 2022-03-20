@@ -5,14 +5,17 @@ import java.text.SimpleDateFormat;
 
 public class Player {
 
-    private String nickname;
-    private String age;               // CONTROLLARE LIBRERIA DATA
+    private final String nickname;
+    private final String age;               // CONTROLLARE LIBRERIA DATA
     private PlayerNumber playerNumber;
     private TurnState turnState;
     private School personalSchool;
-    private AssistentCard trash;
+    private AssistantCard trash;
     private Team team;
     private int coinScore;
+
+    public Player() {
+    }
 
 
     public String getNickname() {
@@ -39,7 +42,7 @@ public class Player {
         return this.personalSchool;
     }
 
-    public AssistentCard getTrash(String AssistentCard.assistentName, int AssistentCard.turnValue) {
+    public AssistantCard getTrash(String AssistentCard.assistantName, int AssistentCard.turnValue) {
         return this.trash;
     }
 
@@ -47,7 +50,7 @@ public class Player {
         return this.team;
     }
 
-    public int getCoinScore() {
+    public static int getCoinScore() {
         return this.coinScore;
     }
 

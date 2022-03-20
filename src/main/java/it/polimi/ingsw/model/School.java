@@ -59,27 +59,31 @@ public class School {
 
     public boolean calculateGInfluence() {
         //da fare
-
+        return true;
     }
 
     public boolean calculateRInfluence() {
         //da fare
+        return true;
     }
 
     public boolean calculateYInfluence() {
         //da fare
+        return true;
     }
 
     public boolean calculatePInfluence() {
         //da fare
+        return true;
     }
 
     public boolean calculateBInfluence() {
         //da fare
+        return true;
     }
 
     public int increaseCoinScore(){
-        int coinScore = Player.getCoinScore();
+        Player.getCoinScore();
         coinScore = Player.increaseCoinScore();
         return coinScore;
     }
@@ -140,11 +144,7 @@ public class School {
     }
 
     public boolean checkTowerIsEmpty() {
-        if (this.tower != null)
-            return false;
-        else
-            return true;
-        }
+        return this.tower == null;
     }
 
 

@@ -20,7 +20,7 @@ public class Table {
         return this.coinsOnTable;
     }
 
-    public ArrayList<idIsland> joinIsland(){
+    public ArrayList<IslandCard> joinIsland(){
         //da fare
     }
 
