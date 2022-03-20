@@ -24,12 +24,15 @@ public class CharacterCard {
     }
 
     public void setCoinOnCard(boolean coinOnCard) {
-        this.coinOnCard = coinOnCard;
+        if (this.coinOnCard == false) {
+            this.coinOnCard = true;
+        }
+        else return;
     }
 
     public int increaseCostCharachter(){
-            costCharacter = getCostCharacter();
-            costCharacter = costCharacter + 1;
-            return this.costCharacter;
+        this.costCharacter = getCostCharacter();
+        this.costCharacter = costCharacter + 1;
+        return this.costCharacter;
     }
 }

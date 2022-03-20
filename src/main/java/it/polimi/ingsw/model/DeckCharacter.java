@@ -4,10 +4,21 @@ import java.util.ArrayList;
 
 public class DeckCharacter {
 
-    private ArrayList<CharacterCard> characterCards= new ArrayList<>(12); //10 o 12??
+    private ArrayList<CharacterCard> characterCards = new ArrayList<>(12); //10 o 12??
 
-    public characterCards getAssistentCard(){
-
+    public ArrayList<CharacterCard> getAssistentCard(){
+        return this.characterCards;
     }
-    // DA FARE I METODI
+
+    public ArrayList<CharacterCard> updateDeck(){
+        return this.characterCards;
+    }
+
+    public boolean checkIsEmpty(){
+        if (this.characterCards != null)
+            return false;
+        else
+            return true;
+    }
+
 }

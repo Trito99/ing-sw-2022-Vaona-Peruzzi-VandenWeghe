@@ -14,7 +14,8 @@ public class Game {
     private ArrayList<Player> round = new ArrayList<>();
 
     public void addPlayer(){
-        listOfPlayer  = listOfPlayer+1;
+        this.listOfPlayer + 1;
+        // ci sarà una notify observer
         //modo per scannerizzare nuovo Player
     }
 

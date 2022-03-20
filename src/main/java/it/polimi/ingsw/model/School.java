@@ -22,7 +22,8 @@ public class School {
     }
 
     public ArrayList<Student> addStudent() {
-        entry = entry + 1;
+        this.entry + 1;     //ho scoperto che non si può usare per array :')
+        // ci sarà una notify observer
         // ?? in school o in entry ??
         // SERVE ?
     }
@@ -151,8 +152,9 @@ public class School {
     }
 
     public ArrayList<Tower> addTower() {
-        ArrayList<Tower> = ArrayList<Tower> + 1;
-        return this.tower;
+        this.tower + 1;
+        // ci sarà una notify observer
+        return null;
     }
 
     public ArrayList<Tower> removeTower() {

@@ -8,15 +8,17 @@ public class Bag {
 
     public ArrayList<Student> shuffleBag(){
         //da fare
+        return this.bag;
     }
 
     public ArrayList<Student> extractStudent(){
         //da fare
+        return this.bag;
     }
 
     public boolean CheckIsEmpty(){
         if (this.bag != null){
-            return this.bag;
+            return 0;
         }
     }
 
