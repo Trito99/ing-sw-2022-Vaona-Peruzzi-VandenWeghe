@@ -5,13 +5,18 @@ import java.util.List;
 
 public class Game {
 
-    private int gameId;
-    private GameMode gameMode;
-    private ArrayList<Player> listOfPlayer = new ArrayList<>(2);
+    private int gameId; //?
+    private GameMode gameMode; //?
+    private ArrayList<Player> listOfPlayers;
     private int activePlayer;
     private int numberOfPlayers;
     private State state;
-    private ArrayList<Player> round = new ArrayList<>();
+    private ArrayList<int> round; // int meglio? con id del player (1,2,3,4)
+
+    public Game() {
+        this.listOfPlayers = new ArrayList<>();
+        this.round = new ArrayList<>();
+    }
 
     public void addPlayer(){
         this.listOfPlayer + 1;
