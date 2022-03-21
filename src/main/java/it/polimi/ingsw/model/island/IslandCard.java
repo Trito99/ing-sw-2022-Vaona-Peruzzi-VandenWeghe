@@ -1,4 +1,8 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.island;
+
+import it.polimi.ingsw.model.student.Student;
+import it.polimi.ingsw.model.school.TColour;
+import it.polimi.ingsw.model.player.PlayerNumber;
 
 import java.util.ArrayList;
 

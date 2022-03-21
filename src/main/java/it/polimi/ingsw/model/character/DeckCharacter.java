@@ -1,4 +1,6 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.character;
+
+import it.polimi.ingsw.model.character.CharacterCard;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,9 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.school;
+
+import it.polimi.ingsw.model.student.Student;
+import it.polimi.ingsw.model.game.Game;
+import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.player.Player;
 
 import java.util.ArrayList;
 

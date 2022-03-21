@@ -1,4 +1,10 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.table;
+
+import it.polimi.ingsw.model.cloud.CloudCard;
+import it.polimi.ingsw.model.character.CharacterCard;
+import it.polimi.ingsw.model.game.Game;
+import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.island.IslandCard;
 
 import java.util.ArrayList;
 

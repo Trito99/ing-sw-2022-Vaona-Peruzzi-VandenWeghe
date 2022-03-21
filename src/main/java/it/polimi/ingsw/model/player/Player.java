@@ -1,4 +1,11 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.player;
+
+import it.polimi.ingsw.model.assistant.AssistantCard;
+import it.polimi.ingsw.model.game.Game;
+import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.game.Team;
+import it.polimi.ingsw.model.game.TurnState;
+import it.polimi.ingsw.model.school.School;
 
 public class Player {
 

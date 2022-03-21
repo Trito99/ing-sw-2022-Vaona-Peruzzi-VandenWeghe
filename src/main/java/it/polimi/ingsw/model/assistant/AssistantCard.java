@@ -1,6 +1,4 @@
-package it.polimi.ingsw.model;
-
-import java.util.List;
+package it.polimi.ingsw.model.assistant;
 
 public class AssistantCard {
 

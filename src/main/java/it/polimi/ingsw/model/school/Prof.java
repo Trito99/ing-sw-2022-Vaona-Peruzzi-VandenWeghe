@@ -1,4 +1,6 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.school;
+
+import it.polimi.ingsw.model.student.SColour;
 
 public class Prof {
 
