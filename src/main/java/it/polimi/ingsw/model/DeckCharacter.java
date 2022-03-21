@@ -4,7 +4,11 @@ import java.util.ArrayList;
 
 public class DeckCharacter {
 
-    private ArrayList<CharacterCard> characterCards = new ArrayList<>(12); //10 o 12??
+    private ArrayList<CharacterCard> characterCards;
+
+    public DeckCharacter(ArrayList<CharacterCard> characterCards){
+        this.characterCards = new ArrayList<>(12);
+    }
 
     public ArrayList<CharacterCard> getAssistantCard(){
         return this.characterCards;

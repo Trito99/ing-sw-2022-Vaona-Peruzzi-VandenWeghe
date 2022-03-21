@@ -4,18 +4,22 @@ import java.util.ArrayList;
 
 public class DeckAssistant {
 
-    private ArrayList<AssistantCard> assistentCard = new ArrayList<>(10);
+    private ArrayList<AssistantCard> assistantCard;
 
-    public ArrayList<AssistantCard> getAssistentCard() {
-        return this.assistentCard;
+    public DeckAssistant (ArrayList<AssistantCard> assistantCard){
+        this.assistantCard = new ArrayList <>(10);
+    }
+
+    public ArrayList<AssistantCard> getAssistantCard() {
+        return this.assistantCard;
     }
 
     public ArrayList<AssistantCard> updateDeck() {
-        return this.assistentCard;
+        return this.assistantCard;
     }
 
     public boolean checkIsEmpty() {
-        return this.assistentCard == null;
+        return this.assistantCard == null;
     }
 
 }
