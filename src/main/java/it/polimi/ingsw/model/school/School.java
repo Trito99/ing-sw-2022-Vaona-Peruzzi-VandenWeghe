@@ -48,13 +48,25 @@ public class School {
         // RICORDA!!! devi togliere student da CloudCard
     }
 
-    public ArrayList<Student> moveStudentInHall(){
-        //da implementare
+    public ArrayList<Student> moveStudentInHall(int id, SColour sColour){
+        GTable.add(new Student(id,sColour));
+        GTable.remove(new GTable(id,sColour));
+
+        RTable.add(new Student(id,sColour));
+        RTable.remove(new RTable(id,sColour));
+
+        YTable.add(new Student(id,sColour));
+        YTable.remove(new YTable(id,sColour));
+
+        PTable.add(new Student(id,sColour));
+        PTable.remove(new PTable(id,sColour));
+
+        BTable.add(new Student(id,sColour));
+        BTable.remove(new BTable(id,sColour));
+        //VEDERE SE VA MESSA UNA IF
     }
 
-    public ArrayList<Student> moveStudentInIsland(){
-        //da implementare
-    }
+
 
     public ArrayList<Student> getGTable(){
         return this.GTable;

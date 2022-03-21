@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model.island;
 
+import it.polimi.ingsw.model.cloud.CloudCard;
+import it.polimi.ingsw.model.school.School;
+import it.polimi.ingsw.model.student.SColour;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.school.TColour;
 import it.polimi.ingsw.model.player.PlayerNumber;
@@ -38,6 +41,13 @@ public class IslandCard {
 
     public void setTowerIsOnIsland(boolean towerIsOnIsland) {
         this.towerIsOnIsland = towerIsOnIsland;
+    }
+
+    public ArrayList<Student> moveStudentInIsland(int id, SColour sColour){
+        ArrayList<Student> studentOnIsland = School.getEntry();
+        studentOnIsland.add(new Student(id, sColour));
+
+        // RICORDA!!! devi togliere student da School
     }
 
     public PlayerNumber calculateInfluence(){
