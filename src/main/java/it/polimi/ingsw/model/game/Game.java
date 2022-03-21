@@ -2,6 +2,10 @@ package it.polimi.ingsw.model.game;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.PlayerNumber;
+import it.polimi.ingsw.model.school.School;
+import it.polimi.ingsw.model.school.TColour;
+import it.polimi.ingsw.model.school.Tower;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,10 +29,8 @@ public class Game {
         this.round = new ArrayList<>();
     }
 
-    public void addPlayer(){
-        listOfPlayers.addAll(listOfPlayers);
-        // ci sarà una notify observer
-        //modo per scannerizzare nuovo Player
+    public void addPlayer(String nickname, String age, PlayerNumber playerNumber, School personalSchool, AssistantCard trash, Team team){
+        listOfPlayers.add(new Player(nickname, age, playerNumber, personalSchool, trash, team));
     }
 
     public GameMode getGameMode() {

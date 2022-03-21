@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.school;
 
+import java.util.ArrayList;
+
 public class Tower {
 
     private int idTower;

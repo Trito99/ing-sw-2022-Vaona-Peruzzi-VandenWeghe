@@ -10,6 +10,7 @@ public class Student {
         this.sColour = sColour;
     }
 
+
     public int getIdStudent() {
         return this.idStudent;
     }

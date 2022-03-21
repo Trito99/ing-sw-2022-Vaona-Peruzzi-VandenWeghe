@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.school;
 
+import it.polimi.ingsw.model.cloud.CloudCard;
+import it.polimi.ingsw.model.student.SColour;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
@@ -40,12 +42,10 @@ public class School {
         return this.entry;
     }
 
-    public ArrayList<Student> addStudent() {
-        this.entry + 1;     //ho scoperto che non si può usare per array :')
-        // ci sarà una notify observer
-        // ?? in school o in entry ??
-        // SERVE ?
-        return entry;
+    public void addStudent(int id, SColour sColour) {
+        ArrayList<Student> entry = CloudCard.getStudentOnCloud();
+        entry.add(new Student(id,sColour));
+        // RICORDA!!! devi togliere student da CloudCard
     }
 
     public ArrayList<Student> moveStudentInHall(){
@@ -145,15 +145,13 @@ public class School {
         return this.tower;
     }
 
-    public ArrayList<Tower> addTower() {
-        this.tower + 1;
+    public void addTower(int id, TColour tColour) {
+            tower.add(new Tower(id,tColour));
         // ci sarà una notify observer
-        return null;
     }
 
-    public ArrayList<Tower> removeTower() {
-        ArrayList<Tower> = ArrayList<Tower> - 1;
-        return this.tower;
+    public void removeTower(int id, TColour tColour) {
+        tower.remove(new Tower(id,tColour));
     }
 
     public boolean checkTowerIsEmpty() {

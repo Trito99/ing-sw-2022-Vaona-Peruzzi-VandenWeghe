@@ -7,7 +7,7 @@ import it.polimi.ingsw.model.student.Student;
 import java.util.ArrayList;
 
 public class CloudCard{
-    private ArrayList<Student> studentOnCloud = new ArrayList<>(3);
+    private ArrayList<Student> studentOnCloud;
     private int numberOfSpaces;
     private int studentCount;
 
