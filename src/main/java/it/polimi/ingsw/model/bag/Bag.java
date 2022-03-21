@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.bag;
 
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.student.Student;
 
 import java.util.ArrayList;
@@ -15,27 +16,27 @@ public class Bag {
         return this.bag;
     }
 
-    public ArrayList<Student> extractStudent(int[] extracted){
-        public final int length = 4;
-        public int capacity = 130;
-        Game gameMode = Game.getGameMode();
-        assert gameMode != null;
-        if(gameMode.equals(GameMode.THREEPLAYERS)){
-            for (int i = 0; i <= extracted.length; i++) {
-                    bag.toArray(Student[] bag(capacity));
-                    new capacity = capacity - 1;
+    public ArrayList<Student> extractStudent(ArrayList<Student> stud){
+
+        GameMode gameMode = Game.getGameMode();
+        School entry = School.getEntry();
+
+        if(gameMode.equals(GameMode.THREEPLAYERS)){                           // DA RIVEDERE
+            for (int i = bag.size(); i <= bag.size()-4; i--) {
+                entry.addStudent(int id, SColour sColour);
+                bag[i].remove(new Student(int id, SColour sColour));
             }
         }
         else {
-            for (int i = 0; i < extracted.length; i++) {
-                bag.toArray(Student[] bag(capacity));
-                new capacity = capacity - 1;
+            for (int i = bag.size(); i <= bag.size()-3; i--) {
+                entry.addStudent(int id, SColour sColour);
+                bag[i].remove(new Student(int id, SColour sColour));
         }
         }
-        return this.bag;
+        return bag;
     }
 
-    public boolean CheckIsEmpty(){
+    public boolean checkIsEmpty(){
         return bag.toArray().length != 0;
     }
 

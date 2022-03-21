@@ -27,7 +27,8 @@ public class School {
     public School() {
         Game gameMode = Game.getGameMode();
         assert gameMode != null;
-        if (gameMode.equals(GameMode.THREEPLAYERS)) entry = new ArrayList<>(9);
+        if (gameMode.equals(GameMode.THREEPLAYERS))
+            entry = new ArrayList<>(9);
         else entry = new ArrayList<>(7);
 
         GTable = new ArrayList<>();
@@ -54,7 +55,7 @@ public class School {
         else if(sColour == SColour.YELLOW) YTable.add(new Student(id,sColour));
         else if(sColour == SColour.PINK) PTable.add(new Student(id, sColour));
         else if(sColour == SColour.BLUE) BTable.add(new Student(id, sColour));
-        entry.remove(entry(id,sColour));
+        entry.remove(new Student(id,sColour));   // da verificare il "new"
     }
 
     public ArrayList<Student> getGTable(){
@@ -77,9 +78,12 @@ public class School {
         return this.BTable;
     }
 
-    public boolean calculateGInfluence() {
-        //da fare
-        return true;
+    public int calculateGInfluence(Player player) {   //calcolo influenza del player sugli studenti gialli
+
+       //School.getGTable();
+       // int influenceG = GTable.size();
+        // Student situa= player.getPersonalSchool().getGtable();   numero di studenti gialli del player "selezionato"
+
     }
 
     public boolean calculateRInfluence() {
@@ -152,11 +156,11 @@ public class School {
     }
 
     public void removeTower(int id, TColour tColour) {
-        tower.remove(Tower(id,tColour));
+        tower.remove(new Tower(id,tColour)); // da verificare il "new"
     }
 
     public boolean checkTowerIsEmpty() {
-        return tower.toArray() != 0;
+        return tower.toArray().length != 0;
     }
 
 }

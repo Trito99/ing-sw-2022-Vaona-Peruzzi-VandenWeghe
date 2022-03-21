@@ -1,14 +1,14 @@
 package it.polimi.ingsw.model.game;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
+import it.polimi.ingsw.model.assistant.DeckAssistant;
+import it.polimi.ingsw.model.bag.Bag;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.School;
-import it.polimi.ingsw.model.school.TColour;
-import it.polimi.ingsw.model.school.Tower;
+import it.polimi.ingsw.model.table.Table;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Game {
 
@@ -19,18 +19,24 @@ public class Game {
     private int numberOfPlayers;
     private State state;
     private ArrayList<Player> round;
+    private Difficulty difficulty;
 
-    public Game(int gameId, GameMode gameMode, int numberOfPlayers) {
+    public Game(int gameId, GameMode gameMode, int numberOfPlayers, Difficulty difficulty) {
         this.gameId = gameId;
         this.gameMode = gameMode;
+        this.difficulty = difficulty;
         this.activePlayer = activePlayer;
         this.numberOfPlayers = numberOfPlayers;
         this.listOfPlayers = new ArrayList<>();
         this.round = new ArrayList<>();
     }
 
+    public Difficulty getDifficulty(){
+        return this.difficulty;
+    }
+
     public void addPlayer(String nickname, String age, PlayerNumber playerNumber, School personalSchool, AssistantCard trash, Team team){
-        listOfPlayers.add(new Player(nickname, age, playerNumber, personalSchool, trash, team));
+        listOfPlayers.add(new Player(nickname, age, playerNumber, personalSchool, trash, team, tColour));
     }
 
     public GameMode getGameMode() {
@@ -69,19 +75,33 @@ public class Game {
         return this.round;
     }
 
-    public ArrayList<Player> setRound(){
-        for(int i : Player ){
-            if( //bella domanda )
+    public ArrayList<Player> setRound(){   //setta ordine dei giocatori nel round
+
+        int TurnValue = AssistantCard.getTurnValue();
+        AssistantCard lastCard = Player.getTrash();
+
+        //DA FINIRE
         }
 
     }
 
-    public Player winnerIs(){
-        //da fare
+    public Player winnerIs() {
+        if (DeckAssistant.checkIsEmpty() == true ||
+                School.checkTowerIsEmpty() == true ||
+                Bag.checkIsEmpty() == true ||
+                Table.checkListOfIsland() == true)
+
+            return Table.playerIsWinning();
+
     }
 
     public void initialize(){
-        //da fare
+        Game gameMode = Game.getGameMode();
+        assert gameMode != null;
+        if (gameMode.equals(GameMode.TWOPLAYERS))
+           // DA Implementare
+
+
     }
 
 }

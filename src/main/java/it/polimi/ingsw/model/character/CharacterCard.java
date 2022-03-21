@@ -3,7 +3,7 @@ package it.polimi.ingsw.model.character;
 public class CharacterCard {
 
     private final int idCharacter;
-    private final int costCharacter;
+    private int costCharacter;
     private final CardEffect cardEffect;
     private boolean coinOnCard;
 
@@ -31,10 +31,8 @@ public class CharacterCard {
     }
 
     public void setCoinOnCard(boolean coinOnCard) {
-        if (!this.coinOnCard) {
+        if (!this.coinOnCard)
             this.coinOnCard = true;
-        }
-        else return;
     }
 
     public int increaseCostCharachter(){

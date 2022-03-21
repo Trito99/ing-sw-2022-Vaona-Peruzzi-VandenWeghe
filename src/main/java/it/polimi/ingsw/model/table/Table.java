@@ -5,19 +5,20 @@ import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.island.IslandCard;
+import it.polimi.ingsw.model.player.PlayerNumber;
 
 import java.util.ArrayList;
 
 public class Table {
 
     private ArrayList<CloudCard> cloudNumber;
-    private ArrayList<IslandCard> idIsland;
+    private ArrayList<IslandCard> listOfIsland;
     private ArrayList<CharacterCard> characterCardsOnTable;
     private int coinsOnTable;
 
     public Table(ArrayList<CharacterCard> characterCardsOnTable, int coinsOnTable) {
         this.cloudNumber = new ArrayList<>(2);
-        this.idIsland = new ArrayList<>(12);
+        this.listOfIsland = new ArrayList<>(12);
         this.characterCardsOnTable = new ArrayList<>(3);
 
         Game gameMode = Game.getGameMode();
@@ -31,8 +32,8 @@ public class Table {
         return this.cloudNumber;
     }
 
-    public ArrayList<IslandCard> getIdIsland() {
-        return this.idIsland;
+    public ArrayList<IslandCard> getListOfIsland() {
+        return this.listOfIsland;
     }
 
     public int getCoinsOnTable() {
@@ -48,7 +49,12 @@ public class Table {
     }
 
     public boolean checkListOfIsland(){
+        if(listOfIsland.size()==3)
+            return true;
+    }
 
+    public PlayerNumber playerIsWinning(){
+        // DA FARE
     }
 
 }

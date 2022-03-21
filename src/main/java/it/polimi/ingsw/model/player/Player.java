@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Team;
 import it.polimi.ingsw.model.game.TurnState;
 import it.polimi.ingsw.model.school.School;
+import it.polimi.ingsw.model.school.TColour;
 
 public class Player {
 
@@ -17,12 +18,14 @@ public class Player {
     private AssistantCard trash;
     private Team team;
     private int coinScore;
+    private TColour tColour;
 
-    public Player(String nickname, String age, PlayerNumber playerNumber, School personalSchool, AssistantCard trash, Team team) {
+    public Player(String nickname, String age, PlayerNumber playerNumber, School personalSchool, AssistantCard trash, Team team, TColour tColour) {
         this.nickname = nickname;
         this.age = age;
         this.playerNumber = playerNumber;
         this.personalSchool = personalSchool;
+        this.tColour = tColour;
         this.trash = null;
         this.coinScore = 1;
 
