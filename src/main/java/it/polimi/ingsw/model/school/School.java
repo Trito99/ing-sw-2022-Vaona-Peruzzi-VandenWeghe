@@ -49,24 +49,13 @@ public class School {
     }
 
     public ArrayList<Student> moveStudentInHall(int id, SColour sColour){
-        GTable.add(new Student(id,sColour));
-        GTable.remove(new GTable(id,sColour));
-
-        RTable.add(new Student(id,sColour));
-        RTable.remove(new RTable(id,sColour));
-
-        YTable.add(new Student(id,sColour));
-        YTable.remove(new YTable(id,sColour));
-
-        PTable.add(new Student(id,sColour));
-        PTable.remove(new PTable(id,sColour));
-
-        BTable.add(new Student(id,sColour));
-        BTable.remove(new BTable(id,sColour));
-        //VEDERE SE VA MESSA UNA IF
+        if(sColour == SColour.GREEN) GTable.add(new Student(id, sColour));
+        else if(sColour == SColour.RED) RTable.add(new Student(id, sColour));
+        else if(sColour == SColour.YELLOW) YTable.add(new Student(id,sColour));
+        else if(sColour == SColour.PINK) PTable.add(new Student(id, sColour));
+        else if(sColour == SColour.BLUE) BTable.add(new Student(id, sColour));
+        entry.remove(entry(id,sColour));
     }
-
-
 
     public ArrayList<Student> getGTable(){
         return this.GTable;
@@ -163,15 +152,11 @@ public class School {
     }
 
     public void removeTower(int id, TColour tColour) {
-        tower.remove(new Tower(id,tColour));
+        tower.remove(Tower(id,tColour));
     }
 
     public boolean checkTowerIsEmpty() {
         return tower.toArray() != 0;
     }
-
-
-
-
 
 }
