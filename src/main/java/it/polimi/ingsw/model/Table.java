@@ -4,9 +4,27 @@ import java.util.ArrayList;
 
 public class Table {
 
-    private ArrayList<CloudCard> cloudNumber = new ArrayList<>(2);
-    private ArrayList<IslandCard> idIsland = new ArrayList<>(12);
+    private ArrayList<CloudCard> cloudNumber;
+    private ArrayList<IslandCard> idIsland;
+    private ArrayList<CharacterCard> characterCardsOnTable;
     private int coinsOnTable;
+
+    public Table(ArrayList<CharacterCard> characterCardsOnTable, int coinsOnTable) {
+        this.cloudNumber = new ArrayList<>(2);
+        this.idIsland = new ArrayList<>(12);
+        this.characterCardsOnTable = new ArrayList<>(3);
+
+        if(Game.gameMode equals(GameMode.TWOPLAYERS)){
+            this.coinsOnTable = 18;
+        }
+        else if(Game.gameMode equals(GameMode.THREEPLAYERS)){
+            this.coinsOnTable = 17;
+        }
+        else {
+            this.coinsOnTable = 16;
+        }
+
+    }
 
     public ArrayList<CloudCard> getCloudNumber() {
         return this.cloudNumber;

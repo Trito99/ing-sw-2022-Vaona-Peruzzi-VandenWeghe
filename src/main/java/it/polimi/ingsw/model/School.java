@@ -4,18 +4,34 @@ import java.util.ArrayList;
 
 public class School {
 
-    private ArrayList<Student> entry  = new ArrayList<>(7);
-    private ArrayList<Student> GTable = new ArrayList<>();
-    private ArrayList<Student> RTable = new ArrayList<>();
-    private ArrayList<Student> YTable = new ArrayList<>();
-    private ArrayList<Student> PTable = new ArrayList<>();
-    private ArrayList<Student> BTable = new ArrayList<>();
+    private ArrayList<Student> entry;
+    private ArrayList<Student> GTable;
+    private ArrayList<Student> RTable;
+    private ArrayList<Student> YTable;
+    private ArrayList<Student> PTable;
+    private ArrayList<Student> BTable;
     private boolean profGInHall;
     private boolean profRInHall;
     private boolean profYInHall;
     private boolean profPInHall;
     private boolean profBInHall;
-    private ArrayList<Tower> tower = new ArrayList<>();
+    private ArrayList<Tower> tower;
+
+    public School() {
+        if (Game.gameMode equals (GameMode.THREEPLAYERS)){
+            entry = new ArrayList<>(7);
+        }
+        else {
+            entry = new ArrayList<>(7);
+        }
+
+        GTable = new ArrayList<>();
+        RTable = new ArrayList<>();
+        YTable = new ArrayList<>();
+        PTable = new ArrayList<>();
+        BTable = new ArrayList<>();
+        tower = new ArrayList<>();
+    }
 
     public ArrayList<Student> getEntry() {
         return this.entry;

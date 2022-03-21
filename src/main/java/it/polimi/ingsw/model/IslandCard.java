@@ -5,13 +5,16 @@ import java.util.ArrayList;
 public class IslandCard {
 
     private int idIsland;
-    private ArrayList<Student> studentOnIsland = new ArrayList<>();
+    private ArrayList<Student> studentOnIsland = new ArrayList<>();;
     private boolean towerIsOnIsland;
     private TColour towerOnIsland;
 
-    IslandCard {
-
+    public IslandCard(int idIsland, TColour towerOnIsland) {
+        this.idIsland = idIsland;
+        this.towerOnIsland = null;
+        this.studentOnIsland = null;
     }
+
 
     public int getIdIsland() {
         return this.idIsland;

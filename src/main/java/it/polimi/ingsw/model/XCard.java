@@ -6,6 +6,12 @@ public class XCard {
     private int position;
     private int idXCard;
 
+    public XCard(boolean isOnIsland, int position, int idXCard) {
+        this.isOnIsland = false;
+        this.position = position;
+        this.idXCard = idXCard;
+    }
+
     public boolean getIsOnIsland() {
         return this.isOnIsland;
     }

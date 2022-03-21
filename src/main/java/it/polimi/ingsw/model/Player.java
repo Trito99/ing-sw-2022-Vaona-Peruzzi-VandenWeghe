@@ -1,8 +1,5 @@
 package it.polimi.ingsw.model;
 
-import java.util.ArrayList;
-import java.text.SimpleDateFormat;
-
 public class Player {
 
     private final String nickname;
@@ -14,7 +11,22 @@ public class Player {
     private Team team;
     private int coinScore;
 
-    public Player() {
+    public Player(String nickname, String age, PlayerNumber playerNumber, School personalSchool, AssistantCard trash, Team team) {
+        this.nickname = nickname;
+        this.age = age;
+        this.playerNumber = playerNumber;
+        this.personalSchool = personalSchool;
+        this.trash = null;
+        this.coinScore = 1;
+
+        if(Game.gameMode equals(GameMode.COOP)) {
+            this.team = team;
+        }
+        else {
+            this.team = null;
+        }
+
+
     }
 
 

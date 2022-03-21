@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class MotherEarth {
 
-    private int position;
+    private int position = 0;
 
     public int getPosition() {
         return this.position;

@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Game {
 
@@ -13,7 +12,11 @@ public class Game {
     private State state;
     private ArrayList<int> round; // int meglio? con id del player (1,2,3,4)
 
-    public Game() {
+    public Game(int gameId, GameMode gameMode, int numberOfPlayers) {
+        this.gameId = gameId;
+        this.gameMode = gameMode;
+        this.activePlayer = activePlayer;
+        this.numberOfPlayers = numberOfPlayers;
         this.listOfPlayers = new ArrayList<>();
         this.round = new ArrayList<>();
     }
@@ -61,9 +64,7 @@ public class Game {
     }
 
     public ArrayList<Player> setRound(){
-        for (Player player : this.round = round) {
 
-        }
 
     }
 

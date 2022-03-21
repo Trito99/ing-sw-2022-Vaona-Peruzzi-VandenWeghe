@@ -1,10 +1,14 @@
 package it.polimi.ingsw.model;
 
-import java.util.ArrayList;
-
 public class Student {
+
     private int idStudent;
     private SColour sColour;
+
+    public Student(int idStudent, SColour sColour) {
+        this.idStudent = idStudent;
+        this.sColour = sColour;
+    }
 
     public int getIdStudent() {
         return this.idStudent;
