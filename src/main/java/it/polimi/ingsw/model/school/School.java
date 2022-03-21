@@ -23,12 +23,10 @@ public class School {
     private ArrayList<Tower> tower;
 
     public School() {
-        if (Game.gameMode equals (GameMode.THREEPLAYERS)){
-            entry = new ArrayList<>(7);
-        }
-        else {
-            entry = new ArrayList<>(7);
-        }
+        Game gameMode = Game.getGameMode();
+        assert gameMode != null;
+        if (gameMode.equals(GameMode.THREEPLAYERS)) entry = new ArrayList<>(9);
+        else entry = new ArrayList<>(7);
 
         GTable = new ArrayList<>();
         RTable = new ArrayList<>();
@@ -103,12 +101,6 @@ public class School {
         return true;
     }
 
-    public int increaseCoinScore(){
-        Player.getCoinScore();
-        coinScore = Player.increaseCoinScore();
-        return coinScore;
-    }
-
     public boolean getProfGInHall(){
         return this.profGInHall;
     }
@@ -165,7 +157,7 @@ public class School {
     }
 
     public boolean checkTowerIsEmpty() {
-        return this.tower == null;
+        return tower.toArray() != 0;
     }
 
 

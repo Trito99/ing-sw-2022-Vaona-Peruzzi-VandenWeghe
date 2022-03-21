@@ -26,12 +26,10 @@ public class Player {
         this.trash = null;
         this.coinScore = 1;
 
-        if(Game.gameMode equals(GameMode.COOP)) {
-            this.team = team;
-        }
-        else {
-            this.team = null;
-        }
+        Game gameMode = Game.getGameMode();
+        assert gameMode != null;
+        if(gameMode.equals(GameMode.COOP)) this.team = team;
+        else this.team = null;
 
 
     }
@@ -61,7 +59,7 @@ public class Player {
         return this.personalSchool;
     }
 
-    public AssistantCard getTrash(String AssistentCard.assistantName, int AssistentCard.turnValue) {
+    public AssistantCard getTrash() {
         return this.trash;
     }
 

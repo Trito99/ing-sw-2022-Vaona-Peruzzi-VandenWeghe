@@ -21,10 +21,7 @@ public class DeckCharacter {
     }
 
     public boolean checkIsEmpty(){
-        if (this.characterCards != null)
-            return false;
-        else
-            return true;
+        return characterCards.toArray() != 0;
     }
 
 }

@@ -1,8 +1,10 @@
 package it.polimi.ingsw.model.game;
 
+import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.player.Player;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Game {
 
@@ -12,7 +14,7 @@ public class Game {
     private int activePlayer;
     private int numberOfPlayers;
     private State state;
-    private ArrayList<int> round; // int meglio? con id del player (1,2,3,4)
+    private ArrayList<Player> round;
 
     public Game(int gameId, GameMode gameMode, int numberOfPlayers) {
         this.gameId = gameId;
@@ -24,7 +26,7 @@ public class Game {
     }
 
     public void addPlayer(){
-        this.listOfPlayer + 1;
+        listOfPlayers.addAll(listOfPlayers);
         // ci sarà una notify observer
         //modo per scannerizzare nuovo Player
     }
@@ -34,7 +36,7 @@ public class Game {
     }
 
     public ArrayList<Player> getListOfPlayer{
-            //da fare
+            return this.listOfPlayers;
     }
 
     public int getGameId(){
@@ -66,7 +68,9 @@ public class Game {
     }
 
     public ArrayList<Player> setRound(){
-
+        for(int i : Player ){
+            if( //bella domanda )
+        }
 
     }
 

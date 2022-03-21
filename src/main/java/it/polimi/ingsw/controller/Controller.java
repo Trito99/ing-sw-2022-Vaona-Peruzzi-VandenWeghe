@@ -7,10 +7,4 @@ import java.util.ArrayList;
 public class Controller {
 
 
-    //metodi da bag
-    public ArrayList<Student> extractStudent(){
-        //da fare
-        return this.bag;
-    }
-
 }

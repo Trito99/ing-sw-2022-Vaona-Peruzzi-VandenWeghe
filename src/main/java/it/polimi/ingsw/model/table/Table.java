@@ -20,16 +20,11 @@ public class Table {
         this.idIsland = new ArrayList<>(12);
         this.characterCardsOnTable = new ArrayList<>(3);
 
-        if(Game.gameMode equals(GameMode.TWOPLAYERS)){
-            this.coinsOnTable = 18;
-        }
-        else if(Game.gameMode equals(GameMode.THREEPLAYERS)){
-            this.coinsOnTable = 17;
-        }
-        else {
-            this.coinsOnTable = 16;
-        }
-
+        Game gameMode = Game.getGameMode();
+        assert gameMode != null;
+        if(gameMode.equals(GameMode.TWOPLAYERS)) this.coinsOnTable = 18;
+        if(gameMode.equals(GameMode.THREEPLAYERS)) this.coinsOnTable = 17;
+        else this.coinsOnTable = 16;
     }
 
     public ArrayList<CloudCard> getCloudNumber() {
@@ -42,6 +37,10 @@ public class Table {
 
     public int getCoinsOnTable() {
         return this.coinsOnTable;
+    }
+
+    public ArrayList<CharacterCard> getCharacterCardsOnTable() {
+        return characterCardsOnTable;
     }
 
     public ArrayList<IslandCard> joinIsland(){

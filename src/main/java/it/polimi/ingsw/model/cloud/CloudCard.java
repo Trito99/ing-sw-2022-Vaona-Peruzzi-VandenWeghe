@@ -15,11 +15,10 @@ public class CloudCard{
         this.studentOnCloud = new ArrayList<Student>(3);
         this.studentCount = 0;
 
-        if (Game.gameMode equals (GameMode.THREEPLAYERS)){
-            this.numberOfSpaces = 4;
-        }
-        else { this.numberOfSpaces = 3;
-        }
+        Game gameMode = Game.getGameMode();
+        assert gameMode != null;
+        if (gameMode.equals(GameMode.THREEPLAYERS)) this.numberOfSpaces = 4;
+        else this.numberOfSpaces = 3;
 
     }
 

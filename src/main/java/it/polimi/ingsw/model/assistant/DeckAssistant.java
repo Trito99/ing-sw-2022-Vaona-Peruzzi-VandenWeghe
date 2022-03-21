@@ -19,7 +19,7 @@ public class DeckAssistant {
     }
 
     public boolean checkIsEmpty() {
-        return this.assistantCard == null;
+        return assistantCard.toArray() != 0;
     }
 
 }
