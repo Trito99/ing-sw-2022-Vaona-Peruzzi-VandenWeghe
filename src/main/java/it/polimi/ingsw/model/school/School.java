@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.school;
 
 import it.polimi.ingsw.model.cloud.CloudCard;
+import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.student.SColour;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.game.Game;
@@ -23,8 +24,9 @@ public class School {
     private boolean profPInHall;
     private boolean profBInHall;
     private ArrayList<Tower> tower;
+    private ArrayList<Prof> profOfPlayer = null;
 
-    public School() {
+    public School(ArrayList<Prof> profOfPlayer) {
         Game gameMode = Game.getGameMode();
         assert gameMode != null;
         if (gameMode.equals(GameMode.THREEPLAYERS))
@@ -78,11 +80,13 @@ public class School {
         return this.BTable;
     }
 
-    public int calculateGInfluence(Player player) {   //calcolo influenza del player sugli studenti gialli
+    public int calculateGInfluence(Player player) {   //calcolo se player che sta giocando conquista il prof giallo
 
-       //School.getGTable();
-       // int influenceG = GTable.size();
-        // Student situa= player.getPersonalSchool().getGtable();   numero di studenti gialli del player "selezionato"
+        int numberOfG = player.getPersonalSchool().getGTable().size();  // numero di studenti gialli del player "selezionato"
+
+        for (Player player : PlayerNumber player.getPlayerNumber(){
+            for(numberOfG > )
+        }
 
     }
 

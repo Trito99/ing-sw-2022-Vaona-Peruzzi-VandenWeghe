@@ -75,13 +75,13 @@ public class Game {
         return this.round;
     }
 
-    public ArrayList<Player> setRound(){   //setta ordine dei giocatori nel round
+    public ArrayList<Player> setRound(ArrayList<Player> round){   //setta ordine dei giocatori nel round
+        for(int i : round) {
+            round.set(i, Player.getTrash().getTurnValue()); //assegna ad ogni player il turnvalue della sua ultima carta giocata
 
-        int TurnValue = AssistantCard.getTurnValue();
-        AssistantCard lastCard = Player.getTrash();
-
-        //DA FINIRE
+        //DA CONTROLLARE
         }
+        round.sort(Player.getTrash().getTurnValue());
 
     }
 

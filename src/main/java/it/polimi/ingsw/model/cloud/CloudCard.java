@@ -27,10 +27,19 @@ public class CloudCard{
     }
 
     public int getNumberOfSpaces() {
-        return this.numberOfSpaces;
+        GameMode gameMode = Game.getGameMode();
+
+        if(gameMode.equals(GameMode.THREEPLAYERS)){
+            numberOfSpaces=4;
+            return numberOfSpaces;
+        }
+        else{
+            numberOfSpaces=3;
+            return numberOfSpaces;
+        }
     }
 
-    public int getStudentCount() {
+  /*  public int getStudentCount() {    //restituisce numero di studenti sulla nuvola
         return this.studentCount;
     }
-}
+}  *\

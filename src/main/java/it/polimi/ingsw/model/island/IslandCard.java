@@ -31,7 +31,7 @@ public class IslandCard {
         return this.studentOnIsland;
     }
 
-    public boolean isTowerIsOnIsland() {
+    public boolean TowerIsOnIsland() {
         return this.towerIsOnIsland;
     }
 

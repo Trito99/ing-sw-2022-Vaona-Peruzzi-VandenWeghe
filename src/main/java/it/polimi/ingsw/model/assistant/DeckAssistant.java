@@ -16,10 +16,10 @@ public class DeckAssistant {
 
     public ArrayList<AssistantCard> updateDeck() {
         return this.assistantCard;
-    }
+    }  //ritorna il mazzo di carte senza la carta selezionata
 
     public boolean checkIsEmpty() {
-        return assistantCard.toArray() != 0;
+        return assistantCard.toArray().length != 0;
     }
 
 }
