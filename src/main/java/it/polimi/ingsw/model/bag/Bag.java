@@ -16,21 +16,21 @@ public class Bag {
         return this.bag;
     }
 
-    public ArrayList<Student> extractStudent(ArrayList<Student> stud){
+    public ArrayList<Student> extractStudent(ArrayList<Student> stud, School school, Game gameMode){   //estrae dal sacchetto 3/4 studenti
 
-        GameMode gameMode = Game.getGameMode();
-        School entry = School.getEntry();
+        //GameMode gameMode = Game.getGameMode();                          // DA RIVEDERE
+        //School entry = School.getEntry();    (FEDERICO: L'ho tolto e ho inserito school come parametro della funzione)
 
-        if(gameMode.equals(GameMode.THREEPLAYERS)){                           // DA RIVEDERE
+        if(gameMode.equals(GameMode.THREEPLAYERS)){
             for (int i = bag.size(); i <= bag.size()-4; i--) {
-                entry.addStudent(int id, SColour sColour);
-                bag[i].remove(new Student(int id, SColour sColour));
+                school.addStudent(stud.get(i).getIdStudent(), stud.get(i).getsColour());
+                bag.remove(stud);
             }
         }
         else {
             for (int i = bag.size(); i <= bag.size()-3; i--) {
-                entry.addStudent(int id, SColour sColour);
-                bag[i].remove(new Student(int id, SColour sColour));
+                school.addStudent(stud.get(i).getIdStudent(), stud.get(i).getsColour());
+                bag.remove(stud);
         }
         }
         return bag;
