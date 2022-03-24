@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model.school;
 
 import it.polimi.ingsw.model.cloud.CloudCard;
-import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.student.SColour;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.game.Game;
@@ -45,7 +44,7 @@ public class School {
         return this.entry;
     }
 
-    public void addStudent(int id, SColour sColour) {
+    public void addStudentInEntry(int id, SColour sColour) {
         ArrayList<Student> entry = CloudCard.getStudentOnCloud();
         entry.add(new Student(id,sColour));
         // RICORDA!!! devi togliere student da CloudCard

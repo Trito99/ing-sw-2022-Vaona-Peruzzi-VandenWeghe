@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.bag;
 
-import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.student.Student;
@@ -24,13 +23,13 @@ public class Bag {
 
         if(gameMode.equals(GameMode.THREEPLAYERS)){
             for (int i = bag.size(); i >= x -4; i--) {
-                school.addStudent(stud.get(i).getIdStudent(), stud.get(i).getsColour());
+                school.addStudentInEntry(stud.get(i).getIdStudent(), stud.get(i).getsColour());  //addStudentInEntry non va bene, deve esserci metodo addStudInCloud
                 bag.remove(stud);
             }
         }
         else {
             for (int i = bag.size(); i >= x -3; i--) {
-                school.addStudent(stud.get(i).getIdStudent(), stud.get(i).getsColour());
+                school.addStudentInEntry(stud.get(i).getIdStudent(), stud.get(i).getsColour());
                 bag.remove(stud);
         }
         }
