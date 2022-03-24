@@ -46,6 +46,10 @@ public class Player {
         return this.age;
     }
 
+    public void setPlayerNumber(PlayerNumber playerNumber) {
+        this.playerNumber = playerNumber;
+    }
+
     public PlayerNumber getPlayerNumber() {
         return this.playerNumber;
     }
