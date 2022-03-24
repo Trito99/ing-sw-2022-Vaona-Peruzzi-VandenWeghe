@@ -6,12 +6,16 @@ import it.polimi.ingsw.model.student.Student;
 
 import java.util.ArrayList;
 
-public class CloudCard{
+public class CloudCard {
     private ArrayList<Student> studentOnCloud;
     private int numberOfSpaces;
     private int studentCount;
+    private int idCloud;
 
-    public CloudCard(ArrayList<Student> studentOnCloud, int numberOfSpaces, int studentCount){
+
+
+    public CloudCard(ArrayList<Student> studentOnCloud, int numberOfSpaces, int studentCount, int idCloud){
+        this.idCloud = idCloud;
         this.studentOnCloud = new ArrayList<Student>(3);
         this.studentCount = 0;
 
@@ -39,7 +43,20 @@ public class CloudCard{
         }
     }
 
-  /*  public int getStudentCount() {    //restituisce numero di studenti sulla nuvola
-        return this.studentCount;
+    public int getIdCloud(){
+        return this.idCloud;
     }
-}  *\
+
+    public void clearCloud(){
+        for(int i=0; i<numberOfSpaces; i++){
+            studentOnCloud.set(i, null);
+        }
+
+    }
+
+
+
+  /**  public int getStudentCount() {    //restituisce numero di studenti sulla nuvola
+        return this.studentCount;
+    }  */
+}

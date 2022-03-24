@@ -43,11 +43,20 @@ public class School {
     public ArrayList<Student> getEntry() {
         return this.entry;
     }
+    public void addStudentInEntry(ArrayList<Student> students, GameMode gameMode,CloudCard cloudCard) {
 
-    public void addStudentInEntry(int id, SColour sColour) {
-        ArrayList<Student> entry = CloudCard.getStudentOnCloud();
-        entry.add(new Student(id,sColour));
-        // RICORDA!!! devi togliere student da CloudCard
+        if (gameMode.equals(GameMode.THREEPLAYERS)) {
+            for(int i=4; i>0; i--) {
+                entry.add(new Student(students.get(i).getIdStudent(), students.get(i).getsColour()));
+            }
+            cloudCard.clearCloud();
+        }
+        else {
+            for(int i=3; i>0; i--) {
+                entry.add(new Student(students.get(i).getIdStudent(), students.get(i).getsColour()));
+            }
+            cloudCard.clearCloud();
+        }
     }
 
     public ArrayList<Student> moveStudentInHall(int id, SColour sColour){
