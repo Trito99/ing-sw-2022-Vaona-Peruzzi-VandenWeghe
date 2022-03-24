@@ -7,11 +7,11 @@ public class CharacterCard {
     private final CardEffect cardEffect;
     private boolean coinOnCard;
 
-    public CharacterCard (int idCharacter, int costCharacter, CardEffect cardEffect, boolean coinOnCard){
+    public CharacterCard (int idCharacter, int costCharacter, CardEffect cardEffect){
         this.idCharacter = idCharacter;
         this.costCharacter = costCharacter;
         this.cardEffect = cardEffect;
-        this.coinOnCard = coinOnCard;
+        this.coinOnCard = false;
     }
 
     public int getIdCharacter() {
@@ -20,6 +20,10 @@ public class CharacterCard {
 
     public int getCostCharacter() {
         return this.costCharacter;
+    }
+
+    public void setCostCharacter(int costCharacter) {
+        this.costCharacter = costCharacter;
     }
 
     public CardEffect getCardEffect() {
@@ -31,13 +35,11 @@ public class CharacterCard {
     }
 
     public void setCoinOnCard(boolean coinOnCard) {
-        if (!this.coinOnCard)
-            this.coinOnCard = true;
+        this.coinOnCard = coinOnCard;
     }
 
-    public int increaseCostCharachter(){
-        this.costCharacter = getCostCharacter();
-        this.costCharacter = costCharacter + 1;
-        return this.costCharacter;
+    public CharacterCard increaseCostCharachter(CharacterCard characterCard){
+        characterCard.setCostCharacter(getCostCharacter() + 1);
+        return characterCard;
     }
 }
