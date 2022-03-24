@@ -74,16 +74,31 @@ public class Player {
         return this.coinScore;
     }
 
-    public int increaseCoinScore(){
-        coinScore = getCoinScore();
-        coinScore = coinScore + 1;
-        return this.coinScore;
+    public void setCoinScore(int coinScore) {
+        this.coinScore = coinScore;
     }
 
-    public int decreaseCoinScore(){
-        coinScore = getCoinScore();
-        coinScore = coinScore - 1;
-        return this.coinScore;
+    public int increaseCoinScore(int coinScore){
+        Player.setCoinScore(getCoinScore() + 1);
+        return coinScore;
     }
 
-}
+    public int decreaseCoinScore(int coinScore){
+        Player.setCoinScore(getCoinScore() -1);
+        return coinScore;
+    }
+
+    public void initializeTower(GameMode gameMode, PlayerNumber playerNumber, TColour tColour){
+        if (gameMode.equals(GameMode.TWOPLAYERS)) {
+            if(getPlayerNumber()==PlayerNumber.PLAYER1) tColour = TColour.WHITE;
+            else if(getPlayerNumber()==PlayerNumber.PLAYER2) tColour = TColour.BLACK;
+            //mettere 8 torri in TowerZone
+        }
+        if (gameMode.equals(GameMode.TWOPLAYERS)) {
+            if(getPlayerNumber()==PlayerNumber.PLAYER1) tColour = TColour.WHITE;
+            else if(getPlayerNumber()==PlayerNumber.PLAYER2) tColour = TColour.GREY;
+            else if(getPlayerNumber()==PlayerNumber.PLAYER2) tColour = TColour.BLACK;
+        }
+        if (gameMode.equals(GameMode.COOP)) {
+
+        }
