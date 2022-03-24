@@ -20,7 +20,7 @@ public class Player {
     private int coinScore;
     private TColour tColour;
 
-    public Player(String nickname, String age, PlayerNumber playerNumber, School personalSchool, AssistantCard trash, Team team, TColour tColour) {
+    public Player(String nickname, String age, PlayerNumber playerNumber, School personalSchool, AssistantCard trash, Team team, TColour tColour, int coinScore) {
         this.nickname = nickname;
         this.age = age;
         this.playerNumber = playerNumber;

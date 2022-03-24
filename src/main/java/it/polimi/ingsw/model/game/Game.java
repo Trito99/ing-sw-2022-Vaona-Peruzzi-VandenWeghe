@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.bag.Bag;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.School;
+import it.polimi.ingsw.model.school.TColour;
 import it.polimi.ingsw.model.table.Table;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class Game {
     private int gameId; //?
     private GameMode gameMode; //?
     private ArrayList<Player> listOfPlayers;
-    private int activePlayer;
+    private Player activePlayer;     // tipo Player o Int???
     private int numberOfPlayers;
     private State state;
     private ArrayList<Player> round;
@@ -25,7 +26,7 @@ public class Game {
         this.gameId = gameId;
         this.gameMode = gameMode;
         this.difficulty = difficulty;
-        this.activePlayer = activePlayer;
+        this.activePlayer = null;
         this.numberOfPlayers = numberOfPlayers;
         this.listOfPlayers = new ArrayList<>();
         this.round = new ArrayList<>();
@@ -35,15 +36,15 @@ public class Game {
         return this.difficulty;
     }
 
-    public void addPlayer(String nickname, String age, PlayerNumber playerNumber, School personalSchool, AssistantCard trash, Team team){
-        listOfPlayers.add(new Player(nickname, age, playerNumber, personalSchool, trash, team, tColour));
+    public void addPlayer(String nickname, String age, PlayerNumber playerNumber, School personalSchool, AssistantCard trash, Team team, TColour tColour, int coinScore){
+        listOfPlayers.add(new Player(nickname, age, playerNumber, personalSchool, null, team, tColour, 1));
     }
 
     public GameMode getGameMode() {
         return this.gameMode;
     }
 
-    public ArrayList<Player> getListOfPlayer{
+    public ArrayList<Player> getListOfPlayer(){
             return this.listOfPlayers;
     }
 
@@ -55,7 +56,7 @@ public class Game {
         return this.numberOfPlayers;
     }
 
-    public Player getActivePlayer(){
+    public Player getActivePlayer(){   // tipo Player o Int???
         return this.activePlayer;
     }
 
@@ -67,7 +68,7 @@ public class Game {
         return this.state;
     }
 
-    public void setState(state State){
+    public void setState(State state){
         this.state = state;
     }
 
@@ -76,20 +77,20 @@ public class Game {
     }
 
     public ArrayList<Player> setRound(ArrayList<Player> round){   //setta ordine dei giocatori nel round
-        for(int i : round) {
+        for(Player i : round) {
             round.set(i, Player.getTrash().getTurnValue()); //assegna ad ogni player il turnvalue della sua ultima carta giocata
 
-        //DA CONTROLLARE
+        //DA CONTROLLARE !!!
         }
         round.sort(Player.getTrash().getTurnValue());
 
     }
 
     public Player winnerIs() {
-        if (DeckAssistant.checkIsEmpty() == true ||
-                School.checkTowerIsEmpty() == true ||
-                Bag.checkIsEmpty() == true ||
-                Table.checkListOfIsland() == true)
+        if (DeckAssistant.checkIsEmpty() ||
+                School.checkTowerIsEmpty() ||
+                Bag.checkIsEmpty() ||
+                Table.checkListOfIsland())
 
             return Table.playerIsWinning();
 
