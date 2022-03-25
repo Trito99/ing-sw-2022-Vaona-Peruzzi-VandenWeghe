@@ -1,13 +1,11 @@
 package it.polimi.ingsw.model.character;
 
-import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.Game;
-import it.polimi.ingsw.model.school.School;
-import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class DeckCharacter {
 
@@ -17,26 +15,27 @@ public class DeckCharacter {
         this.characterCards = new ArrayList<>(12);
     }
 
-    public ArrayList<CharacterCard> getAssistantCard(){
+    public ArrayList<CharacterCard> getCharacterCards(){
         return this.characterCards;
     }
 
-    public ArrayList<CharacterCard> drawCard(){    //Pesca tre carte
+    public ArrayList<CharacterCard> shuffleCard(){
+    return null;
+    }
 
-        Difficulty difficulty = Game.getDifficulty();
-        Table table = Table.getCharacterCardsOnTable();
 
-        if(difficulty.equals(Difficulty.EXPERTMODE)){
-            for (int i = characterCards.size(); i <= characterCards.size()-3; i--) {           //DA RIVEDERE
-                table.addCharacterCard(int idCharacter, int costCharacter,CardEffect cardEffect)
-                characterCards[i].remove(new CharacterCard(int idCharacter, int costCharacter,CardEffect cardEffect));
-            }
+    public void drawCard(Table table){    //Pesca tre carte personaggio dal mazzo e mettile al centro del tavolo
+
+        /**  Random x;
+         x.nextInt(12);
+         //Da verificare il Random x */
+        characterCards.shuffleCard();
+
+        for (int i = 0; i < 3; i++) {
+            table.getCharacterCardsOnTable().add(i, characterCards.get(i));
         }
 
     }
 
-    public ArrayList<CharacterCard> shuffleCard(){
-
-    }
 
 }

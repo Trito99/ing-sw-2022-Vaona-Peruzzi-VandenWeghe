@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.bag;
 
+import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.GameMode;
-import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.student.Student;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class Bag {
         return this.bag;
     }
 
-    public ArrayList<Student> extractStudent(ArrayList<Student> stud, School school, GameMode gameMode){   //estrae dal sacchetto 3/4 studenti
+    public ArrayList<Student> extractStudent(ArrayList<Student> stud, CloudCard cloudCard, GameMode gameMode){   //estrae dal sacchetto 3/4 studenti
 
         //GameMode gameMode = Game.getGameMode();                          // DA RIVEDERE
         //School entry = School.getEntry();    (FEDERICO: Li ho tolti e ho inserito school e gamemode come parametri della funzione)
@@ -23,13 +23,13 @@ public class Bag {
 
         if(gameMode.equals(GameMode.THREEPLAYERS)){
             for (int i = bag.size(); i >= x -4; i--) {
-                school.addStudentInEntry(stud.get(i).getIdStudent(), stud.get(i).getsColour());  //addStudentInEntry non va bene, deve esserci metodo addStudInCloud
+                cloudCard.getStudentOnCloud().add(stud.get(i));
                 bag.remove(stud);
             }
         }
         else {
             for (int i = bag.size(); i >= x -3; i--) {
-                school.addStudentInEntry(stud.get(i).getIdStudent(), stud.get(i).getsColour());
+                cloudCard.getStudentOnCloud().add(stud.get(i));
                 bag.remove(stud);
         }
         }

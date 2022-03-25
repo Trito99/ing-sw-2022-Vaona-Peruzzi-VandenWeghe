@@ -13,7 +13,7 @@ public class Team {
         this.team = new ArrayList<>(2);
     }
 
-    public ArrayList<PlayerNumber> getTeam() {
+    public ArrayList<Player> getTeam() {
         return this.team;
     }
 
