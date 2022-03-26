@@ -108,13 +108,15 @@ public class School {
         return bTable.size();
     }
 
-    public int calculateGInfluence(Player player) {   //calcolo se player che sta giocando conquista il prof giallo
-
-        int numberOfG = player.getPersonalSchool().getGTable().size();  // numero di studenti gialli del player "selezionato"
-
-        for (Player player : PlayerNumber player.getPlayerNumber(){
-            for(numberOfG > )
+    public int calculateGInfluence(ArrayList<Player> players) {   //calcolo se player che sta giocando conquista il prof giallo
+        // numero di studenti gialli del player "selezionato"
+        int max=0;
+        for (Player player : players){
+            if(player.getPersonalSchool().numberOfG(player.getPersonalSchool().getGTable()) > max){
+                max= player.getPersonalSchool().numberOfG(player.getPersonalSchool().getGTable());
+            }
         }
+        return max;
         /*Da Fare: passo alla funzione tutti i player(Arraylist<Player>) e usando metodo numberOfG tengo traccia di chi ha più gialli,
         cosa ritorna la funzione? Il numero di gialli maggiore? Il giocatore che ha più gialli? Un booleano? */
     }
