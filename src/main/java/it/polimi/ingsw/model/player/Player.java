@@ -15,7 +15,7 @@ public class Player {
     private PlayerNumber playerNumber;
     private TurnState turnState;
     private School personalSchool;
-    private AssistantCard trash;
+    private AssistantCard trash;          //= Ultima carta nella pila degli scarti
     private Team team;
     private int coinScore;
     private TColour tColour;
@@ -29,7 +29,7 @@ public class Player {
         this.trash = null;
         this.coinScore = 1;
 
-        Game gameMode = Game.getGameMode();
+        Game gameMode = Game.getGameMode();             //gameMode come parametro?(Vedi CloudCard)
         assert gameMode != null;
         if(gameMode.equals(GameMode.COOP)) this.team = team;
         else this.team = null;
@@ -92,7 +92,7 @@ public class Player {
         return coinScore;
     }
 
-    public void initializeTower(GameMode gameMode, PlayerNumber playerNumber, TColour tColour){
+    public void initializeTower(GameMode gameMode, PlayerNumber playerNumber, TColour tColour){  //Da Finire!!!
         if (gameMode.equals(GameMode.TWOPLAYERS)) {
             if(getPlayerNumber()==PlayerNumber.PLAYER1) tColour = TColour.WHITE;
             else if(getPlayerNumber()==PlayerNumber.PLAYER2) tColour = TColour.BLACK;

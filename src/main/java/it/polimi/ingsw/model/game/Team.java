@@ -19,6 +19,7 @@ public class Team {
 
     public void initializeTeam(GameMode gameMode, Player player1, Player player2){
         team.set(0, Player.setPlayerNumber(player1.getPlayerNumber()));
+        //Mettere scelta compagno? o inserire scelta prima del metodo e passare TeamMate(=player2) come parametro?
         team.set(1, Player.setPlayerNumber(player2.getPlayerNumber()));   //Si Può fare??
     }
 }

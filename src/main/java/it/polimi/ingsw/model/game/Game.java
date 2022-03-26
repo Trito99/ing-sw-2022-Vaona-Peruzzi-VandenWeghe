@@ -38,6 +38,7 @@ public class Game {
 
     public void addPlayer(String nickname, String age, PlayerNumber playerNumber, School personalSchool, AssistantCard trash, Team team, TColour tColour, int coinScore){
         listOfPlayers.add(new Player(nickname, age, playerNumber, personalSchool, null, team, tColour, 1));
+                                                                                            //se EasyMode coinscore=0!!!
     }
 
     public GameMode getGameMode() {
@@ -58,11 +59,11 @@ public class Game {
 
     public Player getActivePlayer(){   // tipo Player o Int???
         return this.activePlayer;
-    }
+    }  //Player o int?
 
-    public void setActivePlayer(int activePlayer){
+    public void setActivePlayer(Player activePlayer){
         this.activePlayer = activePlayer;
-    }
+    }  // Player o int?
 
     public State getState(){
         return this.state;
@@ -84,7 +85,7 @@ public class Game {
         }
         round.sort(Player.getTrash().getTurnValue());
 
-    }
+    } //?
 
     public Player winnerIs() {
         if (DeckAssistant.checkIsEmpty() ||
@@ -94,10 +95,10 @@ public class Game {
 
             return Table.playerIsWinning();
 
-    }
+    } //?
 
     public void initialize(){
-        Game gameMode = Game.getGameMode();
+        Game gameMode = Game.getGameMode();   //Mettere Scelta della Difficulty e della gameMode dal Player che crea la partita???
         assert gameMode != null;
         if (gameMode.equals(GameMode.TWOPLAYERS))
            // DA Implementare

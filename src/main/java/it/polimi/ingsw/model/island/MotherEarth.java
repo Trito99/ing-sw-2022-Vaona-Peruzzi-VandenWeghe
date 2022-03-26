@@ -10,7 +10,7 @@ public class MotherEarth {
         return this.position;
     }
 
-    public int movePosition() {
+    public int movePosition() {    //Le scelte brooo,
         position = getPosition();
 
         // ! MADRE NATURA PUò FARE UN NUMERO DIVERSO DI PASSI, SCELTI DAL GIOCATORE !

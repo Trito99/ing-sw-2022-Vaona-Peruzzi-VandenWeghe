@@ -19,8 +19,8 @@ public class CloudCard {
         this.studentOnCloud = new ArrayList<Student>(3);
         this.studentCount = 0;
 
-        Game gameMode = Game.getGameMode();
-        assert gameMode != null;
+        Game gameMode = Game.getGameMode();       // Passo gameMode come parametro?
+        assert gameMode != null;                  // Se non sappiamo ancora la gameMode? Altro costruttore?(con numberOfSpaces=0)
         if (gameMode.equals(GameMode.THREEPLAYERS)) this.numberOfSpaces = 4;
         else this.numberOfSpaces = 3;
 

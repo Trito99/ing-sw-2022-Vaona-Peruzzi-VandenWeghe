@@ -21,7 +21,7 @@ public class Table {
         this.listOfIsland = new ArrayList<>(12);
         this.characterCardsOnTable = new ArrayList<>(3);
 
-        Game gameMode = Game.getGameMode();
+        Game gameMode = Game.getGameMode();     //gameMode come parametro (vedi CloudCard)
         assert gameMode != null;
         if(gameMode.equals(GameMode.TWOPLAYERS)) this.coinsOnTable = 18;
         if(gameMode.equals(GameMode.THREEPLAYERS)) this.coinsOnTable = 17;
@@ -48,7 +48,7 @@ public class Table {
         //da fare
     }
 
-    public boolean checkListOfIsland(){
+    public boolean checkListOfIsland(){  // Se ListOfIsland=3, finisce la partita?
         if(listOfIsland.size()==3)
             return true;
     }

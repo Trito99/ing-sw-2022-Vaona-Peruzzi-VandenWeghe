@@ -13,4 +13,6 @@ public class Prof {
     public SColour getSColour() {
         return this.sColour;
     }
+
+    
 }

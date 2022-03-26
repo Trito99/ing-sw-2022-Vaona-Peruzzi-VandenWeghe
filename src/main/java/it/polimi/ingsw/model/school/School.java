@@ -22,7 +22,7 @@ public class School {
     private boolean profYInHall;
     private boolean profPInHall;
     private boolean profBInHall;
-    private ArrayList<Tower> tower;
+    private ArrayList<Tower> tower;                //A che serve?
     private ArrayList<Prof> profOfPlayer = null;
 
     public School(ArrayList<Prof> profOfPlayer) {
@@ -59,13 +59,13 @@ public class School {
         }
     }
 
-    public ArrayList<Student> moveStudentInHall(int id, SColour sColour){
+    public ArrayList<Student> moveStudentInHall(int id, SColour sColour){    //DA RIGUARDARE!!
         if(sColour == SColour.GREEN) GTable.add(new Student(id, sColour));
         else if(sColour == SColour.RED) RTable.add(new Student(id, sColour));
         else if(sColour == SColour.YELLOW) YTable.add(new Student(id,sColour));
         else if(sColour == SColour.PINK) PTable.add(new Student(id, sColour));
         else if(sColour == SColour.BLUE) BTable.add(new Student(id, sColour));
-        entry.remove(new Student(id,sColour));   // da verificare il "new"
+        entry.remove(new Student(id,sColour));   // da verificare il "new"!!!!!
     }
 
     public ArrayList<Student> getGTable(){
@@ -88,6 +88,26 @@ public class School {
         return this.BTable;
     }
 
+    public int numberOfG(ArrayList<Student> gTable){
+        return gTable.size();
+    }
+
+    public int numberOfR(ArrayList<Student> rTable){
+        return rTable.size();
+    }
+
+    public int numberOfY(ArrayList<Student> yTable){
+        return yTable.size();
+    }
+
+    public int numberOfP(ArrayList<Student> pTable){
+        return pTable.size();
+    }
+
+    public int numberOfB(ArrayList<Student> bTable){
+        return bTable.size();
+    }
+
     public int calculateGInfluence(Player player) {   //calcolo se player che sta giocando conquista il prof giallo
 
         int numberOfG = player.getPersonalSchool().getGTable().size();  // numero di studenti gialli del player "selezionato"
@@ -95,10 +115,11 @@ public class School {
         for (Player player : PlayerNumber player.getPlayerNumber(){
             for(numberOfG > )
         }
-
+        /*Da Fare: passo alla funzione tutti i player(Arraylist<Player>) e usando metodo numberOfG tengo traccia di chi ha più gialli,
+        cosa ritorna la funzione? Il numero di gialli maggiore? Il giocatore che ha più gialli? Un booleano? */
     }
 
-    public boolean calculateRInfluence() {
+    public boolean calculateRInfluence() { //Vedi sopra
         //da fare
         return true;
     }
@@ -171,7 +192,7 @@ public class School {
         tower.remove(new Tower(id,tColour)); // da verificare il "new"
     }
 
-    public boolean checkTowerIsEmpty() {
+    public boolean checkTowerIsEmpty() {     //(Ricorda: se non ci sono Tower in TowerZone finisce la partita)
         return tower.toArray().length != 0;
     }
 

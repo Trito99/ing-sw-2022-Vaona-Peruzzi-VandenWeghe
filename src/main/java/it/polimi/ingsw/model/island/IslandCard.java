@@ -43,18 +43,18 @@ public class IslandCard {
         this.towerIsOnIsland = towerIsOnIsland;
     }
 
-    public ArrayList<Student> moveStudentInIsland(int id, SColour sColour){
+    public ArrayList<Student> moveStudentInIsland(int id, SColour sColour){  //Penso da Rifare
         ArrayList<Student> studentOnIsland = School.getEntry();
         studentOnIsland.add(new Student(id, sColour));
 
         // RICORDA!!! devi togliere student da School
     }
 
-    public PlayerNumber calculateInfluence(){
+    public PlayerNumber calculateInfluence(){   //Restituisce playerNumber del Player che ha influenza sull'isola?
 
     }
 
-    public TColour buildTowerOnIsland(){
+    public TColour buildTowerOnIsland(){        //Builda la torre del colore del Player che ha l'influenza sull'isola??
 
     }
 }
