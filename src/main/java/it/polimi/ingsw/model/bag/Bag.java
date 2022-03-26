@@ -5,14 +5,15 @@ import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.student.Student;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class Bag {
 
     private ArrayList<Student> bag = new ArrayList<>(130);
 
-    public ArrayList<Student> shuffleBag(){
-        //da fare
-        return this.bag;
+    public void shuffleBag(ArrayList<Student> bag){
+        Collections.shuffle(bag);
     }
 
     public ArrayList<Student> extractStudent(ArrayList<Student> stud, CloudCard cloudCard, GameMode gameMode){   //estrae dal sacchetto 3/4 studenti

@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.table.Table;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class DeckCharacter {
@@ -19,17 +20,14 @@ public class DeckCharacter {
         return this.characterCards;
     }
 
-    public ArrayList<CharacterCard> shuffleCard(){
-    return null;
+    public void shuffleCard(ArrayList<CharacterCard> DeckCharacter){
+        Collections.shuffle(DeckCharacter);
     }
 
 
     public void drawCard(Table table){    //Pesca tre carte personaggio dal mazzo e mettile al centro del tavolo
 
-        /**  Random x;
-         x.nextInt(12);
-         //Da verificare il Random x */
-        characterCards.shuffleCard();
+        shuffleCard(characterCards); //non sono sicuro di vaere passato l'array giusto
 
         for (int i = 0; i < 3; i++) {
             table.getCharacterCardsOnTable().add(i, characterCards.get(i));
