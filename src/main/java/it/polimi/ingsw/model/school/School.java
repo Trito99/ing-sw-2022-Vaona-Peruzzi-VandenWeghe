@@ -22,7 +22,7 @@ public class School {
     private boolean profYInHall;
     private boolean profPInHall;
     private boolean profBInHall;
-    private ArrayList<Tower> tower;                //A che serve?
+    private ArrayList<Tower> tower;
     private ArrayList<Prof> profOfPlayer = null;
 
     public School(ArrayList<Prof> profOfPlayer) {
@@ -43,6 +43,7 @@ public class School {
     public ArrayList<Student> getEntry() {
         return this.entry;
     }
+
     public void addStudentInEntry(ArrayList<Student> students, GameMode gameMode,CloudCard cloudCard) {
 
         if (gameMode.equals(GameMode.THREEPLAYERS)) {
@@ -88,32 +89,32 @@ public class School {
         return this.BTable;
     }
 
-    public int numberOfG(ArrayList<Student> gTable){
-        return gTable.size();
+    public int numberOfG(Player player){
+        return player.getPersonalSchool().getBTable().size();
     }
 
-    public int numberOfR(ArrayList<Student> rTable){
+    public int numberOfR(Player player){
         return rTable.size();
     }
 
-    public int numberOfY(ArrayList<Student> yTable){
+    public int numberOfY(Player player){
         return yTable.size();
     }
 
-    public int numberOfP(ArrayList<Student> pTable){
+    public int numberOfP(Player player){
         return pTable.size();
     }
 
-    public int numberOfB(ArrayList<Student> bTable){
+    public int numberOfB(Player player){
         return bTable.size();
     }
 
-    public int calculateGInfluence(ArrayList<Player> players) {   //calcolo se player che sta giocando conquista il prof giallo
+    public int calculateGMax(ArrayList<Player> players) {   //calcolo se player che sta giocando conquista il prof giallo
         // numero di studenti gialli del player "selezionato"
         int max=0;
         for (Player player : players){
-            if(player.getPersonalSchool().numberOfG(player.getPersonalSchool().getGTable()) > max){
-                max= player.getPersonalSchool().numberOfG(player.getPersonalSchool().getGTable());
+            if(numberOfG(player) > max){
+                max= numberOfG(player);
             }
         }
         return max;
@@ -121,22 +122,22 @@ public class School {
         cosa ritorna la funzione? Il numero di gialli maggiore? Il giocatore che ha più gialli? Un booleano? */
     }
 
-    public boolean calculateRInfluence() { //Vedi sopra
+    public boolean calculateRMax() { //Vedi sopra
         //da fare
         return true;
     }
 
-    public boolean calculateYInfluence() {
+    public boolean calculateYMax() {
         //da fare
         return true;
     }
 
-    public boolean calculatePInfluence() {
+    public boolean calculatePMax() {
         //da fare
         return true;
     }
 
-    public boolean calculateBInfluence() {
+    public boolean calculateBMax() {
         //da fare
         return true;
     }
@@ -163,23 +164,23 @@ public class School {
 
     public boolean setProfGInHall(boolean profGInHall){
         return this.profGInHall = profGInHall;
-    }
+    }  //boolean o void??
 
     public boolean setProfRInHall(boolean profRInHall){
         return this.profRInHall = profRInHall;
-    }
+    }  //boolean o void??
 
     public boolean setProfYInHall(boolean profYInHall){
        return this.profYInHall = profYInHall;
-    }
+    }  //boolean o void??
 
     public boolean setProfPInHall(boolean profPInHall){
         return this.profPInHall = profPInHall;
-    }
+    }  //boolean o void??
 
     public boolean setProfBInHall(boolean profBInHall){
         return this.profBInHall = profBInHall;
-    }
+    }  //boolean o void??
 
     public ArrayList<Tower> getTower() {
         return this.tower;
@@ -194,7 +195,7 @@ public class School {
         tower.remove(new Tower(id,tColour)); // da verificare il "new"
     }
 
-    public boolean checkTowerIsEmpty() {     //(Ricorda: se non ci sono Tower in TowerZone finisce la partita)
+    public boolean checkTowerIsEmpty() {     //  (Ricorda: se non ci sono Tower in TowerZone finisce la partita)
         return tower.toArray().length != 0;
     }
 

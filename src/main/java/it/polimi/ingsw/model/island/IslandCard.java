@@ -15,6 +15,7 @@ public class IslandCard {
     private ArrayList<Student> studentOnIsland = new ArrayList<>();;
     private boolean towerIsOnIsland;
     private TColour towerOnIsland;
+    private int mergeIsland;        // = quante isole sono unite
 
     public IslandCard(int idIsland, TColour towerOnIsland) {
         this.idIsland = idIsland;
@@ -43,7 +44,7 @@ public class IslandCard {
         this.towerIsOnIsland = towerIsOnIsland;
     }
 
-    public ArrayList<Student> moveStudentInIsland(int id, SColour sColour){  //Penso da Rifare
+    public ArrayList<Student> moveStudentOnIsland(int id, SColour sColour){  //Penso da Rifare
         ArrayList<Student> studentOnIsland = School.getEntry();
         studentOnIsland.add(new Student(id, sColour));
 
@@ -56,5 +57,13 @@ public class IslandCard {
 
     public TColour buildTowerOnIsland(){        //Builda la torre del colore del Player che ha l'influenza sull'isola??
 
+    }
+
+    public int getMergeIsland() {
+        return this.mergeIsland;
+    }
+
+    public void setMergeIsland(int mergeIsland) {
+        this.mergeIsland = mergeIsland;
     }
 }

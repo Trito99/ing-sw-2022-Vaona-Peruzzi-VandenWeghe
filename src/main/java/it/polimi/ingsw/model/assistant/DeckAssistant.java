@@ -4,22 +4,22 @@ import java.util.ArrayList;
 
 public class DeckAssistant {
 
-    private ArrayList<AssistantCard> assistantCard;
+    private ArrayList<AssistantCard> cardsInHand;
 
-    public DeckAssistant (ArrayList<AssistantCard> assistantCard){
-        this.assistantCard = new ArrayList <>(10);
+    public DeckAssistant (ArrayList<AssistantCard> cardsInHand){
+        this.cardsInHand = new ArrayList <>(10);
     }
 
-    public ArrayList<AssistantCard> getAssistantCard() {
-        return this.assistantCard;
+    public ArrayList<AssistantCard> getCardsInHand() {
+        return this.cardsInHand;
     }
 
-  /**  public ArrayList<AssistantCard> updateDeck() {
-        return this.assistantCard;
+   /* public ArrayList<AssistantCard> updateDeck() {
+        return this.cardsInHand;
     }  //ritorna il mazzo di carte senza la carta selezionata     */
 
     public boolean checkIsEmpty() {
-        return assistantCard.toArray().length != 0;
+        return cardsInHand.toArray().length != 0;
     }
 
 }

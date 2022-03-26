@@ -54,9 +54,7 @@ public class CloudCard {
 
     }
 
-
-
-  /**  public int getStudentCount() {    //restituisce numero di studenti sulla nuvola
+   public int getStudentCount() {    //restituisce numero di studenti sulla nuvola
         return this.studentCount;
-    }  */
+    }
 }

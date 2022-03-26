@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model.game;
+package it.polimi.ingsw.model.player;
 
 public enum TurnState {
     NOTYOURTURN,

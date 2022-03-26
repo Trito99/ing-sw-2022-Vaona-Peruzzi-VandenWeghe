@@ -12,6 +12,8 @@ public class Bag {
 
     private ArrayList<Student> bag = new ArrayList<>(130);
 
+    //Costruttore??
+
     public void shuffleBag(ArrayList<Student> bag){
         Collections.shuffle(bag);
     }

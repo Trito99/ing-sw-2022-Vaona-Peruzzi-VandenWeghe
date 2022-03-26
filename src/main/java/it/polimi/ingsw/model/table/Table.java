@@ -16,6 +16,7 @@ public class Table {
     private ArrayList<CharacterCard> characterCardsOnTable;
     private int coinsOnTable;
 
+
     public Table(ArrayList<CharacterCard> characterCardsOnTable, int coinsOnTable) {
         this.cloudNumber = new ArrayList<>(2);
         this.listOfIsland = new ArrayList<>(12);

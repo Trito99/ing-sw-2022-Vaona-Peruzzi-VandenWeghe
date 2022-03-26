@@ -38,8 +38,7 @@ public class CharacterCard {
         this.coinOnCard = coinOnCard;
     }
 
-    public CharacterCard increaseCostCharacter(CharacterCard characterCard){
+    public void increaseCostCharacter(CharacterCard characterCard){
         characterCard.setCostCharacter(getCostCharacter() + 1);
-        return characterCard;
     }
 }
