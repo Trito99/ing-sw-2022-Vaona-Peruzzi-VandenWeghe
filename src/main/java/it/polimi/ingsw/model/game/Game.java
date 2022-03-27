@@ -5,7 +5,7 @@ import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.bag.Bag;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
-import it.polimi.ingsw.model.game.Team;
+import it.polimi.ingsw.model.player.Team;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColour;
 import it.polimi.ingsw.model.table.Table;
@@ -85,7 +85,7 @@ public class Game {
         //DA CONTROLLARE !!!
         }
         round.sort(Player.getTrash().getTurnValue());
-
+    return round;
     } //?
 
     public Player winnerIs() {
