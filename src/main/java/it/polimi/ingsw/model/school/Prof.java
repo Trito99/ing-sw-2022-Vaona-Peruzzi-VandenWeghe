@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.student.SColour;
 
 public class Prof {
 
-    private SColour sColour;
+    private final SColour sColour;
 
     public Prof(SColour sColour){
         this.sColour=sColour;

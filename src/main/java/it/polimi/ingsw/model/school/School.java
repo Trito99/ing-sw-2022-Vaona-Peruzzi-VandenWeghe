@@ -44,7 +44,7 @@ public class School {
         return this.entry;
     }
 
-    public void addStudentInEntry(ArrayList<Student> students, GameMode gameMode,CloudCard cloudCard) {
+    public void addStudentInCloud(ArrayList<Student> students, GameMode gameMode,CloudCard cloudCard) {
 
         if (gameMode.equals(GameMode.THREEPLAYERS)) {
             for(int i=4; i>0; i--) {
