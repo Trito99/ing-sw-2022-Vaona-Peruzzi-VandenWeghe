@@ -11,6 +11,7 @@ import it.polimi.ingsw.model.school.TColour;
 import it.polimi.ingsw.model.table.Table;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Game {
 
@@ -23,6 +24,9 @@ public class Game {
     private ArrayList<Player> round;
     private Difficulty difficulty;
 
+    /**
+     * Default constructor.
+     */
     public Game(int gameId, GameMode gameMode, int numberOfPlayers, Difficulty difficulty) {
         this.gameId = gameId;
         this.gameMode = gameMode;
@@ -33,11 +37,14 @@ public class Game {
         this.round = new ArrayList<>();
     }
 
-    public Difficulty getDifficulty(){
-        return this.difficulty;
+    public void addPlayer(Player player) {
+        if(listOfPlayers.size()<4){
+            listOfPlayers.add(player);
+        }
     }
 
-    public void addPlayer(String nickname, String age, PlayerNumber playerNumber, School personalSchool, AssistantCard trash, Team team, TColour tColour, int coinScore){
+    /**
+    public void addPlayer(String nickname, Date age, PlayerNumber playerNumber, School personalSchool, AssistantCard trash, Team team, TColour tColour, int coinScore){
         listOfPlayers.add(new Player(nickname, age, playerNumber, personalSchool, null, team, tColour, 1));
                                                                                             //se EasyMode coinscore=0!!!
     }
@@ -89,6 +96,10 @@ public class Game {
 
     public void setState(State state){
         this.state = state;
+    }
+
+    public Difficulty getDifficulty(){
+        return this.difficulty;
     }
 
     public ArrayList<Player> getRound(){

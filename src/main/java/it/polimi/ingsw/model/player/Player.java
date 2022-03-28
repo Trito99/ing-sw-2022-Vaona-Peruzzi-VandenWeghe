@@ -6,19 +6,27 @@ import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColour;
 
+import java.util.Date;
+
+/**
+ * This class represents the player and it contains all his information.
+ */
 public class Player {
 
     private final String nickname;
-    private final String age;               // CONTROLLARE LIBRERIA DATA
-    private PlayerNumber playerNumber;
+    private final Date age;               // CONTROLLARE LIBRERIA DATA
+    private final PlayerNumber playerNumber;
     private TurnState turnState;
-    private School personalSchool;
+    private final School personalSchool;
     private AssistantCard trash;          //= Ultima carta nella pila degli scarti
-    private Team team;
+    private final Team team;
     private int coinScore;
     private TColour tColour;
 
-    public Player(String nickname, String age, PlayerNumber playerNumber, School personalSchool, AssistantCard trash, Team team, TColour tColour, int coinScore) {
+    /**
+     * Default constructor.
+     */
+    public Player(String nickname, Date age, PlayerNumber playerNumber, School personalSchool, AssistantCard trash, Team team, TColour tColour, int coinScore) {
         this.nickname = nickname;
         this.age = age;
         this.playerNumber = playerNumber;
@@ -26,14 +34,26 @@ public class Player {
         this.tColour = tColour;
         this.trash = null;
         this.coinScore = 1;
-
         Game gameMode = Game.getGameMode();             //gameMode come parametro?(Vedi CloudCard)
         assert gameMode != null;
         if(gameMode.equals(GameMode.COOP)) this.team = team;
         else this.team = null;
-
-
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public String getNickname() {
@@ -88,20 +108,22 @@ public class Player {
         Player.setCoinScore(getCoinScore() -1);
     }
 
-    public void initializeTower(GameMode gameMode, PlayerNumber playerNumber, TColour tColour){  //Da Finire!!!
+    public void initializeTower(GameMode gameMode, Player player, TColour tColour){  //Da Finire!!!
         if (gameMode.equals(GameMode.TWOPLAYERS)) {
-            if(getPlayerNumber()==PlayerNumber.PLAYER1) tColour = TColour.WHITE;
-            else if(getPlayerNumber()==PlayerNumber.PLAYER2) tColour = TColour.BLACK;
+            if(player.getPlayerNumber()==PlayerNumber.PLAYER1) tColour = TColour.WHITE;
+            else if(player.getPlayerNumber()==PlayerNumber.PLAYER2) tColour = TColour.BLACK;
             //mettere 8 torri in TowerZone
         }
         if (gameMode.equals(GameMode.TWOPLAYERS)) {
-            if(getPlayerNumber()==PlayerNumber.PLAYER1) tColour = TColour.WHITE;
-            else if(getPlayerNumber()==PlayerNumber.PLAYER2) tColour = TColour.GREY;
-            else if(getPlayerNumber()==PlayerNumber.PLAYER3) tColour = TColour.BLACK;
+            if(player.getPlayerNumber()==PlayerNumber.PLAYER1) tColour = TColour.WHITE;
+            else if(player.getPlayerNumber()==PlayerNumber.PLAYER2) tColour = TColour.GREY;
+            else if(player.getPlayerNumber()==PlayerNumber.PLAYER3) tColour = TColour.BLACK;
         }
         if (gameMode.equals(GameMode.COOP)) {
             int i = 0;
-            if(team.getTeam().get(i) == /**...*/)) tColour = TColour.WHITE;
+            if(player.team.getTeam().get(i) == /**...*/)) tColour = TColour.WHITE;
         }
+    }
+}
 
         }
