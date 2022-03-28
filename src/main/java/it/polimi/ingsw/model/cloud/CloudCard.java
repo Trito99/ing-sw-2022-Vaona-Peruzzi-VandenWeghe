@@ -35,12 +35,11 @@ public class CloudCard {
 
         if(gameMode.equals(GameMode.THREEPLAYERS)){
             numberOfSpaces=4;
-            return numberOfSpaces;
         }
         else{
             numberOfSpaces=3;
-            return numberOfSpaces;
         }
+        return numberOfSpaces;
     }
 
     public int getIdCloud(){

@@ -44,7 +44,7 @@ public class IslandCard {
         this.towerIsOnIsland = towerIsOnIsland;
     }
 
-    public ArrayList<Student> moveStudentOnIsland(int id, SColour sColour){  //Penso da Rifare
+    public ArrayList<Student> moveStudentOnIsland(int id, SColour sColour){  //Penso da Rifare!!!
         ArrayList<Student> studentOnIsland = School.getEntry();
         studentOnIsland.add(new Student(id, sColour));
 

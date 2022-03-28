@@ -20,8 +20,8 @@ public class DeckCharacter {
         return this.characterCards;
     }
 
-    public void shuffleCard(ArrayList<CharacterCard> CharacterCards){
-        Collections.shuffle(DeckCharacter);
+    public void shuffleCard(ArrayList<CharacterCard> characterCards){
+        Collections.shuffle(characterCards);
     }
 
 

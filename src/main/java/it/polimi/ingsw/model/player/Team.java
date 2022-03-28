@@ -16,7 +16,7 @@ public class Team {
     }
 
     public void intializeTeam(GameMode gamemode, Player player1, Player player2){
-        team.set(0,Player.setPlayerNumber(player1.getPlayerNumber()));
-        team.set(1,Player.setPlayerNumber(player2.getPlayerNumber()));
+        team.set(0,player1);
+        team.set(1,player2);
     }
 }

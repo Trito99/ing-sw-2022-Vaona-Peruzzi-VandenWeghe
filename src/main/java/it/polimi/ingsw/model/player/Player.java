@@ -66,7 +66,7 @@ public class Player {
 
     public void setPlayerNumber(PlayerNumber playerNumber) {
         this.playerNumber = playerNumber;
-    }
+    }  //Se è final non può esserci metodo set (da guardare)
 
     public PlayerNumber getPlayerNumber() {
         return this.playerNumber;
@@ -94,7 +94,7 @@ public class Player {
 
     public static int getCoinScore() {
         return this.coinScore;
-    }
+    }   //Static?
 
     public void setCoinScore(int coinScore) {
         this.coinScore = coinScore;

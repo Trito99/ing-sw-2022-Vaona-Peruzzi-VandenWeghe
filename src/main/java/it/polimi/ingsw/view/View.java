@@ -16,7 +16,7 @@ public class View extends Observable implements Observer, Runnable {   //extends
     }
 
     @Override
-    public void run() {                                 // Metodo dell
+    public void run() {                                 // Metodo perchè implemento Runnable
 
     }
 
