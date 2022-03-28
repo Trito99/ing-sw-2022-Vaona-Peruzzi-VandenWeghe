@@ -80,14 +80,12 @@ public class Player {
         this.coinScore = coinScore;
     }
 
-    public int increaseCoinScore(int coinScore){
+    public void increaseCoinScore(int coinScore){
         Player.setCoinScore(getCoinScore() + 1);
-        return coinScore;
     }
 
-    public int decreaseCoinScore(int coinScore){
+    public void decreaseCoinScore(int coinScore){
         Player.setCoinScore(getCoinScore() -1);
-        return coinScore;
     }
 
     public void initializeTower(GameMode gameMode, PlayerNumber playerNumber, TColour tColour){  //Da Finire!!!
@@ -99,8 +97,11 @@ public class Player {
         if (gameMode.equals(GameMode.TWOPLAYERS)) {
             if(getPlayerNumber()==PlayerNumber.PLAYER1) tColour = TColour.WHITE;
             else if(getPlayerNumber()==PlayerNumber.PLAYER2) tColour = TColour.GREY;
-            else if(getPlayerNumber()==PlayerNumber.PLAYER2) tColour = TColour.BLACK;
+            else if(getPlayerNumber()==PlayerNumber.PLAYER3) tColour = TColour.BLACK;
         }
         if (gameMode.equals(GameMode.COOP)) {
+            int i = 0;
+            if(team.getTeam().get(i) == /**...*/)) tColour = TColour.WHITE;
+        }
 
         }

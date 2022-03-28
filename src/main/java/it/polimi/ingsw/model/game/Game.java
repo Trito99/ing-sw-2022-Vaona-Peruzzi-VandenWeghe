@@ -42,13 +42,30 @@ public class Game {
                                                                                             //se EasyMode coinscore=0!!!
     }
 
+    /**     SECONDO ME SAREBBE PIù CORRETTO - chiara
+     * public void addPlayer(Player player){
+     *     if(listOfPlayers.size()<4) listOfPlayers.add(player);
+     * }
+     */
+
     public GameMode getGameMode() {
         return this.gameMode;
     }
 
     public ArrayList<Player> getListOfPlayer(){
-            return this.listOfPlayers;
+        return this.listOfPlayers;
     }
+
+    /**     SECONDO ME SAREBBE PIù CORRETTO - chiara
+     * public ArrayList<Player> getListOfPlayer(){
+     *      ArrayList<Player> listOfPlayers = new ArrayList<>()
+     *      for (int i = 0; i < getListOfPlayer().size(); i++) {
+     *          listOfPlayers.get(i).add(getListOfPlayer();
+     *          }
+     *      return listOfPlayers;
+     * }
+     */
+
 
     public int getGameId(){
         return this.gameId;
