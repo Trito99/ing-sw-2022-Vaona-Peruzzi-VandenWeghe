@@ -3,7 +3,6 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.player.Player;
 
-import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 import it.polimi.ingsw.view.View;
