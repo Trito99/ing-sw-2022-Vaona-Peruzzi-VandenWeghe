@@ -43,18 +43,6 @@ public class Game {
         }
     }
 
-    /**
-    public void addPlayer(String nickname, Date age, PlayerNumber playerNumber, School personalSchool, AssistantCard trash, Team team, TColour tColour, int coinScore){
-        listOfPlayers.add(new Player(nickname, age, playerNumber, personalSchool, null, team, tColour, 1));
-                                                                                            //se EasyMode coinscore=0!!!
-    }
-
-    /**     SECONDO ME SAREBBE PIù CORRETTO - chiara
-     * public void addPlayer(Player player){
-     *     if(listOfPlayers.size()<4) listOfPlayers.add(player);
-     * }
-     */
-
     public GameMode getGameMode() {
         return this.gameMode;
     }

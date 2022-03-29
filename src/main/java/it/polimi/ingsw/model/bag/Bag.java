@@ -20,7 +20,7 @@ public class Bag {
 
     public ArrayList<Student> extractStudent(ArrayList<Student> stud, CloudCard cloudCard, GameMode gameMode){   //estrae dal sacchetto 3/4 studenti
 
-        //GameMode gameMode = Game.getGameMode();                          // DA RIVEDERE
+        //GameMode gameMode = Game.getGameMode();                          // Da rivedere
         //School entry = School.getEntry();    (FEDERICO: Li ho tolti e ho inserito school e gamemode come parametri della funzione)
         int x = bag.size();
 
@@ -34,13 +34,13 @@ public class Bag {
             for (int i = bag.size(); i >= x -3; i--) {
                 cloudCard.getStudentOnCloud().add(stud.get(i));
                 bag.remove(stud);
-        }
+            }
         }
         return bag;
     }
 
     public boolean checkIsEmpty(){
-        return bag.toArray().length != 0;
+        return bag.toArray().length == 0;
     }
 
 }
