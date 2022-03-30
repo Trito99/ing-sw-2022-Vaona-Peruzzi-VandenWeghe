@@ -96,7 +96,7 @@ public class Player {
         return this.coinScore;
     }   //Static?
 
-    public void setCoinScore(int coinScore) {
+    public static void setCoinScore(int coinScore) {
         this.coinScore = coinScore;
     }
 

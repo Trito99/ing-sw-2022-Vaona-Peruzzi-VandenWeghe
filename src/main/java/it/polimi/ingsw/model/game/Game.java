@@ -86,6 +86,11 @@ public class Game {
         this.state = state;
     }
 
+
+    public void setGameMode(GameMode gameMode){
+        this.gameMode = gameMode;
+    }
+
     public Difficulty getDifficulty(){
         return this.difficulty;
     }
@@ -114,12 +119,12 @@ public class Game {
 
     } //?
 
-    public void initialize(){
+   /* public void initialize(){
         Game gameMode = Game.getGameMode();   //Mettere Scelta della Difficulty e della gameMode dal Player che crea la partita???
         assert gameMode != null;
         if (gameMode.equals(GameMode.TWOPLAYERS))
            // DA Implementare
-
+   */
 
     }
 
