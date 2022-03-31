@@ -90,23 +90,23 @@ public class School {
     }
 
     public int numberOfG(Player player){
-        return player.getPersonalSchool().getBTable().size();
+        return player.getPersonalSchool().getGTable().size();
     }
 
     public int numberOfR(Player player){
-        return rTable.size();
+        return player.getPersonalSchool().getRTable().size();
     }
 
     public int numberOfY(Player player){
-        return yTable.size();
+        return player.getPersonalSchool().getYTable().size();
     }
 
     public int numberOfP(Player player){
-        return pTable.size();
+        return player.getPersonalSchool().getPTable().size();
     }
 
     public int numberOfB(Player player){
-        return bTable.size();
+        return player.getPersonalSchool().getBTable().size();
     }
 
     public int calculateGMax(ArrayList<Player> players) {   //calcolo se player che sta giocando conquista il prof giallo

@@ -47,6 +47,8 @@ public class Table {
 
     public ArrayList<IslandCard> joinIsland(){
         //da fare
+        //va chiamata in moveMotherNature() dopo la buildTowerOnIsland()
+        //va chiamata in changeTower()
     }
 
     public boolean checkListOfIsland(){  // Se ListOfIsland=3, finisce la partita?
@@ -54,7 +56,7 @@ public class Table {
             return true;
     }
 
-    public PlayerNumber playerIsWinning(){
+    public PlayerNumber playerIsWinning(){  //calcola influenza torri sul tavolo e restituisce quello con più influenza
         // DA FARE
     }
 

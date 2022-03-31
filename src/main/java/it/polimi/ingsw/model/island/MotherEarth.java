@@ -14,7 +14,8 @@ public class MotherEarth {
         position = getPosition();
 
         // ! MADRE NATURA PUò FARE UN NUMERO DIVERSO DI PASSI, SCELTI DAL GIOCATORE !
-        //  DA IMPLEMENTARE
+        // deve chiamare anche buildTowerOnIsland() da IslandCard
+        //  DA IMPLEMENTARE e spostare in CONTROLLER
 
     }
 }

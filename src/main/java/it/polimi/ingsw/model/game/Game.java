@@ -21,20 +21,20 @@ public class Game {
     private Player activePlayer;     // tipo Player o Int???
     private int numberOfPlayers;
     private State state;
-    private ArrayList<Player> round;
+    private ArrayList<Player> order;
     private Difficulty difficulty;
 
     /**
      * Default constructor.
      */
-    public Game(int gameId, GameMode gameMode, int numberOfPlayers, Difficulty difficulty) {
-        this.gameId = gameId;
-        this.gameMode = gameMode;
-        this.difficulty = difficulty;
-        this.activePlayer = null;
-        this.numberOfPlayers = numberOfPlayers;
-        this.listOfPlayers = new ArrayList<>();
-        this.round = new ArrayList<>();
+    public Game() {
+        gameId = 0;
+        gameMode = new GameMode;
+        difficulty = new Difficulty;
+        activePlayer = new Player;
+        numberOfPlayers = 0;
+        listOfPlayers = new ArrayList<>();
+        order = new ArrayList<>();
     }
 
     public void addPlayer(Player player) {
@@ -86,7 +86,6 @@ public class Game {
         this.state = state;
     }
 
-
     public void setGameMode(GameMode gameMode){
         this.gameMode = gameMode;
     }
@@ -95,20 +94,13 @@ public class Game {
         return this.difficulty;
     }
 
-    public ArrayList<Player> getRound(){
-        return this.round;
+    public ArrayList<Player> getOrder(){
+        return this.order;
     }
 
-    public ArrayList<Player> setRound(ArrayList<Player> round){   //setta ordine dei giocatori nel round
-        for(Player i : round) {
-            round.set(i, Player.getTrash().getTurnValue()); //assegna ad ogni player il turnvalue della sua ultima carta giocata
-
-        //DA CONTROLLARE !!!
-        }
-        round.sort(Player.getTrash().getTurnValue());
-    return round;
-    } //?
-
+    /**
+     * winnerIs deve rimanere all'interno di Game
+     */
     public Player winnerIs() {
         if (DeckAssistant.checkIsEmpty() ||
                 School.checkTowerIsEmpty() ||
@@ -119,13 +111,6 @@ public class Game {
 
     } //?
 
-   /* public void initialize(){
-        Game gameMode = Game.getGameMode();   //Mettere Scelta della Difficulty e della gameMode dal Player che crea la partita???
-        assert gameMode != null;
-        if (gameMode.equals(GameMode.TWOPLAYERS))
-           // DA Implementare
-   */
 
-    }
 
 }

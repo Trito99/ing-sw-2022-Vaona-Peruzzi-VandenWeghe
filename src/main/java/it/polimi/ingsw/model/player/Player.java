@@ -14,7 +14,7 @@ import java.util.Date;
 public class Player {
 
     private final String nickname;
-    private final Date age;               // CONTROLLARE LIBRERIA DATA
+    private int age;               // CONTROLLARE LIBRERIA DATA
     private final PlayerNumber playerNumber;
     private TurnState turnState;
     private final School personalSchool;
@@ -26,34 +26,19 @@ public class Player {
     /**
      * Default constructor.
      */
-    public Player(String nickname, Date age, PlayerNumber playerNumber, School personalSchool, AssistantCard trash, Team team, TColour tColour, int coinScore) {
-        this.nickname = nickname;
-        this.age = age;
-        this.playerNumber = playerNumber;
-        this.personalSchool = personalSchool;
-        this.tColour = tColour;
-        this.trash = null;
-        this.coinScore = 1;
+    public Player(School personalSchool, AssistantCard trash, Team team, TColour tColour, int coinScore) {
+        nickname = new String;
+        age = 0;
+        playerNumber = new PlayerNumber;
+        personalSchool = new School;
+        tColour = new TColour;
+        trash = null;
+        coinScore = 1;
         Game gameMode = Game.getGameMode();             //gameMode come parametro?(Vedi CloudCard)
         assert gameMode != null;
         if(gameMode.equals(GameMode.COOP)) this.team = team;
         else this.team = null;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public String getNickname() {
@@ -92,6 +77,11 @@ public class Player {
         return this.team;
     }
 
+
+    public void setTColour(TColour tColour) {
+        this.tColour = tColour;
+    }
+
     public static int getCoinScore() {
         return this.coinScore;
     }   //Static?
@@ -100,30 +90,5 @@ public class Player {
         this.coinScore = coinScore;
     }
 
-    public void increaseCoinScore(int coinScore){
-        Player.setCoinScore(getCoinScore() + 1);
-    }
 
-    public void decreaseCoinScore(int coinScore){
-        Player.setCoinScore(getCoinScore() -1);
-    }
-
-    public void initializeTower(GameMode gameMode, Player player, TColour tColour){  //Da Finire!!!
-        if (gameMode.equals(GameMode.TWOPLAYERS)) {
-            if(player.getPlayerNumber()==PlayerNumber.PLAYER1) tColour = TColour.WHITE;
-            else if(player.getPlayerNumber()==PlayerNumber.PLAYER2) tColour = TColour.BLACK;
-            //mettere 8 torri in TowerZone
-        }
-        if (gameMode.equals(GameMode.TWOPLAYERS)) {
-            if(player.getPlayerNumber()==PlayerNumber.PLAYER1) tColour = TColour.WHITE;
-            else if(player.getPlayerNumber()==PlayerNumber.PLAYER2) tColour = TColour.GREY;
-            else if(player.getPlayerNumber()==PlayerNumber.PLAYER3) tColour = TColour.BLACK;
-        }
-        if (gameMode.equals(GameMode.COOP)) {
-            int i = 0;
-            if(player.team.getTeam().get(i) == /**...*/)) tColour = TColour.WHITE;
-        }
-    }
 }
-
-        }
