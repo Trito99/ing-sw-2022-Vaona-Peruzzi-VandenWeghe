@@ -1,6 +1,5 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.view.ModelView;
 import it.polimi.ingsw.view.View;
 
@@ -15,7 +14,7 @@ public class App
         Model model = new Model();
         ModelView modelView = new ModelView();
         View view = new View();
-        GameController controller = new GameController(model, view);
+        GameC controller = new GameC(model, view);
 
         view.addObserver(controller);  //(= controller osserva view)
         model.addObserver(modelView);
