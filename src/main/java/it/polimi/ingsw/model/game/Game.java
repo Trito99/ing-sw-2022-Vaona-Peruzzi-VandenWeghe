@@ -9,32 +9,31 @@ import it.polimi.ingsw.model.player.Team;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColour;
 import it.polimi.ingsw.model.table.Table;
+import it.polimi.ingsw.model.bag.Bag;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Game {
 
-    private int gameId; //?
-    private GameMode gameMode; //?
+    //private int gameId;
+    private GameMode gameMode;
     private ArrayList<Player> listOfPlayers;
-    private Player activePlayer;     // tipo Player o Int???
+    private Player activePlayer;
     private int numberOfPlayers;
     private State state;
     private ArrayList<Player> order;
     private Difficulty difficulty;
+    private Table table;
+    private Bag bag;
 
     /**
      * Default constructor.
      */
     public Game() {
-        gameId = 0;
-        gameMode = new GameMode;
-        difficulty = new Difficulty;
-        activePlayer = new Player;
-        numberOfPlayers = 0;
-        listOfPlayers = new ArrayList<>();
-        order = new ArrayList<>();
+        listOfPlayers = new ArrayList<Player>();
+        table = new Table();
+        bag = new Bag();
     }
 
     public void addPlayer(Player player) {
@@ -61,10 +60,11 @@ public class Game {
      * }
      */
 
-
+    /**
     public int getGameId(){
         return this.gameId;
     }
+    */
 
     public int getNumberOfPlayers(){
         return this.numberOfPlayers;

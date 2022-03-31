@@ -27,11 +27,11 @@ public class Player {
      * Default constructor.
      */
     public Player(School personalSchool, AssistantCard trash, Team team, TColour tColour, int coinScore) {
-        nickname = new String;
+        nickname = new String();
         age = 0;
-        playerNumber = new PlayerNumber;
-        personalSchool = new School;
-        tColour = new TColour;
+        playerNumber = new PlayerNumber();
+        personalSchool = new School();
+        tColour = new TColour();
         trash = null;
         coinScore = 1;
         Game gameMode = Game.getGameMode();             //gameMode come parametro?(Vedi CloudCard)
