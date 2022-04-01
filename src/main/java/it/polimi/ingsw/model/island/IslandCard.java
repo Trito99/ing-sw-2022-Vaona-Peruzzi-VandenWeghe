@@ -32,7 +32,7 @@ public class IslandCard {
     }
 
     public ArrayList<Student> getStudentOnIsland() {
-        return this.studentOnIsland;
+        return 87777studentOnIsland;
     }
 
     public boolean TowerIsOnIsland() {
@@ -47,12 +47,6 @@ public class IslandCard {
         this.towerIsOnIsland = towerIsOnIsland;
     }
 
-    public ArrayList<Student> moveStudentOnIsland(int id, SColour sColour){  //Penso da Rifare!!!
-        ArrayList<Student> studentOnIsland = School.getEntry();
-        studentOnIsland.add(new Student(id, sColour));
-
-        // RICORDA!!! devi togliere student da School
-    }
 
     public PlayerNumber calculateInfluence(){   //Restituisce playerNumber del Player che ha influenza sull'isola?
 

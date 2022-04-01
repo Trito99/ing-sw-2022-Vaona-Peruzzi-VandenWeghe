@@ -22,31 +22,32 @@ public class Table {
     private int coinsOnTable;
 
 
-    public Table(ArrayList<CharacterCard> characterCardsOnTable, int coinsOnTable) {
-        this.cloudNumber = new ArrayList<>(2);
-        this.listOfIsland = new ArrayList<>(12);
-        this.characterCardsOnTable = new ArrayList<>(3);
-
-        Game gameMode = Game.getGameMode();     //gameMode come parametro (vedi CloudCard)
-        assert gameMode != null;
-        if(gameMode.equals(GameMode.TWOPLAYERS)) this.coinsOnTable = 18;
-        if(gameMode.equals(GameMode.THREEPLAYERS)) this.coinsOnTable = 17;
-        else this.coinsOnTable = 16;
+    public void generateCloudNumber(Table table,GameMode gm){
+        GameMode gameMode = gm;
+        int x;
+        if(gameMode.equals(GameMode.TWOPLAYERS)){
+            x=2;
+        }else if(gameMode.equals(GameMode.THREEPLAYERS)){
+            x=3;
+        }else{
+            x=4;
+        }
+        for(int i=0;i<x;i++){
+            table.getCloudNumber().add(new CloudCard());
+        }
     }
 
-    public ArrayList<IslandCard> generateIslandCards(){
+
+    public void generateIslandCards(Table table){
         TColour black = TColour.BLACK;
         TColour grey = TColour.GREY;
         TColour white = TColour.WHITE;
-        Table t= new Table();  // sistemare costruttore!!!
+        Table t= table;
 
-
-        for(int s=1;s<13;s++) {                                      //id da 1 a 12
+        for(int s=1;s<13;s++) {
             t.getListOfIsland().add(new IslandCard(s));
         }
-        return t;
     }
-
     public ArrayList<CloudCard> getCloudNumber() {
         return this.cloudNumber;
     }

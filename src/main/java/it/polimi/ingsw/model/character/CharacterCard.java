@@ -15,11 +15,11 @@ public class CharacterCard {
     }
 
     public int getIdCharacter() {
-        return this.idCharacter;
+        return idCharacter;
     }
 
     public int getCostCharacter() {
-        return this.costCharacter;
+        return costCharacter;
     }
 
     public void setCostCharacter(int costCharacter) {
@@ -31,7 +31,7 @@ public class CharacterCard {
     }
 
     public boolean getCoinOnCard() {    //o isCoinOnCard() ?
-        return this.coinOnCard;
+        return coinOnCard;
     }
 
     public void setCoinOnCard(boolean coinOnCard) {
