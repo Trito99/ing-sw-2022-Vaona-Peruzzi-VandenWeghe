@@ -24,11 +24,11 @@ public class Bag {
         for(int s=1;s<131;s++){
             if(s<27)
                 b.getBag().add(new Student(s,green));
-            else if(s>26 && s<53)
+            else if(s<53)
                 b.getBag().add(new Student(s,red));
-            else if(s>52 && s<79)
+            else if(s<79)
                 b.getBag().add(new Student(s,yellow));
-            else if(s>78 && s<105)
+            else if(s<105)
                 b.getBag().add(new Student(s,pink));
             else
                 b.getBag().add(new Student(s,blue));
@@ -41,20 +41,20 @@ public class Bag {
         return bag;
     }
 
-    public ArrayList<Student> extractStudent(ArrayList<Student> stud, CloudCard cloudCard, GameMode gameMode){   //estrae dal sacchetto 3/4 studenti
+    public ArrayList<Student> extractStudent(Bag bag, CloudCard cloudCard, GameMode gameMode){   //estrae dal sacchetto 3/4 studenti
 
         //GameMode gameMode = Game.getGameMode();                          // Da rivedere
         //School entry = School.getEntry();    (FEDERICO: Li ho tolti e ho inserito school e gamemode come parametri della funzione)
-        int x = bag.size();
+        int x = bag.getBag().size();
 
         if(gameMode.equals(GameMode.THREEPLAYERS)){
-            for (int i = bag.size(); i >= x -4; i--) {
+            for (int i = bag.getBag().size(); i >= x -4; i--) {
                 cloudCard.getStudentOnCloud().add(stud.get(i));
                 bag.remove(stud);
             }
         }
         else {
-            for (int i = bag.size(); i >= x -3; i--) {
+            for (int i = bag.getBag().size(); i >= x -3; i--) {
                 cloudCard.getStudentOnCloud().add(stud.get(i));
                 bag.remove(stud);
             }
