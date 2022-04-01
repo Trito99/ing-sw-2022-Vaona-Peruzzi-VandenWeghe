@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.cloud;
 
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.student.Student;
 
 import java.util.ArrayList;
@@ -19,19 +20,14 @@ public class CloudCard {
         this.studentOnCloud = new ArrayList<Student>(3);
         this.studentCount = 0;
 
-        Game gameMode = Game.getGameMode();       // Passo gameMode come parametro?
-        assert gameMode != null;                  // Se non sappiamo ancora la gameMode? Altro costruttore?(con numberOfSpaces=0)
-        if (gameMode.equals(GameMode.THREEPLAYERS)) this.numberOfSpaces = 4;
-        else this.numberOfSpaces = 3;
-
     }
 
     public ArrayList<Student> getStudentOnCloud() {
-        return this.studentOnCloud;
+        return studentOnCloud;
     }
 
-    public int getNumberOfSpaces() {
-        GameMode gameMode = Game.getGameMode();
+    public void setNumberOfSpaces(GameMode gm) {
+        GameMode gameMode = gm;
 
         if(gameMode.equals(GameMode.THREEPLAYERS)){
             numberOfSpaces=4;
@@ -39,21 +35,23 @@ public class CloudCard {
         else{
             numberOfSpaces=3;
         }
-        return numberOfSpaces;
     }
 
     public int getIdCloud(){
-        return this.idCloud;
+        return idCloud;
     }
 
-    public void clearCloud(){
-        for(int i=0; i<numberOfSpaces; i++){
-            studentOnCloud.set(i, null);
+    public void moveStudentToIsland(CloudCard cloudCard, IslandCard islandCard, int id){ //Specifico Studente va spostato (sceglie player)
+        Student student = new Student(131,null);
+        for(int i = 0; i < cloudCard.getStudentOnCloud().size(); i++) {
+            if(id==cloudCard.getStudentOnCloud().get(i).getIdStudent())
+                student = cloudCard.getStudentOnCloud().get(i);
         }
-
+        islandCard.getStudentOnIsland().add(cloudCard.getStudentOnCloud().get(cloudCard.getStudentOnCloud().indexOf(student)));
+        cloudCard.getStudentOnCloud().remove(cloudCard.getStudentOnCloud().get(cloudCard.getStudentOnCloud().indexOf(student)));
     }
 
    public int getStudentCount() {    //restituisce numero di studenti sulla nuvola
-        return this.studentCount;
+        return studentCount;
     }
 }

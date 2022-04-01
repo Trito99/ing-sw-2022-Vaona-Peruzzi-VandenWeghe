@@ -12,10 +12,10 @@ public class Student {
 
 
     public int getIdStudent() {
-        return this.idStudent;
+        return idStudent;
     }
 
     public SColour getsColour() {
-        return this.sColour;
+        return sColour;
     }
 }

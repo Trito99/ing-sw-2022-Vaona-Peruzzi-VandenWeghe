@@ -43,7 +43,7 @@ public class Game {
     }
 
     public GameMode getGameMode() {
-        return this.gameMode;
+        return gameMode;
     }
 
     public ArrayList<Player> getListOfPlayer(){
