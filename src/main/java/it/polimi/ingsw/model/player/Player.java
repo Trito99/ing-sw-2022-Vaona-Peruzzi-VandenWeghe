@@ -90,5 +90,7 @@ public class Player {
         this.coinScore = coinScore;
     }
 
-
+    public void setTrash(AssistantCard trash) {
+        this.trash = trash;
+    }
 }

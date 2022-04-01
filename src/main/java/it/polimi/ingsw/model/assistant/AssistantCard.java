@@ -25,4 +25,8 @@ public class AssistantCard {
     public int getTurnValue() {
         return this.turnValue;
     }
+
+    public void setTurnValue(int turnValue) {
+        this.turnValue = turnValue;
+    }
 }
