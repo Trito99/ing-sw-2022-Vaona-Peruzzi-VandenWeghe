@@ -49,10 +49,6 @@ public class Player {
         return this.age;
     }
 
-    public void setPlayerNumber(PlayerNumber playerNumber) {
-        this.playerNumber = playerNumber;
-    }  //Se è final non può esserci metodo set (da guardare)
-
     public PlayerNumber getPlayerNumber() {
         return this.playerNumber;
     }

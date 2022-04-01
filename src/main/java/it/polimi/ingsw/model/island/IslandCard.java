@@ -15,12 +15,15 @@ public class IslandCard {
     private ArrayList<Student> studentOnIsland = new ArrayList<>();;
     private boolean towerIsOnIsland;
     private TColour towerOnIsland;
-    private int mergeIsland;        // = quante isole sono unite
+    private int mergedIsland;        // = quante isole sono unite
 
-    public IslandCard(int idIsland, TColour towerOnIsland) {
+    public IslandCard(int idIsland) {
         this.idIsland = idIsland;
-        this.towerOnIsland = null;
         this.studentOnIsland = null;
+        this.towerIsOnIsland = false;
+        this.towerOnIsland = null;
+        this.mergedIsland = 1;
+
     }
 
 

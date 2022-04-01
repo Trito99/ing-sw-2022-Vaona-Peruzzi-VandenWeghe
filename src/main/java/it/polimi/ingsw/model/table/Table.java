@@ -1,13 +1,18 @@
 package it.polimi.ingsw.model.table;
 
+import it.polimi.ingsw.model.bag.Bag;
 import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.PlayerNumber;
+import it.polimi.ingsw.model.school.TColour;
+import it.polimi.ingsw.model.student.SColour;
+import it.polimi.ingsw.model.student.Student;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Table {
 
@@ -27,6 +32,19 @@ public class Table {
         if(gameMode.equals(GameMode.TWOPLAYERS)) this.coinsOnTable = 18;
         if(gameMode.equals(GameMode.THREEPLAYERS)) this.coinsOnTable = 17;
         else this.coinsOnTable = 16;
+    }
+
+    public ArrayList<IslandCard> generateIslandCards(){
+        TColour black = TColour.BLACK;
+        TColour grey = TColour.GREY;
+        TColour white = TColour.WHITE;
+        Table t= new Table();  // sistemare costruttore!!!
+
+
+        for(int s=1;s<13;s++) {                                      //id da 1 a 12
+            t.getListOfIsland().add(new IslandCard(s));
+        }
+        return t;
     }
 
     public ArrayList<CloudCard> getCloudNumber() {
