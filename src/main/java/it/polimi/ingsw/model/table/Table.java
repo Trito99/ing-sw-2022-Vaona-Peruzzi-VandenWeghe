@@ -44,10 +44,6 @@ public class Table {
 
 
     public void generateIslandCards(Table table){
-        TColour black = TColour.BLACK;
-        TColour grey = TColour.GREY;
-        TColour white = TColour.WHITE;
-
         for(int s=1;s<13;s++) {
             table.getListOfIsland().add(new IslandCard(s));
         }

@@ -11,14 +11,12 @@ public class CloudCard {
     private int idCloud;
     private ArrayList<Student> studentOnCloud;
     private int numberOfSpaces;
-    private int studentCount;
 
 
     public CloudCard(int idCloud, int numberOfSpaces){
         this.idCloud = idCloud;
         this.studentOnCloud = new ArrayList<Student>(3);
         this.numberOfSpaces = numberOfSpaces;
-        this.studentCount = 0;
     }
 
     public ArrayList<Student> getStudentOnCloud() {
