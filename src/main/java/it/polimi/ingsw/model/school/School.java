@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.school;
 
 import it.polimi.ingsw.model.cloud.CloudCard;
+import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.student.SColour;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.game.Game;
@@ -44,20 +45,14 @@ public class School {
         return this.entry;
     }
 
-    public void addStudentInCloud(ArrayList<Student> students, GameMode gameMode,CloudCard cloudCard) {
-
-        if (gameMode.equals(GameMode.THREEPLAYERS)) {
-            for(int i=4; i>0; i--) {
-                entry.add(new Student(students.get(i).getIdStudent(), students.get(i).getsColour()));
-            }
-            cloudCard.clearCloud();
+    public void moveStudentToIsland(School school, IslandCard islandCard, int id){ //Specifico Studente va spostato (sceglie player)
+        Student student = new Student(131,null);
+        for(int i = 0; i < school.getEntry().size(); i++) {
+            if(id==school.getEntry().get(i).getIdStudent())
+                student = school.getEntry().get(i);
         }
-        else {
-            for(int i=3; i>0; i--) {
-                entry.add(new Student(students.get(i).getIdStudent(), students.get(i).getsColour()));
-            }
-            cloudCard.clearCloud();
-        }
+        islandCard.getStudentOnIsland().add(school.getEntry().get(school.getEntry().indexOf(student)));
+        school.getEntry().remove(school.getEntry().get(school.getEntry().indexOf(student)));
     }
 
     public ArrayList<Student> moveStudentInHall(int id, SColour sColour){    //DA RIGUARDARE!!
