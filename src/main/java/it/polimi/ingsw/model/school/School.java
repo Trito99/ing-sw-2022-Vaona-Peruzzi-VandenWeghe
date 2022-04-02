@@ -270,6 +270,15 @@ public class School {
         // ci sarà una notify observer
     }
 
+    public int lastTowerAvailable(){
+        //implementare una LIFO
+        int i = 0;
+        int maxNumTower = 8;    //da inizializzare in game controller
+        for(int i = maxNumTower, i < maxNumTower-1, i--){
+            tower[i] = tower.remove(i);
+        }
+    }
+
     public void removeTower(int id, TColour tColour) {
         tower.remove(new Tower(id,tColour)); // da verificare il "new"
     }

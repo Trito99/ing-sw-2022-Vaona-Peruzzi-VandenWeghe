@@ -78,6 +78,10 @@ public class Player {
         this.tColour = tColour;
     }
 
+    public TColour getTColour() {
+        return tColour;
+    }
+
     public static int getCoinScore() {
         return coinScore;
     }   //Static?

@@ -6,6 +6,8 @@ import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.GameState;
+import it.polimi.ingsw.model.island.IslandCard;
+import it.polimi.ingsw.model.island.MotherEarth;
 import it.polimi.ingsw.model.player.Player;
 
 import java.util.ArrayList;
@@ -106,6 +108,14 @@ public class GameController implements Observer {
 
     public void decreaseCoinScore() {
         Player.setCoinScore(Player.getCoinScore() - 1);
+    }
+
+    public void moveMotherEarth() {    //Le scelte brooo,
+        int position = MotherEarth.getPosition();
+        //notify Observer che mi dice la scelta del giocatore
+        position = position + playerChoice;
+        IslandCard.buildTowerOnIsland();
+        IslandCard.changeTowerColour();
     }
 
     /**
