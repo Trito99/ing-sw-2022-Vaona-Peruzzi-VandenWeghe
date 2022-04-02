@@ -27,11 +27,6 @@ public class School {
     private ArrayList<Prof> profOfPlayer = null;
 
     public School(ArrayList<Prof> profOfPlayer) {
-        Game gameMode = Game.getGameMode();
-        assert gameMode != null;
-        if (gameMode.equals(GameMode.THREEPLAYERS))
-            entry = new ArrayList<>(9);
-        else entry = new ArrayList<>(7);
 
         GTable = new ArrayList<>();
         RTable = new ArrayList<>();
@@ -55,13 +50,34 @@ public class School {
         school.getEntry().remove(school.getEntry().get(school.getEntry().indexOf(student)));
     }
 
-    public ArrayList<Student> moveStudentInHall(int id, SColour sColour){    //DA RIGUARDARE!!
-        if(sColour == SColour.GREEN) GTable.add(new Student(id, sColour));
-        else if(sColour == SColour.RED) RTable.add(new Student(id, sColour));
-        else if(sColour == SColour.YELLOW) YTable.add(new Student(id,sColour));
-        else if(sColour == SColour.PINK) PTable.add(new Student(id, sColour));
-        else if(sColour == SColour.BLUE) BTable.add(new Student(id, sColour));
-        entry.remove(new Student(id,sColour));   // da verificare il "new"!!!!!
+    public void moveStudentInHall(School school,int id) {
+        Student student = new Student(131, null);
+        for (int i = 0; i < school.getEntry().size(); i++) {
+            if (id == school.getEntry().get(i).getIdStudent())
+                student = school.getEntry().get(i);
+        }
+        switch(student.getsColour()){
+            case GREEN:
+                school.getGTable().add(student);
+                school.getEntry().remove(school.getEntry().get(school.getEntry().indexOf(student)));
+                break;
+            case RED:
+                school.getRTable().add(student);
+                school.getEntry().remove(school.getEntry().get(school.getEntry().indexOf(student)));
+                break;
+            case YELLOW:
+                school.getYTable().add(student);
+                school.getEntry().remove(school.getEntry().get(school.getEntry().indexOf(student)));
+                break;
+            case PINK:
+                school.getPTable().add(student);
+                school.getEntry().remove(school.getEntry().get(school.getEntry().indexOf(student)));
+                break;
+            case BLUE:
+                school.getBTable().add(student);
+                school.getEntry().remove(school.getEntry().get(school.getEntry().indexOf(student)));
+                break;
+        }
     }
 
     public ArrayList<Student> getGTable(){
