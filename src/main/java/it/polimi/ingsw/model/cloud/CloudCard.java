@@ -25,20 +25,8 @@ public class CloudCard {
         return studentOnCloud;
     }
 
-    public void setNumberOfSpaces(GameMode gm) {
-        GameMode gameMode = gm;
-
-        if(gameMode.equals(GameMode.THREEPLAYERS)){
-            numberOfSpaces=4;
-        }
-        else{
-            numberOfSpaces=3;
-        }
-    }
 
     public int getNumberOfSpaces(){
-        GameMode gm = Game.getGameMode();
-        setNumberOfSpaces(gm);
         return numberOfSpaces;
     }
 
