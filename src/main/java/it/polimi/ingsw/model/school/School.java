@@ -271,16 +271,17 @@ public class School {
     }
 
     public int lastTowerAvailable(){
-        //implementare una LIFO
-        int i = 0;
-        int maxNumTower = 8;    //da inizializzare in game controller
-        for(int i = maxNumTower, i < maxNumTower-1, i--){
-            tower[i] = tower.remove(i);
+
+        int maxNumTower = 7;    //da inizializzare in game controller -- a seconda della gameMode!
+        while(tower.get(maxNumTower) != null){
+            maxNumTower--;
         }
+        return maxNumTower;
     }
 
-    public void removeTower(int id, TColour tColour) {
-        tower.remove(new Tower(id,tColour)); // da verificare il "new"
+    public void removeTower() {
+
+        tower.remove(lastTowerAvailable()); // da verificare il "new"
     }
 
     public boolean checkTowerIsEmpty() {     //  (Ricorda: se non ci sono Tower in TowerZone finisce la partita)

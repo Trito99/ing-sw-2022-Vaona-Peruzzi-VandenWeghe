@@ -39,7 +39,7 @@ public class IslandCard {
         return this.towerIsOnIsland;
     }
 
-    public TColour getTowerOnIsland() {
+    public Tower getTowerOnIsland() {
         return towerOnIsland;
     }
 
@@ -47,25 +47,30 @@ public class IslandCard {
         this.towerIsOnIsland = towerIsOnIsland;
     }
 
-    public Tower setTowerOnIsland(Tower towerOnIsland){
+    public void setTowerOnIsland(Tower towerOnIsland){
         this.towerOnIsland = towerOnIsland;
     }
 
 
     public Player calculateInfluence(){   //Restituisce playerNumber del Player che ha influenza sull'isola?
+
+    return Player;
     }
 
-    public Tower buildTowerOnIsland(){        //Builda la torre del colore del Player che ha l'influenza sull'isola??
-        Player player = calculateInfluence();
-        TColour towerColour = player.getTColour();
-        towerOnIsland = new Tower(player.getPersonalSchool().lastTowerAvailable(),towerColour);
-        player.getPersonalSchool().removeTower(player.getPersonalSchool().lastTowerAvailable(), towerColour);     //va modificato l'idTower
+    public void buildTowerOnIsland(){        //Builda la torre del colore del Player che ha l'influenza sull'isola??
+
+        Player player = calculateInfluence();           //Player che ha influenza sull'isola
+        TColour towerColour = player.getTColour();      //Colore delle torri del player che ha influenza
+
+        towerOnIsland = new Tower(player.getPersonalSchool().lastTowerAvailable(), towerColour);
+        player.getPersonalSchool().removeTower();
+
         setTowerIsOnIsland(true);
-        setTowerOnIsland();
     }
 
     public TColour changeTowerColour(){
 
+        return TColour;
     }
 
     public int getMergeIsland() {
