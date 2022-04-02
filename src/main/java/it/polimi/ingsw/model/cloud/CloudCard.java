@@ -42,7 +42,4 @@ public class CloudCard {
         cloudCard.getStudentOnCloud().remove(cloudCard.getStudentOnCloud().get(cloudCard.getStudentOnCloud().indexOf(student)));
     }
 
-   public int getStudentCount() {    //restituisce numero di studenti sulla nuvola
-        return studentCount;
-    }
 }

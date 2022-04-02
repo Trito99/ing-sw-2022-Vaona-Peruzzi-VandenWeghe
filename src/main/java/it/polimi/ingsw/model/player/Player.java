@@ -45,16 +45,16 @@ public class Player {
         return this.nickname;
     }
 
-    public String getAge() {
-        return this.age;
+    public int getAge() {
+        return age;
     }
 
     public PlayerNumber getPlayerNumber() {
-        return this.playerNumber;
+        return playerNumber;
     }
 
     public TurnState getTurnState() {
-        return this.turnState;
+        return turnState;
     }
 
     public void setTurnState(TurnState turnState) {
@@ -62,15 +62,15 @@ public class Player {
     }
 
     public School getPersonalSchool() {
-        return this.personalSchool;
+        return personalSchool;
     }
 
     public AssistantCard getTrash() {
-        return this.trash;
+        return trash;
     }
 
     public Team getTeam() {
-        return this.team;
+        return team;
     }
 
 
@@ -79,7 +79,7 @@ public class Player {
     }
 
     public static int getCoinScore() {
-        return this.coinScore;
+        return coinScore;
     }   //Static?
 
     public static void setCoinScore(int coinScore) {

@@ -42,7 +42,7 @@ public class School {
     }
 
     public ArrayList<Student> getEntry() {
-        return this.entry;
+        return entry;
     }
 
     public void moveStudentToIsland(School school, IslandCard islandCard, int id){ //Specifico Studente va spostato (sceglie player)
@@ -65,23 +65,23 @@ public class School {
     }
 
     public ArrayList<Student> getGTable(){
-        return this.GTable;
+        return GTable;
     }
 
     public ArrayList<Student> getRTable(){
-        return this.RTable;
+        return RTable;
     }
 
     public ArrayList<Student> getYTable(){
-        return this.YTable;
+        return YTable;
     }
 
     public ArrayList<Student> getPTable(){
-        return this.PTable;
+        return PTable;
     }
 
     public ArrayList<Student> getBTable(){
-        return this.BTable;
+        return BTable;
     }
 
     public int numberOfG(Player player){
@@ -262,7 +262,7 @@ public class School {
     }
 
     public ArrayList<Tower> getTower() {
-        return this.tower;
+        return tower;
     }
 
     public void addTower(int id, TColour tColour) {

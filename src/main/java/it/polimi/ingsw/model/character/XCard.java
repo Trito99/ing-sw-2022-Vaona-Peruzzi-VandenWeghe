@@ -13,14 +13,14 @@ public class XCard {
     }
 
     public boolean getIsOnIsland() {
-        return this.isOnIsland;
+        return isOnIsland;
     }
 
     public int getPosition() {
-        return this.position;
+        return position;
     }
 
     public int getIdXCard() {
-        return this.idXCard;
+        return idXCard;
     }
 }

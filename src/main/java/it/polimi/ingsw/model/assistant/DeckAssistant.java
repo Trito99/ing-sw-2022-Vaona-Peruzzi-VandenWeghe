@@ -11,7 +11,7 @@ public class DeckAssistant {
     }
 
     public ArrayList<AssistantCard> getCardsInHand() {
-        return this.cardsInHand;
+        return cardsInHand;
     }
 
    /* public ArrayList<AssistantCard> updateDeck() {

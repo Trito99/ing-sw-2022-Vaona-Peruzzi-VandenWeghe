@@ -28,7 +28,7 @@ public class IslandCard {
 
 
     public int getIdIsland() {
-        return this.idIsland;
+        return idIsland;
     }
 
     public ArrayList<Student> getStudentOnIsland() {
@@ -40,7 +40,7 @@ public class IslandCard {
     }
 
     public TColour getTowerOnIsland() {
-        return this.towerOnIsland;
+        return towerOnIsland;
     }
 
     public void setTowerIsOnIsland(boolean towerIsOnIsland) {
@@ -57,10 +57,10 @@ public class IslandCard {
     }
 
     public int getMergeIsland() {
-        return this.mergeIsland;
+        return mergedIsland;
     }
 
     public void setMergeIsland(int mergeIsland) {
-        this.mergeIsland = mergeIsland;
+        this.mergedIsland = mergeIsland;
     }
 }

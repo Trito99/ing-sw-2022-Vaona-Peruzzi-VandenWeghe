@@ -7,7 +7,7 @@ public class MotherEarth {
     private int position = 0;
 
     public int getPosition() {
-        return this.position;
+        return position;
     }
 
     public void movePosition() {    //Le scelte brooo,

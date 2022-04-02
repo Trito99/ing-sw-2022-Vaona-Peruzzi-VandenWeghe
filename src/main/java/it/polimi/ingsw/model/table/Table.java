@@ -23,14 +23,13 @@ public class Table {
 
 
     public void generateCloudNumber(Table table,GameMode gm){
-        GameMode gameMode = gm;
         int x;
         int maxNumberOfStudents;
 
-        if(gameMode.equals(GameMode.TWOPLAYERS)){
+        if(gm.equals(GameMode.TWOPLAYERS)){
             x=2;
             maxNumberOfStudents = 3;
-        }else if(gameMode.equals(GameMode.THREEPLAYERS)){
+        }else if(gm.equals(GameMode.THREEPLAYERS)){
             x=3;
             maxNumberOfStudents = 4;
         }else{
@@ -49,15 +48,15 @@ public class Table {
         }
     }
     public ArrayList<CloudCard> getCloudNumber() {
-        return this.cloudNumber;
+        return cloudNumber;
     }
 
     public ArrayList<IslandCard> getListOfIsland() {
-        return this.listOfIsland;
+        return listOfIsland;
     }
 
     public int getCoinsOnTable() {
-        return this.coinsOnTable;
+        return coinsOnTable;
     }
 
     public ArrayList<CharacterCard> getCharacterCardsOnTable() {

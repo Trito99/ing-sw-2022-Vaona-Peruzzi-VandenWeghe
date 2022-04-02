@@ -15,15 +15,15 @@ public class AssistantCard {
     }
 
     public String getAssistantName() {
-        return this.assistantName;
+        return assistantName;
     }
 
     public int getStepMotherEarth() {
-        return this.stepMotherEarth;
+        return stepMotherEarth;
     }
 
     public int getTurnValue() {
-        return this.turnValue;
+        return turnValue;
     }
 
     public void setTurnValue(int turnValue) {

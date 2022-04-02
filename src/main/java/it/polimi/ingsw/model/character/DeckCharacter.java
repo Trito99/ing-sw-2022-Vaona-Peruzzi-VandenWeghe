@@ -17,7 +17,7 @@ public class DeckCharacter {
     }
 
     public ArrayList<CharacterCard> getCharacterCards(){
-        return this.characterCards;
+        return characterCards;
     }
 
     public void shuffleCard(ArrayList<CharacterCard> characterCards){
