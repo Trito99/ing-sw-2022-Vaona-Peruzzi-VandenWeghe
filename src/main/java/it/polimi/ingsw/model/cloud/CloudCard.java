@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model.cloud;
 
-import it.polimi.ingsw.model.game.Game;
+
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.student.Student;
@@ -14,14 +14,11 @@ public class CloudCard {
     private int studentCount;
 
 
-
-
     public CloudCard(int idCloud, int numberOfSpaces){
         this.idCloud = idCloud;
         this.studentOnCloud = new ArrayList<Student>(3);
         this.numberOfSpaces = numberOfSpaces;
         this.studentCount = 0;
-
     }
 
     public ArrayList<Student> getStudentOnCloud() {
@@ -37,6 +34,12 @@ public class CloudCard {
         else{
             numberOfSpaces=3;
         }
+    }
+
+    public int getNumberOfSpaces(){
+        GameMode gm = Game.getGameMode();
+        setNumberOfSpaces(gm);
+        return numberOfSpaces;
     }
 
     public int getIdCloud(){

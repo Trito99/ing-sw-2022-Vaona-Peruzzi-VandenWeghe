@@ -42,7 +42,7 @@ public class Bag {
     }
 
     public void extractStudent(Bag bag, CloudCard cloudCard){   //estrae dal sacchetto 3/4 studenti
-
+        /** chiara: penso vada passato anche l'id cloud */
         if(cloudCard.getNumberOfSpaces()==4){
             for (int i=0; i<4; i++) {
                 cloudCard.getStudentOnCloud().add(bag.getBag().get(i));
