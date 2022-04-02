@@ -32,7 +32,7 @@ public class IslandCard {
     }
 
     public ArrayList<Student> getStudentOnIsland() {
-        return 87777studentOnIsland;
+        return studentOnIsland;
     }
 
     public boolean TowerIsOnIsland() {

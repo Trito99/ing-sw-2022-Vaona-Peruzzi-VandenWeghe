@@ -25,15 +25,20 @@ public class Table {
     public void generateCloudNumber(Table table,GameMode gm){
         GameMode gameMode = gm;
         int x;
+        int maxNumberOfStudents;
+
         if(gameMode.equals(GameMode.TWOPLAYERS)){
             x=2;
+            maxNumberOfStudents = 3;
         }else if(gameMode.equals(GameMode.THREEPLAYERS)){
             x=3;
+            maxNumberOfStudents = 4;
         }else{
             x=4;
+            maxNumberOfStudents = 3;
         }
         for(int i=0;i<x;i++){
-            table.getCloudNumber().add(new CloudCard());
+            table.getCloudNumber().add(new CloudCard(i, maxNumberOfStudents));
         }
     }
 
@@ -42,10 +47,9 @@ public class Table {
         TColour black = TColour.BLACK;
         TColour grey = TColour.GREY;
         TColour white = TColour.WHITE;
-        Table t= table;
 
         for(int s=1;s<13;s++) {
-            t.getListOfIsland().add(new IslandCard(s));
+            table.getListOfIsland().add(new IslandCard(s));
         }
     }
     public ArrayList<CloudCard> getCloudNumber() {
