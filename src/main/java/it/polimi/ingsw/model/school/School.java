@@ -109,85 +109,169 @@ public class School {
         return player.getPersonalSchool().getBTable().size();
     }
 
-    public int calculateGMax(ArrayList<Player> players) {   //calcolo se player che sta giocando conquista il prof giallo
+    public void winProfG(ArrayList<Player> players) {
+        //calcolo se player che sta giocando conquista il prof giallo
         // numero di studenti gialli del player "selezionato"
         int max=0;
-        for (Player player : players){
-            if(numberOfG(player) > max){
-                max= numberOfG(player);
+        int playerWithMax = 0;
+        Player maxPlayer = null;
+
+        for (Player player : players) {
+            if (numberOfG(player) > max) {
+                max = numberOfG(player);
+            }
+            else player.getPersonalSchool().setProfGInHall(false);
+        }
+
+        for (Player player : players) {
+            if(numberOfG(player) == max){
+                playerWithMax ++;
+                maxPlayer = player;
             }
         }
-        return max;
-        /*Da Fare: passo alla funzione tutti i player(Arraylist<Player>) e usando metodo numberOfG tengo traccia di chi ha più gialli,
-        cosa ritorna la funzione? Il numero di gialli maggiore? Il giocatore che ha più gialli? Un booleano? */
+        if (playerWithMax == 1){
+            maxPlayer.getPersonalSchool().setProfGInHall(true);
+        }
     }
 
-    public boolean calculateRMax() { //Vedi sopra
-        //da fare
-        return true;
+    public void winProfR(ArrayList<Player> players) {
+        int max=0;
+        int playerWithMax = 0;
+        Player maxPlayer = null;
+
+        for (Player player : players) {
+            if (numberOfR(player) > max) {
+                max = numberOfR(player);
+            }
+            else player.getPersonalSchool().setProfRInHall(false);
+        }
+
+        for (Player player : players) {
+            if(numberOfR(player) == max){
+                playerWithMax ++;
+                maxPlayer = player;
+            }
+        }
+        if (playerWithMax == 1){
+            maxPlayer.getPersonalSchool().setProfRInHall(true);
+        }
     }
 
-    public boolean calculateYMax() {
-        //da fare
-        return true;
+    public void winProfY(ArrayList<Player> players) {
+        int max=0;
+        int playerWithMax = 0;
+        Player maxPlayer = null;
+
+        for (Player player : players) {
+            if (numberOfY(player) > max) {
+                max = numberOfY(player);
+            }
+            else player.getPersonalSchool().setProfYInHall(false);
+        }
+
+        for (Player player : players) {
+            if(numberOfY(player) == max){
+                playerWithMax ++;
+                maxPlayer = player;
+            }
+        }
+        if (playerWithMax == 1){
+            maxPlayer.getPersonalSchool().setProfYInHall(true);
+        }
     }
 
-    public boolean calculatePMax() {
-        //da fare
-        return true;
+    public void winProfP(ArrayList<Player> players) {
+        int max=0;
+        int playerWithMax = 0;
+        Player maxPlayer = null;
+
+        for (Player player : players) {
+            if (numberOfP(player) > max) {
+                max = numberOfP(player);
+            }
+            else player.getPersonalSchool().setProfPInHall(false);
+        }
+
+        for (Player player : players) {
+            if(numberOfP(player) == max){
+                playerWithMax ++;
+                maxPlayer = player;
+            }
+        }
+        if (playerWithMax == 1){
+            maxPlayer.getPersonalSchool().setProfPInHall(true);
+        }
     }
 
-    public boolean calculateBMax() {
-        //da fare
-        return true;
+    public boolean winProfB(ArrayList<Player> players) {
+        int max=0;
+        int playerWithMax = 0;
+        Player maxPlayer = null;
+
+        for (Player player : players) {
+            if (numberOfB(player) > max) {
+                max = numberOfB(player);
+            }
+            else player.getPersonalSchool().setProfBInHall(false);
+        }
+
+        for (Player player : players) {
+            if(numberOfB(player) == max){
+                playerWithMax ++;
+                maxPlayer = player;
+            }
+        }
+        if (playerWithMax == 1){
+            maxPlayer.getPersonalSchool().setProfBInHall(true);
+        }
     }
 
     public boolean getProfGInHall(){
-        return this.profGInHall;
+        return profGInHall;
     }
 
     public boolean getProfRInHall(){
-        return this.profRInHall;
+        return profRInHall;
     }
 
     public boolean getProfYInHall(){
-        return this.profYInHall;
+        return profYInHall;
     }
 
     public boolean getProfPInHall(){
-        return this.profPInHall;
+        return profPInHall;
     }
 
     public boolean getProfBInHall(){
-        return this.profBInHall;
+        return profBInHall;
     }
 
     public boolean setProfGInHall(boolean profGInHall){
         return this.profGInHall = profGInHall;
-    }  //boolean o void??
+    }
 
     public boolean setProfRInHall(boolean profRInHall){
         return this.profRInHall = profRInHall;
-    }  //boolean o void??
+    }
 
     public boolean setProfYInHall(boolean profYInHall){
        return this.profYInHall = profYInHall;
-    }  //boolean o void??
+    }
 
     public boolean setProfPInHall(boolean profPInHall){
         return this.profPInHall = profPInHall;
-    }  //boolean o void??
+    }
 
     public boolean setProfBInHall(boolean profBInHall){
         return this.profBInHall = profBInHall;
-    }  //boolean o void??
+    }
 
     public ArrayList<Tower> getTower() {
         return this.tower;
     }
 
     public void addTower(int id, TColour tColour) {
-            tower.add(new Tower(id,tColour));
+        tower.add(new Tower(id,tColour));
         // ci sarà una notify observer
     }
 
