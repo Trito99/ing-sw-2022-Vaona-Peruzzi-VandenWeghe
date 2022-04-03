@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
+import it.polimi.ingsw.model.bag.Bag;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.school.School;
@@ -38,6 +39,33 @@ public class Player {
         assert gameMode != null;
         if(gameMode.equals(GameMode.COOP)) this.team = team;
         else this.team = null;
+    }
+
+    public School generateSchool(Bag bag, GameMode gameMode, TColour tcolour){
+        int i=7;
+        int t=0;
+        switch(gameMode){
+            case TWOPLAYERS:
+                i=7;
+                t=8;
+                break;
+            case THREEPLAYERS:
+                i=9;
+                t=6;
+                break;
+            case COOP:
+                i=7;
+                t=0;
+                break;
+        }
+        for(int s=0;s<i;s++) {
+            personalSchool.getEntry().add(bag.getBag().get(s));
+            bag.getBag().remove(bag.getBag().get(s));
+        }
+        for(int f=0;f<t;f++){
+            personalSchool.addTower(f,tcolour);
+        }
+        return personalSchool;
     }
 
 

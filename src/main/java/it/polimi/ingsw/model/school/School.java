@@ -287,18 +287,22 @@ public class School {
         // ci sarà una notify observer
     }
 
-    public int lastTowerAvailable(){
-        tower = getTower();
-        int maxNumTower = 7;    //da inizializzare in game controller -- a seconda della gameMode!
-        while(tower.get(maxNumTower) != null){
-            maxNumTower--;
+    public int indexOfLastTowerAvailable(GameMode gameMode) {
+        int maxNumTower = 8;
+        switch(gameMode){
+            case TWOPLAYERS:
+                maxNumTower=8;
+                break;
+            case THREEPLAYERS:
+                maxNumTower=6;
+                break;
+            case COOP:
+                maxNumTower=8;
+                break;
         }
-        return maxNumTower;
-    }
-
-    public void removeTower() {
+    public void removeTower(gameMode GameMode) {
         tower = getTower();
-        tower.remove(lastTowerAvailable()); // da verificare il "new"
+        tower.remove(indexOfLastTowerAvailable(gameMode));
     }
 
    /* public boolean checkTowerIsEmpty() {     //  (Ricorda: se non ci sono Tower in TowerZone finisce la partita)
