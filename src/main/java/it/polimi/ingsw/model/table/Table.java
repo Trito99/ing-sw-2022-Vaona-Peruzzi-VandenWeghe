@@ -74,14 +74,12 @@ public class Table {
             return true;
     } */
 
-    public Player playerIsWinning(IslandCard islandCard, Player player){  //calcola influenza torri sul tavolo e restituisce quello con più influenza
+    public Player playerIsWinning(){  //calcola influenza torri sul tavolo e restituisce quello con più influenza
         int countGrey = 0;
         int countWhite = 0;
         int countBlack = 0;
         Player winner = null;
         Player alsoWinner = null ;
-
-        listOfIsland = getListOfIsland();
 
         /** conto il numero di torri presenti sul tavolo per ogni colore */
         for (int s=1;s<13;s++){
@@ -97,45 +95,49 @@ public class Table {
         }
 
         /** confronto e cerco chi ha maggior influenza */
-        if (countBlack > countGrey){
-            winner.equals(player.getTColour().BLACK);
-            return winner;
+        if (countBlack > countGrey && countBlack > countWhite){
+            for(Player player : Game.getListOfPlayer()){
+                if(player.getTColour().equals(TColour.BLACK)){
+                    return winner = player;
+                }
+            }
         }
-        else if(countBlack > countWhite){
-            winner.equals(player.getTColour().BLACK);
-            return winner;
+
+        else if(countGrey > countBlack && countGrey > countWhite){
+                for(Player player : Game.getListOfPlayer()) {
+                    if (player.getTColour().equals(TColour.BLACK)) {
+                        return winner = player;
+                    }
+                }
         }
-        else if(countGrey > countBlack){
-            winner.equals(player.getTColour().GREY);
-            return winner;
-        }
-        else if(countGrey > countWhite){
-            winner.equals(player.getTColour().GREY);
-            return winner;
-        }
-        else if(countWhite > countBlack){
-            winner.equals(player.getTColour().WHITE);
-            return winner;
-        }
-        else if(countWhite > countGrey){
-            winner.equals(player.getTColour().WHITE);
-            return winner;
+        else if(countWhite > countBlack && countWhite > countGrey){
+            for(Player player : Game.getListOfPlayer()) {
+                if (player.getTColour().equals(TColour.BLACK)) {
+                    return winner = player;
+                }
+            }
         }
 
         /** in caso di parità, confronto i player e vince quello con più prof */
-        else if(countBlack == countGrey){
-            winner.equals(player.getTColour().BLACK);
-            alsoWinner.equals(player.getTColour().GREY);
+        else if(countBlack == countGrey && countBlack > countWhite){
+            for(Player player : Game.getListOfPlayer()) {
+                if (player.getTColour().equals(TColour.BLACK)) {
+                    winner = player;
+                }
+                else if(player.getTColour().equals(TColour.GREY)) {
+                    alsoWinner = player;
+                }
+            }
             int profWinner = winner.getPersonalSchool().numberOfProf();
             int profAlsoWinner = alsoWinner.getPersonalSchool().numberOfProf();
 
             if(profWinner > profAlsoWinner){
                 return winner;
             }
-            else return alsoWinner;
+            else return alsoWinner;             /** METTERE CASO PAREGGIO PROF ??? */
         }
 
-        else if(countGrey == countWhite){
+        else if(countGrey == countWhite && countGrey > countBlack){
             winner.equals(player.getTColour().GREY);
             alsoWinner.equals(player.getTColour().WHITE);
             int profWinner = winner.getPersonalSchool().numberOfProf();
@@ -147,7 +149,7 @@ public class Table {
             else return alsoWinner;
         }
 
-        else if(countWhite == countBlack){
+        else if(countWhite == countBlack && countWhite > countGrey){
             winner.equals(player.getTColour().WHITE);
             alsoWinner.equals(player.getTColour().BLACK);
             int profWinner = winner.getPersonalSchool().numberOfProf();
