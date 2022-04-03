@@ -9,14 +9,14 @@ import it.polimi.ingsw.model.game.GameState;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.island.MotherEarth;
 import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.PlayerNumber;
+import it.polimi.ingsw.model.school.TColour;
+import it.polimi.ingsw.model.table.Table;
+import it.polimi.ingsw.view.View;
 
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-
-import it.polimi.ingsw.model.player.PlayerNumber;
-import it.polimi.ingsw.model.school.TColour;
-import it.polimi.ingsw.view.View;
 
 public class GameController implements Observer {
 
@@ -109,12 +109,14 @@ public class GameController implements Observer {
         Player.setCoinScore(Player.getCoinScore() - 1);
     }
 
-    public void moveMotherEarth() {    //Le scelte brooo,
+    public void moveMotherEarth(IslandCard islandCard, Table table) {    //Le scelte brooo,
         int position = MotherEarth.getPosition();
         //notify Observer che mi dice la scelta del giocatore
         position = position + playerChoice;
-        IslandCard.buildTowerOnIsland();
-        IslandCard.changeTowerColour();
+        islandCard.buildTowerOnIsland();
+        islandCard.changeTowerColour();
+        table.joinIsland();
+
     }
 
     /**

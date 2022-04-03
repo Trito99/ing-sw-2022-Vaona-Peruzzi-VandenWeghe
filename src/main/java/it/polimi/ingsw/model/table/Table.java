@@ -42,12 +42,12 @@ public class Table {
         }
     }
 
-
     public void generateIslandCards(Table table){
         for(int s=1;s<13;s++) {
             table.getListOfIsland().add(new IslandCard(s));
         }
     }
+
     public ArrayList<CloudCard> getCloudNumber() {
         return cloudNumber;
     }
@@ -66,8 +66,7 @@ public class Table {
 
     public ArrayList<IslandCard> joinIsland(){
         //da fare
-        //va chiamata in moveMotherNature() dopo la buildTowerOnIsland()
-        //va chiamata in changeTower()
+
     }
 
     /* public boolean checkListOfIsland(){  // Se ListOfIsland=3, finisce la partita?
@@ -75,8 +74,53 @@ public class Table {
             return true;
     } */
 
-    public Player playerIsWinning(){  //calcola influenza torri sul tavolo e restituisce quello con più influenza
-        // DA FARE
+    public Player playerIsWinning(IslandCard islandCard, Player player){  //calcola influenza torri sul tavolo e restituisce quello con più influenza
+        int countGrey = 0;
+        int countWhite = 0;
+        int countBlack = 0;
+        Player playerIsWinning = null;
+
+        listOfIsland = getListOfIsland();
+
+        /** conto il numero di torri presenti sul tavolo per ogni colore */
+        for (int s=1;s<13;s++){
+            if(listOfIsland[s] = islandCard.getTowerOnIsland().getTColour() == TColour.GREY){
+                countGrey++;
+            }
+            else if (listOfIsland[s] = islandCard.getTowerOnIsland().getTColour() == TColour.WHITE){
+                countWhite++;
+            }
+            else if (listOfIsland[s] = islandCard.getTowerOnIsland().getTColour() == TColour.BLACK){
+                countBlack++;
+            }
+        }
+
+        /** confronto e cerco chi ha maggior influenza */
+        if (countBlack > countGrey){
+            playerIsWinning.equals(player.getTColour().BLACK);
+            return playerIsWinning;
+        }
+        else if(countBlack > countWhite){
+            playerIsWinning.equals(player.getTColour().BLACK);
+            return playerIsWinning;
+        }
+        else if(countGrey > countBlack){
+            playerIsWinning.equals(player.getTColour().GREY);
+            return playerIsWinning;
+        }
+        else if(countGrey > countWhite){
+            playerIsWinning.equals(player.getTColour().GREY);
+            return playerIsWinning;
+        }
+        else if(countWhite > countBlack){
+            playerIsWinning.equals(player.getTColour().WHITE);
+            return playerIsWinning;
+        }
+        else if(countWhite > countGrey){
+            playerIsWinning.equals(player.getTColour().WHITE);
+            return playerIsWinning;
+        }
+
     }
 
 }
