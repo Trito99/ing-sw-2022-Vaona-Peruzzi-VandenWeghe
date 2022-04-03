@@ -78,47 +78,85 @@ public class Table {
         int countGrey = 0;
         int countWhite = 0;
         int countBlack = 0;
-        Player playerIsWinning = null;
+        Player winner = null;
+        Player alsoWinner = null ;
 
         listOfIsland = getListOfIsland();
 
         /** conto il numero di torri presenti sul tavolo per ogni colore */
         for (int s=1;s<13;s++){
-            if(listOfIsland[s] = islandCard.getTowerOnIsland().getTColour() == TColour.GREY){
+            if((listOfIsland.get(s).getTowerOnIsland().getTColour()).equals(TColour.GREY)){
                 countGrey++;
             }
-            else if (listOfIsland[s] = islandCard.getTowerOnIsland().getTColour() == TColour.WHITE){
+            else if ((listOfIsland.get(s).getTowerOnIsland().getTColour()).equals(TColour.WHITE)){
                 countWhite++;
             }
-            else if (listOfIsland[s] = islandCard.getTowerOnIsland().getTColour() == TColour.BLACK){
+            else if ((listOfIsland.get(s).getTowerOnIsland().getTColour()).equals(TColour.BLACK)){
                 countBlack++;
             }
         }
 
         /** confronto e cerco chi ha maggior influenza */
         if (countBlack > countGrey){
-            playerIsWinning.equals(player.getTColour().BLACK);
-            return playerIsWinning;
+            winner.equals(player.getTColour().BLACK);
+            return winner;
         }
         else if(countBlack > countWhite){
-            playerIsWinning.equals(player.getTColour().BLACK);
-            return playerIsWinning;
+            winner.equals(player.getTColour().BLACK);
+            return winner;
         }
         else if(countGrey > countBlack){
-            playerIsWinning.equals(player.getTColour().GREY);
-            return playerIsWinning;
+            winner.equals(player.getTColour().GREY);
+            return winner;
         }
         else if(countGrey > countWhite){
-            playerIsWinning.equals(player.getTColour().GREY);
-            return playerIsWinning;
+            winner.equals(player.getTColour().GREY);
+            return winner;
         }
         else if(countWhite > countBlack){
-            playerIsWinning.equals(player.getTColour().WHITE);
-            return playerIsWinning;
+            winner.equals(player.getTColour().WHITE);
+            return winner;
         }
         else if(countWhite > countGrey){
-            playerIsWinning.equals(player.getTColour().WHITE);
-            return playerIsWinning;
+            winner.equals(player.getTColour().WHITE);
+            return winner;
+        }
+
+        /** in caso di parità, confronto i player e vince quello con più prof */
+        else if(countBlack == countGrey){
+            winner.equals(player.getTColour().BLACK);
+            alsoWinner.equals(player.getTColour().GREY);
+            int profWinner = winner.getPersonalSchool().numberOfProf();
+            int profAlsoWinner = alsoWinner.getPersonalSchool().numberOfProf();
+
+            if(profWinner > profAlsoWinner){
+                return winner;
+            }
+            else return alsoWinner;
+        }
+
+        else if(countGrey == countWhite){
+            winner.equals(player.getTColour().GREY);
+            alsoWinner.equals(player.getTColour().WHITE);
+            int profWinner = winner.getPersonalSchool().numberOfProf();
+            int profAlsoWinner = alsoWinner.getPersonalSchool().numberOfProf();
+
+            if(profWinner > profAlsoWinner){
+                return winner;
+            }
+            else return alsoWinner;
+        }
+
+        else if(countWhite == countBlack){
+            winner.equals(player.getTColour().WHITE);
+            alsoWinner.equals(player.getTColour().BLACK);
+            int profWinner = winner.getPersonalSchool().numberOfProf();
+            int profAlsoWinner = alsoWinner.getPersonalSchool().numberOfProf();
+
+            if(profWinner > profAlsoWinner){
+                return winner;
+            }
+            else return alsoWinner;
         }
 
     }

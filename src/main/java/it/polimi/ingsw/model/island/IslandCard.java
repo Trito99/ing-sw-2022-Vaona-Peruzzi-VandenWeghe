@@ -63,7 +63,6 @@ public class IslandCard {
         Player player = calculateInfluence();           //Player che ha influenza sull'isola
         TColour towerColour = player.getTColour();      //Colore delle torri del player che ha influenza
 
-        setTowerIsOnIsland(true);
         towerOnIsland = new Tower(player.getPersonalSchool().indexOfLastTowerAvailable(gameMode), towerColour);
         player.getPersonalSchool().removeTower(gameMode);
 
