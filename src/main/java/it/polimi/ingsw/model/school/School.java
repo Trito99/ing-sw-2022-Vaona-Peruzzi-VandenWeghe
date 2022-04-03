@@ -23,7 +23,7 @@ public class School {
     private boolean profYInHall;
     private boolean profPInHall;
     private boolean profBInHall;
-    private ArrayList<Tower> tower;
+    private ArrayList<Tower> towerZone;
     private ArrayList<Prof> profOfPlayer = null;
 
     public School(ArrayList<Prof> profOfPlayer) {
@@ -282,30 +282,20 @@ public class School {
     }
 
     public void addTower(int id, TColour tColour) {
-        tower = getTower();
-        tower.add(new Tower(id,tColour));
+        towerZone.add(new Tower(id,tColour));
         // ci sarà una notify observer
     }
 
-    public int indexOfLastTowerAvailable(GameMode gameMode) {
-        int maxNumTower = 8;
-        switch (gameMode) {
-            case TWOPLAYERS:
-                maxNumTower = 8;
-                break;
-            case THREEPLAYERS:
-                maxNumTower = 6;
-                break;
-            case COOP:
-                maxNumTower = 8;
-                break;
+    public int indexOfLastTowerAvailable(){
+        int maxNumTower = towerZone.size();    //da inizializzare in game controller -- a seconda della gameMode!
+        while(towerZone.get(maxNumTower) != null){
+            maxNumTower--;
         }
         return maxNumTower;
     }
 
-    public void removeTower(GameMode gameMode) {
-        tower = getTower();
-        tower.remove(indexOfLastTowerAvailable(gameMode));
+    public void removeTower() {
+        towerZone.remove(towerZone.size()); // da verificare il "new"
     }
 
    /* public boolean checkTowerIsEmpty() {     //  (Ricorda: se non ci sono Tower in TowerZone finisce la partita)
