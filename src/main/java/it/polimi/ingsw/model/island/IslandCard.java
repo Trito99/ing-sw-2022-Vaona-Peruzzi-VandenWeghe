@@ -57,20 +57,28 @@ public class IslandCard {
     return Player;
     }
 
-    public void buildTowerOnIsland(){        //Builda la torre del colore del Player che ha l'influenza sull'isola??
+    public void buildTowerOnIsland(){        //Builda la torre del colore del Player che ha l'influenza sull'isola
 
         Player player = calculateInfluence();           //Player che ha influenza sull'isola
         TColour towerColour = player.getTColour();      //Colore delle torri del player che ha influenza
 
+        setTowerIsOnIsland(true);
         towerOnIsland = new Tower(player.getPersonalSchool().lastTowerAvailable(), towerColour);
         player.getPersonalSchool().removeTower();
 
         setTowerIsOnIsland(true);
     }
 
-    public TColour changeTowerColour(){
+    public void changeTowerColour(){        //cambio colore della torre se è cambiata l'influenza sull'isola
 
-        return TColour;
+        towerOnIsland = getTowerOnIsland();                         //considero la torre presente sull'isola
+        Player currPlayer = null;
+        currPlayer.getTColour().equals(towerOnIsland.getTColour());     //trovo il giocatore che ha quel tColour
+        TColour towerColour = towerOnIsland.getTColour();
+        currPlayer.getPersonalSchool().addTower(currPlayer.getPersonalSchool().lastTowerAvailable()+1, towerColour);     //riposiziono la torre nella plancia del giocatore
+        Player newPlayer = calculateInfluence();       //trovo il nuovo giocatore che detiene l'influenza
+        towerOnIsland = new Tower(newPlayer.getPersonalSchool().lastTowerAvailable(), towerColour);
+        newPlayer.getPersonalSchool().removeTower();
     }
 
     public int getMergeIsland() {
