@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.island;
 
 import it.polimi.ingsw.model.cloud.CloudCard;
+import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.Tower;
@@ -36,7 +37,7 @@ public class IslandCard {
         return studentOnIsland;
     }
 
-    public boolean TowerIsOnIsland() {
+    public boolean towerIsOnIsland() {
         return this.towerIsOnIsland;
     }
 
@@ -58,28 +59,34 @@ public class IslandCard {
     return Player;
     }
 
-    public void buildTowerOnIsland(GameMode gameMode){        //Builda la torre del colore del Player che ha l'influenza sull'isola
+    public void buildTowerOnIsland(){        //Builda la torre del colore del Player che ha l'influenza sull'isola
 
         Player player = calculateInfluence();           //Player che ha influenza sull'isola
         TColour towerColour = player.getTColour();      //Colore delle torri del player che ha influenza
 
-        setTowerIsOnIsland(true);
-        towerOnIsland = new Tower(player.getPersonalSchool().getTower().size() + 1, towerColour);
+        towerOnIsland = new Tower(player.getPersonalSchool().getTower().size(), towerColour);
         player.getPersonalSchool().removeTower();
 
         setTowerIsOnIsland(true);
     }
 
-    public void changeTowerColour(GameMode gameMode){        //cambio colore della torre se è cambiata l'influenza sull'isola
+    public void changeTowerColour(){        //cambio colore della torre se è cambiata l'influenza sull'isola
 
-        towerOnIsland = getTowerOnIsland();                         //considero la torre presente sull'isola
-        Player currPlayer = null;
-        currPlayer.getTColour().equals(towerOnIsland.getTColour());     //trovo il giocatore che ha quel tColour
-        TColour towerColour = towerOnIsland.getTColour();
-        currPlayer.getPersonalSchool().addTower(currPlayer.getPersonalSchool().getTower().size() + 1, towerColour);     //riposiziono la torre nella plancia del giocatore
-        Player newPlayer = calculateInfluence();       //trovo il nuovo giocatore che detiene l'influenza
-        towerOnIsland = new Tower(newPlayer.getPersonalSchool().getTower().size() + 1, towerColour);
-        newPlayer.getPersonalSchool().removeTower();
+        Player prevPlayer = null;
+        Player playerBuilder = calculateInfluence();
+
+        for(Player player : Game.getListOfPlayer()){
+            if(player.getTColour().equals(towerOnIsland.getTColour()))          //determina il prevPlayer
+                prevPlayer = player;
+        }
+
+        if(playerBuilder.getTColour().equals(towerOnIsland.getTColour())) {     //
+            return;
+        }
+        else{
+            setTowerOnIsland(playerBuilder.getPersonalSchool().getTower().get(playerBuilder.getPersonalSchool().getTower().size() - 1));
+            prevPlayer.getPersonalSchool().addTower(playerBuilder.getPersonalSchool().getTower().size(), playerBuilder.getTColour());
+        }
     }
 
     public int getMergedIsland() {

@@ -33,7 +33,7 @@ public class School {
         YTable = new ArrayList<>();
         PTable = new ArrayList<>();
         BTable = new ArrayList<>();
-        tower = new ArrayList<>();
+        towerZone = new ArrayList<>();
     }
 
     public ArrayList<Student> getEntry() {
@@ -214,25 +214,24 @@ public class School {
         }
     }
 
-    public boolean winProfB(ArrayList<Player> players) {
-        int max=0;
+    public void winProfB(ArrayList<Player> players) {
+        int max = 0;
         int playerWithMax = 0;
         Player maxPlayer = null;
 
         for (Player player : players) {
             if (numberOfB(player) > max) {
                 max = numberOfB(player);
-            }
-            else player.getPersonalSchool().setProfBInHall(false);
+            } else player.getPersonalSchool().setProfBInHall(false);
         }
 
         for (Player player : players) {
-            if(numberOfB(player) == max){
-                playerWithMax ++;
+            if (numberOfB(player) == max) {
+                playerWithMax++;
                 maxPlayer = player;
             }
         }
-        if (playerWithMax == 1){
+        if (playerWithMax == 1) {
             maxPlayer.getPersonalSchool().setProfBInHall(true);
         }
     }
@@ -278,7 +277,7 @@ public class School {
     }
 
     public ArrayList<Tower> getTower() {
-        return tower;
+        return towerZone;
     }
 
     public void addTower(int id, TColour tColour) {
@@ -286,16 +285,8 @@ public class School {
         // ci sarà una notify observer
     }
 
-    public int indexOfLastTowerAvailable(){
-        int maxNumTower = towerZone.size();    //da inizializzare in game controller -- a seconda della gameMode!
-        while(towerZone.get(maxNumTower) != null){
-            maxNumTower--;
-        }
-        return maxNumTower;
-    }
-
     public void removeTower() {
-        towerZone.remove(towerZone.size()); // da verificare il "new"
+        towerZone.remove(towerZone.size() - 1);
     }
 
     public int numberOfProf(){
@@ -311,7 +302,7 @@ public class School {
     }
 
    /* public boolean checkTowerIsEmpty() {     //  (Ricorda: se non ci sono Tower in TowerZone finisce la partita)
-        return tower.toArray().length != 0;
+        return towerZone.toArray().length != 0;
     } */
 
 }

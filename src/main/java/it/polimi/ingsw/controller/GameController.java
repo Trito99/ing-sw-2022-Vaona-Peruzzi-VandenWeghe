@@ -113,8 +113,12 @@ public class GameController implements Observer {
         int position = MotherEarth.getPosition();
         //notify Observer che mi dice la scelta del giocatore
         position = position + playerChoice;
-        islandCard.buildTowerOnIsland();
-        islandCard.changeTowerColour();
+        if(IslandCard.towerIsOnIsland()) {
+            islandCard.changeTowerColour();
+        }
+        else {
+            islandCard.buildTowerOnIsland();
+        }
         table.joinIsland();
 
     }
