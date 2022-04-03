@@ -24,7 +24,7 @@ public class School {
     private boolean profPInHall;
     private boolean profBInHall;
     private ArrayList<Tower> towerZone;
-    private ArrayList<Prof> profOfPlayer = null;
+    private ArrayList<Prof> profOfPlayer;
 
     public School(ArrayList<Prof> profOfPlayer) {
 
@@ -34,6 +34,7 @@ public class School {
         PTable = new ArrayList<>();
         BTable = new ArrayList<>();
         towerZone = new ArrayList<>();
+        profOfPlayer = new ArrayList<>();
     }
 
     public ArrayList<Student> getEntry() {
@@ -80,6 +81,10 @@ public class School {
         }
     }
 
+    public ArrayList<Prof> getProfOfPlayer(){
+        return profOfPlayer;
+    }
+
     public ArrayList<Student> getGTable(){
         return GTable;
     }
@@ -100,8 +105,21 @@ public class School {
         return BTable;
     }
 
-    public int numberOfG(Player player){
-        return player.getPersonalSchool().getGTable().size();
+    /** da generalizzare tutto con questo */
+    public int numberOfStudents(Player player, SColour colour){
+        switch(colour){
+            case GREEN:
+                return player.getPersonalSchool().getGTable().size();
+            case RED:
+                return player.getPersonalSchool().getRTable().size();
+            case YELLOW:
+                return player.getPersonalSchool().getYTable().size();
+            case PINK:
+                return player.getPersonalSchool().getPTable().size();
+            case BLUE:
+                return player.getPersonalSchool().getBTable().size();
+        }
+        return 0;
     }
 
     public int numberOfR(Player player){
@@ -127,11 +145,33 @@ public class School {
         int playerWithMax = 0;
         Player maxPlayer = null;
 
+        /** Prof Giallo */
+        /* for (Player player : players) {
+            for (SColour colour : SColour.values()){
+                if (numberOfStudents(player, colour) > max) {
+                    max = numberOfStudents(player, colour);
+                }
+                else player.getPersonalSchool().getProfOfPlayer().get(0).setInHall(false);
+                max = 0;
+            }
+        }
+
+        for (Player player : players) {
+            for (SColour colour : SColour.values()){
+                if(numberOfStudents(player, colour) == max){
+                    playerWithMax ++;
+                    maxPlayer = player;
+                }
+                if (playerWithMax == 1){
+                    maxPlayer.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true);
+                }
+            }
+        } */
         for (Player player : players) {
             if (numberOfG(player) > max) {
                 max = numberOfG(player);
             }
-            else player.getPersonalSchool().setProfGInHall(false);
+            else player.getPersonalSchool().setProfRInHall(false);
         }
 
         for (Player player : players) {

@@ -23,6 +23,7 @@ public class Player {
     private final Team team;
     private int coinScore;
     private TColour tColour;
+    private int influenceOnIsland;
 
     /**
      * Default constructor.
@@ -31,6 +32,7 @@ public class Player {
         nickname = new String();
         age = 0;
         playerNumber = new PlayerNumber();
+        influenceOnIsland = 0;
         personalSchool = new School();
         tColour = new TColour();
         trash = null;
@@ -116,6 +118,14 @@ public class Player {
 
     public static void setCoinScore(int coinScore) {
         this.coinScore = coinScore;
+    }
+
+    public int getInfluenceOnIsland() {
+        return influenceOnIsland;
+    }
+
+    public void setInfluenceOnIsland(int influenceOnIsland) {
+        this.influenceOnIsland = influenceOnIsland;
     }
 
     public void setTrash(AssistantCard trash) {

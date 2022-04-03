@@ -54,9 +54,59 @@ public class IslandCard {
     }
 
 
-    public Player calculateInfluence(){   //Restituisce playerNumber del Player che ha influenza sull'isola?
+    public Player calculateInfluence(Player player){   //Restituisce il Player che ha influenza sull'isola
+        int i ;
+        int maxInfluence = 0;
+        Player playerWithInfluence = null;
 
-    return Player;
+        for(Player player : Game.getListOfPlayers()){
+            int countTot = 0;
+
+            for(i=0; i<studentOnIsland.size(); i++){
+                switch (studentOnIsland.get(i).getsColour()){
+                    case GREEN:
+                        if(player.getPersonalSchool().getProfGInHall()){
+                            countTot++;
+                        }
+                        break;
+                    case RED:
+                        if(player.getPersonalSchool().getProfRInHall()){
+                            countTot++;
+                        }
+                        break;
+                    case YELLOW:
+                        if(player.getPersonalSchool().getProfYInHall()){
+                            countTot++;
+                        }
+                        break;
+                    case PINK:
+                        if(player.getPersonalSchool().getProfPInHall()){
+                            countTot++;
+                        }
+                        break;
+                    case BLUE:
+                        if(player.getPersonalSchool().getProfBInHall()){
+                            countTot++;
+                        }
+                        break;
+                }
+                player.setInfluenceOnIsland(countTot);
+            }
+        }
+
+        for(Player player : Game.getListOfPlayer()) {
+            if (player.getInfluenceOnIsland() > maxInfluence){
+                maxInfluence = player.getInfluenceOnIsland();
+            }
+        }
+
+        for(Player player : Game.getListOfPlayer()) {
+            if (player.getInfluenceOnIsland() == maxInfluence){
+                playerWithInfluence = player;
+            }
+        }
+
+        return playerWithInfluence;
     }
 
     public void buildTowerOnIsland(){        //Builda la torre del colore del Player che ha l'influenza sull'isola
