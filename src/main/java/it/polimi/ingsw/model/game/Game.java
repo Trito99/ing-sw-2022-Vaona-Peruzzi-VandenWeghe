@@ -103,7 +103,7 @@ public class Game {
                 bag.getBag().size() == 0 ||
                 table.getListOfIsland().size() == 3 )
 
-            return Table.playerIsWinning();
+            Table.playerIsWinning();
 
     } //?
 

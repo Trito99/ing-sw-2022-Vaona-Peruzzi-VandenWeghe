@@ -298,6 +298,18 @@ public class School {
         towerZone.remove(towerZone.size()); // da verificare il "new"
     }
 
+    public int numberOfProf(){
+        int countProf = 0;
+
+        if(profGInHall == true) countProf++;
+        else if(profBInHall == true) countProf++;
+        else if(profPInHall == true) countProf++;
+        else if(profRInHall == true) countProf++;
+        else if(profYInHall == true) countProf++;
+
+        return countProf;
+    }
+
    /* public boolean checkTowerIsEmpty() {     //  (Ricorda: se non ci sono Tower in TowerZone finisce la partita)
         return tower.toArray().length != 0;
     } */
