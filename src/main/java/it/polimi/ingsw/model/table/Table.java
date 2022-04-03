@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.island.IslandCard;
+import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.TColour;
 import it.polimi.ingsw.model.student.SColour;
@@ -74,7 +75,7 @@ public class Table {
             return true;
     } */
 
-    public PlayerNumber playerIsWinning(){  //calcola influenza torri sul tavolo e restituisce quello con più influenza
+    public Player playerIsWinning(){  //calcola influenza torri sul tavolo e restituisce quello con più influenza
         // DA FARE
     }
 

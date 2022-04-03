@@ -289,18 +289,21 @@ public class School {
 
     public int indexOfLastTowerAvailable(GameMode gameMode) {
         int maxNumTower = 8;
-        switch(gameMode){
+        switch (gameMode) {
             case TWOPLAYERS:
-                maxNumTower=8;
+                maxNumTower = 8;
                 break;
             case THREEPLAYERS:
-                maxNumTower=6;
+                maxNumTower = 6;
                 break;
             case COOP:
-                maxNumTower=8;
+                maxNumTower = 8;
                 break;
         }
-    public void removeTower(gameMode GameMode) {
+        return maxNumTower;
+    }
+
+    public void removeTower(GameMode gameMode) {
         tower = getTower();
         tower.remove(indexOfLastTowerAvailable(gameMode));
     }
@@ -310,3 +313,4 @@ public class School {
     } */
 
 }
+
