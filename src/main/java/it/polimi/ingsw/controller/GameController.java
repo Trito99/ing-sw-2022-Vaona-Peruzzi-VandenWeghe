@@ -29,7 +29,6 @@ public class GameController implements Observer {
     private ArrayList<AssistantCard> tempCards;
 
     public GameController(){
-        this.view = view;
         maxPlayers=0;
         tempCards = new ArrayList<>();
     }

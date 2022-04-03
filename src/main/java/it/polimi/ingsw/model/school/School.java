@@ -282,12 +282,13 @@ public class School {
     }
 
     public void addTower(int id, TColour tColour) {
+        tower = getTower();
         tower.add(new Tower(id,tColour));
         // ci sarà una notify observer
     }
 
     public int lastTowerAvailable(){
-
+        tower = getTower();
         int maxNumTower = 7;    //da inizializzare in game controller -- a seconda della gameMode!
         while(tower.get(maxNumTower) != null){
             maxNumTower--;
@@ -296,12 +297,12 @@ public class School {
     }
 
     public void removeTower() {
-
+        tower = getTower();
         tower.remove(lastTowerAvailable()); // da verificare il "new"
     }
 
-    public boolean checkTowerIsEmpty() {     //  (Ricorda: se non ci sono Tower in TowerZone finisce la partita)
+   /* public boolean checkTowerIsEmpty() {     //  (Ricorda: se non ci sono Tower in TowerZone finisce la partita)
         return tower.toArray().length != 0;
-    }
+    } */
 
 }

@@ -18,8 +18,8 @@ public class DeckAssistant {
         return this.cardsInHand;
     }  //ritorna il mazzo di carte senza la carta selezionata     */
 
-    public boolean checkIsEmpty() {
+    /* public boolean checkIsEmpty() {
         return cardsInHand.toArray().length != 0;
-    }
+    } */
 
 }

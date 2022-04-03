@@ -81,8 +81,8 @@ public class Bag {
         }
     }
 
-    public boolean checkIsEmpty(){
+    /* public boolean checkIsEmpty(){
         return bag.toArray().length == 0;
-    }
+    } */
 
 }

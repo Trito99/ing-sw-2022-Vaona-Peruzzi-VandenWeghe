@@ -69,10 +69,10 @@ public class Table {
         //va chiamata in changeTower()
     }
 
-    public boolean checkListOfIsland(){  // Se ListOfIsland=3, finisce la partita?
+    /* public boolean checkListOfIsland(){  // Se ListOfIsland=3, finisce la partita?
         if(listOfIsland.size()==3)
             return true;
-    }
+    } */
 
     public PlayerNumber playerIsWinning(){  //calcola influenza torri sul tavolo e restituisce quello con più influenza
         // DA FARE

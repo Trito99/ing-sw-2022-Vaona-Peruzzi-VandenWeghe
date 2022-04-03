@@ -101,11 +101,11 @@ public class Game {
     /**
      * winnerIs deve rimanere all'interno di Game
      */
-    public Player winnerIs() {
-        if (DeckAssistant.checkIsEmpty() ||
-                School.checkTowerIsEmpty() ||
-                Bag.checkIsEmpty() ||
-                Table.checkListOfIsland())
+    public Player winnerIs(DeckAssistant deckAssistant, Bag bag, School school, Table table) {
+        if (deckAssistant.getCardsInHand().size() == 0 ||
+                school.getTower().size() == 0 ||
+                bag.getBag().size() == 0 ||
+                table.getListOfIsland().size() == 3 )
 
             return Table.playerIsWinning();
 
