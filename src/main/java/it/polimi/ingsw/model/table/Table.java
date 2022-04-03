@@ -1,16 +1,13 @@
 package it.polimi.ingsw.model.table;
 
-import it.polimi.ingsw.model.bag.Bag;
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.TColour;
-import it.polimi.ingsw.model.student.SColour;
-import it.polimi.ingsw.model.student.Student;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -110,6 +107,7 @@ public class Table {
                     }
                 }
         }
+
         else if(countWhite > countBlack && countWhite > countGrey){
             for(Player player : Game.getListOfPlayer()) {
                 if (player.getTColour().equals(TColour.BLACK)) {
@@ -134,33 +132,47 @@ public class Table {
             if(profWinner > profAlsoWinner){
                 return winner;
             }
-            else return alsoWinner;             /** METTERE CASO PAREGGIO PROF ??? */
+            else return winner = alsoWinner;
+            /** METTERE CASO PAREGGIO PROF ??? */
         }
 
         else if(countGrey == countWhite && countGrey > countBlack){
-            winner.equals(player.getTColour().GREY);
-            alsoWinner.equals(player.getTColour().WHITE);
+            for(Player player : Game.getListOfPlayer()) {
+                if (player.getTColour().equals(TColour.GREY)) {
+                    winner = player;
+                }
+                else if(player.getTColour().equals(TColour.WHITE)) {
+                    alsoWinner = player;
+                }
+            }
             int profWinner = winner.getPersonalSchool().numberOfProf();
             int profAlsoWinner = alsoWinner.getPersonalSchool().numberOfProf();
 
             if(profWinner > profAlsoWinner){
                 return winner;
             }
-            else return alsoWinner;
+            else return winner = alsoWinner;
         }
 
         else if(countWhite == countBlack && countWhite > countGrey){
-            winner.equals(player.getTColour().WHITE);
-            alsoWinner.equals(player.getTColour().BLACK);
+            for(Player player : Game.getListOfPlayer()) {
+                if (player.getTColour().equals(TColour.WHITE)) {
+                    winner = player;
+                }
+                else if(player.getTColour().equals(TColour.BLACK)) {
+                    alsoWinner = player;
+                }
+            }
             int profWinner = winner.getPersonalSchool().numberOfProf();
             int profAlsoWinner = alsoWinner.getPersonalSchool().numberOfProf();
 
             if(profWinner > profAlsoWinner){
                 return winner;
             }
-            else return alsoWinner;
+            else return winner = alsoWinner;
         }
 
+        return winner;
     }
 
 }
