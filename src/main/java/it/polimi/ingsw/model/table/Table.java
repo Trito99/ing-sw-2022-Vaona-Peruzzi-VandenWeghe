@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.table;
 
 import com.sun.org.apache.bcel.internal.generic.RETURN;
+import it.polimi.ingsw.model.bag.Bag;
 import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Game;
@@ -71,7 +72,7 @@ public class Table {
             return true;
     } */
 
-    public Player playerIsWinning(){  //calcola influenza torri sul tavolo e restituisce quello con più influenza
+    public Player playerIsWinning(Table table){  //calcola influenza torri sul tavolo e restituisce quello con più influenza
         int countGrey = 0;
         int countWhite = 0;
         int countBlack = 0;
@@ -169,10 +170,19 @@ public class Table {
             if(profWinner > profAlsoWinner){
                 return winner;
             }
-            else return winner = alsoWinner;
+            else if(profAlsoWinner > profWinner){
+                winner = alsoWinner;
+            }
+            else{
+                System.out.println(String.format("%s e %s", winner.getNickname(), alsoWinner.getNickname()) + "HANNO PAREGGIATO!");
+            }
         }
 
+        if(Game.gameIsFinished(Bag.getBag(), table))   {   //Bag come attributo di table invece di fare la classe bag
+
+            System.out.println("HA VINTO IL GIOCATORE " + winner.getNickname());
+
         return winner;
-    }
+
 
 }

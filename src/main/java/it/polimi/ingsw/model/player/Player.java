@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
+import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.bag.Bag;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
@@ -19,6 +20,7 @@ public class Player {
     private final PlayerNumber playerNumber;
     private TurnState turnState;
     private final School personalSchool;
+    private DeckAssistant deckOfPlayer;
     private AssistantCard trash;          //= Ultima carta nella pila degli scarti
     private final Team team;
     private int coinScore;
@@ -31,7 +33,7 @@ public class Player {
     public Player(School personalSchool, AssistantCard trash, Team team, TColour tColour, int coinScore) {
         nickname = new String();
         age = 0;
-        playerNumber = new PlayerNumber();
+        playerNumber = new PlayerNumber();      /** DA RIFARE COSTRUTTORE */
         influenceOnIsland = 0;
         personalSchool = new School();
         tColour = new TColour();
@@ -115,6 +117,10 @@ public class Player {
     public static int getCoinScore() {
         return coinScore;
     }   //Static?
+
+    public DeckAssistant getDeckOfPlayer(){
+        return deckOfPlayer;
+    }
 
     public static void setCoinScore(int coinScore) {
         this.coinScore = coinScore;

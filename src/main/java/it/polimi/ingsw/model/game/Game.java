@@ -97,15 +97,18 @@ public class Game {
     /**
      * winnerIs deve rimanere all'interno di Game
      */
-    public Player winnerIs(DeckAssistant deckAssistant, Bag bag, School school, Table table) {
-        if (deckAssistant.getCardsInHand().size() == 0 ||
-                school.getTower().size() == 0 ||
+    public boolean gameIsFinished(Bag bag, Table table) {
+        Player player = getActivePlayer();
+
+        if (player.getDeckOfPlayer().getCardsInHand().size() == 0 ||   // Dobbiamo collegare ogni deck assistant al suo player
+                player.getPersonalSchool().getTower().size() == 0 ||
                 bag.getBag().size() == 0 ||
-                table.getListOfIsland().size() == 3 )
+                table.getListOfIsland().size() == 3 /** da verificare */) {
+            return true;
+        }
 
-            Table.playerIsWinning();
-
-    } //?
+        return false;
+    }
 
 
 
