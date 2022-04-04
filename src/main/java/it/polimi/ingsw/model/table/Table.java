@@ -77,12 +77,7 @@ public class Table {
 
     }
 
-    /* public boolean checkListOfIsland(){  // Se ListOfIsland=3, finisce la partita?
-        if(listOfIsland.size()==3)
-            return true;
-    } */
-
-    public Player playerIsWinning(Table table){  //calcola influenza torri sul tavolo e restituisce quello con più influenza
+    public Player playerIsWinning(Table table, ArrayList<Player> listOfPlayers){  //calcola influenza torri sul tavolo e restituisce quello con più influenza
         int countGrey = 0;
         int countWhite = 0;
         int countBlack = 0;
@@ -104,7 +99,7 @@ public class Table {
 
         /** confronto e cerco chi ha maggior influenza */
         if (countBlack > countGrey && countBlack > countWhite){
-            for(Player player : Game.getListOfPlayer()){
+            for(Player player : listOfPlayers){
                 if(player.getTColour().equals(TColour.BLACK)){
                     return winner = player;
                 }
@@ -112,7 +107,7 @@ public class Table {
         }
 
         else if(countGrey > countBlack && countGrey > countWhite){
-                for(Player player : Game.getListOfPlayer()) {
+                for(Player player : listOfPlayers) {
                     if (player.getTColour().equals(TColour.BLACK)) {
                         return winner = player;
                     }
@@ -120,7 +115,7 @@ public class Table {
         }
 
         else if(countWhite > countBlack && countWhite > countGrey){
-            for(Player player : Game.getListOfPlayer()) {
+            for(Player player : listOfPlayers) {
                 if (player.getTColour().equals(TColour.BLACK)) {
                     return winner = player;
                 }
@@ -129,7 +124,7 @@ public class Table {
 
         /** in caso di parità, confronto i player e vince quello con più prof */
         else if(countBlack == countGrey && countBlack > countWhite){
-            for(Player player : Game.getListOfPlayer()) {
+            for(Player player : listOfPlayers) {
                 if (player.getTColour().equals(TColour.BLACK)) {
                     winner = player;
                 }
@@ -144,11 +139,10 @@ public class Table {
                 return winner;
             }
             else return winner = alsoWinner;
-            /** METTERE CASO PAREGGIO PROF ??? */
         }
 
         else if(countGrey == countWhite && countGrey > countBlack){
-            for(Player player : Game.getListOfPlayer()) {
+            for(Player player : listOfPlayers) {
                 if (player.getTColour().equals(TColour.GREY)) {
                     winner = player;
                 }
@@ -166,7 +160,7 @@ public class Table {
         }
 
         else if(countWhite == countBlack && countWhite > countGrey){
-            for(Player player : Game.getListOfPlayer()) {
+            for(Player player : listOfPlayers) {
                 if (player.getTColour().equals(TColour.WHITE)) {
                     winner = player;
                 }

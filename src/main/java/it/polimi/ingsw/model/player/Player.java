@@ -16,6 +16,7 @@ import java.util.Date;
 public class Player {
 
     private final String nickname;
+    private Date date;
     private int age;               // CONTROLLARE LIBRERIA DATA
     private final PlayerNumber playerNumber;
     private TurnState turnState;
@@ -114,7 +115,7 @@ public class Player {
         return tColour;
     }
 
-    public static int getCoinScore() {
+    public int getCoinScore() {
         return coinScore;
     }   //Static?
 

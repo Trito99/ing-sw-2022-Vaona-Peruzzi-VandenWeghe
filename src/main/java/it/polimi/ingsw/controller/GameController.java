@@ -78,9 +78,9 @@ public class GameController implements Observer {
                     Player.setCoinScore(1);
                 }
                 /** colore torre */
-                if(player.getPlayerNumber()==PlayerNumber.PLAYER1) Player.setTColour(TColour.WHITE);
-                else if(player.getPlayerNumber()==PlayerNumber.PLAYER2) Player.setTColour(TColour.GREY);
-                else if(player.getPlayerNumber()==PlayerNumber.PLAYER1) Player.setTColour(TColour.BLACK);
+                if(player.getPlayerNumber()==PlayerNumber.PLAYER1) player.setTColour(TColour.WHITE);
+                else if(player.getPlayerNumber()==PlayerNumber.PLAYER2) player.setTColour(TColour.GREY);
+                else if(player.getPlayerNumber()==PlayerNumber.PLAYER1) player.setTColour(TColour.BLACK);
 
             case 2:
                 game.getListOfPlayer().get(1);
@@ -94,30 +94,30 @@ public class GameController implements Observer {
                     Player.setCoinScore(1);
                 }
                 /** colore torre */
-                if(player.getPlayerNumber()==PlayerNumber.PLAYER1) Player.setTColour(TColour.WHITE);
-                else if(player.getPlayerNumber()==PlayerNumber.PLAYER2) Player.setTColour(TColour.BLACK);
+                if(player.getPlayerNumber()==PlayerNumber.PLAYER1) player.setTColour(TColour.WHITE);
+                else if(player.getPlayerNumber()==PlayerNumber.PLAYER2) player.setTColour(TColour.BLACK);
 
         }
     }
 
 
-    public void increaseCoinScore(){
-        Player.setCoinScore(Player.getCoinScore() + 1);
+    public void increaseCoinScore(Player player){
+        player.setCoinScore(player.getCoinScore() + 1);
     }
 
-    public void decreaseCoinScore() {
-        Player.setCoinScore(Player.getCoinScore() - 1);
+    public void decreaseCoinScore(Player player) {
+        player.setCoinScore(player.getCoinScore() - 1);
     }
 
-    public void moveMotherEarth(IslandCard islandCard, Table table) {    //Le scelte brooo,
-        int position = MotherEarth.getPosition();
+    public void moveMotherEarth(IslandCard islandCard, Table table, MotherEarth motherEarth) {    //Le scelte brooo,
+        int position = motherEarth.getPosition();
         //notify Observer che mi dice la scelta del giocatore
         position = position + playerChoice;
-        if(IslandCard.towerIsOnIsland()) {
+        if(islandCard.towerIsOnIsland()) {
             islandCard.changeTowerColour();
         }
         else {
-            islandCard.buildTowerOnIsland();
+            islandCard.buildTowerOnIsland(game.getActivePlayer(), game.getListOfPlayer());
         }
         table.joinIsland();
 

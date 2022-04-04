@@ -43,7 +43,7 @@ public class Game {
     }
 
     public ArrayList<Player> getListOfPlayer(){
-        return listOfPlayers;
+        return new ArrayList<>(listOfPlayers);
     }
 
     /**     SECONDO ME SAREBBE PIù CORRETTO - chiara

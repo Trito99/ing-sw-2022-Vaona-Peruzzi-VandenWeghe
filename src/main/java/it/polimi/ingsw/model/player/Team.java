@@ -12,7 +12,7 @@ public class Team {
     }
 
     public ArrayList<Player> getTeam(){
-        return team;
+        return new ArrayList<Player>(team);
     }
 
     public void intializeTeam(GameMode gamemode, Player player1, Player player2){
