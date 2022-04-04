@@ -7,11 +7,13 @@ import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.island.IslandCard;
+import it.polimi.ingsw.model.island.MotherEarth;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.school.TColour;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class Table {
 
@@ -21,7 +23,7 @@ public class Table {
     private int coinsOnTable;
 
 
-    public void generateCloudNumber(Table table,GameMode gm){
+    public void generateCloudNumber(GameMode gm){
         int x;
         int maxNumberOfStudents;
 
@@ -36,14 +38,22 @@ public class Table {
             maxNumberOfStudents = 3;
         }
         for(int i=0;i<x;i++){
-            table.getCloudNumber().add(new CloudCard(i, maxNumberOfStudents));
+            cloudNumber.add(new CloudCard(i, maxNumberOfStudents));
         }
     }
 
-    public void generateIslandCards(Table table){
+    public void generateIslandCards(){
         for(int s=1;s<13;s++) {
-            table.getListOfIsland().add(new IslandCard(s));
+            listOfIsland.add(new IslandCard(s));
         }
+    }
+
+    public void generateMotherEarth(MotherEarth me ){
+        Random rn = new Random();
+        int n = rn.nextInt(12)+1;
+        System.out.println(n);
+        listOfIsland.get(n-1).setMotherEarthOnIsland(true);
+        me.setPosition(n);
     }
 
     public ArrayList<CloudCard> getCloudNumber() {

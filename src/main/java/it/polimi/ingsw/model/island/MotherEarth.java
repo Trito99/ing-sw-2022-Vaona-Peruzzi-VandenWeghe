@@ -10,5 +10,9 @@ public class MotherEarth {
         return position;
     }
 
+    public void setPosition(int pos) {
+        this.position = pos;
+    }
+
 
 }

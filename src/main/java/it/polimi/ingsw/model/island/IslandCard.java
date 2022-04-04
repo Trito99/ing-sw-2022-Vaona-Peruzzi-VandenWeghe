@@ -18,7 +18,8 @@ public class IslandCard {
     private ArrayList<Student> studentOnIsland ;
     private boolean towerIsOnIsland;
     private Tower towerOnIsland;
-    private int mergedIsland;        // = quante isole sono unite
+    private int mergedIsland; // = quante isole sono unite
+    private boolean MotherEarthOnIsland = false;
 
     public IslandCard(int idIsland) {
         this.idIsland = idIsland;
@@ -28,6 +29,11 @@ public class IslandCard {
         mergedIsland = 1;
     }
 
+    public boolean getMotherEarthOnIsland(){ return MotherEarthOnIsland;}
+
+    public void setMotherEarthOnIsland(boolean MotherEarthIsOnIsland){
+        this.MotherEarthOnIsland = MotherEarthIsOnIsland;
+    }
 
     public int getIdIsland() {
         return idIsland;
