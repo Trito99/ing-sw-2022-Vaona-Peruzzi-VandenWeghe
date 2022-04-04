@@ -72,10 +72,35 @@ public class Table {
         return characterCardsOnTable;
     }
 
-    public ArrayList<IslandCard> joinIsland(){
-        //da fare
+    public ArrayList<IslandCard> joinIsland(IslandCard island){      //valuto se due isole mergiano, in caso le unisco
+        int i = 0;
+        ArrayList<IslandCard> newListOfIsland = null;
 
+        for(IslandCard islands : listOfIsland){
+            if(islands.getMotherEarthOnIsland()){
+                i = islands.getIdIsland();
+            }
+        }
+
+
+        /** isole adiacenti */
+        // se è 0 controlla il 12
+        if (i == listOfIsland.size() -1){
+            int s = 0;
+            newListOfIsland.remove(s);
+            //....
+        }
+        else if(listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i+1).getTowerOnIsland().getTColour()) &&
+                (listOfIsland.get(i).getTowerOnIsland().getTColour() != listOfIsland.get(i+2).getTowerOnIsland().getTColour())){
+            newListOfIsland.remove(island.getIdIsland()+1);
+        }
+
+        /** tre isole */
+        else if(listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i-1).getTowerOnIsland().getTColour())){
+
+        }
     }
+
 
     public Player playerIsWinning(Table table, ArrayList<Player> listOfPlayers){  //calcola influenza torri sul tavolo e restituisce quello con più influenza
         int countGrey = 0;
