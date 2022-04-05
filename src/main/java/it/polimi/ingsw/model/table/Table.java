@@ -67,19 +67,20 @@ public class Table {
         Collections.shuffle(bag);
     }
 
+    public void extractStudentsInit(){
+        for(int i=0;i<listOfIsland.size();i++){
+            if(i!=(posMotherEarth-1) && i!=(posMotherEarth+5)) {
+                listOfIsland.get(i).getStudentOnIsland().add(bag.get(0));
+                bag.remove(bag.get(0));
+            }
+        }
+    }
 
     public void extractStudent() {   //estrae dal sacchetto 3/4 studenti
-        for (int c = 0; c < cloudNumber.size(); c++) {
-            if (cloudNumber.get(c).getNumberOfSpaces() == 4) {
-                for (int i = 0; i < 4; i++) {
-                    cloudNumber.get(c).getStudentOnCloud().add(bag.get(i));
-                    bag.remove(bag.get(i));
-                }
-            } else {
-                for (int i = 0; i < 3; i++) {
-                    cloudNumber.get(c).getStudentOnCloud().add(bag.get(i));
-                    bag.remove(bag.get(i));
-                }
+        for(int c=0;c<cloudNumber.size();c++){
+            for (int i = 0; i < cloudNumber.get(c).getNumberOfSpaces(); i++) {
+                cloudNumber.get(c).getStudentOnCloud().add(bag.get(0));
+                bag.remove(bag.get(0));
             }
         }
     }
