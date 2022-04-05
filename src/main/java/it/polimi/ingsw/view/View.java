@@ -5,23 +5,40 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
 
-public class View extends Observable implements Observer, Runnable {   //extends Observable mi dà già i metodi notifyAllObserver e addObserver setChanged
+public class View {
 
-    private Scanner scanner;                //Per View fatta come CLI
-    private PrintStream outPutStream;       //Per View fatta come CLI
+    void askPlayersNumber();
 
-    public View(){
-        scanner= new Scanner(System.in);
-        outPutStream= new PrintStream(System.out);
-    }
+    void askAction();
 
-    @Override
-    public void run() {                                 // Metodo perchè implemento Runnable
+    void showMessage(String message);
 
-    }
+    void askStudentToMoveToIsland();
 
-    @Override
-    public void update(Observable o, Object arg) {       // Metodo "dell'osservatore" perchè implemento observer
+    void askStudentToMoveToHall();
 
-    }
+    void askAssistantCardToPlay();
+
+    void askStepsOfMotherEarth();
+
+    void askCloudCard();
+
+    void showCloudCards();
+
+    void showIslands();
+
+    void showSchool();
+
+    void showTable();
+
+    void showErrorMsg(String message);
+
+    void showWinMessage();
+
+    void showLoseMessage();
+
+    void showPlayerList();
+
+    void showPlayerTurn(String activePlayer);
+}
 }

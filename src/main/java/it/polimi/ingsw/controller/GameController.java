@@ -17,15 +17,14 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-public class GameController implements Observer {
-
-    private Game game;
+public class GameController {
+    private int maxPlayers;
+    private Game gameSession;
+    private final HashMap<String, VirtualView> allVirtualView;
+    private TurnController turnController;
+    private GameState gameState;
     private GameMode gameMode;
     private Difficulty difficulty;
-    private View view;
-    private int maxPlayers;
-    private GameState gameState;
-    private ArrayList<AssistantCard> tempCards;
 
     public GameController(){
         maxPlayers=0;
