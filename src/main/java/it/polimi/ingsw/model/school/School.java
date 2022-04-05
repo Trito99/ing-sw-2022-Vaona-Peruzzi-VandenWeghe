@@ -6,6 +6,8 @@ import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.player.Player;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.Map;
 
 public class School {
 
@@ -77,6 +79,9 @@ public class School {
                 break;
         }
     }
+
+/*    EnumMap<SColor, Boolean> profMap = new EnumMap<>(SColor.class);
+    profMap.put(SColor.GREEN, false);       */
 
     public ArrayList<Prof> getProfOfPlayer(){
         return profOfPlayer;
