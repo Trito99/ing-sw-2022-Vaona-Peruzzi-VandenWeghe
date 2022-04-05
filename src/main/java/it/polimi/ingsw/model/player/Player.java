@@ -67,13 +67,8 @@ public class Player {
             personalSchool.getEntry().add(table.getBag().get(s));
             table.getBag().remove(table.getBag().get(s));
         }
-        switch(playerNumber){
-            case PLAYER1 -> tcolor = TColor.BLACK;
-            case PLAYER2 -> tcolor = TColor.WHITE;
-            case PLAYER3 -> tcolor = TColor.GREY;
-        }
         for (int f = 0; f < t; f++) {
-            personalSchool.addTower(f, tcolor);
+            personalSchool.addTower(f, tColor);
         }
         return personalSchool;
     }

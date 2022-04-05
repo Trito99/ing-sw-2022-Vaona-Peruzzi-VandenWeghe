@@ -24,7 +24,6 @@ public class Game {
     public Game() {
         listOfPlayers = new ArrayList<Player>();
         table = new Table();
-        bag = new Bag();
     }
 
     public void addPlayer(Player player) {

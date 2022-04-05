@@ -299,5 +299,6 @@ public class Table {
 
 
         }
+        return winner;
     }
 }
