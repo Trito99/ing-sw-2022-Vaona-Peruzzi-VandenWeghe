@@ -67,17 +67,24 @@ public class Table {
         Collections.shuffle(bag);
     }
 
-    public void extractStudentsInit(){
-        for(int i=0;i<listOfIsland.size();i++){
-            if(i!=(posMotherEarth-1) && i!=(posMotherEarth+5)) {
-                listOfIsland.get(i).getStudentOnIsland().add(bag.get(0));
-                bag.remove(bag.get(0));
+    public void extractStudentsInit() {
+        for (int i = 0; i < listOfIsland.size(); i++) {
+            if (posMotherEarth + 6 > listOfIsland.size()) {
+                if (i != (posMotherEarth - 1) && i != (posMotherEarth + 5 - listOfIsland.size())) {
+                    listOfIsland.get(i).getStudentOnIsland().add(bag.get(0));
+                    bag.remove(bag.get(0));
+                }
+            } else {
+                if (i != (posMotherEarth - 1) && i != (posMotherEarth + 5)) {
+                    listOfIsland.get(i).getStudentOnIsland().add(bag.get(0));
+                    bag.remove(bag.get(0));
+                }
             }
         }
     }
 
     public void extractStudent() {   //estrae dal sacchetto 3/4 studenti
-        for(int c=0;c<cloudNumber.size();c++){
+        for (int c = 0; c < cloudNumber.size(); c++) {
             for (int i = 0; i < cloudNumber.get(c).getNumberOfSpaces(); i++) {
                 cloudNumber.get(c).getStudentOnCloud().add(bag.get(0));
                 bag.remove(bag.get(0));
@@ -159,7 +166,7 @@ public class Table {
 
     public ArrayList<IslandCard> joinIsland(IslandCard island, ArrayList<IslandCard> listOfIsland) {      //valuto se due isole mergiano, in caso le unisco
 
-        int i = posMotherEarth -1;
+        int i = posMotherEarth - 1;
         ArrayList<IslandCard> newListOfIsland = listOfIsland;
 
 
@@ -167,27 +174,23 @@ public class Table {
         // se è 0 controlla il listofisland.size()
         if (i == listOfIsland.size() - 1) {
             int s = 0;
-            if(listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(s).getTowerOnIsland().getTColour()) &&
+            if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(s).getTowerOnIsland().getTColour()) &&
                     (listOfIsland.get(i).getTowerOnIsland().getTColour() != listOfIsland.get(i - 1).getTowerOnIsland().getTColour())) {
                 newListOfIsland.remove(s);                 // 2 isole caso i= size
-            }
-            else if(listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i - 1).getTowerOnIsland().getTColour())){
+            } else if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i - 1).getTowerOnIsland().getTColour())) {
                 newListOfIsland.remove(s);
                 newListOfIsland.remove(posMotherEarth);   // 3 isole caso i= size
             }
-        }
-        else if (i == 0) {
+        } else if (i == 0) {
             int s = listOfIsland.size();
-            if(listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i + 1).getTowerOnIsland().getTColour()) &&
+            if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i + 1).getTowerOnIsland().getTColour()) &&
                     (listOfIsland.get(i).getTowerOnIsland().getTColour() != listOfIsland.get(s).getTowerOnIsland().getTColour())) {
                 newListOfIsland.remove(s);              // 2 isole caso i = 0
-            }
-            else if(listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(s).getTowerOnIsland().getTColour())){
+            } else if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(s).getTowerOnIsland().getTColour())) {
                 newListOfIsland.remove(s);
                 newListOfIsland.remove(posMotherEarth);  // 3 isole caso i = 0
             }
-        }
-        else if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i + 1).getTowerOnIsland().getTColour()) &&
+        } else if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i + 1).getTowerOnIsland().getTColour()) &&
                 (listOfIsland.get(i).getTowerOnIsland().getTColour() != listOfIsland.get(i - 1).getTowerOnIsland().getTColour())) {
             newListOfIsland.remove(posMotherEarth);      // Caso normal 2 isole
         }
@@ -195,7 +198,7 @@ public class Table {
         /** tre isole */
         else if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i - 1).getTowerOnIsland().getTColour())) {
             newListOfIsland.remove(posMotherEarth);
-            newListOfIsland.remove(posMotherEarth -2);      // Caso normal 3 isole
+            newListOfIsland.remove(posMotherEarth - 2);      // Caso normal 3 isole
         }
         return newListOfIsland;
     }
@@ -298,3 +301,4 @@ public class Table {
 
         }
     }
+}
