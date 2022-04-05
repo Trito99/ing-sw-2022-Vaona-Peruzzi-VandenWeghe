@@ -46,32 +46,38 @@ public class Player {
         else this.team = null;
     }
 
-    public School generateSchool(Table table, GameMode gameMode, TColor tcolour){
-        int i=7;
-        int t=0;
-        switch(gameMode){
+    public School generateSchool(Table table, GameMode gameMode) {
+        int i = 7, t=0;
+        TColor tcolor = TColor.WHITE;
+        switch (gameMode) {
             case TWOPLAYERS:
-                i=7;
-                t=8;
+                i = 7;
+                t = 8;
                 break;
             case THREEPLAYERS:
-                i=9;
-                t=6;
+                i = 9;
+                t = 6;
                 break;
             case COOP:
-                i=7;
-                t=0;
+                i = 7;
+                t = 0;
                 break;
         }
-        for(int s=0;s<i;s++) {
+        for (int s = 0; s < i; s++) {
             personalSchool.getEntry().add(table.getBag().get(s));
             table.getBag().remove(table.getBag().get(s));
         }
-        for(int f=0;f<t;f++){
-            personalSchool.addTower(f,tcolour);
+        switch(playerNumber){
+            case PLAYER1 -> tcolor = TColor.BLACK;
+            case PLAYER2 -> tcolor = TColor.WHITE;
+            case PLAYER3 -> tcolor = TColor.GREY;
+        }
+        for (int f = 0; f < t; f++) {
+            personalSchool.addTower(f, tcolor);
         }
         return personalSchool;
     }
+
 
 
     public String getNickname() {
