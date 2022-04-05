@@ -67,27 +67,19 @@ public class Table {
         Collections.shuffle(bag);
     }
 
-    public void extractStudentsInit() {
-        for (int i = 0; i < listOfIsland.size(); i++) {
-            if (posMotherEarth + 6 > listOfIsland.size()) {
-                if (i != (posMotherEarth - 1) && i != (posMotherEarth + 5 - listOfIsland.size())) {
-                    listOfIsland.get(i).getStudentOnIsland().add(bag.get(0));
-                    bag.remove(bag.get(0));
-                }
-            } else {
-                if (i != (posMotherEarth - 1) && i != (posMotherEarth + 5)) {
-                    listOfIsland.get(i).getStudentOnIsland().add(bag.get(0));
-                    bag.remove(bag.get(0));
-                }
-            }
-        }
-    }
 
     public void extractStudent() {   //estrae dal sacchetto 3/4 studenti
         for (int c = 0; c < cloudNumber.size(); c++) {
-            for (int i = 0; i < cloudNumber.get(c).getNumberOfSpaces(); i++) {
-                cloudNumber.get(c).getStudentOnCloud().add(bag.get(0));
-                bag.remove(bag.get(0));
+            if (cloudNumber.get(c).getNumberOfSpaces() == 4) {
+                for (int i = 0; i < 4; i++) {
+                    cloudNumber.get(c).getStudentOnCloud().add(bag.get(i));
+                    bag.remove(bag.get(i));
+                }
+            } else {
+                for (int i = 0; i < 3; i++) {
+                    cloudNumber.get(c).getStudentOnCloud().add(bag.get(i));
+                    bag.remove(bag.get(i));
+                }
             }
         }
     }
@@ -124,6 +116,7 @@ public class Table {
     public void generateMotherEarth() {
         Random rn = new Random();
         int n = rn.nextInt(12) + 1;
+        System.out.println(n);
         listOfIsland.get(n - 1).setMotherEarthOnIsland(true);
         posMotherEarth = n;
     }
@@ -294,10 +287,8 @@ public class Table {
         if (game.gameIsFinished(table)) {
 
             System.out.println("HA VINTO IL GIOCATORE " + winner.getNickname());
-
             return winner;
-
-
         }
+        return winner;
     }
 }
