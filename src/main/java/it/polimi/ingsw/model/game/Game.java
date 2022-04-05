@@ -1,14 +1,10 @@
 package it.polimi.ingsw.model.game;
 
 
-import it.polimi.ingsw.model.assistant.DeckAssistant;
-import it.polimi.ingsw.model.bag.Bag;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.table.Table;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Game {
 
@@ -21,7 +17,6 @@ public class Game {
     private ArrayList<Player> order;
     private Difficulty difficulty;
     private Table table;
-    private Bag bag;
 
     /**
      * Default constructor.
@@ -97,12 +92,12 @@ public class Game {
     /**
      * winnerIs deve rimanere all'interno di Game
      */
-    public boolean gameIsFinished(Bag bag, Table table) {
+    public boolean gameIsFinished(Table table) {
         Player player = getActivePlayer();
 
         if (player.getDeckOfPlayer().getCardsInHand().size() == 0 ||   // Dobbiamo collegare ogni deck assistant al suo player
                 player.getPersonalSchool().getTower().size() == 0 ||
-                bag.getBag().size() == 0 ||
+                table.getBag().size() == 0 ||
                 table.getListOfIsland().size() == 3 /** da verificare */) {
             return true;
         }

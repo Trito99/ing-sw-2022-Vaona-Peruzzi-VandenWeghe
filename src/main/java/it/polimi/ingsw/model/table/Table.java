@@ -1,15 +1,14 @@
 package it.polimi.ingsw.model.table;
 
-import com.sun.org.apache.bcel.internal.generic.RETURN;
-import it.polimi.ingsw.model.bag.Bag;
 import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.island.IslandCard;
-import it.polimi.ingsw.model.island.MotherEarth;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.school.TColour;
+import it.polimi.ingsw.model.student.SColour;
+import it.polimi.ingsw.model.student.Student;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,7 +20,73 @@ public class Table {
     private ArrayList<IslandCard> listOfIsland;
     private ArrayList<CharacterCard> characterCardsOnTable;
     private int coinsOnTable;
+    private int posMotherEarth=0;
+    private ArrayList<Student> bag = new ArrayList<>();
 
+    public void generateBagInit(){
+        SColour green = SColour.GREEN;
+        SColour red = SColour.RED;
+        SColour yellow = SColour.YELLOW;
+        SColour pink = SColour.PINK;
+        SColour blue = SColour.BLUE;
+
+        for(int s=1;s<11;s++){
+            if(s<3)
+                bag.add(new Student(s,green));
+            else if(s<5)
+                bag.add(new Student(s,red));
+            else if(s<7)
+                bag.add(new Student(s,yellow));
+            else if(s<9)
+                bag.add(new Student(s,pink));
+            else
+                bag.add(new Student(s,blue));
+        }
+        Collections.shuffle(bag);
+    }
+
+    public void addFinalStudents(){
+        SColour green = SColour.GREEN;
+        SColour red = SColour.RED;
+        SColour yellow = SColour.YELLOW;
+        SColour pink = SColour.PINK;
+        SColour blue = SColour.BLUE;
+
+        for(int s=11;s<131;s++){
+            if(s<35)
+                bag.add(new Student(s,green));
+            else if(s<59)
+                bag.add(new Student(s,red));
+            else if(s<83)
+                bag.add(new Student(s,yellow));
+            else if(s<107)
+                bag.add(new Student(s,pink));
+            else
+                bag.add(new Student(s,blue));
+        }
+        Collections.shuffle(bag);
+    }
+
+
+    public void extractStudent() {   //estrae dal sacchetto 3/4 studenti
+        for(int c=0;c<cloudNumber.size();c++){
+            if (cloudNumber.get(c).getNumberOfSpaces() == 4) {
+                for (int i = 0; i < 4; i++) {
+                    cloudNumber.get(c).getStudentOnCloud().add(bag.get(i));
+                    bag.remove(bag.get(i));
+                }
+            } else {
+                for (int i = 0; i < 3; i++) {
+                    cloudNumber.get(c).getStudentOnCloud().add(bag.get(i));
+                    bag.remove(bag.get(i));
+                }
+            }
+        }
+    }
+
+    public ArrayList<Student> getBag() {
+        return bag;
+    }
 
     public void generateCloudNumber(GameMode gm){
         int x;
@@ -47,14 +112,16 @@ public class Table {
             listOfIsland.add(new IslandCard(s));
         }
     }
-
-    public void generateMotherEarth(MotherEarth me ){
+    public void generateMotherEarth(){
         Random rn = new Random();
         int n = rn.nextInt(12)+1;
         System.out.println(n);
         listOfIsland.get(n-1).setMotherEarthOnIsland(true);
-        me.setPosition(n);
+        posMotherEarth=n;
     }
+    public int getPosMotherEarth(){ return posMotherEarth;}
+
+    public void setPosMotherEarth(int posMotherEarth){this.posMotherEarth=posMotherEarth;}
 
     public ArrayList<CloudCard> getCloudNumber() {
         return cloudNumber;
@@ -207,7 +274,7 @@ public class Table {
             }
         }
 
-        if(Game.gameIsFinished(Bag.getBag(), table))   {   //Bag come attributo di table invece di fare la classe bag
+        if(Game.gameIsFinished(table))   {
 
             System.out.println("HA VINTO IL GIOCATORE " + winner.getNickname());
 

@@ -2,11 +2,11 @@ package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
-import it.polimi.ingsw.model.bag.Bag;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColour;
+import it.polimi.ingsw.model.table.Table;
 
 import java.util.Date;
 
@@ -46,7 +46,7 @@ public class Player {
         else this.team = null;
     }
 
-    public School generateSchool(Bag bag, GameMode gameMode, TColour tcolour){
+    public School generateSchool(Table table, GameMode gameMode, TColour tcolour){
         int i=7;
         int t=0;
         switch(gameMode){
@@ -64,8 +64,8 @@ public class Player {
                 break;
         }
         for(int s=0;s<i;s++) {
-            personalSchool.getEntry().add(bag.getBag().get(s));
-            bag.getBag().remove(bag.getBag().get(s));
+            personalSchool.getEntry().add(table.getBag().get(s));
+            table.getBag().remove(table.getBag().get(s));
         }
         for(int f=0;f<t;f++){
             personalSchool.addTower(f,tcolour);

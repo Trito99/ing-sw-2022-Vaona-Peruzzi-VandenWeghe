@@ -41,42 +41,42 @@ public class School {
         return entry;
     }
 
-    public void moveStudentToIsland(School school, IslandCard islandCard, int id){ //Specifico Studente va spostato (sceglie player)
+    public void moveStudentToIsland(IslandCard islandCard, int id){ //Specifico Studente va spostato (sceglie player)
         Student student = new Student(131,null);
-        for(int i = 0; i < school.getEntry().size(); i++) {
-            if(id==school.getEntry().get(i).getIdStudent())
-                student = school.getEntry().get(i);
+        for(int i = 0; i < entry.size(); i++) {
+            if(id==entry.get(i).getIdStudent())
+                student = entry.get(i);
         }
-        islandCard.getStudentOnIsland().add(school.getEntry().get(school.getEntry().indexOf(student)));
-        school.getEntry().remove(school.getEntry().get(school.getEntry().indexOf(student)));
+        islandCard.getStudentOnIsland().add(entry.get(entry.indexOf(student)));
+        entry.remove(entry.get(entry.indexOf(student)));
     }
 
-    public void moveStudentInHall(School school,int id) {
+    public void moveStudentInHall(int id) {
         Student student = new Student(131, null);
-        for (int i = 0; i < school.getEntry().size(); i++) {
-            if (id == school.getEntry().get(i).getIdStudent())
-                student = school.getEntry().get(i);
+        for (int i = 0; i < entry.size(); i++) {
+            if (id == entry.get(i).getIdStudent())
+                student=entry.get(i);
         }
         switch(student.getsColour()){
             case GREEN:
-                school.getGTable().add(student);
-                school.getEntry().remove(school.getEntry().get(school.getEntry().indexOf(student)));
+                GTable.add(student);
+                entry.remove(entry.get(entry.indexOf(student)));
                 break;
             case RED:
-                school.getRTable().add(student);
-                school.getEntry().remove(school.getEntry().get(school.getEntry().indexOf(student)));
+                RTable.add(student);
+                entry.remove(entry.get(entry.indexOf(student)));
                 break;
             case YELLOW:
-                school.getYTable().add(student);
-                school.getEntry().remove(school.getEntry().get(school.getEntry().indexOf(student)));
+                YTable.add(student);
+                entry.remove(entry.get(entry.indexOf(student)));
                 break;
             case PINK:
-                school.getPTable().add(student);
-                school.getEntry().remove(school.getEntry().get(school.getEntry().indexOf(student)));
+                PTable.add(student);
+                entry.remove(entry.get(entry.indexOf(student)));
                 break;
             case BLUE:
-                school.getBTable().add(student);
-                school.getEntry().remove(school.getEntry().get(school.getEntry().indexOf(student)));
+                BTable.add(student);
+                entry.remove(entry.get(entry.indexOf(student)));
                 break;
         }
     }
