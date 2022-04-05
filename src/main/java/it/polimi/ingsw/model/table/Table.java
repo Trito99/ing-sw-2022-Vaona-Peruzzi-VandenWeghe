@@ -119,6 +119,18 @@ public class Table {
         listOfIsland.get(n-1).setMotherEarthOnIsland(true);
         posMotherEarth=n;
     }
+
+    public void moveMotherEarth(int n){
+        listOfIsland.get(posMotherEarth-1).setMotherEarthOnIsland(false);
+        if((posMotherEarth+n)>listOfIsland.size()) {
+            listOfIsland.get(posMotherEarth+n-listOfIsland.size()-1).setMotherEarthOnIsland(true);
+            posMotherEarth=posMotherEarth+n-listOfIsland.size();
+        }else{
+            listOfIsland.get(posMotherEarth+n-1).setMotherEarthOnIsland(true);
+            posMotherEarth=posMotherEarth+n;
+        }
+    }
+
     public int getPosMotherEarth(){ return posMotherEarth;}
 
     public void setPosMotherEarth(int posMotherEarth){this.posMotherEarth=posMotherEarth;}
