@@ -92,7 +92,7 @@ public class Game {
     /**
      * winnerIs deve rimanere all'interno di Game
      */
-    public boolean gameIsFinished(Table table) {
+    public boolean gameIsFinished() {
         Player player = getActivePlayer();
 
         if (player.getDeckOfPlayer().getCardsInHand().size() == 0 ||   // Dobbiamo collegare ogni deck assistant al suo player

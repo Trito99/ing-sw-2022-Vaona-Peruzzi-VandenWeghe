@@ -284,7 +284,7 @@ public class Table {
             }
         }
 
-        if (game.gameIsFinished(table)) {
+        if (game.gameIsFinished()) {
 
             System.out.println("HA VINTO IL GIOCATORE " + winner.getNickname());
             return winner;

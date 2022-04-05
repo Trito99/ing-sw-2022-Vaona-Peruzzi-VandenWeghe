@@ -170,14 +170,14 @@ public class School {
             }
         } */
         for (Player player : players) {
-            if (numberOfG(player) > max) {
-                max = numberOfG(player);
+            if (numberOfStudents(player, SColor.YELLOW) > max) {
+                max = numberOfStudents(player, SColor.YELLOW);
             }
             else player.getPersonalSchool().setProfRInHall(false);
         }
 
         for (Player player : players) {
-            if(numberOfG(player) == max){
+            if(numberOfStudents(player, SColor.YELLOW) == max){
                 playerWithMax ++;
                 maxPlayer = player;
             }
