@@ -49,52 +49,46 @@ public class GameController implements Observer {
         }
     }
 
-    public void initializeGame(Player player){
+    public void initializeGame(){
         setGameState(GameState.INIT);
         switch (maxPlayers){
             case 4:
-                game.getListOfPlayer().get(3);      //array da 0 a 3
-                /** gameMode */
                 game.setGameMode(gameMode.COOP);
-                /** difficoltà */
                 if(difficulty.equals(Difficulty.STANDARDMODE)){
                     Player.setCoinScore(0);
                 }
                 else if (difficulty.equals(Difficulty.EXPERTMODE)){
                     Player.setCoinScore(1);
                 }
-                /** colore torre */
-                //manca inizializzare torri
+                for(int i=0;i<4;i++)
+                    game.getListOfPlayer().add(new Player());
             case 3:
-                game.getListOfPlayer().get(2);
-                /** gameMode */
                 game.setGameMode(gameMode.THREEPLAYERS);
-                /** difficoltà */
                 if(difficulty.equals(Difficulty.STANDARDMODE)){
                     Player.setCoinScore(0);
                 }
                 else if (difficulty.equals(Difficulty.EXPERTMODE)){
                     Player.setCoinScore(1);
                 }
-                /** colore torre */
-                if(player.getPlayerNumber()==PlayerNumber.PLAYER1) player.setTColour(TColor.WHITE);
+                for(int i=0;i<3;i++)
+                    game.getListOfPlayer().add(new Player());
+                /**if(player.getPlayerNumber()==PlayerNumber.PLAYER1) player.setTColour(TColor.WHITE);
                 else if(player.getPlayerNumber()==PlayerNumber.PLAYER2) player.setTColour(TColor.GREY);
-                else if(player.getPlayerNumber()==PlayerNumber.PLAYER1) player.setTColour(TColor.BLACK);
+                else if(player.getPlayerNumber()==PlayerNumber.PLAYER1) player.setTColour(TColor.BLACK);*/
 
             case 2:
-                game.getListOfPlayer().get(1);
-                /** gameMode */
                 game.setGameMode(gameMode.TWOPLAYERS);
-                /** difficoltà */
                 if(difficulty.equals(Difficulty.STANDARDMODE)){
                     Player.setCoinScore(0);
                 }
                 else if (difficulty.equals(Difficulty.EXPERTMODE)){
                     Player.setCoinScore(1);
                 }
-                /** colore torre */
+                for(int i=0;i<2;i++)
+                    game.getListOfPlayer().add(new Player());
+                /**
                 if(player.getPlayerNumber()==PlayerNumber.PLAYER1) player.setTColour(TColor.WHITE);
-                else if(player.getPlayerNumber()==PlayerNumber.PLAYER2) player.setTColour(TColor.BLACK);
+                else if(player.getPlayerNumber()==PlayerNumber.PLAYER2) player.setTColour(TColor.BLACK);*/
 
         }
     }
