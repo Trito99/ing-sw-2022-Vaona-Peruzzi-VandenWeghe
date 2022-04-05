@@ -9,7 +9,7 @@ import it.polimi.ingsw.model.game.GameState;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
-import it.polimi.ingsw.model.school.TColour;
+import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.view.View;
 
@@ -77,9 +77,9 @@ public class GameController implements Observer {
                     Player.setCoinScore(1);
                 }
                 /** colore torre */
-                if(player.getPlayerNumber()==PlayerNumber.PLAYER1) player.setTColour(TColour.WHITE);
-                else if(player.getPlayerNumber()==PlayerNumber.PLAYER2) player.setTColour(TColour.GREY);
-                else if(player.getPlayerNumber()==PlayerNumber.PLAYER1) player.setTColour(TColour.BLACK);
+                if(player.getPlayerNumber()==PlayerNumber.PLAYER1) player.setTColour(TColor.WHITE);
+                else if(player.getPlayerNumber()==PlayerNumber.PLAYER2) player.setTColour(TColor.GREY);
+                else if(player.getPlayerNumber()==PlayerNumber.PLAYER1) player.setTColour(TColor.BLACK);
 
             case 2:
                 game.getListOfPlayer().get(1);
@@ -93,8 +93,8 @@ public class GameController implements Observer {
                     Player.setCoinScore(1);
                 }
                 /** colore torre */
-                if(player.getPlayerNumber()==PlayerNumber.PLAYER1) player.setTColour(TColour.WHITE);
-                else if(player.getPlayerNumber()==PlayerNumber.PLAYER2) player.setTColour(TColour.BLACK);
+                if(player.getPlayerNumber()==PlayerNumber.PLAYER1) player.setTColour(TColor.WHITE);
+                else if(player.getPlayerNumber()==PlayerNumber.PLAYER2) player.setTColour(TColor.BLACK);
 
         }
     }

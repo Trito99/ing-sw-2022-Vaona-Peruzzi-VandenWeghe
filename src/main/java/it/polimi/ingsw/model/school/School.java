@@ -1,11 +1,8 @@
 package it.polimi.ingsw.model.school;
 
-import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.island.IslandCard;
-import it.polimi.ingsw.model.student.SColour;
+import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
-import it.polimi.ingsw.model.game.Game;
-import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.Player;
 
 import java.util.ArrayList;
@@ -106,7 +103,7 @@ public class School {
     }
 
     /** da generalizzare tutto con questo */
-    public int numberOfStudents(Player player, SColour colour){
+    public int numberOfStudents(Player player, SColor colour){
         switch(colour){
             case GREEN:
                 return player.getPersonalSchool().getGTable().size();
@@ -147,7 +144,7 @@ public class School {
 
         /** Prof Giallo */
         /* for (Player player : players) {
-            for (SColour colour : SColour.values()){
+            for (SColor colour : SColor.values()){
                 if (numberOfStudents(player, colour) > max) {
                     max = numberOfStudents(player, colour);
                 }
@@ -157,7 +154,7 @@ public class School {
         }
 
         for (Player player : players) {
-            for (SColour colour : SColour.values()){
+            for (SColor colour : SColor.values()){
                 if(numberOfStudents(player, colour) == max){
                     playerWithMax ++;
                     maxPlayer = player;
@@ -320,8 +317,8 @@ public class School {
         return towerZone;
     }
 
-    public void addTower(int id, TColour tColour) {
-        towerZone.add(new Tower(id,tColour));
+    public void addTower(int id, TColor tColor) {
+        towerZone.add(new Tower(id, tColor));
         // ci sarà una notify observer
     }
 

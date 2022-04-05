@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model.student;
 
-public enum SColour {
+public enum SColor {
     GREEN,
     RED,
     YELLOW,

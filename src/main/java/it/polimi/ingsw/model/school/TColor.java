@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model.school;
 
-public enum TColour {
+public enum TColor {
     WHITE,
     GREY,
     BLACK

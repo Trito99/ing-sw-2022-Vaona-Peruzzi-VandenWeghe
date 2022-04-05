@@ -5,7 +5,7 @@ import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.school.School;
-import it.polimi.ingsw.model.school.TColour;
+import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.table.Table;
 
 import java.util.Date;
@@ -25,19 +25,19 @@ public class Player {
     private AssistantCard trash;          //= Ultima carta nella pila degli scarti
     private final Team team;
     private int coinScore;
-    private TColour tColour;
+    private TColor tColor;
     private int influenceOnIsland;
 
     /**
      * Default constructor.
      */
-    public Player(School personalSchool, AssistantCard trash, Team team, TColour tColour, int coinScore) {
+    public Player(School personalSchool, AssistantCard trash, Team team, TColor tColor, int coinScore) {
         nickname = new String();
         age = 0;
         playerNumber = new PlayerNumber();      /** DA RIFARE COSTRUTTORE */
         influenceOnIsland = 0;
         personalSchool = new School();
-        tColour = new TColour();
+        tColor = new TColor();
         trash = null;
         coinScore = 1;
         Game gameMode = Game.getGameMode();             //gameMode come parametro?(Vedi CloudCard)
@@ -46,7 +46,7 @@ public class Player {
         else this.team = null;
     }
 
-    public School generateSchool(Table table, GameMode gameMode, TColour tcolour){
+    public School generateSchool(Table table, GameMode gameMode, TColor tcolour){
         int i=7;
         int t=0;
         switch(gameMode){
@@ -107,12 +107,12 @@ public class Player {
     }
 
 
-    public void setTColour(TColour tColour) {
-        this.tColour = tColour;
+    public void setTColour(TColor tColor) {
+        this.tColor = tColor;
     }
 
-    public TColour getTColour() {
-        return tColour;
+    public TColor getTColour() {
+        return tColor;
     }
 
     public int getCoinScore() {

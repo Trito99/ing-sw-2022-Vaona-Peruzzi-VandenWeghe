@@ -1,14 +1,9 @@
 package it.polimi.ingsw.model.island;
 
-import it.polimi.ingsw.model.cloud.CloudCard;
-import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.Tower;
-import it.polimi.ingsw.model.student.SColour;
 import it.polimi.ingsw.model.student.Student;
-import it.polimi.ingsw.model.school.TColour;
-import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.school.TColor;
 
 import java.util.ArrayList;
 
@@ -119,7 +114,7 @@ public class IslandCard {
     public void buildTowerOnIsland(Player player, ArrayList<Player> listOfPlayer){        //Builda la torre del colore del Player che ha l'influenza sull'isola
 
         Player playerFonud = calculateInfluence(player, listOfPlayer);           //Player che ha influenza sull'isola
-        TColour towerColour = player.getTColour();      //Colore delle torri del player che ha influenza
+        TColor towerColour = player.getTColour();      //Colore delle torri del player che ha influenza
 
         towerOnIsland = new Tower(player.getPersonalSchool().getTower().size(), towerColour);
         player.getPersonalSchool().removeTower();

@@ -6,8 +6,8 @@ import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.school.TColour;
-import it.polimi.ingsw.model.student.SColour;
+import it.polimi.ingsw.model.school.TColor;
+import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 
 import java.util.ArrayList;
@@ -24,11 +24,11 @@ public class Table {
     private ArrayList<Student> bag = new ArrayList<>();
 
     public void generateBagInit(){
-        SColour green = SColour.GREEN;
-        SColour red = SColour.RED;
-        SColour yellow = SColour.YELLOW;
-        SColour pink = SColour.PINK;
-        SColour blue = SColour.BLUE;
+        SColor green = SColor.GREEN;
+        SColor red = SColor.RED;
+        SColor yellow = SColor.YELLOW;
+        SColor pink = SColor.PINK;
+        SColor blue = SColor.BLUE;
 
         for(int s=1;s<11;s++){
             if(s<3)
@@ -46,11 +46,11 @@ public class Table {
     }
 
     public void addFinalStudents(){
-        SColour green = SColour.GREEN;
-        SColour red = SColour.RED;
-        SColour yellow = SColour.YELLOW;
-        SColour pink = SColour.PINK;
-        SColour blue = SColour.BLUE;
+        SColor green = SColor.GREEN;
+        SColor red = SColor.RED;
+        SColor yellow = SColor.YELLOW;
+        SColor pink = SColor.PINK;
+        SColor blue = SColor.BLUE;
 
         for(int s=11;s<131;s++){
             if(s<35)
@@ -178,13 +178,13 @@ public class Table {
 
         /** conto il numero di torri presenti sul tavolo per ogni colore */
         for (int s=1;s<13;s++){
-            if((listOfIsland.get(s).getTowerOnIsland().getTColour()).equals(TColour.GREY)){
+            if((listOfIsland.get(s).getTowerOnIsland().getTColour()).equals(TColor.GREY)){
                 countGrey++;
             }
-            else if ((listOfIsland.get(s).getTowerOnIsland().getTColour()).equals(TColour.WHITE)){
+            else if ((listOfIsland.get(s).getTowerOnIsland().getTColour()).equals(TColor.WHITE)){
                 countWhite++;
             }
-            else if ((listOfIsland.get(s).getTowerOnIsland().getTColour()).equals(TColour.BLACK)){
+            else if ((listOfIsland.get(s).getTowerOnIsland().getTColour()).equals(TColor.BLACK)){
                 countBlack++;
             }
         }
@@ -192,7 +192,7 @@ public class Table {
         /** confronto e cerco chi ha maggior influenza */
         if (countBlack > countGrey && countBlack > countWhite){
             for(Player player : listOfPlayers){
-                if(player.getTColour().equals(TColour.BLACK)){
+                if(player.getTColour().equals(TColor.BLACK)){
                     return winner = player;
                 }
             }
@@ -200,7 +200,7 @@ public class Table {
 
         else if(countGrey > countBlack && countGrey > countWhite){
                 for(Player player : listOfPlayers) {
-                    if (player.getTColour().equals(TColour.BLACK)) {
+                    if (player.getTColour().equals(TColor.BLACK)) {
                         return winner = player;
                     }
                 }
@@ -208,7 +208,7 @@ public class Table {
 
         else if(countWhite > countBlack && countWhite > countGrey){
             for(Player player : listOfPlayers) {
-                if (player.getTColour().equals(TColour.BLACK)) {
+                if (player.getTColour().equals(TColor.BLACK)) {
                     return winner = player;
                 }
             }
@@ -217,10 +217,10 @@ public class Table {
         /** in caso di parità, confronto i player e vince quello con più prof */
         else if(countBlack == countGrey && countBlack > countWhite){
             for(Player player : listOfPlayers) {
-                if (player.getTColour().equals(TColour.BLACK)) {
+                if (player.getTColour().equals(TColor.BLACK)) {
                     winner = player;
                 }
-                else if(player.getTColour().equals(TColour.GREY)) {
+                else if(player.getTColour().equals(TColor.GREY)) {
                     alsoWinner = player;
                 }
             }
@@ -235,10 +235,10 @@ public class Table {
 
         else if(countGrey == countWhite && countGrey > countBlack){
             for(Player player : listOfPlayers) {
-                if (player.getTColour().equals(TColour.GREY)) {
+                if (player.getTColour().equals(TColor.GREY)) {
                     winner = player;
                 }
-                else if(player.getTColour().equals(TColour.WHITE)) {
+                else if(player.getTColour().equals(TColor.WHITE)) {
                     alsoWinner = player;
                 }
             }
@@ -253,10 +253,10 @@ public class Table {
 
         else if(countWhite == countBlack && countWhite > countGrey){
             for(Player player : listOfPlayers) {
-                if (player.getTColour().equals(TColour.WHITE)) {
+                if (player.getTColour().equals(TColor.WHITE)) {
                     winner = player;
                 }
-                else if(player.getTColour().equals(TColour.BLACK)) {
+                else if(player.getTColour().equals(TColor.BLACK)) {
                     alsoWinner = player;
                 }
             }

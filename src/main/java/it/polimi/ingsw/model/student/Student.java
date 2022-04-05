@@ -3,11 +3,11 @@ package it.polimi.ingsw.model.student;
 public class Student {
 
     private int idStudent;
-    private SColour sColour;
+    private SColor sColor;
 
-    public Student(int idStudent, SColour sColour) {
+    public Student(int idStudent, SColor sColor) {
         this.idStudent = idStudent;
-        this.sColour = sColour;
+        this.sColor = sColor;
     }
 
 
@@ -15,7 +15,7 @@ public class Student {
         return idStudent;
     }
 
-    public SColour getsColour() {
-        return sColour;
+    public SColor getsColour() {
+        return sColor;
     }
 }

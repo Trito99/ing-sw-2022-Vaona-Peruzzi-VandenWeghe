@@ -1,23 +1,21 @@
 package it.polimi.ingsw.model.school;
 
-import java.util.ArrayList;
-
 public class Tower {
 
     private int idTower;
-    private TColour tColour;
+    private TColor tColor;
 
-    public Tower(int idTower, TColour tColour) {
+    public Tower(int idTower, TColor tColor) {
         this.idTower = idTower;
-        this.tColour = tColour;
+        this.tColor = tColor;
     }
 
     public int getIdTower() {
         return idTower;
     }
 
-    public TColour getTColour(){
-        return tColour;
+    public TColor getTColour(){
+        return tColor;
     }
 
 }
