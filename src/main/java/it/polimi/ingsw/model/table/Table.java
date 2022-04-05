@@ -124,7 +124,6 @@ public class Table {
     public void generateMotherEarth() {
         Random rn = new Random();
         int n = rn.nextInt(12) + 1;
-        System.out.println(n);
         listOfIsland.get(n - 1).setMotherEarthOnIsland(true);
         posMotherEarth = n;
     }
