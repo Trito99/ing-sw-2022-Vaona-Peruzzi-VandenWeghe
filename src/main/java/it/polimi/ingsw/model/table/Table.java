@@ -18,7 +18,7 @@ public class Table {
 
     private ArrayList<CloudCard> cloudNumber;
     private ArrayList<IslandCard> listOfIsland;
-    private ArrayList<CharacterCard> characterCardsOnTable;
+    private ArrayList<CharacterCard> characterCardsOnTable = new ArrayList<>(3);
     private int coinsOnTable;
     private int posMotherEarth = 0;
     private ArrayList<Student> bag = new ArrayList<>();
@@ -121,6 +121,14 @@ public class Table {
         posMotherEarth = n;
     }
 
+    public void generateCharacterCardsOnTable(ArrayList<CharacterCard> characterCards){
+        Collections.shuffle(characterCards);
+
+        for( int i = 0; i<3; i++){
+            characterCardsOnTable.add(characterCards.get(i));
+        }
+    }
+
     public void moveMotherEarth(int n) {
         listOfIsland.get(posMotherEarth - 1).setMotherEarthOnIsland(false);
         if ((posMotherEarth + n) > listOfIsland.size()) {
@@ -150,6 +158,14 @@ public class Table {
 
     public int getCoinsOnTable() {
         return coinsOnTable;
+    }
+
+    public void setCoinsOnTable(int coinsOnTable) {
+        this.coinsOnTable = coinsOnTable;
+    }
+
+    public void increaseCoinsOnTable(int coinsValue){
+        setCoinsOnTable(getCoinsOnTable() + coinsValue);
     }
 
     public ArrayList<CharacterCard> getCharacterCardsOnTable() {
@@ -194,7 +210,6 @@ public class Table {
         }
         return newListOfIsland;
     }
-
 
     public Player playerIsWinning(Game game, Table table, ArrayList<Player> listOfPlayers) {  //calcola influenza torri sul tavolo e restituisce quello con più influenza
         int countGrey = 0;

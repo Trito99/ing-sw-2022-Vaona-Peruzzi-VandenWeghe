@@ -2,6 +2,8 @@ package it.polimi.ingsw.controller;
 
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
+import it.polimi.ingsw.model.character.CardEffect;
+import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
@@ -97,8 +99,47 @@ public class GameController {
         player.setCoinScore(player.getCoinScore() + 1);
     }
 
-    public void decreaseCoinScore(Player player) {
-        player.setCoinScore(player.getCoinScore() - 1);
+    public void decreaseCoinScore(Player player, int decreaseValue) {
+        player.setCoinScore(player.getCoinScore() - decreaseValue);
+    }
+
+    public void playCard(CharacterCard character, Player player, GameController gc, Table table, CharacterCard card){
+        //notify observer con scelta del giocatore -> sceglie attraverso l'id
+
+        //selezione
+        switch(character.getCardEffect()){
+            /** 1 */
+            case EFFECTONE:
+
+
+            /** 2 */
+            case CICCIOPANZA:
+                character.getCardEffect().playCiccioPanza(player, gc, table, card);     //controllare il gc
+
+            case EFFECTTHREE:   /** 3 */
+                break;
+            case EFFECTFOUR:   /** 4 */
+                break;
+            case EFFECTFIVE:   /** 5 */
+                break;
+            case EFFECTSIX:   /** 6 */
+                break;
+            case EFFECTSEVEN:   /** 7 */
+                break;
+            case EFFECTEIGHT:   /** 8 */
+                break;
+            case EFFECTNINE:   /** 9 */
+                break;
+            case EFFECTTEN:   /** 10 */
+                break;
+            case EFFECTELEVEN:   /** 11 */
+                break;
+            case EFFECTTWELVE:   /** 12 */
+                break;
+        }
+
+
+
     }
 
     public void moveMotherEarth(IslandCard islandCard, Table table, MotherEarth motherEarth) {    //Le scelte brooo,
