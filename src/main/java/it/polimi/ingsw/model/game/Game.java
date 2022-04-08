@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.game;
 
 
+import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.table.Table;
 
@@ -17,6 +18,7 @@ public class Game {
     private ArrayList<Player> order;
     private Difficulty difficulty;
     private Table table;
+    private ArrayList<CharacterCard> characterCards;
 
     /**
      * Default constructor.
@@ -24,6 +26,7 @@ public class Game {
     public Game() {
         listOfPlayers = new ArrayList<Player>();
         table = new Table();
+        characterCards = new ArrayList<CharacterCard>(12);
     }
 
     public void addPlayer(Player player) {

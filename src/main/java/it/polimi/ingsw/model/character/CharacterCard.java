@@ -6,16 +6,26 @@ public class CharacterCard {
     private int costCharacter;
     private final CardEffect cardEffect;
     private boolean coinOnCard;
+    private boolean neverUsed;
 
     public CharacterCard (int idCharacter, int costCharacter, CardEffect cardEffect){
         this.idCharacter = idCharacter;
         this.costCharacter = costCharacter;
         this.cardEffect = cardEffect;
         this.coinOnCard = false;
+        this.neverUsed = true;
     }
 
     public int getIdCharacter() {
         return idCharacter;
+    }
+
+    public boolean isNeverUsed() {
+        return neverUsed;
+    }
+
+    public void setNeverUsed(boolean neverUsed) {
+        this.neverUsed = neverUsed;
     }
 
     public int getCostCharacter() {
