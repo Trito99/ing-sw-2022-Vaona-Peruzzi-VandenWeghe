@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.school;
 
+import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
@@ -144,6 +145,9 @@ public class School {
                 }
                 if (playerWithMax == 1) {
                     maxPlayer.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true);
+                }
+                else if(playerWithMax == 2){
+
                 }
 
             case RED:
