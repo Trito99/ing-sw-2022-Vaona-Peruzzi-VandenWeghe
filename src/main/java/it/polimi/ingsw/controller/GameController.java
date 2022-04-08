@@ -114,7 +114,7 @@ public class GameController {
 
             /** 2 */
             case CICCIOPANZA:
-                character.getCardEffect().playCiccioPanza(player, gc, table, card);     //controllare il gc
+                character.getCardEffect().playCiccioPanza(player, gc, table, card, ArrayList<Player> players);     //controllare il gc
 
             case EFFECTTHREE:   /** 3 */
                 break;
