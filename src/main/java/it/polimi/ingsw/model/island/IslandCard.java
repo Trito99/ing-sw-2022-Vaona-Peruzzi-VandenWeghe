@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.island;
 
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.school.Tower;
+import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.school.TColor;
 
@@ -55,7 +56,7 @@ public class IslandCard {
     }
 
 
-    public Player calculateInfluence(ArrayList<Player> listOfPlayers){   //Restituisce il Player che ha influenza sull'isola
+    public Player calculateInfluence(ArrayList<Player> listOfPlayers, Player player){   //Restituisce il Player che ha influenza sull'isola
         int i ;
         int maxInfluence = 0;
         Player playerWithInfluence = null;
@@ -67,27 +68,27 @@ public class IslandCard {
             for(i=0; i<studentOnIsland.size(); i++){
                 switch (studentOnIsland.get(i).getsColour()){
                     case GREEN:
-                        if(players.getPersonalSchool().getProfGInHall()){
+                        if(players.getPersonalSchool().getProfInHall(player, SColor.GREEN)){
                             countTot++;
                         }
                         break;
                     case RED:
-                        if(players.getPersonalSchool().getProfRInHall()){
+                        if(players.getPersonalSchool().getProfInHall(player, SColor.RED)){
                             countTot++;
                         }
                         break;
                     case YELLOW:
-                        if(players.getPersonalSchool().getProfYInHall()){
+                        if(players.getPersonalSchool().getProfInHall(player, SColor.YELLOW)){
                             countTot++;
                         }
                         break;
                     case PINK:
-                        if(players.getPersonalSchool().getProfPInHall()){
+                        if(players.getPersonalSchool().getProfInHall(player, SColor.PINK)){
                             countTot++;
                         }
                         break;
                     case BLUE:
-                        if(players.getPersonalSchool().getProfBInHall()){
+                        if(players.getPersonalSchool().getProfInHall(player, SColor.BLUE)){
                             countTot++;
                         }
                         break;

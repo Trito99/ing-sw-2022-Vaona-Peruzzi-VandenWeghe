@@ -108,8 +108,8 @@ public class School {
     }
 
     /** da generalizzare tutto con questo */
-    public int numberOfStudents(Player player, SColor colour){
-        switch(colour){
+    public int numberOfStudents(Player player, SColor color){
+        switch(color){
             case GREEN:
                 return player.getPersonalSchool().getGTable().size();
             case RED:
@@ -124,178 +124,105 @@ public class School {
         return 0;
     }
 
-    public int numberOfR(Player player){
-        return player.getPersonalSchool().getRTable().size();
-    }
-
-    public int numberOfY(Player player){
-        return player.getPersonalSchool().getYTable().size();
-    }
-
-    public int numberOfP(Player player){
-        return player.getPersonalSchool().getPTable().size();
-    }
-
-    public int numberOfB(Player player){
-        return player.getPersonalSchool().getBTable().size();
-    }
-
-    public void winProfG(ArrayList<Player> players) {
-        //calcolo se player che sta giocando conquista il prof giallo
-        // numero di studenti gialli del player "selezionato"
-        int max=0;
-        int playerWithMax = 0;
-        Player maxPlayer = null;
-
-        /** Prof Giallo */
-        /* for (Player player : players) {
-            for (SColor colour : SColor.values()){
-                if (numberOfStudents(player, colour) > max) {
-                    max = numberOfStudents(player, colour);
-                }
-                else player.getPersonalSchool().getProfOfPlayer().get(0).setInHall(false);
-                max = 0;
-            }
-        }
-
-        for (Player player : players) {
-            for (SColor colour : SColor.values()){
-                if(numberOfStudents(player, colour) == max){
-                    playerWithMax ++;
-                    maxPlayer = player;
-                }
-                if (playerWithMax == 1){
-                    maxPlayer.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true);
-                }
-            }
-        } */
-        for (Player player : players) {
-            if (numberOfStudents(player, SColor.YELLOW) > max) {
-                max = numberOfStudents(player, SColor.YELLOW);
-            }
-            else player.getPersonalSchool().setProfRInHall(false);
-        }
-
-        for (Player player : players) {
-            if(numberOfStudents(player, SColor.YELLOW) == max){
-                playerWithMax ++;
-                maxPlayer = player;
-            }
-        }
-        if (playerWithMax == 1){
-            maxPlayer.getPersonalSchool().setProfGInHall(true);
-        }
-    }
-
-    public void winProfR(ArrayList<Player> players) {
-        int max=0;
-        int playerWithMax = 0;
-        Player maxPlayer = null;
-
-        for (Player player : players) {
-            if (numberOfR(player) > max) {
-                max = numberOfR(player);
-            }
-            else player.getPersonalSchool().setProfRInHall(false);
-        }
-
-        for (Player player : players) {
-            if(numberOfR(player) == max){
-                playerWithMax ++;
-                maxPlayer = player;
-            }
-        }
-        if (playerWithMax == 1){
-            maxPlayer.getPersonalSchool().setProfRInHall(true);
-        }
-    }
-
-    public void winProfY(ArrayList<Player> players) {
-        int max=0;
-        int playerWithMax = 0;
-        Player maxPlayer = null;
-
-        for (Player player : players) {
-            if (numberOfY(player) > max) {
-                max = numberOfY(player);
-            }
-            else player.getPersonalSchool().setProfYInHall(false);
-        }
-
-        for (Player player : players) {
-            if(numberOfY(player) == max){
-                playerWithMax ++;
-                maxPlayer = player;
-            }
-        }
-        if (playerWithMax == 1){
-            maxPlayer.getPersonalSchool().setProfYInHall(true);
-        }
-    }
-
-    public void winProfP(ArrayList<Player> players) {
-        int max=0;
-        int playerWithMax = 0;
-        Player maxPlayer = null;
-
-        for (Player player : players) {
-            if (numberOfP(player) > max) {
-                max = numberOfP(player);
-            }
-            else player.getPersonalSchool().setProfPInHall(false);
-        }
-
-        for (Player player : players) {
-            if(numberOfP(player) == max){
-                playerWithMax ++;
-                maxPlayer = player;
-            }
-        }
-        if (playerWithMax == 1){
-            maxPlayer.getPersonalSchool().setProfPInHall(true);
-        }
-    }
-
-    public void winProfB(ArrayList<Player> players) {
+    void winProf(ArrayList<Player> players, SColor color) {
         int max = 0;
         int playerWithMax = 0;
         Player maxPlayer = null;
 
-        for (Player player : players) {
-            if (numberOfB(player) > max) {
-                max = numberOfB(player);
-            } else player.getPersonalSchool().setProfBInHall(false);
+        switch (color){
+            case GREEN:
+                for (Player p : players) {
+                    if (numberOfStudents(p, SColor.GREEN) > max) {
+                        max = numberOfStudents(p, SColor.GREEN);
+                    } else p.getPersonalSchool().setProfGInHall(false);
+                }
+                for (Player p : players) {
+                    if (numberOfStudents(p, SColor.GREEN) == max) {
+                        playerWithMax++;
+                        maxPlayer = p;
+                    }
+                }
+                if (playerWithMax == 1) {
+                    maxPlayer.getPersonalSchool().setProfGInHall(true);
+                }
+
+            case RED:
+                for (Player p : players) {
+                    if (numberOfStudents(p, SColor.RED) > max) {
+                        max = numberOfStudents(p, SColor.RED);
+                    } else p.getPersonalSchool().setProfRInHall(false);
+                }
+                for (Player p : players) {
+                    if (numberOfStudents(p, SColor.RED) == max) {
+                        playerWithMax++;
+                        maxPlayer = p;
+                    }
+                }
+                if (playerWithMax == 1) {
+                    maxPlayer.getPersonalSchool().setProfRInHall(true);
+                }
+            case YELLOW:
+                for (Player p : players) {
+                    if (numberOfStudents(p, SColor.YELLOW) > max) {
+                        max = numberOfStudents(p, SColor.YELLOW);
+                    } else p.getPersonalSchool().setProfYInHall(false);
+                }
+                for (Player p : players) {
+                    if (numberOfStudents(p, SColor.YELLOW) == max) {
+                        playerWithMax++;
+                        maxPlayer = p;
+                    }
+                }
+                if (playerWithMax == 1) {
+                    maxPlayer.getPersonalSchool().setProfYInHall(true);
+                }
+            case PINK:
+                for (Player p : players) {
+                    if (numberOfStudents(p, SColor.PINK) > max) {
+                        max = numberOfStudents(p, SColor.PINK);
+                    } else p.getPersonalSchool().setProfPInHall(false);
+                }
+                for (Player p : players) {
+                    if (numberOfStudents(p, SColor.PINK) == max) {
+                        playerWithMax++;
+                        maxPlayer = p;
+                    }
+                }
+                if (playerWithMax == 1) {
+                    maxPlayer.getPersonalSchool().setProfPInHall(true);
+                }
+            case BLUE:
+                for (Player p : players) {
+                    if (numberOfStudents(p, SColor.BLUE) > max) {
+                        max = numberOfStudents(p, SColor.BLUE);
+                    } else p.getPersonalSchool().getProfInHall(p, color.BLUE).get(4).setInHall(false);
+                }
+                for (Player p : players) {
+                    if (numberOfStudents(p, SColor.BLUE) == max) {
+                        playerWithMax++;
+                        maxPlayer = p;
+                    }
+                }
+                if (playerWithMax == 1) {
+                    maxPlayer.getPersonalSchool().getProfOfPlayer().get(4).setInHall(true);
+                }
+        }
+    }
+
+    public boolean getProfInHall(Player player, SColor color){
+        switch(color){
+            case GREEN:
+                return profGInHall;
+            case RED:
+                return profRInHall;
+            case YELLOW:
+                return profYInHall;
+            case PINK:
+                return profPInHall;
+            case BLUE:
+                return profBInHall;
         }
 
-        for (Player player : players) {
-            if (numberOfB(player) == max) {
-                playerWithMax++;
-                maxPlayer = player;
-            }
-        }
-        if (playerWithMax == 1) {
-            maxPlayer.getPersonalSchool().setProfBInHall(true);
-        }
-    }
-
-    public boolean getProfGInHall(){
-        return profGInHall;
-    }
-
-    public boolean getProfRInHall(){
-        return profRInHall;
-    }
-
-    public boolean getProfYInHall(){
-        return profYInHall;
-    }
-
-    public boolean getProfPInHall(){
-        return profPInHall;
-    }
-
-    public boolean getProfBInHall(){
-        return profBInHall;
     }
 
     public boolean setProfGInHall(boolean profGInHall){
