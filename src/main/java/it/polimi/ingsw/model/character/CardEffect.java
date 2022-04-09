@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.character;
 
 import it.polimi.ingsw.controller.GameController;
+import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.table.Table;
@@ -25,21 +26,25 @@ public enum CardEffect {
 
 
     public void playMbriacone(Player player){
-
         player.setMbriaconePlayed(true);
-
     }
 
     public void playCiccioPanza(Player player) {
-        player.setMbriaconePlayed(true);
+        player.setCiccioPanzaPlayed(true);
+    }
 
+    public void playAlzabandiera(Player player, ArrayList<Player> listOfPlayers, IslandCard islandChosen){
+
+        ArrayList<Player> playersList= new ArrayList<>(listOfPlayers);
+
+        islandChosen.calculateInfluence(playersList, player);
+        islandChosen.buildTowerOnIsland(playersList);
+        islandChosen.changeTowerColour(playersList);
     }
 
     public void playCepostaperte(Player player){
 
-
-        player.setCepostaperte(true);
-
+        player.setCePostaPerTePlayed(true);
 
     }
 

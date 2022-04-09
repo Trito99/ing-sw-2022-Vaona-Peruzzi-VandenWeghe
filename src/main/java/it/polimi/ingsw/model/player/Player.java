@@ -32,6 +32,7 @@ public class Player {
     private boolean silvioPlayed;
     private boolean tauroPlayed;
     private boolean cePostaPerTePlayed;
+    private boolean alzabandieraPlayed;
 
     /**
      * Default constructor.
@@ -117,6 +118,14 @@ public class Player {
 
     public void setCePostaPerTePlayed(boolean cePostaPerTePlayed) {
         this.cePostaPerTePlayed = cePostaPerTePlayed;
+    }
+
+    public boolean isAlzabandieraPlayed() {
+        return alzabandieraPlayed;
+    }
+
+    public void setAlzabandieraPlayed(boolean alzabandierPlayed) {
+        this.alzabandieraPlayed = alzabandierPlayed;
     }
 
     public String getNickname() {

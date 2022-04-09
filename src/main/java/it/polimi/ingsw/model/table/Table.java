@@ -129,7 +129,7 @@ public class Table {
         }
     }
 
-    public void moveMotherEarth(int n) {
+    public void moveMotherEarth(int n) {  /** GUARDA GAMECONTROLLER */
         listOfIsland.get(posMotherEarth - 1).setMotherEarthOnIsland(false);
         if ((posMotherEarth + n) > listOfIsland.size()) {
             listOfIsland.get(posMotherEarth + n - listOfIsland.size() - 1).setMotherEarthOnIsland(true);

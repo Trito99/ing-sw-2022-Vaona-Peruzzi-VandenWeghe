@@ -107,6 +107,7 @@ public class Game {
         return false;
     }
 
-
-
+    public Table getTable() {
+        return table;
+    }
 }

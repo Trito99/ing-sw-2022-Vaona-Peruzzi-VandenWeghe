@@ -104,16 +104,28 @@ public class GameController {
     }
 
     public void playCard(CharacterCard character, Player player, Table table){
-        //notify observer con scelta del giocatore -> sceglie attraverso l'id
+        //notify observer con scelta del giocatore -> sceglie attraverso l'id o con Nome personaggio?
 
         if(character.getCoinOnCard()) {
-            decreaseCoinScore(player, character.getCostCharacter() + 1);
-            table.increaseCoinsOnTable(character.getCostCharacter() + 1);
+            if(player.getCoinScore() >= character.getCostCharacter() +1) {
+                decreaseCoinScore(player, character.getCostCharacter() + 1);
+                table.increaseCoinsOnTable(character.getCostCharacter() + 1);
+            }
+            else{
+                System.out.println("NON HAI ABBASTANZA MONETE! ");
+                /** Rifai scelta */
+            }
         }
         else{
-            decreaseCoinScore(player, character.getCostCharacter());
-            table.increaseCoinsOnTable(character.getCostCharacter());
-            character.setCoinOnCard(true);
+            if(player.getCoinScore() >= character.getCostCharacter()) {
+                decreaseCoinScore(player, character.getCostCharacter());
+                table.increaseCoinsOnTable(character.getCostCharacter());
+                character.setCoinOnCard(true);
+            }
+            else{
+                System.out.println("NON HAI ABBASTANZA MONETE! ");
+                /** Rifai scelta */
+            }
         }
 
         //selezione
@@ -128,6 +140,9 @@ public class GameController {
                 character.getCardEffect().playCiccioPanza(player);
 
             case ALZABANDIERA:   /** 3 */
+                //notify (observer)----> islandChosen
+                character.getCardEffect().playAlzabandiera(player, gameSession.getListOfPlayer(), islandChosen);
+                gameSession.getTable().joinIsland(islandChosen, gameSession.getTable().getListOfIsland());
                 break;
             case CEPOSTAPERTE:   /** 4 */
                 character.getCardEffect().playCepostaperte(player);
@@ -181,6 +196,9 @@ public class GameController {
                 table.getListOfIsland().get(table.getPosMotherEarth() + n + 2 - 1).setMotherEarthOnIsland(true);
                 table.setPosMotherEarth(table.getPosMotherEarth() + n + 2);
             }
+        }
+        else{
+            System.out.println("Scelta non valida!!");
         }
     }
 
