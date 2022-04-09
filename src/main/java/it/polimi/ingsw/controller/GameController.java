@@ -103,38 +103,37 @@ public class GameController {
         player.setCoinScore(player.getCoinScore() - decreaseValue);
     }
 
-    public void playCard(CharacterCard character, Player player, GameController gc, Table table, CharacterCard card){
+    public void playCard(CharacterCard character, Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
         //notify observer con scelta del giocatore -> sceglie attraverso l'id
 
         //selezione
         switch(character.getCardEffect()){
             /** 1 */
-            case EFFECTONE:
-
+            case MBRIACONE:
 
             /** 2 */
             case CICCIOPANZA:
-                character.getCardEffect().playCiccioPanza(player, gc, table, card, ArrayList<Player> players);     //controllare il gc
+                character.getCardEffect().playCiccioPanza(player, gc, table, card, players);     //controllare il gc
 
-            case EFFECTTHREE:   /** 3 */
+            case ALZABANDIERA:   /** 3 */
                 break;
-            case EFFECTFOUR:   /** 4 */
+            case CEPOSTAPERTE:   /** 4 */
                 break;
-            case EFFECTFIVE:   /** 5 */
+            case SCIURA:   /** 5 */
                 break;
-            case EFFECTSIX:   /** 6 */
+            case TAURO:   /** 6 */
                 break;
-            case EFFECTSEVEN:   /** 7 */
+            case JOKER:   /** 7 */
                 break;
-            case EFFECTEIGHT:   /** 8 */
+            case SILVIO:   /** 8 */
                 break;
-            case EFFECTNINE:   /** 9 */
+            case FUNGAIOLO:   /** 9 */
                 break;
-            case EFFECTTEN:   /** 10 */
+            case MENESTRELLO:   /** 10 */
                 break;
-            case EFFECTELEVEN:   /** 11 */
+            case DAMA:   /** 11 */
                 break;
-            case EFFECTTWELVE:   /** 12 */
+            case TOSSICO:   /** 12 */
                 break;
         }
 
