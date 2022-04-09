@@ -62,56 +62,62 @@ public class IslandCard {
         Player playerWithInfluence = null;
 
 
-        for(Player players : listOfPlayers){
+        for(Player p : listOfPlayers){
             int countTot = 0;
 
             for(i=0; i<studentOnIsland.size(); i++){
                 switch (studentOnIsland.get(i).getsColour()){   /** guardo colore studente */
                     case GREEN:
-                        if(players.getPersonalSchool().getProfInHall(SColor.GREEN)){ /** se ho il prof verde e stud è verde incremento influenza */
+                        if(p.getPersonalSchool().getProfInHall(SColor.GREEN)){ /** se ho il prof verde e stud è verde incremento influenza */
                             countTot++;
                         }
                         break;
                     case RED:
-                        if(players.getPersonalSchool().getProfInHall(SColor.RED)){
+                        if(p.getPersonalSchool().getProfInHall(SColor.RED)){
                             countTot++;
                         }
                         break;
                     case YELLOW:
-                        if(players.getPersonalSchool().getProfInHall(SColor.YELLOW)){
+                        if(p.getPersonalSchool().getProfInHall(SColor.YELLOW)){
                             countTot++;
                         }
                         break;
                     case PINK:
-                        if(players.getPersonalSchool().getProfInHall(SColor.PINK)){
+                        if(p.getPersonalSchool().getProfInHall(SColor.PINK)){
                             countTot++;
                         }
                         break;
                     case BLUE:
-                        if(players.getPersonalSchool().getProfInHall(SColor.BLUE)){
+                        if(p.getPersonalSchool().getProfInHall(SColor.BLUE)){
                             countTot++;
                         }
                         break;
                 }
+                /** EFFETTO TAURO */
+                if(p.getTColour().equals(towerOnIsland.getTColour()) && !playerTurn.isTauroPlayed() && playerTurn == p){  /** Aggiungo influenza torri */
+                    countTot++;
+                }
+
                 /** EFFETTO SILVIO */
-                if(playerTurn==players && playerTurn.isSilvioPlayed()) {
-                    players.setInfluenceOnIsland(countTot + 2);
+                if(playerTurn==p && playerTurn.isSilvioPlayed()) {
+                    p.setInfluenceOnIsland(countTot + 2);
                     playerTurn.setSilvioPlayed(false);      /** controlla  se va bene qua */
                 }
                 else
-                    players.setInfluenceOnIsland(countTot);
+                    p.setInfluenceOnIsland(countTot);
+            }
+        }
+        playerTurn.setTauroPlayed(false);       /**controlla  se va bene qua */
+
+        for(Player p : listOfPlayers) {
+            if (p.getInfluenceOnIsland() > maxInfluence){
+                maxInfluence = p.getInfluenceOnIsland();
             }
         }
 
-        for(Player players : listOfPlayers) {
-            if (players.getInfluenceOnIsland() > maxInfluence){
-                maxInfluence = players.getInfluenceOnIsland();
-            }
-        }
-
-        for(Player players : listOfPlayers) {
-            if (players.getInfluenceOnIsland() == maxInfluence){
-                playerWithInfluence = players;
+        for(Player p : listOfPlayers) {
+            if (p.getInfluenceOnIsland() == maxInfluence){
+                playerWithInfluence = p;
             }
         }
 

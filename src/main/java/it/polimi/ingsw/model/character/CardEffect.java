@@ -35,10 +35,10 @@ public enum CardEffect {
 
     }
 
-    public void playCepostaperte(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
+    public void playCepostaperte(Player player){
 
 
-        //card.setCepostaperte(true);
+        player.setCepostaperte(true);
 
 
     }
@@ -52,9 +52,9 @@ public enum CardEffect {
 
     }
 
-    public void playTauro(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
+    public void playTauro(Player player){
 
-        //card.setTauro(true);
+        player.setTauroPlayed(true);
 
         /** effetto */
 

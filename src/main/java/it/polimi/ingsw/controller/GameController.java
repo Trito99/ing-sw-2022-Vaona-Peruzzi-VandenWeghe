@@ -130,14 +130,17 @@ public class GameController {
             case ALZABANDIERA:   /** 3 */
                 break;
             case CEPOSTAPERTE:   /** 4 */
+                character.getCardEffect().playCepostaperte(player);
                 break;
             case SCIURA:   /** 5 */
                 break;
             case TAURO:   /** 6 */
+                character.getCardEffect().playTauro(player);
                 break;
             case JOKER:   /** 7 */
                 break;
             case SILVIO:   /** 8 */
+                character.getCardEffect().playSilvio(player);
                 break;
             case FUNGAIOLO:   /** 9 */
                 break;
@@ -153,18 +156,32 @@ public class GameController {
 
     }
 
-    public void moveMotherEarth(IslandCard islandCard, Table table, MotherEarth motherEarth) {    //Le scelte brooo,
-        int position = motherEarth.getPosition();
-        //notify Observer che mi dice la scelta del giocatore
-        position = position + playerChoice;
-        if(islandCard.towerIsOnIsland()) {
-            islandCard.changeTowerColour(game.getListOfPlayer());
-        }
-        else {
-            islandCard.buildTowerOnIsland(game.getListOfPlayer());
-        }
-        table.joinIsland();
+    public void moveMotherEarth(int n, Table table, Player player) { /** DA TOGLIERE IN TABLE??? */
+        table.getListOfIsland().get(table.getPosMotherEarth() - 1).setMotherEarthOnIsland(false);
+        //notify(observer)
 
+        if (playerchoice() <= player.getTrash().getStepMotherEarth() && !player.isCePostaPerTePlayed()) {
+
+            if ((table.getPosMotherEarth() + n) > table.getListOfIsland().size()) {
+                table.getListOfIsland().get(table.getPosMotherEarth() + n - table.getListOfIsland().size() - 1).setMotherEarthOnIsland(true);
+                table.setPosMotherEarth(table.getPosMotherEarth() + n - table.getListOfIsland().size());
+            }
+            else {
+                table.getListOfIsland().get(table.getPosMotherEarth() + n - 1).setMotherEarthOnIsland(true);
+                table.setPosMotherEarth(table.getPosMotherEarth() + n);
+            }
+        }
+        /** EFFETTO CEPOSTAPERTE */
+        else if(playerChoice() <= player.getTrash().getStepMotherEarth()+2 && player.isCePostaPerTePlayed()){
+            if ((table.getPosMotherEarth() + n + 2) > table.getListOfIsland().size()) {
+                table.getListOfIsland().get(table.getPosMotherEarth() + n + 2 - table.getListOfIsland().size() - 1).setMotherEarthOnIsland(true);
+                table.setPosMotherEarth(table.getPosMotherEarth() + n + 2 - table.getListOfIsland().size());
+            }
+            else {
+                table.getListOfIsland().get(table.getPosMotherEarth() + n + 2 - 1).setMotherEarthOnIsland(true);
+                table.setPosMotherEarth(table.getPosMotherEarth() + n + 2);
+            }
+        }
     }
 
     /**

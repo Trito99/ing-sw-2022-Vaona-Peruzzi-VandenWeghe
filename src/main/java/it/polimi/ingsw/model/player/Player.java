@@ -30,6 +30,8 @@ public class Player {
     private boolean mbriaconePlayed;
     private boolean ciccioPanzaPlayed;
     private boolean silvioPlayed;
+    private boolean tauroPlayed;
+    private boolean cePostaPerTePlayed;
 
     /**
      * Default constructor.
@@ -99,6 +101,22 @@ public class Player {
 
     public void setCiccioPanzaPlayed(boolean ciccioPanzaPlayed) {
         this.ciccioPanzaPlayed = ciccioPanzaPlayed;
+    }
+
+    public boolean isTauroPlayed() {
+        return tauroPlayed;
+    }
+
+    public void setTauroPlayed(boolean tauroPlayed) {
+        this.tauroPlayed = tauroPlayed;
+    }
+
+    public boolean isCePostaPerTePlayed() {
+        return cePostaPerTePlayed;
+    }
+
+    public void setCePostaPerTePlayed(boolean cePostaPerTePlayed) {
+        this.cePostaPerTePlayed = cePostaPerTePlayed;
     }
 
     public String getNickname() {
