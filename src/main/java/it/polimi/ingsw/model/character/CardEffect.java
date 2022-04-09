@@ -70,13 +70,9 @@ public enum CardEffect {
 
     }
 
-    public void playSilvio(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
+    public void playSilvio(Player player){
 
-
-
-        //card.setSilvio(true);
-
-        /** effetto */
+        player.setSilvioPlayed(true);
 
     }
 

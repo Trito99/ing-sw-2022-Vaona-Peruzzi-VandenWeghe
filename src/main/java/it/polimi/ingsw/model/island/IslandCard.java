@@ -56,7 +56,7 @@ public class IslandCard {
     }
 
 
-    public Player calculateInfluence(ArrayList<Player> listOfPlayers, Player player){   //Restituisce il Player che ha influenza sull'isola
+    public Player calculateInfluence(ArrayList<Player> listOfPlayers, Player playerTurn){   //Restituisce il Player che ha influenza sull'isola
         int i ;
         int maxInfluence = 0;
         Player playerWithInfluence = null;
@@ -66,9 +66,9 @@ public class IslandCard {
             int countTot = 0;
 
             for(i=0; i<studentOnIsland.size(); i++){
-                switch (studentOnIsland.get(i).getsColour()){
+                switch (studentOnIsland.get(i).getsColour()){   /** guardo colore studente */
                     case GREEN:
-                        if(players.getPersonalSchool().getProfInHall(SColor.GREEN)){
+                        if(players.getPersonalSchool().getProfInHall(SColor.GREEN)){ /** se ho il prof verde e stud è verde incremento influenza */
                             countTot++;
                         }
                         break;
@@ -93,7 +93,13 @@ public class IslandCard {
                         }
                         break;
                 }
-                players.setInfluenceOnIsland(countTot);
+                /** EFFETTO SILVIO */
+                if(playerTurn==players && playerTurn.isSilvioPlayed()) {
+                    players.setInfluenceOnIsland(countTot + 2);
+                    playerTurn.setSilvioPlayed(false);      /** controlla  se va bene qua */
+                }
+                else
+                    players.setInfluenceOnIsland(countTot);
             }
         }
 

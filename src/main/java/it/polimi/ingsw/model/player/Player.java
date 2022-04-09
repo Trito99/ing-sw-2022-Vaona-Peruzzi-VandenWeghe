@@ -20,7 +20,7 @@ public class Player {
     private int age;               // CONTROLLARE LIBRERIA DATA
     private final PlayerNumber playerNumber;
     private TurnState turnState;
-    private final School personalSchool;
+    private School personalSchool;
     private DeckAssistant deckOfPlayer;
     private AssistantCard trash;          //= Ultima carta nella pila degli scarti
     private final Team team;
@@ -29,6 +29,7 @@ public class Player {
     private int influenceOnIsland;
     private boolean mbriaconePlayed;
     private boolean ciccioPanzaPlayed;
+    private boolean silvioPlayed;
 
     /**
      * Default constructor.
@@ -82,6 +83,14 @@ public class Player {
 
     public void setMbriaconePlayed(boolean mbriaconePlayed) {
         this.mbriaconePlayed = mbriaconePlayed;
+    }
+
+    public boolean isSilvioPlayed() {
+        return silvioPlayed;
+    }
+
+    public void setSilvioPlayed(boolean silvioPlayed) {
+        this.silvioPlayed = silvioPlayed;
     }
 
     public boolean isCiccioPanzaPlayed() {
