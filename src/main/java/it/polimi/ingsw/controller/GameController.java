@@ -158,6 +158,8 @@ public class GameController {
                 character.getCardEffect().playSilvio(player);
                 break;
             case FUNGAIOLO:   /** 9 */
+                //notify (observer)----> colorChosen
+                character.getCardEffect().playFungaiolo(player, colorChosen);
                 break;
             case MENESTRELLO:   /** 10 */
                 break;

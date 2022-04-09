@@ -5,5 +5,21 @@ public enum SColor {
     RED,
     YELLOW,
     PINK,
-    BLUE
+    BLUE;
+
+    public boolean isColorBlocked;
+
+    public boolean isColorBlocked() {
+        return isColorBlocked;
+    }
+
+    public void lockColor() {
+        isColorBlocked = true;
+    }
+
+    public void unlockColor(){
+        isColorBlocked = false;
+
+    }
+
 }

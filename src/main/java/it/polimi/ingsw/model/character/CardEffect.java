@@ -81,9 +81,9 @@ public enum CardEffect {
 
     }
 
-    public void playFungaiolo(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
+    public void playFungaiolo(Player player, SColor colorChosen){
 
-        //card.setFungaiolo(true);
+        colorChosen.lockColor();
 
         /** effetto */
 

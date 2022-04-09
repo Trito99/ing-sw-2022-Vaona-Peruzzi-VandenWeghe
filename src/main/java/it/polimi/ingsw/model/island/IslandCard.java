@@ -68,27 +68,27 @@ public class IslandCard {
             for(i=0; i<studentOnIsland.size(); i++){
                 switch (studentOnIsland.get(i).getsColour()){   /** guardo colore studente */
                     case GREEN:
-                        if(p.getPersonalSchool().getProfInHall(SColor.GREEN)){ /** se ho il prof verde e stud è verde incremento influenza */
+                        if(p.getPersonalSchool().getProfInHall(SColor.GREEN) && !SColor.GREEN.isColorBlocked()){ /** se ho il prof verde e stud è verde incremento influenza */
                             countTot++;
                         }
                         break;
                     case RED:
-                        if(p.getPersonalSchool().getProfInHall(SColor.RED)){
+                        if(p.getPersonalSchool().getProfInHall(SColor.RED) && !SColor.RED.isColorBlocked()){
                             countTot++;
                         }
                         break;
                     case YELLOW:
-                        if(p.getPersonalSchool().getProfInHall(SColor.YELLOW)){
+                        if(p.getPersonalSchool().getProfInHall(SColor.YELLOW) && !SColor.YELLOW.isColorBlocked()){
                             countTot++;
                         }
                         break;
                     case PINK:
-                        if(p.getPersonalSchool().getProfInHall(SColor.PINK)){
+                        if(p.getPersonalSchool().getProfInHall(SColor.PINK) && !SColor.PINK.isColorBlocked()){
                             countTot++;
                         }
                         break;
                     case BLUE:
-                        if(p.getPersonalSchool().getProfInHall(SColor.BLUE)){
+                        if(p.getPersonalSchool().getProfInHall(SColor.BLUE) && !SColor.BLUE.isColorBlocked()){
                             countTot++;
                         }
                         break;
@@ -106,8 +106,21 @@ public class IslandCard {
                 else
                     p.setInfluenceOnIsland(countTot);
             }
+           if(playerTurn == p){
+               playerTurn.setTauroPlayed(false);           /** controlla se va bene qua (Tauro) */
+
+               for(SColor c : SColor.values()){            /** controlla se va bene qua (Fungaiolo) */
+                   if(c.isColorBlocked)
+                       c.unlockColor();
+               }
+           }
+
         }
-        playerTurn.setTauroPlayed(false);       /**controlla  se va bene qua */
+
+        for(SColor c : SColor.values()){    /** controlla se va bene qua (Fungaiolo) */
+            if(c.isColorBlocked)
+                c.unlockColor();
+        }
 
         for(Player p : listOfPlayers) {
             if (p.getInfluenceOnIsland() > maxInfluence){
