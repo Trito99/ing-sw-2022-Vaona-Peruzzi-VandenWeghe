@@ -6,7 +6,6 @@ public class CharacterCard {
     private int costCharacter;
     private final CardEffect cardEffect;
     private boolean coinOnCard;
-    private boolean neverUsed;      //se è stato già usato un personaggio, aumenta il costo
     private boolean playedMbriacone;
     private boolean playedCiccioPanza;
     private boolean playedAlzabandiera;
@@ -16,7 +15,7 @@ public class CharacterCard {
         this.costCharacter = costCharacter;
         this.cardEffect = cardEffect;
         this.coinOnCard = false;
-        this.neverUsed = true;
+
 
         this.playedCiccioPanza = false;
 
@@ -24,14 +23,6 @@ public class CharacterCard {
 
     public int getIdCharacter() {
         return idCharacter;
-    }
-
-    public boolean isNeverUsed() {
-        return neverUsed;
-    }
-
-    public void setNeverUsed(boolean neverUsed) {
-        this.neverUsed = neverUsed;
     }
 
     public int getCostCharacter() {
@@ -52,14 +43,6 @@ public class CharacterCard {
 
     public void setCoinOnCard(boolean coinOnCard) {
         this.coinOnCard = coinOnCard;
-    }
-
-    public void increaseCostCharacter(CharacterCard characterCard){
-        characterCard.setCostCharacter(getCostCharacter() + 1);
-    }
-
-    public void setPlayedCiccioPanza(boolean playedCiccioPanza) {
-        this.playedCiccioPanza = playedCiccioPanza;
     }
 
 

@@ -22,101 +22,29 @@ public enum CardEffect {
     TOSSICO;
 
 
-    public void playMbriacone(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
-        /** gestisce costo carta */
-        if (card.isNeverUsed()) {
-            gc.decreaseCoinScore(player, 1);
-            table.increaseCoinsOnTable(1);
-            card.setNeverUsed(false);
-        } else {
-            gc.decreaseCoinScore(player, 2);
-            table.increaseCoinsOnTable(2);
-        }
 
-        //card.setMbriacone(true);
 
-        /** effetto */
+    public void playMbriacone(Player player){
+
+        player.setMbriaconePlayed(true);
 
     }
 
-    public void playCiccioPanza(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players) {
-        /** gestisce costo carta */
-        if (card.isNeverUsed()) {
-            gc.decreaseCoinScore(player, 2);
-            table.increaseCoinsOnTable(2);
-            card.setNeverUsed(false);
-        } else {
-            gc.decreaseCoinScore(player, 3);
-            table.increaseCoinsOnTable(3);
-        }
-
-        card.setPlayedCiccioPanza(true);
-
-        // prendi il controllo dei prof se hai lo stesso numero di studenti nella scuola
-        int max = 0;
-        int playerWithMax = 0;
-        Player maxPlayer = null;
-
-        for (Player player : players) {
-            if (player.getPersonalSchool().numberOfStudents(player, SColor.GREEN) > max) {
-                max = player.getPersonalSchool().numberOfStudents(player, SColor.GREEN);
-            } else player.getPersonalSchool().getProfOfPlayer().get(0).setInHall(false);
-        }
-        for (Player player : players) {
-            if (player.getPersonalSchool().numberOfStudents(player, SColor.GREEN) == max) {
-                playerWithMax++;
-                maxPlayer = player;
-            }
-        }
-        if (playerWithMax == 2) {
-            maxPlayer.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true);
-        }
-    }
-
-    public void playAlzabandiera(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
-        /** gestisce costo carta */
-        if (card.isNeverUsed()) {
-            gc.decreaseCoinScore(player, 3);
-            table.increaseCoinsOnTable(3);
-            card.setNeverUsed(false);
-        } else {
-            gc.decreaseCoinScore(player, 4);
-            table.increaseCoinsOnTable(4);
-        }
-
-        //card.setAlzabandiera(true);
-
-        /** effetto */
+    public void playCiccioPanza(Player player) {
+        player.setMbriaconePlayed(true);
 
     }
 
     public void playCepostaperte(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
-        /** gestisce costo carta */
-        if (card.isNeverUsed()) {
-            gc.decreaseCoinScore(player, 1);
-            table.increaseCoinsOnTable(1);
-            card.setNeverUsed(false);
-        } else {
-            gc.decreaseCoinScore(player, 2);
-            table.increaseCoinsOnTable(2);
-        }
+
 
         //card.setCepostaperte(true);
 
-        /** effetto */
 
     }
 
     public void playSciura(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
-        /** gestisce costo carta */
-        if (card.isNeverUsed()) {
-            gc.decreaseCoinScore(player, 2);
-            table.increaseCoinsOnTable(2);
-            card.setNeverUsed(false);
-        } else {
-            gc.decreaseCoinScore(player, 3);
-            table.increaseCoinsOnTable(3);
-        }
+
 
         //card.setSciura(true);
 
@@ -125,15 +53,6 @@ public enum CardEffect {
     }
 
     public void playTauro(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
-        /** gestisce costo carta */
-        if (card.isNeverUsed()) {
-            gc.decreaseCoinScore(player, 3);
-            table.increaseCoinsOnTable(3);
-            card.setNeverUsed(false);
-        } else {
-            gc.decreaseCoinScore(player, 4);
-            table.increaseCoinsOnTable(4);
-        }
 
         //card.setTauro(true);
 
@@ -142,15 +61,8 @@ public enum CardEffect {
     }
 
     public void playJoker(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
-        /** gestisce costo carta */
-        if (card.isNeverUsed()) {
-            gc.decreaseCoinScore(player, 1);
-            table.increaseCoinsOnTable(1);
-            card.setNeverUsed(false);
-        } else {
-            gc.decreaseCoinScore(player, 2);
-            table.increaseCoinsOnTable(2);
-        }
+
+
 
         //card.setJoker(true);
 
@@ -159,15 +71,8 @@ public enum CardEffect {
     }
 
     public void playSilvio(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
-        /** gestisce costo carta */
-        if (card.isNeverUsed()) {
-            gc.decreaseCoinScore(player, 2);
-            table.increaseCoinsOnTable(2);
-            card.setNeverUsed(false);
-        } else {
-            gc.decreaseCoinScore(player, 3);
-            table.increaseCoinsOnTable(3);
-        }
+
+
 
         //card.setSilvio(true);
 
@@ -176,15 +81,6 @@ public enum CardEffect {
     }
 
     public void playFungaiolo(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
-        /** gestisce costo carta */
-        if (card.isNeverUsed()) {
-            gc.decreaseCoinScore(player, 3);
-            table.increaseCoinsOnTable(3);
-            card.setNeverUsed(false);
-        } else {
-            gc.decreaseCoinScore(player, 4);
-            table.increaseCoinsOnTable(4);
-        }
 
         //card.setFungaiolo(true);
 
@@ -193,15 +89,6 @@ public enum CardEffect {
     }
 
     public void playMenestrello(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
-        /** gestisce costo carta */
-        if (card.isNeverUsed()) {
-            gc.decreaseCoinScore(player, 1);
-            table.increaseCoinsOnTable(1);
-            card.setNeverUsed(false);
-        } else {
-            gc.decreaseCoinScore(player, 2);
-            table.increaseCoinsOnTable(2);
-        }
 
         //card.setMenestrello(true);
 
@@ -210,15 +97,7 @@ public enum CardEffect {
     }
 
     public void playDama(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
-        /** gestisce costo carta */
-        if (card.isNeverUsed()) {
-            gc.decreaseCoinScore(player, 2);
-            table.increaseCoinsOnTable(2);
-            card.setNeverUsed(false);
-        } else {
-            gc.decreaseCoinScore(player, 3);
-            table.increaseCoinsOnTable(3);
-        }
+
 
         //card.setDama(true);
 
@@ -227,15 +106,7 @@ public enum CardEffect {
     }
 
     public void playTossico(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
-        /** gestisce costo carta */
-        if (card.isNeverUsed()) {
-            gc.decreaseCoinScore(player, 3);
-            table.increaseCoinsOnTable(3);
-            card.setNeverUsed(false);
-        } else {
-            gc.decreaseCoinScore(player, 4);
-            table.increaseCoinsOnTable(4);
-        }
+
 
         //card.setTossico(true);
 

@@ -68,27 +68,27 @@ public class IslandCard {
             for(i=0; i<studentOnIsland.size(); i++){
                 switch (studentOnIsland.get(i).getsColour()){
                     case GREEN:
-                        if(players.getPersonalSchool().getProfInHall(player, SColor.GREEN)){
+                        if(players.getPersonalSchool().getProfInHall(SColor.GREEN)){
                             countTot++;
                         }
                         break;
                     case RED:
-                        if(players.getPersonalSchool().getProfInHall(player, SColor.RED)){
+                        if(players.getPersonalSchool().getProfInHall(SColor.RED)){
                             countTot++;
                         }
                         break;
                     case YELLOW:
-                        if(players.getPersonalSchool().getProfInHall(player, SColor.YELLOW)){
+                        if(players.getPersonalSchool().getProfInHall(SColor.YELLOW)){
                             countTot++;
                         }
                         break;
                     case PINK:
-                        if(players.getPersonalSchool().getProfInHall(player, SColor.PINK)){
+                        if(players.getPersonalSchool().getProfInHall(SColor.PINK)){
                             countTot++;
                         }
                         break;
                     case BLUE:
-                        if(players.getPersonalSchool().getProfInHall(player, SColor.BLUE)){
+                        if(players.getPersonalSchool().getProfInHall(SColor.BLUE)){
                             countTot++;
                         }
                         break;

@@ -103,17 +103,29 @@ public class GameController {
         player.setCoinScore(player.getCoinScore() - decreaseValue);
     }
 
-    public void playCard(CharacterCard character, Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
+    public void playCard(CharacterCard character, Player player, Table table){
         //notify observer con scelta del giocatore -> sceglie attraverso l'id
+
+        if(character.getCoinOnCard()) {
+            decreaseCoinScore(player, character.getCostCharacter() + 1);
+            table.increaseCoinsOnTable(character.getCostCharacter() + 1);
+        }
+        else{
+            decreaseCoinScore(player, character.getCostCharacter());
+            table.increaseCoinsOnTable(character.getCostCharacter());
+            character.setCoinOnCard(true);
+        }
 
         //selezione
         switch(character.getCardEffect()){
             /** 1 */
             case MBRIACONE:
+                character.getCardEffect().playMbriacone(player);
+               /** player.setMbriaconePlayed(true); o questo???*/
 
             /** 2 */
             case CICCIOPANZA:
-                character.getCardEffect().playCiccioPanza(player, gc, table, card, players);     //controllare il gc
+                character.getCardEffect().playCiccioPanza(player);
 
             case ALZABANDIERA:   /** 3 */
                 break;

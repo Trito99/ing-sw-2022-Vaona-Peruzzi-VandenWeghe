@@ -27,6 +27,8 @@ public class Player {
     private int coinScore;
     private TColor tColor;
     private int influenceOnIsland;
+    private boolean mbriaconePlayed;
+    private boolean ciccioPanzaPlayed;
 
     /**
      * Default constructor.
@@ -74,6 +76,21 @@ public class Player {
     }
 
 
+    public boolean isMbriaconePlayed() {
+        return mbriaconePlayed;
+    }
+
+    public void setMbriaconePlayed(boolean mbriaconePlayed) {
+        this.mbriaconePlayed = mbriaconePlayed;
+    }
+
+    public boolean isCiccioPanzaPlayed() {
+        return ciccioPanzaPlayed;
+    }
+
+    public void setCiccioPanzaPlayed(boolean ciccioPanzaPlayed) {
+        this.ciccioPanzaPlayed = ciccioPanzaPlayed;
+    }
 
     public String getNickname() {
         return this.nickname;

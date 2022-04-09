@@ -125,29 +125,30 @@ public class School {
         return 0;
     }
 
-    void winProf(ArrayList<Player> players, SColor color) {
+    void winProf(ArrayList<Player> players, Player playerTurn, SColor color) {
         int max = 0;
         int playerWithMax = 0;
         Player maxPlayer = null;
 
         switch (color){
             case GREEN:
-                for (Player p : players) {
+                for (Player p : players) {                         /** In questo for trovo max numero di verdi generale*/
                     if (numberOfStudents(p, SColor.GREEN) > max) {
                         max = numberOfStudents(p, SColor.GREEN);
-                    } else p.getPersonalSchool().getProfOfPlayer().get(0).setInHall(false);
+                    } else p.getPersonalSchool().getProfOfPlayer().get(0).setInHall(false); //Perchè in else?
                 }
-                for (Player p : players) {
+                for (Player p : players) {                          /**In questo for conto i giocatori che hanno il max numero di verdi*/
                     if (numberOfStudents(p, SColor.GREEN) == max) {
                         playerWithMax++;
-                        maxPlayer = p;
+                        maxPlayer = p;      /**Se è solo uno lo salvo in maxPlayer*/
                     }
                 }
-                if (playerWithMax == 1) {
+                if (playerWithMax == 1) {   /**Setto a true il prof verde del maxplayer */
                     maxPlayer.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true);
                 }
-                else if(playerWithMax == 2){
-
+                else if(playerWithMax > 1 && playerTurn.isCiccioPanzaPlayed()){ /**Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di CiccioPanza*/
+                        playerTurn.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true);
+                        playerTurn.setCiccioPanzaPlayed(false); /** ??? (andrebbe messo a false a fine turno)*/
                 }
 
             case RED:
@@ -213,7 +214,7 @@ public class School {
         }
     }
 
-    public boolean getProfInHall(Player player, SColor color){
+    public boolean getProfInHall(SColor color){
         switch(color){
             case GREEN:
                 return profGInHall;
@@ -226,7 +227,7 @@ public class School {
             case BLUE:
                 return profBInHall;
         }
-        return getProfInHall(player, color);        //da modificare con un return valido
+        return false;        //da modificare con un return valido
     }
 
     public ArrayList<Tower> getTower() {
