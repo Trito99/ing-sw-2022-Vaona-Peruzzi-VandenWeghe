@@ -43,9 +43,7 @@ public enum CardEffect {
     }
 
     public void playCepostaperte(Player player){
-
         player.setCePostaPerTePlayed(true);
-
     }
 
     public void playSciura(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
@@ -58,11 +56,7 @@ public enum CardEffect {
     }
 
     public void playTauro(Player player){
-
         player.setTauroPlayed(true);
-
-        /** effetto */
-
     }
 
     public void playJoker(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
@@ -76,25 +70,11 @@ public enum CardEffect {
     }
 
     public void playSilvio(Player player){
-
         player.setSilvioPlayed(true);
-
     }
 
     public void playFungaiolo(Player player, SColor colorChosen){
-
         colorChosen.lockColor();
-
-        /** effetto */
-
-    }
-
-    public void playMenestrello(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
-
-        //card.setMenestrello(true);
-
-        /** effetto */
-
     }
 
     public void playDama(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){

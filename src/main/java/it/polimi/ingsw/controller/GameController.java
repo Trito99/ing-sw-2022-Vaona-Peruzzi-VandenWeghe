@@ -12,9 +12,12 @@ import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.TColor;
+import it.polimi.ingsw.model.student.SColor;
+import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.view.View;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -162,6 +165,95 @@ public class GameController {
                 character.getCardEffect().playFungaiolo(player, colorChosen);
                 break;
             case MENESTRELLO:   /** 10 */
+               Student firstChoiceEntry = null;
+                Student secondChoiceEntry = null;
+                //notify (observer)---->scelta 2 studenti
+                    if(firstChoiceEntry.getsColour().equals(SColor.GREEN)){
+                        gameSession.getActivePlayer().getPersonalSchool().getGTable().add(firstChoiceEntry);
+                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(firstChoiceEntry);
+                    }
+                    else if(firstChoiceEntry.getsColour().equals(SColor.RED)){
+                        gameSession.getActivePlayer().getPersonalSchool().getRTable().add(firstChoiceEntry);
+                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(firstChoiceEntry);
+                    }
+                    else if(firstChoiceEntry.getsColour().equals(SColor.YELLOW)){
+                        gameSession.getActivePlayer().getPersonalSchool().getYTable().add(firstChoiceEntry);
+                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(firstChoiceEntry);
+                    }
+                    else if(firstChoiceEntry.getsColour().equals(SColor.PINK)){
+                        gameSession.getActivePlayer().getPersonalSchool().getPTable().add(firstChoiceEntry);
+                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(firstChoiceEntry);
+                    }
+                    else if(firstChoiceEntry.getsColour().equals(SColor.BLUE)){
+                        gameSession.getActivePlayer().getPersonalSchool().getBTable().add(firstChoiceEntry);
+                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(firstChoiceEntry);
+                     }
+
+                    else if(secondChoiceEntry.getsColour().equals(SColor.GREEN)){
+                        gameSession.getActivePlayer().getPersonalSchool().getGTable().add(secondChoiceEntry);
+                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(secondChoiceEntry);
+                    }
+                    else if(secondChoiceEntry.getsColour().equals(SColor.RED)){
+                        gameSession.getActivePlayer().getPersonalSchool().getRTable().add(secondChoiceEntry);
+                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(secondChoiceEntry);
+                    }
+                    else if(secondChoiceEntry.getsColour().equals(SColor.YELLOW)){
+                        gameSession.getActivePlayer().getPersonalSchool().getYTable().add(secondChoiceEntry);
+                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(secondChoiceEntry);
+                    }
+                    else if(secondChoiceEntry.getsColour().equals(SColor.PINK)){
+                        gameSession.getActivePlayer().getPersonalSchool().getPTable().add(secondChoiceEntry);
+                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(secondChoiceEntry);
+                    }
+                    else if(secondChoiceEntry.getsColour().equals(SColor.BLUE)){
+                        gameSession.getActivePlayer().getPersonalSchool().getBTable().add(secondChoiceEntry);
+                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(secondChoiceEntry);
+                    }
+
+               Student firstChoiceRemove = null;
+               Student secondChoiceRemove = null;
+               //notify (observer)---->scelta 2 studenti
+                if(firstChoiceRemove.getsColour().equals(SColor.GREEN)){
+                    gameSession.getActivePlayer().getPersonalSchool().getGTable().remove(firstChoiceRemove);
+                    gameSession.getActivePlayer().getPersonalSchool().getEntry().add(firstChoiceRemove);
+                }
+                else if(firstChoiceRemove.getsColour().equals(SColor.RED)){
+                    gameSession.getActivePlayer().getPersonalSchool().getRTable().remove(firstChoiceRemove);
+                    gameSession.getActivePlayer().getPersonalSchool().getEntry().add(firstChoiceRemove);
+                }
+                else if(firstChoiceRemove.getsColour().equals(SColor.YELLOW)){
+                    gameSession.getActivePlayer().getPersonalSchool().getYTable().remove(firstChoiceRemove);
+                    gameSession.getActivePlayer().getPersonalSchool().getEntry().add(firstChoiceRemove);
+                }
+                else if(firstChoiceRemove.getsColour().equals(SColor.PINK)){
+                    gameSession.getActivePlayer().getPersonalSchool().getPTable().remove(firstChoiceRemove);
+                    gameSession.getActivePlayer().getPersonalSchool().getEntry().add(firstChoiceRemove);
+                }
+                else if(firstChoiceRemove.getsColour().equals(SColor.BLUE)){
+                    gameSession.getActivePlayer().getPersonalSchool().getBTable().remove(firstChoiceRemove);
+                    gameSession.getActivePlayer().getPersonalSchool().getEntry().add(firstChoiceRemove);
+                }
+
+                else if(secondChoiceRemove.getsColour().equals(SColor.GREEN)){
+                    gameSession.getActivePlayer().getPersonalSchool().getGTable().remove(secondChoiceRemove);
+                    gameSession.getActivePlayer().getPersonalSchool().getEntry().add(secondChoiceRemove);
+                }
+                else if(secondChoiceRemove.getsColour().equals(SColor.RED)){
+                    gameSession.getActivePlayer().getPersonalSchool().getRTable().remove(secondChoiceRemove);
+                    gameSession.getActivePlayer().getPersonalSchool().getEntry().add(secondChoiceRemove);
+                }
+                else if(secondChoiceRemove.getsColour().equals(SColor.YELLOW)){
+                    gameSession.getActivePlayer().getPersonalSchool().getYTable().remove(secondChoiceRemove);
+                    gameSession.getActivePlayer().getPersonalSchool().getEntry().add(secondChoiceRemove);
+                }
+                else if(secondChoiceRemove.getsColour().equals(SColor.PINK)){
+                    gameSession.getActivePlayer().getPersonalSchool().getPTable().remove(secondChoiceRemove);
+                    gameSession.getActivePlayer().getPersonalSchool().getEntry().add(secondChoiceRemove);
+                }
+                else if(secondChoiceRemove.getsColour().equals(SColor.BLUE)){
+                    gameSession.getActivePlayer().getPersonalSchool().getBTable().remove(secondChoiceRemove);
+                    gameSession.getActivePlayer().getPersonalSchool().getEntry().add(secondChoiceRemove);
+                }
                 break;
             case DAMA:   /** 11 */
                 break;
