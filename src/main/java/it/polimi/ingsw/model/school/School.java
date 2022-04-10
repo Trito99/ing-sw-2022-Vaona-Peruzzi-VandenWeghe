@@ -58,9 +58,12 @@ public class School {
             if (id == entry.get(i).getIdStudent())
                 student=entry.get(i);
         }
-        switch(student.getsColour()){
+        switch(student.getsColour()) {
             case GREEN:
                 GTable.add(student);
+                // if(GameMode.equals(EXPERTMODE) && (GTable.size()==3 || GTable.size()==6 || GTable.size()=9)){
+                //     player.increaseCoinScore();
+                //     table.decreaseCoinScore(); }
                 entry.remove(entry.get(entry.indexOf(student)));
                 break;
             case RED:

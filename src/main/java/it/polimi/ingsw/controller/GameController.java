@@ -33,7 +33,6 @@ public class GameController {
 
     public GameController(){
         maxPlayers=0;
-        tempCards = new ArrayList<>();
     }
 
 
@@ -97,6 +96,17 @@ public class GameController {
         }
     }
 
+    public void playTrashCard(Player player){   /** memorizzo solo ultima carta giocata */
+        AssistantCard playedCard = null;
+        //notify observer---->scelgo carta da scartare
+        for(Player p : gameSession.getListOfPlayer()){
+            AssistantCard alreadyTaken = null;
+            if(playedCard != alreadyTaken)
+                player.setTrash(playedCard);
+            /** controlla se è l'unica carta giocabile */
+        }
+        player.getDeckOfPlayer().getCardsInHand().remove(playedCard);
+    }
 
     public void increaseCoinScore(Player player){
         player.setCoinScore(player.getCoinScore() + 1);
