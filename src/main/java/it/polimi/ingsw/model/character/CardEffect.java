@@ -22,85 +22,68 @@ public enum CardEffect {
     DAMA,
     TOSSICO;
 
-    private int xCardOnSciura = 0;
+    private int xCardOnCard = 0;
+    private boolean mbriaconePlayed;
+    private boolean ciccioPanzaPlayed;
+    private boolean silvioPlayed;
+    private boolean tauroPlayed;
+    private boolean cePostaPerTePlayed;
+    private boolean alzabandieraPlayed;
 
 
-    public void playMbriacone(Player player){
-        player.setMbriaconePlayed(true);
+    public int getXCardOnCard() {
+        return xCardOnCard;
     }
 
-    public void playCiccioPanza(Player player) {
-        player.setCiccioPanzaPlayed(true);
+    public void setxCardOnCard(int xCardOnSciura) {
+        this.xCardOnCard = xCardOnSciura;
+    }
+    public boolean isMbriaconePlayed() {
+        return mbriaconePlayed;
     }
 
-    public void playAlzabandiera(Player player, ArrayList<Player> listOfPlayers, IslandCard islandChosen){
-
-        ArrayList<Player> playersList= new ArrayList<>(listOfPlayers);
-
-        islandChosen.calculateInfluence(playersList, player);
-        islandChosen.buildTowerOnIsland(playersList);
-        islandChosen.changeTowerColour(playersList);
+    public void setMbriaconePlayed(boolean mbriaconePlayed) {
+        this.mbriaconePlayed = mbriaconePlayed;
     }
 
-    public void playCepostaperte(Player player){
-        player.setCePostaPerTePlayed(true);
+    public boolean isSilvioPlayed() {
+        return silvioPlayed;
     }
 
-    public void playSciura(Player player, IslandCard islandChosen){
-
-        islandChosen.setXCardOnIsland(true);
-        if(islandChosen.getXCardCounter() < 4 && SCIURA.xCardOnSciura > 0){
-            islandChosen.setXCardCounter(islandChosen.getXCardCounter() + 1);
-        }
-        else
-            System.out.println(" Non puoi!!!");
-
-        /** effetto */
-
+    public void setSilvioPlayed(boolean silvioPlayed) {
+        this.silvioPlayed = silvioPlayed;
     }
 
-    public void playTauro(Player player){
-        player.setTauroPlayed(true);
+    public boolean isCiccioPanzaPlayed() {
+        return ciccioPanzaPlayed;
     }
 
-    public void playJoker(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
-
-
-
-        //card.setJoker(true);
-
-        /** effetto */
-
+    public void setCiccioPanzaPlayed(boolean ciccioPanzaPlayed) {
+        this.ciccioPanzaPlayed = ciccioPanzaPlayed;
     }
 
-    public void playSilvio(Player player){
-        player.setSilvioPlayed(true);
+    public boolean isTauroPlayed() {
+        return tauroPlayed;
     }
 
-    public void playFungaiolo(Player player, SColor colorChosen){
-        colorChosen.lockColor();
+    public void setTauroPlayed(boolean tauroPlayed) {
+        this.tauroPlayed = tauroPlayed;
     }
 
-    public void playDama(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
-
-
-        //card.setDama(true);
-
-        /** effetto */
-
+    public boolean isCePostaPerTePlayed() {
+        return cePostaPerTePlayed;
     }
 
-    public void playTossico(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
-
-
-        //card.setTossico(true);
-
-        /** effetto */
-
+    public void setCePostaPerTePlayed(boolean cePostaPerTePlayed) {
+        this.cePostaPerTePlayed = cePostaPerTePlayed;
     }
 
-    public void setXCardOnSciura(int xCardOnSciura) {
-        this.xCardOnSciura = xCardOnSciura;
+    public boolean isAlzabandieraPlayed() {
+        return alzabandieraPlayed;
+    }
+
+    public void setAlzabandieraPlayed(boolean alzabandierPlayed) {
+        this.alzabandieraPlayed = alzabandierPlayed;
     }
 }
 

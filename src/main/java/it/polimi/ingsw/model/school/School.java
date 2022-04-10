@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.school;
 
+import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.student.SColor;
@@ -125,7 +126,7 @@ public class School {
         return 0;
     }
 
-    void winProf(ArrayList<Player> players, Player playerTurn, SColor color) {
+    void winProf(ArrayList<Player> players, Player playerTurn, CardEffect cardEffectPlayed, SColor color) {
         int max = 0;
         int playerWithMax = 0;
         Player maxPlayer = null;
@@ -146,9 +147,9 @@ public class School {
                 if (playerWithMax == 1) {   /**Setto a true il prof verde del maxplayer */
                     maxPlayer.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true);
                 }
-                else if(playerWithMax > 1 && playerTurn.isCiccioPanzaPlayed()){ /**Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di CiccioPanza*/
+                else if(playerWithMax > 1 && cardEffectPlayed.isCiccioPanzaPlayed()){ /**Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di CiccioPanza*/
                         playerTurn.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true);
-                        playerTurn.setCiccioPanzaPlayed(false); /** ??? (andrebbe messo a false a fine turno)*/
+
                 }
 
             case RED:
@@ -166,6 +167,10 @@ public class School {
                 if (playerWithMax == 1) {
                     maxPlayer.getPersonalSchool().getProfOfPlayer().get(1).setInHall(true);
                 }
+                else if(playerWithMax > 1 && cardEffectPlayed.isCiccioPanzaPlayed()){ /**Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di CiccioPanza*/
+                    playerTurn.getPersonalSchool().getProfOfPlayer().get(1).setInHall(true);
+
+                }
             case YELLOW:
                 for (Player p : players) {
                     if (numberOfStudents(p, SColor.YELLOW) > max) {
@@ -180,6 +185,10 @@ public class School {
                 }
                 if (playerWithMax == 1) {
                     maxPlayer.getPersonalSchool().getProfOfPlayer().get(2).setInHall(true);
+                }
+                else if(playerWithMax > 1 && cardEffectPlayed.isCiccioPanzaPlayed()){ /**Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di CiccioPanza*/
+                    playerTurn.getPersonalSchool().getProfOfPlayer().get(2).setInHall(true);
+
                 }
             case PINK:
                 for (Player p : players) {
@@ -196,6 +205,9 @@ public class School {
                 if (playerWithMax == 1) {
                     maxPlayer.getPersonalSchool().getProfOfPlayer().get(3).setInHall(true);
                 }
+                else if(playerWithMax > 1 && cardEffectPlayed.isCiccioPanzaPlayed()){ /**Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di CiccioPanza*/
+                    playerTurn.getPersonalSchool().getProfOfPlayer().get(3).setInHall(true);
+                }
             case BLUE:
                 for (Player p : players) {
                     if (numberOfStudents(p, SColor.BLUE) > max) {
@@ -211,7 +223,11 @@ public class School {
                 if (playerWithMax == 1) {
                     maxPlayer.getPersonalSchool().getProfOfPlayer().get(4).setInHall(true);
                 }
+                else if(playerWithMax > 1 && cardEffectPlayed.isCiccioPanzaPlayed()){ /**Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di CiccioPanza*/
+                    playerTurn.getPersonalSchool().getProfOfPlayer().get(4).setInHall(true);
+                }
         }
+        cardEffectPlayed.setCiccioPanzaPlayed(false); /** Va Bene??? */
     }
 
     public boolean getProfInHall(SColor color){

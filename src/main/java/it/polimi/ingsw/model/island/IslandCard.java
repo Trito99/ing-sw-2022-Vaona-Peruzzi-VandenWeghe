@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.island;
 
+import it.polimi.ingsw.model.character.CardEffect;
+import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.SColor;
@@ -58,7 +60,7 @@ public class IslandCard {
     }
 
 
-    public Player calculateInfluence(ArrayList<Player> listOfPlayers, Player playerTurn){   //Restituisce il Player che ha influenza sull'isola
+    public Player calculateInfluence(ArrayList<Player> listOfPlayers, CardEffect cardEffectPlayed){   //Restituisce il Player che ha influenza sull'isola
         int i ;
         int maxInfluence = 0;
         Player playerWithInfluence = null;
@@ -96,32 +98,25 @@ public class IslandCard {
                         break;
                 }
                 /** EFFETTO TAURO */
-                if(p.getTColour().equals(towerOnIsland.getTColour()) && !playerTurn.isTauroPlayed() && playerTurn == p){  /** Aggiungo influenza torri */
+                if(p.getTColour().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isTauroPlayed()){  /** Aggiungo influenza torri */
                     countTot++;
                 }
 
                 /** EFFETTO SILVIO */
-                if(playerTurn==p && playerTurn.isSilvioPlayed()) {
+                if(cardEffectPlayed.isSilvioPlayed()) {
                     p.setInfluenceOnIsland(countTot + 2);
-                    playerTurn.setSilvioPlayed(false);      /** controlla  se va bene qua */
+                          /** controlla  se va bene qua */
                 }
                 else
                     p.setInfluenceOnIsland(countTot);
             }
-           if(playerTurn == p){
-               playerTurn.setTauroPlayed(false);           /** controlla se va bene qua (Tauro) */
 
-               for(SColor c : SColor.values()){            /** controlla se va bene qua (Fungaiolo) */
+
+
+            for(SColor c : SColor.values()){            /** controlla se va bene qua (Fungaiolo) */
                    if(c.isColorBlocked)
                        c.unlockColor();
-               }
-           }
-
-        }
-
-        for(SColor c : SColor.values()){    /** controlla se va bene qua (Fungaiolo) */
-            if(c.isColorBlocked)
-                c.unlockColor();
+            }
         }
 
         for(Player p : listOfPlayers) {
@@ -135,6 +130,9 @@ public class IslandCard {
                 playerWithInfluence = p;
             }
         }
+
+        cardEffectPlayed.setSilvioPlayed(false);
+        cardEffectPlayed.setTauroPlayed(false);           /** controlla se va bene qua (Tauro) */
 
         return playerWithInfluence;         /** Controllo Pareggio Influenza ----> return null? */
     }

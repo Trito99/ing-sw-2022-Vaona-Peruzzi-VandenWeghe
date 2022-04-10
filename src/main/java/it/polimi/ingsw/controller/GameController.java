@@ -135,26 +135,30 @@ public class GameController {
         switch(character.getCardEffect()){
             /** 1 */
             case MBRIACONE:
-                character.getCardEffect().playMbriacone(player);
-               /** player.setMbriaconePlayed(true); o questo???*/
+                character.getCardEffect().setMbriaconePlayed(true);
 
             /** 2 */
             case CICCIOPANZA:
-                character.getCardEffect().playCiccioPanza(player);
+                character.getCardEffect().setCiccioPanzaPlayed(true);
 
             case ALZABANDIERA:   /** 3 */
                 //notify (observer)----> islandChosen
-                character.getCardEffect().playAlzabandiera(player, gameSession.getListOfPlayer(), islandChosen);
+                ArrayList<Player> playersList= new ArrayList<>(gameSession.getListOfPlayer());
+
+                islandChosen.calculateInfluence(playersList, player);
+                islandChosen.buildTowerOnIsland(playersList);
+                islandChosen.changeTowerColour(playersList);
                 gameSession.getTable().joinIsland(islandChosen, gameSession.getTable().getListOfIsland());
                 break;
+
             case CEPOSTAPERTE:   /** 4 */
-                character.getCardEffect().playCepostaperte(player);
+                character.getCardEffect().setCePostaPerTePlayed(true);
                 break;
             case SCIURA:   /** 5 */
                 //notify (observer)----> islandChosen
 
                 islandChosen.setXCardOnIsland(true);
-                if(islandChosen.getXCardCounter() < 4 && SCIURA.xCardOnSciura > 0){
+                if(islandChosen.getXCardCounter() < 4 && character.getCardEffect().getXCardOnCard() > 0){
                     islandChosen.setXCardCounter(islandChosen.getXCardCounter() + 1);
                 }
                 else
@@ -163,17 +167,22 @@ public class GameController {
 
                 break;
             case TAURO:   /** 6 */
-                character.getCardEffect().playTauro(player);
+                character.getCardEffect().setTauroPlayed(true);
                 break;
+
             case JOKER:   /** 7 */
+
+
                 break;
             case SILVIO:   /** 8 */
-                character.getCardEffect().playSilvio(player);
+                character.getCardEffect().setSilvioPlayed(true);
                 break;
+
             case FUNGAIOLO:   /** 9 */
                 //notify (observer)----> colorChosen
-                character.getCardEffect().playFungaiolo(player, colorChosen);
+                colorChosen.lockColor();
                 break;
+
             case MENESTRELLO:   /** 10 */
                Student firstChoiceEntry = null;
                 Student secondChoiceEntry = null;
@@ -265,8 +274,12 @@ public class GameController {
                     gameSession.getActivePlayer().getPersonalSchool().getEntry().add(secondChoiceRemove);
                 }
                 break;
+
             case DAMA:   /** 11 */
+
+
                 break;
+
             case TOSSICO:   /** 12 */
                 break;
         }
@@ -275,11 +288,11 @@ public class GameController {
 
     }
 
-    public void moveMotherEarth(int n, Table table, Player player) { /** DA TOGLIERE IN TABLE??? */
+    public void moveMotherEarth(int n, Table table, Player player, CardEffect cardEffectPlayed) { /** DA TOGLIERE IN TABLE??? */
         table.getListOfIsland().get(table.getPosMotherEarth() - 1).setMotherEarthOnIsland(false);
         //notify(observer)
 
-        if (playerchoice() <= player.getTrash().getStepMotherEarth() && !player.isCePostaPerTePlayed()) {
+        if (playerchoice() <= player.getTrash().getStepMotherEarth() && !cardEffectPlayed.isCePostaPerTePlayed()) {
 
             if ((table.getPosMotherEarth() + n) > table.getListOfIsland().size()) {
                 table.getListOfIsland().get(table.getPosMotherEarth() + n - table.getListOfIsland().size() - 1).setMotherEarthOnIsland(true);
@@ -291,7 +304,7 @@ public class GameController {
             }
         }
         /** EFFETTO CEPOSTAPERTE */
-        else if(playerChoice() <= player.getTrash().getStepMotherEarth()+2 && player.isCePostaPerTePlayed()){
+        else if(playerChoice() <= player.getTrash().getStepMotherEarth()+2 && cardEffectPlayed.isCePostaPerTePlayed()){
             if ((table.getPosMotherEarth() + n + 2) > table.getListOfIsland().size()) {
                 table.getListOfIsland().get(table.getPosMotherEarth() + n + 2 - table.getListOfIsland().size() - 1).setMotherEarthOnIsland(true);
                 table.setPosMotherEarth(table.getPosMotherEarth() + n + 2 - table.getListOfIsland().size());
