@@ -142,6 +142,7 @@ public class GameController {
                 character.getCardEffect().setCiccioPanzaPlayed(true);
 
             case ALZABANDIERA:   /** 3 */
+                IslandCard islandChosen = null;
                 //notify (observer)----> islandChosen
                 ArrayList<Player> playersList= new ArrayList<>(gameSession.getListOfPlayer());
 
@@ -155,11 +156,14 @@ public class GameController {
                 character.getCardEffect().setCePostaPerTePlayed(true);
                 break;
             case SCIURA:   /** 5 */
+                IslandCard islandChosen = null;
                 //notify (observer)----> islandChosen
 
                 islandChosen.setXCardOnIsland(true);
                 if(islandChosen.getXCardCounter() < 4 && character.getCardEffect().getXCardOnCard() > 0){
                     islandChosen.setXCardCounter(islandChosen.getXCardCounter() + 1);
+                    islandChosen.setXCardOnIsland(true);
+                    character.getCardEffect().setXCardOnCard(character.getCardEffect().getXCardOnCard()-1);
                 }
                 else
                     System.out.println(" Non puoi!!!");
@@ -179,6 +183,7 @@ public class GameController {
                 break;
 
             case FUNGAIOLO:   /** 9 */
+                SColor colorChosen = null;
                 //notify (observer)----> colorChosen
                 colorChosen.lockColor();
                 break;

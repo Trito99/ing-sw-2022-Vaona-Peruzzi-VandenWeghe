@@ -35,9 +35,10 @@ public enum CardEffect {
         return xCardOnCard;
     }
 
-    public void setxCardOnCard(int xCardOnSciura) {
+    public void setXCardOnCard(int xCardOnSciura) {
         this.xCardOnCard = xCardOnSciura;
     }
+
     public boolean isMbriaconePlayed() {
         return mbriaconePlayed;
     }

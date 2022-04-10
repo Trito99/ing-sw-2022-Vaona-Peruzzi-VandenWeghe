@@ -11,19 +11,12 @@ public class CharacterCard {
     private final CardEffect cardEffect;
     private boolean coinOnCard;
     private ArrayList<Student> studentsOnCard;
-    private int xCardCounter = 0;
-    private boolean playedMbriacone;
-    private boolean playedCiccioPanza;
-    private boolean playedAlzabandiera;
 
     public CharacterCard (int idCharacter, int costCharacter, CardEffect cardEffect){
         this.idCharacter = idCharacter;
         this.costCharacter = costCharacter;
         this.cardEffect = cardEffect;
         this.coinOnCard = false;
-
-
-        this.playedCiccioPanza = false;
 
     }
 
@@ -59,11 +52,4 @@ public class CharacterCard {
         this.studentsOnCard = studentsOnCard;
     }
 
-    public int getXCardCounter() {
-        return xCardCounter;
-    }
-
-    public void setXCardCounter(int xCardCounter) {
-        this.xCardCounter = xCardCounter;
-    }
 }

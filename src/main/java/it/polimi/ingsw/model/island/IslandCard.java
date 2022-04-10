@@ -65,7 +65,7 @@ public class IslandCard {
         int maxInfluence = 0;
         Player playerWithInfluence = null;
 
-
+        /** calcolo influenza sull'isola */
         for(Player p : listOfPlayers){
             int countTot = 0;
 
@@ -105,17 +105,15 @@ public class IslandCard {
                 /** EFFETTO SILVIO */
                 if(cardEffectPlayed.isSilvioPlayed()) {
                     p.setInfluenceOnIsland(countTot + 2);
-                          /** controlla  se va bene qua */
+                    /** controlla  se va bene qua */
                 }
                 else
                     p.setInfluenceOnIsland(countTot);
             }
 
-
-
             for(SColor c : SColor.values()){            /** controlla se va bene qua (Fungaiolo) */
-                   if(c.isColorBlocked)
-                       c.unlockColor();
+                if(c.isColorBlocked)
+                    c.unlockColor();
             }
         }
 
@@ -135,22 +133,31 @@ public class IslandCard {
         cardEffectPlayed.setTauroPlayed(false);           /** controlla se va bene qua (Tauro) */
 
         return playerWithInfluence;         /** Controllo Pareggio Influenza ----> return null? */
+
     }
 
     public void buildTowerOnIsland(ArrayList<Player> listOfPlayer){        //Builda la torre del colore del Player che ha l'influenza sull'isola
 
         Player playerFound = calculateInfluence(listOfPlayer);  //Player che ha influenza sull'isola
 
-        if(playerFound==null){
-            return;             /** Se nessuno ha influenza non buildo */
+        /** SCIURA: controllo che non ci sia una tessera divieto sull'isola */
+        if (xCardOnIsland){
+            setXCardCounter(getXCardCounter()-1);
+            if(xCardCounter == 0) setXCardOnIsland(false);
         }
 
-        TColor towerColour = playerFound.getTColour();      //Colore delle torri del player che ha influenza
+        else{
+            if(playerFound==null){
+                return;             /** Se nessuno ha influenza non buildo */
+            }
 
-        towerOnIsland = new Tower(playerFound.getPersonalSchool().getTower().size(), towerColour);
-        playerFound.getPersonalSchool().removeTower();
+            TColor towerColour = playerFound.getTColour();      //Colore delle torri del player che ha influenza
 
-        setTowerIsOnIsland(true);
+            towerOnIsland = new Tower(playerFound.getPersonalSchool().getTower().size(), towerColour);
+            playerFound.getPersonalSchool().removeTower();
+
+            setTowerIsOnIsland(true);
+        }
     }
 
     public void changeTowerColour(ArrayList<Player> listOfPlayers){        //cambio colore della torre se è cambiata l'influenza sull'isola

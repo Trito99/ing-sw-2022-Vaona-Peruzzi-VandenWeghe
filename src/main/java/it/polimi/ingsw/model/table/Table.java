@@ -137,7 +137,7 @@ public class Table {
                     }
                     break;
                 case SCIURA:
-                        characterCards.get(j).setXCardCounter(4);
+                        characterCards.get(j).getCardEffect().setXCardOnCard(4);
                     break;
                 case JOKER:
                     for (int i = 0; i < 6; i++) {
