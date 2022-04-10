@@ -276,6 +276,40 @@ public class GameController {
                 break;
 
             case TOSSICO:   /** 12 */
+                SColor colorChoice = null;
+                //notify (observer)---->scelgo un colore
+                for(Player p : gameSession.getListOfPlayer()){
+                    if(colorChoice.equals(SColor.GREEN)){
+                        for(int j=0; j<3; j++){
+                            if(gameSession.getActivePlayer().getPersonalSchool().getGTable().size() != 0)
+                                gameSession.getActivePlayer().getPersonalSchool().getGTable().remove(colorChoice);
+                        }
+                    }
+                    else if(colorChoice.equals(SColor.RED)){
+                        for(int j=0; j<3; j++){
+                            if(gameSession.getActivePlayer().getPersonalSchool().getRTable().size() != 0)
+                                gameSession.getActivePlayer().getPersonalSchool().getRTable().remove(colorChoice);
+                        }
+                    }
+                    else if(colorChoice.equals(SColor.YELLOW)){
+                        for(int j=0; j<3; j++){
+                            if(gameSession.getActivePlayer().getPersonalSchool().getYTable().size() != 0)
+                                gameSession.getActivePlayer().getPersonalSchool().getYTable().remove(colorChoice);
+                        }
+                    }
+                    else if(colorChoice.equals(SColor.PINK)){
+                        for(int j=0; j<3; j++){
+                            if(gameSession.getActivePlayer().getPersonalSchool().getPTable().size() != 0)
+                                gameSession.getActivePlayer().getPersonalSchool().getPTable().remove(colorChoice);
+                        }
+                    }
+                    else if(colorChoice.equals(SColor.BLUE)){
+                        for(int j=0; j<3; j++){
+                            if(gameSession.getActivePlayer().getPersonalSchool().getBTable().size() != 0)
+                                gameSession.getActivePlayer().getPersonalSchool().getBTable().add(choice);
+                        }
+                    }
+                }
                 break;
         }
 
