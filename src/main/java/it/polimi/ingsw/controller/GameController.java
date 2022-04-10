@@ -167,17 +167,25 @@ public class GameController {
                 }
                 else
                     System.out.println(" Non puoi!!!");
-
-
                 break;
+
             case TAURO:   /** 6 */
                 character.getCardEffect().setTauroPlayed(true);
                 break;
 
             case JOKER:   /** 7 */
-
-
+                for(int i =0; i<3; i++){
+                    Student choice = null;  //nuovo studente da mettere nella entry
+                    Student toChange = null;    //studente da togliere dalla entry
+                    //notify (observer)---->scelta studente in entry da scambiare
+                    gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(toChange);
+                    //notify (observer)---->scelta studente nella carta da scambiare
+                    gameSession.getActivePlayer().getPersonalSchool().getEntry().add(choice);
+                    character.getStudentsOnCard().remove(choice);
+                    character.getStudentsOnCard().add(toChange);
+                }
                 break;
+
             case SILVIO:   /** 8 */
                 character.getCardEffect().setSilvioPlayed(true);
                 break;
@@ -189,100 +197,82 @@ public class GameController {
                 break;
 
             case MENESTRELLO:   /** 10 */
-               Student firstChoiceEntry = null;
-                Student secondChoiceEntry = null;
-                //notify (observer)---->scelta 2 studenti
-                    if(firstChoiceEntry.getsColour().equals(SColor.GREEN)){
-                        gameSession.getActivePlayer().getPersonalSchool().getGTable().add(firstChoiceEntry);
-                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(firstChoiceEntry);
+                // TO DO: controlli se sono pieni
+                /** togli da entry e metti in hall */
+                for(int i =0; i<3; i++){
+                    Student choice = null;
+                    //notify (observer)---->scelta 2 studenti
+                    if(choice.getsColour().equals(SColor.GREEN)){
+                        gameSession.getActivePlayer().getPersonalSchool().getGTable().add(choice);
+                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(choice);
                     }
-                    else if(firstChoiceEntry.getsColour().equals(SColor.RED)){
-                        gameSession.getActivePlayer().getPersonalSchool().getRTable().add(firstChoiceEntry);
-                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(firstChoiceEntry);
+                    else if(choice.getsColour().equals(SColor.RED)){
+                        gameSession.getActivePlayer().getPersonalSchool().getRTable().add(choice);
+                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(choice);
                     }
-                    else if(firstChoiceEntry.getsColour().equals(SColor.YELLOW)){
-                        gameSession.getActivePlayer().getPersonalSchool().getYTable().add(firstChoiceEntry);
-                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(firstChoiceEntry);
+                    else if(choice.getsColour().equals(SColor.YELLOW)){
+                        gameSession.getActivePlayer().getPersonalSchool().getYTable().add(choice);
+                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(choice);
                     }
-                    else if(firstChoiceEntry.getsColour().equals(SColor.PINK)){
-                        gameSession.getActivePlayer().getPersonalSchool().getPTable().add(firstChoiceEntry);
-                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(firstChoiceEntry);
+                    else if(choice.getsColour().equals(SColor.PINK)){
+                        gameSession.getActivePlayer().getPersonalSchool().getPTable().add(choice);
+                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(choice);
                     }
-                    else if(firstChoiceEntry.getsColour().equals(SColor.BLUE)){
-                        gameSession.getActivePlayer().getPersonalSchool().getBTable().add(firstChoiceEntry);
-                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(firstChoiceEntry);
-                     }
-
-                    else if(secondChoiceEntry.getsColour().equals(SColor.GREEN)){
-                        gameSession.getActivePlayer().getPersonalSchool().getGTable().add(secondChoiceEntry);
-                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(secondChoiceEntry);
+                    else if(choice.getsColour().equals(SColor.BLUE)){
+                        gameSession.getActivePlayer().getPersonalSchool().getBTable().add(choice);
+                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(choice);
                     }
-                    else if(secondChoiceEntry.getsColour().equals(SColor.RED)){
-                        gameSession.getActivePlayer().getPersonalSchool().getRTable().add(secondChoiceEntry);
-                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(secondChoiceEntry);
+                }
+                /** togli da hall e metti in entry */
+                for(int i =0; i<3; i++){
+                    Student choice = null;
+                    //notify (observer)---->scelta 2 studenti
+                    if(choice.getsColour().equals(SColor.GREEN)){
+                        gameSession.getActivePlayer().getPersonalSchool().getGTable().remove(choice);
+                        gameSession.getActivePlayer().getPersonalSchool().getEntry().add(choice);
                     }
-                    else if(secondChoiceEntry.getsColour().equals(SColor.YELLOW)){
-                        gameSession.getActivePlayer().getPersonalSchool().getYTable().add(secondChoiceEntry);
-                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(secondChoiceEntry);
+                    else if(choice.getsColour().equals(SColor.RED)){
+                        gameSession.getActivePlayer().getPersonalSchool().getRTable().remove(choice);
+                        gameSession.getActivePlayer().getPersonalSchool().getEntry().add(choice);
                     }
-                    else if(secondChoiceEntry.getsColour().equals(SColor.PINK)){
-                        gameSession.getActivePlayer().getPersonalSchool().getPTable().add(secondChoiceEntry);
-                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(secondChoiceEntry);
+                    else if(choice.getsColour().equals(SColor.YELLOW)){
+                        gameSession.getActivePlayer().getPersonalSchool().getYTable().remove(choice);
+                        gameSession.getActivePlayer().getPersonalSchool().getEntry().add(choice);
                     }
-                    else if(secondChoiceEntry.getsColour().equals(SColor.BLUE)){
-                        gameSession.getActivePlayer().getPersonalSchool().getBTable().add(secondChoiceEntry);
-                        gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(secondChoiceEntry);
+                    else if(choice.getsColour().equals(SColor.PINK)){
+                        gameSession.getActivePlayer().getPersonalSchool().getPTable().remove(choice);
+                        gameSession.getActivePlayer().getPersonalSchool().getEntry().add(choice);
                     }
-
-               Student firstChoiceRemove = null;
-               Student secondChoiceRemove = null;
-               //notify (observer)---->scelta 2 studenti
-                if(firstChoiceRemove.getsColour().equals(SColor.GREEN)){
-                    gameSession.getActivePlayer().getPersonalSchool().getGTable().remove(firstChoiceRemove);
-                    gameSession.getActivePlayer().getPersonalSchool().getEntry().add(firstChoiceRemove);
-                }
-                else if(firstChoiceRemove.getsColour().equals(SColor.RED)){
-                    gameSession.getActivePlayer().getPersonalSchool().getRTable().remove(firstChoiceRemove);
-                    gameSession.getActivePlayer().getPersonalSchool().getEntry().add(firstChoiceRemove);
-                }
-                else if(firstChoiceRemove.getsColour().equals(SColor.YELLOW)){
-                    gameSession.getActivePlayer().getPersonalSchool().getYTable().remove(firstChoiceRemove);
-                    gameSession.getActivePlayer().getPersonalSchool().getEntry().add(firstChoiceRemove);
-                }
-                else if(firstChoiceRemove.getsColour().equals(SColor.PINK)){
-                    gameSession.getActivePlayer().getPersonalSchool().getPTable().remove(firstChoiceRemove);
-                    gameSession.getActivePlayer().getPersonalSchool().getEntry().add(firstChoiceRemove);
-                }
-                else if(firstChoiceRemove.getsColour().equals(SColor.BLUE)){
-                    gameSession.getActivePlayer().getPersonalSchool().getBTable().remove(firstChoiceRemove);
-                    gameSession.getActivePlayer().getPersonalSchool().getEntry().add(firstChoiceRemove);
-                }
-
-                else if(secondChoiceRemove.getsColour().equals(SColor.GREEN)){
-                    gameSession.getActivePlayer().getPersonalSchool().getGTable().remove(secondChoiceRemove);
-                    gameSession.getActivePlayer().getPersonalSchool().getEntry().add(secondChoiceRemove);
-                }
-                else if(secondChoiceRemove.getsColour().equals(SColor.RED)){
-                    gameSession.getActivePlayer().getPersonalSchool().getRTable().remove(secondChoiceRemove);
-                    gameSession.getActivePlayer().getPersonalSchool().getEntry().add(secondChoiceRemove);
-                }
-                else if(secondChoiceRemove.getsColour().equals(SColor.YELLOW)){
-                    gameSession.getActivePlayer().getPersonalSchool().getYTable().remove(secondChoiceRemove);
-                    gameSession.getActivePlayer().getPersonalSchool().getEntry().add(secondChoiceRemove);
-                }
-                else if(secondChoiceRemove.getsColour().equals(SColor.PINK)){
-                    gameSession.getActivePlayer().getPersonalSchool().getPTable().remove(secondChoiceRemove);
-                    gameSession.getActivePlayer().getPersonalSchool().getEntry().add(secondChoiceRemove);
-                }
-                else if(secondChoiceRemove.getsColour().equals(SColor.BLUE)){
-                    gameSession.getActivePlayer().getPersonalSchool().getBTable().remove(secondChoiceRemove);
-                    gameSession.getActivePlayer().getPersonalSchool().getEntry().add(secondChoiceRemove);
+                    else if(choice.getsColour().equals(SColor.BLUE)){
+                        gameSession.getActivePlayer().getPersonalSchool().getBTable().remove(choice);
+                        gameSession.getActivePlayer().getPersonalSchool().getEntry().add(choice);
+                    }
                 }
                 break;
 
             case DAMA:   /** 11 */
-
-
+                Student choice = null;
+                int i =0;
+                //notify (observer)---->scelgo pedina da mettere nel table
+                if(choice.getsColour().equals(SColor.GREEN)){
+                    gameSession.getActivePlayer().getPersonalSchool().getGTable().add(choice);
+                }
+                else if(choice.getsColour().equals(SColor.RED)){
+                    gameSession.getActivePlayer().getPersonalSchool().getRTable().add(choice);
+                }
+                else if(choice.getsColour().equals(SColor.YELLOW)){
+                    gameSession.getActivePlayer().getPersonalSchool().getYTable().add(choice);
+                }
+                else if(choice.getsColour().equals(SColor.PINK)){
+                    gameSession.getActivePlayer().getPersonalSchool().getPTable().add(choice);
+                }
+                else if(choice.getsColour().equals(SColor.BLUE)){
+                    gameSession.getActivePlayer().getPersonalSchool().getBTable().add(choice);
+                }
+                character.getStudentsOnCard().remove(choice);
+                //notify (observer)---->pesco pedina da mettere sulla carta
+                character.getStudentsOnCard().add(table.getBag().get(table.getBag().size() -1));
+                table.getBag().remove(table.getBag().get(table.getBag().size() -1));
                 break;
 
             case TOSSICO:   /** 12 */
