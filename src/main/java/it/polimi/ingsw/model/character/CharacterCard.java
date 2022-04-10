@@ -1,11 +1,17 @@
 package it.polimi.ingsw.model.character;
 
+import it.polimi.ingsw.model.student.Student;
+
+import java.util.ArrayList;
+
 public class CharacterCard {
 
     private final int idCharacter;
     private int costCharacter;
     private final CardEffect cardEffect;
     private boolean coinOnCard;
+    private ArrayList<Student> studentsOnCard;
+    private int xCardCounter = 0;
     private boolean playedMbriacone;
     private boolean playedCiccioPanza;
     private boolean playedAlzabandiera;
@@ -45,5 +51,19 @@ public class CharacterCard {
         this.coinOnCard = coinOnCard;
     }
 
+    public ArrayList<Student> getStudentsOnCard() {
+        return studentsOnCard;
+    }
 
+    public void setStudentsOnCard(ArrayList<Student> studentsOnCard) {
+        this.studentsOnCard = studentsOnCard;
+    }
+
+    public int getXCardCounter() {
+        return xCardCounter;
+    }
+
+    public void setXCardCounter(int xCardCounter) {
+        this.xCardCounter = xCardCounter;
+    }
 }

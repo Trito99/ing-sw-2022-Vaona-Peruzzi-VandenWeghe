@@ -151,6 +151,16 @@ public class GameController {
                 character.getCardEffect().playCepostaperte(player);
                 break;
             case SCIURA:   /** 5 */
+                //notify (observer)----> islandChosen
+
+                islandChosen.setXCardOnIsland(true);
+                if(islandChosen.getXCardCounter() < 4 && SCIURA.xCardOnSciura > 0){
+                    islandChosen.setXCardCounter(islandChosen.getXCardCounter() + 1);
+                }
+                else
+                    System.out.println(" Non puoi!!!");
+
+
                 break;
             case TAURO:   /** 6 */
                 character.getCardEffect().playTauro(player);

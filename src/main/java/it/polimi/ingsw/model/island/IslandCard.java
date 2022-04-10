@@ -16,6 +16,8 @@ public class IslandCard {
     private Tower towerOnIsland;
     private int mergedIsland; // = quante isole sono unite
     private boolean MotherEarthOnIsland = false;
+    private boolean xCardOnIsland = false;
+    private int xCardCounter = 0;
 
     public IslandCard(int idIsland) {
         this.idIsland = idIsland;
@@ -182,5 +184,25 @@ public class IslandCard {
 
     public void setMergedIsland(int mergedIsland) {
         this.mergedIsland = mergedIsland;
+    }
+
+    public void setIdIsland(int idIsland) {
+        this.idIsland = idIsland;
+    }
+
+    public boolean isXCardOnIsland() {
+        return xCardOnIsland;
+    }
+
+    public int getXCardCounter() {
+        return xCardCounter;
+    }
+
+    public void setXCardCounter(int xCardCounter) {
+        this.xCardCounter = xCardCounter;
+    }
+
+    public void setXCardOnIsland(boolean xCardOnIsland) {
+        this.xCardOnIsland = xCardOnIsland;
     }
 }

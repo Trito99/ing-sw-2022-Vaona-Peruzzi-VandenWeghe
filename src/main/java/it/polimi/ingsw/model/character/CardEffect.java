@@ -22,7 +22,7 @@ public enum CardEffect {
     DAMA,
     TOSSICO;
 
-
+    private int xCardOnSciura = 0;
 
 
     public void playMbriacone(Player player){
@@ -46,10 +46,14 @@ public enum CardEffect {
         player.setCePostaPerTePlayed(true);
     }
 
-    public void playSciura(Player player, GameController gc, Table table, CharacterCard card, ArrayList<Player> players){
+    public void playSciura(Player player, IslandCard islandChosen){
 
-
-        //card.setSciura(true);
+        islandChosen.setXCardOnIsland(true);
+        if(islandChosen.getXCardCounter() < 4 && SCIURA.xCardOnSciura > 0){
+            islandChosen.setXCardCounter(islandChosen.getXCardCounter() + 1);
+        }
+        else
+            System.out.println(" Non puoi!!!");
 
         /** effetto */
 
@@ -93,6 +97,10 @@ public enum CardEffect {
 
         /** effetto */
 
+    }
+
+    public void setXCardOnSciura(int xCardOnSciura) {
+        this.xCardOnSciura = xCardOnSciura;
     }
 }
 

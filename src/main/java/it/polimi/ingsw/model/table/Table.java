@@ -68,7 +68,7 @@ public class Table {
     }
 
 
-    public void extractStudent() {   //estrae dal sacchetto 3/4 studenti
+    public void extractStudentOnCloud() {   //estrae dal sacchetto 3/4 studenti
         for (int c = 0; c < cloudNumber.size(); c++) {
             if (cloudNumber.get(c).getNumberOfSpaces() == 4) {
                 for (int i = 0; i < 4; i++) {
@@ -126,6 +126,34 @@ public class Table {
 
         for( int i = 0; i<3; i++){
             characterCardsOnTable.add(characterCards.get(i));
+        }
+
+        for(int j=0; j<3; j++){
+            switch (characterCards.get(j).getCardEffect()){
+                case MBRIACONE:
+                    for (int i = 0; i < 4; i++) {
+                        characterCards.get(j).getStudentsOnCard().add(bag.get(i));
+                        bag.remove(bag.get(i));
+                    }
+                    break;
+                case SCIURA:
+                        characterCards.get(j).setXCardCounter(4);
+                    break;
+                case JOKER:
+                    for (int i = 0; i < 6; i++) {
+                        characterCards.get(j).getStudentsOnCard().add(bag.get(i));
+                        bag.remove(bag.get(i));
+                    }
+                    break;
+                case DAMA:
+                    for (int i = 0; i < 4; i++) {
+                        characterCards.get(j).getStudentsOnCard().add(bag.get(i));
+                        bag.remove(bag.get(i));
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
