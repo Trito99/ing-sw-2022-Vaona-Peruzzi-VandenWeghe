@@ -15,7 +15,7 @@ public class Team {
         return new ArrayList<Player>(team);
     }
 
-    public void intializeTeam(GameMode gamemode, Player player1, Player player2){
+    public void intializeTeam(Player player1, Player player2){
         team.add(0,player1);
         team.add(1,player2);
     }

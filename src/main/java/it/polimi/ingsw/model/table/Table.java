@@ -18,7 +18,7 @@ public class Table {
 
     private ArrayList<CloudCard> cloudNumber;
     private ArrayList<IslandCard> listOfIsland;
-    private ArrayList<CharacterCard> characterCardsOnTable;
+    private ArrayList<CharacterCard> characterCardsOnTable = new ArrayList<>(3);
     private int coinsOnTable;
     private int posMotherEarth = 0;
     private ArrayList<Student> bag = new ArrayList<>();
@@ -67,27 +67,19 @@ public class Table {
         Collections.shuffle(bag);
     }
 
-    public void extractStudentsInit() {
-        for (int i = 0; i < listOfIsland.size(); i++) {
-            if (posMotherEarth + 6 > listOfIsland.size()) {
-                if (i != (posMotherEarth - 1) && i != (posMotherEarth + 5 - listOfIsland.size())) {
-                    listOfIsland.get(i).getStudentOnIsland().add(bag.get(0));
-                    bag.remove(bag.get(0));
+
+    public void extractStudentOnCloud() {   //estrae dal sacchetto 3/4 studenti
+        for (int c = 0; c < cloudNumber.size(); c++) {
+            if (cloudNumber.get(c).getNumberOfSpaces() == 4) {
+                for (int i = 0; i < 4; i++) {
+                    cloudNumber.get(c).getStudentOnCloud().add(bag.get(i));
+                    bag.remove(bag.get(i));
                 }
             } else {
-                if (i != (posMotherEarth - 1) && i != (posMotherEarth + 5)) {
-                    listOfIsland.get(i).getStudentOnIsland().add(bag.get(0));
-                    bag.remove(bag.get(0));
+                for (int i = 0; i < 3; i++) {
+                    cloudNumber.get(c).getStudentOnCloud().add(bag.get(i));
+                    bag.remove(bag.get(i));
                 }
-            }
-        }
-    }
-
-    public void extractStudent() {   //estrae dal sacchetto 3/4 studenti
-        for (int c = 0; c < cloudNumber.size(); c++) {
-            for (int i = 0; i < cloudNumber.get(c).getNumberOfSpaces(); i++) {
-                cloudNumber.get(c).getStudentOnCloud().add(bag.get(0));
-                bag.remove(bag.get(0));
             }
         }
     }
@@ -124,11 +116,48 @@ public class Table {
     public void generateMotherEarth() {
         Random rn = new Random();
         int n = rn.nextInt(12) + 1;
+        System.out.println(n);
         listOfIsland.get(n - 1).setMotherEarthOnIsland(true);
         posMotherEarth = n;
     }
 
-    public void moveMotherEarth(int n) {
+    public void generateCharacterCardsOnTable(ArrayList<CharacterCard> characterCards){
+        Collections.shuffle(characterCards);
+
+        for( int i = 0; i<3; i++){
+            characterCardsOnTable.add(characterCards.get(i));
+        }
+
+        for(int j=0; j<3; j++){
+            switch (characterCards.get(j).getCardEffect()){
+                case MBRIACONE:
+                    for (int i = 0; i < 4; i++) {
+                        characterCards.get(j).getStudentsOnCard().add(bag.get(i));
+                        bag.remove(bag.get(i));
+                    }
+                    break;
+                case SCIURA:
+                        characterCards.get(j).getCardEffect().setXCardOnCard(4);
+                    break;
+                case JOKER:
+                    for (int i = 0; i < 6; i++) {
+                        characterCards.get(j).getStudentsOnCard().add(bag.get(i));
+                        bag.remove(bag.get(i));
+                    }
+                    break;
+                case DAMA:
+                    for (int i = 0; i < 4; i++) {
+                        characterCards.get(j).getStudentsOnCard().add(bag.get(i));
+                        bag.remove(bag.get(i));
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public void moveMotherEarth(int n) {  /** GUARDA GAMECONTROLLER */
         listOfIsland.get(posMotherEarth - 1).setMotherEarthOnIsland(false);
         if ((posMotherEarth + n) > listOfIsland.size()) {
             listOfIsland.get(posMotherEarth + n - listOfIsland.size() - 1).setMotherEarthOnIsland(true);
@@ -157,6 +186,14 @@ public class Table {
 
     public int getCoinsOnTable() {
         return coinsOnTable;
+    }
+
+    public void setCoinsOnTable(int coinsOnTable) {
+        this.coinsOnTable = coinsOnTable;
+    }
+
+    public void increaseCoinsOnTable(int coinsValue){
+        setCoinsOnTable(getCoinsOnTable() + coinsValue);
     }
 
     public ArrayList<CharacterCard> getCharacterCardsOnTable() {
@@ -201,7 +238,6 @@ public class Table {
         }
         return newListOfIsland;
     }
-
 
     public Player playerIsWinning(Game game, Table table, ArrayList<Player> listOfPlayers) {  //calcola influenza torri sul tavolo e restituisce quello con più influenza
         int countGrey = 0;
@@ -291,13 +327,10 @@ public class Table {
             }
         }
 
-        if (game.gameIsFinished(table)) {
+        if (game.gameIsFinished()) {
 
             System.out.println("HA VINTO IL GIOCATORE " + winner.getNickname());
-
             return winner;
-
-
         }
         return winner;
     }

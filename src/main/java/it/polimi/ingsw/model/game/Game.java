@@ -1,7 +1,9 @@
 package it.polimi.ingsw.model.game;
 
 
+import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.Team;
 import it.polimi.ingsw.model.table.Table;
 
 import java.util.ArrayList;
@@ -17,6 +19,8 @@ public class Game {
     private ArrayList<Player> order;
     private Difficulty difficulty;
     private Table table;
+    private ArrayList<CharacterCard> characterCards;
+    private ArrayList<Team> team;
 
     /**
      * Default constructor.
@@ -24,12 +28,7 @@ public class Game {
     public Game() {
         listOfPlayers = new ArrayList<Player>();
         table = new Table();
-    }
-
-    public void addPlayer(Player player) {
-        if(listOfPlayers.size()<4){
-            listOfPlayers.add(player);
-        }
+        characterCards = new ArrayList<CharacterCard>(12);
     }
 
     public GameMode getGameMode() {
@@ -91,7 +90,7 @@ public class Game {
     /**
      * winnerIs deve rimanere all'interno di Game
      */
-    public boolean gameIsFinished(Table table) {
+    public boolean gameIsFinished() {
         Player player = getActivePlayer();
 
         if (player.getDeckOfPlayer().getCardsInHand().size() == 0 ||   // Dobbiamo collegare ogni deck assistant al suo player
@@ -104,6 +103,11 @@ public class Game {
         return false;
     }
 
+    public Table getTable() {
+        return table;
+    }
 
-
+    public ArrayList<Team> getTeam() {
+        return team;
+    }
 }

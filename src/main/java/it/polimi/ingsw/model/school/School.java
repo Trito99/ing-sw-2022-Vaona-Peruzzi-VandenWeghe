@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.school;
 
+import it.polimi.ingsw.model.character.CardEffect;
+import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
@@ -56,9 +58,12 @@ public class School {
             if (id == entry.get(i).getIdStudent())
                 student=entry.get(i);
         }
-        switch(student.getsColour()){
+        switch(student.getsColour()) {
             case GREEN:
                 GTable.add(student);
+                // if(GameMode.equals(EXPERTMODE) && (GTable.size()==3 || GTable.size()==6 || GTable.size()=9)){
+                //     player.increaseCoinScore();
+                //     table.decreaseCoinScore(); }
                 entry.remove(entry.get(entry.indexOf(student)));
                 break;
             case RED:
@@ -108,8 +113,8 @@ public class School {
     }
 
     /** da generalizzare tutto con questo */
-    public int numberOfStudents(Player player, SColor colour){
-        switch(colour){
+    public int numberOfStudents(Player player, SColor color){
+        switch(color){
             case GREEN:
                 return player.getPersonalSchool().getGTable().size();
             case RED:
@@ -124,198 +129,124 @@ public class School {
         return 0;
     }
 
-    public int numberOfR(Player player){
-        return player.getPersonalSchool().getRTable().size();
-    }
-
-    public int numberOfY(Player player){
-        return player.getPersonalSchool().getYTable().size();
-    }
-
-    public int numberOfP(Player player){
-        return player.getPersonalSchool().getPTable().size();
-    }
-
-    public int numberOfB(Player player){
-        return player.getPersonalSchool().getBTable().size();
-    }
-
-    public void winProfG(ArrayList<Player> players) {
-        //calcolo se player che sta giocando conquista il prof giallo
-        // numero di studenti gialli del player "selezionato"
-        int max=0;
-        int playerWithMax = 0;
-        Player maxPlayer = null;
-
-        /** Prof Giallo */
-        /* for (Player player : players) {
-            for (SColor colour : SColor.values()){
-                if (numberOfStudents(player, colour) > max) {
-                    max = numberOfStudents(player, colour);
-                }
-                else player.getPersonalSchool().getProfOfPlayer().get(0).setInHall(false);
-                max = 0;
-            }
-        }
-
-        for (Player player : players) {
-            for (SColor colour : SColor.values()){
-                if(numberOfStudents(player, colour) == max){
-                    playerWithMax ++;
-                    maxPlayer = player;
-                }
-                if (playerWithMax == 1){
-                    maxPlayer.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true);
-                }
-            }
-        } */
-        for (Player player : players) {
-            if (numberOfG(player) > max) {
-                max = numberOfG(player);
-            }
-            else player.getPersonalSchool().setProfRInHall(false);
-        }
-
-        for (Player player : players) {
-            if(numberOfG(player) == max){
-                playerWithMax ++;
-                maxPlayer = player;
-            }
-        }
-        if (playerWithMax == 1){
-            maxPlayer.getPersonalSchool().setProfGInHall(true);
-        }
-    }
-
-    public void winProfR(ArrayList<Player> players) {
-        int max=0;
-        int playerWithMax = 0;
-        Player maxPlayer = null;
-
-        for (Player player : players) {
-            if (numberOfR(player) > max) {
-                max = numberOfR(player);
-            }
-            else player.getPersonalSchool().setProfRInHall(false);
-        }
-
-        for (Player player : players) {
-            if(numberOfR(player) == max){
-                playerWithMax ++;
-                maxPlayer = player;
-            }
-        }
-        if (playerWithMax == 1){
-            maxPlayer.getPersonalSchool().setProfRInHall(true);
-        }
-    }
-
-    public void winProfY(ArrayList<Player> players) {
-        int max=0;
-        int playerWithMax = 0;
-        Player maxPlayer = null;
-
-        for (Player player : players) {
-            if (numberOfY(player) > max) {
-                max = numberOfY(player);
-            }
-            else player.getPersonalSchool().setProfYInHall(false);
-        }
-
-        for (Player player : players) {
-            if(numberOfY(player) == max){
-                playerWithMax ++;
-                maxPlayer = player;
-            }
-        }
-        if (playerWithMax == 1){
-            maxPlayer.getPersonalSchool().setProfYInHall(true);
-        }
-    }
-
-    public void winProfP(ArrayList<Player> players) {
-        int max=0;
-        int playerWithMax = 0;
-        Player maxPlayer = null;
-
-        for (Player player : players) {
-            if (numberOfP(player) > max) {
-                max = numberOfP(player);
-            }
-            else player.getPersonalSchool().setProfPInHall(false);
-        }
-
-        for (Player player : players) {
-            if(numberOfP(player) == max){
-                playerWithMax ++;
-                maxPlayer = player;
-            }
-        }
-        if (playerWithMax == 1){
-            maxPlayer.getPersonalSchool().setProfPInHall(true);
-        }
-    }
-
-    public void winProfB(ArrayList<Player> players) {
+    void winProf(ArrayList<Player> players, Player playerTurn, CardEffect cardEffectPlayed, SColor color) {
         int max = 0;
         int playerWithMax = 0;
         Player maxPlayer = null;
 
-        for (Player player : players) {
-            if (numberOfB(player) > max) {
-                max = numberOfB(player);
-            } else player.getPersonalSchool().setProfBInHall(false);
+        switch (color){
+            case GREEN:
+                for (Player p : players) {                         /** In questo for trovo max numero di verdi generale*/
+                    if (numberOfStudents(p, SColor.GREEN) > max) {
+                        max = numberOfStudents(p, SColor.GREEN);
+                    } else p.getPersonalSchool().getProfOfPlayer().get(0).setInHall(false); //Perchè in else?
+                }
+                for (Player p : players) {                          /**In questo for conto i giocatori che hanno il max numero di verdi*/
+                    if (numberOfStudents(p, SColor.GREEN) == max) {
+                        playerWithMax++;
+                        maxPlayer = p;      /**Se è solo uno lo salvo in maxPlayer*/
+                    }
+                }
+                if (playerWithMax == 1) {   /**Setto a true il prof verde del maxplayer */
+                    maxPlayer.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true);
+                }
+                else if(playerWithMax > 1 && cardEffectPlayed.isCiccioPanzaPlayed()){ /**Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di CiccioPanza*/
+                        playerTurn.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true);
+
+                }
+
+            case RED:
+                for (Player p : players) {
+                    if (numberOfStudents(p, SColor.RED) > max) {
+                        max = numberOfStudents(p, SColor.RED);
+                    } else p.getPersonalSchool().getProfOfPlayer().get(1).setInHall(false);
+                }
+                for (Player p : players) {
+                    if (numberOfStudents(p, SColor.RED) == max) {
+                        playerWithMax++;
+                        maxPlayer = p;
+                    }
+                }
+                if (playerWithMax == 1) {
+                    maxPlayer.getPersonalSchool().getProfOfPlayer().get(1).setInHall(true);
+                }
+                else if(playerWithMax > 1 && cardEffectPlayed.isCiccioPanzaPlayed()){ /**Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di CiccioPanza*/
+                    playerTurn.getPersonalSchool().getProfOfPlayer().get(1).setInHall(true);
+
+                }
+            case YELLOW:
+                for (Player p : players) {
+                    if (numberOfStudents(p, SColor.YELLOW) > max) {
+                        max = numberOfStudents(p, SColor.YELLOW);
+                    } else p.getPersonalSchool().getProfOfPlayer().get(2).setInHall(false);
+                }
+                for (Player p : players) {
+                    if (numberOfStudents(p, SColor.YELLOW) == max) {
+                        playerWithMax++;
+                        maxPlayer = p;
+                    }
+                }
+                if (playerWithMax == 1) {
+                    maxPlayer.getPersonalSchool().getProfOfPlayer().get(2).setInHall(true);
+                }
+                else if(playerWithMax > 1 && cardEffectPlayed.isCiccioPanzaPlayed()){ /**Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di CiccioPanza*/
+                    playerTurn.getPersonalSchool().getProfOfPlayer().get(2).setInHall(true);
+
+                }
+            case PINK:
+                for (Player p : players) {
+                    if (numberOfStudents(p, SColor.PINK) > max) {
+                        max = numberOfStudents(p, SColor.PINK);
+                    } else p.getPersonalSchool().getProfOfPlayer().get(3).setInHall(false);
+                }
+                for (Player p : players) {
+                    if (numberOfStudents(p, SColor.PINK) == max) {
+                        playerWithMax++;
+                        maxPlayer = p;
+                    }
+                }
+                if (playerWithMax == 1) {
+                    maxPlayer.getPersonalSchool().getProfOfPlayer().get(3).setInHall(true);
+                }
+                else if(playerWithMax > 1 && cardEffectPlayed.isCiccioPanzaPlayed()){ /**Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di CiccioPanza*/
+                    playerTurn.getPersonalSchool().getProfOfPlayer().get(3).setInHall(true);
+                }
+            case BLUE:
+                for (Player p : players) {
+                    if (numberOfStudents(p, SColor.BLUE) > max) {
+                        max = numberOfStudents(p, SColor.BLUE);
+                    } else p.getPersonalSchool().getProfOfPlayer().get(4).setInHall(false);
+                }
+                for (Player p : players) {
+                    if (numberOfStudents(p, SColor.BLUE) == max) {
+                        playerWithMax++;
+                        maxPlayer = p;
+                    }
+                }
+                if (playerWithMax == 1) {
+                    maxPlayer.getPersonalSchool().getProfOfPlayer().get(4).setInHall(true);
+                }
+                else if(playerWithMax > 1 && cardEffectPlayed.isCiccioPanzaPlayed()){ /**Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di CiccioPanza*/
+                    playerTurn.getPersonalSchool().getProfOfPlayer().get(4).setInHall(true);
+                }
         }
+        cardEffectPlayed.setCiccioPanzaPlayed(false); /** Va Bene??? */
+    }
 
-        for (Player player : players) {
-            if (numberOfB(player) == max) {
-                playerWithMax++;
-                maxPlayer = player;
-            }
+    public boolean getProfInHall(SColor color){
+        switch(color){
+            case GREEN:
+                return profGInHall;
+            case RED:
+                return profRInHall;
+            case YELLOW:
+                return profYInHall;
+            case PINK:
+                return profPInHall;
+            case BLUE:
+                return profBInHall;
         }
-        if (playerWithMax == 1) {
-            maxPlayer.getPersonalSchool().setProfBInHall(true);
-        }
-    }
-
-    public boolean getProfGInHall(){
-        return profGInHall;
-    }
-
-    public boolean getProfRInHall(){
-        return profRInHall;
-    }
-
-    public boolean getProfYInHall(){
-        return profYInHall;
-    }
-
-    public boolean getProfPInHall(){
-        return profPInHall;
-    }
-
-    public boolean getProfBInHall(){
-        return profBInHall;
-    }
-
-    public boolean setProfGInHall(boolean profGInHall){
-        return this.profGInHall = profGInHall;
-    }
-
-    public boolean setProfRInHall(boolean profRInHall){
-        return this.profRInHall = profRInHall;
-    }
-
-    public boolean setProfYInHall(boolean profYInHall){
-       return this.profYInHall = profYInHall;
-    }
-
-    public boolean setProfPInHall(boolean profPInHall){
-        return this.profPInHall = profPInHall;
-    }
-
-    public boolean setProfBInHall(boolean profBInHall){
-        return this.profBInHall = profBInHall;
+        return false;        //da modificare con un return valido
     }
 
     public ArrayList<Tower> getTower() {
@@ -342,10 +273,6 @@ public class School {
 
         return countProf;
     }
-
-   /* public boolean checkTowerIsEmpty() {     //  (Ricorda: se non ci sono Tower in TowerZone finisce la partita)
-        return towerZone.toArray().length != 0;
-    } */
 
 }
 

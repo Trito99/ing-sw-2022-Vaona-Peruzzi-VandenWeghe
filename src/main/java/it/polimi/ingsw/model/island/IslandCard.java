@@ -1,7 +1,10 @@
 package it.polimi.ingsw.model.island;
 
+import it.polimi.ingsw.model.character.CardEffect;
+import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.school.Tower;
+import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.school.TColor;
 
@@ -15,6 +18,8 @@ public class IslandCard {
     private Tower towerOnIsland;
     private int mergedIsland; // = quante isole sono unite
     private boolean MotherEarthOnIsland = false;
+    private boolean xCardOnIsland = false;
+    private int xCardCounter = 0;
 
     public IslandCard(int idIsland) {
         this.idIsland = idIsland;
@@ -55,76 +60,104 @@ public class IslandCard {
     }
 
 
-    public Player calculateInfluence(ArrayList<Player> listOfPlayers){   //Restituisce il Player che ha influenza sull'isola
+    public Player calculateInfluence(ArrayList<Player> listOfPlayers, CardEffect cardEffectPlayed){   //Restituisce il Player che ha influenza sull'isola
         int i ;
         int maxInfluence = 0;
         Player playerWithInfluence = null;
 
-
-        for(Player players : listOfPlayers){
+        /** calcolo influenza sull'isola */
+        for(Player p : listOfPlayers){
             int countTot = 0;
 
             for(i=0; i<studentOnIsland.size(); i++){
-                switch (studentOnIsland.get(i).getsColour()){
+                switch (studentOnIsland.get(i).getsColour()){   /** guardo colore studente */
                     case GREEN:
-                        if(players.getPersonalSchool().getProfGInHall()){
+                        if(p.getPersonalSchool().getProfInHall(SColor.GREEN) && !SColor.GREEN.isColorBlocked()){ /** se ho il prof verde e stud è verde incremento influenza */
                             countTot++;
                         }
                         break;
                     case RED:
-                        if(players.getPersonalSchool().getProfRInHall()){
+                        if(p.getPersonalSchool().getProfInHall(SColor.RED) && !SColor.RED.isColorBlocked()){
                             countTot++;
                         }
                         break;
                     case YELLOW:
-                        if(players.getPersonalSchool().getProfYInHall()){
+                        if(p.getPersonalSchool().getProfInHall(SColor.YELLOW) && !SColor.YELLOW.isColorBlocked()){
                             countTot++;
                         }
                         break;
                     case PINK:
-                        if(players.getPersonalSchool().getProfPInHall()){
+                        if(p.getPersonalSchool().getProfInHall(SColor.PINK) && !SColor.PINK.isColorBlocked()){
                             countTot++;
                         }
                         break;
                     case BLUE:
-                        if(players.getPersonalSchool().getProfBInHall()){
+                        if(p.getPersonalSchool().getProfInHall(SColor.BLUE) && !SColor.BLUE.isColorBlocked()){
                             countTot++;
                         }
                         break;
                 }
-                players.setInfluenceOnIsland(countTot);
+                /** EFFETTO TAURO */
+                if(p.getTColour().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isTauroPlayed()){  /** Aggiungo influenza torri */
+                    countTot++;
+                }
+
+                /** EFFETTO SILVIO */
+                if(cardEffectPlayed.isSilvioPlayed()) {
+                    p.setInfluenceOnIsland(countTot + 2);
+                    /** controlla  se va bene qua */
+                }
+                else
+                    p.setInfluenceOnIsland(countTot);
+            }
+
+            for(SColor c : SColor.values()){            /** controlla se va bene qua (Fungaiolo) */
+                if(c.isColorBlocked)
+                    c.unlockColor();
             }
         }
 
-        for(Player players : listOfPlayers) {
-            if (players.getInfluenceOnIsland() > maxInfluence){
-                maxInfluence = players.getInfluenceOnIsland();
+        for(Player p : listOfPlayers) {
+            if (p.getInfluenceOnIsland() > maxInfluence){
+                maxInfluence = p.getInfluenceOnIsland();
             }
         }
 
-        for(Player players : listOfPlayers) {
-            if (players.getInfluenceOnIsland() == maxInfluence){
-                playerWithInfluence = players;
+        for(Player p : listOfPlayers) {
+            if (p.getInfluenceOnIsland() == maxInfluence){
+                playerWithInfluence = p;
             }
         }
+
+        cardEffectPlayed.setSilvioPlayed(false);
+        cardEffectPlayed.setTauroPlayed(false);           /** controlla se va bene qua (Tauro) */
 
         return playerWithInfluence;         /** Controllo Pareggio Influenza ----> return null? */
+
     }
 
     public void buildTowerOnIsland(ArrayList<Player> listOfPlayer){        //Builda la torre del colore del Player che ha l'influenza sull'isola
 
         Player playerFound = calculateInfluence(listOfPlayer);  //Player che ha influenza sull'isola
 
-        if(playerFound==null){
-            return;             /** Se nessuno ha influenza non buildo */
+        /** SCIURA: controllo che non ci sia una tessera divieto sull'isola */
+        if (xCardOnIsland){
+            setXCardCounter(getXCardCounter()-1);
+            if(xCardCounter == 0) setXCardOnIsland(false);
         }
 
-        TColor towerColour = playerFound.getTColour();      //Colore delle torri del player che ha influenza
+        else{
+            if(playerFound==null){
+                return;             /** Se nessuno ha influenza non buildo */
+            }
 
-        towerOnIsland = new Tower(playerFound.getPersonalSchool().getTower().size(), towerColour);
-        playerFound.getPersonalSchool().removeTower();
+            TColor towerColour = playerFound.getTColour();      //Colore delle torri del player che ha influenza
 
-        setTowerIsOnIsland(true);
+            towerOnIsland = new Tower(playerFound.getPersonalSchool().getTower().size(), towerColour);
+            playerFound.getPersonalSchool().removeTower();
+
+            setTowerIsOnIsland(true);
+        }
     }
 
     public void changeTowerColour(ArrayList<Player> listOfPlayers){        //cambio colore della torre se è cambiata l'influenza sull'isola
@@ -156,5 +189,25 @@ public class IslandCard {
 
     public void setMergedIsland(int mergedIsland) {
         this.mergedIsland = mergedIsland;
+    }
+
+    public void setIdIsland(int idIsland) {
+        this.idIsland = idIsland;
+    }
+
+    public boolean isXCardOnIsland() {
+        return xCardOnIsland;
+    }
+
+    public int getXCardCounter() {
+        return xCardCounter;
+    }
+
+    public void setXCardCounter(int xCardCounter) {
+        this.xCardCounter = xCardCounter;
+    }
+
+    public void setXCardOnIsland(boolean xCardOnIsland) {
+        this.xCardOnIsland = xCardOnIsland;
     }
 }

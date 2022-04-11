@@ -1,17 +1,23 @@
 package it.polimi.ingsw.model.character;
 
+import it.polimi.ingsw.model.student.Student;
+
+import java.util.ArrayList;
+
 public class CharacterCard {
 
     private final int idCharacter;
     private int costCharacter;
     private final CardEffect cardEffect;
     private boolean coinOnCard;
+    private ArrayList<Student> studentsOnCard;
 
     public CharacterCard (int idCharacter, int costCharacter, CardEffect cardEffect){
         this.idCharacter = idCharacter;
         this.costCharacter = costCharacter;
         this.cardEffect = cardEffect;
         this.coinOnCard = false;
+
     }
 
     public int getIdCharacter() {
@@ -38,7 +44,12 @@ public class CharacterCard {
         this.coinOnCard = coinOnCard;
     }
 
-    public void increaseCostCharacter(CharacterCard characterCard){
-        characterCard.setCostCharacter(getCostCharacter() + 1);
+    public ArrayList<Student> getStudentsOnCard() {
+        return studentsOnCard;
     }
+
+    public void setStudentsOnCard(ArrayList<Student> studentsOnCard) {
+        this.studentsOnCard = studentsOnCard;
+    }
+
 }
