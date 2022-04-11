@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.game;
 
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.Team;
 import it.polimi.ingsw.model.table.Table;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class Game {
     private Difficulty difficulty;
     private Table table;
     private ArrayList<CharacterCard> characterCards;
+    private ArrayList<Team> team;
 
     /**
      * Default constructor.
@@ -27,12 +29,6 @@ public class Game {
         listOfPlayers = new ArrayList<Player>();
         table = new Table();
         characterCards = new ArrayList<CharacterCard>(12);
-    }
-
-    public void addPlayer(Player player) {
-        if(listOfPlayers.size()<4){
-            listOfPlayers.add(player);
-        }
     }
 
     public GameMode getGameMode() {
@@ -109,5 +105,9 @@ public class Game {
 
     public Table getTable() {
         return table;
+    }
+
+    public ArrayList<Team> getTeam() {
+        return team;
     }
 }

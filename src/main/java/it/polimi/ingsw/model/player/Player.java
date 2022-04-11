@@ -27,15 +27,16 @@ public class Player {
     private int coinScore;
     private TColor tColor;
     private int influenceOnIsland;
+    private boolean hasAlreadyPlayed; //= True se il player ha già giocato la trashCard nel suo turno
 
 
     /**
      * Default constructor.
      */
-    public Player(School personalSchool, AssistantCard trash, Team team, TColor tColor, int coinScore) {
+    public Player(TColor tColor, PlayerNumber playerNumber) {
         nickname = new String();
         age = 0;
-        playerNumber = new PlayerNumber();      /** DA RIFARE COSTRUTTORE */
+        this.playerNumber = playerNumber;      /** DA RIFARE COSTRUTTORE */
         influenceOnIsland = 0;
         personalSchool = new School();
         tColor = new TColor();
@@ -140,5 +141,13 @@ public class Player {
 
     public void setTrash(AssistantCard trash) {
         this.trash = trash;
+    }
+
+    public boolean HasAlreadyPlayed() {
+        return hasAlreadyPlayed;
+    }
+
+    public void setHasAlreadyPlayed(boolean hasAlreadyPlayed) {
+        this.hasAlreadyPlayed = hasAlreadyPlayed;
     }
 }

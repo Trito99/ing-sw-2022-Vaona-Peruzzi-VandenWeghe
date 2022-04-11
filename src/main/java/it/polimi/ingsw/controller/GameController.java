@@ -11,6 +11,7 @@ import it.polimi.ingsw.model.game.GameState;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
+import it.polimi.ingsw.model.player.Team;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
@@ -41,10 +42,59 @@ public class GameController {
      * @param nickname del Giocatore.
      * @param gameId id della partita a cui il giocatore sta giocando.
      */
-    public void newPlayer(String nickname, int gameId, int age, View view) {
+
+    /** maxPlayers va scelto da chi crea la partita */
+    public void initializePlayer(String nickname, int gameId, int age, View view) { // Setto i player a inizio partita
         if(view.size()<maxPlayers){
-            this.game.addPlayer(new Player(nickname, gameId, age));
-            //view.put(nickname, view);
+            switch (maxPlayers){
+                /** Da inserire Nickname, data(età) ecc.. di tutti i player */
+                /** Togliere AddPlayer in Game e usare getListofPlayer.add??? (già fatto)*/
+                case 2:
+                    /**ESEMPIO:
+                     Player 1: scegli nickname, scrivi la tua età (o JSON)
+                     this.gameSession.addPlayer(new Player(nickname, età, TColor.WHITE, PlayerNumber.PLAYER1));
+                     Player 2: scegli nickname, scrivi la tua età
+                     this.gameSession.addPlayer(new Player(nickname, età, TColor.WHITE, PlayerNumber.PLAYER1)); */
+                    this.gameSession.getListOfPlayer().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
+                    this.gameSession.getListOfPlayer().add(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
+
+                    if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
+                        for (Player p : gameSession.getListOfPlayer())
+                            p.setCoinScore(1);
+                    }
+                    break;
+                    //view.put(nickname, view);
+                case 3:
+                    this.gameSession.getListOfPlayer().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
+                    this.gameSession.getListOfPlayer().add(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
+                    this.gameSession.getListOfPlayer().add(new Player(TColor.GREY, PlayerNumber.PLAYER3));
+
+                    if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)) {
+                        for (Player p : gameSession.getListOfPlayer())
+                            p.setCoinScore(1);
+                    }
+                    break;
+
+                case 4:
+                    this.gameSession.getListOfPlayer().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
+                    this.gameSession.getListOfPlayer().add(new Player(TColor.WHITE, PlayerNumber.PLAYER2));
+                    gameSession.getTeam().add(new Team()) ;
+                    gameSession.getTeam().get(0).intializeTeam(gameSession.getListOfPlayer().get(0), gameSession.getListOfPlayer().get(1));
+
+                    this.gameSession.getListOfPlayer().add(new Player(TColor.BLACK, PlayerNumber.PLAYER3));
+                    this.gameSession.getListOfPlayer().add(new Player(TColor.BLACK, PlayerNumber.PLAYER4));
+                    gameSession.getTeam().add(new Team());
+                    gameSession.getTeam().get(1).intializeTeam(gameSession.getListOfPlayer().get(2), gameSession.getListOfPlayer().get(3));
+
+                    /** Mettere ArrayList<Player> team dentro alla classe Player???  */
+                    if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)) {
+                        for (Player p : gameSession.getListOfPlayer())
+                            p.setCoinScore(1);
+                    }
+                    break;
+                default:
+                    break;
+            }
 
             if(view.size()==maxPlayers){
                 initializeGame();
@@ -52,48 +102,9 @@ public class GameController {
         }
     }
 
-    public void initializeGame(){
+    public void initializeGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
         setGameState(GameState.INIT);
-        switch (maxPlayers){
-            case 4:
-                game.setGameMode(gameMode.COOP);
-                if(difficulty.equals(Difficulty.STANDARDMODE)){
-                    Player.setCoinScore(0);
-                }
-                else if (difficulty.equals(Difficulty.EXPERTMODE)){
-                    Player.setCoinScore(1);
-                }
-                for(int i=0;i<4;i++)
-                    game.getListOfPlayer().add(new Player());
-            case 3:
-                game.setGameMode(gameMode.THREEPLAYERS);
-                if(difficulty.equals(Difficulty.STANDARDMODE)){
-                    Player.setCoinScore(0);
-                }
-                else if (difficulty.equals(Difficulty.EXPERTMODE)){
-                    Player.setCoinScore(1);
-                }
-                for(int i=0;i<3;i++)
-                    game.getListOfPlayer().add(new Player());
-                /**if(player.getPlayerNumber()==PlayerNumber.PLAYER1) player.setTColour(TColor.WHITE);
-                else if(player.getPlayerNumber()==PlayerNumber.PLAYER2) player.setTColour(TColor.GREY);
-                else if(player.getPlayerNumber()==PlayerNumber.PLAYER1) player.setTColour(TColor.BLACK);*/
 
-            case 2:
-                game.setGameMode(gameMode.TWOPLAYERS);
-                if(difficulty.equals(Difficulty.STANDARDMODE)){
-                    Player.setCoinScore(0);
-                }
-                else if (difficulty.equals(Difficulty.EXPERTMODE)){
-                    Player.setCoinScore(1);
-                }
-                for(int i=0;i<2;i++)
-                    game.getListOfPlayer().add(new Player());
-                /**
-                if(player.getPlayerNumber()==PlayerNumber.PLAYER1) player.setTColour(TColor.WHITE);
-                else if(player.getPlayerNumber()==PlayerNumber.PLAYER2) player.setTColour(TColor.BLACK);*/
-
-        }
     }
 
     public void playTrashCard(Player player){   /** memorizzo solo ultima carta giocata */
@@ -101,11 +112,20 @@ public class GameController {
         //notify observer---->scelgo carta da scartare
         for(Player p : gameSession.getListOfPlayer()){
             AssistantCard alreadyTaken = null;
-            if(playedCard != alreadyTaken)
+            if(playedCard != p.getTrash() && p.HasAlreadyPlayed()) {
                 player.setTrash(playedCard);
+                player.setHasAlreadyPlayed(true);
+            }
+            else if(playedCard == p.getTrash() && p.HasAlreadyPlayed())
+                System.out.println("Scegli un'altra carta! ");
+            /**ELSE  controlla se è l'unica carta giocabile */
             /** controlla se è l'unica carta giocabile */
         }
         player.getDeckOfPlayer().getCardsInHand().remove(playedCard);
+
+        for(Player p : gameSession.getListOfPlayer()){          /** Rimetto tutto a false a fine "turno" */
+            p.setHasAlreadyPlayed(false);
+        }
     }
 
     public void increaseCoinScore(Player player){
