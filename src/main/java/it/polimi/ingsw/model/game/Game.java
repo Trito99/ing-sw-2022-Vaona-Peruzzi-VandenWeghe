@@ -36,7 +36,7 @@ public class Game {
     }
 
     public ArrayList<Player> getListOfPlayer(){
-        return new ArrayList<>(listOfPlayers);
+        return (ArrayList<Player>) listOfPlayers.clone();
     }
 
     /**     SECONDO ME SAREBBE PIù CORRETTO - chiara
@@ -84,7 +84,7 @@ public class Game {
     }
 
     public ArrayList<Player> getOrder(){
-        return order;
+        return (ArrayList<Player>) order.clone();
     }
 
     /**
@@ -108,6 +108,6 @@ public class Game {
     }
 
     public ArrayList<Team> getTeam() {
-        return team;
+        return (ArrayList<Team>) team.clone();
     }
 }

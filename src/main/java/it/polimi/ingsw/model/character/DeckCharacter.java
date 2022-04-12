@@ -17,7 +17,7 @@ public class DeckCharacter {
     }
 
     public ArrayList<CharacterCard> getCharacterCards(){
-        return characterCards;
+        return (ArrayList<CharacterCard>) characterCards.clone();
     }
 
     public void shuffleCard(ArrayList<CharacterCard> characterCards){

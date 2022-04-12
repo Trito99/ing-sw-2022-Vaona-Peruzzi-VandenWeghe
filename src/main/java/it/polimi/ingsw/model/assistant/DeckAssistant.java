@@ -11,7 +11,7 @@ public class DeckAssistant {
     }
 
     public ArrayList<AssistantCard> getCardsInHand() {
-        return cardsInHand;
+        return (ArrayList<AssistantCard>) cardsInHand.clone();
     }
 
    /* public ArrayList<AssistantCard> updateDeck() {

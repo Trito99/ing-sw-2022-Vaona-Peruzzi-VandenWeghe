@@ -44,7 +44,7 @@ public class GameController {
      */
 
     /** maxPlayers va scelto da chi crea la partita */
-    public void initializePlayer(String nickname, int gameId, int age, View view) { // Setto i player a inizio partita
+    public void initializePlayer(View view) { // Setto i player a inizio partita
         if(view.size()<maxPlayers){
             switch (maxPlayers){
                 /** Da inserire Nickname, data(età) ecc.. di tutti i player */
@@ -123,7 +123,7 @@ public class GameController {
         }
         player.getDeckOfPlayer().getCardsInHand().remove(playedCard);
 
-        for(Player p : gameSession.getListOfPlayer()){          /** Rimetto tutto a false a fine "turno" */
+        for(Player p : gameSession.getListOfPlayer()){    /** Rimetto tutto a false a fine "turno"--->Andrà fuori dal metodo */
             p.setHasAlreadyPlayed(false);
         }
     }
@@ -136,7 +136,7 @@ public class GameController {
         player.setCoinScore(player.getCoinScore() - decreaseValue);
     }
 
-    public void playCard(CharacterCard character, Player player, Table table){
+    public void playCharacterCard(CharacterCard character, Player player, Table table){
         //notify observer con scelta del giocatore -> sceglie attraverso l'id o con Nome personaggio?
 
         if(character.getCoinOnCard()) {
@@ -176,9 +176,9 @@ public class GameController {
                 //notify (observer)----> islandChosen
                 ArrayList<Player> playersList= new ArrayList<>(gameSession.getListOfPlayer());
 
-                islandChosen.calculateInfluence(playersList, player);
-                islandChosen.buildTowerOnIsland(playersList);
-                islandChosen.changeTowerColour(playersList);
+                islandChosen.calculateInfluence(playersList, character.getCardEffect());
+                islandChosen.buildTowerOnIsland(playersList, character.getCardEffect());
+                islandChosen.changeTowerColour(playersList, character.getCardEffect());
                 gameSession.getTable().joinIsland(islandChosen, gameSession.getTable().getListOfIsland());
                 break;
 

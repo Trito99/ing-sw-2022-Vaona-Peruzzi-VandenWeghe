@@ -85,7 +85,7 @@ public class Table {
     }
 
     public ArrayList<Student> getBag() {
-        return bag;
+        return (ArrayList<Student>) bag.clone();
     }
 
     public void generateCloudNumber(GameMode gm) {
@@ -177,11 +177,11 @@ public class Table {
     }
 
     public ArrayList<CloudCard> getCloudNumber() {
-        return cloudNumber;
+        return (ArrayList<CloudCard>) cloudNumber.clone();
     }
 
     public ArrayList<IslandCard> getListOfIsland() {
-        return listOfIsland;
+        return (ArrayList<IslandCard>) listOfIsland.clone();
     }
 
     public int getCoinsOnTable() {
@@ -197,7 +197,7 @@ public class Table {
     }
 
     public ArrayList<CharacterCard> getCharacterCardsOnTable() {
-        return characterCardsOnTable;
+        return (ArrayList<CharacterCard>) characterCardsOnTable.clone();
     }
 
     public ArrayList<IslandCard> joinIsland(IslandCard island, ArrayList<IslandCard> listOfIsland) {      //valuto se due isole mergiano, in caso le unisco

@@ -45,7 +45,7 @@ public class CharacterCard {
     }
 
     public ArrayList<Student> getStudentsOnCard() {
-        return studentsOnCard;
+        return (ArrayList<Student>) studentsOnCard.clone();
     }
 
     public void setStudentsOnCard(ArrayList<Student> studentsOnCard) {
