@@ -39,7 +39,7 @@ public class School {
     }
 
     public ArrayList<Student> getEntry() {
-        return entry;
+        return (ArrayList<Student>) entry.clone();
     }
 
     public void moveStudentToIsland(IslandCard islandCard, int id){ //Specifico Studente va spostato (sceglie player)
@@ -89,27 +89,27 @@ public class School {
     profMap.put(SColor.GREEN, false);       */
 
     public ArrayList<Prof> getProfOfPlayer(){
-        return profOfPlayer;
+        return (ArrayList<Prof>) profOfPlayer.clone();
     }
 
     public ArrayList<Student> getGTable(){
-        return GTable;
+        return (ArrayList<Student>) GTable.clone();
     }
 
     public ArrayList<Student> getRTable(){
-        return RTable;
+        return (ArrayList<Student>) RTable.clone();
     }
 
     public ArrayList<Student> getYTable(){
-        return YTable;
+        return  (ArrayList<Student>) YTable.clone();
     }
 
     public ArrayList<Student> getPTable(){
-        return PTable;
+        return  (ArrayList<Student>) PTable.clone();
     }
 
     public ArrayList<Student> getBTable(){
-        return BTable;
+        return  (ArrayList<Student>) BTable.clone();
     }
 
     /** da generalizzare tutto con questo */
@@ -250,7 +250,7 @@ public class School {
     }
 
     public ArrayList<Tower> getTower() {
-        return towerZone;
+        return (ArrayList<Tower>) towerZone.clone();
     }
 
     public void addTower(int id, TColor tColor) {

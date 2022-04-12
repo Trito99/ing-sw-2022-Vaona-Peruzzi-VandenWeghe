@@ -40,7 +40,7 @@ public class IslandCard {
     }
 
     public ArrayList<Student> getStudentOnIsland() {
-        return studentOnIsland;
+        return (ArrayList<Student>) studentOnIsland.clone();
     }
 
     public boolean towerIsOnIsland() {
@@ -136,9 +136,9 @@ public class IslandCard {
 
     }
 
-    public void buildTowerOnIsland(ArrayList<Player> listOfPlayer){        //Builda la torre del colore del Player che ha l'influenza sull'isola
+    public void buildTowerOnIsland(ArrayList<Player> listOfPlayer,  CardEffect cardEffectPlayed){        //Builda la torre del colore del Player che ha l'influenza sull'isola
 
-        Player playerFound = calculateInfluence(listOfPlayer);  //Player che ha influenza sull'isola
+        Player playerFound = calculateInfluence(listOfPlayer, cardEffectPlayed);  //Player che ha influenza sull'isola
 
         /** SCIURA: controllo che non ci sia una tessera divieto sull'isola */
         if (xCardOnIsland){
@@ -160,10 +160,10 @@ public class IslandCard {
         }
     }
 
-    public void changeTowerColour(ArrayList<Player> listOfPlayers){        //cambio colore della torre se è cambiata l'influenza sull'isola
+    public void changeTowerColour(ArrayList<Player> listOfPlayers, CardEffect cardEffectPlayed){        //cambio colore della torre se è cambiata l'influenza sull'isola
 
         Player prevPlayer = null;
-        Player playerBuilder = calculateInfluence(listOfPlayers);
+        Player playerBuilder = calculateInfluence(listOfPlayers, cardEffectPlayed);
 
         if(playerBuilder==null){
             return;             /** Se nessuno ha influenza non cambia il colore */

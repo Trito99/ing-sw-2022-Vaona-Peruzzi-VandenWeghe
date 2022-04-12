@@ -12,7 +12,7 @@ public class Team {
     }
 
     public ArrayList<Player> getTeam(){
-        return new ArrayList<Player>(team);
+        return (ArrayList<Player>) team.clone();
     }
 
     public void intializeTeam(Player player1, Player player2){

@@ -79,7 +79,7 @@ public class Player {
 
 
     public String getNickname() {
-        return this.nickname;
+        return nickname;
     }
 
     public int getAge() {
@@ -121,13 +121,13 @@ public class Player {
 
     public int getCoinScore() {
         return coinScore;
-    }   //Static?
+    }
 
     public DeckAssistant getDeckOfPlayer(){
         return deckOfPlayer;
     }
 
-    public static void setCoinScore(int coinScore) {
+    public void setCoinScore(int coinScore) {
         this.coinScore = coinScore;
     }
 
