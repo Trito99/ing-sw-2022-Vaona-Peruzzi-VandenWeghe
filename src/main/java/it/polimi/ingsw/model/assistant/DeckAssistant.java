@@ -14,6 +14,11 @@ public class DeckAssistant {
         return cardsInHand;
     }
 
+    public void generateDeck(){
+        cardsInHand.add(new AssistantCard("nome",1,2));
+        //altre 9 volte
+    }
+
    /* public ArrayList<AssistantCard> updateDeck() {
         return this.cardsInHand;
     }  //ritorna il mazzo di carte senza la carta selezionata     */
