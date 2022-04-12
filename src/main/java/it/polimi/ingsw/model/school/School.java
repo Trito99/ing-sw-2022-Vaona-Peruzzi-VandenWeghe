@@ -27,7 +27,7 @@ public class School {
     private ArrayList<Tower> towerZone;
     private ArrayList<Prof> profOfPlayer;
 
-    public School(ArrayList<Prof> profOfPlayer) {
+    public School() {
 
         GTable = new ArrayList<>();
         RTable = new ArrayList<>();
@@ -61,9 +61,9 @@ public class School {
         switch(student.getsColour()) {
             case GREEN:
                 GTable.add(student);
-                // if(GameMode.equals(EXPERTMODE) && (GTable.size()==3 || GTable.size()==6 || GTable.size()=9)){
-                //     player.increaseCoinScore();
-                //     table.decreaseCoinScore(); }
+                /** if(GameMode.equals(EXPERTMODE) && (GTable.size()==3 || GTable.size()==6 || GTable.size()=9)){
+                    player.setCoinScore(player.getCoinScore() + 1);
+                    table.decreaseCoinScore(); }  */
                 entry.remove(entry.get(entry.indexOf(student)));
                 break;
             case RED:
@@ -84,9 +84,6 @@ public class School {
                 break;
         }
     }
-
-/*    EnumMap<SColor, Boolean> profMap = new EnumMap<>(SColor.class);
-    profMap.put(SColor.GREEN, false);       */
 
     public ArrayList<Prof> getProfOfPlayer(){
         return (ArrayList<Prof>) profOfPlayer.clone();

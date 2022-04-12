@@ -23,7 +23,6 @@ public class Player {
     private School personalSchool;
     private DeckAssistant deckOfPlayer;
     private AssistantCard trash;          //= Ultima carta nella pila degli scarti
-    private final Team team;
     private int coinScore;
     private TColor tColor;
     private int influenceOnIsland;
@@ -33,19 +32,16 @@ public class Player {
     /**
      * Default constructor.
      */
-    public Player(TColor tColor, PlayerNumber playerNumber) {
-        nickname = new String();
-        age = 0;
+    public Player(TColor tColor, PlayerNumber playerNumber) {   //+ nickname e data
+        nickname = new String(); //= nickname
+        age = 0;                 //= data
         this.playerNumber = playerNumber;      /** DA RIFARE COSTRUTTORE */
         influenceOnIsland = 0;
         personalSchool = new School();
-        tColor = new TColor();
+        this.tColor = tColor;
         trash = null;
-        coinScore = 1;
-        Game gameMode = Game.getGameMode();             //gameMode come parametro?(Vedi CloudCard)
-        assert gameMode != null;
-        if(gameMode.equals(GameMode.COOP)) this.team = team;
-        else this.team = null;
+        coinScore = 0;
+        hasAlreadyPlayed = false;
     }
 
     public School generateSchool(Table table, GameMode gameMode) {
@@ -75,9 +71,6 @@ public class Player {
         return personalSchool;
     }
 
-
-
-
     public String getNickname() {
         return nickname;
     }
@@ -104,10 +97,6 @@ public class Player {
 
     public AssistantCard getTrash() {
         return trash;
-    }
-
-    public Team getTeam() {
-        return team;
     }
 
 

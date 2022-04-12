@@ -16,7 +16,6 @@ import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
-import it.polimi.ingsw.view.View;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -26,7 +25,6 @@ import java.util.Observer;
 public class GameController {
     private int maxPlayers;
     private Game gameSession;
-    private final HashMap<String, VirtualView> allVirtualView;
     private TurnController turnController;
     private GameState gameState;
     private GameMode gameMode;
@@ -44,9 +42,9 @@ public class GameController {
      */
 
     /** maxPlayers va scelto da chi crea la partita */
-    public void initializePlayer(View view) { // Setto i player a inizio partita
-        if(view.size()<maxPlayers){
-            switch (maxPlayers){
+    public void initializePlayer() { // Setto i player a inizio partita
+
+        switch (maxPlayers){
                 /** Da inserire Nickname, data(età) ecc.. di tutti i player */
                 /** Togliere AddPlayer in Game e usare getListofPlayer.add??? (già fatto)*/
                 case 2:
@@ -94,11 +92,7 @@ public class GameController {
                     break;
                 default:
                     break;
-            }
 
-            if(view.size()==maxPlayers){
-                initializeGame();
-            }
         }
     }
 
@@ -186,13 +180,13 @@ public class GameController {
                 character.getCardEffect().setCePostaPerTePlayed(true);
                 break;
             case SCIURA:   /** 5 */
-                IslandCard islandChosen = null;
+                IslandCard islandChosenTwo = null;
                 //notify (observer)----> islandChosen
 
-                islandChosen.setXCardOnIsland(true);
-                if(islandChosen.getXCardCounter() < 4 && character.getCardEffect().getXCardOnCard() > 0){
-                    islandChosen.setXCardCounter(islandChosen.getXCardCounter() + 1);
-                    islandChosen.setXCardOnIsland(true);
+                islandChosenTwo.setXCardOnIsland(true);
+                if(islandChosenTwo.getXCardCounter() < 4 && character.getCardEffect().getXCardOnCard() > 0){
+                    islandChosenTwo.setXCardCounter(islandChosenTwo.getXCardCounter() + 1);
+                    islandChosenTwo.setXCardOnIsland(true);
                     character.getCardEffect().setXCardOnCard(character.getCardEffect().getXCardOnCard()-1);
                 }
                 else
@@ -336,7 +330,7 @@ public class GameController {
                     else if(colorChoice.equals(SColor.BLUE)){
                         for(int j=0; j<3; j++){
                             if(gameSession.getActivePlayer().getPersonalSchool().getBTable().size() != 0)
-                                gameSession.getActivePlayer().getPersonalSchool().getBTable().add(choice);
+                                gameSession.getActivePlayer().getPersonalSchool().getBTable().remove(colorChoice);
                         }
                     }
                 }
@@ -349,9 +343,11 @@ public class GameController {
 
     public void moveMotherEarth(int n, Table table, Player player, CardEffect cardEffectPlayed) { /** DA TOGLIERE IN TABLE??? */
         table.getListOfIsland().get(table.getPosMotherEarth() - 1).setMotherEarthOnIsland(false);
+
+        int playerChoice=0; /** da cambiare */
         //notify(observer)
 
-        if (playerchoice() <= player.getTrash().getStepMotherEarth() && !cardEffectPlayed.isCePostaPerTePlayed()) {
+        if (playerChoice <= player.getTrash().getStepMotherEarth() && !cardEffectPlayed.isCePostaPerTePlayed()) {
 
             if ((table.getPosMotherEarth() + n) > table.getListOfIsland().size()) {
                 table.getListOfIsland().get(table.getPosMotherEarth() + n - table.getListOfIsland().size() - 1).setMotherEarthOnIsland(true);
@@ -363,7 +359,7 @@ public class GameController {
             }
         }
         /** EFFETTO CEPOSTAPERTE */
-        else if(playerChoice() <= player.getTrash().getStepMotherEarth()+2 && cardEffectPlayed.isCePostaPerTePlayed()){
+        else if(playerChoice <= player.getTrash().getStepMotherEarth()+2 && cardEffectPlayed.isCePostaPerTePlayed()){
             if ((table.getPosMotherEarth() + n + 2) > table.getListOfIsland().size()) {
                 table.getListOfIsland().get(table.getPosMotherEarth() + n + 2 - table.getListOfIsland().size() - 1).setMotherEarthOnIsland(true);
                 table.setPosMotherEarth(table.getPosMotherEarth() + n + 2 - table.getListOfIsland().size());
@@ -388,14 +384,14 @@ public class GameController {
 
 
 
-    @Override
+  /**  @Override
     public void update(Observable o, Object arg) {
         if (o != view || !(arg instanceof Choice)){
             throw new IllegalArgumentException();
         }
-        /** model.setPlayerChoice((Choice)arg);
-         game();                 (DA CAMBIARE: preso da esercit)  */
-    }
+         model.setPlayerChoice((Choice)arg);
+         game();                 (DA CAMBIARE: preso da esercit)
+    }*/
 }
 
 

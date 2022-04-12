@@ -24,3 +24,5 @@ public class XCard {
         return idXCard;
     }
 }
+
+/** DA TOGLIERE!!!!!!! */

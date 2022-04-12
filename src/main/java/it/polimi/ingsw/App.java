@@ -2,8 +2,7 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.model.game.Game;
-import it.polimi.ingsw.view.ModelView;
-import it.polimi.ingsw.view.View;
+
 
 /**
  * Hello world!
@@ -13,7 +12,8 @@ public class App
 {
     public static void main( String[] args )
     {
-        Game model = new Game();
+        System.out.println("Hi Guys !!!");
+      /**  Game model = new Game();
         ModelView modelView = new ModelView();
         View view = new View();
         GameController controller = new GameController(model, view);
@@ -24,5 +24,6 @@ public class App
 
         view.run();
 
+    }*/
     }
 }
