@@ -23,16 +23,23 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class GameController {
-    private int maxPlayers;
+    private int maxPlayers; //Fede: Inutile, basta guardare gamesession.getGameMode()
     private Game gameSession;
-    private TurnController turnController;
+    private TurnController turnController; //?
     private GameState gameState;
-    private GameMode gameMode;
-    private Difficulty difficulty;
+    private GameMode gameMode;  //Fede: da eliminare? dovrebbe bastare gamesession.getGameMode()
+    private Difficulty difficulty;// Vedi commento sopra ^
 
     public GameController(){
         maxPlayers=0;
-        setGameState(GameState.INIT);
+        gameSession = new Game();
+        //turnController  = null; ?
+        gameState= GameState.INIT;
+        //gameMode = null;  ?
+        //difficulty = null;
+
+
+
     }
 
 
@@ -42,13 +49,13 @@ public class GameController {
      * @param gameId id della partita a cui il giocatore sta giocando.
      */
 
-    /** maxPlayers va scelto da chi crea la partita */
+    /** maxPlayers(GameMode) e difficulty vanno scelti da chi crea la partita */
     public void initializePlayer() { // Setto i player a inizio partita
 
-        switch (maxPlayers){
+        switch (gameSession.getGameMode()){
                 /** Da inserire Nickname, data(età) ecc.. di tutti i player */
                 /** Togliere AddPlayer in Game e usare getListofPlayer.add??? (già fatto)*/
-                case 2:
+            case TWOPLAYERS:
                     /**ESEMPIO:
                      Player 1: scegli nickname, scrivi la tua età (o JSON)
                      this.gameSession.addPlayer(new Player(nickname, età, TColor.WHITE, PlayerNumber.PLAYER1));
@@ -63,7 +70,7 @@ public class GameController {
                     }
                     break;
                     //view.put(nickname, view);
-                case 3:
+            case THREEPLAYERS:
                     this.gameSession.getListOfPlayer().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
                     this.gameSession.getListOfPlayer().add(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
                     this.gameSession.getListOfPlayer().add(new Player(TColor.GREY, PlayerNumber.PLAYER3));
@@ -74,7 +81,7 @@ public class GameController {
                     }
                     break;
 
-                case 4:
+            case COOP:
                     this.gameSession.getListOfPlayer().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
                     this.gameSession.getListOfPlayer().add(new Player(TColor.WHITE, PlayerNumber.PLAYER2));
                     gameSession.getTeam().add(new Team()) ;

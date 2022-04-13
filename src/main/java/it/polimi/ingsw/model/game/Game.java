@@ -26,12 +26,20 @@ public class Game {
      * Default constructor.
      */
     public Game() {
-        listOfPlayers = new ArrayList<Player>();
-        table = new Table();
-        characterCards = new ArrayList<CharacterCard>(12);
-        table.generateIslandCards();
+        this.gameMode = null;
+        this.listOfPlayers = new ArrayList<Player>();
+        this.activePlayer = null;
+        this.numberOfPlayers = 0;
+        this.state = null;
+        this.order = new ArrayList<Player>();
+        this.difficulty = difficulty;
+        this.table = new Table();
+        this.characterCards = new ArrayList<CharacterCard>();
+        this.team = new ArrayList<Team>();
+
+        /**table.generateIslandCards();
         table.generateMotherEarth();
-        table.generateCloudNumber(gameMode);
+        table.generateCloudNumber(gameMode);  */
     }
 
     public GameMode getGameMode() {
