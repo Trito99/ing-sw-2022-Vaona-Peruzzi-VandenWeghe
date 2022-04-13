@@ -17,7 +17,7 @@ import java.util.Random;
 public class Table {
 
     private ArrayList<CloudCard> cloudNumber;
-    private ArrayList<IslandCard> listOfIsland;
+    private ArrayList<IslandCard> listOfIsland = new ArrayList<>();
     private ArrayList<CharacterCard> characterCardsOnTable = new ArrayList<>(3);
     private int coinsOnTable;
     private int posMotherEarth = 0;
@@ -43,6 +43,22 @@ public class Table {
                 bag.add(new Student(s, blue));
         }
         Collections.shuffle(bag);
+    }
+
+    public void extractStudentsInit(){
+        for(int i=0;i<listOfIsland.size();i++){
+            if(posMotherEarth+6>listOfIsland.size()){
+                if(i!=(posMotherEarth-1) && i!=(posMotherEarth+5-listOfIsland.size())) {
+                    listOfIsland.get(i).getStudentOnIsland().add(bag.get(0));
+                    bag.remove(bag.get(0));
+                }
+            }else{
+                if(i!=(posMotherEarth-1) && i!=(posMotherEarth+5)) {
+                    listOfIsland.get(i).getStudentOnIsland().add(bag.get(0));
+                    bag.remove(bag.get(0));
+                }
+            }
+        }
     }
 
     public void addFinalStudents() {
