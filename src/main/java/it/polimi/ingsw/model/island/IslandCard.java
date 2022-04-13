@@ -40,7 +40,7 @@ public class IslandCard {
     }
 
     public ArrayList<Student> getStudentOnIsland() {
-        return (ArrayList<Student>) studentOnIsland.clone();
+        return (ArrayList<Student>) studentOnIsland;
     }
 
     public boolean towerIsOnIsland() {

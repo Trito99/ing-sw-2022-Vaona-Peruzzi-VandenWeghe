@@ -92,18 +92,13 @@ public class TestTable {
     @Test
     public void extraxtStudentsInit(){
         Table table = new Table();
-        int islandEx = 0;
         table.generateBagInit();
         table.generateIslandCards();
         table.generateMotherEarth();
         table.extractStudentsInit();
         for(IslandCard is:table.getListOfIsland()){
-            if(is.getMotherEarthOnIsland()==true)
-                islandEx=(is.getIdIsland()+6)%table.getListOfIsland().size();
-        }
-        for(IslandCard is:table.getListOfIsland()){
-            if(is.getMotherEarthOnIsland()==false&&(is.getIdIsland()!=islandEx))
-                assertEquals(1,is.getStudentOnIsland().size());
+            if(is.getMotherEarthOnIsland()==false&&(is.getIdIsland()!=(table.getPosMotherEarth()+6)%(table.getListOfIsland().size()))){
+                assertEquals(1,is.getStudentOnIsland().size());}
             else
                 assertEquals(0,is.getStudentOnIsland().size());
         }
