@@ -32,6 +32,7 @@ public class GameController {
 
     public GameController(){
         maxPlayers=0;
+        setGameState(GameState.INIT);
     }
 
 

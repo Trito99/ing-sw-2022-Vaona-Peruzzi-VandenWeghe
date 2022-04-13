@@ -29,6 +29,9 @@ public class Game {
         listOfPlayers = new ArrayList<Player>();
         table = new Table();
         characterCards = new ArrayList<CharacterCard>(12);
+        table.generateIslandCards();
+        table.generateMotherEarth();
+        table.generateCloudNumber(gameMode);
     }
 
     public GameMode getGameMode() {
