@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.table;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.student.Student;
 import org.junit.Assert;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;
@@ -89,18 +90,25 @@ public class TestTable {
 
     }
 
-    @Test
-    public void extraxtStudentsInit(){
+    @RepeatedTest(100)
+    public void extraxtStudentsInit() {
         Table table = new Table();
         table.generateBagInit();
         table.generateIslandCards();
         table.generateMotherEarth();
         table.extractStudentsInit();
-        for(IslandCard is:table.getListOfIsland()){
-            if(is.getMotherEarthOnIsland()==false&&(is.getIdIsland()!=(table.getPosMotherEarth()+6)%(table.getListOfIsland().size()))){
-                assertEquals(1,is.getStudentOnIsland().size());}
-            else
-                assertEquals(0,is.getStudentOnIsland().size());
+        for (IslandCard is : table.getListOfIsland()) {
+            if (table.getPosMotherEarth() + 6 <= table.getListOfIsland().size()) {
+                if (is.getMotherEarthOnIsland() == false && (is.getIdIsland() != (table.getPosMotherEarth() + 6)))
+                    assertEquals(1, is.getStudentOnIsland().size());
+                else
+                    assertEquals(0, is.getStudentOnIsland().size());
+            } else {
+                if (is.getMotherEarthOnIsland() == false && (is.getIdIsland() != (table.getPosMotherEarth() - 6)))
+                    assertEquals(1, is.getStudentOnIsland().size());
+                else
+                    assertEquals(0, is.getStudentOnIsland().size());
+            }
         }
     }
 }

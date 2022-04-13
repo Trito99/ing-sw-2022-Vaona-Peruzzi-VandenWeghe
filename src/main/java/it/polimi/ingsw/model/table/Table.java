@@ -47,9 +47,16 @@ public class Table {
 
     public void extractStudentsInit(){
         for(int i=0;i<listOfIsland.size();i++){
-            if(i!=(posMotherEarth-1) && i!=((posMotherEarth+5)%listOfIsland.size())) {
+            if(posMotherEarth+6>listOfIsland.size()){
+                if(i!=(posMotherEarth-1) && i!=(posMotherEarth+5-listOfIsland.size())) {
                     listOfIsland.get(i).getStudentOnIsland().add(bag.get(0));
                     bag.remove(bag.get(0));
+                }
+            }else{
+                if(i!=(posMotherEarth-1) && i!=(posMotherEarth+5)) {
+                    listOfIsland.get(i).getStudentOnIsland().add(bag.get(0));
+                    bag.remove(bag.get(0));
+                }
             }
         }
     }
@@ -125,6 +132,7 @@ public class Table {
     public void generateMotherEarth() {
         Random rn = new Random();
         int n = rn.nextInt(12) + 1;
+        System.out.println(n);
         listOfIsland.get(n - 1).setMotherEarthOnIsland(true);
         posMotherEarth = n;
     }
