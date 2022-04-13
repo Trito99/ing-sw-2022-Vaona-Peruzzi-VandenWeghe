@@ -91,7 +91,7 @@ public class TestTable {
     }
 
     @RepeatedTest(100)
-    public void extraxtStudentsInit() {
+    public void extractStudentsInit() {
         Table table = new Table();
         table.generateBagInit();
         table.generateIslandCards();
