@@ -14,6 +14,11 @@ public class DeckAssistant {
         return (ArrayList<AssistantCard>) cardsInHand.clone();
     }
 
+    public void generateAssistantDeck(){
+        cardsInHand.add(new AssistantCard("nome", 1, 9));
+        // altre carte
+    }
+
    /* public ArrayList<AssistantCard> updateDeck() {
         return this.cardsInHand;
     }  //ritorna il mazzo di carte senza la carta selezionata     */
