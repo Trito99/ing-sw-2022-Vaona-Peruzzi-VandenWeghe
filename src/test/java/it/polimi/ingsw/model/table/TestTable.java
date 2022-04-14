@@ -3,17 +3,28 @@ package it.polimi.ingsw.model.table;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.student.Student;
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+import org.junit.runners.Parameterized;
 
 import static org.junit.Assert.*;
 
 
 public class TestTable {
 
+    private Table table;
+
+    @BeforeEach
+    public void setup(){
+        table = new Table();
+    }
+
     @Test
-    public void generateBagInit() {
-        Table table= new Table();
+    public void generateBagInitTest() {
         int countgreen=0;
         int countyellow=0;
         int countred=0;
@@ -52,8 +63,7 @@ public class TestTable {
     }
 
     @Test
-    public void addFinalStudents(){
-        Table table= new Table();
+    public void addFinalStudentsTest(){
         int countgreen=0;
         int countyellow=0;
         int countred=0;
@@ -90,12 +100,12 @@ public class TestTable {
 
     }
 
+
     @RepeatedTest(100)
-    public void extractStudentsInit() {
-        Table table = new Table();
-        table.generateBagInit();
+    public void extractStudentsInitTest() {
         table.generateIslandCards();
         table.generateMotherEarth();
+        table.generateBagInit();
         table.extractStudentsInit();
         for (IslandCard is : table.getListOfIsland()) {
             if (table.getPosMotherEarth() + 6 <= table.getListOfIsland().size()) {
@@ -110,5 +120,11 @@ public class TestTable {
                     assertEquals(0, is.getStudentOnIsland().size());
             }
         }
+    }
+
+    @Test
+    public void ExtractStudentOnCloudTest(){
+        
+
     }
 }
