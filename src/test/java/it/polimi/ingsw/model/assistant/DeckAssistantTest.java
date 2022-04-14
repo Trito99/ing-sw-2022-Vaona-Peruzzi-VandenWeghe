@@ -7,29 +7,24 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 
-public class TestDeckAssistant {
+public class DeckAssistantTest {
 
     @Test
-    public void generateAssistantDeck(){
+    public void generateAssistantDeckTest(){
 
-        ArrayList <AssistantCard> cardsInHand = new ArrayList<>();
-        DeckAssistant deckAssistant = new DeckAssistant(cardsInHand);
-
-        int countCard = 0;
-        int countStepMotherEarth = 0;
-        int countTurnValue = 0;
-
+        DeckAssistant deckAssistant = new DeckAssistant();
         deckAssistant.generateAssistantDeck();
-
+        int countCard = 0,countStepMotherEarth = 0,countTurnValue = 0,n=1;
         assertNotNull(deckAssistant.getCardsInHand());
         assertEquals(10, deckAssistant.getCardsInHand().size());
-
         for(AssistantCard card : deckAssistant.getCardsInHand()){
             countStepMotherEarth = countStepMotherEarth + card.getStepMotherEarth();
             countTurnValue = countTurnValue + card.getTurnValue();
             countCard ++;
+            for(int i=n;i<deckAssistant.getCardsInHand().size();i++)
+                assertNotEquals(card,deckAssistant.getCardsInHand().get(i));
+            n++;
         }
-
         assertEquals(10, countCard);
         assertEquals(30, countStepMotherEarth);
         assertEquals(55, countTurnValue);
