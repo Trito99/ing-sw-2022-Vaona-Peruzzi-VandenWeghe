@@ -15,6 +15,10 @@ public class Prof {
         return sColor;
     }
 
+    public boolean getInHall(){
+        return isInHall;
+    }
+
     public void setInHall(boolean inHall) {
         isInHall = inHall;
     }

@@ -19,10 +19,11 @@ public class Table {
 
     private ArrayList<CloudCard> cloudNumber = new ArrayList<>() ;
     private ArrayList<IslandCard> listOfIsland = new ArrayList<>();
-    private ArrayList<CharacterCard> characterCardsOnTable = new ArrayList<>(3);
+    private ArrayList<CharacterCard> characterCardsOnTable = new ArrayList<>();
     private int coinsOnTable;
     private int posMotherEarth = 0;
     private ArrayList<Student> bag = new ArrayList<>();
+
 
     public void generateBagInit() {
         SColor green = SColor.GREEN;

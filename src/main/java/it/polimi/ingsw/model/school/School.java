@@ -262,11 +262,10 @@ public class School {
     public int numberOfProf(){
         int countProf = 0;
 
-        if(profGInHall == true) countProf++;
-        else if(profBInHall == true) countProf++;
-        else if(profPInHall == true) countProf++;
-        else if(profRInHall == true) countProf++;
-        else if(profYInHall == true) countProf++;
+        for (Prof prof : profOfPlayer){
+            if(prof.getInHall())
+                countProf++;
+        }
 
         return countProf;
     }
