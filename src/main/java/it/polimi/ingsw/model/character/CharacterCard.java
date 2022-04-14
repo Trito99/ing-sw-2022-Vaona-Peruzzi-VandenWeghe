@@ -6,22 +6,16 @@ import java.util.ArrayList;
 
 public class CharacterCard {
 
-    private final int idCharacter;
     private int costCharacter;
     private final CardEffect cardEffect;
     private boolean coinOnCard;
     private ArrayList<Student> studentsOnCard;
 
-    public CharacterCard (int idCharacter, int costCharacter, CardEffect cardEffect){
-        this.idCharacter = idCharacter;
+    public CharacterCard (int costCharacter, CardEffect cardEffect){
         this.costCharacter = costCharacter;
         this.cardEffect = cardEffect;
         this.coinOnCard = false;
 
-    }
-
-    public int getIdCharacter() {
-        return idCharacter;
     }
 
     public int getCostCharacter() {

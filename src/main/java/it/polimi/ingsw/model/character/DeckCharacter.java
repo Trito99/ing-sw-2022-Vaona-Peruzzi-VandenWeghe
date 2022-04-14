@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.character;
 
+import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.table.Table;
@@ -12,8 +13,8 @@ public class DeckCharacter {
 
     private ArrayList<CharacterCard> characterCards;
 
-    public DeckCharacter(ArrayList<CharacterCard> characterCards){
-        this.characterCards = new ArrayList<>(12);
+    public DeckCharacter(){
+        this.characterCards = new ArrayList<>();
     }
 
     public ArrayList<CharacterCard> getCharacterCards(){
@@ -22,6 +23,22 @@ public class DeckCharacter {
 
     public void shuffleCard(ArrayList<CharacterCard> characterCards){
         Collections.shuffle(characterCards);
+    }
+
+    public void generateCharacterDeck(){
+        characterCards.add(new CharacterCard(1, CardEffect.MBRIACONE));
+        characterCards.add(new CharacterCard(1, CardEffect.CICCIOPANZA));
+        characterCards.add(new CharacterCard(1, CardEffect.ALZABANDIERA));
+        characterCards.add(new CharacterCard(1, CardEffect.CEPOSTAPERTE));
+        characterCards.add(new CharacterCard(1, CardEffect.SCIURA));
+        characterCards.add(new CharacterCard(1, CardEffect.TAURO));
+        characterCards.add(new CharacterCard(1, CardEffect.JOKER));
+        characterCards.add(new CharacterCard(1, CardEffect.SILVIO));
+        characterCards.add(new CharacterCard(1, CardEffect.FUNGAIOLO));
+        characterCards.add(new CharacterCard(1, CardEffect.MENESTRELLO));
+        characterCards.add(new CharacterCard(1, CardEffect.DAMA));
+        characterCards.add(new CharacterCard(1, CardEffect.TOSSICO));
+
     }
 
 
