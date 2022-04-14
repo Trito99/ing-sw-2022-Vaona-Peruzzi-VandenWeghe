@@ -1,7 +1,5 @@
-package it.polimi.ingsw.model.table;
+package it.polimi.ingsw.model.assistant;
 
-import it.polimi.ingsw.model.assistant.AssistantCard;
-import it.polimi.ingsw.model.assistant.DeckAssistant;
 import org.junit.Test;
 
 import java.util.ArrayList;
