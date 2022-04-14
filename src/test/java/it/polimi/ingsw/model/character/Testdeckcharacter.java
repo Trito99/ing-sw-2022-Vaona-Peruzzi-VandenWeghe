@@ -27,7 +27,7 @@ public class Testdeckcharacter {
 
         int countCardOnTable = 0;
 
-        deckCharacter.drawCard(table);
+        //deckCharacter.drawCard(table);
 
         for(CharacterCard card : table.getCharacterCardsOnTable()){
             countCardOnTable++;
