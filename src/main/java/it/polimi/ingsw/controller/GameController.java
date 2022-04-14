@@ -6,7 +6,6 @@ import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.Game;
-import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.GameState;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
@@ -23,22 +22,15 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class GameController {
-    private int maxPlayers; //Fede: Inutile, basta guardare gamesession.getGameMode()
     private Game gameSession;
     private TurnController turnController; //?
     private GameState gameState;
-    private GameMode gameMode;  //Fede: da eliminare? dovrebbe bastare gamesession.getGameMode()
-    private Difficulty difficulty;// Vedi commento sopra ^
+
 
     public GameController(){
-        maxPlayers=0;
         gameSession = new Game();
         //turnController  = null; ?
         gameState= GameState.INIT;
-        //gameMode = null;  ?
-        //difficulty = null;
-
-
 
     }
 

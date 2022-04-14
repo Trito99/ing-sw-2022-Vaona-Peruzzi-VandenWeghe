@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class DeckAssistant {
 
     private ArrayList<AssistantCard> cardsInHand;
+    private String name;
 
     public DeckAssistant (ArrayList<AssistantCard> cardsInHand){
         this.cardsInHand = new ArrayList <>(10);
@@ -25,6 +26,14 @@ public class DeckAssistant {
         cardsInHand.add(new AssistantCard("dog", 4, 8));
         cardsInHand.add(new AssistantCard("elephant", 5, 9));
         cardsInHand.add(new AssistantCard("turtle", 5, 10));
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 
    /** public ArrayList<AssistantCard> updateDeck() {

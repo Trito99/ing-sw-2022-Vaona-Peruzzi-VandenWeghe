@@ -12,6 +12,7 @@ import it.polimi.ingsw.model.student.Student;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.Random;
 
 public class Table {
@@ -350,4 +351,14 @@ public class Table {
         }
         return winner;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Table)) return false;
+        Table table = (Table) o;
+        return listOfIsland.equals(table.listOfIsland);
+    }
+
 }
+
