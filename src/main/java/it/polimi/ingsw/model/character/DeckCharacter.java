@@ -25,7 +25,7 @@ public class DeckCharacter {
     }
 
 
-    public void drawCard(Table table){    //Pesca tre carte personaggio dal mazzo e mettile al centro del tavolo
+  /**  public void drawCard(Table table){    //Pesca tre carte personaggio dal mazzo e mettile al centro del tavolo
 
         shuffleCard(characterCards); //non sono sicuro di vaere passato l'array giusto
 
@@ -33,7 +33,7 @@ public class DeckCharacter {
             table.getCharacterCardsOnTable().add(i, characterCards.get(i));
         }
 
-    }
+    } */
 
 
 }

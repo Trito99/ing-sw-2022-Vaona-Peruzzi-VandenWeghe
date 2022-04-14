@@ -3,8 +3,10 @@ package it.polimi.ingsw.model.player;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.school.Prof;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;
+import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.table.Table;
 
 import java.util.Date;
@@ -67,6 +69,13 @@ public class Player {
         for (int f = 0; f < t; f++) {
             personalSchool.addTower(f, tColor);
         }
+
+        personalSchool.getProfOfPlayer().add(new Prof(SColor.GREEN));
+        personalSchool.getProfOfPlayer().add(new Prof(SColor.YELLOW));
+        personalSchool.getProfOfPlayer().add(new Prof(SColor.RED));
+        personalSchool.getProfOfPlayer().add(new Prof(SColor.BLUE));
+        personalSchool.getProfOfPlayer().add(new Prof(SColor.PINK));
+
         return personalSchool;
     }
 
