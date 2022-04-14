@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.table;
 
+import it.polimi.ingsw.model.cloud.CloudCard;
+import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.student.Student;
 import org.junit.Assert;
@@ -9,6 +11,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.runners.Parameterized;
 
 import static org.junit.Assert.*;
@@ -21,6 +26,8 @@ public class TestTable {
     @BeforeEach
     public void setup(){
         table = new Table();
+        table.generateIslandCards();
+        table.generateMotherEarth();
     }
 
     @Test
@@ -72,7 +79,6 @@ public class TestTable {
         table.addFinalStudents();
         assertNotNull(table.getBag());
         assertNotNull(table.getBag().get(119));
-
         for(Student s : table.getBag()){
             switch (s.getsColour()){
                 case GREEN:
@@ -103,8 +109,6 @@ public class TestTable {
 
     @RepeatedTest(100)
     public void extractStudentsInitTest() {
-        table.generateIslandCards();
-        table.generateMotherEarth();
         table.generateBagInit();
         table.extractStudentsInit();
         for (IslandCard is : table.getListOfIsland()) {
@@ -120,11 +124,22 @@ public class TestTable {
                     assertEquals(0, is.getStudentOnIsland().size());
             }
         }
+        assertEquals(0,table.getBag().size());
     }
 
-    @Test
-    public void ExtractStudentOnCloudTest(){
-        
 
+
+    @ParameterizedTest
+    @EnumSource(GameMode.class)
+    public void ExtractStudentOnCloudTest(GameMode gameMode){
+        table.generateCloudNumber(gameMode);
+        table.addFinalStudents();
+        int n = table.getBag().size();
+        table.extractStudentOnCloud();
+        for(CloudCard cloud : table.getCloudNumber()){
+            assertNotNull(cloud.getStudentOnCloud());
+            assertEquals(cloud.getNumberOfSpaces(),cloud.getStudentOnCloud().size());
+        }
+        assertEquals(n-(table.getCloudNumber().get(0).getNumberOfSpaces()*table.getCloudNumber().size()),table.getBag().size());
     }
 }

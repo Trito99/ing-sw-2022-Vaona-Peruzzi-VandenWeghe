@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class Table {
 
-    private ArrayList<CloudCard> cloudNumber;
+    private ArrayList<CloudCard> cloudNumber = new ArrayList<>() ;
     private ArrayList<IslandCard> listOfIsland = new ArrayList<>();
     private ArrayList<CharacterCard> characterCardsOnTable = new ArrayList<>(3);
     private int coinsOnTable;
@@ -87,16 +87,9 @@ public class Table {
 
     public void extractStudentOnCloud() {   //estrae dal sacchetto 3/4 studenti
         for (int c = 0; c < cloudNumber.size(); c++) {
-            if (cloudNumber.get(c).getNumberOfSpaces() == 4) {
-                for (int i = 0; i < 4; i++) {
-                    cloudNumber.get(c).getStudentOnCloud().add(bag.get(i));
-                    bag.remove(bag.get(i));
-                }
-            } else {
-                for (int i = 0; i < 3; i++) {
-                    cloudNumber.get(c).getStudentOnCloud().add(bag.get(i));
-                    bag.remove(bag.get(i));
-                }
+            for (int i = 0; i < cloudNumber.get(c).getNumberOfSpaces(); i++) {
+                cloudNumber.get(c).getStudentOnCloud().add(bag.get(i));
+                bag.remove(bag.get(i));
             }
         }
     }
@@ -133,7 +126,6 @@ public class Table {
     public void generateMotherEarth() {
         Random rn = new Random();
         int n = rn.nextInt(12) + 1;
-        System.out.println(n);
         listOfIsland.get(n - 1).setMotherEarthOnIsland(true);
         posMotherEarth = n;
     }
