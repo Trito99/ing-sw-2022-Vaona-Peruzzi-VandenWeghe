@@ -2,7 +2,6 @@ package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
-import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;
@@ -98,7 +97,6 @@ public class Player {
     public AssistantCard getTrash() {
         return trash;
     }
-
 
     public void setTColour(TColor tColor) {
         this.tColor = tColor;

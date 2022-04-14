@@ -9,6 +9,7 @@ import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.school.TColor;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class IslandCard {
 
@@ -210,4 +211,13 @@ public class IslandCard {
     public void setXCardOnIsland(boolean xCardOnIsland) {
         this.xCardOnIsland = xCardOnIsland;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof IslandCard)) return false;
+        IslandCard that = (IslandCard) o;
+        return towerOnIsland.equals(that.towerOnIsland);
+    }
+
 }
