@@ -15,7 +15,7 @@ public class Prof {
         return sColor;
     }
 
-    public boolean getInHall(){
+    public boolean getIsInHall(){
         return isInHall;
     }
 
