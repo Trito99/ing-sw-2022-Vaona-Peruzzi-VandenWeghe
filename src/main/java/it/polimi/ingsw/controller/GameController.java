@@ -228,22 +228,27 @@ public class GameController {
                     //notify (observer)---->scelta 2 studenti
                     if(choice.getsColour().equals(SColor.GREEN)){
                         gameSession.getActivePlayer().getPersonalSchool().getGTable().add(choice);
+                        getCoinFromStudentMove();
                         gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(choice);
                     }
                     else if(choice.getsColour().equals(SColor.RED)){
                         gameSession.getActivePlayer().getPersonalSchool().getRTable().add(choice);
+                        getCoinFromStudentMove();
                         gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(choice);
                     }
                     else if(choice.getsColour().equals(SColor.YELLOW)){
                         gameSession.getActivePlayer().getPersonalSchool().getYTable().add(choice);
+                        getCoinFromStudentMove();
                         gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(choice);
                     }
                     else if(choice.getsColour().equals(SColor.PINK)){
                         gameSession.getActivePlayer().getPersonalSchool().getPTable().add(choice);
+                        getCoinFromStudentMove();
                         gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(choice);
                     }
                     else if(choice.getsColour().equals(SColor.BLUE)){
                         gameSession.getActivePlayer().getPersonalSchool().getBTable().add(choice);
+                        getCoinFromStudentMove();
                         gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(choice);
                     }
                 }
@@ -280,18 +285,23 @@ public class GameController {
                 //notify (observer)---->scelgo pedina da mettere nel table
                 if(choice.getsColour().equals(SColor.GREEN)){
                     gameSession.getActivePlayer().getPersonalSchool().getGTable().add(choice);
+                    getCoinFromStudentMove();
                 }
                 else if(choice.getsColour().equals(SColor.RED)){
                     gameSession.getActivePlayer().getPersonalSchool().getRTable().add(choice);
+                    getCoinFromStudentMove();
                 }
                 else if(choice.getsColour().equals(SColor.YELLOW)){
                     gameSession.getActivePlayer().getPersonalSchool().getYTable().add(choice);
+                    getCoinFromStudentMove();
                 }
                 else if(choice.getsColour().equals(SColor.PINK)){
                     gameSession.getActivePlayer().getPersonalSchool().getPTable().add(choice);
+                    getCoinFromStudentMove();
                 }
                 else if(choice.getsColour().equals(SColor.BLUE)){
                     gameSession.getActivePlayer().getPersonalSchool().getBTable().add(choice);
+                    getCoinFromStudentMove();
                 }
                 character.getStudentsOnCard().remove(choice);
                 //notify (observer)---->pesco pedina da mettere sulla carta
@@ -380,6 +390,21 @@ public class GameController {
 
     public void setGameState(GameState gameState){
         this.gameState = gameState;
+    }
+
+    private void getCoinFromStudentMove() {
+        if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE) && (gameSession.getActivePlayer().getPersonalSchool().getGTable().size()==3)){
+            gameSession.getActivePlayer().setCoinScore(gameSession.getActivePlayer().getCoinScore() + 1);
+            gameSession.getTable().setCoinsOnTable(gameSession.getTable().getCoinsOnTable() - 1);
+        }
+        else if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE) && (gameSession.getActivePlayer().getPersonalSchool().getGTable().size()==6)){
+            gameSession.getActivePlayer().setCoinScore(gameSession.getActivePlayer().getCoinScore() + 1);
+            gameSession.getTable().setCoinsOnTable(gameSession.getTable().getCoinsOnTable() - 1);
+        }
+        else if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE) && (gameSession.getActivePlayer().getPersonalSchool().getGTable().size()==9)){
+            gameSession.getActivePlayer().setCoinScore(gameSession.getActivePlayer().getCoinScore() + 1);
+            gameSession.getTable().setCoinsOnTable(gameSession.getTable().getCoinsOnTable() - 1);
+        }
     }
 
 

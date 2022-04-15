@@ -59,33 +59,33 @@ public class School {
         switch(student.getsColour()) {
             case GREEN:
                 GTable.add(student);
-                GetCoinFromStudentMove(playerMoving, table, difficulty);
+                getCoinFromStudentMove(playerMoving, table, difficulty);
                 entry.remove(entry.get(entry.indexOf(student)));
                 break;
             case RED:
                 RTable.add(student);
-                GetCoinFromStudentMove(playerMoving, table, difficulty);
+                getCoinFromStudentMove(playerMoving, table, difficulty);
                 entry.remove(entry.get(entry.indexOf(student)));
                 break;
             case YELLOW:
                 YTable.add(student);
-                GetCoinFromStudentMove(playerMoving, table, difficulty);
+                getCoinFromStudentMove(playerMoving, table, difficulty);
                 entry.remove(entry.get(entry.indexOf(student)));
                 break;
             case PINK:
                 PTable.add(student);
-                GetCoinFromStudentMove(playerMoving, table, difficulty);
+                getCoinFromStudentMove(playerMoving, table, difficulty);
                 entry.remove(entry.get(entry.indexOf(student)));
                 break;
             case BLUE:
                 BTable.add(student);
-                GetCoinFromStudentMove(playerMoving, table, difficulty);
+                getCoinFromStudentMove(playerMoving, table, difficulty);
                 entry.remove(entry.get(entry.indexOf(student)));
                 break;
         }
     }
 
-    private void GetCoinFromStudentMove(Player playerMoving, Table table, Difficulty difficulty) {
+    private void getCoinFromStudentMove(Player playerMoving, Table table, Difficulty difficulty) {
         if(difficulty.equals(Difficulty.EXPERTMODE) && (GTable.size()==3)){
             playerMoving.setCoinScore(playerMoving.getCoinScore() + 1);
             table.setCoinsOnTable(table.getCoinsOnTable() - 1);
