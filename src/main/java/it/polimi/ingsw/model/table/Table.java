@@ -96,7 +96,7 @@ public class Table {
     }
 
     public ArrayList<Student> getBag() {
-        return (ArrayList<Student>) bag.clone();
+        return (ArrayList<Student>) bag;
     }
 
     public void generateCloudNumber(GameMode gm) {

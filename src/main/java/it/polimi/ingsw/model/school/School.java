@@ -13,19 +13,19 @@ import java.util.Map;
 
 public class School {
 
-    private ArrayList<Student> entry;
-    private ArrayList<Student> GTable;
-    private ArrayList<Student> RTable;
-    private ArrayList<Student> YTable;
-    private ArrayList<Student> PTable;
-    private ArrayList<Student> BTable;
+    private ArrayList<Student> entry = new ArrayList<>();
+    private ArrayList<Student> GTable = new ArrayList<>();
+    private ArrayList<Student> RTable = new ArrayList<>();
+    private ArrayList<Student> YTable = new ArrayList<>();
+    private ArrayList<Student> PTable = new ArrayList<>();
+    private ArrayList<Student> BTable = new ArrayList<>();
     private boolean profGInHall;
     private boolean profRInHall;
     private boolean profYInHall;
     private boolean profPInHall;
     private boolean profBInHall;
-    private ArrayList<Tower> towerZone;
-    private ArrayList<Prof> profOfPlayer;
+    private ArrayList<Tower> towerZone = new ArrayList<>();
+    private ArrayList<Prof> profOfPlayer = new ArrayList<>();
 
     public School() {
 
@@ -39,7 +39,7 @@ public class School {
     }
 
     public ArrayList<Student> getEntry() {
-        return (ArrayList<Student>) entry.clone();
+        return (ArrayList<Student>) entry;
     }
 
     public void moveStudentToIsland(IslandCard islandCard, int id){ //Specifico Studente va spostato (sceglie player)
@@ -86,7 +86,7 @@ public class School {
     }
 
     public ArrayList<Prof> getProfOfPlayer(){
-        return (ArrayList<Prof>) profOfPlayer.clone();
+        return (ArrayList<Prof>) profOfPlayer;
     }
 
     public ArrayList<Student> getGTable(){

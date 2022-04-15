@@ -23,18 +23,17 @@ class SchoolTest {
     public void init(){
         table= new Table();
         table.addFinalStudents();
+        table.generateIslandCards();
     }
     @ParameterizedTest
     @EnumSource(GameMode.class)
-
     void numberOfProf(GameMode gameMode) {
-        School school= new School();
         Player player= new Player(TColor.BLACK, PlayerNumber.PLAYER1);
         player.generateSchool(table, gameMode);
         for (int i = 0; i < 5; i++) {
             player.getPersonalSchool().getProfOfPlayer().get(i).setInHall(true);
         }
-        assertEquals(5, school.numberOfProf());
+        assertEquals(5, player.getPersonalSchool().numberOfProf());
 
     }
 }

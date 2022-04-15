@@ -12,8 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import java.util.Random;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class TableTest{
@@ -25,6 +26,7 @@ public class TableTest{
         table = new Table();
         table.generateIslandCards();
         table.generateMotherEarth();
+        table.addFinalStudents();
     }
 
     @Test
@@ -34,6 +36,7 @@ public class TableTest{
         int countred=0;
         int countblue=0;
         int countpink=0;
+        table.getBag().clear();
         table.generateBagInit();
         assertNotNull(table.getBag());
         assertNotNull(table.getBag().get(9));
@@ -67,13 +70,38 @@ public class TableTest{
     }
 
     @Test
+    public void generateIslandCardsTest(){
+        assertNotNull(table.getListOfIsland());
+        assertEquals(12,table.getListOfIsland().size());
+    }
+
+    @RepeatedTest(100)
+    public void generateMotherEarthTest(){
+        int n=0;
+        assertNotNull(table.getPosMotherEarth());
+        for(IslandCard islandCard : table.getListOfIsland()){
+            if(islandCard.getMotherEarthOnIsland()==true){
+                assertEquals(table.getPosMotherEarth(),islandCard.getIdIsland());
+                n++;
+            }
+        }
+        assertEquals(1,n);
+    }
+
+    @ParameterizedTest
+    @EnumSource(GameMode.class)
+    public void generateCloudNumberTest(GameMode gameMode){
+        table.generateCloudNumber(gameMode);
+        assertNotNull(table.getCloudNumber());
+    }
+
+    @Test
     public void addFinalStudentsTest(){
         int countgreen=0;
         int countyellow=0;
         int countred=0;
         int countblue=0;
         int countpink=0;
-        table.addFinalStudents();
         assertNotNull(table.getBag());
         assertNotNull(table.getBag().get(119));
         for(Student s : table.getBag()){
@@ -106,6 +134,7 @@ public class TableTest{
 
     @RepeatedTest(50)
     public void extractStudentsInitTest() {
+        table.getBag().clear();
         table.generateBagInit();
         table.extractStudentsInit();
         for (IslandCard is : table.getListOfIsland()) {
@@ -130,7 +159,6 @@ public class TableTest{
     @EnumSource(GameMode.class)
     public void ExtractStudentOnCloudTest(GameMode gameMode){
         table.generateCloudNumber(gameMode);
-        table.addFinalStudents();
         int n = table.getBag().size();
         table.extractStudentOnCloud();
         for(CloudCard cloud : table.getCloudNumber()){
@@ -142,7 +170,6 @@ public class TableTest{
 
     @RepeatedTest(100)
     void generateCharacterCardsOnTable() {
-        table.addFinalStudents();
         DeckCharacter characterDeck = new DeckCharacter();
         characterDeck.generateCharacterDeck();
         table.generateCharacterCardsOnTable(characterDeck.getCharacterCards());
@@ -154,6 +181,23 @@ public class TableTest{
             assertNotNull(card);
         }
         assertEquals(3, cardsOnTable);
+    }
+
+    @RepeatedTest(100)
+    public void MoveMotherEarthTest(){
+        Random rn = new Random();
+        int n = rn.nextInt(12) + 1, p=0;
+        while(n==table.getPosMotherEarth()) {
+            n = rn.nextInt(12) + 1;
+        }
+        table.moveMotherEarth(n);
+        for(IslandCard islandCard : table.getListOfIsland()){
+            if(islandCard.getMotherEarthOnIsland()==true){
+                assertEquals(table.getPosMotherEarth(),islandCard.getIdIsland());
+                p++;
+            }
+        }
+        assertEquals(1,p);
     }
 
     /** controlla i costCharacter
