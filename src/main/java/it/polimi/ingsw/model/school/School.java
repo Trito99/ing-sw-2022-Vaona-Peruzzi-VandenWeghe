@@ -2,10 +2,13 @@ package it.polimi.ingsw.model.school;
 
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
+import it.polimi.ingsw.model.game.Difficulty;
+import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.table.Table;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -13,22 +16,22 @@ import java.util.Map;
 
 public class School {
 
-    private ArrayList<Student> entry = new ArrayList<>();
-    private ArrayList<Student> GTable = new ArrayList<>();
-    private ArrayList<Student> RTable = new ArrayList<>();
-    private ArrayList<Student> YTable = new ArrayList<>();
-    private ArrayList<Student> PTable = new ArrayList<>();
-    private ArrayList<Student> BTable = new ArrayList<>();
-    private boolean profGInHall;
-    private boolean profRInHall;
+    private ArrayList<Student> entry;
+    private ArrayList<Student> GTable;
+    private ArrayList<Student> RTable;
+    private ArrayList<Student> YTable;
+    private ArrayList<Student> PTable;
+    private ArrayList<Student> BTable;
+    private boolean profGInHall; /** DA TOGLIERE QUANDO CAMBIAMO GETPROFINHALL*/
     private boolean profYInHall;
+    private boolean profRInHall;
     private boolean profPInHall;
     private boolean profBInHall;
     private ArrayList<Tower> towerZone = new ArrayList<>();
     private ArrayList<Prof> profOfPlayer = new ArrayList<>();
 
     public School() {
-
+        entry = new ArrayList<>();
         GTable = new ArrayList<>();
         RTable = new ArrayList<>();
         YTable = new ArrayList<>();
@@ -52,7 +55,7 @@ public class School {
         entry.remove(entry.get(entry.indexOf(student)));
     }
 
-    public void moveStudentInHall(int id) {
+    public void moveStudentInHall(Player playerMoving, int id, Table table, GameMode gameMode) {
         Student student = new Student(131, null);
         for (int i = 0; i < entry.size(); i++) {
             if (id == entry.get(i).getIdStudent())
@@ -61,27 +64,44 @@ public class School {
         switch(student.getsColour()) {
             case GREEN:
                 GTable.add(student);
-                /** if(GameMode.equals(EXPERTMODE) && (GTable.size()==3 || GTable.size()==6 || GTable.size()=9)){
-                    player.setCoinScore(player.getCoinScore() + 1);
-                    table.decreaseCoinScore(); }  */
+                GetCoinFromStudentMove(playerMoving, table, gameMode);
                 entry.remove(entry.get(entry.indexOf(student)));
                 break;
             case RED:
                 RTable.add(student);
+                GetCoinFromStudentMove(playerMoving, table, gameMode);
                 entry.remove(entry.get(entry.indexOf(student)));
                 break;
             case YELLOW:
                 YTable.add(student);
+                GetCoinFromStudentMove(playerMoving, table, gameMode);
                 entry.remove(entry.get(entry.indexOf(student)));
                 break;
             case PINK:
                 PTable.add(student);
+                GetCoinFromStudentMove(playerMoving, table, gameMode);
                 entry.remove(entry.get(entry.indexOf(student)));
                 break;
             case BLUE:
                 BTable.add(student);
+                GetCoinFromStudentMove(playerMoving, table, gameMode);
                 entry.remove(entry.get(entry.indexOf(student)));
                 break;
+        }
+    }
+
+    private void GetCoinFromStudentMove(Player playerMoving, Table table, GameMode gameMode) {
+        if(gameMode.equals(Difficulty.EXPERTMODE) && (GTable.size()==3)){
+            playerMoving.setCoinScore(playerMoving.getCoinScore() + 1);
+            table.setCoinsOnTable(table.getCoinsOnTable() - 1);
+        }
+        else if(gameMode.equals(Difficulty.EXPERTMODE) && (GTable.size()==6)){
+            playerMoving.setCoinScore(playerMoving.getCoinScore() + 1);
+            table.setCoinsOnTable(table.getCoinsOnTable() - 1);
+        }
+        else if(gameMode.equals(Difficulty.EXPERTMODE) && (GTable.size()==9)){
+            playerMoving.setCoinScore(playerMoving.getCoinScore() + 1);
+            table.setCoinsOnTable(table.getCoinsOnTable() - 1);
         }
     }
 
@@ -230,7 +250,7 @@ public class School {
         cardEffectPlayed.setCiccioPanzaPlayed(false); /** Va Bene??? */
     }
 
-    public boolean getProfInHall(SColor color){
+    public boolean getProfInHall(SColor color){     /** DA CAMBIARE: ORA ABBIAMO ARRAY PROFOFPLAYER (POI VA CAMBIATO ANCHE CALCULATEINFLUENCE) */
         switch(color){
             case GREEN:
                 return profGInHall;
