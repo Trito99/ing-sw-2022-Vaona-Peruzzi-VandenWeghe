@@ -22,10 +22,10 @@ public class DeckAssistantTest {
             countTurnValue = countTurnValue + card.getTurnValue();
             countCard ++;
             for(int i=n;i<deckAssistant.getCardsInHand().size();i++)
-                assertNotEquals(card,deckAssistant.getCardsInHand().get(i));
+                assertNotEquals(card,deckAssistant.getCardsInHand().get(i));/**Checks that all the cards created are different */
             n++;
         }
-        assertEquals(10, countCard);
+        assertEquals(10, countCard);  /**Checks if are generated 10 cards and with the correct values */
         assertEquals(30, countStepMotherEarth);
         assertEquals(55, countTurnValue);
 

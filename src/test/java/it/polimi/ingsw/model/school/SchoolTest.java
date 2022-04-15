@@ -34,6 +34,12 @@ class SchoolTest {
             player.getPersonalSchool().getProfOfPlayer().get(i).setInHall(true);
         }
         assertEquals(5, player.getPersonalSchool().numberOfProf());
+        player.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true);
+        player.getPersonalSchool().getProfOfPlayer().get(1).setInHall(false);
+        player.getPersonalSchool().getProfOfPlayer().get(2).setInHall(false);
+        player.getPersonalSchool().getProfOfPlayer().get(3).setInHall(true);
+        player.getPersonalSchool().getProfOfPlayer().get(4).setInHall(false);
+        assertEquals(2,player.getPersonalSchool().numberOfProf());
 
     }
 }

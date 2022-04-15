@@ -39,7 +39,7 @@ public class CharacterCard {
     }
 
     public ArrayList<Student> getStudentsOnCard() {
-        return (ArrayList<Student>) studentsOnCard.clone();
+        return studentsOnCard;
     }
 
     public void setStudentsOnCard(ArrayList<Student> studentsOnCard) {
