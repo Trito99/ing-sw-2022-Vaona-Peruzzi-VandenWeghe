@@ -9,7 +9,7 @@ public class CharacterCard {
     private int costCharacter;
     private final CardEffect cardEffect;
     private boolean coinOnCard;
-    private ArrayList<Student> studentsOnCard;
+    private ArrayList<Student> studentsOnCard = new ArrayList<>();
 
     public CharacterCard (int costCharacter, CardEffect cardEffect){
         this.costCharacter = costCharacter;

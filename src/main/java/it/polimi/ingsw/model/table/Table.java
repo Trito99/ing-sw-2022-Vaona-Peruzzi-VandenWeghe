@@ -139,25 +139,25 @@ public class Table {
         }
 
         for(int j=0; j<3; j++){
-            switch (characterCards.get(j).getCardEffect()){
+            switch (characterCardsOnTable.get(j).getCardEffect()){
                 case MBRIACONE:
                     for (int i = 0; i < 4; i++) {
-                        characterCards.get(j).getStudentsOnCard().add(bag.get(i));
+                        characterCardsOnTable.get(j).getStudentsOnCard().add(bag.get(i));
                         bag.remove(bag.get(i));
                     }
                     break;
                 case SCIURA:
-                        characterCards.get(j).getCardEffect().setXCardOnCard(4);
+                        characterCardsOnTable.get(j).getCardEffect().setXCardOnCard(4);
                     break;
                 case JOKER:
                     for (int i = 0; i < 6; i++) {
-                        characterCards.get(j).getStudentsOnCard().add(bag.get(i));
+                        characterCardsOnTable.get(j).getStudentsOnCard().add(bag.get(i));
                         bag.remove(bag.get(i));
                     }
                     break;
                 case DAMA:
                     for (int i = 0; i < 4; i++) {
-                        characterCards.get(j).getStudentsOnCard().add(bag.get(i));
+                        characterCardsOnTable.get(j).getStudentsOnCard().add(bag.get(i));
                         bag.remove(bag.get(i));
                     }
                     break;

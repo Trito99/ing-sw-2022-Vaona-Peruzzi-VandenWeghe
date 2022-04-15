@@ -140,8 +140,9 @@ public class TableTest{
         assertEquals(n-(table.getCloudNumber().get(0).getNumberOfSpaces()*table.getCloudNumber().size()),table.getBag().size());
     }
 
-    @Test
+    @RepeatedTest(100)
     void generateCharacterCardsOnTable() {
+        table.addFinalStudents();
         DeckCharacter characterDeck = new DeckCharacter();
         characterDeck.generateCharacterDeck();
         table.generateCharacterCardsOnTable(characterDeck.getCharacterCards());
