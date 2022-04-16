@@ -31,15 +31,7 @@ public class CloudCard {
         return idCloud;
     }
 
-    public void moveStudentToIsland(IslandCard islandCard, int idStudent){ //Specifico Studente va spostato (sceglie player)
-        Student student = new Student(131,null);
-        for(int i = 0; i < studentOnCloud.size(); i++) {
-            if(idStudent == studentOnCloud.get(i).getIdStudent())
-                student = studentOnCloud.get(i);
-        }
-        islandCard.getStudentOnIsland().add(studentOnCloud.get(studentOnCloud.indexOf(student)));
-        studentOnCloud.remove(studentOnCloud.get(studentOnCloud.indexOf(student)));
-    }
+
     /** Fede: Penso non funzioni (andrebbe messo come parametro l'id dell'isola, non l'isola)
      ---> Da spostare in gameController*/
 
