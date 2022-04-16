@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model.island;
 
 import it.polimi.ingsw.model.character.CardEffect;
-import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.SColor;
@@ -9,7 +8,6 @@ import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.school.TColor;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class IslandCard {
 
@@ -41,7 +39,7 @@ public class IslandCard {
     }
 
     public ArrayList<Student> getStudentOnIsland() {
-        return (ArrayList<Student>) studentOnIsland;
+        return studentOnIsland;
     }
 
     public boolean towerIsOnIsland() {
@@ -103,8 +101,8 @@ public class IslandCard {
                     countTot++;
                 }
 
-                /** EFFETTO SILVIO */
-                if(cardEffectPlayed.isSilvioPlayed()) {
+                /** EFFETTO KNIGHT */
+                if(cardEffectPlayed.isKnightPlayed()) {
                     p.setInfluenceOnIsland(countTot + 2);
                     /** controlla  se va bene qua */
                 }
@@ -130,7 +128,7 @@ public class IslandCard {
             }
         }
 
-        cardEffectPlayed.setSilvioPlayed(false);
+        cardEffectPlayed.setKnightPlayed(false);
         cardEffectPlayed.setTauroPlayed(false);           /** controlla se va bene qua (Tauro) */
 
         return playerWithInfluence;         /** Controllo Pareggio Influenza ----> return null? */
@@ -141,7 +139,7 @@ public class IslandCard {
 
         Player playerFound = calculateInfluence(listOfPlayer, cardEffectPlayed);  //Player che ha influenza sull'isola
 
-        /** SCIURA: controllo che non ci sia una tessera divieto sull'isola */
+        /** OLDLADY: controllo che non ci sia una tessera divieto sull'isola */
         if (xCardOnIsland){
             setXCardCounter(getXCardCounter()-1);
             if(xCardCounter == 0) setXCardOnIsland(false);

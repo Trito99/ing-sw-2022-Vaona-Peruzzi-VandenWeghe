@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.table;
 
+import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.DeckCharacter;
 import it.polimi.ingsw.model.cloud.CloudCard;
@@ -40,9 +41,9 @@ public class TableTest{
         table.generateBagInit();
         assertNotNull(table.getBag());
         assertNotNull(table.getBag().get(9));
-        assertEquals(10, table.getBag().size());
+        assertEquals(10, table.getBag().size());   /**Tests if there are 10 students in the bag*/
 
-        for(Student s : table.getBag()){
+        for(Student s : table.getBag()){    /**Tests if there are 2 students for each color*/
             switch (s.getsColour()){
                 case GREEN:
                     countgreen++;
@@ -70,18 +71,20 @@ public class TableTest{
     }
 
     @Test
-    public void generateIslandCardsTest(){
-        assertNotNull(table.getListOfIsland());
+    public void generateIslandCardsTest(){ /** Tests if generateIslandCards creates always 12 islands with correct id*/
+        assertNotNull(table.getListOfIsland().get(0));
+        assertEquals(1, table.getListOfIsland().get(0).getIdIsland());
+        assertNotNull(table.getListOfIsland().get(11));
+        assertEquals(12, table.getListOfIsland().get(11).getIdIsland());
         assertEquals(12,table.getListOfIsland().size());
     }
 
     @RepeatedTest(100)
     public void generateMotherEarthTest(){
         int n=0;
-        assertNotNull(table.getPosMotherEarth());
         for(IslandCard islandCard : table.getListOfIsland()){
-            if(islandCard.getMotherEarthOnIsland()==true){
-                assertEquals(table.getPosMotherEarth(),islandCard.getIdIsland());
+            if(islandCard.getMotherEarthOnIsland()){  /**Tests if MotherEarth is only and only in one island */
+                assertEquals(table.getPosMotherEarth(), islandCard.getIdIsland());
                 n++;
             }
         }
@@ -92,11 +95,12 @@ public class TableTest{
     @EnumSource(GameMode.class)
     public void generateCloudNumberTest(GameMode gameMode){
         table.generateCloudNumber(gameMode);
-        assertNotNull(table.getCloudNumber());
+        for(CloudCard cloud : table.getCloudNumber())
+        assertNotNull(cloud);
     }
 
     @Test
-    public void addFinalStudentsTest(){
+    public void addFinalStudentsTest(){ /** Tests if at the beginning of the game there are 24 students of each color */
         int countgreen=0;
         int countyellow=0;
         int countred=0;
@@ -133,21 +137,21 @@ public class TableTest{
 
 
     @RepeatedTest(50)
-    public void extractStudentsInitTest() {
+    public void extractStudentsInitTest() { /**checks the students on the islands at the beginning of the game */
         table.getBag().clear();
         table.generateBagInit();
         table.extractStudentsInit();
         for (IslandCard is : table.getListOfIsland()) {
             if (table.getPosMotherEarth() + 6 <= table.getListOfIsland().size()) {
-                if (is.getMotherEarthOnIsland() == false && (is.getIdIsland() != (table.getPosMotherEarth() + 6)))
+                if (!is.getMotherEarthOnIsland() && (is.getIdIsland() != (table.getPosMotherEarth() + 6)))
                     assertEquals(1, is.getStudentOnIsland().size());
                 else
-                    assertEquals(0, is.getStudentOnIsland().size());
+                    assertEquals(0, is.getStudentOnIsland().size()); /** if there is motherEarth, checks there aren't students on the island*/
             } else {
-                if (is.getMotherEarthOnIsland() == false && (is.getIdIsland() != (table.getPosMotherEarth() - 6)))
+                if (!is.getMotherEarthOnIsland() && (is.getIdIsland() != (table.getPosMotherEarth() - 6)))
                     assertEquals(1, is.getStudentOnIsland().size());
                 else
-                    assertEquals(0, is.getStudentOnIsland().size());
+                    assertEquals(0, is.getStudentOnIsland().size()); /** if there is motherEarth, checks there aren't students on the island*/
             }
         }
         assertEquals(0,table.getBag().size());
@@ -157,7 +161,7 @@ public class TableTest{
 
     @ParameterizedTest
     @EnumSource(GameMode.class)
-    public void ExtractStudentOnCloudTest(GameMode gameMode){
+    public void ExtractStudentOnCloudTest(GameMode gameMode){ /** Tests if is always extracted the correct number of students from the bag */
         table.generateCloudNumber(gameMode);
         int n = table.getBag().size();
         table.extractStudentOnCloud();
@@ -169,22 +173,27 @@ public class TableTest{
     }
 
     @RepeatedTest(100)
-    void generateCharacterCardsOnTable() {
+    void generateCharacterCardsOnTable() { /** Check if at the beginning of the expertMode game there are 3 casual character card on the table */
         DeckCharacter characterDeck = new DeckCharacter();
         characterDeck.generateCharacterDeck();
         table.generateCharacterCardsOnTable(characterDeck.getCharacterCards());
         int cardsOnTable = 0;
 
-        assertNotNull(table.getCharacterCardsOnTable());
+        assertNotNull(table.getCharacterCardsOnTable().get(0));
+        assertNotNull(table.getCharacterCardsOnTable().get(2));
         for (CharacterCard card : table.getCharacterCardsOnTable()) {
             cardsOnTable++;
             assertNotNull(card);
+            if(card.getCardEffect().equals(CardEffect.BACCO)){ /**Tests if effects with students on the card works */
+                assertEquals(card.getCardEffect(), CardEffect.BACCO);
+                assertEquals(4, card.getStudentsOnCard().size());
+            }
         }
         assertEquals(3, cardsOnTable);
     }
 
     @RepeatedTest(100)
-    public void MoveMotherEarthTest(){
+    public void MoveMotherEarthTest(){ /** Checks if MotherEarth always move correctly */
         Random rn = new Random();
         int n = rn.nextInt(12) + 1, p=0;
         while(n==table.getPosMotherEarth()) {
@@ -192,7 +201,7 @@ public class TableTest{
         }
         table.moveMotherEarth(n);
         for(IslandCard islandCard : table.getListOfIsland()){
-            if(islandCard.getMotherEarthOnIsland()==true){
+            if(islandCard.getMotherEarthOnIsland()){
                 assertEquals(table.getPosMotherEarth(),islandCard.getIdIsland());
                 p++;
             }
@@ -202,7 +211,7 @@ public class TableTest{
 
     /** controlla i costCharacter
      for( CharacterCard card : deckCharacter.getCharacterCards()){
-     if( card.getCardEffect().equals(CardEffect.MBRIACONE)){
+     if( card.getCardEffect().equals(CardEffect.BACCO)){
      assertEquals(1, card.getCostCharacter());
      }
      } */

@@ -16,10 +16,7 @@ import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 
 public class GameController {
     private Game gameSession;
@@ -158,8 +155,18 @@ public class GameController {
         //selezione
         switch(character.getCardEffect()){
             /** 1 */
-            case MBRIACONE:
-                character.getCardEffect().setMbriaconePlayed(true);
+            case BACCO:
+                Student studentChosen = null;
+                IslandCard islandCardChosen= null;
+                //notify (observer)----> studentChosen
+                for(Student s : character.getStudentsOnCard()){
+                    if(s.equals(studentChosen)){
+                        character.getStudentsOnCard().remove(s);
+                        gameSession.getTable().getListOfIsland().get(islandCardChosen.getIdIsland() - 1).getStudentOnIsland().add(s);
+                    }
+                }
+                character.getStudentsOnCard().add(gameSession.getTable().getBag().get(0));
+                gameSession.getTable().getBag().remove(0);
 
             /** 2 */
             case CICCIOPANZA:
@@ -176,10 +183,10 @@ public class GameController {
                 gameSession.getTable().joinIsland(islandChosen, gameSession.getTable().getListOfIsland());
                 break;
 
-            case CEPOSTAPERTE:   /** 4 */
-                character.getCardEffect().setCePostaPerTePlayed(true);
+            case MAILMAN:   /** 4 */
+                character.getCardEffect().setMailmanPlayed(true);
                 break;
-            case SCIURA:   /** 5 */
+            case OLDLADY:   /** 5 */
                 IslandCard islandChosenTwo = null;
                 //notify (observer)----> islandChosen
 
@@ -210,8 +217,8 @@ public class GameController {
                 }
                 break;
 
-            case SILVIO:   /** 8 */
-                character.getCardEffect().setSilvioPlayed(true);
+            case KNIGHT:   /** 8 */
+                character.getCardEffect().setKnightPlayed(true);
                 break;
 
             case FUNGAIOLO:   /** 9 */
@@ -228,22 +235,27 @@ public class GameController {
                     //notify (observer)---->scelta 2 studenti
                     if(choice.getsColour().equals(SColor.GREEN)){
                         gameSession.getActivePlayer().getPersonalSchool().getGTable().add(choice);
+                        getCoinFromStudentMove();
                         gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(choice);
                     }
                     else if(choice.getsColour().equals(SColor.RED)){
                         gameSession.getActivePlayer().getPersonalSchool().getRTable().add(choice);
+                        getCoinFromStudentMove();
                         gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(choice);
                     }
                     else if(choice.getsColour().equals(SColor.YELLOW)){
                         gameSession.getActivePlayer().getPersonalSchool().getYTable().add(choice);
+                        getCoinFromStudentMove();
                         gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(choice);
                     }
                     else if(choice.getsColour().equals(SColor.PINK)){
                         gameSession.getActivePlayer().getPersonalSchool().getPTable().add(choice);
+                        getCoinFromStudentMove();
                         gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(choice);
                     }
                     else if(choice.getsColour().equals(SColor.BLUE)){
                         gameSession.getActivePlayer().getPersonalSchool().getBTable().add(choice);
+                        getCoinFromStudentMove();
                         gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(choice);
                     }
                 }
@@ -274,24 +286,29 @@ public class GameController {
                 }
                 break;
 
-            case DAMA:   /** 11 */
+            case DAME:   /** 11 */
                 Student choice = null;
                 int i =0;
                 //notify (observer)---->scelgo pedina da mettere nel table
                 if(choice.getsColour().equals(SColor.GREEN)){
                     gameSession.getActivePlayer().getPersonalSchool().getGTable().add(choice);
+                    getCoinFromStudentMove();
                 }
                 else if(choice.getsColour().equals(SColor.RED)){
                     gameSession.getActivePlayer().getPersonalSchool().getRTable().add(choice);
+                    getCoinFromStudentMove();
                 }
                 else if(choice.getsColour().equals(SColor.YELLOW)){
                     gameSession.getActivePlayer().getPersonalSchool().getYTable().add(choice);
+                    getCoinFromStudentMove();
                 }
                 else if(choice.getsColour().equals(SColor.PINK)){
                     gameSession.getActivePlayer().getPersonalSchool().getPTable().add(choice);
+                    getCoinFromStudentMove();
                 }
                 else if(choice.getsColour().equals(SColor.BLUE)){
                     gameSession.getActivePlayer().getPersonalSchool().getBTable().add(choice);
+                    getCoinFromStudentMove();
                 }
                 character.getStudentsOnCard().remove(choice);
                 //notify (observer)---->pesco pedina da mettere sulla carta
@@ -299,38 +316,38 @@ public class GameController {
                 table.getBag().remove(table.getBag().get(table.getBag().size() -1));
                 break;
 
-            case TOSSICO:   /** 12 */
+            case THIEF:   /** 12 */
                 SColor colorChoice = null;
                 //notify (observer)---->scelgo un colore
                 for(Player p : gameSession.getListOfPlayer()){
                     if(colorChoice.equals(SColor.GREEN)){
                         for(int j=0; j<3; j++){
                             if(gameSession.getActivePlayer().getPersonalSchool().getGTable().size() != 0)
-                                gameSession.getActivePlayer().getPersonalSchool().getGTable().remove(colorChoice);
+                                gameSession.getActivePlayer().getPersonalSchool().getGTable().remove(gameSession.getActivePlayer().getPersonalSchool().getGTable().size()-1);
                         }
                     }
                     else if(colorChoice.equals(SColor.RED)){
                         for(int j=0; j<3; j++){
                             if(gameSession.getActivePlayer().getPersonalSchool().getRTable().size() != 0)
-                                gameSession.getActivePlayer().getPersonalSchool().getRTable().remove(colorChoice);
+                                gameSession.getActivePlayer().getPersonalSchool().getRTable().remove(gameSession.getActivePlayer().getPersonalSchool().getRTable().size()-1);
                         }
                     }
                     else if(colorChoice.equals(SColor.YELLOW)){
                         for(int j=0; j<3; j++){
                             if(gameSession.getActivePlayer().getPersonalSchool().getYTable().size() != 0)
-                                gameSession.getActivePlayer().getPersonalSchool().getYTable().remove(colorChoice);
+                                gameSession.getActivePlayer().getPersonalSchool().getYTable().remove(gameSession.getActivePlayer().getPersonalSchool().getYTable().size()-1);
                         }
                     }
                     else if(colorChoice.equals(SColor.PINK)){
                         for(int j=0; j<3; j++){
                             if(gameSession.getActivePlayer().getPersonalSchool().getPTable().size() != 0)
-                                gameSession.getActivePlayer().getPersonalSchool().getPTable().remove(colorChoice);
+                                gameSession.getActivePlayer().getPersonalSchool().getPTable().remove(gameSession.getActivePlayer().getPersonalSchool().getPTable().size()-1);
                         }
                     }
                     else if(colorChoice.equals(SColor.BLUE)){
                         for(int j=0; j<3; j++){
                             if(gameSession.getActivePlayer().getPersonalSchool().getBTable().size() != 0)
-                                gameSession.getActivePlayer().getPersonalSchool().getBTable().remove(colorChoice);
+                                gameSession.getActivePlayer().getPersonalSchool().getBTable().remove(gameSession.getActivePlayer().getPersonalSchool().getBTable().size()-1);
                         }
                     }
                 }
@@ -347,7 +364,7 @@ public class GameController {
         int playerChoice=0; /** da cambiare */
         //notify(observer)
 
-        if (playerChoice <= player.getTrash().getStepMotherEarth() && !cardEffectPlayed.isCePostaPerTePlayed()) {
+        if (playerChoice <= player.getTrash().getStepMotherEarth() && !cardEffectPlayed.isMailmanPlayed()) {
 
             if ((table.getPosMotherEarth() + n) > table.getListOfIsland().size()) {
                 table.getListOfIsland().get(table.getPosMotherEarth() + n - table.getListOfIsland().size() - 1).setMotherEarthOnIsland(true);
@@ -358,8 +375,8 @@ public class GameController {
                 table.setPosMotherEarth(table.getPosMotherEarth() + n);
             }
         }
-        /** EFFETTO CEPOSTAPERTE */
-        else if(playerChoice <= player.getTrash().getStepMotherEarth()+2 && cardEffectPlayed.isCePostaPerTePlayed()){
+        /** EFFETTO MAILMAN */
+        else if(playerChoice <= player.getTrash().getStepMotherEarth()+2 && cardEffectPlayed.isMailmanPlayed()){
             if ((table.getPosMotherEarth() + n + 2) > table.getListOfIsland().size()) {
                 table.getListOfIsland().get(table.getPosMotherEarth() + n + 2 - table.getListOfIsland().size() - 1).setMotherEarthOnIsland(true);
                 table.setPosMotherEarth(table.getPosMotherEarth() + n + 2 - table.getListOfIsland().size());
@@ -380,6 +397,21 @@ public class GameController {
 
     public void setGameState(GameState gameState){
         this.gameState = gameState;
+    }
+
+    private void getCoinFromStudentMove() {
+        if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE) && (gameSession.getActivePlayer().getPersonalSchool().getGTable().size()==3)){
+            gameSession.getActivePlayer().setCoinScore(gameSession.getActivePlayer().getCoinScore() + 1);
+            gameSession.getTable().setCoinsOnTable(gameSession.getTable().getCoinsOnTable() - 1);
+        }
+        else if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE) && (gameSession.getActivePlayer().getPersonalSchool().getGTable().size()==6)){
+            gameSession.getActivePlayer().setCoinScore(gameSession.getActivePlayer().getCoinScore() + 1);
+            gameSession.getTable().setCoinsOnTable(gameSession.getTable().getCoinsOnTable() - 1);
+        }
+        else if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE) && (gameSession.getActivePlayer().getPersonalSchool().getGTable().size()==9)){
+            gameSession.getActivePlayer().setCoinScore(gameSession.getActivePlayer().getCoinScore() + 1);
+            gameSession.getTable().setCoinsOnTable(gameSession.getTable().getCoinsOnTable() - 1);
+        }
     }
 
 

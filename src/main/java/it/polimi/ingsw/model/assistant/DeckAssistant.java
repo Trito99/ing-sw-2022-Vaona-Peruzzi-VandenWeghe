@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class DeckAssistant {
 
-    private ArrayList<AssistantCard> cardsInHand= new ArrayList<>(10);
+    private ArrayList<AssistantCard> cardsInHand= new ArrayList<>();
     private String name;
 
     public ArrayList<AssistantCard> getCardsInHand() {

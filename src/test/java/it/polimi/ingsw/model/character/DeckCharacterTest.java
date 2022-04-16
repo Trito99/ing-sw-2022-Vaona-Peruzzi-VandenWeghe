@@ -15,12 +15,12 @@ public class DeckCharacterTest {
         for(CharacterCard card : deckCharacter.getCharacterCards()){
             count++;
             assertNotNull(card);
-            for(int i=n;i<deckCharacter.getCharacterCards().size();i++)
+            for(int i=n;i<deckCharacter.getCharacterCards().size();i++) /** Checks if all cards are different */
                 assertNotEquals(card, deckCharacter.getCharacterCards().get(i));
             n++;
         }
 
-        assertEquals(12, count);
+        assertEquals(12, count); /**Checks that are created 12 character */
 
     }
 

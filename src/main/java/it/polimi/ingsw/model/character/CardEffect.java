@@ -1,34 +1,24 @@
 package it.polimi.ingsw.model.character;
 
-import it.polimi.ingsw.controller.GameController;
-import it.polimi.ingsw.model.island.IslandCard;
-import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.student.SColor;
-import it.polimi.ingsw.model.table.Table;
-
-import java.util.ArrayList;
-
 public enum CardEffect {
-    MBRIACONE,
+    BACCO,
     CICCIOPANZA,
     ALZABANDIERA,
-    CEPOSTAPERTE,
-    SCIURA,
+    MAILMAN,
+    OLDLADY,
     TAURO,
     JOKER,
-    SILVIO,
+    KNIGHT,
     FUNGAIOLO,
     MENESTRELLO,
-    DAMA,
-    TOSSICO;
+    DAME,
+    THIEF;
 
     private int xCardOnCard = 0;
-    private boolean mbriaconePlayed;
     private boolean ciccioPanzaPlayed;
-    private boolean silvioPlayed;
+    private boolean knightPlayed;
     private boolean tauroPlayed;
-    private boolean cePostaPerTePlayed;
-    private boolean alzabandieraPlayed;
+    private boolean mailmanPlayed;
 
 
     public int getXCardOnCard() {
@@ -39,20 +29,12 @@ public enum CardEffect {
         this.xCardOnCard = xCardOnSciura;
     }
 
-    public boolean isMbriaconePlayed() {
-        return mbriaconePlayed;
+    public boolean isKnightPlayed() {
+        return knightPlayed;
     }
 
-    public void setMbriaconePlayed(boolean mbriaconePlayed) {
-        this.mbriaconePlayed = mbriaconePlayed;
-    }
-
-    public boolean isSilvioPlayed() {
-        return silvioPlayed;
-    }
-
-    public void setSilvioPlayed(boolean silvioPlayed) {
-        this.silvioPlayed = silvioPlayed;
+    public void setKnightPlayed(boolean knightPlayed) {
+        this.knightPlayed = knightPlayed;
     }
 
     public boolean isCiccioPanzaPlayed() {
@@ -71,21 +53,14 @@ public enum CardEffect {
         this.tauroPlayed = tauroPlayed;
     }
 
-    public boolean isCePostaPerTePlayed() {
-        return cePostaPerTePlayed;
+    public boolean isMailmanPlayed() {
+        return mailmanPlayed;
     }
 
-    public void setCePostaPerTePlayed(boolean cePostaPerTePlayed) {
-        this.cePostaPerTePlayed = cePostaPerTePlayed;
+    public void setMailmanPlayed(boolean mailmanPlayed) {
+        this.mailmanPlayed = mailmanPlayed;
     }
 
-    public boolean isAlzabandieraPlayed() {
-        return alzabandieraPlayed;
-    }
-
-    public void setAlzabandieraPlayed(boolean alzabandierPlayed) {
-        this.alzabandieraPlayed = alzabandierPlayed;
-    }
 }
 
 
