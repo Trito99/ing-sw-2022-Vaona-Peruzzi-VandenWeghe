@@ -156,7 +156,17 @@ public class GameController {
         switch(character.getCardEffect()){
             /** 1 */
             case BACCO:
-                character.getCardEffect().setBaccoPlayed(true);
+                Student studentChosen = null;
+                IslandCard islandCardChosen= null;
+                //notify (observer)----> studentChosen
+                for(Student s : character.getStudentsOnCard()){
+                    if(s.equals(studentChosen)){
+                        character.getStudentsOnCard().remove(s);
+                        gameSession.getTable().getListOfIsland().get(islandCardChosen.getIdIsland() - 1).getStudentOnIsland().add(s);
+                    }
+                }
+                character.getStudentsOnCard().add(gameSession.getTable().getBag().get(0));
+                gameSession.getTable().getBag().remove(0);
 
             /** 2 */
             case CICCIOPANZA:

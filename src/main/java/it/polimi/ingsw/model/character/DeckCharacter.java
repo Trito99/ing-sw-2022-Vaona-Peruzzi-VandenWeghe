@@ -32,19 +32,5 @@ public class DeckCharacter {
         characterCards.add(new CharacterCard(1, CardEffect.MENESTRELLO));
         characterCards.add(new CharacterCard(2, CardEffect.DAME));
         characterCards.add(new CharacterCard(3, CardEffect.THIEF));
-
     }
-
-
-  /**  public void drawCard(Table table){    //Pesca tre carte personaggio dal mazzo e mettile al centro del tavolo
-
-        shuffleCard(characterCards); //non sono sicuro di vaere passato l'array giusto
-
-        for (int i = 0; i < 3; i++) {
-            table.getCharacterCardsOnTable().add(i, characterCards.get(i));
-        }
-
-    } */
-
-
 }
