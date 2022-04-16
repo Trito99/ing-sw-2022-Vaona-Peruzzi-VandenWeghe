@@ -180,7 +180,7 @@ public class GameController {
                 islandChosen.calculateInfluence(playersList, character.getCardEffect());
                 islandChosen.buildTowerOnIsland(playersList, character.getCardEffect());
                 islandChosen.changeTowerColour(playersList, character.getCardEffect());
-                gameSession.getTable().joinIsland(islandChosen, gameSession.getTable().getListOfIsland());
+                gameSession.getTable().joinIsland(gameSession.getTable().getListOfIsland());
                 break;
 
             case MAILMAN:   /** 4 */

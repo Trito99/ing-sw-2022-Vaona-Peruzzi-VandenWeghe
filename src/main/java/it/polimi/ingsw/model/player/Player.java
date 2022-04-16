@@ -59,7 +59,7 @@ public class Player {
                 break;
             case COOP:
                 i = 7;
-                t = 0;
+                t = 8;
                 break;
         }
         for (int s = 0; s < i; s++) {
