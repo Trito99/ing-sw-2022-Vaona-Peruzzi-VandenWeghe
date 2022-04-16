@@ -12,7 +12,6 @@ import it.polimi.ingsw.model.student.Student;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Objects;
 import java.util.Random;
 
 public class Table {
@@ -87,16 +86,16 @@ public class Table {
 
 
     public void extractStudentOnCloud() {   //estrae dal sacchetto 3/4 studenti
-        for (int c = 0; c < cloudNumber.size(); c++) {
-            for (int i = 0; i < cloudNumber.get(c).getNumberOfSpaces(); i++) {
-                cloudNumber.get(c).getStudentOnCloud().add(bag.get(i));
+        for (CloudCard cloudCard : cloudNumber) {
+            for (int i = 0; i < cloudCard.getNumberOfSpaces(); i++) {
+                cloudCard.getStudentOnCloud().add(bag.get(i));
                 bag.remove(bag.get(i));
             }
         }
     }
 
     public ArrayList<Student> getBag() {
-        return (ArrayList<Student>) bag;
+        return bag;
     }
 
     public void generateCloudNumber(GameMode gm) {
@@ -140,13 +139,13 @@ public class Table {
 
         for(int j=0; j<3; j++){
             switch (characterCardsOnTable.get(j).getCardEffect()){
-                case MBRIACONE:
+                case BACCO:
                     for (int i = 0; i < 4; i++) {
                         characterCardsOnTable.get(j).getStudentsOnCard().add(bag.get(i));
                         bag.remove(bag.get(i));
                     }
                     break;
-                case SCIURA:
+                case OLDLADY:
                         characterCardsOnTable.get(j).getCardEffect().setXCardOnCard(4);
                     break;
                 case JOKER:
@@ -155,7 +154,7 @@ public class Table {
                         bag.remove(bag.get(i));
                     }
                     break;
-                case DAMA:
+                case DAME:
                     for (int i = 0; i < 4; i++) {
                         characterCardsOnTable.get(j).getStudentsOnCard().add(bag.get(i));
                         bag.remove(bag.get(i));
@@ -271,19 +270,19 @@ public class Table {
         if (countBlack > countGrey && countBlack > countWhite) {
             for (Player player : listOfPlayers) {
                 if (player.getTColour().equals(TColor.BLACK)) {
-                    return winner = player;
+                    return player;
                 }
             }
         } else if (countGrey > countBlack && countGrey > countWhite) {
             for (Player player : listOfPlayers) {
                 if (player.getTColour().equals(TColor.BLACK)) {
-                    return winner = player;
+                    return player;
                 }
             }
         } else if (countWhite > countBlack && countWhite > countGrey) {
             for (Player player : listOfPlayers) {
                 if (player.getTColour().equals(TColor.BLACK)) {
-                    return winner = player;
+                    return player;
                 }
             }
         }
@@ -300,10 +299,12 @@ public class Table {
             int profWinner = winner.getPersonalSchool().numberOfProf();
             int profAlsoWinner = alsoWinner.getPersonalSchool().numberOfProf();
 
-            if (profWinner > profAlsoWinner) {
+            if (profWinner > profAlsoWinner)
                 return winner;
-            } else return winner = alsoWinner;
-        } else if (countGrey == countWhite && countGrey > countBlack) {
+            else
+                return alsoWinner;
+        }
+        else if (countGrey == countWhite && countGrey > countBlack) {
             for (Player player : listOfPlayers) {
                 if (player.getTColour().equals(TColor.GREY)) {
                     winner = player;
@@ -314,10 +315,12 @@ public class Table {
             int profWinner = winner.getPersonalSchool().numberOfProf();
             int profAlsoWinner = alsoWinner.getPersonalSchool().numberOfProf();
 
-            if (profWinner > profAlsoWinner) {
+            if (profWinner > profAlsoWinner)
                 return winner;
-            } else return winner = alsoWinner;
-        } else if (countWhite == countBlack && countWhite > countGrey) {
+             else
+                 return alsoWinner;
+        }
+        else if (countWhite == countBlack && countWhite > countGrey) {
             for (Player player : listOfPlayers) {
                 if (player.getTColour().equals(TColor.WHITE)) {
                     winner = player;
@@ -328,13 +331,12 @@ public class Table {
             int profWinner = winner.getPersonalSchool().numberOfProf();
             int profAlsoWinner = alsoWinner.getPersonalSchool().numberOfProf();
 
-            if (profWinner > profAlsoWinner) {
+            if (profWinner > profAlsoWinner)
                 return winner;
-            } else if (profAlsoWinner > profWinner) {
+            else if (profAlsoWinner > profWinner)
                 winner = alsoWinner;
-            } else {
+            else
                 System.out.println(String.format("%s e %s", winner.getNickname(), alsoWinner.getNickname()) + "HANNO PAREGGIATO!");
-            }
         }
 
         if (game.gameIsFinished()) {

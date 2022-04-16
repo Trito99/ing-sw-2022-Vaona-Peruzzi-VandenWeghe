@@ -82,9 +82,8 @@ public class TableTest{
     @RepeatedTest(100)
     public void generateMotherEarthTest(){
         int n=0;
-        assertNotNull(table.getPosMotherEarth());
         for(IslandCard islandCard : table.getListOfIsland()){
-            if(islandCard.getMotherEarthOnIsland()==true){  /**Tests if MotherEarth is only and only in one island */
+            if(islandCard.getMotherEarthOnIsland()){  /**Tests if MotherEarth is only and only in one island */
                 assertEquals(table.getPosMotherEarth(), islandCard.getIdIsland());
                 n++;
             }
@@ -144,12 +143,12 @@ public class TableTest{
         table.extractStudentsInit();
         for (IslandCard is : table.getListOfIsland()) {
             if (table.getPosMotherEarth() + 6 <= table.getListOfIsland().size()) {
-                if (is.getMotherEarthOnIsland() == false && (is.getIdIsland() != (table.getPosMotherEarth() + 6)))
+                if (!is.getMotherEarthOnIsland() && (is.getIdIsland() != (table.getPosMotherEarth() + 6)))
                     assertEquals(1, is.getStudentOnIsland().size());
                 else
                     assertEquals(0, is.getStudentOnIsland().size()); /** if there is motherEarth, checks there aren't students on the island*/
             } else {
-                if (is.getMotherEarthOnIsland() == false && (is.getIdIsland() != (table.getPosMotherEarth() - 6)))
+                if (!is.getMotherEarthOnIsland() && (is.getIdIsland() != (table.getPosMotherEarth() - 6)))
                     assertEquals(1, is.getStudentOnIsland().size());
                 else
                     assertEquals(0, is.getStudentOnIsland().size()); /** if there is motherEarth, checks there aren't students on the island*/
@@ -185,8 +184,8 @@ public class TableTest{
         for (CharacterCard card : table.getCharacterCardsOnTable()) {
             cardsOnTable++;
             assertNotNull(card);
-            if(card.getCardEffect().equals(CardEffect.MBRIACONE)){ /**Tests if effects with students on the card works */
-                assertEquals(card.getCardEffect(), CardEffect.MBRIACONE);
+            if(card.getCardEffect().equals(CardEffect.BACCO)){ /**Tests if effects with students on the card works */
+                assertEquals(card.getCardEffect(), CardEffect.BACCO);
                 assertEquals(4, card.getStudentsOnCard().size());
             }
         }
@@ -202,7 +201,7 @@ public class TableTest{
         }
         table.moveMotherEarth(n);
         for(IslandCard islandCard : table.getListOfIsland()){
-            if(islandCard.getMotherEarthOnIsland()==true){
+            if(islandCard.getMotherEarthOnIsland()){
                 assertEquals(table.getPosMotherEarth(),islandCard.getIdIsland());
                 p++;
             }
@@ -212,7 +211,7 @@ public class TableTest{
 
     /** controlla i costCharacter
      for( CharacterCard card : deckCharacter.getCharacterCards()){
-     if( card.getCardEffect().equals(CardEffect.MBRIACONE)){
+     if( card.getCardEffect().equals(CardEffect.BACCO)){
      assertEquals(1, card.getCostCharacter());
      }
      } */
