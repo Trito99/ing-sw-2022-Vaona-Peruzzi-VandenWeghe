@@ -209,6 +209,11 @@ public class TableTest{
         assertEquals(1,p);
     }
 
+    @Test
+    public void JoinIslandTest(){
+
+    }
+
     /** controlla i costCharacter
      for( CharacterCard card : deckCharacter.getCharacterCards()){
      if( card.getCardEffect().equals(CardEffect.BACCO)){

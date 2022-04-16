@@ -38,6 +38,10 @@ public class IslandCard {
         return idIsland;
     }
 
+    public void setIdIsland(int newId) {
+         this.idIsland=newId;
+    }
+
     public ArrayList<Student> getStudentOnIsland() {
         return studentOnIsland;
     }
@@ -188,10 +192,6 @@ public class IslandCard {
 
     public void setMergedIsland(int mergedIsland) {
         this.mergedIsland = mergedIsland;
-    }
-
-    public void setIdIsland(int idIsland) {
-        this.idIsland = idIsland;
     }
 
     public boolean isXCardOnIsland() {

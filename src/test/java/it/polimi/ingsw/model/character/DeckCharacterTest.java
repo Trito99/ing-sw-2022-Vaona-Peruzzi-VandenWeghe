@@ -20,7 +20,7 @@ public class DeckCharacterTest {
             n++;
         }
 
-        assertEquals(12, count); /**Checks that are created 12 character */
+        assertEquals(12, count); /**Checks that 12 characterCards are created */
 
     }
 
