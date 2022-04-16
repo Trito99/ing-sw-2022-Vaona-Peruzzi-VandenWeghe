@@ -15,12 +15,10 @@ public enum CardEffect {
     THIEF;
 
     private int xCardOnCard = 0;
-    private boolean baccoPlayed;
     private boolean ciccioPanzaPlayed;
     private boolean knightPlayed;
     private boolean tauroPlayed;
     private boolean mailmanPlayed;
-    private boolean alzabandieraPlayed;
 
 
     public int getXCardOnCard() {
@@ -29,14 +27,6 @@ public enum CardEffect {
 
     public void setXCardOnCard(int xCardOnSciura) {
         this.xCardOnCard = xCardOnSciura;
-    }
-
-    public boolean isBaccoPlayed() {
-        return baccoPlayed;
-    }
-
-    public void setBaccoPlayed(boolean baccoPlayed) {
-        this.baccoPlayed = baccoPlayed;
     }
 
     public boolean isKnightPlayed() {
@@ -71,13 +61,6 @@ public enum CardEffect {
         this.mailmanPlayed = mailmanPlayed;
     }
 
-    public boolean isAlzabandieraPlayed() {
-        return alzabandieraPlayed;
-    }
-
-    public void setAlzabandieraPlayed(boolean alzabandierPlayed) {
-        this.alzabandieraPlayed = alzabandierPlayed;
-    }
 }
 
 
