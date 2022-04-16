@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model.cloud;
 
 
-import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.student.Student;
 
@@ -15,7 +14,7 @@ public class CloudCard {
 
     public CloudCard(int idCloud, int numberOfSpaces){
         this.idCloud = idCloud;
-        this.studentOnCloud = new ArrayList<Student>(3);
+        this.studentOnCloud = new ArrayList<Student>();
         this.numberOfSpaces = numberOfSpaces;
     }
 
@@ -32,14 +31,16 @@ public class CloudCard {
         return idCloud;
     }
 
-    public void moveStudentToIsland(CloudCard cloudCard, IslandCard islandCard, int id){ //Specifico Studente va spostato (sceglie player)
+    public void moveStudentToIsland(IslandCard islandCard, int idStudent){ //Specifico Studente va spostato (sceglie player)
         Student student = new Student(131,null);
-        for(int i = 0; i < cloudCard.getStudentOnCloud().size(); i++) {
-            if(id==cloudCard.getStudentOnCloud().get(i).getIdStudent())
-                student = cloudCard.getStudentOnCloud().get(i);
+        for(int i = 0; i < studentOnCloud.size(); i++) {
+            if(idStudent == studentOnCloud.get(i).getIdStudent())
+                student = studentOnCloud.get(i);
         }
-        islandCard.getStudentOnIsland().add(cloudCard.getStudentOnCloud().get(cloudCard.getStudentOnCloud().indexOf(student)));
-        cloudCard.getStudentOnCloud().remove(cloudCard.getStudentOnCloud().get(cloudCard.getStudentOnCloud().indexOf(student)));
+        islandCard.getStudentOnIsland().add(studentOnCloud.get(studentOnCloud.indexOf(student)));
+        studentOnCloud.remove(studentOnCloud.get(studentOnCloud.indexOf(student)));
     }
+    /** Fede: Penso non funzioni (andrebbe messo come parametro l'id dell'isola, non l'isola)
+     ---> Da spostare in gameController*/
 
 }
