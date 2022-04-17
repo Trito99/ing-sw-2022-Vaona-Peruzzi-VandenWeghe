@@ -258,7 +258,7 @@ public class School {
     }
 
     public ArrayList<Tower> getTower() {
-        return (ArrayList<Tower>) towerZone.clone();
+        return towerZone;
     }
 
     public void addTower(int id, TColor tColor) {

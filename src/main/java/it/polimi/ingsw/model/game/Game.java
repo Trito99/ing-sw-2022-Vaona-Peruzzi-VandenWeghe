@@ -10,16 +10,15 @@ import java.util.ArrayList;
 
 public class Game {
 
-    //private int gameId;
+    //private int gameId;   serve per partite multiple
     private GameMode gameMode;
     private ArrayList<Player> listOfPlayers;
     private Player activePlayer;
-    private int numberOfPlayers;
+    private int numberOfPlayers;  // Non serve, basta la gameMode (Two/Three players, coop)
     private State state;
     private ArrayList<Player> order;
     private Difficulty difficulty;
     private Table table;
-    private ArrayList<CharacterCard> characterCards;
     private ArrayList<Team> team;
 
     /**
@@ -27,15 +26,14 @@ public class Game {
      */
     public Game() {
         this.gameMode = null;
-        this.listOfPlayers = new ArrayList<Player>();
+        this.listOfPlayers = new ArrayList<>();
         this.activePlayer = null;
         this.numberOfPlayers = 0;
         this.state = null;
-        this.order = new ArrayList<Player>();
-        this.difficulty = difficulty;
+        this.order = new ArrayList<>();
+        this.difficulty = null;
         this.table = new Table();
-        this.characterCards = new ArrayList<CharacterCard>();
-        this.team = new ArrayList<Team>();
+        this.team = new ArrayList<>();
 
         /**table.generateIslandCards();
         table.generateMotherEarth();
@@ -99,26 +97,30 @@ public class Game {
     }
 
     /**
-     * winnerIs deve rimanere all'interno di Game
+     * winnerIs deve rimanere all'interno di Game   (?)
      */
+    public Table getTable() {
+        return table;
+    }
+
+    public void setTable(Table table) {
+        this.table = table;
+    }
+
+    public ArrayList<Team> getTeam() {
+        return (ArrayList<Team>) team.clone();
+    }
+
     public boolean gameIsFinished() {
         Player player = getActivePlayer();
 
-        if (player.getDeckOfPlayer().getCardsInHand().size() == 0 ||   // Dobbiamo collegare ogni deck assistant al suo player
-                player.getPersonalSchool().getTower().size() == 0 ||
-                table.getBag().size() == 0 ||
+        if (player.getDeckOfPlayer().getCardsInHand().isEmpty() ||   // Dobbiamo collegare ogni deck assistant al suo player
+                player.getPersonalSchool().getTower().isEmpty() ||
+                table.getBag().isEmpty() ||
                 table.getListOfIsland().size() == 3 /** da verificare */) {
             return true;
         }
 
         return false;
-    }
-
-    public Table getTable() {
-        return table;
-    }
-
-    public ArrayList<Team> getTeam() {
-        return (ArrayList<Team>) team.clone();
     }
 }
