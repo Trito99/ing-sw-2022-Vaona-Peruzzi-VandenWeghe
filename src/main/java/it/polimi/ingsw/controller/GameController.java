@@ -127,7 +127,22 @@ public class GameController {
         player.setCoinScore(player.getCoinScore() - decreaseValue);
     }
 
-    public void playCharacterCard(CharacterCard character, Player player, Table table){
+    public void playAssistantCard(String assistantName){
+        //Scelta dal giocatore
+        AssistantCard assistantCardPlayed = null;
+
+        for (AssistantCard card : gameSession.getActivePlayer().getDeckOfPlayer().getCardsInHand()){
+            if(card.getAssistantName()==assistantName) {
+                /** DA FARE: Controllo se il giocatore può giocare quella carta (non è già stata giocata da altri) o se è l'unica che può mettere */
+                assistantCardPlayed=card;
+            }
+        }
+        gameSession.getActivePlayer().setTrash(assistantCardPlayed);
+        gameSession.getActivePlayer().setHasAlreadyPlayed(true);
+        gameSession.getActivePlayer().getDeckOfPlayer().getCardsInHand().remove(assistantCardPlayed);
+    }
+
+    public void playCharacterCard(CharacterCard character, Player player, Table table){ /** da rifare!!! */
         //notify observer con scelta del giocatore -> sceglie attraverso l'id o con Nome personaggio?
 
         if(character.getCoinOnCard()) {
@@ -397,6 +412,14 @@ public class GameController {
 
     public void setGameState(GameState gameState){
         this.gameState = gameState;
+    }
+
+    public Game getGameSession() {
+        return gameSession;
+    }
+
+    public void setGameSession(Game gameSession) {
+        this.gameSession = gameSession;
     }
 
     private void getCoinFromStudentMove() {

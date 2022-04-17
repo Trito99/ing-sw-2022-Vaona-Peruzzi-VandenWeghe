@@ -123,6 +123,10 @@ public class Player {
         return deckOfPlayer;
     }
 
+    public void setDeckOfPlayer(DeckAssistant deckOfPlayer) {
+        this.deckOfPlayer = deckOfPlayer;
+    }
+
     public void setCoinScore(int coinScore) {
         this.coinScore = coinScore;
     }

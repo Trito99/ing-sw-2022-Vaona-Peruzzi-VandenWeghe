@@ -8,7 +8,7 @@ public class DeckAssistant {
     private String name;
 
     public ArrayList<AssistantCard> getCardsInHand() {
-        return (ArrayList<AssistantCard>) cardsInHand.clone();
+        return cardsInHand;
     }
 
     public void generateAssistantDeck(){
