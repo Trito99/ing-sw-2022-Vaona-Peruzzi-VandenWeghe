@@ -15,20 +15,25 @@ import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
+import it.polimi.ingsw.view.VirtualView;
+import it.polimi.ingsw.view.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GameController {
     private Game gameSession;
+    private int maxPlayers;
     private TurnController turnController; //?
     private GameState gameState;
+    private final HashMap<String, VirtualView> allVirtualView;
 
 
     public GameController(){
+        this.allVirtualView= new HashMap<>();
         gameSession = new Game();
         //turnController  = null; ?
         gameState= GameState.INIT;
-
     }
 
 
@@ -37,6 +42,25 @@ public class GameController {
      * @param nickname del Giocatore.
      * @param gameId id della partita a cui il giocatore sta giocando.
      */
+    public boolean newPlayer(String nickname, String gameId, VirtualView virtualView) {
+        if(allVirtualView.isEmpty()){
+            allVirtualView.put(nickname, virtualView);
+            virtualView.showLogin(nickname,gameId, true);
+            //virtualView.askPlayersNumber();
+            return true;
+        }
+        else if(allVirtualView.size()<maxPlayers){
+            //this.gameSession.addPlayer(new Player(nickname));
+            allVirtualView.put(nickname, virtualView);
+            virtualView.showLogin(nickname, gameId,true);
+            /**if(allVirtualView.size()==maxPlayers){
+                startGame();
+            } */
+            return true;
+        }
+        else virtualView.showLogin(nickname, gameId,false);
+        return false;
+    }
 
     /** maxPlayers(GameMode) e difficulty vanno scelti da chi crea la partita */
     public void initializePlayer() { // Setto i player a inizio partita
