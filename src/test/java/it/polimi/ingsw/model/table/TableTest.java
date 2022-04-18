@@ -6,6 +6,9 @@ import it.polimi.ingsw.model.character.DeckCharacter;
 import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.island.IslandCard;
+import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.PlayerNumber;
+import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.Student;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
@@ -209,9 +212,29 @@ public class TableTest{
         assertEquals(1,p);
     }
 
-    @Test
-    public void JoinIslandTest(){
+    @ParameterizedTest
+    @EnumSource(GameMode.class)
+    public void JoinIslandTest(GameMode gameMode){
+        Player player= new Player(TColor.BLACK, PlayerNumber.PLAYER2);
+        player.generateSchool(table,gameMode);
+        for(int i=0;i<12;i++) {
+            for (int n = 0; n < i+1; n++)
+                table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(n));
+        }
+        assertEquals(1,table.getListOfIsland().get(0).getStudentOnIsland().size());
+        assertEquals(2,table.getListOfIsland().get(1).getStudentOnIsland().size());
+        assertEquals(3,table.getListOfIsland().get(2).getStudentOnIsland().size());
+        assertEquals(12,table.getListOfIsland().get(11).getStudentOnIsland().size());
 
+        table.setPosMotherEarth(2);
+        table.getListOfIsland().get(1).setTowerIsOnIsland(true);
+        table.getListOfIsland().get(0).setTowerOnIsland(player.getPersonalSchool().getTower().get(0));
+        assertEquals(TColor.BLACK,table.getListOfIsland().get(0).getTowerOnIsland().getTColour());
+        table.getListOfIsland().get(2).setTowerOnIsland(player.getPersonalSchool().getTower().get(0));
+        table.getListOfIsland().get(1).setTowerOnIsland(player.getPersonalSchool().getTower().get(0));
+        table.joinIsland(table.getListOfIsland());
+        assertEquals(10,table.getListOfIsland().size());
+        assertEquals(6,table.getListOfIsland().get(0).getStudentOnIsland().size());
     }
 
     /** controlla i costCharacter

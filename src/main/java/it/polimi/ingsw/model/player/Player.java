@@ -59,7 +59,7 @@ public class Player {
                 break;
             case COOP:
                 i = 7;
-                t = 0;
+                t = 8;
                 break;
         }
         for (int s = 0; s < i; s++) {
@@ -121,6 +121,10 @@ public class Player {
 
     public DeckAssistant getDeckOfPlayer(){
         return deckOfPlayer;
+    }
+
+    public void setDeckOfPlayer(DeckAssistant deckOfPlayer) {
+        this.deckOfPlayer = deckOfPlayer;
     }
 
     public void setCoinScore(int coinScore) {
