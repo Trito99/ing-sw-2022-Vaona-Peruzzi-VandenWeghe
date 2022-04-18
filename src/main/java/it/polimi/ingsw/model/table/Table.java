@@ -84,7 +84,6 @@ public class Table {
         Collections.shuffle(bag);
     }
 
-
     public void extractStudentOnCloud() {   //estrae dal sacchetto 3/4 studenti
         for (CloudCard cloudCard : cloudNumber) {
             for (int i = 0; i < cloudCard.getNumberOfSpaces(); i++) {

@@ -11,8 +11,6 @@ import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.table.Table;
 
 import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.Map;
 
 public class School {
 
@@ -246,15 +244,13 @@ public class School {
     }
 
     public boolean getProfInHall(SColor color){     /** DA CAMBIARE: ORA ABBIAMO ARRAY PROFOFPLAYER (POI VA CAMBIATO ANCHE CALCULATEINFLUENCE) */
+        boolean x = false;
 
-    boolean x=false;
-
-    for(Prof p : profOfPlayer) {
-        if (p.getSColour().equals(color))
-            x= p.getIsInHall();
-    }
-    return x;
-
+        for(Prof p : profOfPlayer) {
+            if (p.getSColour().equals(color))
+                x= p.getIsInHall();
+        }
+        return x;
     }
 
     public ArrayList<Tower> getTower() {
