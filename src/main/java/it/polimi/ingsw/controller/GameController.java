@@ -20,6 +20,7 @@ import it.polimi.ingsw.view.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class GameController {
     private Game gameSession;
@@ -120,6 +121,34 @@ public class GameController {
     public void initializeGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
         setGameState(GameState.INIT);
 
+    }
+
+    public boolean hasInactivePlayers(){
+        return turnController.hasInactivePlayers();
+    }
+
+    /** @return lista di nickname dei giocatori disconnessi dal gioco */
+    public List<String> getInactivePlayers(){
+        return turnController.getInactivePlayers();
+    }
+
+    /** DA COMPLETARE */
+    /** riconnette giocatore che si era disconnesso, durante il gioco avviato */
+    public void reconnect(String username, VirtualView virtualView){
+        allVirtualView.put(username, virtualView);
+        turnController.reconnect(username);
+        //broadcastMessage(username + " has reconnected.");
+        /** showPlayer(gameSession.getPlayer(username),username);
+        allVirtualView.get(username).showMarket(gameSession.getMarket().getMarketTray(), gameSession.getMarket().getCornerMarble());
+        allVirtualView.get(username).showDevMarket(gameSession.getCardMarket().availableCards(), gameSession.getCardMarket().remainingCards());
+        allVirtualView.get(username).showPlayerTurn(getActivePlayer());
+         */
+
+    }
+
+    /** se il gioco non è cominciato ----> return false */
+    public boolean isGameStarted(){
+        return gameState!=GameState.INIT;
     }
 
     public void playTrashCard(Player player){   /** memorizzo solo ultima carta giocata */

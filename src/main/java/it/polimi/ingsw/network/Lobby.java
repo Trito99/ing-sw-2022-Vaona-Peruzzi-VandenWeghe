@@ -21,35 +21,58 @@ public class Lobby {
     }
 
     /** aggiungo nuovo giocatore alla Lobby */
-    public void addPlayer(String username, ClientHandler clientHandler){
+    public void addPlayer(String nickname, ClientHandler clientHandler){
         VirtualView virtualView = new VirtualView(clientHandler);
-        /**
+
         if(!(isGameStarted())){
 
             int i=1;
-            String u = new String(username);
+            String n = new String(nickname);
             // ...
-            // stampo username così: (username)
-            while (clientHandlerMap.containsValue(u)) {
-                u = username + "(" + i + ")";
-                System.out.println(u);
+            // stampo nickname così: nickname(1) / nickname(2) / ecc.
+            while (clientHandlerMap.containsValue(n)) {
+                n = nickname + "(" + i + ")";
+                System.out.println(n);
                 i++;
             }
-            clientHandlerMap.put(clientHandler, u);
-            if(!gameController.newPlayer(u, gameId, virtualView)){
+            clientHandlerMap.put(clientHandler, n);
+            if(!gameController.newPlayer(n, gameId, virtualView)){
                 clientHandlerMap.remove(clientHandler);
             }
         }
+
         else if(hasInactivePLayers()){
-            List<String> inactive =getInactivePlayers();
-            if(inactive.contains(username)){
-                reconnect(username, clientHandler, virtualView);
+            List<String> inactive = getInactivePlayers();
+            if(inactive.contains(nickname)){
+                reconnect(nickname, clientHandler, virtualView);
             }
         }
         else{
-            virtualView.showLogin(username, gameId, false);
+            virtualView.showLogin(nickname, gameId, false);
         }
-         */
+    }
+
+
+
+    /** controlla se il gioco è inattivo o in corso ----> return se il gioco è già cominciato */
+    public boolean isGameStarted(){
+        return gameController.isGameStarted();
+    }
+
+    /** controlla se ci sono giocatori inattivi ----> return true */
+    public boolean hasInactivePLayers(){
+        return gameController.hasInactivePlayers();
+    }
+
+    /** controlla lista di giocatori inattivi  ----> return lista di nickname */
+    public List<String> getInactivePlayers(){
+        return gameController.getInactivePlayers();
+    }
+
+    /** riconnetti giocatore alla Lobby */
+    public void reconnect(String username, ClientHandler clientHandler,VirtualView virtualView){
+        clientHandlerMap.put(clientHandler, username);
+        gameController.reconnect(username, virtualView);
     }
 
 
