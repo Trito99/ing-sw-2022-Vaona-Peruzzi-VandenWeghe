@@ -155,7 +155,7 @@ public class GameController {
         //selezione
         switch(character.getCardEffect()){
             /** 1 */
-            case BACCO:
+            case ABATE:
                 Student studentChosen = null;
                 IslandCard islandCardChosen= null;
                 //notify (observer)----> studentChosen
@@ -169,10 +169,10 @@ public class GameController {
                 gameSession.getTable().getBag().remove(0);
 
             /** 2 */
-            case CICCIOPANZA:
-                character.getCardEffect().setCiccioPanzaPlayed(true);
+            case OSTE:
+                character.getCardEffect().setOstePlayed(true);
 
-            case ALZABANDIERA:   /** 3 */
+            case ARALDO:   /** 3 */
                 IslandCard islandChosen = null;
                 //notify (observer)----> islandChosen
                 ArrayList<Player> playersList= new ArrayList<>(gameSession.getListOfPlayer());
@@ -183,10 +183,10 @@ public class GameController {
                 gameSession.getTable().joinIsland(islandChosen, gameSession.getTable().getListOfIsland());
                 break;
 
-            case MAILMAN:   /** 4 */
-                character.getCardEffect().setMailmanPlayed(true);
+            case LATORE:   /** 4 */
+                character.getCardEffect().setLatorePlayed(true);
                 break;
-            case OLDLADY:   /** 5 */
+            case CURATRICE:   /** 5 */
                 IslandCard islandChosenTwo = null;
                 //notify (observer)----> islandChosen
 
@@ -200,11 +200,11 @@ public class GameController {
                     System.out.println(" Non puoi!!!");
                 break;
 
-            case TAURO:   /** 6 */
-                character.getCardEffect().setTauroPlayed(true);
+            case CENTAURO:   /** 6 */
+                character.getCardEffect().setCentauroPlayed(true);
                 break;
 
-            case JOKER:   /** 7 */
+            case SALTIMBANCO:   /** 7 */
                 for(int i =0; i<3; i++){
                     Student choice = null;  //nuovo studente da mettere nella entry
                     Student toChange = null;    //studente da togliere dalla entry
@@ -217,17 +217,17 @@ public class GameController {
                 }
                 break;
 
-            case KNIGHT:   /** 8 */
-                character.getCardEffect().setKnightPlayed(true);
+            case CAVALIERE:   /** 8 */
+                character.getCardEffect().setCavalierePlayed(true);
                 break;
 
-            case FUNGAIOLO:   /** 9 */
+            case ERBORISTA:   /** 9 */
                 SColor colorChosen = null;
                 //notify (observer)----> colorChosen
                 colorChosen.lockColor();
                 break;
 
-            case MENESTRELLO:   /** 10 */
+            case BARDO:   /** 10 */
                 // TO DO: controlli se sono pieni
                 /** togli da entry e metti in hall */
                 for(int i =0; i<3; i++){
@@ -286,7 +286,7 @@ public class GameController {
                 }
                 break;
 
-            case DAME:   /** 11 */
+            case CORTIGIANA:   /** 11 */
                 Student choice = null;
                 int i =0;
                 //notify (observer)---->scelgo pedina da mettere nel table
@@ -316,7 +316,7 @@ public class GameController {
                 table.getBag().remove(table.getBag().get(table.getBag().size() -1));
                 break;
 
-            case THIEF:   /** 12 */
+            case RIGATTIERE:   /** 12 */
                 SColor colorChoice = null;
                 //notify (observer)---->scelgo un colore
                 for(Player p : gameSession.getListOfPlayer()){
@@ -364,7 +364,7 @@ public class GameController {
         int playerChoice=0; /** da cambiare */
         //notify(observer)
 
-        if (playerChoice <= player.getTrash().getStepMotherEarth() && !cardEffectPlayed.isMailmanPlayed()) {
+        if (playerChoice <= player.getTrash().getStepMotherEarth() && !cardEffectPlayed.isLatorePlayed()) {
 
             if ((table.getPosMotherEarth() + n) > table.getListOfIsland().size()) {
                 table.getListOfIsland().get(table.getPosMotherEarth() + n - table.getListOfIsland().size() - 1).setMotherEarthOnIsland(true);
@@ -375,8 +375,8 @@ public class GameController {
                 table.setPosMotherEarth(table.getPosMotherEarth() + n);
             }
         }
-        /** EFFETTO MAILMAN */
-        else if(playerChoice <= player.getTrash().getStepMotherEarth()+2 && cardEffectPlayed.isMailmanPlayed()){
+        /** EFFETTO LATORE */
+        else if(playerChoice <= player.getTrash().getStepMotherEarth()+2 && cardEffectPlayed.isLatorePlayed()){
             if ((table.getPosMotherEarth() + n + 2) > table.getListOfIsland().size()) {
                 table.getListOfIsland().get(table.getPosMotherEarth() + n + 2 - table.getListOfIsland().size() - 1).setMotherEarthOnIsland(true);
                 table.setPosMotherEarth(table.getPosMotherEarth() + n + 2 - table.getListOfIsland().size());

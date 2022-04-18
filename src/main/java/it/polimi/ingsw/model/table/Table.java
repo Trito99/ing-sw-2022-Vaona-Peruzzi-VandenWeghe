@@ -139,23 +139,18 @@ public class Table {
 
         for(int j=0; j<3; j++){
             switch (characterCardsOnTable.get(j).getCardEffect()){
-                case BACCO:
+                case ABATE:
+                case CORTIGIANA:
                     for (int i = 0; i < 4; i++) {
                         characterCardsOnTable.get(j).getStudentsOnCard().add(bag.get(i));
                         bag.remove(bag.get(i));
                     }
                     break;
-                case OLDLADY:
+                case CURATRICE:
                         characterCardsOnTable.get(j).getCardEffect().setXCardOnCard(4);
                     break;
-                case JOKER:
+                case SALTIMBANCO:
                     for (int i = 0; i < 6; i++) {
-                        characterCardsOnTable.get(j).getStudentsOnCard().add(bag.get(i));
-                        bag.remove(bag.get(i));
-                    }
-                    break;
-                case DAME:
-                    for (int i = 0; i < 4; i++) {
                         characterCardsOnTable.get(j).getStudentsOnCard().add(bag.get(i));
                         bag.remove(bag.get(i));
                     }

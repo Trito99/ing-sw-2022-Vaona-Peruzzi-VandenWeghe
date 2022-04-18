@@ -1,24 +1,24 @@
 package it.polimi.ingsw.model.character;
 
 public enum CardEffect {
-    BACCO,
-    CICCIOPANZA,
-    ALZABANDIERA,
-    MAILMAN,
-    OLDLADY,
-    TAURO,
-    JOKER,
-    KNIGHT,
-    FUNGAIOLO,
-    MENESTRELLO,
-    DAME,
-    THIEF;
+    ABATE,
+    OSTE,
+    ARALDO,
+    LATORE,
+    CURATRICE,
+    CENTAURO,
+    SALTIMBANCO,
+    CAVALIERE,
+    ERBORISTA,
+    BARDO,
+    CORTIGIANA,
+    RIGATTIERE;
 
     private int xCardOnCard = 0;
-    private boolean ciccioPanzaPlayed;
-    private boolean knightPlayed;
+    private boolean ostePlayed;
+    private boolean cavalierePlayed;
     private boolean tauroPlayed;
-    private boolean mailmanPlayed;
+    private boolean latorePlayed;
 
 
     public int getXCardOnCard() {
@@ -29,36 +29,36 @@ public enum CardEffect {
         this.xCardOnCard = xCardOnSciura;
     }
 
-    public boolean isKnightPlayed() {
-        return knightPlayed;
+    public boolean isCavalierePlayed() {
+        return cavalierePlayed;
     }
 
-    public void setKnightPlayed(boolean knightPlayed) {
-        this.knightPlayed = knightPlayed;
+    public void setCavalierePlayed(boolean knightPlayed) {
+        this.cavalierePlayed = knightPlayed;
     }
 
-    public boolean isCiccioPanzaPlayed() {
-        return ciccioPanzaPlayed;
+    public boolean isOstePlayed() {
+        return ostePlayed;
     }
 
-    public void setCiccioPanzaPlayed(boolean ciccioPanzaPlayed) {
-        this.ciccioPanzaPlayed = ciccioPanzaPlayed;
+    public void setOstePlayed(boolean ostePlayed) {
+        this.ostePlayed = ostePlayed;
     }
 
-    public boolean isTauroPlayed() {
+    public boolean isCentauroPlayed() {
         return tauroPlayed;
     }
 
-    public void setTauroPlayed(boolean tauroPlayed) {
+    public void setCentauroPlayed(boolean tauroPlayed) {
         this.tauroPlayed = tauroPlayed;
     }
 
-    public boolean isMailmanPlayed() {
-        return mailmanPlayed;
+    public boolean isLatorePlayed() {
+        return latorePlayed;
     }
 
-    public void setMailmanPlayed(boolean mailmanPlayed) {
-        this.mailmanPlayed = mailmanPlayed;
+    public void setLatorePlayed(boolean latorePlayed) {
+        this.latorePlayed = latorePlayed;
     }
 
 }

@@ -20,17 +20,17 @@ public class DeckCharacter {
     }
 
     public void generateCharacterDeck(){
-        characterCards.add(new CharacterCard(1, CardEffect.BACCO));
-        characterCards.add(new CharacterCard(2, CardEffect.CICCIOPANZA));
-        characterCards.add(new CharacterCard(3, CardEffect.ALZABANDIERA));
-        characterCards.add(new CharacterCard(1, CardEffect.MAILMAN));
-        characterCards.add(new CharacterCard(2, CardEffect.OLDLADY));
-        characterCards.add(new CharacterCard(3, CardEffect.TAURO));
-        characterCards.add(new CharacterCard(1, CardEffect.JOKER));
-        characterCards.add(new CharacterCard(2, CardEffect.KNIGHT));
-        characterCards.add(new CharacterCard(3, CardEffect.FUNGAIOLO));
-        characterCards.add(new CharacterCard(1, CardEffect.MENESTRELLO));
-        characterCards.add(new CharacterCard(2, CardEffect.DAME));
-        characterCards.add(new CharacterCard(3, CardEffect.THIEF));
+        characterCards.add(new CharacterCard(1, CardEffect.ABATE));
+        characterCards.add(new CharacterCard(2, CardEffect.OSTE));
+        characterCards.add(new CharacterCard(3, CardEffect.ARALDO));
+        characterCards.add(new CharacterCard(1, CardEffect.LATORE));
+        characterCards.add(new CharacterCard(2, CardEffect.CURATRICE));
+        characterCards.add(new CharacterCard(3, CardEffect.CENTAURO));
+        characterCards.add(new CharacterCard(1, CardEffect.SALTIMBANCO));
+        characterCards.add(new CharacterCard(2, CardEffect.CAVALIERE));
+        characterCards.add(new CharacterCard(3, CardEffect.ERBORISTA));
+        characterCards.add(new CharacterCard(1, CardEffect.BARDO));
+        characterCards.add(new CharacterCard(2, CardEffect.CORTIGIANA));
+        characterCards.add(new CharacterCard(3, CardEffect.RIGATTIERE));
     }
 }

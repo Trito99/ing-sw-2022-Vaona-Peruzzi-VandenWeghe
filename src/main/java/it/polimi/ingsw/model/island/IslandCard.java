@@ -100,13 +100,13 @@ public class IslandCard {
                         }
                         break;
                 }
-                /** EFFETTO TAURO */
-                if(p.getTColour().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isTauroPlayed()){  /** Aggiungo influenza torri */
+                /** EFFETTO CENTAURO */
+                if(p.getTColour().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isCentauroPlayed()){  /** Aggiungo influenza torri */
                     countTot++;
                 }
 
-                /** EFFETTO KNIGHT */
-                if(cardEffectPlayed.isKnightPlayed()) {
+                /** EFFETTO CAVALIERE */
+                if(cardEffectPlayed.isCavalierePlayed()) {
                     p.setInfluenceOnIsland(countTot + 2);
                     /** controlla  se va bene qua */
                 }
@@ -114,7 +114,7 @@ public class IslandCard {
                     p.setInfluenceOnIsland(countTot);
             }
 
-            for(SColor c : SColor.values()){            /** controlla se va bene qua (Fungaiolo) */
+            for(SColor c : SColor.values()){            /** controlla se va bene qua (Erborista) */
                 if(c.isColorBlocked)
                     c.unlockColor();
             }
@@ -132,8 +132,8 @@ public class IslandCard {
             }
         }
 
-        cardEffectPlayed.setKnightPlayed(false);
-        cardEffectPlayed.setTauroPlayed(false);           /** controlla se va bene qua (Tauro) */
+        cardEffectPlayed.setCavalierePlayed(false);
+        cardEffectPlayed.setCentauroPlayed(false);           /** controlla se va bene qua (Centauro) */
 
         return playerWithInfluence;         /** Controllo Pareggio Influenza ----> return null? */
 
@@ -143,7 +143,7 @@ public class IslandCard {
 
         Player playerFound = calculateInfluence(listOfPlayer, cardEffectPlayed);  //Player che ha influenza sull'isola
 
-        /** OLDLADY: controllo che non ci sia una tessera divieto sull'isola */
+        /** CURATRICE: controllo che non ci sia una tessera divieto sull'isola */
         if (xCardOnIsland){
             setXCardCounter(getXCardCounter()-1);
             if(xCardCounter == 0) setXCardOnIsland(false);
@@ -177,7 +177,7 @@ public class IslandCard {
                 prevPlayer = player;
         }
 
-        if(playerBuilder.getTColour().equals(towerOnIsland.getTColour())) {     //
+        if(playerBuilder.getTColour().equals(towerOnIsland.getTColour())) {
             return;
         }
         else{
