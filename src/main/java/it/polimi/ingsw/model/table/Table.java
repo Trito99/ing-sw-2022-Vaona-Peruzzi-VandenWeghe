@@ -208,7 +208,7 @@ public class Table {
         int i = posMotherEarth - 1;
 
         if (listOfIsland.get(i).towerIsOnIsland() == true) {/** isole adiacenti */
-            if (i == listOfIsland.size() - 1) {
+            if (i == (listOfIsland.size() - 1)) {
                 if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(0).getTowerOnIsland().getTColour()) &&
                         listOfIsland.get(i).getTowerOnIsland().getTColour() != listOfIsland.get(i - 1).getTowerOnIsland().getTColour()) {
                     for (Student student : listOfIsland.get(0).getStudentOnIsland())
@@ -230,7 +230,7 @@ public class Table {
                         listOfIsland.get(i).getStudentOnIsland().add(student);
                     listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 2);
                     listOfIsland.remove(0);
-                    listOfIsland.remove(i - 1);   // 3 isole caso i= size
+                    listOfIsland.remove(i - 2);   // 3 isole caso i= size
                 }
             } else if (i == 0) {
                 int s = (listOfIsland.size() - 1);
@@ -280,7 +280,7 @@ public class Table {
                     listOfIsland.get(i).getStudentOnIsland().add(student);
                 listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 2);
                 listOfIsland.remove(i - 1);
-                listOfIsland.remove(i + 1);   // 3 isole caso i= size
+                listOfIsland.remove(i);   // 3 isole caso i= size
             }
             for (int f = 0; f < listOfIsland.size(); f++) {
                 listOfIsland.get(f).setIdIsland(f + 1);
