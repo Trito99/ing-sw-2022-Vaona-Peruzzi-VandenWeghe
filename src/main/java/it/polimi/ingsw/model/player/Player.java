@@ -3,9 +3,8 @@ package it.polimi.ingsw.model.player;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.school.*;
 import it.polimi.ingsw.model.school.Prof;
-import it.polimi.ingsw.model.school.School;
-import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.table.Table;
 

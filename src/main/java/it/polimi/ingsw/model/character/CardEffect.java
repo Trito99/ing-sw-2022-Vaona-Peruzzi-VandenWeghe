@@ -17,7 +17,7 @@ public enum CardEffect {
     private int xCardOnCard = 0;
     private boolean ostePlayed;
     private boolean cavalierePlayed;
-    private boolean tauroPlayed;
+    private boolean centauroPlayed;
     private boolean latorePlayed;
 
 
@@ -25,8 +25,8 @@ public enum CardEffect {
         return xCardOnCard;
     }
 
-    public void setXCardOnCard(int xCardOnSciura) {
-        this.xCardOnCard = xCardOnSciura;
+    public void setXCardOnCard(int xCardOnCard) {
+        this.xCardOnCard = xCardOnCard;
     }
 
     public boolean isCavalierePlayed() {
@@ -46,11 +46,11 @@ public enum CardEffect {
     }
 
     public boolean isCentauroPlayed() {
-        return tauroPlayed;
+        return centauroPlayed;
     }
 
-    public void setCentauroPlayed(boolean tauroPlayed) {
-        this.tauroPlayed = tauroPlayed;
+    public void setCentauroPlayed(boolean centauroPlayed) {
+        this.centauroPlayed = centauroPlayed;
     }
 
     public boolean isLatorePlayed() {
