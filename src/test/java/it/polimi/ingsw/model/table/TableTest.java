@@ -213,28 +213,28 @@ public class TableTest{
         assertEquals(1,p);
     }
 
-    @ParameterizedTest
-    @EnumSource(GameMode.class)
-    public void JoinIslandTest(GameMode gameMode) {
+    @RepeatedTest(100)
+    public void JoinIslandTest() {
         Player player = new Player(TColor.BLACK, PlayerNumber.PLAYER2);
-        player.generateSchool(table, gameMode);
+        Player player2 = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
+        player.generateSchool(table, GameMode.TWOPLAYERS);
+        player2.generateSchool(table,GameMode.TWOPLAYERS);
         ArrayList<IslandCard> newListOfIslands = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {  /** Moves students on Islands: 1 on the first Island, 2 on the second and so on. */
+        Random rn = new Random();
+        int r;
+        for (int i = 0; i < 12; i++) {  /** Moves random number of students on Islands. */
             newListOfIslands.add(new IslandCard(i));
-            for (int n = 0; n < i + 1; n++) {
-                table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(n));
-                newListOfIslands.get(i).getStudentOnIsland().add(table.getBag().get(n));
-                table.getBag().remove(n);
+            r = rn.nextInt(10)+1;
+            for (int n = 0; n < r; n++) {
+                table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
+                newListOfIslands.get(i).getStudentOnIsland().add(table.getBag().get(0));
+                table.getBag().remove(0);
             }
         }
-        for (int s = 0; s < table.getListOfIsland().size(); s++)
-            assertEquals(s + 1, table.getListOfIsland().get(s).getStudentOnIsland().size()); /** Checks if the quantity of students are like desired*/
 
         /**  Checks if joinIsland functions in the case of the merge of 3 Islands */
-
         for (int p = 0; p < table.getListOfIsland().size(); p++) {
-            table.setPosMotherEarth(p + 1);
-
+            table.moveMotherEarth(13+p-table.getPosMotherEarth());
             if (p == 0) {
                 table.getListOfIsland().get(11).setTowerOnIsland(player.getPersonalSchool().getTower().get(0));
                 table.getListOfIsland().get(11).setTowerIsOnIsland(true);
@@ -258,35 +258,38 @@ public class TableTest{
             assertEquals(10, table.getListOfIsland().size());
 
             if (p == 0) {
-                assertEquals(newListOfIslands.get(11).getStudentOnIsland().size() + newListOfIslands.get(p).getStudentOnIsland().size() + newListOfIslands.get(p + 1).getStudentOnIsland().size(), table.getListOfIsland().get(0).getStudentOnIsland().size());
-                assertEquals(3, table.getListOfIsland().get(p).getMergedIsland());
+                assertEquals(newListOfIslands.get(11).getStudentOnIsland().size() + newListOfIslands.get(p).getStudentOnIsland().size() + newListOfIslands.get(p + 1).getStudentOnIsland().size(), table.getListOfIsland().get(table.getPosMotherEarth()-1).getStudentOnIsland().size());
+                assertEquals(3, table.getListOfIsland().get(table.getPosMotherEarth()-1).getMergedIsland());
             } else if (p == 11) {
-                assertEquals(newListOfIslands.get(p - 1).getStudentOnIsland().size() + newListOfIslands.get(p).getStudentOnIsland().size() + newListOfIslands.get(0).getStudentOnIsland().size(), table.getListOfIsland().get(9).getStudentOnIsland().size());
-                assertEquals(3, table.getListOfIsland().get(9).getMergedIsland());
+                assertEquals(newListOfIslands.get(p - 1).getStudentOnIsland().size() + newListOfIslands.get(p).getStudentOnIsland().size() + newListOfIslands.get(0).getStudentOnIsland().size(), table.getListOfIsland().get(table.getPosMotherEarth()-1).getStudentOnIsland().size());
+                assertEquals(3, table.getListOfIsland().get(table.getPosMotherEarth()-1).getMergedIsland());
             } else {
-                assertEquals(newListOfIslands.get(p - 1).getStudentOnIsland().size() + newListOfIslands.get(p).getStudentOnIsland().size() + newListOfIslands.get(p + 1).getStudentOnIsland().size(), table.getListOfIsland().get(p - 1).getStudentOnIsland().size());
-                assertEquals(3, table.getListOfIsland().get(p - 1).getMergedIsland());
+                assertEquals(newListOfIslands.get(p - 1).getStudentOnIsland().size() + newListOfIslands.get(p).getStudentOnIsland().size() + newListOfIslands.get(p + 1).getStudentOnIsland().size(), table.getListOfIsland().get(table.getPosMotherEarth()-1).getStudentOnIsland().size());
+                assertEquals(3, table.getListOfIsland().get(table.getPosMotherEarth()-1).getMergedIsland());
             }
+            assertEquals(true,table.getListOfIsland().get(table.getPosMotherEarth()-1).getMotherEarthOnIsland());
 
-
-            /** Regenerates the original conditions */
+            /** Regenerates the original conditions with new random number of students */
             table.getListOfIsland().clear();
+            newListOfIslands.clear();
             table.getBag().clear();
             table.addFinalStudents();
             for (int i = 0; i < 12; i++) {
                 table.getListOfIsland().add(new IslandCard(i));
-                for (int n = 0; n < i + 1; n++) {
-                    table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(n));
-                    table.getBag().remove(n);
+                newListOfIslands.add(new IslandCard(i));
+                r = rn.nextInt(10)+1;
+                for (int n = 0; n < r; n++) {
+                    table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
+                    newListOfIslands.get(i).getStudentOnIsland().add(table.getBag().get(0));
+                    table.getBag().remove(0);
                 }
             }
-
+            table.generateMotherEarth();
         }
-        table.setPosMotherEarth(0);
-        /**  Checks if joinIsland functions in the case of the merge of 2 Islands (pre) */
-        for (int p2 = 0; p2 < table.getListOfIsland().size(); p2++) {
-            table.setPosMotherEarth(p2 + 1);
 
+        /**  Checks if joinIsland functions in the case of the merge of 2 Islands (the one in question and the one before). The next Island has a different color of tower  */
+        for (int p2 = 0; p2 < table.getListOfIsland().size(); p2++) {
+            table.moveMotherEarth(13+p2-table.getPosMotherEarth());
             if (p2 == 0) {
                 table.getListOfIsland().get(11).setTowerOnIsland(player.getPersonalSchool().getTower().get(0));
                 table.getListOfIsland().get(11).setTowerIsOnIsland(true);
@@ -295,6 +298,13 @@ public class TableTest{
                 table.getListOfIsland().get(p2 - 1).setTowerIsOnIsland(true);
             }
 
+            if (p2 == 11) {
+                table.getListOfIsland().get(0).setTowerOnIsland(player2.getPersonalSchool().getTower().get(0));
+                table.getListOfIsland().get(0).setTowerIsOnIsland(true);
+            } else {
+                table.getListOfIsland().get(p2 + 1).setTowerOnIsland(player2.getPersonalSchool().getTower().get(0));
+                table.getListOfIsland().get(p2 + 1).setTowerIsOnIsland(true);
+            }
 
             table.getListOfIsland().get(p2).setTowerOnIsland(player.getPersonalSchool().getTower().get(0));
             table.getListOfIsland().get(p2).setTowerIsOnIsland(true);
@@ -304,34 +314,39 @@ public class TableTest{
             assertEquals(11, table.getListOfIsland().size());
 
             if (p2 == 0) {
-                assertEquals(newListOfIslands.get(11).getStudentOnIsland().size() + newListOfIslands.get(p2).getStudentOnIsland().size(), table.getListOfIsland().get(0).getStudentOnIsland().size());
-                assertEquals(2, table.getListOfIsland().get(p2).getMergedIsland());
+                assertEquals(newListOfIslands.get(11).getStudentOnIsland().size() + newListOfIslands.get(p2).getStudentOnIsland().size(), table.getListOfIsland().get(table.getPosMotherEarth()-1).getStudentOnIsland().size());
+                assertEquals(2, table.getListOfIsland().get(table.getPosMotherEarth()-1).getMergedIsland());
             } else if (p2 == 11) {
-                assertEquals(newListOfIslands.get(p2 - 1).getStudentOnIsland().size() + newListOfIslands.get(p2).getStudentOnIsland().size(), table.getListOfIsland().get(10).getStudentOnIsland().size());
-                assertEquals(2, table.getListOfIsland().get(10).getMergedIsland());
+                assertEquals(newListOfIslands.get(p2 - 1).getStudentOnIsland().size() + newListOfIslands.get(p2).getStudentOnIsland().size(), table.getListOfIsland().get(table.getPosMotherEarth()-1).getStudentOnIsland().size());
+                assertEquals(2, table.getListOfIsland().get(table.getPosMotherEarth()-1).getMergedIsland());
             } else {
-                assertEquals(newListOfIslands.get(p2 - 1).getStudentOnIsland().size() + newListOfIslands.get(p2).getStudentOnIsland().size(), table.getListOfIsland().get(p2 - 1).getStudentOnIsland().size());
-                assertEquals(2, table.getListOfIsland().get(p2 - 1).getMergedIsland());
+                assertEquals(newListOfIslands.get(p2 - 1).getStudentOnIsland().size() + newListOfIslands.get(p2).getStudentOnIsland().size(), table.getListOfIsland().get(table.getPosMotherEarth()-1).getStudentOnIsland().size());
+                assertEquals(2, table.getListOfIsland().get(table.getPosMotherEarth()-1).getMergedIsland());
             }
 
+            assertEquals(true,table.getListOfIsland().get(table.getPosMotherEarth()-1).getMotherEarthOnIsland());
 
-            /** Regenerates the original conditions */
+            /** Regenerates the original conditions with new random number of students */
             table.getListOfIsland().clear();
+            newListOfIslands.clear();
             table.getBag().clear();
             table.addFinalStudents();
             for (int i = 0; i < 12; i++) {
                 table.getListOfIsland().add(new IslandCard(i));
-                for (int n = 0; n < i + 1; n++) {
-                    table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(n));
-                    table.getBag().remove(n);
+                newListOfIslands.add(new IslandCard(i));
+                r = rn.nextInt(10)+1;
+                for (int n = 0; n < r; n++) {
+                    table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
+                    newListOfIslands.get(i).getStudentOnIsland().add(table.getBag().get(0));
+                    table.getBag().remove(0);
                 }
             }
+            table.generateMotherEarth();
         }
 
-        table.setPosMotherEarth(0);
-        /**  Checks if joinIsland functions in the case of the merge of 2 Islands (post) */
+        /**  Checks if joinIsland functions in the case of the merge of 2 Islands (the one in question and the next one). The next Island has no tower  */
         for (int p3 = 0; p3 < table.getListOfIsland().size(); p3++) {
-            table.setPosMotherEarth(p3 + 1);
+            table.moveMotherEarth(13+p3-table.getPosMotherEarth());
 
             if (p3 == 11) {
                 table.getListOfIsland().get(0).setTowerOnIsland(player.getPersonalSchool().getTower().get(0));
@@ -350,29 +365,36 @@ public class TableTest{
             assertEquals(11, table.getListOfIsland().size());
 
             if (p3 == 0) {
-                assertEquals(newListOfIslands.get(p3).getStudentOnIsland().size() + newListOfIslands.get(p3+1).getStudentOnIsland().size(), table.getListOfIsland().get(p3).getStudentOnIsland().size());
-                assertEquals(2, table.getListOfIsland().get(p3).getMergedIsland());
+                assertEquals(newListOfIslands.get(p3).getStudentOnIsland().size() + newListOfIslands.get(p3+1).getStudentOnIsland().size(), table.getListOfIsland().get(table.getPosMotherEarth()-1).getStudentOnIsland().size());
+                assertEquals(2, table.getListOfIsland().get(table.getPosMotherEarth()-1).getMergedIsland());
             } else if (p3 == 11) {
-                assertEquals(newListOfIslands.get(p3).getStudentOnIsland().size() + newListOfIslands.get(0).getStudentOnIsland().size(), table.getListOfIsland().get(10).getStudentOnIsland().size());
-                assertEquals(2, table.getListOfIsland().get(10).getMergedIsland());
+                assertEquals(newListOfIslands.get(p3).getStudentOnIsland().size() + newListOfIslands.get(0).getStudentOnIsland().size(), table.getListOfIsland().get(table.getPosMotherEarth()-1).getStudentOnIsland().size());
+                assertEquals(2, table.getListOfIsland().get(table.getPosMotherEarth()-1).getMergedIsland());
             } else {
-                assertEquals(newListOfIslands.get(p3).getStudentOnIsland().size() + newListOfIslands.get(p3+1).getStudentOnIsland().size(), table.getListOfIsland().get(p3).getStudentOnIsland().size());
-                assertEquals(2, table.getListOfIsland().get(p3).getMergedIsland());
+                assertEquals(newListOfIslands.get(p3).getStudentOnIsland().size() + newListOfIslands.get(p3+1).getStudentOnIsland().size(), table.getListOfIsland().get(table.getPosMotherEarth()-1).getStudentOnIsland().size());
+                assertEquals(2, table.getListOfIsland().get(table.getPosMotherEarth()-1).getMergedIsland());
             }
 
+            assertEquals(true,table.getListOfIsland().get(table.getPosMotherEarth()-1).getMotherEarthOnIsland());
 
-            /** Regenerates the original conditions */
+            /** Regenerates the original conditions with new random number of students */
             table.getListOfIsland().clear();
+            newListOfIslands.clear();
             table.getBag().clear();
             table.addFinalStudents();
             for (int i = 0; i < 12; i++) {
                 table.getListOfIsland().add(new IslandCard(i));
-                for (int n = 0; n < i + 1; n++) {
-                    table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(n));
-                    table.getBag().remove(n);
+                newListOfIslands.add(new IslandCard(i));
+                r = rn.nextInt(10)+1;
+                for (int n = 0; n < r; n++) {
+                    table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
+                    newListOfIslands.get(i).getStudentOnIsland().add(table.getBag().get(0));
+                    table.getBag().remove(0);
                 }
             }
+            table.generateMotherEarth();
         }
+
     }
     /** controlla i costCharacter
      for( CharacterCard card : deckCharacter.getCharacterCards()){
