@@ -40,7 +40,8 @@ class GameTest {
 
         gameController.setGameSession(game);
         gameController.playAssistantCard("lion");
-        //assertNotNull(gameController.getGameSession().getActivePlayer().getTrash());
+        assertNotNull(gameController.getGameSession().getActivePlayer().getTrash());
+        assertEquals("lion", gameController.getGameSession().getActivePlayer().getTrash().getAssistantName());
         assertEquals(true, game.gameIsFinished());  /** Control if return true when the player has no more card in his hand */
 
         gameController.getGameSession().getActivePlayer().getDeckOfPlayer().getCardsInHand().add(new AssistantCard("lion",3,4));

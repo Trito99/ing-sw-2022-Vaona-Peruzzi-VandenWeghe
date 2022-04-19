@@ -122,6 +122,7 @@ public class GameController {
 
     }
 
+        /** DA TOGLIERE */
     public void playTrashCard(Player player){   /** memorizzo solo ultima carta giocata */
         AssistantCard playedCard = null;
         //notify observer---->scelgo carta da scartare
@@ -143,6 +144,7 @@ public class GameController {
         }
     }
 
+    /** DA TOGLIERE ?? */
     public void increaseCoinScore(Player player){
         player.setCoinScore(player.getCoinScore() + 1);
     }
@@ -155,24 +157,39 @@ public class GameController {
         //Scelta dal giocatore
         AssistantCard assistantCardPlayed = null;
 
-        for (AssistantCard card : gameSession.getActivePlayer().getDeckOfPlayer().getCardsInHand()){
-            if(card.getAssistantName()==assistantName) {
-                /** DA FARE: Controllo se il giocatore può giocare quella carta (non è già stata giocata da altri) o se è l'unica che può mettere */
-                assistantCardPlayed=card;
+        do {
+            for (AssistantCard card : gameSession.getActivePlayer().getDeckOfPlayer().getCardsInHand()) {
+                if (card.getAssistantName().equals(assistantName)) {
+                    /** DA FARE: Controllo se il giocatore può giocare quella carta (non è già stata giocata da altri) o se è l'unica che può mettere */
+                    assistantCardPlayed = card;
+                }
             }
         }
+        while(assistantCardPlayed==null);
+
         gameSession.getActivePlayer().setTrash(assistantCardPlayed);
         gameSession.getActivePlayer().setHasAlreadyPlayed(true);
         gameSession.getActivePlayer().getDeckOfPlayer().getCardsInHand().remove(assistantCardPlayed);
     }
 
-    public void playCharacterCard(CharacterCard character, Player player, Table table){ /** da rifare!!! */
+    public void playCharacterCard(CardEffect cardEffect){ /** da rifare!!! */
         //notify observer con scelta del giocatore -> sceglie attraverso l'id o con Nome personaggio?
+        CharacterCard characterCardPlayed = null;
 
-        if(character.getCoinOnCard()) {
-            if(player.getCoinScore() >= character.getCostCharacter() +1) {
-                decreaseCoinScore(player, character.getCostCharacter() + 1);
-                table.increaseCoinsOnTable(character.getCostCharacter() + 1);
+        do {
+            for (CharacterCard card : gameSession.getTable().getCharacterCardsOnTable()) {
+                if (card.getCardEffect().equals(cardEffect)) {
+                    /** DA FARE: Controllo se il giocatore può giocare quella carta (non è già stata giocata da altri) o se è l'unica che può mettere */
+                    characterCardPlayed = card;
+                }
+            }
+        }
+        while(characterCardPlayed==null);
+
+        if(characterCardPlayed.getCoinOnCard()) {
+            if(gameSession.getActivePlayer().getCoinScore() >= characterCardPlayed.getCostCharacter() +1) {
+                decreaseCoinScore(gameSession.getActivePlayer(), characterCardPlayed.getCostCharacter() + 1);
+                gameSession.getTable().increaseCoinsOnTable(characterCardPlayed.getCostCharacter() + 1);
             }
             else{
                 System.out.println("NON HAI ABBASTANZA MONETE! ");
@@ -180,10 +197,10 @@ public class GameController {
             }
         }
         else{
-            if(player.getCoinScore() >= character.getCostCharacter()) {
-                decreaseCoinScore(player, character.getCostCharacter());
-                table.increaseCoinsOnTable(character.getCostCharacter());
-                character.setCoinOnCard(true);
+            if(gameSession.getActivePlayer().getCoinScore() >= characterCardPlayed.getCostCharacter()) {
+                decreaseCoinScore(gameSession.getActivePlayer(), characterCardPlayed.getCostCharacter());
+                gameSession.getTable().increaseCoinsOnTable(characterCardPlayed.getCostCharacter());
+                characterCardPlayed.setCoinOnCard(true);
             }
             else{
                 System.out.println("NON HAI ABBASTANZA MONETE! ");
@@ -192,55 +209,55 @@ public class GameController {
         }
 
         //selezione
-        switch(character.getCardEffect()){
+        switch(characterCardPlayed.getCardEffect()){
             /** 1 */
             case ABATE:
                 Student studentChosen = null;
                 IslandCard islandCardChosen= null;
                 //notify (observer)----> studentChosen
-                for(Student s : character.getStudentsOnCard()){
+                for(Student s : characterCardPlayed.getStudentsOnCard()){
                     if(s.equals(studentChosen)){
-                        character.getStudentsOnCard().remove(s);
+                        characterCardPlayed.getStudentsOnCard().remove(s);
                         gameSession.getTable().getListOfIsland().get(islandCardChosen.getIdIsland() - 1).getStudentOnIsland().add(s);
                     }
                 }
-                character.getStudentsOnCard().add(gameSession.getTable().getBag().get(0));
+                characterCardPlayed.getStudentsOnCard().add(gameSession.getTable().getBag().get(0));
                 gameSession.getTable().getBag().remove(0);
 
             /** 2 */
             case OSTE:
-                character.getCardEffect().setOstePlayed(true);
+                characterCardPlayed.getCardEffect().setOstePlayed(true);
 
             case ARALDO:   /** 3 */
                 IslandCard islandChosen = null;
                 //notify (observer)----> islandChosen
                 ArrayList<Player> playersList= new ArrayList<>(gameSession.getListOfPlayers());
 
-                islandChosen.calculateInfluence(playersList, character.getCardEffect());
-                islandChosen.buildTowerOnIsland(playersList, character.getCardEffect());
-                islandChosen.changeTowerColour(playersList, character.getCardEffect());
+                islandChosen.calculateInfluence(playersList, characterCardPlayed.getCardEffect());
+                islandChosen.buildTowerOnIsland(playersList, characterCardPlayed.getCardEffect());
+                islandChosen.changeTowerColour(playersList, characterCardPlayed.getCardEffect());
                 gameSession.getTable().joinIsland(gameSession.getTable().getListOfIsland());
                 break;
 
             case LATORE:   /** 4 */
-                character.getCardEffect().setLatorePlayed(true);
+                characterCardPlayed.getCardEffect().setLatorePlayed(true);
                 break;
             case CURATRICE:   /** 5 */
                 IslandCard islandChosenTwo = null;
                 //notify (observer)----> islandChosen
 
                 islandChosenTwo.setXCardOnIsland(true);
-                if(islandChosenTwo.getXCardCounter() < 4 && character.getCardEffect().getXCardOnCard() > 0){
+                if(islandChosenTwo.getXCardCounter() < 4 && characterCardPlayed.getCardEffect().getXCardOnCard() > 0){
                     islandChosenTwo.setXCardCounter(islandChosenTwo.getXCardCounter() + 1);
                     islandChosenTwo.setXCardOnIsland(true);
-                    character.getCardEffect().setXCardOnCard(character.getCardEffect().getXCardOnCard()-1);
+                    characterCardPlayed.getCardEffect().setXCardOnCard(characterCardPlayed.getCardEffect().getXCardOnCard()-1);
                 }
                 else
                     System.out.println(" Non puoi!!!");
                 break;
 
             case CENTAURO:   /** 6 */
-                character.getCardEffect().setCentauroPlayed(true);
+                characterCardPlayed.getCardEffect().setCentauroPlayed(true);
                 break;
 
             case SALTIMBANCO:   /** 7 */
@@ -251,13 +268,13 @@ public class GameController {
                     gameSession.getActivePlayer().getPersonalSchool().getEntry().remove(toChange);
                     //notify (observer)---->scelta studente nella carta da scambiare
                     gameSession.getActivePlayer().getPersonalSchool().getEntry().add(choice);
-                    character.getStudentsOnCard().remove(choice);
-                    character.getStudentsOnCard().add(toChange);
+                    characterCardPlayed.getStudentsOnCard().remove(choice);
+                    characterCardPlayed.getStudentsOnCard().add(toChange);
                 }
                 break;
 
             case CAVALIERE:   /** 8 */
-                character.getCardEffect().setCavalierePlayed(true);
+                characterCardPlayed.getCardEffect().setCavalierePlayed(true);
                 break;
 
             case ERBORISTA:   /** 9 */
@@ -349,10 +366,10 @@ public class GameController {
                     gameSession.getActivePlayer().getPersonalSchool().getBTable().add(choice);
                     getCoinFromStudentMove();
                 }
-                character.getStudentsOnCard().remove(choice);
+                characterCardPlayed.getStudentsOnCard().remove(choice);
                 //notify (observer)---->pesco pedina da mettere sulla carta
-                character.getStudentsOnCard().add(table.getBag().get(table.getBag().size() -1));
-                table.getBag().remove(table.getBag().get(table.getBag().size() -1));
+                characterCardPlayed.getStudentsOnCard().add(gameSession.getTable().getBag().get(gameSession.getTable().getBag().size() -1));
+                gameSession.getTable().getBag().remove(gameSession.getTable().getBag().get(gameSession.getTable().getBag().size() -1));
                 break;
 
             case RIGATTIERE:   /** 12 */
