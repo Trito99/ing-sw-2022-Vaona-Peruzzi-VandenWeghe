@@ -24,7 +24,7 @@ import java.util.List;
 
 public class GameController {
     private Game gameSession;
-    private int maxPlayers; // Da Togliere?
+    private int maxPlayers;
     private TurnController turnController; //?
     private GameState gameState;
     private final HashMap<String, VirtualView> allVirtualView;
@@ -36,7 +36,6 @@ public class GameController {
         //turnController  = null; ?
         gameState= GameState.INIT;
     }
-
 
 
     /**
@@ -75,40 +74,40 @@ public class GameController {
                      this.gameSession.addPlayer(new Player(nickname, età, TColor.WHITE, PlayerNumber.PLAYER1));
                      Player 2: scegli nickname, scrivi la tua età
                      this.gameSession.addPlayer(new Player(nickname, età, TColor.WHITE, PlayerNumber.PLAYER1)); */
-                    this.gameSession.getListOfPlayer().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
-                    this.gameSession.getListOfPlayer().add(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
+                    this.gameSession.getListOfPlayers().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
+                    this.gameSession.getListOfPlayers().add(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
 
                     if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
-                        for (Player p : gameSession.getListOfPlayer())
+                        for (Player p : gameSession.getListOfPlayers())
                             p.setCoinScore(1);
                     }
                     break;
                     //view.put(nickname, view);
             case THREEPLAYERS:
-                    this.gameSession.getListOfPlayer().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
-                    this.gameSession.getListOfPlayer().add(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
-                    this.gameSession.getListOfPlayer().add(new Player(TColor.GREY, PlayerNumber.PLAYER3));
+                    this.gameSession.getListOfPlayers().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
+                    this.gameSession.getListOfPlayers().add(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
+                    this.gameSession.getListOfPlayers().add(new Player(TColor.GREY, PlayerNumber.PLAYER3));
 
                     if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)) {
-                        for (Player p : gameSession.getListOfPlayer())
+                        for (Player p : gameSession.getListOfPlayers())
                             p.setCoinScore(1);
                     }
                     break;
 
             case COOP:
-                    this.gameSession.getListOfPlayer().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
-                    this.gameSession.getListOfPlayer().add(new Player(TColor.WHITE, PlayerNumber.PLAYER2));
+                    this.gameSession.getListOfPlayers().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
+                    this.gameSession.getListOfPlayers().add(new Player(TColor.WHITE, PlayerNumber.PLAYER2));
                     gameSession.getTeam().add(new Team()) ;
-                    gameSession.getTeam().get(0).intializeTeam(gameSession.getListOfPlayer().get(0), gameSession.getListOfPlayer().get(1));
+                    gameSession.getTeam().get(0).intializeTeam(gameSession.getListOfPlayers().get(0), gameSession.getListOfPlayers().get(1));
 
-                    this.gameSession.getListOfPlayer().add(new Player(TColor.BLACK, PlayerNumber.PLAYER3));
-                    this.gameSession.getListOfPlayer().add(new Player(TColor.BLACK, PlayerNumber.PLAYER4));
+                    this.gameSession.getListOfPlayers().add(new Player(TColor.BLACK, PlayerNumber.PLAYER3));
+                    this.gameSession.getListOfPlayers().add(new Player(TColor.BLACK, PlayerNumber.PLAYER4));
                     gameSession.getTeam().add(new Team());
-                    gameSession.getTeam().get(1).intializeTeam(gameSession.getListOfPlayer().get(2), gameSession.getListOfPlayer().get(3));
+                    gameSession.getTeam().get(1).intializeTeam(gameSession.getListOfPlayers().get(2), gameSession.getListOfPlayers().get(3));
 
                     /** Mettere ArrayList<Player> team dentro alla classe Player???  */
                     if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)) {
-                        for (Player p : gameSession.getListOfPlayer())
+                        for (Player p : gameSession.getListOfPlayers())
                             p.setCoinScore(1);
                     }
                     break;
@@ -120,43 +119,14 @@ public class GameController {
 
     public void initializeGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
         setGameState(GameState.INIT);
-        /** DA FINIRE */
 
     }
 
-    public boolean hasInactivePlayers(){
-        return turnController.hasInactivePlayers();
-    }
-
-    /** @return lista di nickname dei giocatori disconnessi dal gioco */
-    public List<String> getInactivePlayers(){
-        return turnController.getInactivePlayers();
-    }
-
-    /** DA COMPLETARE */
-    /** riconnette giocatore che si era disconnesso, durante il gioco avviato */
-    public void reconnect(String username, VirtualView virtualView){
-        allVirtualView.put(username, virtualView);
-        turnController.reconnect(username);
-        //broadcastMessage(username + " has reconnected.");
-        /** showPlayer(gameSession.getPlayer(username),username);
-        allVirtualView.get(username).showMarket(gameSession.getMarket().getMarketTray(), gameSession.getMarket().getCornerMarble());
-        allVirtualView.get(username).showDevMarket(gameSession.getCardMarket().availableCards(), gameSession.getCardMarket().remainingCards());
-        allVirtualView.get(username).showPlayerTurn(getActivePlayer());
-         */
-
-    }
-
-    /** se il gioco non è cominciato ----> return false */
-    public boolean isGameStarted(){
-        return gameState!=GameState.INIT;
-    }
-
-    /** DA TOGLIERE */
+        /** DA TOGLIERE */
     public void playTrashCard(Player player){   /** memorizzo solo ultima carta giocata */
         AssistantCard playedCard = null;
         //notify observer---->scelgo carta da scartare
-        for(Player p : gameSession.getListOfPlayer()){
+        for(Player p : gameSession.getListOfPlayers()){
             AssistantCard alreadyTaken = null;
             if(playedCard != p.getTrash() && p.HasAlreadyPlayed()) {
                 player.setTrash(playedCard);
@@ -169,12 +139,12 @@ public class GameController {
         }
         player.getDeckOfPlayer().getCardsInHand().remove(playedCard);
 
-        for(Player p : gameSession.getListOfPlayer()){    /** Rimetto tutto a false a fine "turno"--->Andrà fuori dal metodo */
+        for(Player p : gameSession.getListOfPlayers()){    /** Rimetto tutto a false a fine "turno"--->Andrà fuori dal metodo */
             p.setHasAlreadyPlayed(false);
         }
     }
 
-    /** DA TOGLIERE O CAMBIARE ?? */
+    /** DA TOGLIERE ?? */
     public void increaseCoinScore(Player player){
         player.setCoinScore(player.getCoinScore() + 1);
     }
@@ -186,6 +156,7 @@ public class GameController {
     public void playAssistantCard(String assistantName){
         //Scelta dal giocatore
         AssistantCard assistantCardPlayed = null;
+
         do {
             for (AssistantCard card : gameSession.getActivePlayer().getDeckOfPlayer().getCardsInHand()) {
                 if (card.getAssistantName().equals(assistantName)) {
@@ -194,24 +165,26 @@ public class GameController {
                 }
             }
         }
-        while (assistantCardPlayed != null);
+        while(assistantCardPlayed==null);
 
         gameSession.getActivePlayer().setTrash(assistantCardPlayed);
         gameSession.getActivePlayer().setHasAlreadyPlayed(true);
         gameSession.getActivePlayer().getDeckOfPlayer().getCardsInHand().remove(assistantCardPlayed);
     }
 
-    public void playCharacterCard(CardEffect cardEffect){
+    public void playCharacterCard(CardEffect cardEffect){ /** da rifare!!! */
         //notify observer con scelta del giocatore -> sceglie attraverso l'id o con Nome personaggio?
         CharacterCard characterCardPlayed = null;
 
         do {
             for (CharacterCard card : gameSession.getTable().getCharacterCardsOnTable()) {
-                if (card.getCardEffect() == cardEffect)
+                if (card.getCardEffect().equals(cardEffect)) {
+                    /** DA FARE: Controllo se il giocatore può giocare quella carta (non è già stata giocata da altri) o se è l'unica che può mettere */
                     characterCardPlayed = card;
+                }
             }
         }
-        while (characterCardPlayed!=null);
+        while(characterCardPlayed==null);
 
         if(characterCardPlayed.getCoinOnCard()) {
             if(gameSession.getActivePlayer().getCoinScore() >= characterCardPlayed.getCostCharacter() +1) {
@@ -258,7 +231,7 @@ public class GameController {
             case ARALDO:   /** 3 */
                 IslandCard islandChosen = null;
                 //notify (observer)----> islandChosen
-                ArrayList<Player> playersList= new ArrayList<>();
+                ArrayList<Player> playersList= new ArrayList<>(gameSession.getListOfPlayers());
 
                 islandChosen.calculateInfluence(playersList, characterCardPlayed.getCardEffect());
                 islandChosen.buildTowerOnIsland(playersList, characterCardPlayed.getCardEffect());
@@ -395,14 +368,14 @@ public class GameController {
                 }
                 characterCardPlayed.getStudentsOnCard().remove(choice);
                 //notify (observer)---->pesco pedina da mettere sulla carta
-                characterCardPlayed.getStudentsOnCard().add(gameSession.getTable().getBag().get(gameSession.getTable().getBag().size() - 1));
-                gameSession.getTable().getBag().remove(gameSession.getTable().getBag().get(gameSession.getTable().getBag().size() - 1));
+                characterCardPlayed.getStudentsOnCard().add(gameSession.getTable().getBag().get(gameSession.getTable().getBag().size() -1));
+                gameSession.getTable().getBag().remove(gameSession.getTable().getBag().get(gameSession.getTable().getBag().size() -1));
                 break;
 
             case RIGATTIERE:   /** 12 */
                 SColor colorChoice = null;
                 //notify (observer)---->scelgo un colore
-                for(Player p : gameSession.getListOfPlayer()){
+                for(Player p : gameSession.getListOfPlayers()){
                     if(colorChoice.equals(SColor.GREEN)){
                         for(int j=0; j<3; j++){
                             if(gameSession.getActivePlayer().getPersonalSchool().getGTable().size() != 0)
@@ -486,6 +459,22 @@ public class GameController {
         return gameSession;
     }
 
+    /** DA CONTROLLARE */
+    /** inizia il turno */
+    public void startTurn(){
+        switch(gameState){
+            case INIT:
+                /** da spostare qui le funzioni di inizializzazione
+                 * tavolo, scuola, nuvole, deckassistant, deckcharacter, ecc
+                 * */
+                break;
+            case IN_GAME:
+            case END_GAME:
+                //allVirtualView.get(getActivePlayer()).askAction();
+                break;
+        }
+    }
+
     public void setGameSession(Game gameSession) {
         this.gameSession = gameSession;
     }
@@ -506,6 +495,74 @@ public class GameController {
     }
 
 
+    /**
+     * METODI USATI PER CONNESSIONE CLIENT - SERVER
+     * */
+
+    public boolean hasInactivePlayers(){
+        return turnController.hasInactivePlayers();
+    }
+
+    /** @return lista di nickname dei giocatori disconnessi dal gioco */
+    public List<String> getInactivePlayers(){
+        return turnController.getInactivePlayers();
+    }
+
+    /** DA COMPLETARE */
+    /** riconnette giocatore che si era disconnesso, durante il gioco avviato */
+    public void reconnect(String username, VirtualView virtualView){
+        allVirtualView.put(username, virtualView);
+        turnController.reconnect(username);
+        //broadcastMessage(username + " has reconnected.");
+        /** showPlayer(gameSession.getPlayer(username),username);
+         allVirtualView.get(username).showMarket(gameSession.getMarket().getMarketTray(), gameSession.getMarket().getCornerMarble());
+         allVirtualView.get(username).showDevMarket(gameSession.getCardMarket().availableCards(), gameSession.getCardMarket().remainingCards());
+         allVirtualView.get(username).showPlayerTurn(getActivePlayer());
+         */
+
+    }
+
+    /** se il gioco non è cominciato ----> return false */
+    public boolean isGameStarted(){
+        return gameState!=GameState.INIT;
+    }
+
+    /** rimouove giocatore dal gioco e controlla se era l'active player---> inizia nuovo turno */
+    public void disconnect(String username){
+        if(username.equals(getActivePlayer()))
+        {
+
+            if(turnController.nextPlayer().equals(turnController.firstPlayer())&&turnController.getActivePlayers().size()!=0){
+                /** switch(gameState){
+                    case DRAWLEADER:
+                        if(maxPlayers>=2){
+                            setGameState(GameState.GIVERES);}
+                        break;
+                    case GIVERES:
+                        setGameState(GameState.IN_GAME);
+                        for(String s: allVirtualView.keySet()){
+                            if (!s.equals(getActivePlayer())){
+                                allVirtualView.get(s).showPlayerTurn(getActivePlayer());
+                            }
+                        }
+                        break;
+                } */
+            }
+            turnController.disconnect(username);
+            startTurn();
+        }
+        allVirtualView.remove(username);
+        turnController.disconnect(username);
+    }
+
+    /** giocatore attiivo in quel momento */
+    public String getActivePlayer(){
+        return turnController.getActivePlayer();
+    }
+
+    public HashMap<String, VirtualView> getAllVirtualView() {
+        return allVirtualView;
+    }
 
   /**  @Override
     public void update(Observable o, Object arg) {

@@ -12,6 +12,7 @@ public class Game {
 
     //private int gameId;   serve per partite multiple
     private GameMode gameMode;
+    private int gameId;
     private ArrayList<Player> listOfPlayers;
     private Player activePlayer;
     private int numberOfPlayers;  // Non serve, basta la gameMode (Two/Three players, coop)
@@ -44,25 +45,10 @@ public class Game {
         return gameMode;
     }
 
-    public ArrayList<Player> getListOfPlayer(){
-        return (ArrayList<Player>) listOfPlayers.clone();
+    public ArrayList<Player> getListOfPlayers(){
+        return listOfPlayers;
+        //ho tolto la clone perchè questa lista va modificata se fiocatori abbandonano il gioco
     }
-
-    /**     SECONDO ME SAREBBE PIù CORRETTO - chiara
-     * public ArrayList<Player> getListOfPlayer(){
-     *      ArrayList<Player> listOfPlayers = new ArrayList<>()
-     *      for (int i = 0; i < getListOfPlayer().size(); i++) {
-     *          listOfPlayers.get(i).add(getListOfPlayer();
-     *          }
-     *      return listOfPlayers;
-     * }
-     */
-
-    /**
-    public int getGameId(){
-        return this.gameId;
-    }
-    */
 
     public int getNumberOfPlayers(){
         return numberOfPlayers;
