@@ -209,79 +209,125 @@ public class Table {
 
         if (listOfIsland.get(i).towerIsOnIsland() == true) {/** isole adiacenti */
             if (i == (listOfIsland.size() - 1)) {
-                if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(0).getTowerOnIsland().getTColour()) &&
-                        listOfIsland.get(i).getTowerOnIsland().getTColour() != listOfIsland.get(i - 1).getTowerOnIsland().getTColour()) {
-                    for (Student student : listOfIsland.get(0).getStudentOnIsland())
-                        listOfIsland.get(i).getStudentOnIsland().add(student);
-                    listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 1);
-                    listOfIsland.remove(0);                 // 2 isole caso i= size (successivo)
+                if (listOfIsland.get(i-1).towerIsOnIsland() == false) {
+                    if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(0).getTowerOnIsland().getTColour())) {
+                        for (Student student : listOfIsland.get(0).getStudentOnIsland())
+                            listOfIsland.get(i).getStudentOnIsland().add(student);
+                        listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 1);
+                        listOfIsland.remove(0);
+                    }
+                } else if (listOfIsland.get(0).towerIsOnIsland() == false) {
+                    if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i - 1).getTowerOnIsland().getTColour())) {
+                        for (Student student : listOfIsland.get(i - 1).getStudentOnIsland())
+                            listOfIsland.get(i).getStudentOnIsland().add(student);
+                        listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 1);
+                        listOfIsland.remove(i - 1);
+                    }   // 3 isole caso i= size
+                } else if (listOfIsland.get(0).towerIsOnIsland() == true && listOfIsland.get(i - 1).towerIsOnIsland() == true) {
+                    if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(0).getTowerOnIsland().getTColour()) &&
+                            listOfIsland.get(i).getTowerOnIsland().getTColour() != listOfIsland.get(i - 1).getTowerOnIsland().getTColour()) {
+                        for (Student student : listOfIsland.get(0).getStudentOnIsland())
+                            listOfIsland.get(i).getStudentOnIsland().add(student);
+                        listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 1);
+                        listOfIsland.remove(0);
+                    }else if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i - 1).getTowerOnIsland().getTColour()) &&
+                            listOfIsland.get(i).getTowerOnIsland().getTColour() != listOfIsland.get(0).getTowerOnIsland().getTColour()) {
+                        for (Student student : listOfIsland.get(i - 1).getStudentOnIsland())
+                            listOfIsland.get(i).getStudentOnIsland().add(student);
+                        listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 1);
+                        listOfIsland.remove(i - 1);
+                    }else if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i - 1).getTowerOnIsland().getTColour()) &&
+                            listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(0).getTowerOnIsland().getTColour())) {
+                        for (Student student : listOfIsland.get(i - 1).getStudentOnIsland())
+                            listOfIsland.get(i).getStudentOnIsland().add(student);
+                        for (Student student : listOfIsland.get(0).getStudentOnIsland())
+                            listOfIsland.get(i).getStudentOnIsland().add(student);
+                        listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 2);
+                        listOfIsland.remove(0);
+                        listOfIsland.remove(i - 2);
+                    }
                 }
-                if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i - 1).getTowerOnIsland().getTColour()) &&
-                        listOfIsland.get(i).getTowerOnIsland().getTColour() != listOfIsland.get(0).getTowerOnIsland().getTColour()) {
-                    for (Student student : listOfIsland.get(i - 1).getStudentOnIsland())
-                        listOfIsland.get(i).getStudentOnIsland().add(student);
-                    listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 1);
-                    listOfIsland.remove(i - 1);                 // 2 isole caso i= size (antecedente)
-                } else if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i - 1).getTowerOnIsland().getTColour()) &&
-                        listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(0).getTowerOnIsland().getTColour())) {
-                    for (Student student : listOfIsland.get(i - 1).getStudentOnIsland())
-                        listOfIsland.get(i).getStudentOnIsland().add(student);
-                    for (Student student : listOfIsland.get(0).getStudentOnIsland())
-                        listOfIsland.get(i).getStudentOnIsland().add(student);
-                    listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 2);
-                    listOfIsland.remove(0);
-                    listOfIsland.remove(i - 2);   // 3 isole caso i= size
-                }
-            } else if (i == 0) {
+            }else if(i==0){
                 int s = (listOfIsland.size() - 1);
-                if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i + 1).getTowerOnIsland().getTColour()) &&
-                        listOfIsland.get(i).getTowerOnIsland().getTColour() != listOfIsland.get(s).getTowerOnIsland().getTColour()) {
-                    for (Student student : listOfIsland.get(i + 1).getStudentOnIsland())
-                        listOfIsland.get(i).getStudentOnIsland().add(student);
-                    listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 1);
-                    listOfIsland.remove(i + 1);                 // 2 isole caso i= size (successivo)
+                if (listOfIsland.get(s).towerIsOnIsland() == false) {
+                    if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i+1).getTowerOnIsland().getTColour())) {
+                        for (Student student : listOfIsland.get(i+1).getStudentOnIsland())
+                            listOfIsland.get(i).getStudentOnIsland().add(student);
+                        listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 1);
+                        listOfIsland.remove(i+1);
+                    }
+                } else if (listOfIsland.get(i+1).towerIsOnIsland() == false) {
+                    if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(s).getTowerOnIsland().getTColour())) {
+                        for (Student student : listOfIsland.get(s).getStudentOnIsland())
+                            listOfIsland.get(i).getStudentOnIsland().add(student);
+                        listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 1);
+                        listOfIsland.remove(s);
+                    }   // 3 isole caso i= size
+                } else if (listOfIsland.get(s).towerIsOnIsland() == true && listOfIsland.get(i+1).towerIsOnIsland() == true) {
+                    if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i+1).getTowerOnIsland().getTColour()) &&
+                            listOfIsland.get(i).getTowerOnIsland().getTColour() != listOfIsland.get(s).getTowerOnIsland().getTColour()) {
+                        for (Student student : listOfIsland.get(i + 1).getStudentOnIsland())
+                            listOfIsland.get(i).getStudentOnIsland().add(student);
+                        listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 1);
+                        listOfIsland.remove(i + 1);
+                    }else if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(s).getTowerOnIsland().getTColour()) &&
+                            listOfIsland.get(i).getTowerOnIsland().getTColour() != listOfIsland.get(i+1).getTowerOnIsland().getTColour()) {
+                        for (Student student : listOfIsland.get(s).getStudentOnIsland())
+                            listOfIsland.get(i).getStudentOnIsland().add(student);
+                        listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 1);
+                        listOfIsland.remove(s);
+                    }else if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(s).getTowerOnIsland().getTColour()) &&
+                            listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i+1).getTowerOnIsland().getTColour())) {
+                        for (Student student : listOfIsland.get(s).getStudentOnIsland())
+                            listOfIsland.get(i).getStudentOnIsland().add(student);
+                        for (Student student : listOfIsland.get(i + 1).getStudentOnIsland())
+                            listOfIsland.get(i).getStudentOnIsland().add(student);
+                        listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 2);
+                        listOfIsland.remove(s);
+                        listOfIsland.remove(i + 1);
+                    }
                 }
-                if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(s).getTowerOnIsland().getTColour()) &&
-                        listOfIsland.get(i).getTowerOnIsland().getTColour() != listOfIsland.get(i + 1).getTowerOnIsland().getTColour()) {
-                    for (Student student : listOfIsland.get(s).getStudentOnIsland())
-                        listOfIsland.get(i).getStudentOnIsland().add(student);
-                    listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 1);
-                    listOfIsland.remove(s);                 // 2 isole caso i= size (antecedente)
-                } else if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i + 1).getTowerOnIsland().getTColour()) &&
-                        listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(s).getTowerOnIsland().getTColour())) {
-                    for (Student student : listOfIsland.get(s).getStudentOnIsland())
-                        listOfIsland.get(i).getStudentOnIsland().add(student);
-                    for (Student student : listOfIsland.get(i + 1).getStudentOnIsland())
-                        listOfIsland.get(i).getStudentOnIsland().add(student);
-                    listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 2);
-                    listOfIsland.remove(s);
-                    listOfIsland.remove(i + 1);   // 3 isole caso i= size
+            }else{
+                if (listOfIsland.get(i-1).towerIsOnIsland() == false) {
+                    if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i+1).getTowerOnIsland().getTColour())) {
+                        for (Student student : listOfIsland.get(i+1).getStudentOnIsland())
+                            listOfIsland.get(i).getStudentOnIsland().add(student);
+                        listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 1);
+                        listOfIsland.remove(i+1);
+                    }
+                } else if (listOfIsland.get(i+1).towerIsOnIsland() == false) {
+                    if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i-1).getTowerOnIsland().getTColour())) {
+                        for (Student student : listOfIsland.get(i-1).getStudentOnIsland())
+                            listOfIsland.get(i).getStudentOnIsland().add(student);
+                        listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 1);
+                        listOfIsland.remove(i-1);
+                    }   // 3 isole caso i= size
+                } else if (listOfIsland.get(i-1).towerIsOnIsland() == true && listOfIsland.get(i+1).towerIsOnIsland() == true) {
+                    if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i+1).getTowerOnIsland().getTColour()) &&
+                            listOfIsland.get(i).getTowerOnIsland().getTColour() != listOfIsland.get(i-1).getTowerOnIsland().getTColour()) {
+                        for (Student student : listOfIsland.get(i+1).getStudentOnIsland())
+                            listOfIsland.get(i).getStudentOnIsland().add(student);
+                        listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 1);
+                        listOfIsland.remove(i+1);
+                    }else if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i-1).getTowerOnIsland().getTColour()) &&
+                            listOfIsland.get(i).getTowerOnIsland().getTColour() != listOfIsland.get(i+1).getTowerOnIsland().getTColour()) {
+                        for (Student student : listOfIsland.get(i-1).getStudentOnIsland())
+                            listOfIsland.get(i).getStudentOnIsland().add(student);
+                        listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 1);
+                        listOfIsland.remove(i-1);
+                    }else if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i - 1).getTowerOnIsland().getTColour()) &&
+                            listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i+1).getTowerOnIsland().getTColour())) {
+                        for (Student student : listOfIsland.get(i-1).getStudentOnIsland())
+                            listOfIsland.get(i).getStudentOnIsland().add(student);
+                        for (Student student : listOfIsland.get(i + 1).getStudentOnIsland())
+                            listOfIsland.get(i).getStudentOnIsland().add(student);
+                        listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 2);
+                        listOfIsland.remove(i-1);
+                        listOfIsland.remove(i);
+                    }
                 }
-            } else if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i + 1).getTowerOnIsland().getTColour()) &&
-                    (listOfIsland.get(i).getTowerOnIsland().getTColour() != listOfIsland.get(i - 1).getTowerOnIsland().getTColour())) {
-                for (Student student : listOfIsland.get(i + 1).getStudentOnIsland())
-                    listOfIsland.get(i).getStudentOnIsland().add(student);
-                listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 1);
-                listOfIsland.remove(i + 1);      // Caso normal 2 isole (successiva)
-            } else if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i - 1).getTowerOnIsland().getTColour()) &&
-                    (listOfIsland.get(i).getTowerOnIsland().getTColour() != listOfIsland.get(i + 1).getTowerOnIsland().getTColour())) {
-                for (Student student : listOfIsland.get(i - 1).getStudentOnIsland())
-                    listOfIsland.get(i).getStudentOnIsland().add(student);
-                listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 1);
-                listOfIsland.remove(i - 1);      // Caso normal 2 isole (antecedente)
             }
 
-            /** tre isole */
-            else if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i + 1).getTowerOnIsland().getTColour()) &&
-                    listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(i - 1).getTowerOnIsland().getTColour())) {
-                for (Student student : listOfIsland.get(i - 1).getStudentOnIsland())
-                    listOfIsland.get(i).getStudentOnIsland().add(student);
-                for (Student student : listOfIsland.get(i + 1).getStudentOnIsland())
-                    listOfIsland.get(i).getStudentOnIsland().add(student);
-                listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + 2);
-                listOfIsland.remove(i - 1);
-                listOfIsland.remove(i);   // 3 isole caso i= size
-            }
             for (int f = 0; f < listOfIsland.size(); f++) {
                 listOfIsland.get(f).setIdIsland(f + 1);
                 if (listOfIsland.get(f).getMotherEarthOnIsland() == true)
