@@ -35,6 +35,21 @@ public class ClientHandler implements ClientHandlerInterface /** Runnable */ {
         }
     }
 
+    /** disconnete la socket dal server */
+    public void disconnect() {
+        try {
+            if (!client.isClosed()) {
+                client.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Thread.currentThread().interrupt();
+        lobbyServer.leaveLobby(gameId, this);
+    }
+
+    
+
 
 
 

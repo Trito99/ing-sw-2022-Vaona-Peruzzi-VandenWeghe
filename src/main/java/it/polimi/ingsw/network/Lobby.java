@@ -28,8 +28,8 @@ public class Lobby {
 
             int i=1;
             String n = new String(nickname);
-            // ...
-            // stampo nickname così: nickname(1) / nickname(2) / ecc.
+            /** ... */
+            /** stampo nickname così: nickname(1) / nickname(2) / ecc. */
             while (clientHandlerMap.containsValue(n)) {
                 n = nickname + "(" + i + ")";
                 System.out.println(n);
@@ -54,6 +54,7 @@ public class Lobby {
 
 
 
+
     /** controlla se il gioco è inattivo o in corso ----> return se il gioco è già cominciato */
     public boolean isGameStarted(){
         return gameController.isGameStarted();
@@ -73,6 +74,30 @@ public class Lobby {
     public void reconnect(String username, ClientHandler clientHandler,VirtualView virtualView){
         clientHandlerMap.put(clientHandler, username);
         gameController.reconnect(username, virtualView);
+    }
+
+    /** return numero di giocatori connessi */
+    public int currentPlayers(){
+        return clientHandlerMap.size();
+    }
+
+    /** disconnette un client */
+    public void disconnecting(ClientHandler clientHandler){
+        if (gameController.isGameStarted()){
+            disconnect(clientHandler);
+        }
+        else{
+            /** rimuove giocatore dalla lobby */
+            clientHandlerMap.remove(clientHandler);
+        }
+    }
+
+
+    /** disconnette un giocatore dalla lobby */
+    public void disconnect(ClientHandler clientHandler){
+        gameController.disconnect(clientHandlerMap.get(clientHandler));
+        /** rimuove giocatore dalla lobby */
+        clientHandlerMap.remove(clientHandler);
     }
 
 
