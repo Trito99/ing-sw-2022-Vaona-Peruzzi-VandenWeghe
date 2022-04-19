@@ -1,5 +1,7 @@
 package it.polimi.ingsw.network;
 
+import it.polimi.ingsw.message.GeneralMessage;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -10,9 +12,9 @@ public class ClientHandler implements ClientHandlerInterface /** Runnable */ {
     private ObjectOutputStream output;
     private ObjectInputStream input;
     private Lobby lobby;
-    private String gameId;
     private LobbyServer lobbyServer;
-    //private final Object lockSendMessage;
+    private String gameId;
+    private final Object lockSendMessage;
     //private final Object lockHandleMessage;
 
     /** costruttore di default */
@@ -23,8 +25,8 @@ public class ClientHandler implements ClientHandlerInterface /** Runnable */ {
     public ClientHandler(Socket client, LobbyServer lobbyServer) {
         this.client = client;
         this.lobbyServer=lobbyServer;
-        //lockHandleMessage=new Object();
-        //lockSendMessage=new Object();
+        //lockHandleMessage = new Object();
+        lockSendMessage=new Object();
         lobby=null;
 
         try {
@@ -48,7 +50,24 @@ public class ClientHandler implements ClientHandlerInterface /** Runnable */ {
         lobbyServer.leaveLobby(gameId, this);
     }
 
-    
+    /** invia messaggio al client */
+    public void sendMessage(GeneralMessage message)
+    {
+        try{
+            synchronized (lockSendMessage) {
+                output.writeObject((Object) message);
+                output.reset();
+            }
+        }
+        catch(IOException e){
+            e.printStackTrace();
+            Thread.currentThread().interrupt();
+            disconnect();
+        }
+
+    }
+
+
 
 
 
