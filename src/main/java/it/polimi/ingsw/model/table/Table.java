@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.school.Prof;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
@@ -22,6 +23,7 @@ public class Table {
     private int coinsOnTable;
     private int posMotherEarth = 0;
     private ArrayList<Student> bag = new ArrayList<>();
+    private ArrayList<Prof> listOfProfOnTable = new ArrayList<>();
 
 
     public void generateBagInit() {
@@ -206,7 +208,6 @@ public class Table {
     public void joinIsland(ArrayList<IslandCard> listOfIsland) {      //valuto se due isole mergiano, in caso le unisco
 
         int i = posMotherEarth - 1;
-
         if (listOfIsland.get(i).towerIsOnIsland() == true) {/** isole adiacenti */
             if (i == (listOfIsland.size() - 1)) {
                 if (listOfIsland.get(i-1).towerIsOnIsland() == false) {
@@ -336,7 +337,7 @@ public class Table {
         }
     }
 
-    public Player playerIsWinning(Game game, Table table, ArrayList<Player> listOfPlayers) {  //calcola influenza torri sul tavolo e restituisce quello con più influenza
+    public Player playerIsWinning(Game game) {  //calcola influenza torri sul tavolo e restituisce quello con più influenza
         int countGrey = 0;
         int countWhite = 0;
         int countBlack = 0;
@@ -344,87 +345,124 @@ public class Table {
         Player alsoWinner = null;
 
         /** conto il numero di torri presenti sul tavolo per ogni colore */
-        for (int s = 1; s < 13; s++) {
+        for (int s = 0; s < listOfIsland.size(); s++) {
             if ((listOfIsland.get(s).getTowerOnIsland().getTColour()).equals(TColor.GREY)) {
-                countGrey++;
+                countGrey=countGrey+listOfIsland.get(s).getMergedIsland();
             } else if ((listOfIsland.get(s).getTowerOnIsland().getTColour()).equals(TColor.WHITE)) {
-                countWhite++;
+                countWhite=countWhite+listOfIsland.get(s).getMergedIsland();
             } else if ((listOfIsland.get(s).getTowerOnIsland().getTColour()).equals(TColor.BLACK)) {
-                countBlack++;
+                countBlack=countBlack+listOfIsland.get(s).getMergedIsland();
             }
         }
 
         /** confronto e cerco chi ha maggior influenza */
-        if (countBlack > countGrey && countBlack > countWhite) {
-            for (Player player : listOfPlayers) {
-                if (player.getTColour().equals(TColor.BLACK)) {
-                    return player;
+        if(game.getGameMode().equals(GameMode.THREEPLAYERS)){
+            if (countBlack > countGrey && countBlack > countWhite) {
+                for (Player player : game.getOrder()) {
+                    if (player.getTColour().equals(TColor.BLACK)) {
+                        return player;
+                    }
+                }
+            } else if (countGrey > countBlack && countGrey > countWhite) {
+                for (Player player : game.getOrder()) {
+                    if (player.getTColour().equals(TColor.BLACK)) {
+                        return player;
+                    }
+                }
+            } else if (countWhite > countBlack && countWhite > countGrey) {
+                for (Player player : game.getOrder()) {
+                    if (player.getTColour().equals(TColor.BLACK)) {
+                        return player;
+                    }
                 }
             }
-        } else if (countGrey > countBlack && countGrey > countWhite) {
-            for (Player player : listOfPlayers) {
-                if (player.getTColour().equals(TColor.BLACK)) {
-                    return player;
-                }
-            }
-        } else if (countWhite > countBlack && countWhite > countGrey) {
-            for (Player player : listOfPlayers) {
-                if (player.getTColour().equals(TColor.BLACK)) {
-                    return player;
-                }
-            }
-        }
 
-        /** in caso di parità, confronto i player e vince quello con più prof */
-        else if (countBlack == countGrey && countBlack > countWhite) {
-            for (Player player : listOfPlayers) {
-                if (player.getTColour().equals(TColor.BLACK)) {
-                    winner = player;
-                } else if (player.getTColour().equals(TColor.GREY)) {
-                    alsoWinner = player;
+            /** in caso di parità, confronto i player e vince quello con più prof */
+            else if (countBlack == countGrey && countBlack > countWhite) {
+                for (Player player : game.getOrder()) {
+                    if (player.getTColour().equals(TColor.BLACK)) {
+                        winner = player;
+                    } else if (player.getTColour().equals(TColor.GREY)) {
+                        alsoWinner = player;
+                    }
                 }
-            }
-            int profWinner = winner.getPersonalSchool().numberOfProf();
-            int profAlsoWinner = alsoWinner.getPersonalSchool().numberOfProf();
+                int profWinner = winner.getPersonalSchool().numberOfProf();
+                int profAlsoWinner = alsoWinner.getPersonalSchool().numberOfProf();
 
-            if (profWinner > profAlsoWinner)
-                return winner;
-            else
-                return alsoWinner;
-        }
-        else if (countGrey == countWhite && countGrey > countBlack) {
-            for (Player player : listOfPlayers) {
-                if (player.getTColour().equals(TColor.GREY)) {
-                    winner = player;
-                } else if (player.getTColour().equals(TColor.WHITE)) {
-                    alsoWinner = player;
+                if (profWinner > profAlsoWinner)
+                    return winner;
+                else if (profWinner < profAlsoWinner)
+                    return alsoWinner;
+                else
+                    return null; //Black Grey
+            }
+            else if (countGrey == countWhite && countGrey > countBlack) {
+                for (Player player : game.getOrder()) {
+                    if (player.getTColour().equals(TColor.GREY)) {
+                        winner = player;
+                    } else if (player.getTColour().equals(TColor.WHITE)) {
+                        alsoWinner = player;
+                    }
                 }
-            }
-            int profWinner = winner.getPersonalSchool().numberOfProf();
-            int profAlsoWinner = alsoWinner.getPersonalSchool().numberOfProf();
+                int profWinner = winner.getPersonalSchool().numberOfProf();
+                int profAlsoWinner = alsoWinner.getPersonalSchool().numberOfProf();
 
-            if (profWinner > profAlsoWinner)
-                return winner;
-             else
-                 return alsoWinner;
-        }
-        else if (countWhite == countBlack && countWhite > countGrey) {
-            for (Player player : listOfPlayers) {
-                if (player.getTColour().equals(TColor.WHITE)) {
-                    winner = player;
-                } else if (player.getTColour().equals(TColor.BLACK)) {
-                    alsoWinner = player;
+                if (profWinner > profAlsoWinner)
+                    return winner;
+                else if (profWinner < profAlsoWinner)
+                    return alsoWinner;
+                else
+                    return null; //grey white
+            }
+            else if (countWhite == countBlack && countWhite > countGrey) {
+                for (Player player : game.getOrder()) {
+                    if (player.getTColour().equals(TColor.WHITE)) {
+                        winner = player;
+                    } else if (player.getTColour().equals(TColor.BLACK)) {
+                        alsoWinner = player;
+                    }
                 }
-            }
-            int profWinner = winner.getPersonalSchool().numberOfProf();
-            int profAlsoWinner = alsoWinner.getPersonalSchool().numberOfProf();
+                int profWinner = winner.getPersonalSchool().numberOfProf();
+                int profAlsoWinner = alsoWinner.getPersonalSchool().numberOfProf();
 
-            if (profWinner > profAlsoWinner)
-                return winner;
-            else if (profAlsoWinner > profWinner)
-                winner = alsoWinner;
-            else
-                System.out.println(String.format("%s e %s", winner.getNickname(), alsoWinner.getNickname()) + "HANNO PAREGGIATO!");
+                if (profWinner > profAlsoWinner)
+                    return winner;
+                else if (profWinner < profAlsoWinner)
+                    return alsoWinner;
+                else
+                    return null; //white black
+            }
+        }else{
+            if (countBlack > countWhite) {
+                for (Player player : game.getOrder()) {
+                    if (player.getTColour().equals(TColor.BLACK)) {
+                        return player;
+                    }
+                }
+            }else if (countWhite > countBlack) {
+                for (Player player : game.getOrder()) {
+                    if (player.getTColour().equals(TColor.WHITE)) {
+                        return player;
+                    }
+                }
+            } else if(countWhite == countBlack){
+                for (Player player : game.getOrder()) {
+                    if (player.getTColour().equals(TColor.WHITE)) {
+                        winner = player;
+                    } else if (player.getTColour().equals(TColor.BLACK)) {
+                        alsoWinner = player;
+                    }
+                }
+                int profWinner = winner.getPersonalSchool().numberOfProf();
+                int profAlsoWinner = alsoWinner.getPersonalSchool().numberOfProf();
+
+                if (profWinner > profAlsoWinner)
+                    return winner;
+                else if (profWinner < profAlsoWinner)
+                    return alsoWinner;
+                else
+                    return null;
+            }
         }
 
         if (game.gameIsFinished()) {

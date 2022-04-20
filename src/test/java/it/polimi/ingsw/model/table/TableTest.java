@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.DeckCharacter;
 import it.polimi.ingsw.model.cloud.CloudCard;
+import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
@@ -224,7 +225,7 @@ public class TableTest{
         int r;
         for (int i = 0; i < 12; i++) {  /** Moves random number of students on Islands. */
             newListOfIslands.add(new IslandCard(i));
-            r = rn.nextInt(10)+1;
+            r = rn.nextInt(9)+1;
             for (int n = 0; n < r; n++) {
                 table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
                 newListOfIslands.get(i).getStudentOnIsland().add(table.getBag().get(0));
@@ -277,7 +278,7 @@ public class TableTest{
             for (int i = 0; i < 12; i++) {
                 table.getListOfIsland().add(new IslandCard(i));
                 newListOfIslands.add(new IslandCard(i));
-                r = rn.nextInt(10)+1;
+                r = rn.nextInt(9)+1;
                 for (int n = 0; n < r; n++) {
                     table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
                     newListOfIslands.get(i).getStudentOnIsland().add(table.getBag().get(0));
@@ -287,7 +288,7 @@ public class TableTest{
             table.generateMotherEarth();
         }
 
-        /**  Checks if joinIsland functions in the case of the merge of 2 Islands (the one in question and the one before). The next Island has a different color of tower  */
+        /**  Checks if joinIsland functions in the case of the merge of 2 Islands (the one in question and the one before). The next Island has a tower with different color on even positions */
         for (int p2 = 0; p2 < table.getListOfIsland().size(); p2++) {
             table.moveMotherEarth(13+p2-table.getPosMotherEarth());
             if (p2 == 0) {
@@ -301,7 +302,7 @@ public class TableTest{
             if (p2 == 11) {
                 table.getListOfIsland().get(0).setTowerOnIsland(player2.getPersonalSchool().getTower().get(0));
                 table.getListOfIsland().get(0).setTowerIsOnIsland(true);
-            } else {
+            } else if (p2%2==1) {
                 table.getListOfIsland().get(p2 + 1).setTowerOnIsland(player2.getPersonalSchool().getTower().get(0));
                 table.getListOfIsland().get(p2 + 1).setTowerIsOnIsland(true);
             }
@@ -334,7 +335,7 @@ public class TableTest{
             for (int i = 0; i < 12; i++) {
                 table.getListOfIsland().add(new IslandCard(i));
                 newListOfIslands.add(new IslandCard(i));
-                r = rn.nextInt(10)+1;
+                r = rn.nextInt(9)+1;
                 for (int n = 0; n < r; n++) {
                     table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
                     newListOfIslands.get(i).getStudentOnIsland().add(table.getBag().get(0));
@@ -344,9 +345,17 @@ public class TableTest{
             table.generateMotherEarth();
         }
 
-        /**  Checks if joinIsland functions in the case of the merge of 2 Islands (the one in question and the next one). The next Island has no tower  */
+        /**  Checks if joinIsland functions in the case of the merge of 2 Islands (the one in question and the next one). The next Island has a tower with different color on even positions  */
         for (int p3 = 0; p3 < table.getListOfIsland().size(); p3++) {
             table.moveMotherEarth(13+p3-table.getPosMotherEarth());
+
+            if (p3 == 0) {
+                table.getListOfIsland().get(11).setTowerOnIsland(player2.getPersonalSchool().getTower().get(0));
+                table.getListOfIsland().get(11).setTowerIsOnIsland(true);
+            } else if (p3%2==0) {
+                table.getListOfIsland().get(p3 - 1).setTowerOnIsland(player2.getPersonalSchool().getTower().get(0));
+                table.getListOfIsland().get(p3 - 1).setTowerIsOnIsland(true);
+            }
 
             if (p3 == 11) {
                 table.getListOfIsland().get(0).setTowerOnIsland(player.getPersonalSchool().getTower().get(0));
@@ -385,7 +394,7 @@ public class TableTest{
             for (int i = 0; i < 12; i++) {
                 table.getListOfIsland().add(new IslandCard(i));
                 newListOfIslands.add(new IslandCard(i));
-                r = rn.nextInt(10)+1;
+                r = rn.nextInt(9)+1;
                 for (int n = 0; n < r; n++) {
                     table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
                     newListOfIslands.get(i).getStudentOnIsland().add(table.getBag().get(0));
@@ -396,6 +405,34 @@ public class TableTest{
         }
 
     }
+
+    @RepeatedTest(10)
+    public void playerIsWinningTest(){
+        Random rn = new Random();
+        int r;
+        Game game= new Game();
+        game.setGameMode(GameMode.THREEPLAYERS);
+        for(int n=0;n<3;n++) {
+            game.getOrder().add(new Player(TColor.values()[n], PlayerNumber.values()[n]));
+            game.getOrder().get(n).generateSchool(table,GameMode.THREEPLAYERS);
+        }
+        for (int i = 0; i < 12; i++) {
+            r = rn.nextInt(9)+1;
+            for (int n = 0; n < r; n++) {
+                table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
+                table.getBag().remove(0);
+            }
+            table.getListOfIsland().get(i).setTowerOnIsland(game.getOrder().get(rn.nextInt(game.getOrder().size())).getPersonalSchool().getTower().get(0));
+            table.getListOfIsland().get(i).setTowerIsOnIsland(true);
+        }
+        for(int i=0;i<table.getListOfIsland().size();i++){
+            table.joinIsland(table.getListOfIsland());
+            table.moveMotherEarth(1);
+        }
+        System.out.println(table.playerIsWinning(game).getPlayerNumber());
+        System.out.println(table.getListOfIsland().size());
+    }
+
     /** controlla i costCharacter
      for( CharacterCard card : deckCharacter.getCharacterCards()){
      if( card.getCardEffect().equals(CardEffect.BACCO)){

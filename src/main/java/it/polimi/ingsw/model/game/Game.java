@@ -79,7 +79,7 @@ public class Game {
     }
 
     public ArrayList<Player> getOrder(){
-        return (ArrayList<Player>) order.clone();
+        return (ArrayList<Player>) order;
     }
 
     /**
