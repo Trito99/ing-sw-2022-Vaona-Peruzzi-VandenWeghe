@@ -51,8 +51,7 @@ public class ClientHandler implements ClientHandlerInterface /** Runnable */ {
     }
 
     /** invia messaggio al client */
-    public void sendMessage(GeneralMessage message)
-    {
+    public void sendMessage(GeneralMessage message) {
         try{
             synchronized (lockSendMessage) {
                 output.writeObject((Object) message);
@@ -67,6 +66,29 @@ public class ClientHandler implements ClientHandlerInterface /** Runnable */ {
 
     }
 
+    /** gestisce messaggio inviato dal client */
+    private void handleMessage() {
+        try {
+            while (!Thread.currentThread().isInterrupted()) {
+                /**synchronized (lockHandleMessage) {
+                    ClientMessage message = (ClientMessage) input.readObject();
+
+                    if (message.getMessageType() == MessageType.LOGIN) {
+                        LoginRequest loginMsg = (LoginRequest) message;
+                        lobby = (lobbyServer.getLobby(loginMsg.getGameId()));
+                        gameId=loginMsg.getGameId();
+                        lobby.addPlayer(loginMsg.getUsername(), this);
+                    } else if (lobby != null) {
+                        lobby.getMessage(message);
+                    }
+                }*/
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            System.out.println("invalid stream from client");
+            disconnect();
+        }
+    }
 
 
 
