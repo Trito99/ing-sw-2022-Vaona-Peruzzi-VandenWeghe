@@ -16,8 +16,8 @@ public class Lobby {
     /** costruttore di default */
     public Lobby(String gameId) {
         clientHandlerMap = Collections.synchronizedMap(new HashMap<>());
-        gameController=new GameController();
-        this.gameId=gameId;
+        gameController = new GameController();
+        this.gameId = gameId;
     }
 
     /** aggiungo nuovo giocatore alla Lobby */
@@ -52,9 +52,6 @@ public class Lobby {
         }
     }
 
-
-
-
     /** controlla se il gioco è inattivo o in corso ----> return se il gioco è già cominciato */
     public boolean isGameStarted(){
         return gameController.isGameStarted();
@@ -68,12 +65,6 @@ public class Lobby {
     /** controlla lista di giocatori inattivi  ----> return lista di nickname */
     public List<String> getInactivePlayers(){
         return gameController.getInactivePlayers();
-    }
-
-    /** riconnetti giocatore alla Lobby */
-    public void reconnect(String username, ClientHandler clientHandler,VirtualView virtualView){
-        clientHandlerMap.put(clientHandler, username);
-        gameController.reconnect(username, virtualView);
     }
 
     /** return numero di giocatori connessi */
@@ -92,12 +83,17 @@ public class Lobby {
         }
     }
 
-
     /** disconnette un giocatore dalla lobby */
     public void disconnect(ClientHandler clientHandler){
         gameController.disconnect(clientHandlerMap.get(clientHandler));
         /** rimuove giocatore dalla lobby */
         clientHandlerMap.remove(clientHandler);
+    }
+
+    /** riconnetti giocatore alla Lobby */
+    public void reconnect(String username, ClientHandler clientHandler,VirtualView virtualView){
+        clientHandlerMap.put(clientHandler, username);
+        gameController.reconnect(username, virtualView);
     }
 
 
