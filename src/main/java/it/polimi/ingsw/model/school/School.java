@@ -103,23 +103,23 @@ public class School {
     }
 
     public ArrayList<Student> getGTable(){
-        return (ArrayList<Student>) GTable;
+        return GTable;
     }
 
     public ArrayList<Student> getRTable(){
-        return (ArrayList<Student>) RTable;
+        return RTable;
     }
 
     public ArrayList<Student> getYTable(){
-        return  (ArrayList<Student>) YTable;
+        return  YTable;
     }
 
     public ArrayList<Student> getPTable(){
-        return  (ArrayList<Student>) PTable;
+        return  PTable;
     }
 
     public ArrayList<Student> getBTable(){
-        return  (ArrayList<Student>) BTable;
+        return  BTable;
     }
 
     /** da generalizzare tutto con questo */

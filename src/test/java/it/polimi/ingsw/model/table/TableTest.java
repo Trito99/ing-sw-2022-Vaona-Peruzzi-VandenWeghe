@@ -214,7 +214,7 @@ public class TableTest{
         assertEquals(1,p);
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(10000)
     public void JoinIslandTest() {
         Player player = new Player(TColor.BLACK, PlayerNumber.PLAYER2);
         Player player2 = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
@@ -225,7 +225,7 @@ public class TableTest{
         int r;
         for (int i = 0; i < 12; i++) {  /** Moves random number of students on Islands. */
             newListOfIslands.add(new IslandCard(i));
-            r = rn.nextInt(9)+1;
+            r = rn.nextInt(8)+1;
             for (int n = 0; n < r; n++) {
                 table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
                 newListOfIslands.get(i).getStudentOnIsland().add(table.getBag().get(0));
@@ -278,7 +278,7 @@ public class TableTest{
             for (int i = 0; i < 12; i++) {
                 table.getListOfIsland().add(new IslandCard(i));
                 newListOfIslands.add(new IslandCard(i));
-                r = rn.nextInt(9)+1;
+                r = rn.nextInt(8)+1;
                 for (int n = 0; n < r; n++) {
                     table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
                     newListOfIslands.get(i).getStudentOnIsland().add(table.getBag().get(0));
@@ -335,7 +335,7 @@ public class TableTest{
             for (int i = 0; i < 12; i++) {
                 table.getListOfIsland().add(new IslandCard(i));
                 newListOfIslands.add(new IslandCard(i));
-                r = rn.nextInt(9)+1;
+                r = rn.nextInt(8)+1;
                 for (int n = 0; n < r; n++) {
                     table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
                     newListOfIslands.get(i).getStudentOnIsland().add(table.getBag().get(0));
@@ -394,7 +394,7 @@ public class TableTest{
             for (int i = 0; i < 12; i++) {
                 table.getListOfIsland().add(new IslandCard(i));
                 newListOfIslands.add(new IslandCard(i));
-                r = rn.nextInt(9)+1;
+                r = rn.nextInt(8)+1;
                 for (int n = 0; n < r; n++) {
                     table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
                     newListOfIslands.get(i).getStudentOnIsland().add(table.getBag().get(0));
@@ -406,7 +406,7 @@ public class TableTest{
 
     }
 
-    @RepeatedTest(10)
+    @RepeatedTest(100)
     public void playerIsWinningTest(){
         Random rn = new Random();
         int r;
@@ -416,8 +416,17 @@ public class TableTest{
             game.getOrder().add(new Player(TColor.values()[n], PlayerNumber.values()[n]));
             game.getOrder().get(n).generateSchool(table,GameMode.THREEPLAYERS);
         }
+
+        for(int i=0;i<5;i++) {
+            int s = rn.nextInt(3);
+            if (game.getOrder().get(s).getPersonalSchool().getProfOfPlayer().get(i).getIsInHall() == false)
+                game.getOrder().get(s).getPersonalSchool().getProfOfPlayer().get(i).setInHall(true);
+            else
+                i = i - 1;
+            }
+
         for (int i = 0; i < 12; i++) {
-            r = rn.nextInt(9)+1;
+            r = rn.nextInt(8)+1;
             for (int n = 0; n < r; n++) {
                 table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
                 table.getBag().remove(0);
@@ -425,12 +434,59 @@ public class TableTest{
             table.getListOfIsland().get(i).setTowerOnIsland(game.getOrder().get(rn.nextInt(game.getOrder().size())).getPersonalSchool().getTower().get(0));
             table.getListOfIsland().get(i).setTowerIsOnIsland(true);
         }
+
+        int[] count = new int[]{0, 0, 0};
+        int[] count2 = new int[]{-2, -2, -2};
         for(int i=0;i<table.getListOfIsland().size();i++){
+            if(table.getListOfIsland().get(i).getTowerOnIsland().getTColour()==TColor.WHITE)
+                count[0]++; //white
+            else if (table.getListOfIsland().get(i).getTowerOnIsland().getTColour()==TColor.BLACK)
+                count[1]++; //black
+            else
+                count[2]++; //grey
+        }
+
+        for(int i=0;i<2*table.getListOfIsland().size();i++){
             table.joinIsland(table.getListOfIsland());
             table.moveMotherEarth(1);
         }
-        System.out.println(table.playerIsWinning(game).getPlayerNumber());
-        System.out.println(table.getListOfIsland().size());
+
+        int max=0,p=0;
+        for(int s=0;s< count.length;s++) {
+            if (max < count[s])
+                max = count[s];
+            else if (max == count[s])
+                p=1;
+        }
+        if (p==1){
+            for (int t=0;t<count2.length;t++){
+                if(count[t]==max)
+                    count2[t]=game.getOrder().get(t).getPersonalSchool().numberOfProf();
+            }max=-1;
+            int temp=0;
+            for(int j=0;j< count.length;j++) {
+                if (max < count2[j])
+                    max = count2[j];
+                else if (max == count2[j]) {
+                    temp=max;
+                    p = 2;
+                }
+                for(int i=0;i< count.length;i++){
+                    if(temp<count2[j])
+                        p=1;
+                }
+            }
+        }
+
+
+        for(int g=0;g<count.length;g++){
+            if (max == count[g] && p==0 )
+                assertEquals(PlayerNumber.values()[g], table.playerIsWinning(game).getPlayerNumber());
+            else if (max == count2[g] && p==1)
+                assertEquals(PlayerNumber.values()[g], table.playerIsWinning(game).getPlayerNumber());
+            else if (p==2)
+                assertNull(table.playerIsWinning(game));
+        }
     }
 
     /** controlla i costCharacter

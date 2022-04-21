@@ -5,10 +5,10 @@ import it.polimi.ingsw.model.student.SColor;
 public class Prof {
 
     private final SColor sColor;
-    private boolean isInHall;
+    private boolean isInHall = false;
 
-    public Prof(SColor sColor){
-        this.sColor = sColor;
+    public Prof(SColor sColor2){
+        sColor = sColor2;
     }
 
     public SColor getSColour() {
@@ -20,6 +20,6 @@ public class Prof {
     }
 
     public void setInHall(boolean inHall) {
-        isInHall = inHall;
+        this.isInHall = inHall;
     }
 }
