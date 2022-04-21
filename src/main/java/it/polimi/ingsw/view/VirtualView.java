@@ -4,6 +4,8 @@ import it.polimi.ingsw.message.GeneralMessage;
 import it.polimi.ingsw.network.ClientHandlerInterface;
 import it.polimi.ingsw.observer.Observer;
 
+import java.util.ArrayList;
+
 public class VirtualView implements View, Observer {
     private final ClientHandlerInterface clientHandler;
 
@@ -18,6 +20,25 @@ public class VirtualView implements View, Observer {
         //clientHandler.sendMessage(new LoginReply(username, gameId, wasJoined));
     }
 
+    @Override
+    public void showMessage(String message) {
+
+    }
+
+    @Override
+    public void showPlayerInfluence(int influence) {
+
+    }
+
+    @Override
+    public void showPlayerTurn(String activePlayer) {
+
+    }
+
+    @Override
+    public void showPlayerList(ArrayList<String> playerOrder) {
+
+    }
 
 
     /** riceve un messaggio aggiornato dal model e lo invia tramite il network al client  */
