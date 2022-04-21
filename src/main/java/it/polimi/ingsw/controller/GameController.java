@@ -19,6 +19,7 @@ import it.polimi.ingsw.view.VirtualView;
 import it.polimi.ingsw.view.*;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -73,7 +74,11 @@ public class GameController {
                      Player 1: scegli nickname, scrivi la tua età (o JSON)
                      this.gameSession.addPlayer(new Player(nickname, età, TColor.WHITE, PlayerNumber.PLAYER1));
                      Player 2: scegli nickname, scrivi la tua età
-                     this.gameSession.addPlayer(new Player(nickname, età, TColor.WHITE, PlayerNumber.PLAYER1)); */
+                     this.gameSession.addPlayer(new Player(nickname, età, TColor.WHITE, PlayerNumber.PLAYER1));
+                    int year = 0;
+                    int month=0;
+                    int dayOfMonth=0;
+                    GregorianCalendar dataPlayer = new GregorianCalendar(year, month, dayOfMonth);      */
                     this.gameSession.getListOfPlayers().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
                     this.gameSession.getListOfPlayers().add(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
 

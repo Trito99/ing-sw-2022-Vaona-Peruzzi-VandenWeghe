@@ -8,7 +8,7 @@ import it.polimi.ingsw.model.school.Prof;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.table.Table;
 
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * This class represents the player and it contains all his information.
@@ -16,7 +16,7 @@ import java.util.Date;
 public class Player {
 
     private final String nickname;
-    private Date date;
+    private GregorianCalendar playerDate;
     private int age;               // CONTROLLARE LIBRERIA DATA
     private final PlayerNumber playerNumber;
     private TurnState turnState;
@@ -34,6 +34,7 @@ public class Player {
      */
     public Player(TColor tColor, PlayerNumber playerNumber) {   //+ nickname e data
         nickname = new String(); //= nickname
+        playerDate = null;
         age = 0;                 //= data
         this.playerNumber = playerNumber;      /** DA RIFARE COSTRUTTORE */
         influenceOnIsland = 0;
@@ -80,6 +81,10 @@ public class Player {
 
     public String getNickname() {
         return nickname;
+    }
+
+    public GregorianCalendar getPlayerDate() {
+        return playerDate;
     }
 
     public int getAge() {
