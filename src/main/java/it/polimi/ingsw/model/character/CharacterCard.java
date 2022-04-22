@@ -42,8 +42,4 @@ public class CharacterCard {
         return studentsOnCard;
     }
 
-    public void setStudentsOnCard(ArrayList<Student> studentsOnCard) {
-        this.studentsOnCard = studentsOnCard;
-    }
-
 }

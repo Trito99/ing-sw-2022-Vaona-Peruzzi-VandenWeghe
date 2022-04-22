@@ -47,7 +47,6 @@ public class Game {
 
     public ArrayList<Player> getListOfPlayers(){
         return listOfPlayers;
-        //ho tolto la clone perchè questa lista va modificata se fiocatori abbandonano il gioco
     }
 
     public int getNumberOfPlayers(){
@@ -56,11 +55,11 @@ public class Game {
 
     public Player getActivePlayer(){   // tipo Player o Int???
         return activePlayer;
-    }  //Player o int?
+    }
 
     public void setActivePlayer(Player activePlayer){
         this.activePlayer = activePlayer;
-    }  // Player o int?
+    }
 
     public State getState(){
         return state;

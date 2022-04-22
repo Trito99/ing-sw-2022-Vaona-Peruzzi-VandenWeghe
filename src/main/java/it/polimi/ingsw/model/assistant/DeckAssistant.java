@@ -32,8 +32,4 @@ public class DeckAssistant {
         this.name = name;
     }
 
-   /** public ArrayList<AssistantCard> updateDeck() {
-        return this.cardsInHand;
-    }  //ritorna il mazzo di carte senza la carta selezionata     */
-
 }

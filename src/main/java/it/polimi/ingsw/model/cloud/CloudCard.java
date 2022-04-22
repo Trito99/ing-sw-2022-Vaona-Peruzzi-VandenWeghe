@@ -14,14 +14,13 @@ public class CloudCard {
 
     public CloudCard(int idCloud, int numberOfSpaces){
         this.idCloud = idCloud;
-        this.studentOnCloud = new ArrayList<Student>();
+        this.studentOnCloud = new ArrayList<>();
         this.numberOfSpaces = numberOfSpaces;
     }
 
     public ArrayList<Student> getStudentOnCloud() {
         return studentOnCloud;
     }
-
 
     public int getNumberOfSpaces(){
         return numberOfSpaces;
@@ -30,9 +29,5 @@ public class CloudCard {
     public int getIdCloud(){
         return idCloud;
     }
-
-
-    /** Fede: Penso non funzioni (andrebbe messo come parametro l'id dell'isola, non l'isola)
-     ---> Da spostare in gameController*/
 
 }
