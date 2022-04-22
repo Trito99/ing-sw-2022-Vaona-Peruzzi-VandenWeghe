@@ -16,7 +16,7 @@ import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.view.VirtualView;
-import it.polimi.ingsw.view.*;
+import it.polimi.ingsw.observer.ObservableView;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -131,6 +131,7 @@ public class GameController {
     public void playTrashCard(Player player){   /** memorizzo solo ultima carta giocata */
         AssistantCard playedCard = null;
         //notify observer---->scelgo carta da scartare
+
         for(Player p : gameSession.getListOfPlayers()){
             AssistantCard alreadyTaken = null;
             if(playedCard != p.getTrash() && p.HasAlreadyPlayed()) {

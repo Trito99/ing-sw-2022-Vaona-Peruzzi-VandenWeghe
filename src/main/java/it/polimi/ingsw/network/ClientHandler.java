@@ -32,8 +32,8 @@ public class ClientHandler implements ClientHandlerInterface /** Runnable */ {
         try {
             output = new ObjectOutputStream(client.getOutputStream());
             input = new ObjectInputStream(client.getInputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
     }
 
@@ -89,10 +89,5 @@ public class ClientHandler implements ClientHandlerInterface /** Runnable */ {
             disconnect();
         }
     }
-
-
-
-
-
 
 }
