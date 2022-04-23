@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model.player;
 
-import it.polimi.ingsw.model.game.GameMode;
-import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.school.TColor;
 
 import java.util.ArrayList;

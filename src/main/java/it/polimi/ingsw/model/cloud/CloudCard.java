@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model.cloud;
 
 
-import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.student.Student;
 
 import java.util.ArrayList;

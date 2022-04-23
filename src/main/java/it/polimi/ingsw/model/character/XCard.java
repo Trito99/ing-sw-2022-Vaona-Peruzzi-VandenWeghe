@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.character;
 
+/** DA TOGLIERE!!!!!!! */
 public class XCard {
 
     private boolean isOnIsland;
@@ -24,5 +25,3 @@ public class XCard {
         return idXCard;
     }
 }
-
-/** DA TOGLIERE!!!!!!! */

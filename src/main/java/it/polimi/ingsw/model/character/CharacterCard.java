@@ -22,10 +22,6 @@ public class CharacterCard {
         return costCharacter;
     }
 
-    public void setCostCharacter(int costCharacter) {
-        this.costCharacter = costCharacter;
-    }
-
     public CardEffect getCardEffect() {
         return cardEffect;
     }

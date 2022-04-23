@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model.game;
 
 
-import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.Team;
 import it.polimi.ingsw.model.table.Table;
@@ -12,11 +11,9 @@ public class Game {
 
     //private int gameId;   servirebbe per partite multiple
     private GameMode gameMode;
-    private int gameId;
     private ArrayList<Player> listOfPlayers;
-    private ArrayList<String> nameOfPlayers= new ArrayList<>();
+    private ArrayList<String> nameOfPlayers;
     private Player activePlayer;
-    private int numberOfPlayers;  // Non serve, basta la gameMode (Two/Three players, coop)
     private State state;
     private ArrayList<Player> order;
     private Difficulty difficulty;
@@ -29,8 +26,8 @@ public class Game {
     public Game() {
         this.gameMode = null;
         this.listOfPlayers = new ArrayList<>();
+        this.nameOfPlayers = new ArrayList<>();
         this.activePlayer = null;
-        this.numberOfPlayers = 0;
         this.state = null;
         this.order = new ArrayList<>();
         this.difficulty = null;
@@ -56,10 +53,6 @@ public class Game {
 
     public ArrayList<Player> getListOfPlayers(){
         return listOfPlayers;
-    }
-
-    public int getNumberOfPlayers(){
-        return numberOfPlayers;
     }
 
     public Player getActivePlayer(){   // tipo Player o Int???
@@ -99,7 +92,7 @@ public class Game {
     }
 
     public ArrayList<Player> getOrder(){
-        return (ArrayList<Player>) order;
+        return order;
     }
 
     /**
@@ -120,13 +113,10 @@ public class Game {
     public boolean gameIsFinished() {
         Player player = getActivePlayer();
 
-        if (player.getDeckOfPlayer().getCardsInHand().isEmpty() ||   // Dobbiamo collegare ogni deck assistant al suo player
+        /** da verificare */
+        return player.getDeckOfPlayer().getCardsInHand().isEmpty() ||   // Dobbiamo collegare ogni deck assistant al suo player
                 player.getPersonalSchool().getTower().isEmpty() ||
                 table.getBag().isEmpty() ||
-                table.getListOfIsland().size() == 3 /** da verificare */) {
-            return true;
-        }
-
-        return false;
+                table.getListOfIsland().size() == 3;
     }
 }

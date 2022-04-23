@@ -83,7 +83,7 @@ public class GameController {
                 System.out.println("Inserisci la tua data di nascita: ");
                 /** funzione per leggere */
                 GregorianCalendar dataPlayer = new GregorianCalendar(year, month, dayOfMonth);
-                this.gameSession.getListOfPlayers().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
+                this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
                 this.gameSession.getListOfPlayers().get(i).setPlayerDate(dataPlayer);
                 i++;
 
@@ -94,7 +94,7 @@ public class GameController {
                 System.out.println("Inserisci la tua età: ");
                 /** funzione per leggere */
                 dataPlayer = new GregorianCalendar(year, month, dayOfMonth);
-                this.gameSession.getListOfPlayers().add(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
+                this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
                 this.gameSession.getListOfPlayers().get(i).setPlayerDate(dataPlayer);
 
                 if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
@@ -109,7 +109,7 @@ public class GameController {
                 System.out.println("Inserisci la tua data di nascita: ");
                 /** funzione per leggere */
                 dataPlayer = new GregorianCalendar(year, month, dayOfMonth);
-                this.gameSession.getListOfPlayers().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
+                this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
                 this.gameSession.getListOfPlayers().get(i).setPlayerDate(dataPlayer);
                 i++;
 
@@ -120,7 +120,7 @@ public class GameController {
                 System.out.println("Inserisci la tua età: ");
                 /** funzione per leggere */
                 dataPlayer = new GregorianCalendar(year, month, dayOfMonth);
-                this.gameSession.getListOfPlayers().add(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
+                this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
                 this.gameSession.getListOfPlayers().get(i).setPlayerDate(dataPlayer);
                 i++;
 
@@ -131,7 +131,7 @@ public class GameController {
                 System.out.println("Inserisci la tua età: ");
                 /** funzione per leggere */
                 dataPlayer = new GregorianCalendar(year, month, dayOfMonth);
-                this.gameSession.getListOfPlayers().add(new Player(TColor.GREY, PlayerNumber.PLAYER3));
+                this.gameSession.addPlayer(new Player(TColor.GREY, PlayerNumber.PLAYER3));
                 this.gameSession.getListOfPlayers().get(i).setPlayerDate(dataPlayer);
 
                 if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
@@ -141,13 +141,13 @@ public class GameController {
                 allVirtualView.put(nickname, view);
                 break;
             case COOP:
-                    this.gameSession.getListOfPlayers().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
-                    this.gameSession.getListOfPlayers().add(new Player(TColor.WHITE, PlayerNumber.PLAYER2));
+                    this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
+                    this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER2));
                     gameSession.getTeam().add(new Team()) ;
                     gameSession.getTeam().get(0).intializeTeam(gameSession.getListOfPlayers().get(0), gameSession.getListOfPlayers().get(1), TColor.WHITE);
 
-                    this.gameSession.getListOfPlayers().add(new Player(TColor.BLACK, PlayerNumber.PLAYER3));
-                    this.gameSession.getListOfPlayers().add(new Player(TColor.BLACK, PlayerNumber.PLAYER4));
+                    this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER3));
+                    this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER4));
                     gameSession.getTeam().add(new Team());
                     gameSession.getTeam().get(1).intializeTeam(gameSession.getListOfPlayers().get(2), gameSession.getListOfPlayers().get(3), TColor.BLACK);
 

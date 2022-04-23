@@ -45,8 +45,8 @@ public class Player {
         hasAlreadyPlayed = false;
     }
 
-    public School generateSchool(Table table, GameMode gameMode) {
-        int i = 7, t=0;
+    public void generateSchool(Table table, GameMode gameMode) {
+        int i = 0, t = 0;
         TColor tcolor = TColor.WHITE;
         switch (gameMode) {
             case TWOPLAYERS:
@@ -76,7 +76,6 @@ public class Player {
         personalSchool.getProfOfPlayer().add(new Prof(SColor.BLUE));
         personalSchool.getProfOfPlayer().add(new Prof(SColor.PINK));
 
-        return personalSchool;
     }
 
     public String getNickname() {
