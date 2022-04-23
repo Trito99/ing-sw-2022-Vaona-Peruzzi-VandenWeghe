@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.message.GeneralMessage;
+import it.polimi.ingsw.message.HostGameReply;
 import it.polimi.ingsw.message.ShowPlayerInfo;
 import it.polimi.ingsw.message.StartTurn;
 import it.polimi.ingsw.model.assistant.AssistantCard;
@@ -80,6 +81,11 @@ public class VirtualView implements View, Observer {
     @Override
     public void askAction() {
         clientHandler.sendMessage(new StartTurn());
+    }
+
+    @Override
+    public void askPlayersNumber() {
+        clientHandler.sendMessage(new HostGameReply());
     }
 
     @Override

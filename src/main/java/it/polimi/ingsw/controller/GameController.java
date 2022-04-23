@@ -51,7 +51,7 @@ public class GameController {
         if(allVirtualView.isEmpty()){
             allVirtualView.put(nickname, virtualView);
             virtualView.showLogin(nickname,gameId, true);
-            //virtualView.askPlayersNumber();
+            virtualView.askPlayersNumber();
             return true;
         }
         else if(allVirtualView.size()<maxPlayers){
@@ -68,41 +68,78 @@ public class GameController {
     }
 
     /** maxPlayers(GameMode) e difficulty vanno scelti da chi crea la partita */
-    public void initializePlayer() { // Setto i player a inizio partita
+    public void initializePlayer(VirtualView view) { // Setto i player a inizio partita
+        String nickname = null;
+        int year = 0;
+        int month = 0;
+        int dayOfMonth = 0;
+        int i = 0;
 
         switch (gameSession.getGameMode()){
                 /** Da inserire Nickname, data(età) ecc.. di tutti i player */
-                /** Togliere AddPlayer in Game e usare getListofPlayer.add??? (già fatto)*/
             case TWOPLAYERS:
-                    /**ESEMPIO:
-                     Player 1: scegli nickname, scrivi la tua età (o JSON)
-                     this.gameSession.addPlayer(new Player(nickname, età, TColor.WHITE, PlayerNumber.PLAYER1));
-                     Player 2: scegli nickname, scrivi la tua età
-                     this.gameSession.addPlayer(new Player(nickname, età, TColor.WHITE, PlayerNumber.PLAYER1));
-                    int year = 0;
-                    int month=0;
-                    int dayOfMonth=0;
-                    GregorianCalendar dataPlayer = new GregorianCalendar(year, month, dayOfMonth);      */
-                    this.gameSession.getListOfPlayers().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
-                    this.gameSession.getListOfPlayers().add(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
+                System.out.println("Scegli il tuo nickname: ");
+                /** funzione per leggere */
+                System.out.println("Inserisci la tua data di nascita: ");
+                /** funzione per leggere */
+                GregorianCalendar dataPlayer = new GregorianCalendar(year, month, dayOfMonth);
+                this.gameSession.getListOfPlayers().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
+                this.gameSession.getListOfPlayers().get(i).setPlayerDate(dataPlayer);
+                i++;
 
-                    if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
-                        for (Player p : gameSession.getListOfPlayers())
-                            p.setCoinScore(1);
-                    }
-                    break;
-                    //view.put(nickname, view);
+                //svuoto il campo
+                dataPlayer = null;
+                System.out.println("Scegli il tuo nickname: ");
+                /** funzione per leggere */
+                System.out.println("Inserisci la tua età: ");
+                /** funzione per leggere */
+                dataPlayer = new GregorianCalendar(year, month, dayOfMonth);
+                this.gameSession.getListOfPlayers().add(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
+                this.gameSession.getListOfPlayers().get(i).setPlayerDate(dataPlayer);
+
+                if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
+                    for (Player p : gameSession.getListOfPlayers())
+                        p.setCoinScore(1);
+                }
+                allVirtualView.put(nickname, view);
+                break;
             case THREEPLAYERS:
-                    this.gameSession.getListOfPlayers().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
-                    this.gameSession.getListOfPlayers().add(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
-                    this.gameSession.getListOfPlayers().add(new Player(TColor.GREY, PlayerNumber.PLAYER3));
+                System.out.println("Scegli il tuo nickname: ");
+                /** funzione per leggere */
+                System.out.println("Inserisci la tua data di nascita: ");
+                /** funzione per leggere */
+                dataPlayer = new GregorianCalendar(year, month, dayOfMonth);
+                this.gameSession.getListOfPlayers().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
+                this.gameSession.getListOfPlayers().get(i).setPlayerDate(dataPlayer);
+                i++;
 
-                    if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)) {
-                        for (Player p : gameSession.getListOfPlayers())
-                            p.setCoinScore(1);
-                    }
-                    break;
+                //svuoto il campo
+                dataPlayer = null;
+                System.out.println("Scegli il tuo nickname: ");
+                /** funzione per leggere */
+                System.out.println("Inserisci la tua età: ");
+                /** funzione per leggere */
+                dataPlayer = new GregorianCalendar(year, month, dayOfMonth);
+                this.gameSession.getListOfPlayers().add(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
+                this.gameSession.getListOfPlayers().get(i).setPlayerDate(dataPlayer);
+                i++;
 
+                //svuoto il campo
+                dataPlayer = null;
+                System.out.println("Scegli il tuo nickname: ");
+                /** funzione per leggere */
+                System.out.println("Inserisci la tua età: ");
+                /** funzione per leggere */
+                dataPlayer = new GregorianCalendar(year, month, dayOfMonth);
+                this.gameSession.getListOfPlayers().add(new Player(TColor.GREY, PlayerNumber.PLAYER3));
+                this.gameSession.getListOfPlayers().get(i).setPlayerDate(dataPlayer);
+
+                if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
+                    for (Player p : gameSession.getListOfPlayers())
+                        p.setCoinScore(1);
+                }
+                allVirtualView.put(nickname, view);
+                break;
             case COOP:
                     this.gameSession.getListOfPlayers().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
                     this.gameSession.getListOfPlayers().add(new Player(TColor.WHITE, PlayerNumber.PLAYER2));
@@ -120,9 +157,8 @@ public class GameController {
                             p.setCoinScore(1);
                     }
                     break;
-                default:
-                    break;
-
+            default:
+                break;
         }
     }
 
@@ -136,12 +172,16 @@ public class GameController {
                     maxPlayers = pnSelected.getPlayersNumber();
 
                     if(pnSelected.getPlayersNumber() == 4){
-                        for(int i = 0; i < 4; i++){ initializePlayer(); }
+                        for(int i = 0; i < 4; i++){
+                            //initializePlayer();
+                            }
                         virtualView.showMessage("Gioco in modalità a squadre. \nIn attesa di altri giocatori...");
                     }
                     else{
                         gameSession = new Game();
-                        for(int i = 0; i < maxPlayers; i++){ initializePlayer(); }
+                        for(int i = 0; i < maxPlayers; i++){
+                            //initializePlayer();
+                            }
                         virtualView.showMessage("Gioco in modalità a ("+pnSelected.getPlayersNumber()+") giocatori. \nIn attesa di altri giocatori...");
                     }
                 }
