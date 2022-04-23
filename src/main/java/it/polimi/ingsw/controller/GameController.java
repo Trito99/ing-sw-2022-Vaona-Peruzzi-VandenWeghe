@@ -103,12 +103,12 @@ public class GameController {
                     this.gameSession.getListOfPlayers().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
                     this.gameSession.getListOfPlayers().add(new Player(TColor.WHITE, PlayerNumber.PLAYER2));
                     gameSession.getTeam().add(new Team()) ;
-                    gameSession.getTeam().get(0).intializeTeam(gameSession.getListOfPlayers().get(0), gameSession.getListOfPlayers().get(1));
+                    gameSession.getTeam().get(0).intializeTeam(gameSession.getListOfPlayers().get(0), gameSession.getListOfPlayers().get(1), TColor.WHITE);
 
                     this.gameSession.getListOfPlayers().add(new Player(TColor.BLACK, PlayerNumber.PLAYER3));
                     this.gameSession.getListOfPlayers().add(new Player(TColor.BLACK, PlayerNumber.PLAYER4));
                     gameSession.getTeam().add(new Team());
-                    gameSession.getTeam().get(1).intializeTeam(gameSession.getListOfPlayers().get(2), gameSession.getListOfPlayers().get(3));
+                    gameSession.getTeam().get(1).intializeTeam(gameSession.getListOfPlayers().get(2), gameSession.getListOfPlayers().get(3), TColor.BLACK);
 
                     /** Mettere ArrayList<Player> team dentro alla classe Player???  */
                     if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)) {

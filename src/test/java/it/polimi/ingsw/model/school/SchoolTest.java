@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.school;
 
+import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.Player;
@@ -47,7 +48,7 @@ class SchoolTest {
 
     }
 
-    @RepeatedTest(1)
+    @RepeatedTest(100)
     void WinProfTest(){
         Random rn = new Random();
         int r;
@@ -93,7 +94,7 @@ class SchoolTest {
             }
 
             for (int i = 0; i < index+2; i++) {
-                //game.getListOfPlayers().get(i).getPersonalSchool().winProf(game.getListOfPlayers(),game.getListOfPlayers().get(i),null);
+                game.getListOfPlayers().get(i).getPersonalSchool().winProf(game.getListOfPlayers(),game.getListOfPlayers().get(i), CardEffect.EASYMODE);
             }
 
         }
