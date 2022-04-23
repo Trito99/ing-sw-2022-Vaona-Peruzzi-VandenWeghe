@@ -57,6 +57,11 @@ public class Game {
         return activePlayer;
     }
 
+    public Player getPlayer(String nickname){
+        int indexPlayer = getListOfPlayers().indexOf(nickname);
+        return getListOfPlayers().get(indexPlayer);
+    }
+
     public void setActivePlayer(Player activePlayer){
         this.activePlayer = activePlayer;
     }

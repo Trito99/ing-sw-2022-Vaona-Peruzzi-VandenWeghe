@@ -1,12 +1,18 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.model.assistant.AssistantCard;
+import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.island.IslandCard;
+import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.School;
+import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
+import sun.tools.jconsole.Tab;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +36,14 @@ public interface View {
     void showWinMessage();
 
     void showLoseMessage();
+
+    /** mostra tutti i dati del giocatore */
+    void showPlayer(String nickname, PlayerNumber playerNumber, TColor tColor, int influenceOnIsland, School personalSchool,
+                    DeckAssistant deckOfPlayer, AssistantCard trash, int coinscore, String player);
+
+    void showPersonalSchool(School school);
+
+    void showTable(Table table);
 
     /** azioni di gioco */
 

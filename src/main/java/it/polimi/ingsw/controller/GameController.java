@@ -514,18 +514,15 @@ public class GameController {
         return turnController.getInactivePlayers();
     }
 
-    /** DA COMPLETARE */
     /** riconnette giocatore che si era disconnesso, durante il gioco avviato */
-    public void reconnect(String username, VirtualView virtualView){
-        allVirtualView.put(username, virtualView);
-        turnController.reconnect(username);
-        //broadcastMessage(username + " has reconnected.");
-        /** showPlayer(gameSession.getPlayer(username),username);
-         allVirtualView.get(username).showMarket(gameSession.getMarket().getMarketTray(), gameSession.getMarket().getCornerMarble());
-         allVirtualView.get(username).showDevMarket(gameSession.getCardMarket().availableCards(), gameSession.getCardMarket().remainingCards());
-         allVirtualView.get(username).showPlayerTurn(getActivePlayer());
-         */
-
+    public void reconnect(String nickname, VirtualView virtualView){
+        allVirtualView.put(nickname, virtualView);
+        turnController.reconnect(nickname);
+        broadcastMessage(nickname + " si è riconnesso.");
+        showPlayer(gameSession.getPlayer(nickname),nickname);
+        allVirtualView.get(nickname).showPersonalSchool(gameSession.getPlayer(nickname).getPersonalSchool());
+        allVirtualView.get(nickname).showTable(gameSession.getTable());
+        allVirtualView.get(nickname).showPlayerTurn(getActivePlayer());
     }
 
     /** se il gioco non è cominciato ----> return false */
@@ -535,24 +532,21 @@ public class GameController {
 
     /** rimouove giocatore dal gioco e controlla se era l'active player---> inizia nuovo turno */
     public void disconnect(String username){
-        if(username.equals(getActivePlayer()))
-        {
-
+        if(username.equals(getActivePlayer())) {
             if(turnController.nextPlayer().equals(turnController.firstPlayer())&&turnController.getActivePlayers().size()!=0){
-                /** switch(gameState){
-                    case DRAWLEADER:
+                switch(gameState){
+                    case INIT:
                         if(maxPlayers>=2){
-                            setGameState(GameState.GIVERES);}
+                            setGameState(GameState.IN_GAME);}
                         break;
-                    case GIVERES:
-                        setGameState(GameState.IN_GAME);
+                    case IN_GAME:
                         for(String s: allVirtualView.keySet()){
                             if (!s.equals(getActivePlayer())){
                                 allVirtualView.get(s).showPlayerTurn(getActivePlayer());
                             }
                         }
                         break;
-                } */
+                }
             }
             turnController.disconnect(username);
             startTurn();
@@ -568,6 +562,19 @@ public class GameController {
 
     public HashMap<String, VirtualView> getAllVirtualView() {
         return allVirtualView;
+    }
+
+    public void showPlayer(Player player, String nickname){
+        allVirtualView.get(nickname).showPlayer(player.getNickname(), player.getPlayerNumber(),  player.getTColour(),
+                player.getInfluenceOnIsland(), player.getPersonalSchool(), player.getDeckOfPlayer(), player.getTrash(),
+                player.getCoinScore(), nickname);
+    }
+
+    /** invia un messaggio a ogni giocatore del gioco */
+    public void broadcastMessage(String message) {
+        for (VirtualView vv : allVirtualView.values()) {
+            vv.showMessage(message);
+        }
     }
 
   /**  @Override
