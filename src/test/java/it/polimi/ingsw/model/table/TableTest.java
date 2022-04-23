@@ -425,7 +425,7 @@ public class TableTest{
                 game.getListOfPlayers().get(i).generateSchool(table, GameMode.values()[index]);
             }
 
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 5; i++) {       /** The different Prof are positioned randomly*/
                 int s = rn.nextInt(index+2);
                 if (game.getListOfPlayers().get(s).getPersonalSchool().getProfOfPlayer().get(i).getIsInHall() == false)
                     game.getListOfPlayers().get(s).getPersonalSchool().getProfOfPlayer().get(i).setInHall(true);
@@ -433,7 +433,7 @@ public class TableTest{
                     i = i - 1;
             }
 
-            for (int i = 0; i < 12; i++) {
+            for (int i = 0; i < 12; i++) {      /** Students and Towers are positioned randomly on Islands */
                 r = rn.nextInt(8) + 1;
                 for (int n = 0; n < r; n++) {
                     table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
@@ -454,7 +454,7 @@ public class TableTest{
                     count[2]++; //grey
             }
 
-            for (int i = 0; i < 2 * table.getListOfIsland().size(); i++) {
+            for (int i = 0; i < 2 * table.getListOfIsland().size(); i++) {   /** Islands are Joined */
                 table.joinIsland(table.getListOfIsland());
                 table.moveMotherEarth(1);
             }
