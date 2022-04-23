@@ -11,7 +11,7 @@ import it.polimi.ingsw.model.table.Table;
 import java.util.GregorianCalendar;
 
 /**
- * This class represents the player and it contains all his information.
+ * This class represents the player and contains all his information.
  */
 public class Player {
 
@@ -86,9 +86,8 @@ public class Player {
         return playerDate;
     }
 
-    public GregorianCalendar setPlayerDate(GregorianCalendar playerDate) {
+    public void setPlayerDate(GregorianCalendar playerDate) {
         this.playerDate = playerDate;
-        return playerDate;
     }
 
     public int getAge() {
