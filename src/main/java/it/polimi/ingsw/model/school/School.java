@@ -11,6 +11,7 @@ import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.table.Table;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class School {
 
@@ -287,6 +288,14 @@ public class School {
                 countProf++;
         }
         return countProf;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof School)) return false;
+        School school = (School) o;
+        return Objects.equals(profOfPlayer, school.profOfPlayer);
     }
 
 }
