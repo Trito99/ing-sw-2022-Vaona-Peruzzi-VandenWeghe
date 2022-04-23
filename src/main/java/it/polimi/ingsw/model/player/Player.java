@@ -87,6 +87,11 @@ public class Player {
         return playerDate;
     }
 
+    public GregorianCalendar setPlayerDate(GregorianCalendar playerDate) {
+        this.playerDate = playerDate;
+        return playerDate;
+    }
+
     public int getAge() {
         return age;
     }

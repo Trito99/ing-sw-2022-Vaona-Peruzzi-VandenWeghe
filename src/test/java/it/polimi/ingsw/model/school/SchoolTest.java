@@ -48,7 +48,7 @@ class SchoolTest {
 
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     void WinProfTest(){
         Random rn = new Random();
         int r;
@@ -67,27 +67,38 @@ class SchoolTest {
             }
 
             for (int i = 0; i < index+2; i++) {      /** Students are positioned randomly in the different Tables */
-                r = rn.nextInt(7) + 1;
                 for(int s=1;s<6;s++) {
+                    r = rn.nextInt(7) + 1;
                     switch (s) {
                         case 1:
-                            for (int t = 1; t < r; t++)
+                            for (int t = 1; t < r; t++) {
                                 game.getListOfPlayers().get(i).getPersonalSchool().getGTable().add(table.getBag().get(0));
+                                table.getBag().remove(0);
+                            }
                             break;
                         case 2:
-                            for (int t = 1; t < r; t++)
+                            for (int t = 1; t < r; t++) {
                                 game.getListOfPlayers().get(i).getPersonalSchool().getRTable().add(table.getBag().get(0));
+                                table.getBag().remove(0);
+                            }
                             break;
                         case 3:
-                            for (int t = 1; t < r; t++)
+                            for (int t = 1; t < r; t++) {
                                 game.getListOfPlayers().get(i).getPersonalSchool().getYTable().add(table.getBag().get(0));
+                                table.getBag().remove(0);
+                            }
                             break;
                         case 4:
-                            for (int t = 1; t < r; t++)
+                            for (int t = 1; t < r; t++) {
                                 game.getListOfPlayers().get(i).getPersonalSchool().getPTable().add(table.getBag().get(0));
+                                table.getBag().remove(0);
+                            }
                             break;
                         case 5:
-                            game.getListOfPlayers().get(i).getPersonalSchool().getBTable().add(table.getBag().get(0));
+                            for(int t = 1; t < r; t++){
+                                game.getListOfPlayers().get(i).getPersonalSchool().getBTable().add(table.getBag().get(0));
+                                table.getBag().remove(0);
+                            }
                             break;
                     }
                 }
@@ -96,7 +107,30 @@ class SchoolTest {
             for (int i = 0; i < index+2; i++) {
                 game.getListOfPlayers().get(i).getPersonalSchool().winProf(game.getListOfPlayers(),game.getListOfPlayers().get(i), CardEffect.EASYMODE);
             }
+            for (int i = 0; i < index+2; i++) {
+                for(int g=0;g<game.getListOfPlayers().get(i).getPersonalSchool().getGTable().size();g++)
+                    System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getGTable().get(g).getIdStudent()+" ");
+                System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getProfInHall(SColor.GREEN)+" "+game.getListOfPlayers().get(i).getPersonalSchool().getGTable().size()+"\n");
 
+                for(int g=0;g<game.getListOfPlayers().get(i).getPersonalSchool().getRTable().size();g++)
+                    System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getRTable().get(g).getIdStudent()+" ");
+                System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getProfInHall(SColor.RED)+" "+game.getListOfPlayers().get(i).getPersonalSchool().getRTable().size()+"\n");
+
+                for(int g=0;g<game.getListOfPlayers().get(i).getPersonalSchool().getYTable().size();g++)
+                    System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getYTable().get(g).getIdStudent()+" ");
+                System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getProfInHall(SColor.YELLOW)+" "+game.getListOfPlayers().get(i).getPersonalSchool().getYTable().size()+"\n");
+
+                for(int g=0;g<game.getListOfPlayers().get(i).getPersonalSchool().getPTable().size();g++)
+                    System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getPTable().get(g).getIdStudent()+" ");
+                System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getProfInHall(SColor.PINK)+" "+game.getListOfPlayers().get(i).getPersonalSchool().getPTable().size()+"\n");
+
+                for(int g=0;g<game.getListOfPlayers().get(i).getPersonalSchool().getBTable().size();g++)
+                    System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getBTable().get(g).getIdStudent()+" ");
+                System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getProfInHall(SColor.BLUE)+" "+game.getListOfPlayers().get(i).getPersonalSchool().getBTable().size()+"\n");
+                System.out.println("---");
+            }
+            System.out.println("----------");
         }
+
     }
 }
