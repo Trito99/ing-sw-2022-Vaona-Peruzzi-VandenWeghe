@@ -10,10 +10,11 @@ import java.util.ArrayList;
 
 public class Game {
 
-    //private int gameId;   serve per partite multiple
+    //private int gameId;   servirebbe per partite multiple
     private GameMode gameMode;
     private int gameId;
     private ArrayList<Player> listOfPlayers;
+    private ArrayList<String> nameOfPlayers= new ArrayList<>();
     private Player activePlayer;
     private int numberOfPlayers;  // Non serve, basta la gameMode (Two/Three players, coop)
     private State state;
@@ -41,6 +42,14 @@ public class Game {
         table.generateCloudNumber(gameMode);  */
     }
 
+    private ArrayList<String> getNameOfPlayers() {
+
+        for(Player p : listOfPlayers) {
+            nameOfPlayers.add(p.getNickname());
+        }
+        return nameOfPlayers;
+    }
+
     public GameMode getGameMode() {
         return gameMode;
     }
@@ -58,7 +67,7 @@ public class Game {
     }
 
     public Player getPlayer(String nickname){
-        int indexPlayer = getListOfPlayers().indexOf(nickname);
+        int indexPlayer = getNameOfPlayers().indexOf(nickname);
         return getListOfPlayers().get(indexPlayer);
     }
 

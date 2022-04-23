@@ -83,8 +83,8 @@ public class GameController {
                     int month=0;
                     int dayOfMonth=0;
                     GregorianCalendar dataPlayer = new GregorianCalendar(year, month, dayOfMonth);      */
-                    this.gameSession.getListOfPlayers().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
-                    this.gameSession.getListOfPlayers().add(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
+                    this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
+                    this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
 
                     if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
                         for (Player p : gameSession.getListOfPlayers())
@@ -93,9 +93,9 @@ public class GameController {
                     break;
                     //view.put(nickname, view);
             case THREEPLAYERS:
-                    this.gameSession.getListOfPlayers().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
-                    this.gameSession.getListOfPlayers().add(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
-                    this.gameSession.getListOfPlayers().add(new Player(TColor.GREY, PlayerNumber.PLAYER3));
+                    this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
+                    this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
+                    this.gameSession.addPlayer(new Player(TColor.GREY, PlayerNumber.PLAYER3));
 
                     if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)) {
                         for (Player p : gameSession.getListOfPlayers())
@@ -104,13 +104,13 @@ public class GameController {
                     break;
 
             case COOP:
-                    this.gameSession.getListOfPlayers().add(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
-                    this.gameSession.getListOfPlayers().add(new Player(TColor.WHITE, PlayerNumber.PLAYER2));
+                    this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
+                    this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER2));
                     gameSession.getTeam().add(new Team()) ;
                     gameSession.getTeam().get(0).intializeTeam(gameSession.getListOfPlayers().get(0), gameSession.getListOfPlayers().get(1), TColor.WHITE);
 
-                    this.gameSession.getListOfPlayers().add(new Player(TColor.BLACK, PlayerNumber.PLAYER3));
-                    this.gameSession.getListOfPlayers().add(new Player(TColor.BLACK, PlayerNumber.PLAYER4));
+                    this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER3));
+                    this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER4));
                     gameSession.getTeam().add(new Team());
                     gameSession.getTeam().get(1).intializeTeam(gameSession.getListOfPlayers().get(2), gameSession.getListOfPlayers().get(3), TColor.BLACK);
 
@@ -193,15 +193,16 @@ public class GameController {
         player.setCoinScore(player.getCoinScore() + 1);
     }
 
-    public void decreaseCoinScore(Player player, int decreaseValue) {
+    public void decreaseCoinScore(Player player, int decreaseValue) { /** Passare nickname invece del Player?? */
         player.setCoinScore(player.getCoinScore() - decreaseValue);
     }
 
     public void playAssistantCard(String assistantName){
-        //Scelta dal giocatore
+
         AssistantCard assistantCardPlayed = null;
 
         do {
+            //Scelta del giocatore--> nome carta
             for (AssistantCard card : gameSession.getActivePlayer().getDeckOfPlayer().getCardsInHand()) {
                 if (card.getAssistantName().equals(assistantName)) {
                     /** DA FARE: Controllo se il giocatore può giocare quella carta (non è già stata giocata da altri) o se è l'unica che può mettere */
@@ -216,19 +217,18 @@ public class GameController {
         gameSession.getActivePlayer().getDeckOfPlayer().getCardsInHand().remove(assistantCardPlayed);
     }
 
-    public void playCharacterCard(CardEffect cardEffect){ /** da rifare!!! */
-        //notify observer con scelta del giocatore -> sceglie attraverso l'id o con Nome personaggio?
+    public void playCharacterCard(CardEffect cardEffect){ /** da riguarare!!! */
+
         CharacterCard characterCardPlayed = null;
 
         do {
+            //Scelta Carta/Effetto
             for (CharacterCard card : gameSession.getTable().getCharacterCardsOnTable()) {
-                if (card.getCardEffect().equals(cardEffect)) {
-                    /** DA FARE: Controllo se il giocatore può giocare quella carta (non è già stata giocata da altri) o se è l'unica che può mettere */
+                if (card.getCardEffect().equals(cardEffect))
                     characterCardPlayed = card;
-                }
             }
         }
-        while(characterCardPlayed==null);
+        while(characterCardPlayed == null);
 
         if(characterCardPlayed.getCoinOnCard()) {
             if(gameSession.getActivePlayer().getCoinScore() >= characterCardPlayed.getCostCharacter() +1) {
