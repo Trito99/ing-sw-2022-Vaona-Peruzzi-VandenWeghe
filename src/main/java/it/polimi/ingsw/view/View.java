@@ -44,6 +44,9 @@ public interface View {
     /** chiede al giocatore quale sarà la sua prossima azione */
     void askAction();
 
+    /** chiede quanti giocatori avrà il nuovo gioco */
+    void askPlayersNumber();
+
     /** chiede al giocatore il tipo di partita che vuole giocare */
     void askGameMode(Game game);
 
