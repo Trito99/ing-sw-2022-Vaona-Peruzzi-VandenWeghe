@@ -1,6 +1,9 @@
 package it.polimi.ingsw.controller;
 
 
+import it.polimi.ingsw.message.ClientMessage;
+import it.polimi.ingsw.message.MessageType;
+import it.polimi.ingsw.message.PlayersNumber;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
@@ -18,6 +21,7 @@ import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.view.VirtualView;
 import it.polimi.ingsw.observer.ObservableView;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -120,6 +124,40 @@ public class GameController {
                     break;
 
         }
+    }
+
+    public void getMessage(ClientMessage receivedMessage) throws InvalidParameterException {
+        switch (gameState) {
+            case INIT:
+                VirtualView virtualView = allVirtualView.get(receivedMessage.getNickname());
+
+                if(receivedMessage.getMessageType() == MessageType.PLAYER_NUMBER){
+                    PlayersNumber pnSelected = (PlayersNumber) receivedMessage;
+                    maxPlayers = pnSelected.getPlayersNumber();
+
+                    if(pnSelected.getPlayersNumber() == 4){
+                        for(int i = 0; i < 4; i++){ initializePlayer(); }
+                        virtualView.showMessage("Gioco in modalità a squadre. \nIn attesa di altri giocatori...");
+                    }
+                    else{
+                        gameSession = new Game();
+                        for(int i = 0; i < maxPlayers; i++){ initializePlayer(); }
+                        virtualView.showMessage("Gioco in modalità a ("+pnSelected.getPlayersNumber()+") giocatori. \nIn attesa di altri giocatori...");
+                    }
+                }
+                break;
+            case IN_GAME:
+            case END_GAME:
+                /** inGame è qualcosa che riconosca le varie azioni del gioco da svolgere, e chiama le funzioni*/
+                //inGame(receivedMessage);
+                break;
+            default:
+                String message = "Errore!";
+                for (VirtualView vv : allVirtualView.values()) {
+                    vv.showMessage(message);
+                }
+        }
+
     }
 
     public void initializeGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
@@ -578,6 +616,7 @@ public class GameController {
             vv.showMessage(message);
         }
     }
+
 
   /**  @Override
     public void update(Observable o, Object arg) {

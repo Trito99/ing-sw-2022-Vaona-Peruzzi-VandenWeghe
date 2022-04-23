@@ -1,6 +1,7 @@
 package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.controller.GameController;
+import it.polimi.ingsw.message.ClientMessage;
 import it.polimi.ingsw.view.VirtualView;
 
 import java.util.*;
@@ -96,6 +97,12 @@ public class Lobby {
         gameController.reconnect(username, virtualView);
     }
 
+
+    /** passa messaggio al GameController*/
+    public void getMessage(ClientMessage clientMessage){
+        gameController.getMessage(clientMessage);
+
+    }
 
 
 }

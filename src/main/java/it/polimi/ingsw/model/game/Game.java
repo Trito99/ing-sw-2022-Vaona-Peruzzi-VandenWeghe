@@ -62,6 +62,13 @@ public class Game {
         return getListOfPlayers().get(indexPlayer);
     }
 
+    /** aggiunge giocatore alla lista giocatori */
+    public void addPlayer(Player player) {
+        if(listOfPlayers.size()<4){
+            listOfPlayers.add(player);
+        }
+    }
+
     public void setActivePlayer(Player activePlayer){
         this.activePlayer = activePlayer;
     }

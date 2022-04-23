@@ -1,6 +1,9 @@
 package it.polimi.ingsw.network;
 
+import it.polimi.ingsw.message.ClientMessage;
 import it.polimi.ingsw.message.GeneralMessage;
+import it.polimi.ingsw.message.LoginRequest;
+import it.polimi.ingsw.message.MessageType;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -15,7 +18,7 @@ public class ClientHandler implements ClientHandlerInterface /** Runnable */ {
     private LobbyServer lobbyServer;
     private String gameId;
     private final Object lockSendMessage;
-    //private final Object lockHandleMessage;
+    private final Object lockHandleMessage;
 
     /** costruttore di default */
     /**
@@ -25,9 +28,9 @@ public class ClientHandler implements ClientHandlerInterface /** Runnable */ {
     public ClientHandler(Socket client, LobbyServer lobbyServer) {
         this.client = client;
         this.lobbyServer=lobbyServer;
-        //lockHandleMessage = new Object();
-        lockSendMessage=new Object();
-        lobby=null;
+        lockHandleMessage = new Object();
+        lockSendMessage = new Object();
+        lobby = null;
 
         try {
             output = new ObjectOutputStream(client.getOutputStream());
@@ -66,22 +69,23 @@ public class ClientHandler implements ClientHandlerInterface /** Runnable */ {
 
     }
 
+    /** capire SE SERVE o da togliere */
     /** gestisce messaggio inviato dal client */
     private void handleMessage() {
         try {
             while (!Thread.currentThread().isInterrupted()) {
-                /**synchronized (lockHandleMessage) {
+                synchronized (lockHandleMessage) {
                     ClientMessage message = (ClientMessage) input.readObject();
 
                     if (message.getMessageType() == MessageType.LOGIN) {
                         LoginRequest loginMsg = (LoginRequest) message;
                         lobby = (lobbyServer.getLobby(loginMsg.getGameId()));
                         gameId=loginMsg.getGameId();
-                        lobby.addPlayer(loginMsg.getUsername(), this);
+                        lobby.addPlayer(loginMsg.getNickname(), this);
                     } else if (lobby != null) {
                         lobby.getMessage(message);
                     }
-                }*/
+                }
             }
         } catch (Exception exception) {
             exception.printStackTrace();

@@ -4,20 +4,13 @@ import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Game;
-import it.polimi.ingsw.model.game.GameMode;
-import it.polimi.ingsw.model.island.IslandCard;
-import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
-import sun.tools.jconsole.Tab;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
 
 /** la classe rappresenta la View generica che poi sarà implementata da CLI e GUI*/
 public interface View {
