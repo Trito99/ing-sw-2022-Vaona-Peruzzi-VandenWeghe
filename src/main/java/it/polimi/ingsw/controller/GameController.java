@@ -127,7 +127,7 @@ public class GameController {
 
     }
 
-        /** DA TOGLIERE */
+    /** DA TOGLIERE */
     public void playTrashCard(Player player){   /** memorizzo solo ultima carta giocata */
         AssistantCard playedCard = null;
         //notify observer---->scelgo carta da scartare
@@ -470,13 +470,15 @@ public class GameController {
     public void startTurn(){
         switch(gameState){
             case INIT:
-                /** da spostare qui le funzioni di inizializzazione
-                 * tavolo, scuola, nuvole, deckassistant, deckcharacter, ecc
-                 * */
+                gameSession.getTable().extractStudentOnCloud();
                 break;
             case IN_GAME:
+                playTrashCard(gameSession.getActivePlayer());
+                //gameSession.getActivePlayer().getPersonalSchool().moveStudentFromEntryToIsland(choice2, choice3);
+                //gameSession.getActivePlayer().getPersonalSchool().moveStudentInHall(choice1, choice2, choice3, choice4);
+                //moveMotherEarth(choice5);
             case END_GAME:
-                //allVirtualView.get(getActivePlayer()).askAction();
+                allVirtualView.get(getActivePlayer()).askAction();
                 break;
         }
     }

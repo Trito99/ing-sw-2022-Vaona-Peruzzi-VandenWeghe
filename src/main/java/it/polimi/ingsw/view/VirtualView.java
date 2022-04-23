@@ -2,11 +2,11 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.message.GeneralMessage;
 import it.polimi.ingsw.message.ShowPlayerInfo;
+import it.polimi.ingsw.message.StartTurn;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Game;
-import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;
@@ -75,6 +75,11 @@ public class VirtualView implements View, Observer {
     @Override
     public void showTable(Table table) {
         //clientHandler.sendMessage(new ShowTable(game.getTable()));
+    }
+
+    @Override
+    public void askAction() {
+        clientHandler.sendMessage(new StartTurn());
     }
 
     @Override

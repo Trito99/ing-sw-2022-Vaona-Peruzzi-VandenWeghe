@@ -45,7 +45,11 @@ public interface View {
 
     void showTable(Table table);
 
+
     /** azioni di gioco */
+
+    /** chiede al giocatore quale sarà la sua prossima azione */
+    void askAction();
 
     /** chiede al giocatore il tipo di partita che vuole giocare */
     void askGameMode(Game game);
