@@ -77,19 +77,18 @@ public class IslandTest {
    @ParameterizedTest
    @EnumSource(TColor.class)
    public void TowerOnIsland(TColor color){
-      Player player = new Player(color, PlayerNumber.PLAYER1);
       int count = 0;
       int i = 0;
+      Player player = new Player(color, PlayerNumber.PLAYER1);
+      IslandCard island = new IslandCard(count);
+
+
+      assertNotNull(island.towerIsOnIsland());
+      assertEquals(false, island.towerIsOnIsland());
+      assertNull(island.getTowerOnIsland());
+
       /**
       for(count = 0; count < 12; count++){
-         IslandCard island = new IslandCard(count);
-
-         assertNotNull(island.towerIsOnIsland());
-         assertEquals(false, island.towerIsOnIsland());
-         assertNull(island.getTowerOnIsland());
-
-
-
          for(i=0; i<7; i++){
             switch (color){
                case WHITE:
