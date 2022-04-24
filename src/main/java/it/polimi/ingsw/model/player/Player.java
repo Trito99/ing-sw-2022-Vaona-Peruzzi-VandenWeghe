@@ -49,6 +49,7 @@ public class Player {
 
     public void generateSchool(Table table, GameMode gameMode) {
         int i = 0, t = 0;
+        /** tColor non può essere sempre lo stesso per tutti */
         TColor tcolor = TColor.WHITE;
         switch (gameMode) {
             case TWOPLAYERS:
@@ -131,11 +132,11 @@ public class Player {
         this.trash = trash;
     }
 
-    public TColor getTColour() {
+    public TColor getTColor() {
         return tColor;
     }
 
-    public void setTColour(TColor tColor) {
+    public void setTColor(TColor tColor) {
         this.tColor = tColor;
     }
 
@@ -152,6 +153,7 @@ public class Player {
     }
 
     public void setDeckOfPlayer(DeckAssistant deckOfPlayer) {
+        deckOfPlayer.generateAssistantDeck();
         this.deckOfPlayer = deckOfPlayer;
     }
 
@@ -163,7 +165,7 @@ public class Player {
         this.influenceOnIsland = influenceOnIsland;
     }
 
-    public boolean HasAlreadyPlayed() {
+    public boolean hasAlreadyPlayed() {
         return hasAlreadyPlayed;
     }
 

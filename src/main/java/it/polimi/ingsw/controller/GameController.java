@@ -19,7 +19,6 @@ import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.view.VirtualView;
-import it.polimi.ingsw.observer.ObservableView;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
@@ -212,11 +211,11 @@ public class GameController {
 
         for(Player p : gameSession.getListOfPlayers()){
             AssistantCard alreadyTaken = null;
-            if(playedCard != p.getTrash() && p.HasAlreadyPlayed()) {
+            if(playedCard != p.getTrash() && p.hasAlreadyPlayed()) {
                 player.setTrash(playedCard);
                 player.setHasAlreadyPlayed(true);
             }
-            else if(playedCard == p.getTrash() && p.HasAlreadyPlayed())
+            else if(playedCard == p.getTrash() && p.hasAlreadyPlayed())
                 System.out.println("Scegli un'altra carta! ");
             /**ELSE  controlla se è l'unica carta giocabile */
             /** controlla se è l'unica carta giocabile */
@@ -645,7 +644,7 @@ public class GameController {
     }
 
     public void showPlayer(Player player, String nickname){
-        allVirtualView.get(nickname).showPlayer(player.getNickname(), player.getPlayerNumber(),  player.getTColour(),
+        allVirtualView.get(nickname).showPlayer(player.getNickname(), player.getPlayerNumber(),  player.getTColor(),
                 player.getInfluenceOnIsland(), player.getPersonalSchool(), player.getDeckOfPlayer(), player.getTrash(),
                 player.getCoinScore(), nickname);
     }

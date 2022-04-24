@@ -101,7 +101,7 @@ public class IslandCard {
                         break;
                 }
                 /** EFFETTO CENTAURO */
-                if(p.getTColour().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isCentauroPlayed()){  /** Aggiungo influenza torri */
+                if(p.getTColor().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isCentauroPlayed()){  /** Aggiungo influenza torri */
                     countTot++;
                 }
 
@@ -154,7 +154,7 @@ public class IslandCard {
                 return;             /** Se nessuno ha influenza non buildo */
             }
 
-            TColor towerColour = playerFound.getTColour();      //Colore delle torri del player che ha influenza
+            TColor towerColour = playerFound.getTColor();      //Colore delle torri del player che ha influenza
 
             towerOnIsland = new Tower(playerFound.getPersonalSchool().getTower().size(), towerColour);
             playerFound.getPersonalSchool().removeTower();
@@ -173,16 +173,16 @@ public class IslandCard {
         }
 
         for(Player player : listOfPlayers){
-            if(player.getTColour().equals(towerOnIsland.getTColour()))          //determina il prevPlayer
+            if(player.getTColor().equals(towerOnIsland.getTColour()))          //determina il prevPlayer
                 prevPlayer = player;
         }
 
-        if(playerBuilder.getTColour().equals(towerOnIsland.getTColour())) {
+        if(playerBuilder.getTColor().equals(towerOnIsland.getTColour())) {
             return;
         }
         else{
             setTowerOnIsland(playerBuilder.getPersonalSchool().getTower().get(playerBuilder.getPersonalSchool().getTower().size() - 1));
-            prevPlayer.getPersonalSchool().addTower(playerBuilder.getPersonalSchool().getTower().size(), playerBuilder.getTColour());
+            prevPlayer.getPersonalSchool().addTower(playerBuilder.getPersonalSchool().getTower().size(), playerBuilder.getTColor());
         }
     }
 
