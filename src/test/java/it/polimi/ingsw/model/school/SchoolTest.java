@@ -207,9 +207,9 @@ class SchoolTest {
             for (int i = 0; i < 5; i++) { /** Asserts if winProf has changed the different parameters using the array created before  */
                 for (int j = 0; j < index + 2; j++) {
                     if (game.getListOfPlayers().get(j).getPersonalSchool().numberOfStudentsInHall(SColor.values()[i]) == count[i])
-                        assertEquals(true, game.getListOfPlayers().get(j).getPersonalSchool().getProfOfPlayer().get(i).getIsInHall());
+                        assertEquals(true, game.getListOfPlayers().get(j).getPersonalSchool().getProfInHall(SColor.values()[i]));
                     else
-                        assertEquals(false, game.getListOfPlayers().get(j).getPersonalSchool().getProfOfPlayer().get(i).getIsInHall());
+                        assertEquals(false, game.getListOfPlayers().get(j).getPersonalSchool().getProfInHall(SColor.values()[i]));
                 }
             }
         }
