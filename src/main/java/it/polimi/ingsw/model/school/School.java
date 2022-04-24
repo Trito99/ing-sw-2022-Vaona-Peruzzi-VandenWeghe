@@ -47,7 +47,7 @@ public class School {
         entry.remove(entry.get(entry.indexOf(student)));
     }
 
-    public void moveStudentInHall(Player playerMoving, int id, Table table, Difficulty difficulty) {
+    public void moveStudentFromEntryToHall(Player playerMoving, int id, Table table, Difficulty difficulty) {
         Student student = new Student(131, null);
         for (Student s : entry) {
             if (id == s.getIdStudent())
@@ -121,7 +121,6 @@ public class School {
         return  BTable;
     }
 
-    /** da generalizzare tutto con questo */
     public int numberOfStudents(Player player, SColor color){
         switch(color){
             case GREEN:
@@ -257,7 +256,7 @@ public class School {
         cardEffectPlayed.setOstePlayed(false); /** Va Bene??? */
     }
 
-    public boolean getProfInHall(SColor color){     /** DA CAMBIARE: ORA ABBIAMO ARRAY PROFOFPLAYER (POI VA CAMBIATO ANCHE CALCULATEINFLUENCE) */
+    public boolean getProfInHall(SColor color){
         boolean x = false;
 
         for(Prof p : profOfPlayer) {

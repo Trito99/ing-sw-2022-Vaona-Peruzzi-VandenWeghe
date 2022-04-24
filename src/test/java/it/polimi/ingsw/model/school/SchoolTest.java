@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.student.SColor;
+import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
@@ -30,9 +31,10 @@ class SchoolTest {
         table.generateIslandCards();
         table.generateMotherEarth();
     }
+
     @ParameterizedTest
     @EnumSource(GameMode.class)
-    void numberOfProf(GameMode gameMode) {
+    void numberOfProfTest(GameMode gameMode) {
         Player player= new Player(TColor.BLACK, PlayerNumber.PLAYER1);
         player.generateSchool(table, gameMode);
         for (int i = 0; i < 5; i++) {
@@ -131,6 +133,26 @@ class SchoolTest {
             }
             System.out.println("----------");
         }
+
+    }
+
+    @ParameterizedTest
+    @EnumSource(GameMode.class)
+    void numberOfStudentsTest(GameMode gameMode){
+
+        Player p = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
+        p.generateSchool(table, gameMode);
+        p.getPersonalSchool().getEntry().add(new Student(0,SColor.GREEN));
+        p.getPersonalSchool().getEntry().add(new Student(7, SColor.GREEN));
+        p.getPersonalSchool().getEntry().add(new Student(12,SColor.RED));
+        p.getPersonalSchool().getEntry().add(new Student(16,SColor.YELLOW));
+        p.getPersonalSchool().getEntry().add(new Student(52,SColor.PINK));
+        p.getPersonalSchool().getEntry().add(new Student(77,SColor.GREEN));
+        p.getPersonalSchool().getEntry().add(new Student(2,SColor.YELLOW));
+
+        /** assertEquals(3, p.getPersonalSchool().numberOfStudents(SColor.GREEN));
+        assertEquals(0, p.getPersonalSchool().numberOfStudents(SColor.BLUE));
+         DA CAMBIARE numberOfStudents(Player player SColor sColor) in numberOfStudents(SColor sColor)                                      */
 
     }
 }
