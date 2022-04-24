@@ -49,8 +49,6 @@ public class Player {
 
     public void generateSchool(Table table, GameMode gameMode) {
         int i = 0, t = 0;
-        /** tColor non può essere sempre lo stesso per tutti */
-        TColor tcolor = TColor.WHITE;
         switch (gameMode) {
             case TWOPLAYERS:
                 i = 7;
@@ -70,7 +68,12 @@ public class Player {
             table.getBag().remove(table.getBag().get(s));
         }
         for (int f = 0; f < t; f++) {
-            personalSchool.addTower(f, tColor);
+            if(gameMode == GameMode.COOP && playerNumber ==PlayerNumber.PLAYER1 )
+                personalSchool.addTower(f, tColor);
+            else if(gameMode == GameMode.COOP && playerNumber ==PlayerNumber.PLAYER3)
+                personalSchool.addTower(f, tColor);
+            else if(gameMode!=GameMode.COOP)
+                personalSchool.addTower(f, tColor);
         }
 
         personalSchool.getProfOfPlayer().add(new Prof(SColor.GREEN));

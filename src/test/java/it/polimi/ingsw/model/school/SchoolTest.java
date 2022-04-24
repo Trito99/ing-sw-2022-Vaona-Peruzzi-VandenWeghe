@@ -244,8 +244,9 @@ class SchoolTest {
         player.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true); //Green
         player.getPersonalSchool().getProfOfPlayer().get(1).setInHall(false); // Yellow
         player.getPersonalSchool().getProfOfPlayer().get(2).setInHall(false); // Red
-        player.getPersonalSchool().getProfOfPlayer().get(3).setInHall(true); // Blue
-        player.getPersonalSchool().getProfOfPlayer().get(4).setInHall(false); // Pink
+        player.getPersonalSchool().getProfOfPlayer().get(3).setInHall(true); // Pink
+        player.getPersonalSchool().getProfOfPlayer().get(4).setInHall(false); // Blue
+
 
         assertTrue(player.getPersonalSchool().getProfInHall(SColor.GREEN));
         assertFalse(player.getPersonalSchool().getProfInHall(SColor.RED));
