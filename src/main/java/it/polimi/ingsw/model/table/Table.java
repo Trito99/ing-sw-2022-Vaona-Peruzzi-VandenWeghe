@@ -359,19 +359,19 @@ public class Table {
         if(game.getGameMode().equals(GameMode.THREEPLAYERS)){
             if (countBlack > countGrey && countBlack > countWhite) {
                 for (Player player : game.getListOfPlayers()) {
-                    if (player.getTColour().equals(TColor.BLACK)) {
+                    if (player.getTColor().equals(TColor.BLACK)) {
                         return player;
                     }
                 }
             } else if (countGrey > countBlack && countGrey > countWhite) {
                 for (Player player : game.getListOfPlayers()) {
-                    if (player.getTColour().equals(TColor.GREY)) {
+                    if (player.getTColor().equals(TColor.GREY)) {
                         return player;
                     }
                 }
             } else if (countWhite > countBlack && countWhite > countGrey) {
                 for (Player player : game.getListOfPlayers()) {
-                    if (player.getTColour().equals(TColor.WHITE)) {
+                    if (player.getTColor().equals(TColor.WHITE)) {
                         return player;
                     }
                 }
@@ -380,9 +380,9 @@ public class Table {
             /** in caso di parità, confronto i player e vince quello con più prof */
             else if (countBlack == countGrey && countBlack > countWhite) {
                 for (Player player : game.getListOfPlayers()) {
-                    if (player.getTColour().equals(TColor.BLACK)) {
+                    if (player.getTColor().equals(TColor.BLACK)) {
                         winner = player;
-                    } else if (player.getTColour().equals(TColor.GREY)) {
+                    } else if (player.getTColor().equals(TColor.GREY)) {
                         alsoWinner = player;
                     }
                 }
@@ -398,9 +398,9 @@ public class Table {
             }
             else if (countGrey == countWhite && countGrey > countBlack) {
                 for (Player player : game.getListOfPlayers()) {
-                    if (player.getTColour().equals(TColor.GREY)) {
+                    if (player.getTColor().equals(TColor.GREY)) {
                         winner = player;
-                    } else if (player.getTColour().equals(TColor.WHITE)) {
+                    } else if (player.getTColor().equals(TColor.WHITE)) {
                         alsoWinner = player;
                     }
                 }
@@ -416,9 +416,9 @@ public class Table {
             }
             else if (countWhite == countBlack && countWhite > countGrey) {
                 for (Player player : game.getListOfPlayers()) {
-                    if (player.getTColour().equals(TColor.WHITE)) {
+                    if (player.getTColor().equals(TColor.WHITE)) {
                         winner = player;
-                    } else if (player.getTColour().equals(TColor.BLACK)) {
+                    } else if (player.getTColor().equals(TColor.BLACK)) {
                         alsoWinner = player;
                     }
                 }
@@ -448,21 +448,21 @@ public class Table {
         }else{
             if (countBlack > countWhite) {
                 for (Player player : game.getListOfPlayers()) {
-                    if (player.getTColour().equals(TColor.BLACK)) {
+                    if (player.getTColor().equals(TColor.BLACK)) {
                         return player;
                     }
                 }
             }else if (countWhite > countBlack) {
                 for (Player player : game.getListOfPlayers()) {
-                    if (player.getTColour().equals(TColor.WHITE)) {
+                    if (player.getTColor().equals(TColor.WHITE)) {
                         return player;
                     }
                 }
             } else if(countWhite == countBlack){
                 for (Player player : game.getListOfPlayers()) {
-                    if (player.getTColour().equals(TColor.WHITE)) {
+                    if (player.getTColor().equals(TColor.WHITE)) {
                         winner = player;
-                    } else if (player.getTColour().equals(TColor.BLACK)) {
+                    } else if (player.getTColor().equals(TColor.BLACK)) {
                         alsoWinner = player;
                     }
                 }

@@ -14,7 +14,7 @@ public class TeamTest {
         assertNotNull(team.getTeam().get(0));
         assertNotNull(team.getTeam().get(1));
         assertEquals(2, team.getTeam().size());
-        assertEquals(TColor.BLACK, team.getTeam().get(0).getTColour());
+        assertEquals(TColor.BLACK, team.getTeam().get(0).getTColor());
         assertEquals(TColor.BLACK, team.getTeamColor());
 
         int countPlayer = 0;
