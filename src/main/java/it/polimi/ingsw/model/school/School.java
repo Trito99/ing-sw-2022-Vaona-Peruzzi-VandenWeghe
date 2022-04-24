@@ -121,7 +121,7 @@ public class School {
         return  BTable;
     }
 
-    public int numberOfStudentsInTable(SColor color){
+    public int numberOfStudentsInHall(SColor color){
         switch(color){
             case GREEN:
                 return GTable.size();
@@ -146,12 +146,12 @@ public class School {
             switch (SColor.values()[i]) {
                 case GREEN:
                     for (Player p : players) {                         /** In questo for trovo max numero di verdi generale*/
-                        if (p.getPersonalSchool().numberOfStudentsInTable(SColor.GREEN) > max) {
-                            max = p.getPersonalSchool().numberOfStudentsInTable(SColor.GREEN);
+                        if (p.getPersonalSchool().numberOfStudentsInHall(SColor.GREEN) > max) {
+                            max = p.getPersonalSchool().numberOfStudentsInHall(SColor.GREEN);
                         }
                     }
                     for (Player p : players) {                          /** In questo for conto i giocatori che hanno il max numero di verdi*/
-                        if (p.getPersonalSchool().numberOfStudentsInTable(SColor.GREEN) == max) {
+                        if (p.getPersonalSchool().numberOfStudentsInHall(SColor.GREEN) == max) {
                             playerWithMax++;
                             maxPlayer = p;      /** Se è solo uno lo salvo in maxPlayer*/
                         } else p.getPersonalSchool().getProfOfPlayer().get(0).setInHall(false);
@@ -167,12 +167,12 @@ public class School {
                     break;
                 case RED:
                     for (Player p : players) {
-                        if (p.getPersonalSchool().numberOfStudentsInTable(SColor.RED) > max) {
-                            max = p.getPersonalSchool().numberOfStudentsInTable(SColor.RED);
+                        if (p.getPersonalSchool().numberOfStudentsInHall(SColor.RED) > max) {
+                            max = p.getPersonalSchool().numberOfStudentsInHall(SColor.RED);
                         }
                     }
                     for (Player p : players) {
-                        if (p.getPersonalSchool().numberOfStudentsInTable(SColor.RED) == max) {
+                        if (p.getPersonalSchool().numberOfStudentsInHall(SColor.RED) == max) {
                             playerWithMax++;
                             maxPlayer = p;
                         } else p.getPersonalSchool().getProfOfPlayer().get(1).setInHall(false);
@@ -189,12 +189,12 @@ public class School {
                     break;
                 case YELLOW:
                     for (Player p : players) {
-                        if (p.getPersonalSchool().numberOfStudentsInTable(SColor.YELLOW) > max) {
-                            max = p.getPersonalSchool().numberOfStudentsInTable(SColor.YELLOW);
+                        if (p.getPersonalSchool().numberOfStudentsInHall(SColor.YELLOW) > max) {
+                            max = p.getPersonalSchool().numberOfStudentsInHall(SColor.YELLOW);
                         }
                     }
                     for (Player p : players) {
-                        if (p.getPersonalSchool().numberOfStudentsInTable(SColor.YELLOW) == max) {
+                        if (p.getPersonalSchool().numberOfStudentsInHall(SColor.YELLOW) == max) {
                             playerWithMax++;
                             maxPlayer = p;
                         } else p.getPersonalSchool().getProfOfPlayer().get(2).setInHall(false);
@@ -210,12 +210,12 @@ public class School {
                     break;
                 case PINK:
                     for (Player p : players) {
-                        if (p.getPersonalSchool().numberOfStudentsInTable(SColor.PINK) > max) {
-                            max = p.getPersonalSchool().numberOfStudentsInTable(SColor.PINK);
+                        if (p.getPersonalSchool().numberOfStudentsInHall(SColor.PINK) > max) {
+                            max = p.getPersonalSchool().numberOfStudentsInHall(SColor.PINK);
                         }
                     }
                     for (Player p : players) {
-                        if (p.getPersonalSchool().numberOfStudentsInTable(SColor.PINK) == max) {
+                        if (p.getPersonalSchool().numberOfStudentsInHall(SColor.PINK) == max) {
                             playerWithMax++;
                             maxPlayer = p;
                         } else p.getPersonalSchool().getProfOfPlayer().get(3).setInHall(false);
@@ -231,12 +231,12 @@ public class School {
                     break;
                 case BLUE:
                     for (Player p : players) {
-                        if (p.getPersonalSchool().numberOfStudentsInTable(SColor.BLUE) > max) {
-                            max = p.getPersonalSchool().numberOfStudentsInTable(SColor.BLUE);
+                        if (p.getPersonalSchool().numberOfStudentsInHall(SColor.BLUE) > max) {
+                            max = p.getPersonalSchool().numberOfStudentsInHall(SColor.BLUE);
                         }
                     }
                     for (Player p : players) {
-                        if (p.getPersonalSchool().numberOfStudentsInTable(SColor.BLUE) == max) {
+                        if (p.getPersonalSchool().numberOfStudentsInHall(SColor.BLUE) == max) {
                             playerWithMax++;
                             maxPlayer = p;
                         } else p.getPersonalSchool().getProfOfPlayer().get(4).setInHall(false);
