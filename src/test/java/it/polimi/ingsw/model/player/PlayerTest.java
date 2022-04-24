@@ -18,7 +18,6 @@ import static org.junit.Assert.*;
 public class PlayerTest {
     private Table table;
     private DeckAssistant deckOfPlayer;
-
     private GameMode gameMode = GameMode.TWOPLAYERS;
 
     @BeforeEach
