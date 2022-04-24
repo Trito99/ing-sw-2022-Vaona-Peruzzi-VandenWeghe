@@ -50,6 +50,85 @@ class SchoolTest {
 
     }
 
+    @RepeatedTest(100)
+    void numberOfStudentsTest() {
+        Random rn = new Random();
+        int r;
+        Game game = new Game();
+        for (int index = 0; index < 2; index++) { /** For every GameMode (for now just the first two)*/
+            table.getBag().clear();
+            table.getListOfIsland().clear();
+            table.generateIslandCards();
+            table.generateMotherEarth();
+            table.addFinalStudents();
+            game.getListOfPlayers().clear();
+            game.setGameMode(GameMode.values()[index]);
+            for (int i = 0; i < index + 2; i++) {
+                game.getListOfPlayers().add(new Player(TColor.values()[i], PlayerNumber.values()[i]));
+                game.getListOfPlayers().get(i).generateSchool(table, GameMode.values()[index]);
+            }
+
+            for (int i = 0; i < index + 2; i++) {      /** Students are positioned randomly in the different Tables */
+                for (int s = 1; s < 6; s++) {
+                    r = rn.nextInt(7) + 1;
+                    switch (s) {
+                        case 1:
+                            for (int t = 1; t < r; t++) {
+                                game.getListOfPlayers().get(i).getPersonalSchool().getGTable().add(table.getBag().get(0));
+                                table.getBag().remove(0);
+                            }
+                            break;
+                        case 2:
+                            for (int t = 1; t < r; t++) {
+                                game.getListOfPlayers().get(i).getPersonalSchool().getRTable().add(table.getBag().get(0));
+                                table.getBag().remove(0);
+                            }
+                            break;
+                        case 3:
+                            for (int t = 1; t < r; t++) {
+                                game.getListOfPlayers().get(i).getPersonalSchool().getYTable().add(table.getBag().get(0));
+                                table.getBag().remove(0);
+                            }
+                            break;
+                        case 4:
+                            for (int t = 1; t < r; t++) {
+                                game.getListOfPlayers().get(i).getPersonalSchool().getPTable().add(table.getBag().get(0));
+                                table.getBag().remove(0);
+                            }
+                            break;
+                        case 5:
+                            for (int t = 1; t < r; t++) {
+                                game.getListOfPlayers().get(i).getPersonalSchool().getBTable().add(table.getBag().get(0));
+                                table.getBag().remove(0);
+                            }
+                            break;
+                    }
+                }
+            }
+            for (int i = 0; i < index + 2; i++) {      /** Checks if numberOfStudentsInHall functions */
+                for (int s = 1; s < 6; s++) {
+                    switch (s) {
+                        case 1:
+                            assertEquals(game.getListOfPlayers().get(i).getPersonalSchool().getGTable().size(),game.getListOfPlayers().get(i).getPersonalSchool().numberOfStudentsInTable(SColor.GREEN));
+                            break;
+                        case 2:
+                            assertEquals(game.getListOfPlayers().get(i).getPersonalSchool().getRTable().size(),game.getListOfPlayers().get(i).getPersonalSchool().numberOfStudentsInTable(SColor.RED));
+                            break;
+                        case 3:
+                            assertEquals(game.getListOfPlayers().get(i).getPersonalSchool().getYTable().size(),game.getListOfPlayers().get(i).getPersonalSchool().numberOfStudentsInTable(SColor.YELLOW));
+                            break;
+                        case 4:
+                            assertEquals(game.getListOfPlayers().get(i).getPersonalSchool().getPTable().size(),game.getListOfPlayers().get(i).getPersonalSchool().numberOfStudentsInTable(SColor.PINK));
+                            break;
+                        case 5:
+                            assertEquals(game.getListOfPlayers().get(i).getPersonalSchool().getBTable().size(),game.getListOfPlayers().get(i).getPersonalSchool().numberOfStudentsInTable(SColor.BLUE));
+                            break;
+                    }
+                }
+            }
+        }
+    }
+
     @RepeatedTest(1)
     void WinProfTest(){
         Random rn = new Random();

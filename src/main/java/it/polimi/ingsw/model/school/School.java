@@ -121,18 +121,18 @@ public class School {
         return  BTable;
     }
 
-    public int numberOfStudents(Player player, SColor color){
+    public int numberOfStudentsInTable(SColor color){
         switch(color){
             case GREEN:
-                return player.getPersonalSchool().getGTable().size();
+                return GTable.size();
             case RED:
-                return player.getPersonalSchool().getRTable().size();
+                return RTable.size();
             case YELLOW:
-                return player.getPersonalSchool().getYTable().size();
+                return YTable.size();
             case PINK:
-                return player.getPersonalSchool().getPTable().size();
+                return PTable.size();
             case BLUE:
-                return player.getPersonalSchool().getBTable().size();
+                return BTable.size();
         }
         return 0;
     }
@@ -146,16 +146,17 @@ public class School {
             switch (SColor.values()[i]) {
                 case GREEN:
                     for (Player p : players) {                         /** In questo for trovo max numero di verdi generale*/
-                        if (numberOfStudents(p, SColor.GREEN) > max) {
-                            max = numberOfStudents(p, SColor.GREEN);
+                        if (p.getPersonalSchool().numberOfStudentsInTable(SColor.GREEN) > max) {
+                            max = p.getPersonalSchool().numberOfStudentsInTable(SColor.GREEN);
                         }
-                    }
+                    }System.out.println("Max:"+max);
                     for (Player p : players) {                          /** In questo for conto i giocatori che hanno il max numero di verdi*/
-                        if (numberOfStudents(p, SColor.GREEN) == max) {
+                        if (p.getPersonalSchool().numberOfStudentsInTable(SColor.GREEN) == max) {
                             playerWithMax++;
                             maxPlayer = p;      /** Se è solo uno lo salvo in maxPlayer*/
                         } else p.getPersonalSchool().getProfOfPlayer().get(0).setInHall(false);
-                    }
+                    }System.out.println("MaxP:"+playerWithMax);
+                    System.out.println("MaxP2:"+maxPlayer.getPlayerNumber());
                     if (playerWithMax == 1) {   /** Setto a true il prof verde del maxplayer */
                         maxPlayer.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true);
                     } else if (playerWithMax > 1 && cardEffectPlayed.isOstePlayed()) {       /** Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di CiccioPanza*/
@@ -167,12 +168,12 @@ public class School {
                     break;
                 case RED:
                     for (Player p : players) {
-                        if (numberOfStudents(p, SColor.RED) > max) {
-                            max = numberOfStudents(p, SColor.RED);
+                        if (p.getPersonalSchool().numberOfStudentsInTable(SColor.RED) > max) {
+                            max = p.getPersonalSchool().numberOfStudentsInTable(SColor.RED);
                         }
                     }System.out.println("Max:"+max);
                     for (Player p : players) {
-                        if (numberOfStudents(p, SColor.RED) == max) {
+                        if (p.getPersonalSchool().numberOfStudentsInTable(SColor.RED) == max) {
                             playerWithMax++;
                             maxPlayer = p;
                         } else p.getPersonalSchool().getProfOfPlayer().get(1).setInHall(false);
@@ -180,26 +181,28 @@ public class School {
                     System.out.println("MaxP2:"+maxPlayer.getPlayerNumber());
                     if (playerWithMax == 1) {
                         maxPlayer.getPersonalSchool().getProfOfPlayer().get(1).setInHall(true);
-                        System.out.println(778);
+                        System.out.println(maxPlayer.getPersonalSchool().getProfOfPlayer().get(1).getIsInHall());
                     } else if (playerWithMax > 1 && cardEffectPlayed.isOstePlayed()) { /**Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di CiccioPanza*/
                         playerTurn.getPersonalSchool().getProfOfPlayer().get(1).setInHall(true);
                     } else if (playerWithMax > 1) {
                         for (Player p : players)
                             p.getPersonalSchool().getProfOfPlayer().get(1).setInHall(false);
+                        System.out.println(maxPlayer.getPersonalSchool().getProfOfPlayer().get(1).getIsInHall());
                     }
                     break;
                 case YELLOW:
                     for (Player p : players) {
-                        if (numberOfStudents(p, SColor.YELLOW) > max) {
-                            max = numberOfStudents(p, SColor.YELLOW);
+                        if (p.getPersonalSchool().numberOfStudentsInTable(SColor.YELLOW) > max) {
+                            max = p.getPersonalSchool().numberOfStudentsInTable(SColor.YELLOW);
                         }
-                    }
+                    }System.out.println("Max:"+max);
                     for (Player p : players) {
-                        if (numberOfStudents(p, SColor.YELLOW) == max) {
+                        if (p.getPersonalSchool().numberOfStudentsInTable(SColor.YELLOW) == max) {
                             playerWithMax++;
                             maxPlayer = p;
                         } else p.getPersonalSchool().getProfOfPlayer().get(2).setInHall(false);
-                    }
+                    }System.out.println("MaxP:"+playerWithMax);
+                    System.out.println("MaxP2:"+maxPlayer.getPlayerNumber());
                     if (playerWithMax == 1) {
                         maxPlayer.getPersonalSchool().getProfOfPlayer().get(2).setInHall(true);
                     } else if (playerWithMax > 1 && cardEffectPlayed.isOstePlayed()) { /**Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di Oste*/
@@ -211,16 +214,17 @@ public class School {
                     break;
                 case PINK:
                     for (Player p : players) {
-                        if (numberOfStudents(p, SColor.PINK) > max) {
-                            max = numberOfStudents(p, SColor.PINK);
+                        if (p.getPersonalSchool().numberOfStudentsInTable(SColor.PINK) > max) {
+                            max = p.getPersonalSchool().numberOfStudentsInTable(SColor.PINK);
                         }
-                    }
+                    }System.out.println("Max:"+max);
                     for (Player p : players) {
-                        if (numberOfStudents(p, SColor.PINK) == max) {
+                        if (p.getPersonalSchool().numberOfStudentsInTable(SColor.PINK) == max) {
                             playerWithMax++;
                             maxPlayer = p;
                         } else p.getPersonalSchool().getProfOfPlayer().get(3).setInHall(false);
-                    }
+                    }System.out.println("MaxP:"+playerWithMax);
+                    System.out.println("MaxP2:"+maxPlayer.getPlayerNumber());
                     if (playerWithMax == 1) {
                         maxPlayer.getPersonalSchool().getProfOfPlayer().get(3).setInHall(true);
                     } else if (playerWithMax > 1 && cardEffectPlayed.isOstePlayed()) { /**Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di Oste*/
@@ -232,16 +236,17 @@ public class School {
                     break;
                 case BLUE:
                     for (Player p : players) {
-                        if (numberOfStudents(p, SColor.BLUE) > max) {
-                            max = numberOfStudents(p, SColor.BLUE);
+                        if (p.getPersonalSchool().numberOfStudentsInTable(SColor.BLUE) > max) {
+                            max = p.getPersonalSchool().numberOfStudentsInTable(SColor.BLUE);
                         }
-                    }
+                    }System.out.println("Max:"+max);
                     for (Player p : players) {
-                        if (numberOfStudents(p, SColor.BLUE) == max) {
+                        if (p.getPersonalSchool().numberOfStudentsInTable(SColor.BLUE) == max) {
                             playerWithMax++;
                             maxPlayer = p;
                         } else p.getPersonalSchool().getProfOfPlayer().get(4).setInHall(false);
-                    }
+                    }System.out.println("MaxP:"+playerWithMax);
+                    System.out.println("MaxP2:"+maxPlayer.getPlayerNumber());
                     if (playerWithMax == 1) {
                         maxPlayer.getPersonalSchool().getProfOfPlayer().get(4).setInHall(true);
                     } else if (playerWithMax > 1 && cardEffectPlayed.isOstePlayed()) { /**Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di Oste*/
