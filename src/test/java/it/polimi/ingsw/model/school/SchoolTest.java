@@ -128,7 +128,7 @@ class SchoolTest {
         }
     }
 
-    @RepeatedTest(1)
+    @RepeatedTest(100)
     void WinProfTest(){
         Random rn = new Random();
         int r;
@@ -183,39 +183,35 @@ class SchoolTest {
                     }
                 }
             }
-
+                            /** Sets at true the InHall parameter of Prof if the player has the most students in hall*/
             for (int i = 0; i < index+2; i++) {
                 game.getListOfPlayers().get(i).getPersonalSchool().winProf(game.getListOfPlayers(),game.getListOfPlayers().get(i), CardEffect.EASYMODE);
             }
-            for (int i = 0; i < index+2; i++) {
-                int max=0;
-                if (game.getListOfPlayers().get(i).getPersonalSchool().numberOfStudentsInHall(SColor.GREEN) > max) {
-                        max = game.getListOfPlayers().get(i).getPersonalSchool().numberOfStudentsInHall(SColor.GREEN);
+            int[] count = new int[]{0, 0, 0, 0, 0};
+
+            for (int i = 0; i < 5; i++) {  /** Creates an array of the maximum students in Hall for every color with this order "GRYPB" */
+                int n=0;
+                for(int j = 0; j < index+2; j++) {
+                    if (game.getListOfPlayers().get(j).getPersonalSchool().numberOfStudentsInHall(SColor.values()[i]) > count[i]) {
+                        count[i] = game.getListOfPlayers().get(j).getPersonalSchool().numberOfStudentsInHall(SColor.values()[i]);
+                    }
+                }
+                for(int j = 0; j < index+2; j++) {
+                    if (count[i] == game.getListOfPlayers().get(j).getPersonalSchool().numberOfStudentsInHall(SColor.values()[i]))
+                        n++;
+                }
+                if(n>1)
+                    count[i]=-1;  /** If more players have the most number of students for a color count[i] becomes -1 */
+            }
+
+            for (int i = 0; i < 5; i++) { /** Asserts if winProf has changed the different parameters using the array created before  */
+                for (int j = 0; j < index + 2; j++) {
+                    if (game.getListOfPlayers().get(j).getPersonalSchool().numberOfStudentsInHall(SColor.values()[i]) == count[i])
+                        assertEquals(true, game.getListOfPlayers().get(j).getPersonalSchool().getProfOfPlayer().get(i).getIsInHall());
+                    else
+                        assertEquals(false, game.getListOfPlayers().get(j).getPersonalSchool().getProfOfPlayer().get(i).getIsInHall());
                 }
             }
-            for (int i = 0; i < index+2; i++) {
-                for(int g=0;g<game.getListOfPlayers().get(i).getPersonalSchool().getGTable().size();g++)
-                    System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getGTable().get(g).getIdStudent()+" ");
-                System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getProfOfPlayer().get(0).getIsInHall()+" "+game.getListOfPlayers().get(i).getPersonalSchool().getGTable().size()+"\n");
-
-                for(int g=0;g<game.getListOfPlayers().get(i).getPersonalSchool().getRTable().size();g++)
-                    System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getRTable().get(g).getIdStudent()+" ");
-                System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getProfOfPlayer().get(1).getIsInHall()+" "+game.getListOfPlayers().get(i).getPersonalSchool().getRTable().size()+"\n");
-
-                for(int g=0;g<game.getListOfPlayers().get(i).getPersonalSchool().getYTable().size();g++)
-                    System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getYTable().get(g).getIdStudent()+" ");
-                System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getProfOfPlayer().get(2).getIsInHall()+" "+game.getListOfPlayers().get(i).getPersonalSchool().getYTable().size()+"\n");
-
-                for(int g=0;g<game.getListOfPlayers().get(i).getPersonalSchool().getPTable().size();g++)
-                    System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getPTable().get(g).getIdStudent()+" ");
-                System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getProfOfPlayer().get(3).getIsInHall()+" "+game.getListOfPlayers().get(i).getPersonalSchool().getPTable().size()+"\n");
-
-                for(int g=0;g<game.getListOfPlayers().get(i).getPersonalSchool().getBTable().size();g++)
-                    System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getBTable().get(g).getIdStudent()+" ");
-                System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getProfOfPlayer().get(4).getIsInHall()+" "+game.getListOfPlayers().get(i).getPersonalSchool().getBTable().size()+"\n");
-                System.out.println("---");
-            }
-            System.out.println("----------");
         }
 
     }
