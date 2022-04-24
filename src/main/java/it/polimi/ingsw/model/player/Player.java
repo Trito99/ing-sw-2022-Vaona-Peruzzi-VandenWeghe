@@ -10,12 +10,14 @@ import it.polimi.ingsw.model.table.Table;
 
 import java.util.GregorianCalendar;
 
+import static java.util.Calendar.*;
+
 /**
  * This class represents the player and contains all his information.
  */
 public class Player {
 
-    private final String nickname;
+    private String nickname;
     private GregorianCalendar playerDate;
     private int age;               // CONTROLLARE LIBRERIA DATA
     private final PlayerNumber playerNumber;
@@ -78,8 +80,16 @@ public class Player {
 
     }
 
+    public School getPersonalSchool() {
+        return personalSchool;
+    }
+
     public String getNickname() {
         return nickname;
+    }
+
+    public void setNickname(String nickname){
+        this.nickname = nickname;
     }
 
     public GregorianCalendar getPlayerDate() {
@@ -91,6 +101,13 @@ public class Player {
     }
 
     public int getAge() {
+        return age;
+    }
+
+    public int setAge(GregorianCalendar playerDate){
+        /** da modificare il calcolo della data */
+        int currentYear = 2022;
+        this.age = currentYear - playerDate.get(YEAR);
         return age;
     }
 
@@ -106,24 +123,28 @@ public class Player {
         this.turnState = turnState;
     }
 
-    public School getPersonalSchool() {
-        return personalSchool;
-    }
-
     public AssistantCard getTrash() {
         return trash;
     }
 
-    public void setTColour(TColor tColor) {
-        this.tColor = tColor;
+    public void setTrash(AssistantCard trash) {
+        this.trash = trash;
     }
 
     public TColor getTColour() {
         return tColor;
     }
 
+    public void setTColour(TColor tColor) {
+        this.tColor = tColor;
+    }
+
     public int getCoinScore() {
         return coinScore;
+    }
+
+    public void setCoinScore(int coinScore) {
+        this.coinScore = coinScore;
     }
 
     public DeckAssistant getDeckOfPlayer(){
@@ -134,20 +155,12 @@ public class Player {
         this.deckOfPlayer = deckOfPlayer;
     }
 
-    public void setCoinScore(int coinScore) {
-        this.coinScore = coinScore;
-    }
-
     public int getInfluenceOnIsland() {
         return influenceOnIsland;
     }
 
     public void setInfluenceOnIsland(int influenceOnIsland) {
         this.influenceOnIsland = influenceOnIsland;
-    }
-
-    public void setTrash(AssistantCard trash) {
-        this.trash = trash;
     }
 
     public boolean HasAlreadyPlayed() {

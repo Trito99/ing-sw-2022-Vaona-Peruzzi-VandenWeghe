@@ -1,8 +1,5 @@
-package it.polimi.ingsw.model.team;
+package it.polimi.ingsw.model.player;
 
-import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.PlayerNumber;
-import it.polimi.ingsw.model.player.Team;
 import it.polimi.ingsw.model.school.TColor;
 import org.junit.Test;
 
