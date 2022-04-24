@@ -74,10 +74,10 @@ public class Player {
         }
 
         personalSchool.getProfOfPlayer().add(new Prof(SColor.GREEN));
-        personalSchool.getProfOfPlayer().add(new Prof(SColor.YELLOW));
         personalSchool.getProfOfPlayer().add(new Prof(SColor.RED));
-        personalSchool.getProfOfPlayer().add(new Prof(SColor.BLUE));
+        personalSchool.getProfOfPlayer().add(new Prof(SColor.YELLOW));
         personalSchool.getProfOfPlayer().add(new Prof(SColor.PINK));
+        personalSchool.getProfOfPlayer().add(new Prof(SColor.BLUE));
 
     }
 
