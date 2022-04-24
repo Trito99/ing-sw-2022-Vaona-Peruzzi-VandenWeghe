@@ -50,7 +50,7 @@ class SchoolTest {
     }
 
     @RepeatedTest(100)
-    void numberOfStudentsTest() {
+    void numberOfStudentsTestInHall() {
         Random rn = new Random();
         int r;
         Game game = new Game();
@@ -216,25 +216,6 @@ class SchoolTest {
 
     }
 
-    @ParameterizedTest
-    @EnumSource(GameMode.class)
-    void numberOfStudentsInHallTest(GameMode gameMode){
-
-        Player p = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
-        p.generateSchool(table, gameMode);
-        p.getPersonalSchool().getGTable().add(new Student(0,SColor.GREEN));
-        p.getPersonalSchool().getGTable().add(new Student(7, SColor.GREEN));
-        p.getPersonalSchool().getRTable().add(new Student(12,SColor.RED));
-        p.getPersonalSchool().getYTable().add(new Student(16,SColor.YELLOW));
-        p.getPersonalSchool().getPTable().add(new Student(52,SColor.PINK));
-        p.getPersonalSchool().getGTable().add(new Student(77,SColor.GREEN));
-        p.getPersonalSchool().getYTable().add(new Student(2,SColor.YELLOW));
-
-        assertEquals(3, p.getPersonalSchool().numberOfStudentsInHall(SColor.GREEN));
-        assertEquals(0, p.getPersonalSchool().numberOfStudentsInHall(SColor.BLUE));
-        assertEquals(1, p.getPersonalSchool().numberOfStudentsInHall(SColor.RED));
-
-    }
 
     @Test
     void getProfInHallTest(){
