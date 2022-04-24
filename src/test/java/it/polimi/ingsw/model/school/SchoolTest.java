@@ -8,14 +8,13 @@ import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -109,19 +108,19 @@ class SchoolTest {
                 for (int s = 1; s < 6; s++) {
                     switch (s) {
                         case 1:
-                            assertEquals(game.getListOfPlayers().get(i).getPersonalSchool().getGTable().size(),game.getListOfPlayers().get(i).getPersonalSchool().numberOfStudentsInTable(SColor.GREEN));
+                            assertEquals(game.getListOfPlayers().get(i).getPersonalSchool().getGTable().size(),game.getListOfPlayers().get(i).getPersonalSchool().numberOfStudentsInHall(SColor.GREEN));
                             break;
                         case 2:
-                            assertEquals(game.getListOfPlayers().get(i).getPersonalSchool().getRTable().size(),game.getListOfPlayers().get(i).getPersonalSchool().numberOfStudentsInTable(SColor.RED));
+                            assertEquals(game.getListOfPlayers().get(i).getPersonalSchool().getRTable().size(),game.getListOfPlayers().get(i).getPersonalSchool().numberOfStudentsInHall(SColor.RED));
                             break;
                         case 3:
-                            assertEquals(game.getListOfPlayers().get(i).getPersonalSchool().getYTable().size(),game.getListOfPlayers().get(i).getPersonalSchool().numberOfStudentsInTable(SColor.YELLOW));
+                            assertEquals(game.getListOfPlayers().get(i).getPersonalSchool().getYTable().size(),game.getListOfPlayers().get(i).getPersonalSchool().numberOfStudentsInHall(SColor.YELLOW));
                             break;
                         case 4:
-                            assertEquals(game.getListOfPlayers().get(i).getPersonalSchool().getPTable().size(),game.getListOfPlayers().get(i).getPersonalSchool().numberOfStudentsInTable(SColor.PINK));
+                            assertEquals(game.getListOfPlayers().get(i).getPersonalSchool().getPTable().size(),game.getListOfPlayers().get(i).getPersonalSchool().numberOfStudentsInHall(SColor.PINK));
                             break;
                         case 5:
-                            assertEquals(game.getListOfPlayers().get(i).getPersonalSchool().getBTable().size(),game.getListOfPlayers().get(i).getPersonalSchool().numberOfStudentsInTable(SColor.BLUE));
+                            assertEquals(game.getListOfPlayers().get(i).getPersonalSchool().getBTable().size(),game.getListOfPlayers().get(i).getPersonalSchool().numberOfStudentsInHall(SColor.BLUE));
                             break;
                     }
                 }
@@ -190,8 +189,8 @@ class SchoolTest {
             }
             for (int i = 0; i < index+2; i++) {
                 int max=0;
-                if (game.getListOfPlayers().get(i).getPersonalSchool().numberOfStudentsInTable(SColor.GREEN) > max) {
-                        max = game.getListOfPlayers().get(i).getPersonalSchool().numberOfStudentsInTable(SColor.GREEN);
+                if (game.getListOfPlayers().get(i).getPersonalSchool().numberOfStudentsInHall(SColor.GREEN) > max) {
+                        max = game.getListOfPlayers().get(i).getPersonalSchool().numberOfStudentsInHall(SColor.GREEN);
                 }
             }
             for (int i = 0; i < index+2; i++) {
@@ -223,21 +222,40 @@ class SchoolTest {
 
     @ParameterizedTest
     @EnumSource(GameMode.class)
-    void numberOfStudentsTest(GameMode gameMode){
+    void numberOfStudentsInHallTest(GameMode gameMode){
 
         Player p = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
         p.generateSchool(table, gameMode);
-        p.getPersonalSchool().getEntry().add(new Student(0,SColor.GREEN));
-        p.getPersonalSchool().getEntry().add(new Student(7, SColor.GREEN));
-        p.getPersonalSchool().getEntry().add(new Student(12,SColor.RED));
-        p.getPersonalSchool().getEntry().add(new Student(16,SColor.YELLOW));
-        p.getPersonalSchool().getEntry().add(new Student(52,SColor.PINK));
-        p.getPersonalSchool().getEntry().add(new Student(77,SColor.GREEN));
-        p.getPersonalSchool().getEntry().add(new Student(2,SColor.YELLOW));
+        p.getPersonalSchool().getGTable().add(new Student(0,SColor.GREEN));
+        p.getPersonalSchool().getGTable().add(new Student(7, SColor.GREEN));
+        p.getPersonalSchool().getRTable().add(new Student(12,SColor.RED));
+        p.getPersonalSchool().getYTable().add(new Student(16,SColor.YELLOW));
+        p.getPersonalSchool().getPTable().add(new Student(52,SColor.PINK));
+        p.getPersonalSchool().getGTable().add(new Student(77,SColor.GREEN));
+        p.getPersonalSchool().getYTable().add(new Student(2,SColor.YELLOW));
 
-        /** assertEquals(3, p.getPersonalSchool().numberOfStudents(SColor.GREEN));
-        assertEquals(0, p.getPersonalSchool().numberOfStudents(SColor.BLUE));
-         DA CAMBIARE numberOfStudents(Player player SColor sColor) in numberOfStudents(SColor sColor)                                      */
+        assertEquals(3, p.getPersonalSchool().numberOfStudentsInHall(SColor.GREEN));
+        assertEquals(0, p.getPersonalSchool().numberOfStudentsInHall(SColor.BLUE));
+        assertEquals(1, p.getPersonalSchool().numberOfStudentsInHall(SColor.RED));
+
+    }
+
+    @Test
+    void getProfInHallTest(){
+        Player player = new Player(TColor.BLACK, PlayerNumber.PLAYER1);
+        player.generateSchool(table, GameMode.TWOPLAYERS);
+
+        player.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true); //Green
+        player.getPersonalSchool().getProfOfPlayer().get(1).setInHall(false); // Yellow
+        player.getPersonalSchool().getProfOfPlayer().get(2).setInHall(false); // Red
+        player.getPersonalSchool().getProfOfPlayer().get(3).setInHall(true); // Blue
+        player.getPersonalSchool().getProfOfPlayer().get(4).setInHall(false); // Pink
+
+        assertTrue(player.getPersonalSchool().getProfInHall(SColor.GREEN));
+        assertFalse(player.getPersonalSchool().getProfInHall(SColor.YELLOW));
+        assertFalse(player.getPersonalSchool().getProfInHall(SColor.RED));
+        assertTrue(player.getPersonalSchool().getProfInHall(SColor.BLUE));
+        assertFalse(player.getPersonalSchool().getProfInHall(SColor.PINK));
 
     }
 }
