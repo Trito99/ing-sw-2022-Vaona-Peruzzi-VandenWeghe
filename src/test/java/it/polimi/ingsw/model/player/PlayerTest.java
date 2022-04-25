@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import static java.util.Calendar.*;
@@ -80,6 +81,7 @@ public class PlayerTest {
         assertEquals(17, player.getPlayerDate().get(DAY_OF_MONTH));
         assertEquals(23, player.getAge());
         assertEquals(PlayerNumber.PLAYER1, player.getPlayerNumber());
+
    }
 
    @Test
