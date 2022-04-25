@@ -56,42 +56,42 @@ public class School {
         switch(student.getsColour()) {
             case GREEN:
                 GTable.add(student);
-                getCoinFromStudentMove(playerMoving, table, difficulty);
+                getCoinFromStudentMove(playerMoving, GTable,table, difficulty);
                 entry.remove(entry.get(entry.indexOf(student)));
                 break;
             case RED:
                 RTable.add(student);
-                getCoinFromStudentMove(playerMoving, table, difficulty);
+                getCoinFromStudentMove(playerMoving, RTable, table, difficulty);
                 entry.remove(entry.get(entry.indexOf(student)));
                 break;
             case YELLOW:
                 YTable.add(student);
-                getCoinFromStudentMove(playerMoving, table, difficulty);
+                getCoinFromStudentMove(playerMoving, YTable, table, difficulty);
                 entry.remove(entry.get(entry.indexOf(student)));
                 break;
             case PINK:
                 PTable.add(student);
-                getCoinFromStudentMove(playerMoving, table, difficulty);
+                getCoinFromStudentMove(playerMoving, PTable, table, difficulty);
                 entry.remove(entry.get(entry.indexOf(student)));
                 break;
             case BLUE:
                 BTable.add(student);
-                getCoinFromStudentMove(playerMoving, table, difficulty);
+                getCoinFromStudentMove(playerMoving, BTable, table, difficulty);
                 entry.remove(entry.get(entry.indexOf(student)));
                 break;
         }
     }
 
-    private void getCoinFromStudentMove(Player playerMoving, Table table, Difficulty difficulty) {
-        if(difficulty.equals(Difficulty.EXPERTMODE) && (GTable.size()==3)){
+    private void getCoinFromStudentMove(Player playerMoving,ArrayList<Student> tableColor, Table table, Difficulty difficulty) {
+        if(difficulty.equals(Difficulty.EXPERTMODE) && (tableColor.size()==3)){
             playerMoving.setCoinScore(playerMoving.getCoinScore() + 1);
             table.setCoinsOnTable(table.getCoinsOnTable() - 1);
         }
-        else if(difficulty.equals(Difficulty.EXPERTMODE) && (GTable.size()==6)){
+        else if(difficulty.equals(Difficulty.EXPERTMODE) && (tableColor.size()==6)){
             playerMoving.setCoinScore(playerMoving.getCoinScore() + 1);
             table.setCoinsOnTable(table.getCoinsOnTable() - 1);
         }
-        else if(difficulty.equals(Difficulty.EXPERTMODE) && (GTable.size()==9)){
+        else if(difficulty.equals(Difficulty.EXPERTMODE) && (tableColor.size()==9)){
             playerMoving.setCoinScore(playerMoving.getCoinScore() + 1);
             table.setCoinsOnTable(table.getCoinsOnTable() - 1);
         }
