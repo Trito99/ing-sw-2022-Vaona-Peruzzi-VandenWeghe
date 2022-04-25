@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import static java.util.Calendar.*;
@@ -33,22 +34,28 @@ public class PlayerTest {
     @ParameterizedTest
     @EnumSource(GameMode.class)
     public void generateSchool(GameMode gm){
-        Player player = new Player(TColor.BLACK, PlayerNumber.PLAYER1);
-        player.generateSchool(table, gm);
-        assertNotNull(player.getPersonalSchool());
-        assertNotNull(player.getPersonalSchool().getEntry());
-        assertNotNull(player.getPersonalSchool().getTower());
+        Player player1 = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
+        Player player2 = new Player(TColor.WHITE, PlayerNumber.PLAYER2);
+        player1.generateSchool(table, gm);
+        player2.generateSchool(table, gm);
+        assertNotNull(player1.getPersonalSchool());
+        assertNotNull(player1.getPersonalSchool().getEntry());
+        assertNotNull(player1.getPersonalSchool().getTower());
 
         switch (gm){
             case TWOPLAYERS:
-            case COOP:
-                assertEquals(7, player.getPersonalSchool().getEntry().size());
-                assertEquals(8, player.getPersonalSchool().getTower().size());
+                assertEquals(7, player1.getPersonalSchool().getEntry().size());
+                assertEquals(8, player1.getPersonalSchool().getTower().size());
                 break;
             case THREEPLAYERS:
-                assertEquals(9, player.getPersonalSchool().getEntry().size());
-                assertEquals(6, player.getPersonalSchool().getTower().size());
+                assertEquals(9, player1.getPersonalSchool().getEntry().size());
+                assertEquals(6, player1.getPersonalSchool().getTower().size());
                 break;
+            case COOP:
+                assertEquals(7, player1.getPersonalSchool().getEntry().size());
+                assertEquals(8, player1.getPersonalSchool().getTower().size());
+                assertEquals(7, player2.getPersonalSchool().getEntry().size());
+                assertEquals(0, player2.getPersonalSchool().getTower().size());
             default:
                 break;
         }
@@ -56,9 +63,8 @@ public class PlayerTest {
 
    @Test
    public void playerTest(){
-        Player player = new Player(TColor.BLACK, PlayerNumber.PLAYER1);
+        Player player = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
 
-        assertNotNull(player.getCoinScore());
         assertEquals(0, player.getCoinScore());
 
         player.setNickname("Giocatore");
@@ -75,10 +81,11 @@ public class PlayerTest {
         assertEquals(17, player.getPlayerDate().get(DAY_OF_MONTH));
         assertEquals(23, player.getAge());
         assertEquals(PlayerNumber.PLAYER1, player.getPlayerNumber());
+
    }
 
    @Test
-   public void coinOfPlayer(){
+   public void coinOfPlayerTest(){
        Player player = new Player(TColor.BLACK, PlayerNumber.PLAYER1);
        int count, coinValue = 0;
        assertEquals(0, player.getCoinScore());
@@ -91,7 +98,7 @@ public class PlayerTest {
    }
 
    @Test
-   public void trashOfPlayer(){
+   public void trashOfPlayerTest(){
        Player player = new Player(TColor.BLACK, PlayerNumber.PLAYER1);
        assertNull(player.getDeckOfPlayer());
        AssistantCard aCard = new AssistantCard("lion", 1, 1);
@@ -106,7 +113,7 @@ public class PlayerTest {
    }
 
    @Test
-   public void tColorOfPlayer(){
+   public void tColorOfPlayerTest(){
        Player player = new Player(TColor.BLACK, PlayerNumber.PLAYER1);
        assertNotNull(player.getTColor());
        assertEquals(TColor.BLACK, player.getTColor());
@@ -128,7 +135,7 @@ public class PlayerTest {
     }
 
    @Test
-   public void turnStateOfPlayer(){
+   public void turnStateOfPlayerTest(){
        Player player = new Player(TColor.BLACK, PlayerNumber.PLAYER1);
        player.setTurnState(TurnState.PLANNING);
        assertNotNull(player.getTurnState());
@@ -142,7 +149,7 @@ public class PlayerTest {
    }
 
    @Test
-   public void deckOfPlayer(){
+   public void deckOfPlayerTest(){
        Player player = new Player(TColor.BLACK, PlayerNumber.PLAYER1);
        DeckAssistant deckOfPlayer = new DeckAssistant(DeckName.DECK1);
        assertNull(player.getDeckOfPlayer());
@@ -168,7 +175,7 @@ public class PlayerTest {
    }
 
    @Test
-   public void influenceOnIsland(){
+   public void influenceOnIslandTest(){
        Player player = new Player(TColor.BLACK, PlayerNumber.PLAYER1);
        int influence = 4;
 
@@ -179,7 +186,7 @@ public class PlayerTest {
    }
 
    @Test
-   public void hasAlreadyPlayed(){
+   public void hasAlreadyPlayedTest(){
        Player player = new Player(TColor.BLACK, PlayerNumber.PLAYER1);
        assertNotNull(player.hasAlreadyPlayed());
        assertEquals(false, player.hasAlreadyPlayed());

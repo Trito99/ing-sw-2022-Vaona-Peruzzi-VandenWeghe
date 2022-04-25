@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.school.Prof;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.table.Table;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import static java.util.Calendar.*;
@@ -51,16 +52,13 @@ public class Player {
         int i = 0, t = 0;
         switch (gameMode) {
             case TWOPLAYERS:
+            case COOP:
                 i = 7;
                 t = 8;
                 break;
             case THREEPLAYERS:
                 i = 9;
                 t = 6;
-                break;
-            case COOP:
-                i = 7;
-                t = 8;
                 break;
         }
         for (int s = 0; s < i; s++) {
@@ -82,6 +80,19 @@ public class Player {
         personalSchool.getProfOfPlayer().add(new Prof(SColor.PINK));
         personalSchool.getProfOfPlayer().add(new Prof(SColor.BLUE));
 
+    }
+
+    public AssistantCard getAssistantCard(String assistantCard){
+        int indexPlayer = getAssistantCardByNickname().indexOf(assistantCard);
+        return deckOfPlayer.getCardsInHand().get(indexPlayer);
+    }
+
+    public ArrayList<String> getAssistantCardByNickname() {
+        ArrayList<String> assistantCardList = new ArrayList<>();
+        for (int i = 0; i < deckOfPlayer.getCardsInHand().size(); i++) {
+            assistantCardList.add(deckOfPlayer.getCardsInHand().get(i).getAssistantName());
+        }
+        return assistantCardList;
     }
 
     public School getPersonalSchool() {

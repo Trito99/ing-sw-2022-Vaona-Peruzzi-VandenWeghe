@@ -126,9 +126,8 @@ public class IslandTest {
 
    @Test
    public void InfluenceOnIsland(){
-      int count = 0;
 
-      for(count = 0; count < 12; count++){
+      for(int count = 0; count < 12; count++){
          IslandCard island = new IslandCard(count);
 
          players.get(0).setInfluenceOnIsland(6);
