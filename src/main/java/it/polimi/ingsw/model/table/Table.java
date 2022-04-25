@@ -25,7 +25,6 @@ public class Table {
     private ArrayList<Student> bag = new ArrayList<>();
     private ArrayList<Prof> listOfProfOnTable = new ArrayList<>();
 
-
     public void generateBagInit() {
         SColor green = SColor.GREEN;
         SColor red = SColor.RED;

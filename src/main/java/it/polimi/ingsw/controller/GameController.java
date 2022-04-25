@@ -95,6 +95,7 @@ public class GameController {
                 if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
                     for (Player p : gameSession.getListOfPlayers())
                         p.setCoinScore(1);
+                    gameSession.getTable().setCoinsOnTable(18);
                 }
                 allVirtualView.put(nickname, view);
                 break;
@@ -135,6 +136,7 @@ public class GameController {
                 if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
                     for (Player p : gameSession.getListOfPlayers())
                         p.setCoinScore(1);
+                    gameSession.getTable().setCoinsOnTable(17);
                 }
                 allVirtualView.put(nickname, view);
                 break;
@@ -153,6 +155,7 @@ public class GameController {
                 if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)) {
                     for (Player p : gameSession.getListOfPlayers())
                             p.setCoinScore(1);
+                    gameSession.getTable().setCoinsOnTable(16);
                 }
                 break;
             default:
@@ -203,38 +206,6 @@ public class GameController {
 
     }
 
-    public void moveMotherEarth(int n, Table table, Player player, CardEffect cardEffectPlayed) { /** DA TOGLIERE IN TABLE??? */
-        table.getListOfIsland().get(table.getPosMotherEarth() - 1).setMotherEarthOnIsland(false);
-
-        int playerChoice=0; /** da cambiare */
-        //notify(observer)
-
-        if (playerChoice <= player.getTrash().getStepMotherEarth() && !cardEffectPlayed.isBearerPlayed()) {
-
-            if ((table.getPosMotherEarth() + n) > table.getListOfIsland().size()) {
-                table.getListOfIsland().get(table.getPosMotherEarth() + n - table.getListOfIsland().size() - 1).setMotherEarthOnIsland(true);
-                table.setPosMotherEarth(table.getPosMotherEarth() + n - table.getListOfIsland().size());
-            }
-            else {
-                table.getListOfIsland().get(table.getPosMotherEarth() + n - 1).setMotherEarthOnIsland(true);
-                table.setPosMotherEarth(table.getPosMotherEarth() + n);
-            }
-        }
-        /** EFFETTO LATORE */
-        else if(playerChoice <= player.getTrash().getStepMotherEarth()+2 && cardEffectPlayed.isBearerPlayed()){
-            if ((table.getPosMotherEarth() + n + 2) > table.getListOfIsland().size()) {
-                table.getListOfIsland().get(table.getPosMotherEarth() + n + 2 - table.getListOfIsland().size() - 1).setMotherEarthOnIsland(true);
-                table.setPosMotherEarth(table.getPosMotherEarth() + n + 2 - table.getListOfIsland().size());
-            }
-            else {
-                table.getListOfIsland().get(table.getPosMotherEarth() + n + 2 - 1).setMotherEarthOnIsland(true);
-                table.setPosMotherEarth(table.getPosMotherEarth() + n + 2);
-            }
-        }
-        else{
-            System.out.println("Scelta non valida!!");
-        }
-    }
 
     /**
      * inseriamo le set e le get

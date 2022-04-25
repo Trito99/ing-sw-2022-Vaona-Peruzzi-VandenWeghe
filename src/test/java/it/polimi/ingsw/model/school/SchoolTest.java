@@ -83,12 +83,8 @@ class SchoolTest {
     void moveStudentFromEntryToHallTest(){
         for (int index = 0; index < 2; index++) { /** For the first two GameModes */
             table.getBag().clear();
-            table.getListOfIsland().clear();
             table.getCloudNumber().clear();
-            table.generateIslandCards();
             table.generateMotherEarth();
-            table.generateBagInit();
-            table.extractStudentsInit();
             table.addFinalStudents();
             table.generateCloudNumber(GameMode.values()[index]);
             game.getListOfPlayers().clear();
@@ -99,44 +95,46 @@ class SchoolTest {
             }
             int r=rn.nextInt(table.getCloudNumber().get(0).getNumberOfSpaces());
             int pos, is;
-            for (int i = 0; i < index + 2; i++){
-                ArrayList<Integer> id = new ArrayList<>();
-                for(int s=0;s<game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size();s++)
-                    id.add(game.getListOfPlayers().get(i).getPersonalSchool().getEntry().get(s).getIdStudent());
-                assertEquals(id.size(),game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size());  /** Controls if the size of the new array of Id is the same after every cicle */
-                for(int s=0;s<r;s++) {
-                    pos = rn.nextInt(game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size() - 1);
-                    is = rn.nextInt(11) + 1;
-                    Student newStudent = new Student(131,null);
-                    for (Student student : game.getListOfPlayers().get(i).getPersonalSchool().getEntry()) {
-                        if (id.get(pos) == student.getIdStudent())
-                            newStudent = student;
-                    }
-                    game.getListOfPlayers().get(i).getPersonalSchool().moveStudentFromEntryToHall(game.getListOfPlayers().get(i),id.get(pos),table, Difficulty.STANDARDMODE);
-                    assertEquals(id.size()-1,game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size());  /** Controls if the size of the Entry is reduced by one after every cicle */
+            for(int indexDif=0;indexDif<2;indexDif++){
+                for (int i = 0; i < index + 2; i++) {
+                    ArrayList<Integer> id = new ArrayList<>();
+                    for (int s = 0; s < game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size(); s++)
+                        id.add(game.getListOfPlayers().get(i).getPersonalSchool().getEntry().get(s).getIdStudent());
+                    assertEquals(id.size(), game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size());  /** Controls if the size of the new array of Id is the same after every cicle */
+                    for (int s = 0; s < r; s++) {
+                        pos = rn.nextInt(game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size() - 1);
+                        is = rn.nextInt(11) + 1;
+                        Student newStudent = new Student(131, null);
+                        for (Student student : game.getListOfPlayers().get(i).getPersonalSchool().getEntry()) {
+                            if (id.get(pos) == student.getIdStudent())
+                                newStudent = student;
+                        }
+                        game.getListOfPlayers().get(i).getPersonalSchool().moveStudentFromEntryToHall(game.getListOfPlayers().get(i), id.get(pos), table, Difficulty.STANDARDMODE);
+                        assertEquals(id.size() - 1, game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size());  /** Controls if the size of the Entry is reduced by one after every cicle */
 
-                    switch(newStudent.getsColour()){/** Controls if the id of the student added is the same of the id selected in MoveStudentInHall  */
-                        case GREEN:
-                            assertEquals(id.get(pos),game.getListOfPlayers().get(i).getPersonalSchool().getGTable().get(game.getListOfPlayers().get(i).getPersonalSchool().getGTable().size()-1).getIdStudent());
-                            break;
-                        case RED:
-                            assertEquals(id.get(pos),game.getListOfPlayers().get(i).getPersonalSchool().getRTable().get(game.getListOfPlayers().get(i).getPersonalSchool().getRTable().size()-1).getIdStudent());
-                            break;
-                        case YELLOW:
-                            assertEquals(id.get(pos),game.getListOfPlayers().get(i).getPersonalSchool().getYTable().get(game.getListOfPlayers().get(i).getPersonalSchool().getYTable().size()-1).getIdStudent());
-                            break;
-                        case PINK:
-                            assertEquals(id.get(pos),game.getListOfPlayers().get(i).getPersonalSchool().getPTable().get(game.getListOfPlayers().get(i).getPersonalSchool().getPTable().size()-1).getIdStudent());
-                            break;
-                        case BLUE:
-                            assertEquals(id.get(pos),game.getListOfPlayers().get(i).getPersonalSchool().getBTable().get(game.getListOfPlayers().get(i).getPersonalSchool().getBTable().size()-1).getIdStudent());
-                            break;
-                    }
+                        switch (newStudent.getsColour()) {/** Controls if the id of the student added is the same of the id selected in MoveStudentInHall  */
+                            case GREEN:
+                                assertEquals(id.get(pos), game.getListOfPlayers().get(i).getPersonalSchool().getGTable().get(game.getListOfPlayers().get(i).getPersonalSchool().getGTable().size() - 1).getIdStudent());
+                                break;
+                            case RED:
+                                assertEquals(id.get(pos), game.getListOfPlayers().get(i).getPersonalSchool().getRTable().get(game.getListOfPlayers().get(i).getPersonalSchool().getRTable().size() - 1).getIdStudent());
+                                break;
+                            case YELLOW:
+                                assertEquals(id.get(pos), game.getListOfPlayers().get(i).getPersonalSchool().getYTable().get(game.getListOfPlayers().get(i).getPersonalSchool().getYTable().size() - 1).getIdStudent());
+                                break;
+                            case PINK:
+                                assertEquals(id.get(pos), game.getListOfPlayers().get(i).getPersonalSchool().getPTable().get(game.getListOfPlayers().get(i).getPersonalSchool().getPTable().size() - 1).getIdStudent());
+                                break;
+                            case BLUE:
+                                assertEquals(id.get(pos), game.getListOfPlayers().get(i).getPersonalSchool().getBTable().get(game.getListOfPlayers().get(i).getPersonalSchool().getBTable().size() - 1).getIdStudent());
+                                break;
+                        }
 
-                    for(Student student:game.getListOfPlayers().get(i).getPersonalSchool().getEntry()){
-                        assertNotEquals(id.get(pos),student.getIdStudent());
+                        for (Student student : game.getListOfPlayers().get(i).getPersonalSchool().getEntry()) {
+                            assertNotEquals(id.get(pos), student.getIdStudent());
+                        }
+                        id.remove(id.get(pos));
                     }
-                    id.remove(id.get(pos));
                 }
             }
 
