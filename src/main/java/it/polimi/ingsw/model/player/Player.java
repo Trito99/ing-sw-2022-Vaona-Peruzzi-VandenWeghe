@@ -51,16 +51,13 @@ public class Player {
         int i = 0, t = 0;
         switch (gameMode) {
             case TWOPLAYERS:
+            case COOP:
                 i = 7;
                 t = 8;
                 break;
             case THREEPLAYERS:
                 i = 9;
                 t = 6;
-                break;
-            case COOP:
-                i = 7;
-                t = 8;
                 break;
         }
         for (int s = 0; s < i; s++) {
