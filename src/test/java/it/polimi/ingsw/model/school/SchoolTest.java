@@ -33,6 +33,37 @@ class SchoolTest {
     }
 
     @RepeatedTest(100)
+    void  getProfInHallTest() {
+        Random rn = new Random();
+        int r;
+        Game game = new Game();
+        for (int index = 0; index < 2; index++) { /** For the first two GameModes */
+            table.getBag().clear();
+            table.getListOfIsland().clear();
+            table.generateIslandCards();
+            table.generateMotherEarth();
+            table.addFinalStudents();
+            game.getListOfPlayers().clear();
+            game.setGameMode(GameMode.values()[index]);
+            for (int i = 0; i < index + 2; i++) {
+                game.getListOfPlayers().add(new Player(TColor.values()[i], PlayerNumber.values()[i]));
+                game.getListOfPlayers().get(i).generateSchool(table, GameMode.values()[index]);
+            }
+            for (int i = 0; i < 5; i++) {       /** The different Prof are positioned randomly*/
+                int s = rn.nextInt(index + 2);
+                if (!game.getListOfPlayers().get(s).getPersonalSchool().getProfOfPlayer().get(i).getIsInHall())
+                    game.getListOfPlayers().get(s).getPersonalSchool().getProfOfPlayer().get(i).setInHall(true);
+                else
+                    i = i - 1;
+            }
+            for (int i = 0; i < index + 2; i++) {
+                for (int s = 0; s < 5; s++)
+                    assertEquals(game.getListOfPlayers().get(i).getPersonalSchool().getProfOfPlayer().get(s).getIsInHall(), game.getListOfPlayers().get(i).getPersonalSchool().getProfInHall(SColor.values()[s]));
+            }
+        }
+    }
+
+    @RepeatedTest(100)
     void numberOfProfTest() {
         Random rn = new Random();
         int r;
@@ -51,7 +82,7 @@ class SchoolTest {
             }
             for (int i = 0; i < 5; i++) {       /** The different Prof are positioned randomly*/
                 int s = rn.nextInt(index + 2);
-                if (game.getListOfPlayers().get(s).getPersonalSchool().getProfOfPlayer().get(i).getIsInHall() == false)
+                if (!game.getListOfPlayers().get(s).getPersonalSchool().getProfOfPlayer().get(i).getIsInHall())
                     game.getListOfPlayers().get(s).getPersonalSchool().getProfOfPlayer().get(i).setInHall(true);
                 else
                     i = i - 1;
@@ -234,24 +265,4 @@ class SchoolTest {
 
     }
 
-
-    @Test
-    void getProfInHallTest(){
-        Player player = new Player(TColor.BLACK, PlayerNumber.PLAYER1);
-        player.generateSchool(table, GameMode.TWOPLAYERS);
-
-        player.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true); //Green
-        player.getPersonalSchool().getProfOfPlayer().get(1).setInHall(false); // Yellow
-        player.getPersonalSchool().getProfOfPlayer().get(2).setInHall(false); // Red
-        player.getPersonalSchool().getProfOfPlayer().get(3).setInHall(true); // Pink
-        player.getPersonalSchool().getProfOfPlayer().get(4).setInHall(false); // Blue
-
-
-        assertTrue(player.getPersonalSchool().getProfInHall(SColor.GREEN));
-        assertFalse(player.getPersonalSchool().getProfInHall(SColor.RED));
-        assertFalse(player.getPersonalSchool().getProfInHall(SColor.YELLOW));
-        assertTrue(player.getPersonalSchool().getProfInHall(SColor.PINK));
-        assertFalse(player.getPersonalSchool().getProfInHall(SColor.BLUE));
-
-    }
 }

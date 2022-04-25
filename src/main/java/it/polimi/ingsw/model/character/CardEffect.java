@@ -2,24 +2,24 @@ package it.polimi.ingsw.model.character;
 
 public enum CardEffect {
     EASYMODE,
-    ABATE,
-    OSTE,
-    ARALDO,
-    LATORE,
-    CURATRICE,
-    CENTAURO,
-    SALTIMBANCO,
-    CAVALIERE,
-    ERBORISTA,
-    BARDO,
-    CORTIGIANA,
-    RIGATTIERE;
+    ABBOT, //ABATE
+    HOST, //OSTE
+    HERALD, //ARALDO
+    BEARER, //LATORE
+    CURATOR, //CURATRICE
+    CENTAUR, //CENTAURO
+    ACROBAT, //SALTIMBANCO
+    KNIGHT, //CAVALIERE
+    HERBALIST, //ERBORISTA
+    BARD, //BARDO
+    COURTESAN, //CORTIGIANA,
+    JUNKDEALER; //RIGATTIERE
 
     private int xCardOnCard = 0;
-    private boolean ostePlayed;
-    private boolean cavalierePlayed;
-    private boolean centauroPlayed;
-    private boolean latorePlayed;
+    private boolean hostPlayed;
+    private boolean knightPlayed;
+    private boolean centaurPlayed;
+    private boolean bearerPlayed;
 
 
     public int getXCardOnCard() {
@@ -30,36 +30,28 @@ public enum CardEffect {
         this.xCardOnCard = xCardOnCard;
     }
 
-    public boolean isCavalierePlayed() {
-        return cavalierePlayed;
+    public boolean isKnightPlayed() { return knightPlayed; }
+
+    public void setKnightPlayed(boolean knightPlayed) { this.knightPlayed = knightPlayed; }
+
+    public boolean isHostPlayed() {
+        return hostPlayed;
     }
 
-    public void setCavalierePlayed(boolean knightPlayed) {
-        this.cavalierePlayed = knightPlayed;
+    public void setHostPlayed(boolean ostePlayed) {
+        this.hostPlayed = ostePlayed;
     }
 
-    public boolean isOstePlayed() {
-        return ostePlayed;
+    public boolean isCentaurPlayed() {
+        return centaurPlayed;
     }
 
-    public void setOstePlayed(boolean ostePlayed) {
-        this.ostePlayed = ostePlayed;
-    }
+    public void setCentaurPlayed(boolean centaurPlayed) { this.centaurPlayed = centaurPlayed; }
 
-    public boolean isCentauroPlayed() {
-        return centauroPlayed;
-    }
+    public boolean isBearerPlayed() { return bearerPlayed; }
 
-    public void setCentauroPlayed(boolean centauroPlayed) {
-        this.centauroPlayed = centauroPlayed;
-    }
-
-    public boolean isLatorePlayed() {
-        return latorePlayed;
-    }
-
-    public void setLatorePlayed(boolean latorePlayed) {
-        this.latorePlayed = latorePlayed;
+    public void setBearerPlayed(boolean bearerPlayed) {
+        this.bearerPlayed = bearerPlayed;
     }
 
 }
