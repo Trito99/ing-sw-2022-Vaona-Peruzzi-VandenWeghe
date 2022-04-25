@@ -189,8 +189,8 @@ public class TableTest{
         for (CharacterCard card : table.getCharacterCardsOnTable()) {
             cardsOnTable++;
             assertNotNull(card);
-            if(card.getCardEffect().equals(CardEffect.ABATE)){ /**Tests if effects with students on the card works */
-                assertEquals(card.getCardEffect(), CardEffect.ABATE);
+            if(card.getCardEffect().equals(CardEffect.ABBOT)){ /**Tests if effects with students on the card works */
+                assertEquals(card.getCardEffect(), CardEffect.ABBOT);
                 assertEquals(4, card.getStudentsOnCard().size());
             }
         }

@@ -147,12 +147,12 @@ public class IslandCard {
                         break;
                 }
                 /** EFFETTO CENTAURO */
-                if(p.getTColor().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isCentauroPlayed()){  /** Aggiungo influenza torri */
+                if(p.getTColor().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isCentaurPlayed()){  /** Aggiungo influenza torri */
                     countTot++;
                 }
 
                 /** EFFETTO CAVALIERE */
-                if(cardEffectPlayed.isCavalierePlayed()) {
+                if(cardEffectPlayed.isKnightPlayed()) {
                     p.setInfluenceOnIsland(countTot + 2);
                     /** controlla  se va bene qua */
                 }
@@ -178,8 +178,8 @@ public class IslandCard {
             }
         }
 
-        cardEffectPlayed.setCavalierePlayed(false);
-        cardEffectPlayed.setCentauroPlayed(false);           /** controlla se va bene qua (Centauro) */
+        cardEffectPlayed.setKnightPlayed(false);
+        cardEffectPlayed.setCentaurPlayed(false);           /** controlla se va bene qua (Centauro) */
 
         return playerWithInfluence;         /** Controllo Pareggio Influenza ----> return null? */
 
