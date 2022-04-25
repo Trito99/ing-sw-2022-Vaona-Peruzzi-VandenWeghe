@@ -35,9 +35,7 @@ public class IslandTest {
 
    @Test
    public void IslandCard(){
-      int count = 0;
-
-      for(count = 0; count < 12; count++){
+      for(int count = 0; count < 12; count++){
          IslandCard island = new IslandCard(count);
 
          assertNotNull(island.getIdIsland());
@@ -50,6 +48,16 @@ public class IslandTest {
          assertEquals(1, island.getMergedIsland());
          assertEquals(false, island.isXCardOnIsland());
       }
+
+      //cambio indice
+      for(int i=0; i<10; i++){
+         IslandCard island = new IslandCard(i);
+         assertEquals(i, island.getIdIsland());
+         island.setIdIsland(island.getIdIsland()+1);
+         assertNotNull(island.getIdIsland());
+         assertEquals(i+1, island.getIdIsland());
+      }
+
    }
 
    @Test
@@ -104,9 +112,12 @@ public class IslandTest {
                case GREY:
                   Tower tw = new Tower(i, color);
                   island.setTowerOnIsland(player.getPersonalSchool().getTower().get(i));
+                  island.setTowerIsOnIsland(true);
                   assertNotNull(island.getTowerOnIsland());
+                  assertNotNull(island.towerIsOnIsland());
                   assertEquals(tw.getTColour(), island.getTowerOnIsland().getTColour());
                   assertEquals(tw.getIdTower(), island.getTowerOnIsland().getIdTower());
+                  assertEquals(true, island.towerIsOnIsland());
                   break;
             }
          }
