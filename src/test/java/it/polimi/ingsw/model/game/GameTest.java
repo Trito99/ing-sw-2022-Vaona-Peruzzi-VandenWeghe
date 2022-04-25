@@ -73,5 +73,17 @@ class GameTest {
         assertEquals(9,player.getDeckOfPlayer().getCardsInHand().size());
     }
 
+    @Test
+    void decreasCoinScoreTest(){
+        Game game= new Game();
+        Player player = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
+        player.setNickname("Gino");
+        player.setCoinScore(15);
+        game.getListOfPlayers().add(player);
+
+        game.decreaseCoinScore("Gino", 5);
+        assertEquals(10, player.getCoinScore());
+    }
+
     /** Da Fare: Test di playCharacterCard */
 }
