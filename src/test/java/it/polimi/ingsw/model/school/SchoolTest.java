@@ -94,7 +94,7 @@ class SchoolTest {
                 game.getListOfPlayers().get(i).generateSchool(table, GameMode.values()[index]);
             }
             int r=rn.nextInt(table.getCloudNumber().get(0).getNumberOfSpaces());
-            int pos, is;
+            int pos;
             for(int indexDif=0;indexDif<2;indexDif++){
                 for (int i = 0; i < index + 2; i++) {
                     ArrayList<Integer> id = new ArrayList<>();
@@ -103,13 +103,12 @@ class SchoolTest {
                     assertEquals(id.size(), game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size());  /** Controls if the size of the new array of Id is the same after every cicle */
                     for (int s = 0; s < r; s++) {
                         pos = rn.nextInt(game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size() - 1);
-                        is = rn.nextInt(11) + 1;
                         Student newStudent = new Student(131, null);
                         for (Student student : game.getListOfPlayers().get(i).getPersonalSchool().getEntry()) {
                             if (id.get(pos) == student.getIdStudent())
                                 newStudent = student;
                         }
-                        game.getListOfPlayers().get(i).getPersonalSchool().moveStudentFromEntryToHall(game.getListOfPlayers().get(i), id.get(pos), table, Difficulty.STANDARDMODE);
+                        game.getListOfPlayers().get(i).getPersonalSchool().moveStudentFromEntryToHall(game.getListOfPlayers().get(i), id.get(pos), table, Difficulty.values()[indexDif]);
                         assertEquals(id.size() - 1, game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size());  /** Controls if the size of the Entry is reduced by one after every cicle */
 
                         switch (newStudent.getsColour()) {/** Controls if the id of the student added is the same of the id selected in MoveStudentInHall  */
@@ -133,11 +132,38 @@ class SchoolTest {
                         for (Student student : game.getListOfPlayers().get(i).getPersonalSchool().getEntry()) {
                             assertNotEquals(id.get(pos), student.getIdStudent());
                         }
+                        if(Difficulty.values()[indexDif]==Difficulty.EXPERTMODE){
+                            int count=0;
+                            for(int iTable=0;iTable<6;iTable++){
+                                switch(iTable){
+                                    case 0:
+                                        for(int s3=0;s3<game.getListOfPlayers().get(i).getPersonalSchool().getGTable().size()/3;s3++)
+                                            count++;
+                                        break;
+                                    case 1:
+                                        for(int s3=0;s3<game.getListOfPlayers().get(i).getPersonalSchool().getRTable().size()/3;s3++)
+                                            count++;
+                                        break;
+                                    case 2:
+                                        for(int s3=0;s3<game.getListOfPlayers().get(i).getPersonalSchool().getYTable().size()/3;s3++)
+                                            count++;
+                                        break;
+                                    case 3:
+                                        for(int s3=0;s3<game.getListOfPlayers().get(i).getPersonalSchool().getPTable().size()/3;s3++)
+                                            count++;
+                                        break;
+                                    case 4:
+                                        for(int s3=0;s3<game.getListOfPlayers().get(i).getPersonalSchool().getBTable().size()/3;s3++)
+                                            count++;
+                                        break;
+                                }
+                            }
+                            assertEquals(count,game.getListOfPlayers().get(i).getCoinScore());
+                        }
                         id.remove(id.get(pos));
                     }
                 }
             }
-
         }
     }
 
@@ -200,6 +226,7 @@ class SchoolTest {
             }
         }
     }
+
 
     @RepeatedTest(100)
     void numberOfStudentsTestInHall() {
