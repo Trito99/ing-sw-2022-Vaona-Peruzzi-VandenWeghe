@@ -238,23 +238,23 @@ public class Game {
                     //notify (observer)---->scelta 2 studenti
                     if (choice.getsColour().equals(SColor.GREEN)) {
                         activePlayer.getPersonalSchool().getGTable().add(choice);
-                        getCoinFromStudentMove(activePlayer);
+                        getCoinFromStudentMove(activePlayer, activePlayer.getPersonalSchool().getGTable());
                         activePlayer.getPersonalSchool().getEntry().remove(choice);
                     } else if (choice.getsColour().equals(SColor.RED)) {
                         activePlayer.getPersonalSchool().getRTable().add(choice);
-                        getCoinFromStudentMove(activePlayer);
+                        getCoinFromStudentMove(activePlayer, activePlayer.getPersonalSchool().getRTable());
                         activePlayer.getPersonalSchool().getEntry().remove(choice);
                     } else if (choice.getsColour().equals(SColor.YELLOW)) {
                         activePlayer.getPersonalSchool().getYTable().add(choice);
-                        getCoinFromStudentMove(activePlayer);
+                        getCoinFromStudentMove(activePlayer, activePlayer.getPersonalSchool().getYTable());
                         activePlayer.getPersonalSchool().getEntry().remove(choice);
                     } else if (choice.getsColour().equals(SColor.PINK)) {
                         activePlayer.getPersonalSchool().getPTable().add(choice);
-                        getCoinFromStudentMove(activePlayer);
+                        getCoinFromStudentMove(activePlayer, activePlayer.getPersonalSchool().getPTable());
                         activePlayer.getPersonalSchool().getEntry().remove(choice);
                     } else if (choice.getsColour().equals(SColor.BLUE)) {
                         activePlayer.getPersonalSchool().getBTable().add(choice);
-                        getCoinFromStudentMove(activePlayer);
+                        getCoinFromStudentMove(activePlayer, activePlayer.getPersonalSchool().getBTable());
                         activePlayer.getPersonalSchool().getEntry().remove(choice);
                     }
                 }
@@ -287,19 +287,19 @@ public class Game {
                 //notify (observer)---->scelgo pedina da mettere nel table
                 if (choice.getsColour().equals(SColor.GREEN)) {
                     activePlayer.getPersonalSchool().getGTable().add(choice);
-                    getCoinFromStudentMove(activePlayer);
+                    getCoinFromStudentMove(activePlayer, activePlayer.getPersonalSchool().getGTable());
                 } else if (choice.getsColour().equals(SColor.RED)) {
                     activePlayer.getPersonalSchool().getRTable().add(choice);
-                    getCoinFromStudentMove(activePlayer);
+                    getCoinFromStudentMove(activePlayer, activePlayer.getPersonalSchool().getRTable());
                 } else if (choice.getsColour().equals(SColor.YELLOW)) {
                     activePlayer.getPersonalSchool().getYTable().add(choice);
-                    getCoinFromStudentMove(activePlayer);
+                    getCoinFromStudentMove(activePlayer, activePlayer.getPersonalSchool().getYTable());
                 } else if (choice.getsColour().equals(SColor.PINK)) {
                     activePlayer.getPersonalSchool().getPTable().add(choice);
-                    getCoinFromStudentMove(activePlayer);
+                    getCoinFromStudentMove(activePlayer, activePlayer.getPersonalSchool().getPTable());
                 } else if (choice.getsColour().equals(SColor.BLUE)) {
                     activePlayer.getPersonalSchool().getBTable().add(choice);
-                    getCoinFromStudentMove(activePlayer);
+                    getCoinFromStudentMove(activePlayer, activePlayer.getPersonalSchool().getBTable());
                 }
                 characterCardPlayed.getStudentsOnCard().remove(choice);
                 //notify (observer)---->pesco pedina da mettere sulla carta
@@ -342,17 +342,17 @@ public class Game {
         }
     }
 
-    private void getCoinFromStudentMove(Player activePlayer) {
+    private void getCoinFromStudentMove(Player activePlayer, ArrayList<Student> tableColor) {
         
-        if(getDifficulty().equals(Difficulty.EXPERTMODE) && (activePlayer.getPersonalSchool().getGTable().size()==3)){
+        if(getDifficulty().equals(Difficulty.EXPERTMODE) && (tableColor.size()==3)){
             activePlayer.setCoinScore(activePlayer.getCoinScore() + 1);
             getTable().setCoinsOnTable(getTable().getCoinsOnTable() - 1);
         }
-        else if( getDifficulty().equals(Difficulty.EXPERTMODE) && (activePlayer.getPersonalSchool().getGTable().size()==6)){
+        else if( getDifficulty().equals(Difficulty.EXPERTMODE) && (tableColor.size()==6)){
               activePlayer.setCoinScore(activePlayer.getCoinScore() + 1);
              getTable().setCoinsOnTable(getTable().getCoinsOnTable() - 1);
         }
-        else if( getDifficulty().equals(Difficulty.EXPERTMODE) && (activePlayer.getPersonalSchool().getGTable().size()==9)){
+        else if( getDifficulty().equals(Difficulty.EXPERTMODE) && (tableColor.size()==9)){
              activePlayer.setCoinScore(activePlayer.getCoinScore() + 1);
             getTable().setCoinsOnTable(getTable().getCoinsOnTable() - 1);
         }
