@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,22 +32,39 @@ class SchoolTest {
         table.generateMotherEarth();
     }
 
-    @ParameterizedTest
-    @EnumSource(GameMode.class)
-    void numberOfProfTest(GameMode gameMode) {
-        Player player= new Player(TColor.BLACK, PlayerNumber.PLAYER1);
-        player.generateSchool(table, gameMode);
-        for (int i = 0; i < 5; i++) {
-            player.getPersonalSchool().getProfOfPlayer().get(i).setInHall(true);
+    @RepeatedTest(100)
+    void numberOfProfTest() {
+        Random rn = new Random();
+        int r;
+        Game game = new Game();
+        for (int index = 0; index < 2; index++) { /** For the first two GameModes */
+            table.getBag().clear();
+            table.getListOfIsland().clear();
+            table.generateIslandCards();
+            table.generateMotherEarth();
+            table.addFinalStudents();
+            game.getListOfPlayers().clear();
+            game.setGameMode(GameMode.values()[index]);
+            for (int i = 0; i < index + 2; i++) {
+                game.getListOfPlayers().add(new Player(TColor.values()[i], PlayerNumber.values()[i]));
+                game.getListOfPlayers().get(i).generateSchool(table, GameMode.values()[index]);
+            }
+            for (int i = 0; i < 5; i++) {       /** The different Prof are positioned randomly*/
+                int s = rn.nextInt(index + 2);
+                if (game.getListOfPlayers().get(s).getPersonalSchool().getProfOfPlayer().get(i).getIsInHall() == false)
+                    game.getListOfPlayers().get(s).getPersonalSchool().getProfOfPlayer().get(i).setInHall(true);
+                else
+                    i = i - 1;
+            }
+            for (int i = 0; i < index + 2; i++) {
+                ArrayList<Integer> count = new ArrayList<>();
+                for (int s = 0; s < 5; s++) {
+                    if (game.getListOfPlayers().get(i).getPersonalSchool().getProfOfPlayer().get(s).getIsInHall())
+                        count.add(1);
+                }
+                assertEquals(count.size(), game.getListOfPlayers().get(i).getPersonalSchool().numberOfProf());
+            }
         }
-        assertEquals(5, player.getPersonalSchool().numberOfProf());
-        player.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true);
-        player.getPersonalSchool().getProfOfPlayer().get(1).setInHall(false);
-        player.getPersonalSchool().getProfOfPlayer().get(2).setInHall(false);
-        player.getPersonalSchool().getProfOfPlayer().get(3).setInHall(true);
-        player.getPersonalSchool().getProfOfPlayer().get(4).setInHall(false);
-        assertEquals(2,player.getPersonalSchool().numberOfProf());
-
     }
 
     @RepeatedTest(100)
@@ -54,7 +72,7 @@ class SchoolTest {
         Random rn = new Random();
         int r;
         Game game = new Game();
-        for (int index = 0; index < 2; index++) { /** For every GameMode (for now just the first two)*/
+        for (int index = 0; index < 2; index++) { /** For the first two GameModes */
             table.getBag().clear();
             table.getListOfIsland().clear();
             table.generateIslandCards();
