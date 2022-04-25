@@ -80,30 +80,29 @@ public class IslandTest {
       int count = 0;
       int i = 0;
       Player player = new Player(color, PlayerNumber.PLAYER1);
+      GameMode gm = GameMode.TWOPLAYERS;
+      player.generateSchool(table, gm);
       IslandCard island = new IslandCard(count);
-
 
       assertNotNull(island.towerIsOnIsland());
       assertEquals(false, island.towerIsOnIsland());
       assertNull(island.getTowerOnIsland());
 
-      /**
       for(count = 0; count < 12; count++){
          for(i=0; i<7; i++){
             switch (color){
                case WHITE:
+               case BLACK:
+               case GREY:
                   Tower tw = new Tower(i, color);
                   island.setTowerOnIsland(player.getPersonalSchool().getTower().get(i));
                   assertNotNull(island.getTowerOnIsland());
-                  assertEquals(tw, island.getTowerOnIsland());
-                  break;
-               case BLACK:
-                  break;
-               case GREY:
+                  assertEquals(tw.getTColour(), island.getTowerOnIsland().getTColour());
+                  assertEquals(tw.getIdTower(), island.getTowerOnIsland().getIdTower());
                   break;
             }
          }
-      }*/
+      }
    }
 
    /** da fare */
