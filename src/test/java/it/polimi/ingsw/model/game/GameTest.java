@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.game;
 import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
+import it.polimi.ingsw.model.assistant.DeckName;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.TColor;
@@ -23,12 +24,13 @@ class GameTest {
         Game game= new Game();
         Player player = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
         Table table = new Table();
-        DeckAssistant deckAssistant= new DeckAssistant();
+        DeckAssistant deckAssistant = new DeckAssistant(DeckName.DECK1);
         table.generateIslandCards();
 
         game.setActivePlayer(player);
         game.setTable(table);
         game.getActivePlayer().setDeckOfPlayer(deckAssistant);
+        game.getActivePlayer().getDeckOfPlayer().getCardsInHand().clear();
 
         game.getTable().getBag().add(new Student(0, SColor.GREEN));
 

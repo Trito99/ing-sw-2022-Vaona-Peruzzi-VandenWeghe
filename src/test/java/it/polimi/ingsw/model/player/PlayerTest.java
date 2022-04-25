@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
+import it.polimi.ingsw.model.assistant.DeckName;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.table.Table;
@@ -23,7 +24,7 @@ public class PlayerTest {
     @BeforeEach
     public void setup(){
         table = new Table();
-        deckOfPlayer = new DeckAssistant();
+        deckOfPlayer = new DeckAssistant(DeckName.DECK1);
         table.addFinalStudents();
         table.generateIslandCards();
         table.generateMotherEarth();
@@ -143,7 +144,7 @@ public class PlayerTest {
    @Test
    public void deckOfPlayer(){
        Player player = new Player(TColor.BLACK, PlayerNumber.PLAYER1);
-       DeckAssistant deckOfPlayer = new DeckAssistant();
+       DeckAssistant deckOfPlayer = new DeckAssistant(DeckName.DECK1);
        assertNull(player.getDeckOfPlayer());
 
        player.setDeckOfPlayer(deckOfPlayer);
