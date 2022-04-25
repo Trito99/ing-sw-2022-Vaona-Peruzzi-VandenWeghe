@@ -4,8 +4,13 @@ import java.util.ArrayList;
 
 public class DeckAssistant {
 
-    private ArrayList<AssistantCard> cardsInHand= new ArrayList<>();
-    private String name;
+    private ArrayList<AssistantCard> cardsInHand;
+    private DeckName deckName;
+
+    public DeckAssistant(DeckName deckName){
+        this.deckName = deckName;
+        this.cardsInHand = new ArrayList<>();
+    }
 
     public ArrayList<AssistantCard> getCardsInHand() {
         return cardsInHand;
@@ -24,12 +29,12 @@ public class DeckAssistant {
         cardsInHand.add(new AssistantCard("turtle", 5, 10));
     }
 
-    public String getName(){
-        return name;
+    public DeckName getDeckName(){
+        return deckName;
     }
 
-    public void setName(String name){
-        this.name = name;
+    public void setName(DeckName deckName){
+        this.deckName = deckName;
     }
 
 }
