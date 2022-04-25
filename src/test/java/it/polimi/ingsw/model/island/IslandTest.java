@@ -113,7 +113,6 @@ public class IslandTest {
       }
    }
 
-   /** da fare */
    @Test
    public void InfluenceOnIsland(){
       int count = 0;
@@ -123,24 +122,31 @@ public class IslandTest {
 
          players.get(0).setInfluenceOnIsland(6);
          players.get(1).setInfluenceOnIsland(3);
-         /** DA CONTROLLARE: la funzione deve poter funzionare anche senza carta effetto*/
-         Player winner = island.calculateInfluence(players, CardEffect.CORTIGIANA);
+         Player winner = island.calculateInfluence(players, CardEffect.EASYMODE);
          assertNotNull(winner);
          assertEquals(players.get(0), winner);
          assertEquals(6, winner.getInfluenceOnIsland());
       }
    }
 
-   /** da fare */
    @Test
    public void XCardOnIsland(){
       int count = 0;
+      int countX = 0;
 
       for(count = 0; count < 12; count++){
          IslandCard island = new IslandCard(count);
+         assertNotNull(island.isXCardOnIsland());
+         assertEquals(false, island.isXCardOnIsland());
 
+         for(countX = 0; countX < 4; countX++){
+            assertEquals(countX, island.getXCardCounter());
+            island.setXCardCounter(island.getXCardCounter() + 1);
+            island.setXCardOnIsland(true);
+            assertNotNull(island.getXCardCounter());
+            assertEquals(countX + 1, island.getXCardCounter());
+         }
       }
-      return;
    }
 
 }
