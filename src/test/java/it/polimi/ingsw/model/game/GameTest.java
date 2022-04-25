@@ -57,4 +57,21 @@ class GameTest {
 
         /** MANCA CONTROLLO BAG VUOTA E 3 GRUPPI DI ISOLE */
     }
+
+    @Test
+    public void playAssistantCardTest(){
+
+        Game game= new Game();
+        Player player = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
+        player.setNickname("Gino");
+        game.getListOfPlayers().add(player);
+        DeckAssistant deckAssistant = new DeckAssistant(DeckName.DECK1);
+        game.getPlayer("Gino").setDeckOfPlayer(deckAssistant);
+
+        game.playAssistantCard("lion", "Gino");
+        assertEquals("lion", player.getTrash().getAssistantName());
+        assertEquals(9,player.getDeckOfPlayer().getCardsInHand().size());
+    }
+
+    /** Da Fare: Test di playCharacterCard */
 }
