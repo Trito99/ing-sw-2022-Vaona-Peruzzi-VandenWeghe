@@ -133,7 +133,7 @@ public class IslandTest {
 
          players.get(0).setInfluenceOnIsland(6);
          players.get(1).setInfluenceOnIsland(3);
-         Player winner = island.calculateInfluence(players, CardEffect.EASYMODE);
+         Player winner = island.calculateInfluence(players, CardEffect.STANDARDMODE);
          assertNotNull(winner);
          assertEquals(players.get(0), winner);
          assertEquals(6, winner.getInfluenceOnIsland());

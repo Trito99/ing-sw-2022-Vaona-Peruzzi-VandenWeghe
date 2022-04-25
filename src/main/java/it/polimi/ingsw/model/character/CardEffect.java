@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.character;
 
 public enum CardEffect {
-    EASYMODE,
+    STANDARDMODE,
     ABBOT, //ABATE
     HOST, //OSTE
     HERALD, //ARALDO

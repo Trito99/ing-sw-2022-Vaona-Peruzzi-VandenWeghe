@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.school;
 
 import it.polimi.ingsw.model.character.CardEffect;
+import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.Player;
@@ -23,20 +24,127 @@ import static org.junit.jupiter.api.Assertions.*;
 class SchoolTest {
 
     Table table;
+    Game game;
+    Random rn;
+
     @Test
     @BeforeEach
     public void init(){
         table= new Table();
+        rn = new Random();
+        game = new Game();
         table.addFinalStudents();
         table.generateIslandCards();
         table.generateMotherEarth();
     }
 
     @RepeatedTest(100)
+    void moveStudentFromEntryToIslandTest(){
+        for (int index = 0; index < 2; index++) { /** For the first two GameModes */
+            table.getBag().clear();
+            table.getListOfIsland().clear();
+            table.getCloudNumber().clear();
+            table.generateIslandCards();
+            table.generateMotherEarth();
+            table.generateBagInit();
+            table.extractStudentsInit();
+            table.addFinalStudents();
+            table.generateCloudNumber(GameMode.values()[index]);
+            game.getListOfPlayers().clear();
+            game.setGameMode(GameMode.values()[index]);
+            for (int i = 0; i < index + 2; i++) {
+                game.getListOfPlayers().add(new Player(TColor.values()[i], PlayerNumber.values()[i]));
+                game.getListOfPlayers().get(i).generateSchool(table, GameMode.values()[index]);
+            }
+            int r=rn.nextInt(table.getCloudNumber().get(0).getNumberOfSpaces());
+            int pos, is;
+            for (int i = 0; i < index + 2; i++){
+                ArrayList<Integer> id = new ArrayList<>();
+                for(int s=0;s<game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size();s++)
+                    id.add(game.getListOfPlayers().get(i).getPersonalSchool().getEntry().get(s).getIdStudent());
+                assertEquals(id.size(),game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size());  /** Controls if the size of the new array of Id is the same after every cicle */
+                for(int s=0;s<r;s++) {
+                    pos = rn.nextInt(game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size() - 1);
+                    is = rn.nextInt(11) + 1;
+                    game.getListOfPlayers().get(i).getPersonalSchool().moveStudentFromEntryToIsland(table.getListOfIsland().get(is), id.get(pos));
+                    assertEquals(id.size()-1,game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size());  /** Controls if the size of the Entry is reduced by one after every cicle */
+                    assertEquals(id.get(pos),table.getListOfIsland().get(is).getStudentOnIsland().get(table.getListOfIsland().get(is).getStudentOnIsland().size()-1).getIdStudent());/** Controls if the id of the student added is the same of the id selected in MoveStudentOnIsland  */
+                    for(Student student:game.getListOfPlayers().get(i).getPersonalSchool().getEntry()){
+                        assertNotEquals(id.get(pos),student.getIdStudent());
+                    }
+                    id.remove(id.get(pos));
+                }
+            }
+
+        }
+    }
+
+    @RepeatedTest(100)
+    void moveStudentFromEntryToHallTest(){
+        for (int index = 0; index < 2; index++) { /** For the first two GameModes */
+            table.getBag().clear();
+            table.getListOfIsland().clear();
+            table.getCloudNumber().clear();
+            table.generateIslandCards();
+            table.generateMotherEarth();
+            table.generateBagInit();
+            table.extractStudentsInit();
+            table.addFinalStudents();
+            table.generateCloudNumber(GameMode.values()[index]);
+            game.getListOfPlayers().clear();
+            game.setGameMode(GameMode.values()[index]);
+            for (int i = 0; i < index + 2; i++) {
+                game.getListOfPlayers().add(new Player(TColor.values()[i], PlayerNumber.values()[i]));
+                game.getListOfPlayers().get(i).generateSchool(table, GameMode.values()[index]);
+            }
+            int r=rn.nextInt(table.getCloudNumber().get(0).getNumberOfSpaces());
+            int pos, is;
+            for (int i = 0; i < index + 2; i++){
+                ArrayList<Integer> id = new ArrayList<>();
+                for(int s=0;s<game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size();s++)
+                    id.add(game.getListOfPlayers().get(i).getPersonalSchool().getEntry().get(s).getIdStudent());
+                assertEquals(id.size(),game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size());  /** Controls if the size of the new array of Id is the same after every cicle */
+                for(int s=0;s<r;s++) {
+                    pos = rn.nextInt(game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size() - 1);
+                    is = rn.nextInt(11) + 1;
+                    Student newStudent = new Student(131,null);
+                    for (Student student : game.getListOfPlayers().get(i).getPersonalSchool().getEntry()) {
+                        if (id.get(pos) == student.getIdStudent())
+                            newStudent = student;
+                    }
+                    game.getListOfPlayers().get(i).getPersonalSchool().moveStudentFromEntryToHall(game.getListOfPlayers().get(i),id.get(pos),table, Difficulty.STANDARDMODE);
+                    assertEquals(id.size()-1,game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size());  /** Controls if the size of the Entry is reduced by one after every cicle */
+
+                    switch(newStudent.getsColour()){/** Controls if the id of the student added is the same of the id selected in MoveStudentInHall  */
+                        case GREEN:
+                            assertEquals(id.get(pos),game.getListOfPlayers().get(i).getPersonalSchool().getGTable().get(game.getListOfPlayers().get(i).getPersonalSchool().getGTable().size()-1).getIdStudent());
+                            break;
+                        case RED:
+                            assertEquals(id.get(pos),game.getListOfPlayers().get(i).getPersonalSchool().getRTable().get(game.getListOfPlayers().get(i).getPersonalSchool().getRTable().size()-1).getIdStudent());
+                            break;
+                        case YELLOW:
+                            assertEquals(id.get(pos),game.getListOfPlayers().get(i).getPersonalSchool().getYTable().get(game.getListOfPlayers().get(i).getPersonalSchool().getYTable().size()-1).getIdStudent());
+                            break;
+                        case PINK:
+                            assertEquals(id.get(pos),game.getListOfPlayers().get(i).getPersonalSchool().getPTable().get(game.getListOfPlayers().get(i).getPersonalSchool().getPTable().size()-1).getIdStudent());
+                            break;
+                        case BLUE:
+                            assertEquals(id.get(pos),game.getListOfPlayers().get(i).getPersonalSchool().getBTable().get(game.getListOfPlayers().get(i).getPersonalSchool().getBTable().size()-1).getIdStudent());
+                            break;
+                    }
+
+                    for(Student student:game.getListOfPlayers().get(i).getPersonalSchool().getEntry()){
+                        assertNotEquals(id.get(pos),student.getIdStudent());
+                    }
+                    id.remove(id.get(pos));
+                }
+            }
+
+        }
+    }
+
+    @RepeatedTest(100)
     void  getProfInHallTest() {
-        Random rn = new Random();
-        int r;
-        Game game = new Game();
         for (int index = 0; index < 2; index++) { /** For the first two GameModes */
             table.getBag().clear();
             table.getListOfIsland().clear();
@@ -65,9 +173,6 @@ class SchoolTest {
 
     @RepeatedTest(100)
     void numberOfProfTest() {
-        Random rn = new Random();
-        int r;
-        Game game = new Game();
         for (int index = 0; index < 2; index++) { /** For the first two GameModes */
             table.getBag().clear();
             table.getListOfIsland().clear();
@@ -100,9 +205,7 @@ class SchoolTest {
 
     @RepeatedTest(100)
     void numberOfStudentsTestInHall() {
-        Random rn = new Random();
         int r;
-        Game game = new Game();
         for (int index = 0; index < 2; index++) { /** For the first two GameModes */
             table.getBag().clear();
             table.getListOfIsland().clear();
@@ -179,9 +282,7 @@ class SchoolTest {
 
     @RepeatedTest(100)
     void WinProfTest(){
-        Random rn = new Random();
         int r;
-        Game game= new Game();
         for(int index=0;index<2;index++) { /** For every GameMode (for now just the first two)*/
             table.getBag().clear();
             table.getListOfIsland().clear();
@@ -234,7 +335,7 @@ class SchoolTest {
             }
                             /** Sets at true the InHall parameter of Prof if the player has the most students in hall*/
             for (int i = 0; i < index+2; i++) {
-                game.getListOfPlayers().get(i).getPersonalSchool().winProf(game.getListOfPlayers(),game.getListOfPlayers().get(i), CardEffect.EASYMODE);
+                game.getListOfPlayers().get(i).getPersonalSchool().winProf(game.getListOfPlayers(),game.getListOfPlayers().get(i), CardEffect.STANDARDMODE);
             }
             int[] count = new int[]{0, 0, 0, 0, 0};
 
