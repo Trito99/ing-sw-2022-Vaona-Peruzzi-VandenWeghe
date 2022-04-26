@@ -2,18 +2,22 @@ package it.polimi.ingsw.model.island;
 
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CardEffect;
+import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.school.Tower;
+import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.table.Table;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -156,6 +160,122 @@ public class IslandTest {
             assertNotNull(island.getXCardCounter());
             assertEquals(countX + 1, island.getXCardCounter());
          }
+      }
+   }
+
+   @RepeatedTest(1)
+   public void BuildTowerOnIslandTest(){
+      Random rn = new Random();
+      int r;
+      Game game= new Game();
+      for(int index=0;index<2;index++) { /** For the first two GameModes */
+         table.getBag().clear();
+         table.getListOfIsland().clear();
+         table.generateIslandCards();
+         table.generateMotherEarth();
+         table.generateBagInit();
+         table.extractStudentsInit();
+         table.addFinalStudents();
+         game.getListOfPlayers().clear();
+         game.setGameMode(GameMode.values()[index]);
+         for (int i = 0; i < index + 2; i++) {
+            game.getListOfPlayers().add(new Player(TColor.values()[i], PlayerNumber.values()[i]));
+            game.getListOfPlayers().get(i).generateSchool(table, GameMode.values()[index]);
+         }
+         for (int i = 0; i < index + 2; i++) {      /** Students are positioned randomly in the different Tables */
+            for (int s = 1; s < 6; s++) {
+               r = rn.nextInt(4) + 1;
+               switch (s) {
+                  case 1:
+                     for (int t = 1; t < r; t++) {
+                        game.getListOfPlayers().get(i).getPersonalSchool().getGTable().add(table.getBag().get(0));
+                        table.getBag().remove(0);
+                     }
+                     break;
+                  case 2:
+                     for (int t = 1; t < r; t++) {
+                        game.getListOfPlayers().get(i).getPersonalSchool().getRTable().add(table.getBag().get(0));
+                        table.getBag().remove(0);
+                     }
+                     break;
+                  case 3:
+                     for (int t = 1; t < r; t++) {
+                        game.getListOfPlayers().get(i).getPersonalSchool().getYTable().add(table.getBag().get(0));
+                        table.getBag().remove(0);
+                     }
+                     break;
+                  case 4:
+                     for (int t = 1; t < r; t++) {
+                        game.getListOfPlayers().get(i).getPersonalSchool().getPTable().add(table.getBag().get(0));
+                        table.getBag().remove(0);
+                     }
+                     break;
+                  case 5:
+                     for (int t = 1; t < r; t++) {
+                        game.getListOfPlayers().get(i).getPersonalSchool().getBTable().add(table.getBag().get(0));
+                        table.getBag().remove(0);
+                     }
+                     break;
+               }
+            }
+         }
+         for (int i = 0; i < index+2; i++) {
+            game.getListOfPlayers().get(i).getPersonalSchool().winProf(game.getListOfPlayers(),game.getListOfPlayers().get(i), CardEffect.STANDARDMODE);
+         }
+         for (int i = 0; i < 12; i++) {  /** Moves random number of students on Islands. */
+            r = rn.nextInt(4)+1;
+            for (int n = 0; n < r; n++) {
+               table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
+               table.getBag().remove(0);
+            }
+         }
+         for(int i = 0; i < index + 2; i++){
+            System.out.println("Player "+(i+1));
+            for(int y=1;y<6;y++){
+               switch(y){
+                  case 1:
+                     System.out.print("GREEN ");
+                     for(int t=0;t<game.getListOfPlayers().get(i).getPersonalSchool().getGTable().size();t++)
+                        System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getGTable().get(t).getIdStudent()+" ");
+                     System.out.println(game.getListOfPlayers().get(i).getPersonalSchool().getProfInHall(SColor.values()[y-1]));
+                     break;
+                  case 2:
+                     System.out.print("RED ");
+                     for(int t=0;t<game.getListOfPlayers().get(i).getPersonalSchool().getRTable().size();t++)
+                        System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getRTable().get(t).getIdStudent()+" ");
+                     System.out.println(game.getListOfPlayers().get(i).getPersonalSchool().getProfInHall(SColor.values()[y-1]));
+                     break;
+                  case 3:
+                     System.out.print("YELLOW ");
+                     for(int t=0;t<game.getListOfPlayers().get(i).getPersonalSchool().getYTable().size();t++)
+                        System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getYTable().get(t).getIdStudent()+" ");
+                     System.out.println(game.getListOfPlayers().get(i).getPersonalSchool().getProfInHall(SColor.values()[y-1]));
+                     break;
+                  case 4:
+                     System.out.print("PINK ");
+                     for(int t=0;t<game.getListOfPlayers().get(i).getPersonalSchool().getPTable().size();t++)
+                        System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getPTable().get(t).getIdStudent()+" ");
+                     System.out.println(game.getListOfPlayers().get(i).getPersonalSchool().getProfInHall(SColor.values()[y-1]));
+                     break;
+                  case 5:
+                     System.out.print("BLUE ");
+                     for(int t=0;t<game.getListOfPlayers().get(i).getPersonalSchool().getBTable().size();t++)
+                        System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getBTable().get(t).getIdStudent()+" ");
+                     System.out.println(game.getListOfPlayers().get(i).getPersonalSchool().getProfInHall(SColor.values()[y-1]));
+                     break;
+               }
+
+            }
+            System.out.println(("--"));
+         }
+         for (IslandCard islandCard: table.getListOfIsland()){
+            islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE);
+            if(islandCard.towerIsOnIsland())
+               System.out.println(islandCard.getIdIsland()+" "+islandCard.getTowerOnIsland().getTColour()+" "+islandCard.getTowerOnIsland().getIdTower());
+            else
+               System.out.println(islandCard.getIdIsland()+" vuoto");
+         }
+         System.out.println("--------");
       }
    }
 

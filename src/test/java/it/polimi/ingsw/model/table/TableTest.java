@@ -412,7 +412,7 @@ public class TableTest{
         Random rn = new Random();
         int r;
         Game game= new Game();
-        for(int index=0;index<2;index++) { /** For every GameMode (for now just the first two)*/
+        for(int index=0;index<2;index++) { /** For the first two GameModes */
             table.getBag().clear();
             table.getListOfIsland().clear();
             table.generateIslandCards();

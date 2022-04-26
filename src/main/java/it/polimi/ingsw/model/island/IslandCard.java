@@ -64,8 +64,8 @@ public class IslandCard {
 
     public void buildTowerOnIsland(ArrayList<Player> listOfPlayer,  CardEffect cardEffectPlayed){        //Builda la torre del colore del Player che ha l'influenza sull'isola
 
-        Player playerFound = calculateInfluence(listOfPlayer, cardEffectPlayed);  //Player che ha influenza sull'isola
-
+        Player playerFound = calculateInfluence(listOfPlayer, cardEffectPlayed);//Player che ha influenza sull'isola
+        System.out.println(playerFound.getTColor());
         /** CURATRICE: controllo che non ci sia una tessera divieto sull'isola */
         if (xCardOnIsland){
             setXCardCounter(getXCardCounter()-1);
@@ -78,11 +78,12 @@ public class IslandCard {
             }
 
             TColor towerColour = playerFound.getTColor();      //Colore delle torri del player che ha influenza
+            if(playerFound.getPersonalSchool().getTower().size()!=0){
+                towerOnIsland = new Tower(playerFound.getPersonalSchool().getTower().size(), towerColour);
+                playerFound.getPersonalSchool().removeTower();
+                setTowerIsOnIsland(true);
+            }
 
-            towerOnIsland = new Tower(playerFound.getPersonalSchool().getTower().size(), towerColour);
-            playerFound.getPersonalSchool().removeTower();
-
-            setTowerIsOnIsland(true);
         }
     }
 
@@ -147,8 +148,10 @@ public class IslandCard {
                         break;
                 }
                 /** EFFETTO CENTAURO */
-                if(p.getTColor().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isCentaurPlayed()){  /** Aggiungo influenza torri */
-                    countTot++;
+                if(towerIsOnIsland) {
+                    if (p.getTColor().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isCentaurPlayed()) {  /** Aggiungo influenza torri */
+                        countTot++;
+                    }
                 }
 
                 /** EFFETTO CAVALIERE */

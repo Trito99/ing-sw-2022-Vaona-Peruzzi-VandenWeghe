@@ -79,7 +79,7 @@ class SchoolTest {
         }
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1000)
     void moveStudentFromEntryToHallTest(){
         for (int index = 0; index < 2; index++) { /** For the first two GameModes */
             table.getBag().clear();
@@ -132,35 +132,46 @@ class SchoolTest {
                         for (Student student : game.getListOfPlayers().get(i).getPersonalSchool().getEntry()) {
                             assertNotEquals(id.get(pos), student.getIdStudent());
                         }
-                        if(Difficulty.values()[indexDif]==Difficulty.EXPERTMODE){
-                            int count=0;
-                            for(int iTable=0;iTable<6;iTable++){
-                                switch(iTable){
-                                    case 0:
-                                        for(int s3=0;s3<game.getListOfPlayers().get(i).getPersonalSchool().getGTable().size()/3;s3++)
-                                            count++;
-                                        break;
-                                    case 1:
-                                        for(int s3=0;s3<game.getListOfPlayers().get(i).getPersonalSchool().getRTable().size()/3;s3++)
-                                            count++;
-                                        break;
-                                    case 2:
-                                        for(int s3=0;s3<game.getListOfPlayers().get(i).getPersonalSchool().getYTable().size()/3;s3++)
-                                            count++;
-                                        break;
-                                    case 3:
-                                        for(int s3=0;s3<game.getListOfPlayers().get(i).getPersonalSchool().getPTable().size()/3;s3++)
-                                            count++;
-                                        break;
-                                    case 4:
-                                        for(int s3=0;s3<game.getListOfPlayers().get(i).getPersonalSchool().getBTable().size()/3;s3++)
-                                            count++;
-                                        break;
-                                }
-                            }
-                            assertEquals(count,game.getListOfPlayers().get(i).getCoinScore());
-                        }
                         id.remove(id.get(pos));
+                    }
+                }
+                if(Difficulty.values()[indexDif]==Difficulty.EXPERTMODE) { /** Controls if the coinscore does increase every 3 students in table   */
+                    table.extractStudentOnCloud();
+                    for (int i = 0; i < index + 2; i++) {
+                        ArrayList<Integer> id = new ArrayList<>();
+                        for (int s = 0; s < game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size(); s++)
+                            id.add(game.getListOfPlayers().get(i).getPersonalSchool().getEntry().get(s).getIdStudent());
+                        for (int s = 0; s < r; s++) {
+                            pos = rn.nextInt(game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size() - 1);
+                            game.getListOfPlayers().get(i).getPersonalSchool().moveStudentFromEntryToHall(game.getListOfPlayers().get(i), id.get(pos), table, Difficulty.values()[indexDif]);
+                            id.remove(id.get(pos));
+                        }
+                        int count=0;
+                        for(int iTable=0;iTable<6;iTable++){
+                            switch(iTable){
+                                case 0:
+                                    for(int s3=0;s3<game.getListOfPlayers().get(i).getPersonalSchool().getGTable().size()/3;s3++)
+                                        count++;
+                                    break;
+                                case 1:
+                                    for(int s3=0;s3<game.getListOfPlayers().get(i).getPersonalSchool().getRTable().size()/3;s3++)
+                                        count++;
+                                    break;
+                                case 2:
+                                    for(int s3=0;s3<game.getListOfPlayers().get(i).getPersonalSchool().getYTable().size()/3;s3++)
+                                        count++;
+                                    break;
+                                case 3:
+                                    for(int s3=0;s3<game.getListOfPlayers().get(i).getPersonalSchool().getPTable().size()/3;s3++)
+                                        count++;
+                                    break;
+                                case 4:
+                                    for(int s3=0;s3<game.getListOfPlayers().get(i).getPersonalSchool().getBTable().size()/3;s3++)
+                                        count++;
+                                    break;
+                            }
+                        }
+                        assertEquals(count,game.getListOfPlayers().get(i).getCoinScore());
                     }
                 }
             }
