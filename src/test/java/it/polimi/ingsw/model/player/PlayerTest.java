@@ -195,4 +195,17 @@ public class PlayerTest {
        assertEquals(true, player.hasAlreadyPlayed());
    }
 
+   @Test
+    void getAssistantCardTest(){
+        Player player = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
+        DeckAssistant deckAssistant = new DeckAssistant(DeckName.DECK1);
+
+        player.setDeckOfPlayer(deckAssistant);
+        AssistantCard card = player.getAssistantCard("lion");
+        assertEquals("lion" , card.getAssistantName());
+        card = player.getAssistantCard("lizard");
+        assertEquals("lizard", card.getAssistantName());
+        assertEquals(3, card.getStepMotherEarth());
+   }
+
 }

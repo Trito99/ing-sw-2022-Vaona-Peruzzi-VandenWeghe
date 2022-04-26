@@ -23,7 +23,6 @@ public class Table {
     private int coinsOnTable;
     private int posMotherEarth = 0;
     private ArrayList<Student> bag = new ArrayList<>();
-    private ArrayList<Prof> listOfProfOnTable = new ArrayList<>();
 
     public void generateBagInit() {
         SColor green = SColor.GREEN;

@@ -137,7 +137,7 @@ public class School {
         return 0;
     }
 
-    void winProf(ArrayList<Player> players, Player playerTurn, CardEffect cardEffectPlayed) {
+    public void winProf(ArrayList<Player> players, Player playerTurn, CardEffect cardEffectPlayed) {
 
         for (int i=0;i<SColor.values().length;i++) {
             int max = 0;
