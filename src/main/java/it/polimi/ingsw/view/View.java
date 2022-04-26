@@ -15,7 +15,7 @@ import java.util.ArrayList;
 /** la classe rappresenta la View generica che poi sarà implementata da CLI e GUI*/
 public interface View {
 
-    void showLogin(String username, String gameId, boolean wasJoined);
+    void showLogin(String nickname, String gameId, boolean wasJoined);
 
     /** mostra un messaggio generico */
     void showMessage(String message);
