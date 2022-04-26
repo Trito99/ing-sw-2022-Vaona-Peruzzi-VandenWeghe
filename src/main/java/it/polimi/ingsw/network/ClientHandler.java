@@ -10,6 +10,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+/** rappresenta il client a lato server.
+ * Gestisce i messaggi ricevuti dal client, e invia i messaggi del GameController al client */
+
 public class ClientHandler implements ClientHandlerInterface /** Runnable */ {
     private Socket client;
     private ObjectOutputStream output;
@@ -69,7 +72,6 @@ public class ClientHandler implements ClientHandlerInterface /** Runnable */ {
 
     }
 
-    /** capire SE SERVE o da togliere */
     /** gestisce messaggio inviato dal client */
     private void handleMessage() {
         try {
