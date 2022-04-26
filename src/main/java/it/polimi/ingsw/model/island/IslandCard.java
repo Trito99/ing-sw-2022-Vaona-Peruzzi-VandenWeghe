@@ -63,27 +63,26 @@ public class IslandCard {
     }
 
     public void buildTowerOnIsland(ArrayList<Player> listOfPlayer,  CardEffect cardEffectPlayed){        //Builda la torre del colore del Player che ha l'influenza sull'isola
+        if(MotherEarthOnIsland) {
+            Player playerFound = calculateInfluence(listOfPlayer, cardEffectPlayed);//Player che ha influenza sull'isola
 
-        Player playerFound = calculateInfluence(listOfPlayer, cardEffectPlayed);//Player che ha influenza sull'isola
-        System.out.println(playerFound.getTColor());
-        /** CURATRICE: controllo che non ci sia una tessera divieto sull'isola */
-        if (xCardOnIsland){
-            setXCardCounter(getXCardCounter()-1);
-            if(xCardCounter == 0) setXCardOnIsland(false);
-        }
+            /** CURATRICE: controllo che non ci sia una tessera divieto sull'isola */
+            if (xCardOnIsland) {
+                setXCardCounter(getXCardCounter() - 1);
+                if (xCardCounter == 0) setXCardOnIsland(false);
+            } else {
+                if (playerFound == null) {
+                    return;             /** Se nessuno ha influenza non buildo */
+                }
 
-        else{
-            if(playerFound==null){
-                return;             /** Se nessuno ha influenza non buildo */
+                TColor towerColour = playerFound.getTColor();      //Colore delle torri del player che ha influenza
+                if (playerFound.getPersonalSchool().getTower().size() != 0) {
+                    towerOnIsland = new Tower(playerFound.getPersonalSchool().getTower().size(), towerColour);
+                    playerFound.getPersonalSchool().removeTower();
+                    setTowerIsOnIsland(true);
+                }
+
             }
-
-            TColor towerColour = playerFound.getTColor();      //Colore delle torri del player che ha influenza
-            if(playerFound.getPersonalSchool().getTower().size()!=0){
-                towerOnIsland = new Tower(playerFound.getPersonalSchool().getTower().size(), towerColour);
-                playerFound.getPersonalSchool().removeTower();
-                setTowerIsOnIsland(true);
-            }
-
         }
     }
 
@@ -168,7 +167,7 @@ public class IslandCard {
                     c.unlockColor();
             }
         }
-
+        int count=0;
         for(Player p : listOfPlayers) {
             if (p.getInfluenceOnIsland() > maxInfluence){
                 maxInfluence = p.getInfluenceOnIsland();
@@ -178,13 +177,16 @@ public class IslandCard {
         for(Player p : listOfPlayers) {
             if (p.getInfluenceOnIsland() == maxInfluence){
                 playerWithInfluence = p;
+                count++;
             }
         }
 
         cardEffectPlayed.setKnightPlayed(false);
         cardEffectPlayed.setCentaurPlayed(false);           /** controlla se va bene qua (Centauro) */
-
-        return playerWithInfluence;         /** Controllo Pareggio Influenza ----> return null? */
+        if (count==1)
+            return playerWithInfluence;
+        else
+            return null;
 
     }
 

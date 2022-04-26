@@ -228,6 +228,11 @@ public class IslandTest {
                table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
                table.getBag().remove(0);
             }
+            for(int h=0;h<table.getListOfIsland().get(i).getStudentOnIsland().size();h++){
+                System.out.print(table.getListOfIsland().get(i).getStudentOnIsland().get(h).getsColour()+" ");
+            }
+            if(table.getListOfIsland().get(i).calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE)!=null)
+               System.out.println(table.getListOfIsland().get(i).calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE).getPlayerNumber());
          }
          for(int i = 0; i < index + 2; i++){
             System.out.println("Player "+(i+1));
@@ -268,8 +273,10 @@ public class IslandTest {
             }
             System.out.println(("--"));
          }
+         table.moveMotherEarth(13-table.getPosMotherEarth());
          for (IslandCard islandCard: table.getListOfIsland()){
             islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE);
+            table.moveMotherEarth(1);
             if(islandCard.towerIsOnIsland())
                System.out.println(islandCard.getIdIsland()+" "+islandCard.getTowerOnIsland().getTColour()+" "+islandCard.getTowerOnIsland().getIdTower());
             else
