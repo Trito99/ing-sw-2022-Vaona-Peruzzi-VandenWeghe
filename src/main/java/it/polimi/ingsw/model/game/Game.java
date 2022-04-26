@@ -131,13 +131,7 @@ public class Game {
     public void playCharacterCard(CardEffect cardEffect, String nickname) {
 
         Player activePlayer = getPlayer(nickname);
-        CharacterCard characterCardPlayed = null;
-
-        for (CharacterCard card : getTable().getCharacterCardsOnTable()) {
-            if (card.getCardEffect()==cardEffect) {
-                characterCardPlayed = card;
-            }
-        }
+        CharacterCard characterCardPlayed = table.getCharacterCard(cardEffect);
 
         if (characterCardPlayed.getCoinOnCard()) {
             if (activePlayer.getCoinScore() >= characterCardPlayed.getCostCharacter() + 1) {
