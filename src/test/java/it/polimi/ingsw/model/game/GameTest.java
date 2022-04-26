@@ -14,6 +14,7 @@ import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;
@@ -113,7 +114,7 @@ class GameTest {
 
     /** Da Fare: Test di playCharacterCard */
 
-    @Test
+    @RepeatedTest(1000)
     void playCharacterCardTest(){
         Game game= new Game();
         Table table = new Table();
@@ -194,8 +195,8 @@ class GameTest {
                 game.getListOfPlayers().get(i).getPersonalSchool().winProf(game.getListOfPlayers(),game.getListOfPlayers().get(i), CardEffect.STANDARDMODE);
             }
 
-
-            //game.playCharacterCard(CardEffect.ABBOT, "Gino");
+           /** if(table.g null)
+            game.playCharacterCard(CardEffect.CENTAUR, "Gino"); */
         }
     }
 }

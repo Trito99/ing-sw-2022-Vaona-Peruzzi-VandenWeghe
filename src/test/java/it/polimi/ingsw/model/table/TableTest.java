@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model.table;
 
+import it.polimi.ingsw.model.assistant.AssistantCard;
+import it.polimi.ingsw.model.assistant.DeckAssistant;
+import it.polimi.ingsw.model.assistant.DeckName;
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.DeckCharacter;
@@ -20,6 +23,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -403,6 +407,17 @@ public class TableTest{
             }
             table.generateMotherEarth();
         }
+
+    }
+
+    @Test
+    void getCharacterCardTest(){
+        table.getCharacterCardsOnTable().add(new CharacterCard(2, CardEffect.HOST));
+        table.getCharacterCardsOnTable().add(new CharacterCard(1, CardEffect.BEARER));
+        table.getCharacterCardsOnTable().add(new CharacterCard(3, CardEffect.CENTAUR));
+
+        assertEquals(1, table.getCharacterCard(CardEffect.BEARER).getCostCharacter());
+        assertEquals(CardEffect.HOST, table.getCharacterCard(CardEffect.HOST).getCardEffect());
 
     }
 
