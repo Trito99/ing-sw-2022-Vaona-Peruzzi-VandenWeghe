@@ -28,7 +28,7 @@ public abstract class ObservableView {
     }
 
     /** CONTROLLARE !! */
-    /** notifica tutti i current observer tramite argomento lambda chiamato dall'observer */
+    /** notifica tutti i current observer tramite argomento (lambda) chiamato dall'observer */
     protected void notifyObserver(Consumer<ObserverView> lambda) {
         for (ObserverView observer : observers) {
             lambda.accept(observer);

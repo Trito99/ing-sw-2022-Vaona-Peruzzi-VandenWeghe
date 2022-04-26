@@ -1,12 +1,12 @@
 package it.polimi.ingsw.model.table;
 
+import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.school.Prof;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
@@ -23,7 +23,6 @@ public class Table {
     private int coinsOnTable;
     private int posMotherEarth = 0;
     private ArrayList<Student> bag = new ArrayList<>();
-    private ArrayList<Prof> listOfProfOnTable = new ArrayList<>();
 
     public void generateBagInit() {
         SColor green = SColor.GREEN;
@@ -172,6 +171,19 @@ public class Table {
         }
     }
 
+    public CharacterCard getCharacterCard(CardEffect cardEffect){
+        int indexCharacter = getCharacterCardByEffect().indexOf(cardEffect);
+        return characterCardsOnTable.get(indexCharacter);
+    }
+
+    public ArrayList<CardEffect> getCharacterCardByEffect() {
+        ArrayList<CardEffect> cardEffectList = new ArrayList<>();
+        for (int i = 0; i < characterCardsOnTable.size(); i++) {
+            cardEffectList.add(characterCardsOnTable.get(i).getCardEffect());
+        }
+        return cardEffectList;
+    }
+
     public int getPosMotherEarth() {
         return posMotherEarth;
     }
@@ -201,7 +213,7 @@ public class Table {
     }
 
     public ArrayList<CharacterCard> getCharacterCardsOnTable() {
-        return (ArrayList<CharacterCard>) characterCardsOnTable.clone();
+        return characterCardsOnTable;
     }
 
     public void joinIsland(ArrayList<IslandCard> listOfIsland) {      //valuto se due isole mergiano, in caso le unisco

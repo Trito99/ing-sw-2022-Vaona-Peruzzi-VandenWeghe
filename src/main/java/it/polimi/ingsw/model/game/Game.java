@@ -12,6 +12,7 @@ import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Game {
 
@@ -126,28 +127,24 @@ public class Game {
         activePlayer.setHasAlreadyPlayed(true);
         activePlayer.getDeckOfPlayer().getCardsInHand().remove(assistantCardPlayed);
     }
-    public void playCharacterCard(CardEffect cardEffect, String nickame) {
 
-        Player activePlayer = getPlayer(nickame);
-        CharacterCard characterCardPlayed = null;
+    public void playCharacterCard(CardEffect cardEffect, String nickname) {
 
-        for (CharacterCard card : getTable().getCharacterCardsOnTable()) {
-            if (card.getCardEffect().equals(cardEffect)) {
-                characterCardPlayed = card;
-            }
-        }
+        Player activePlayer = getPlayer(nickname);
+        CharacterCard characterCardPlayed = table.getCharacterCard(cardEffect);
 
         if (characterCardPlayed.getCoinOnCard()) {
             if (activePlayer.getCoinScore() >= characterCardPlayed.getCostCharacter() + 1) {
-                decreaseCoinScore(nickame, characterCardPlayed.getCostCharacter() + 1);
+                decreaseCoinScore(nickname, characterCardPlayed.getCostCharacter() + 1);
                 getTable().increaseCoinsOnTable(characterCardPlayed.getCostCharacter() + 1);
             } else {
                 System.out.println("NON HAI ABBASTANZA MONETE! ");
                 /** Rifai scelta */
+                return;
             }
         } else {
             if (activePlayer.getCoinScore() >= characterCardPlayed.getCostCharacter()) {
-                decreaseCoinScore(nickame, characterCardPlayed.getCostCharacter());
+                decreaseCoinScore(nickname, characterCardPlayed.getCostCharacter());
                 getTable().increaseCoinsOnTable(characterCardPlayed.getCostCharacter());
                 characterCardPlayed.setCoinOnCard(true);
             } else {
@@ -362,4 +359,13 @@ public class Game {
         Player activePlayer = getPlayer(nickname);
         activePlayer.setCoinScore(activePlayer.getCoinScore() - decreaseValue);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Game)) return false;
+        Game game = (Game) o;
+        return Objects.equals(table, game.table);
+    }
+
 }

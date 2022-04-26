@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 /** classe usata per tutti i messaggi per permettere la serializzazione */
 public abstract class GeneralMessage implements Serializable {
+    private final MessageType message;
 
-    private final MessageType msg;
-    public GeneralMessage(MessageType msg){
-
-        this.msg=msg;
+    public GeneralMessage(MessageType message){
+        this.message = message;
     }
+
     public MessageType getMessageType(){
-        return msg;
+        return message;
     }
 
 }
