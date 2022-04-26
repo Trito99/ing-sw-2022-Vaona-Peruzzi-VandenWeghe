@@ -163,7 +163,7 @@ public class IslandTest {
       }
    }
 
-   @RepeatedTest(1)
+   @RepeatedTest(1000)
    public void BuildTowerOnIslandTest(){
       Random rn = new Random();
       int r;
@@ -276,6 +276,8 @@ public class IslandTest {
          table.moveMotherEarth(13-table.getPosMotherEarth());
          for (IslandCard islandCard: table.getListOfIsland()){
             islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE);
+            if(islandCard.towerIsOnIsland())
+               assertEquals(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE).getTColor(),islandCard.getTowerOnIsland().getTColour());
             table.moveMotherEarth(1);
             if(islandCard.towerIsOnIsland())
                System.out.println(islandCard.getIdIsland()+" "+islandCard.getTowerOnIsland().getTColour()+" "+islandCard.getTowerOnIsland().getIdTower());
