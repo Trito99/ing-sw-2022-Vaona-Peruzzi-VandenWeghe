@@ -163,6 +163,11 @@ public class GameController {
         }
     }
 
+    public void initializeGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
+        setGameState(GameState.INIT);
+
+    }
+
     public void getMessage(ClientMessage receivedMessage) throws InvalidParameterException {
         switch (gameState) {
             case INIT:
@@ -198,11 +203,6 @@ public class GameController {
                     vv.showMessage(message);
                 }
         }
-
-    }
-
-    public void initializeGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
-        setGameState(GameState.INIT);
 
     }
 
@@ -265,14 +265,9 @@ public class GameController {
         allVirtualView.get(nickname).showPlayerTurn(getActivePlayer());
     }
 
-    /** se il gioco non è cominciato ----> return false */
-    public boolean isGameStarted(){
-        return gameState!=GameState.INIT;
-    }
-
     /** rimouove giocatore dal gioco e controlla se era l'active player---> inizia nuovo turno */
-    public void disconnect(String username){
-        if(username.equals(getActivePlayer())) {
+    public void disconnect(String nickname){
+        if(nickname.equals(getActivePlayer())) {
             if(turnController.nextPlayer().equals(turnController.firstPlayer())&&turnController.getActivePlayers().size()!=0){
                 switch(gameState){
                     case INIT:
@@ -288,11 +283,16 @@ public class GameController {
                         break;
                 }
             }
-            turnController.disconnect(username);
+            turnController.disconnect(nickname);
             startTurn();
         }
-        allVirtualView.remove(username);
-        turnController.disconnect(username);
+        allVirtualView.remove(nickname);
+        turnController.disconnect(nickname);
+    }
+
+    /** se il gioco non è cominciato ----> return false */
+    public boolean isGameStarted(){
+        return gameState!=GameState.INIT;
     }
 
     /** giocatore attiivo in quel momento */

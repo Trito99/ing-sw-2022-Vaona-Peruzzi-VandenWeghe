@@ -92,9 +92,9 @@ public class Lobby {
     }
 
     /** riconnetti giocatore alla Lobby */
-    public void reconnect(String username, ClientHandler clientHandler,VirtualView virtualView){
-        clientHandlerMap.put(clientHandler, username);
-        gameController.reconnect(username, virtualView);
+    public void reconnect(String nickname, ClientHandler clientHandler,VirtualView virtualView){
+        clientHandlerMap.put(clientHandler, nickname);
+        gameController.reconnect(nickname, virtualView);
     }
 
 

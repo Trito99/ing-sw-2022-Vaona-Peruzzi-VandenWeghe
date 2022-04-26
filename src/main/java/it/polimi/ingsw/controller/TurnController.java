@@ -46,7 +46,7 @@ public class TurnController {
     }
 
     /** giocatore ancora connessi ordinati con l'ordine del turno */
-    public List<String> getActivePlayers(){
+    public ArrayList<String> getActivePlayers(){
         ArrayList<String> activePlayers = new ArrayList<String>();
         for(int i = 0; i < orderPlayers.size(); i++) {
             if (activePlayer.get(orderPlayers.get(i))) activePlayers.add(orderPlayers.get(i));
@@ -65,14 +65,14 @@ public class TurnController {
     }
 
     /** imposta nickname del giocatore come attivo per permettergli di giocare */
-    public void reconnect(String username){
-        activePlayer.put(username, true);
+    public void reconnect(String nickname){
+        activePlayer.put(nickname, true);
     }
 
     /** imposta giocatore come inattivo per permettere di ricollegarsi più tardi */
-    public boolean disconnect(String username){
-        activePlayer.put(username,false);
-        return(username.equals(getActivePlayer()));
+    public boolean disconnect(String nickname){
+        activePlayer.put(nickname,false);
+        return(nickname.equals(getActivePlayer()));
     }
 
 
