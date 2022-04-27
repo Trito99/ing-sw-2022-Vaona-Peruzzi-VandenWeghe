@@ -287,13 +287,5 @@ public class School {
         return countProf;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof School)) return false;
-        School school = (School) o;
-        return Objects.equals(profOfPlayer, school.profOfPlayer);
-    }
-
 }
 

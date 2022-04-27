@@ -214,12 +214,4 @@ public class IslandCard {
         this.xCardOnIsland = xCardOnIsland;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof IslandCard)) return false;
-        IslandCard that = (IslandCard) o;
-        return towerOnIsland.equals(that.towerOnIsland);
-    }
-
 }

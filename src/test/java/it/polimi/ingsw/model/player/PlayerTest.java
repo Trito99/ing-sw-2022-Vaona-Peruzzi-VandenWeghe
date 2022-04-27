@@ -2,7 +2,7 @@ package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
-import it.polimi.ingsw.model.assistant.DeckName;
+import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.table.Table;
@@ -10,8 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
-
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import static java.util.Calendar.*;
@@ -25,7 +23,7 @@ public class PlayerTest {
     @BeforeEach
     public void setup(){
         table = new Table();
-        deckOfPlayer = new DeckAssistant(DeckName.DECK1);
+        deckOfPlayer = new DeckAssistant(AssistantDeckName.DECK1);
         table.addFinalStudents();
         table.generateIslandCards();
         table.generateMotherEarth();
@@ -36,8 +34,10 @@ public class PlayerTest {
     public void generateSchool(GameMode gm){
         Player player1 = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
         Player player2 = new Player(TColor.WHITE, PlayerNumber.PLAYER2);
+        Player player3 = new Player(TColor.WHITE, PlayerNumber.PLAYER3);
         player1.generateSchool(table, gm);
         player2.generateSchool(table, gm);
+        player3.generateSchool(table, gm);
         assertNotNull(player1.getPersonalSchool());
         assertNotNull(player1.getPersonalSchool().getEntry());
         assertNotNull(player1.getPersonalSchool().getTower());
@@ -56,6 +56,8 @@ public class PlayerTest {
                 assertEquals(8, player1.getPersonalSchool().getTower().size());
                 assertEquals(7, player2.getPersonalSchool().getEntry().size());
                 assertEquals(0, player2.getPersonalSchool().getTower().size());
+                assertEquals(7, player1.getPersonalSchool().getEntry().size());
+                assertEquals(8, player1.getPersonalSchool().getTower().size());
             default:
                 break;
         }
@@ -151,7 +153,7 @@ public class PlayerTest {
    @Test
    public void deckOfPlayerTest(){
        Player player = new Player(TColor.BLACK, PlayerNumber.PLAYER1);
-       DeckAssistant deckOfPlayer = new DeckAssistant(DeckName.DECK1);
+       DeckAssistant deckOfPlayer = new DeckAssistant(AssistantDeckName.DECK1);
        assertNull(player.getDeckOfPlayer());
 
        player.setDeckOfPlayer(deckOfPlayer);
@@ -198,7 +200,7 @@ public class PlayerTest {
    @Test
     void getAssistantCardTest(){
         Player player = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
-        DeckAssistant deckAssistant = new DeckAssistant(DeckName.DECK1);
+        DeckAssistant deckAssistant = new DeckAssistant(AssistantDeckName.DECK1);
 
         player.setDeckOfPlayer(deckAssistant);
         AssistantCard card = player.getAssistantCard("lion");

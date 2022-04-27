@@ -2,8 +2,6 @@ package it.polimi.ingsw.model.assistant;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 
@@ -12,7 +10,7 @@ public class DeckAssistantTest {
     @Test
     public void generateAssistantDeckTest(){
 
-        DeckAssistant deckAssistant = new DeckAssistant(DeckName.DECK1);
+        DeckAssistant deckAssistant = new DeckAssistant(AssistantDeckName.DECK1);
         deckAssistant.generateAssistantDeck();
         int countCard = 0,countStepMotherEarth = 0,countTurnValue = 0,n=1;
         assertNotNull(deckAssistant.getCardsInHand());

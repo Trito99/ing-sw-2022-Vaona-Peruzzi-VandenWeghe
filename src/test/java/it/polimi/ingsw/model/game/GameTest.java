@@ -2,11 +2,9 @@ package it.polimi.ingsw.model.game;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
-import it.polimi.ingsw.model.assistant.DeckName;
+import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.character.CardEffect;
-import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.DeckCharacter;
-import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.TColor;
@@ -30,7 +28,7 @@ class GameTest {
         player.setNickname("Gino");
         game.addPlayer(player);
         Table table = new Table();
-        DeckAssistant deckAssistant = new DeckAssistant(DeckName.DECK1);
+        DeckAssistant deckAssistant = new DeckAssistant(AssistantDeckName.DECK1);
         table.generateIslandCards();
 
         game.setTable(table);
@@ -70,7 +68,7 @@ class GameTest {
         Player player = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
         player.setNickname("Gino");
         game.addPlayer(player);
-        DeckAssistant deckAssistant = new DeckAssistant(DeckName.DECK1);
+        DeckAssistant deckAssistant = new DeckAssistant(AssistantDeckName.DECK1);
         game.getPlayer("Gino").setDeckOfPlayer(deckAssistant);
 
         game.playAssistantCard("lion", "Gino");
@@ -113,8 +111,7 @@ class GameTest {
     }
 
     /** Da Fare: Test di playCharacterCard */
-
-    @RepeatedTest(1000)
+    @RepeatedTest(100)
     void playCharacterCardTest(){
         Game game= new Game();
         Table table = new Table();

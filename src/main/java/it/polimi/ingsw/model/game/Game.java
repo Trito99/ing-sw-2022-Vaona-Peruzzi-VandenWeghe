@@ -42,7 +42,6 @@ public class Game {
         table.generateCloudNumber(gameMode);  */
     }
 
-
     public GameMode getGameMode() {
         return gameMode;
     }
@@ -113,6 +112,11 @@ public class Game {
                 player.getPersonalSchool().getTower().isEmpty() ||
                 table.getBag().isEmpty() ||
                 table.getListOfIsland().size() == 3;
+    }
+
+    public void decreaseCoinScore(String nickname, int decreaseValue) {
+        Player activePlayer = getPlayer(nickname);
+        activePlayer.setCoinScore(activePlayer.getCoinScore() - decreaseValue);
     }
 
     /** AssistantName is the card chosen by the Player, nickname is the player that chooses the assistant card to play */
@@ -355,17 +359,6 @@ public class Game {
         }
     }
     
-    public void decreaseCoinScore(String nickname, int decreaseValue) {
-        Player activePlayer = getPlayer(nickname);
-        activePlayer.setCoinScore(activePlayer.getCoinScore() - decreaseValue);
-    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Game)) return false;
-        Game game = (Game) o;
-        return Objects.equals(table, game.table);
-    }
 
 }

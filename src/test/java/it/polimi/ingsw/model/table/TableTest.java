@@ -1,8 +1,5 @@
 package it.polimi.ingsw.model.table;
 
-import it.polimi.ingsw.model.assistant.AssistantCard;
-import it.polimi.ingsw.model.assistant.DeckAssistant;
-import it.polimi.ingsw.model.assistant.DeckName;
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.DeckCharacter;

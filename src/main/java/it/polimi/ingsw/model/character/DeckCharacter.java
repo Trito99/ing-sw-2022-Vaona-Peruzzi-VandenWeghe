@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model.character;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class DeckCharacter {
 
@@ -13,10 +12,6 @@ public class DeckCharacter {
 
     public ArrayList<CharacterCard> getCharacterCards(){
         return (ArrayList<CharacterCard>) characterCards.clone();
-    }
-
-    public void shuffleCard(ArrayList<CharacterCard> characterCards){  /** Serve? */
-        Collections.shuffle(characterCards);
     }
 
     public void generateCharacterDeck(){

@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class DeckAssistant {
 
     private ArrayList<AssistantCard> cardsInHand;
-    private DeckName deckName;
+    private AssistantDeckName assistantDeckName;
 
-    public DeckAssistant(DeckName deckName){
-        this.deckName = deckName;
+    public DeckAssistant(AssistantDeckName assistantDeckName){
+        this.assistantDeckName = assistantDeckName;
         this.cardsInHand = new ArrayList<>();
     }
 
@@ -29,12 +29,12 @@ public class DeckAssistant {
         cardsInHand.add(new AssistantCard("turtle", 5, 10));
     }
 
-    public DeckName getDeckName(){
-        return deckName;
+    public AssistantDeckName getDeckName(){
+        return assistantDeckName;
     }
 
-    public void setName(DeckName deckName){
-        this.deckName = deckName;
+    public void setName(AssistantDeckName assistantDeckName){
+        this.assistantDeckName = assistantDeckName;
     }
 
 }

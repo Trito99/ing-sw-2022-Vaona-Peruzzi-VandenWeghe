@@ -9,9 +9,9 @@ public class AssistantCard {
     //Constructs an AssistantCard.
 
     public AssistantCard(String assistantName,int stepMotherEarth, int turnValue){
-        this.assistantName=assistantName;
-        this.stepMotherEarth=stepMotherEarth;
-        this.turnValue=turnValue;
+        this.assistantName = assistantName;
+        this.stepMotherEarth = stepMotherEarth;
+        this.turnValue = turnValue;
     }
 
     public String getAssistantName() {

@@ -66,9 +66,9 @@ public class Player {
             table.getBag().remove(table.getBag().get(s));
         }
         for (int f = 0; f < t; f++) {
-            if(gameMode == GameMode.COOP && playerNumber ==PlayerNumber.PLAYER1 )
+            if(gameMode == GameMode.COOP && playerNumber == PlayerNumber.PLAYER1 )
                 personalSchool.addTower(f, tColor);
-            else if(gameMode == GameMode.COOP && playerNumber ==PlayerNumber.PLAYER3)
+            else if(gameMode == GameMode.COOP && playerNumber == PlayerNumber.PLAYER3)
                 personalSchool.addTower(f, tColor);
             else if(gameMode!=GameMode.COOP)
                 personalSchool.addTower(f, tColor);

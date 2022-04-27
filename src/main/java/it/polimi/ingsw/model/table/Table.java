@@ -442,13 +442,5 @@ public class Table {
         return winner;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Table)) return false;
-        Table table = (Table) o;
-        return listOfIsland.equals(table.listOfIsland);
-    }
-
 }
 
