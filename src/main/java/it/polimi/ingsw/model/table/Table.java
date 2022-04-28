@@ -221,26 +221,26 @@ public class Table {
         int i = posMotherEarth - 1;
         if (listOfIsland.get(i).towerIsOnIsland()) {/** isole adiacenti */
             if (i == (listOfIsland.size() - 1)) {
-                if (!listOfIsland.get(i - 1).towerIsOnIsland()) {
+                if (!listOfIsland.get(i - 1).towerIsOnIsland() && listOfIsland.get(0).towerIsOnIsland()) {
                     MergeNoTower(listOfIsland,i,0);
-                } else if (!listOfIsland.get(0).towerIsOnIsland()) {
+                } else if (!listOfIsland.get(0).towerIsOnIsland() && listOfIsland.get(i - 1).towerIsOnIsland()) {
                     MergeNoTower(listOfIsland, i, i-1);
                 } else if (listOfIsland.get(0).towerIsOnIsland() && listOfIsland.get(i - 1).towerIsOnIsland()) {
                     MergeTower(listOfIsland,i,0,i-1);
                 }
             }else if(i==0){
                 int s = (listOfIsland.size() - 1);
-                if (!listOfIsland.get(s).towerIsOnIsland()) {
+                if (!listOfIsland.get(s).towerIsOnIsland() && listOfIsland.get(i + 1).towerIsOnIsland()) {
                     MergeNoTower(listOfIsland, i,i+1);
-                } else if (!listOfIsland.get(i + 1).towerIsOnIsland()) {
+                } else if (!listOfIsland.get(i + 1).towerIsOnIsland() && listOfIsland.get(s).towerIsOnIsland()) {
                     MergeNoTower(listOfIsland, i, s);// 3 isole caso i= size
                 } else if (listOfIsland.get(s).towerIsOnIsland() && listOfIsland.get(i+1).towerIsOnIsland()) {
                     MergeTower(listOfIsland,i,i+1,s);
                 }
             }else{
-                if (!listOfIsland.get(i - 1).towerIsOnIsland()) {
+                if (!listOfIsland.get(i - 1).towerIsOnIsland() && listOfIsland.get(i + 1).towerIsOnIsland()) {
                     MergeNoTower(listOfIsland, i,i+1);
-                } else if (!listOfIsland.get(i + 1).towerIsOnIsland()) {
+                } else if (!listOfIsland.get(i + 1).towerIsOnIsland() && listOfIsland.get(i - 1).towerIsOnIsland() ) {
                     MergeNoTower(listOfIsland, i, i-1);
                 } else if (listOfIsland.get(i-1).towerIsOnIsland() && listOfIsland.get(i+1).towerIsOnIsland()) {
                     MergeTower(listOfIsland,i,i+1,i-1);
