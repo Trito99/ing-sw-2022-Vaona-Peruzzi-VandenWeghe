@@ -13,7 +13,7 @@ import java.net.Socket;
 /** rappresenta il client a lato server.
  * Gestisce i messaggi ricevuti dal client, e invia i messaggi del GameController al client */
 
-public class ClientHandler implements ClientHandlerInterface /** Runnable */ {
+public class ClientHandler implements ClientHandlerInterface, Runnable {
     private Socket client;
     private ObjectOutputStream output;
     private ObjectInputStream input;
@@ -96,4 +96,10 @@ public class ClientHandler implements ClientHandlerInterface /** Runnable */ {
         }
     }
 
+
+    @Override
+    public void run() {
+        System.out.println("Connected to " + client.getInetAddress());
+        handleMessage();
+    }
 }
