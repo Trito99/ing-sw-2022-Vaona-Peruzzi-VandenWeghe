@@ -184,7 +184,6 @@ public class Game {
 
                 islandChosen.calculateInfluence(playersList, characterCardPlayed.getCardEffect());
                 islandChosen.buildTowerOnIsland(playersList, characterCardPlayed.getCardEffect());
-                islandChosen.changeTowerColour(playersList, characterCardPlayed.getCardEffect());
                 getTable().joinIsland(getTable().getListOfIsland());
                 break;
 

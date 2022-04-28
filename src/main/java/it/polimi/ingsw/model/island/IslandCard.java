@@ -77,35 +77,30 @@ public class IslandCard {
 
                 TColor towerColour = playerFound.getTColor();      //Colore delle torri del player che ha influenza
                 if (playerFound.getPersonalSchool().getTower().size() != 0) {
-                    towerOnIsland = new Tower(playerFound.getPersonalSchool().getTower().size(), towerColour);
-                    playerFound.getPersonalSchool().removeTower();
-                    setTowerIsOnIsland(true);
+                    if(!towerIsOnIsland) {
+                        towerOnIsland = new Tower(playerFound.getPersonalSchool().getTower().size(), towerColour);
+                        playerFound.getPersonalSchool().removeTower();
+                        setTowerIsOnIsland(true);
+                    }else if(!playerFound.getTColor().equals(towerOnIsland.getTColour())){
+                        changeTowerColour(listOfPlayer, cardEffectPlayed, playerFound);
+                    }
                 }
-
             }
         }
     }
 
-    public void changeTowerColour(ArrayList<Player> listOfPlayers, CardEffect cardEffectPlayed){        //cambio colore della torre se è cambiata l'influenza sull'isola
+    private void changeTowerColour(ArrayList<Player> listOfPlayers, CardEffect cardEffectPlayed, Player playerBuilder){        //cambio colore della torre se è cambiata l'influenza sull'isola
 
         Player prevPlayer = null;
-        Player playerBuilder = calculateInfluence(listOfPlayers, cardEffectPlayed);
-
-        if(playerBuilder==null){
-            return;             /** Se nessuno ha influenza non cambia il colore */
-        }
 
         for(Player player : listOfPlayers){
             if(player.getTColor().equals(towerOnIsland.getTColour()))          //determina il prevPlayer
                 prevPlayer = player;
         }
-
-        if(playerBuilder.getTColor().equals(towerOnIsland.getTColour())) {
-            return;
-        }
-        else{
+        if(!playerBuilder.getTColor().equals(towerOnIsland.getTColour())){
+            prevPlayer.getPersonalSchool().getTower().add(towerOnIsland);
             setTowerOnIsland(playerBuilder.getPersonalSchool().getTower().get(playerBuilder.getPersonalSchool().getTower().size() - 1));
-            prevPlayer.getPersonalSchool().addTower(playerBuilder.getPersonalSchool().getTower().size(), playerBuilder.getTColor());
+            playerBuilder.getPersonalSchool().removeTower();
         }
     }
 
