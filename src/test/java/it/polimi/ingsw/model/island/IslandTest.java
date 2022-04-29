@@ -270,7 +270,7 @@ public class IslandTest {
 
 
 
-   @RepeatedTest(100)
+   @RepeatedTest(1000)
    public void BuildTowerOnIslandTest(){
       Random rn = new Random();
       int r;
@@ -351,19 +351,50 @@ public class IslandTest {
                assertEquals(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE).getTColor(),islandCard.getTowerOnIsland().getTColour());
             table.moveMotherEarth(1);
          }
-         for (int i = 0; i < 12; i++) {/** Towers are positioned randomly on Islands */
-            r=rn.nextInt(game.getListOfPlayers().size()-1);
-            int size=game.getListOfPlayers().get(r).getPersonalSchool().getTower().size();
-            if(game.getListOfPlayers().get(r).getPersonalSchool().getTower().size()!=0){
-               table.getListOfIsland().get(i).setTowerOnIsland(game.getListOfPlayers().get(r).getPersonalSchool().getTower().get(size-1));
-               game.getListOfPlayers().get(r).getPersonalSchool().getTower().remove(size-1);
-               table.getListOfIsland().get(i).setTowerIsOnIsland(true);
+
+         for (int i = 0; i < 12; i++) {  /** Moves random number of students on Islands. */
+            r = rn.nextInt(4)+1;
+            if(table.getBag().size()>r) {
+               for (int n = 0; n < r; n++) {
+                  table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
+                  table.getBag().remove(0);
+               }
             }
          }
          table.moveMotherEarth(13-table.getPosMotherEarth());
          for (IslandCard islandCard: table.getListOfIsland()){
-            islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE);
-            if(islandCard.towerIsOnIsland() && islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE)!=null)
+            int size=0;
+            Player prev=null;
+            if(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE) !=null && islandCard.towerIsOnIsland()){
+               if(!islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE).getTColor().equals(islandCard.getTowerOnIsland().getTColour())) {
+                  for (Player player : game.getListOfPlayers()) {
+                     if (islandCard.towerIsOnIsland()) {
+                        if (player.getTColor() == islandCard.getTowerOnIsland().getTColour()){
+                           if (player.getPersonalSchool().getTower().size() != 0) {
+                              size = player.getPersonalSchool().getTower().size();
+                              prev = player;
+                           }
+                        }
+                     }
+                  }
+                  islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE);
+                  assertEquals(size+1,prev.getPersonalSchool().getTower().size());
+               }else if (islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE).getTColor().equals(islandCard.getTowerOnIsland().getTColour())){
+                  for (Player player : game.getListOfPlayers()) {
+                     if (islandCard.towerIsOnIsland()) {
+                        if (player.getTColor() == islandCard.getTowerOnIsland().getTColour()){
+                              size = player.getPersonalSchool().getTower().size();
+                              prev = player;
+                        }
+                     }
+                  }
+                  islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE);
+                  assertEquals(size,prev.getPersonalSchool().getTower().size());
+               }
+            }else
+               islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE);
+
+            if(islandCard.towerIsOnIsland())
                assertEquals(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE).getTColor(),islandCard.getTowerOnIsland().getTColour());
             table.moveMotherEarth(1);
          }
