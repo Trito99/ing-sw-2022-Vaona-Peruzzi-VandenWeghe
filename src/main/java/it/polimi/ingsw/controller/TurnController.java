@@ -1,9 +1,8 @@
 package it.polimi.ingsw.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import it.polimi.ingsw.model.player.Player;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TurnController {
@@ -11,6 +10,7 @@ public class TurnController {
     private String playingPlayer;
 
     private ArrayList<String> orderPlayers;
+    private ArrayList<Player> playersOrder; // Messo per changeOrder--> andrà tenuto solo orderPlayers(?)
 
     //dichiarare attributi
     /** costruttore */
@@ -75,18 +75,9 @@ public class TurnController {
         return(nickname.equals(getActivePlayer()));
     }
 
+    public void changeOrder(ArrayList<Player> playerOrder){   //setta ordine dei giocatori nel round
 
-
-/**
-    public ArrayList<Player> setOrder(ArrayList<Player> round){   //setta ordine dei giocatori nel round
-       for(Player i : round) {
-            round.set(i,Player.setTrash(Player.getTrash())); //assegna ad ogni player il turnvalue della sua ultima carta giocata (Update: non serve?)
-
-            //DA CONTROLLARE !!!
-    Fede: Non dovrebbe servire assegnare valore ai player perchè c'è già nella sua Trash, la trash andrebbe aggiornata quando è giocata la carta
-        }
-        round.sort(Player.getTrash().getTurnValue());  //da guardare come funziona sort
-        return round;
-    }    */
+        Collections.sort(playerOrder, (o1, o2) -> Integer.valueOf(o1.getTrash().getTurnValue()).compareTo(o2.getTrash().getTurnValue()));
+    }
 
 }
