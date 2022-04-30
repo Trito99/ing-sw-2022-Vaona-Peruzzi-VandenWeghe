@@ -83,7 +83,27 @@ public class Cli extends ObservableView implements View {
     }
 
     @Override
+    public void showWinMessage(int numberOfTower) {
+
+    }
+
+    @Override
+    public void showErrorMessage(String message) {
+
+    }
+
+    @Override
     public void askAction() {
+
+    }
+
+    @Override
+    public void askConnect() {
+
+    }
+
+    @Override
+    public void askLobby() {
 
     }
 

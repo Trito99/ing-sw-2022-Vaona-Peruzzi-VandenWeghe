@@ -15,6 +15,7 @@ import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.network.ClientHandlerInterface;
 import it.polimi.ingsw.observer.Observer;
+import it.polimi.ingsw.message.Error;
 
 import java.util.ArrayList;
 
@@ -63,6 +64,11 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
+    public void showErrorMessage(String message) {
+        clientHandler.sendMessage(new Error(message));
+    }
+
+    @Override
     public void showPlayer(String nickname, PlayerNumber playerNumber, TColor tColor, int influenceOnIsland, School personalSchool, DeckAssistant deckOfPlayer, AssistantCard trash, int coinscore, String player) {
         clientHandler.sendMessage(new ShowPlayerInfo(nickname, playerNumber, tColor, influenceOnIsland, personalSchool, deckOfPlayer,trash, coinscore));
     }
@@ -79,8 +85,23 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
+    public void showWinMessage(int numberOfTower) {
+
+    }
+
+    @Override
     public void askAction() {
         clientHandler.sendMessage(new StartTurn());
+    }
+
+    @Override
+    public void askConnect() {
+
+    }
+
+    @Override
+    public void askLobby() {
+
     }
 
     @Override

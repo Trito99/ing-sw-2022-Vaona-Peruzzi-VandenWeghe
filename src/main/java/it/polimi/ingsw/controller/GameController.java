@@ -5,6 +5,8 @@ import it.polimi.ingsw.message.ClientMessage;
 import it.polimi.ingsw.message.MessageType;
 import it.polimi.ingsw.message.PlayersNumber;
 import it.polimi.ingsw.model.character.CardEffect;
+import it.polimi.ingsw.model.character.CharacterCard;
+import it.polimi.ingsw.model.character.DeckCharacter;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameState;
@@ -16,6 +18,7 @@ import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.view.VirtualView;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -51,9 +54,9 @@ public class GameController {
             //this.gameSession.addPlayer(new Player(nickname));
             allVirtualView.put(nickname, virtualView);
             virtualView.showLogin(nickname, gameId,true);
-            /**if(allVirtualView.size()==maxPlayers){
-                startGame();
-            } */
+            if(allVirtualView.size()==maxPlayers){
+                initializeGame();
+            }
             return true;
         }
         else virtualView.showLogin(nickname, gameId,false);
@@ -165,7 +168,70 @@ public class GameController {
 
     public void initializeGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
         setGameState(GameState.INIT);
+        turnController=new TurnController(this);
+        switch(maxPlayers){
+            case 4:
+                gameSession.getListOfPlayers().get(3).generateSchool(gameSession.getTable(), gameSession.getGameMode());
+                gameSession.getTable().generateBagInit();
+                gameSession.getTable().generateIslandCards();
+                gameSession.getTable().generateMotherEarth();
+                gameSession.getTable().generateCloudNumber(gameSession.getGameMode());
+                gameSession.getTable().extractStudentOnCloud();
+                gameSession.getTable().extractStudentsInit();
+                gameSession.getTable().addFinalStudents();
 
+                if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
+                    DeckCharacter characterDeck = new DeckCharacter();
+                    characterDeck.generateCharacterDeck();
+                    gameSession.getTable().generateCharacterCardsOnTable(characterDeck.getCharacterCards());
+                } else gameSession.getTable().generateCharacterCardsOnTable(null);
+
+                /** da decidere: cosa mostrare del giocatore a inizio gioco*/
+                allVirtualView.get(gameSession.getPlayerListByNickname().get(3)).showPlayerList(gameSession.getPlayerListByNickname());
+                break;
+            case 3:
+                gameSession.getListOfPlayers().get(2).generateSchool(gameSession.getTable(), gameSession.getGameMode());
+                gameSession.getTable().generateBagInit();
+                gameSession.getTable().generateIslandCards();
+                gameSession.getTable().generateMotherEarth();
+                gameSession.getTable().generateCloudNumber(gameSession.getGameMode());
+                gameSession.getTable().extractStudentOnCloud();
+                gameSession.getTable().extractStudentsInit();
+                gameSession.getTable().addFinalStudents();
+
+                if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
+                    DeckCharacter characterDeck = new DeckCharacter();
+                    characterDeck.generateCharacterDeck();
+                    gameSession.getTable().generateCharacterCardsOnTable(characterDeck.getCharacterCards());
+                } else gameSession.getTable().generateCharacterCardsOnTable(null);
+
+                /** da decidere: cosa mostrare del giocatore a inizio gioco*/
+                allVirtualView.get(gameSession.getPlayerListByNickname().get(2)).showPlayerList(gameSession.getPlayerListByNickname());
+                break;
+            case 2:
+                gameSession.getListOfPlayers().get(1).generateSchool(gameSession.getTable(), gameSession.getGameMode());
+                gameSession.getTable().generateBagInit();
+                gameSession.getTable().generateIslandCards();
+                gameSession.getTable().generateMotherEarth();
+                gameSession.getTable().generateCloudNumber(gameSession.getGameMode());
+                gameSession.getTable().extractStudentOnCloud();
+                gameSession.getTable().extractStudentsInit();
+                gameSession.getTable().addFinalStudents();
+
+                if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
+                    DeckCharacter characterDeck = new DeckCharacter();
+                    characterDeck.generateCharacterDeck();
+                    gameSession.getTable().generateCharacterCardsOnTable(characterDeck.getCharacterCards());
+                } else gameSession.getTable().generateCharacterCardsOnTable(null);
+
+                /** da decidere: cosa mostrare del giocatore a inizio gioco*/
+                allVirtualView.get(gameSession.getPlayerListByNickname().get(1)).showPlayerList(gameSession.getPlayerListByNickname());
+                break;
+            default:
+                break;
+        }
+        broadcastMessage("Everyone joined the game!");
+        startTurn();
     }
 
     public void getMessage(ClientMessage receivedMessage) throws InvalidParameterException {

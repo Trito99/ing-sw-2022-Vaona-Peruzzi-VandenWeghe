@@ -38,11 +38,21 @@ public interface View {
 
     void showTable(Table table);
 
+    void showWinMessage(int numberOfTower);
+
+    void showErrorMessage(String message);
+
 
     /** azioni di gioco */
 
     /** chiede al giocatore quale sarà la sua prossima azione */
     void askAction();
+
+    /** chiede al giocatore di connettersi al server fornendo indirizzo ip e porta */
+    void askConnect();
+
+    /** chiede al giocatore di connettersi al gioco fornendo username e game id */
+    void askLobby();
 
     /** chiede quanti giocatori avrà il nuovo gioco */
     void askPlayersNumber();
@@ -64,5 +74,7 @@ public interface View {
 
     /** chiede al giocatore di scegliere una tessera nuvola */
     void askChooseCloud(Table table);
+
+
 
 }

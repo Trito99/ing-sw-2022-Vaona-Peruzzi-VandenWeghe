@@ -3,7 +3,7 @@ package it.polimi.ingsw.message;
 public enum MessageType {
     //messaggi del gioco
     LOGIN,
-    LOGIN_REPLY,
+    LOGIN_RESULT,
     PLAYER_NUMBER,
 
     //messaggi di connessione al server
