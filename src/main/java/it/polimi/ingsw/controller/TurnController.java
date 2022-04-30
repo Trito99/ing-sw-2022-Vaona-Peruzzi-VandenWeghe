@@ -5,6 +5,8 @@ import it.polimi.ingsw.model.player.Player;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.Collections.*;
+
 public class TurnController {
     private HashMap<String, Boolean> activePlayer;
     private String playingPlayer;
@@ -48,8 +50,9 @@ public class TurnController {
     /** giocatore ancora connessi ordinati con l'ordine del turno */
     public ArrayList<String> getActivePlayers(){
         ArrayList<String> activePlayers = new ArrayList<String>();
-        for(int i = 0; i < orderPlayers.size(); i++) {
-            if (activePlayer.get(orderPlayers.get(i))) activePlayers.add(orderPlayers.get(i));
+        for (String orderPlayer : orderPlayers) {
+            if (activePlayer.get(orderPlayer))
+                activePlayers.add(orderPlayer);
         }
         return activePlayers;
     }
