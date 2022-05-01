@@ -82,6 +82,7 @@ public class IslandCard {
                         playerFound.getPersonalSchool().removeTower();
                         setTowerIsOnIsland(true);
                     }else if(!playerFound.getTColor().equals(towerOnIsland.getTColour())){
+                        System.out.println(4567890);
                         changeTowerColour(listOfPlayer, cardEffectPlayed, playerFound);
                     }
                 }
@@ -144,7 +145,7 @@ public class IslandCard {
                 /** EFFETTO CENTAURO */
                 if(towerIsOnIsland) {
                     if (p.getTColor().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isCentaurPlayed()) {  /** Aggiungo influenza torri */
-                        countTot++;
+                        countTot=countTot+mergedIsland;
                     }
                 }
 

@@ -270,7 +270,7 @@ public class IslandTest {
 
 
 
-   @RepeatedTest(1000)
+   @RepeatedTest(100)
    public void BuildTowerOnIslandTest(){
       Random rn = new Random();
       int r;
@@ -351,22 +351,50 @@ public class IslandTest {
                assertEquals(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE).getTColor(),islandCard.getTowerOnIsland().getTColour());
             table.moveMotherEarth(1);
          }
+         /**for (int i = 0; i < index+2; i++) {    /** Positions the Professors according to the rules *
+            for (int y = 0; y < 5; y++) {
+               System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getProfOfPlayer().get(y).getIsInHall()+" ");
+            }
+         }   System.out.println();*/
 
-         for (int i = 0; i < 12; i++) {  /** Moves random number of students on Islands. */
-            r = rn.nextInt(4)+1;
-            if(table.getBag().size()>r) {
-               for (int n = 0; n < r; n++) {
-                  table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
-                  table.getBag().remove(0);
+
+
+         for (int i = 0; i < index+2; i++) {    /** Switches true and false of prof */
+            for(int y=0;y<5;y++){
+               if(game.getListOfPlayers().get(i).getPersonalSchool().getProfOfPlayer().get(y).getIsInHall()) {
+                  game.getListOfPlayers().get(i).getPersonalSchool().getProfOfPlayer().get(y).setInHall(false);
+                  r = rn.nextInt(index+2);
+                  if (r != i) {
+                     game.getListOfPlayers().get(r).getPersonalSchool().getProfOfPlayer().get(y).setInHall(true);
+                  }
+                  while(r==i) {
+                     r = rn.nextInt(index+2);
+                     if (r != i) {
+                        game.getListOfPlayers().get(r).getPersonalSchool().getProfOfPlayer().get(y).setInHall(true);
+                     }
+                  }
                }
             }
          }
+
+         /**for (int i = 0; i < index+2; i++) {    /** Positions the Professors according to the rules *
+            for (int y = 0; y < 5; y++) {
+               System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getProfOfPlayer().get(y).getIsInHall()+" ");
+            }
+         }   System.out.println();*/
+
+
          table.moveMotherEarth(13-table.getPosMotherEarth());
          for (IslandCard islandCard: table.getListOfIsland()){
+            if(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE) !=null && islandCard.towerIsOnIsland()) {
+               System.out.println((islandCard.getTowerOnIsland().getTColour()));
+               System.out.println(islandCard.calculateInfluence(game.getListOfPlayers(), CardEffect.STANDARDMODE).getTColor());
+            }
             int size=0;
             Player prev=null;
             if(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE) !=null && islandCard.towerIsOnIsland()){
-               if(!islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE).getTColor().equals(islandCard.getTowerOnIsland().getTColour())) {
+               if(!(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE).getTColor().equals(islandCard.getTowerOnIsland().getTColour()))) {
+                  System.out.println(12345678);
                   for (Player player : game.getListOfPlayers()) {
                      if (islandCard.towerIsOnIsland()) {
                         if (player.getTColor() == islandCard.getTowerOnIsland().getTColour()){
@@ -394,7 +422,7 @@ public class IslandTest {
             }else
                islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE);
 
-            if(islandCard.towerIsOnIsland())
+            if(islandCard.towerIsOnIsland() && islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE)!=null)
                assertEquals(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE).getTColor(),islandCard.getTowerOnIsland().getTColour());
             table.moveMotherEarth(1);
          }
