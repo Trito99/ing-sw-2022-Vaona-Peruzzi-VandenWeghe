@@ -4,6 +4,8 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.message.ClientMessage;
 import it.polimi.ingsw.message.MessageType;
 import it.polimi.ingsw.message.PlayersNumber;
+import it.polimi.ingsw.model.assistant.AssistantCard;
+import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.DeckCharacter;
 import it.polimi.ingsw.model.game.Difficulty;
@@ -16,6 +18,7 @@ import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.view.VirtualView;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -328,18 +331,19 @@ public class GameController {
         for(String s: allVirtualView.keySet()){
             if (!s.equals(getActivePlayer())){
                 allVirtualView.get(s).showPlayerTurn(getActivePlayer());
-                int i = 0;
-                for(i=0; i< maxPlayers; i++){
-                    if (getActivePlayer().equals(gameSession.getListOfPlayers().get(i).getNickname())){
-                        Player current = gameSession.getListOfPlayers().get(i);
-                        DeckAssistant deckPlayer = current.getDeckOfPlayer();
-                        allVirtualView.get(s).askAssistantCardToPlay(deckPlayer);
-                    }
-                }
+            }
+        }
+        ArrayList<AssistantCard> assistantCards = new ArrayList<>();
+        for(int i=0; i<maxPlayers; i++){
+            if (getActivePlayer().equals(gameSession.getListOfPlayers().get(i).getNickname())){
+                Player currentPlayer = gameSession.getListOfPlayers().get(i);
+                String currentDeck = currentPlayer.getDeckOfPlayer().getCardsInHand().get(0).getAssistantName();
+                assistantCards.add(gameSession.playAssistantCard(currentDeck, getActivePlayer()));
             }
         }
 
-        //allVirtualView.get(getActivePlayer()).askLeaderCardToKeep(leaderCards);
+        allVirtualView.get(getActivePlayer()).askAssistantCardToPlay(assistantCards);
+
     }
 
     public void action(){

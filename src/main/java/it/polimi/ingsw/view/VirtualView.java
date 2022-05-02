@@ -123,7 +123,7 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void askAssistantCardToPlay(DeckAssistant assistantDeck) {
+    public void askAssistantCardToPlay(ArrayList<AssistantCard> assistantDeck) {
         clientHandler.sendMessage(new ShowAssistantToPlay(assistantDeck));
     }
 

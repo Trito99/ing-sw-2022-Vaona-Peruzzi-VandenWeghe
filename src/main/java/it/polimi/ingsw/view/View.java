@@ -61,7 +61,7 @@ public interface View {
     void askGameMode(Game game);
 
     /** chiede al giocatore quale carta assistente vuole giocare */
-    void askAssistantCardToPlay(DeckAssistant assistantDeck);
+    void askAssistantCardToPlay(ArrayList<AssistantCard> assistantDeck);
 
     /** chiede al giocatore dove muovere gli studenti */
     void askStudentsToMove(ArrayList<Student> studentsInHall, School school, Table table);

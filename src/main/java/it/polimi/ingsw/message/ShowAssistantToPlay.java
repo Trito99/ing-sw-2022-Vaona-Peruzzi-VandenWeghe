@@ -8,10 +8,9 @@ import java.util.ArrayList;
 public class ShowAssistantToPlay extends ServerMessage {
     private ArrayList<AssistantCard> assistantDeck;
 
-    public ShowAssistantToPlay(DeckAssistant assistantDeck) {
+    public ShowAssistantToPlay(ArrayList<AssistantCard> assistantDeck) {
         super(MessageType.PLAY_ASSISTANT_CARD);
-        ArrayList<AssistantCard> cardToPlay = assistantDeck.getCardsInHand();
-        this.assistantDeck = cardToPlay;
+        this.assistantDeck = assistantDeck;
     }
 
     public ArrayList<AssistantCard> getAssistantCard() {

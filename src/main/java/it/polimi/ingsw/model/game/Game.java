@@ -120,7 +120,7 @@ public class Game {
     }
 
     /** AssistantName is the card chosen by the Player, nickname is the player that chooses the assistant card to play */
-    public void playAssistantCard(String assistantName, String nickname){
+    public AssistantCard playAssistantCard(String assistantName, String nickname){
         
         Player activePlayer = getPlayer(nickname);
         AssistantCard assistantCardPlayed = activePlayer.getAssistantCard(assistantName);
@@ -130,6 +130,8 @@ public class Game {
         activePlayer.setTrash(assistantCardPlayed);
         activePlayer.setHasAlreadyPlayed(true);
         activePlayer.getDeckOfPlayer().getCardsInHand().remove(assistantCardPlayed);
+
+        return assistantCardPlayed;
     }
 
     public void playCharacterCard(CardEffect cardEffect, String nickname) {
