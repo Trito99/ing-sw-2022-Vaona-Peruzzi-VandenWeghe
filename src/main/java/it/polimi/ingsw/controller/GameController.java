@@ -46,15 +46,28 @@ public class GameController {
     public boolean newPlayer(String nickname, String gameId, VirtualView virtualView) {
         if(allVirtualView.isEmpty()){
             allVirtualView.put(nickname, virtualView);
-            virtualView.showLogin(nickname,gameId, true);
+            virtualView.showLogin(nickname, gameId, true);
             virtualView.askPlayersNumber();
             return true;
         }
-        else if(allVirtualView.size()<maxPlayers){
-            //this.gameSession.addPlayer(new Player(nickname));
+        else if(allVirtualView.size() < maxPlayers){
+            /** da testare */
+            if(allVirtualView.size() == 2){
+                this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
+            }
+            else if(allVirtualView.size() == 3){
+                this.gameSession.addPlayer(new Player(TColor.GREY, PlayerNumber.PLAYER3));
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
+            }
+            else if(allVirtualView.size() == 4){
+                this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER4));
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
+            }
+
             allVirtualView.put(nickname, virtualView);
             virtualView.showLogin(nickname, gameId,true);
-            if(allVirtualView.size()==maxPlayers){
+            if(allVirtualView.size() == maxPlayers){
                 initializeGame();
             }
             return true;
@@ -168,7 +181,7 @@ public class GameController {
 
     public void initializeGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
         setGameState(GameState.INIT);
-        turnController=new TurnController(this);
+        turnController = new TurnController(this);
         switch(maxPlayers){
             case 4:
                 gameSession.getListOfPlayers().get(3).generateSchool(gameSession.getTable(), gameSession.getGameMode());

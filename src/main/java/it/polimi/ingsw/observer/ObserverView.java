@@ -8,4 +8,9 @@ public interface ObserverView {
     /** cerca di connettere un giocatore ad una data lobby */
     public void updateLobby(String username, String gameID);
 
+    /** cerca di connettere un client ad una socket */
+    public void updateConnect(String address, int port);
+
+    /** carica nuovo nickname */
+    public void createNickname(String nickname);
 }

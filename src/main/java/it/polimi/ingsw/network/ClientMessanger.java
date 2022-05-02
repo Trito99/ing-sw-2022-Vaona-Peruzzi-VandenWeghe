@@ -36,10 +36,15 @@ public class ClientMessanger implements ObserverView, Observer {
         }
     }
 
+    @Override
+    public void createNickname(String nickname) {
+
+    }
+
     /** cerca di loggare un giocatore ad una data lobby */
     public void updateLobby(String nickname, String lobby){
         this.nickname = nickname;
-        this.lobby=lobby;
+        this.lobby = lobby;
         client.sendMessage(new LoginRequest(nickname, lobby));
     }
 

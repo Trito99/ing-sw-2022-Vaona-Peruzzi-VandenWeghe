@@ -34,6 +34,9 @@ public class Cli extends ObservableView implements View {
     }
 
     public void start(){
+        out.println("è partito !!");
+        askConnect();
+
         /** ... */
     }
 
@@ -56,7 +59,14 @@ public class Cli extends ObservableView implements View {
 
     @Override
     public void showLogin(String nickname, String gameId, boolean wasJoined) {
-
+        if (wasJoined){
+            notifyObserver(obs -> obs.createNickname(nickname));
+            out.println("\nYou joined game: "+gameId+ " as "+ nickname);
+        }
+        else {
+            out.println("\nGame "+gameId+ " not available.");
+            askLobby();
+        }
     }
 
     @Override
@@ -121,7 +131,21 @@ public class Cli extends ObservableView implements View {
 
     @Override
     public void askConnect() {
-
+        boolean succeded;
+        do {
+            try{
+                succeded = false;
+                out.print("Inserisci indirizzo IP valido (127.0.0.1) : ");
+                String ipAddress = readInput();
+                out.print("Inserisci porta valida (4000) : ");
+                int port = Integer.parseInt(readInput());
+                notifyObserver(obs -> obs.updateConnect(ipAddress, port));
+            }
+            catch (Exception e){
+                out.print("Input non valido.");
+                succeded = true;
+            }
+        }while(succeded);
     }
 
     @Override
