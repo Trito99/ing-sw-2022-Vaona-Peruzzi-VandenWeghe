@@ -1,5 +1,7 @@
 package it.polimi.ingsw.observer;
 
+import it.polimi.ingsw.model.game.GameMode;
+
 /** interfaccia Observer per la view */
 public interface ObserverView {
 
@@ -16,4 +18,7 @@ public interface ObserverView {
 
     /** invia messaggio al server con il numero di giocatori scelti dal giocatore */
     public void choosePlayersNumber(int playersNumber);
+
+    /** invia messaggio al server con la modalità di gioco scelta dal giocatore */
+    public void chooseGameMode(GameMode gameMode);
 }

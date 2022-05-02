@@ -2,6 +2,7 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.message.Error;
+import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.observer.ObserverView;
 import it.polimi.ingsw.view.View;
@@ -46,21 +47,15 @@ public class ClientMessanger implements ObserverView, Observer {
         client.sendMessage(new PlayersNumber(nickname, playersNumber));
     }
 
+    public void chooseGameMode(GameMode gameMode) {
+        client.sendMessage(new GameModeChoosen(gameMode));
+    }
+
     /** cerca di loggare un giocatore ad una data lobby */
     public void updateLobby(String nickname, String lobby){
         this.nickname = nickname;
         this.lobby = lobby;
         client.sendMessage(new LoginRequest(nickname, lobby));
-    }
-
-    /** aggiorna il nuovo nickname, se un giocatore con lo stesso nome è già nel gioco */
-    public void updateNewUsername(String nickname){
-        this.nickname = nickname;
-    }
-
-    /** invia il numero di giocatori al gioco corrente */
-    public void updatePlayersNumber(int numPlayers){
-        client.sendMessage(new PlayersNumber(nickname, numPlayers));
     }
 
     public void updateDisconnect(){
