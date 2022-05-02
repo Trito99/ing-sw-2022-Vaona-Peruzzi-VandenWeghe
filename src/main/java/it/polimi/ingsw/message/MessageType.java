@@ -17,15 +17,15 @@ public enum MessageType {
     //setup
 
     //richiesta di azioni es. tutte le show
+    ASK_PLAYER,
+    SHOW_PLAYER,
+    SHOW_PLAYER_INFLUENCE,
 
     //azioni
 
     //messaggi intermediari
 
     //altri
-    ASK_PLAYER,
-    SHOW_PLAYER,
-    SHOW_PLAYER_INFLUENCE,
     OTHER_PLAYER_TURN,
     ERROR,
     WIN,

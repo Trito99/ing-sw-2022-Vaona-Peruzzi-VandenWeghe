@@ -14,14 +14,19 @@ import it.polimi.ingsw.observer.ObservableView;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
+
+import static java.lang.System.out;
 
 public class Cli extends ObservableView implements View {
     private PrintStream output;
     private Thread inputThread;
     private List<String> commandList;
+    private static final String WRONG_INPUT = "Input error. Type again.";
 
     public Cli(){
-        output = System.out;
+        output = out;
         commandList=new ArrayList<String>();
         /**for(Command command: Command.values()) {
             commandList.add(command.getVal());
@@ -30,6 +35,23 @@ public class Cli extends ObservableView implements View {
 
     public void start(){
         /** ... */
+    }
+
+    /** legge stringhe da input */
+    public String readInput() throws ExecutionException {
+        FutureTask<String> futureTask = new FutureTask<>(new ReadFromInput());
+        inputThread = new Thread(futureTask);
+        inputThread.start();
+
+        String input = null;
+
+        try {
+            input = futureTask.get();
+        } catch (InterruptedException e) {
+            futureTask.cancel(true);
+            Thread.currentThread().interrupt();
+        }
+        return input;
     }
 
     @Override
@@ -104,7 +126,15 @@ public class Cli extends ObservableView implements View {
 
     @Override
     public void askLobby() {
-
+        try {
+            out.print("Enter your nickname: ");
+            String username = readInput();
+            out.print("Enter the gameID: ");
+            String gameID = readInput();
+            notifyObserver(obs -> obs.updateLobby(username, gameID));
+        } catch (ExecutionException e) {
+            out.println(WRONG_INPUT);
+        }
     }
 
     @Override
