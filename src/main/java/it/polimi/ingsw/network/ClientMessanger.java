@@ -36,9 +36,14 @@ public class ClientMessanger implements ObserverView, Observer {
         }
     }
 
-    @Override
+    /** crea/aggiorna il nickname se un giocatore era già presente con lo stesso nome*/
     public void createNickname(String nickname) {
+        this.nickname = nickname;
+    }
 
+    /** comunica il numero di giocatori del gioco in corso */
+    public void choosePlayersNumber(int playersNumber) {
+        client.sendMessage(new PlayersNumber(nickname, playersNumber));
     }
 
     /** cerca di loggare un giocatore ad una data lobby */

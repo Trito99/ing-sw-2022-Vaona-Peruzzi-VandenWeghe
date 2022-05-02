@@ -35,9 +35,9 @@ public class Cli extends ObservableView implements View {
 
     public void start(){
         out.println("è partito !!");
-        askConnect();
-
         /** ... */
+
+        askConnect();
     }
 
     /** legge stringhe da input */
@@ -163,7 +163,19 @@ public class Cli extends ObservableView implements View {
 
     @Override
     public void askPlayersNumber() {
+        int playersNumber;
+        do {
+            out.print("Enter the number of players who will join the room (2-4): ");
+            try {
+                playersNumber = Integer.parseInt(readInput());
+            } catch (Exception e) {
+                out.println(WRONG_INPUT);
+                playersNumber=0;
+            }
 
+        } while(playersNumber > 4 || playersNumber <= 0);
+        int finalPlayersNumber = playersNumber;
+        notifyObserver(obs -> obs.choosePlayersNumber(finalPlayersNumber));
     }
 
     @Override

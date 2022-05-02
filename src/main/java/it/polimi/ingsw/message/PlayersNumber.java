@@ -4,7 +4,7 @@ public class PlayersNumber extends ClientMessage {
     private int playersNumber;
 
     public PlayersNumber(String nickname, int playersNumber) {
-        super(nickname,MessageType.PLAYER_NUMBER);
+        super(nickname, MessageType.PLAYERS_NUMBER);
         this.playersNumber=playersNumber;
     }
 

@@ -252,7 +252,7 @@ public class GameController {
             case INIT:
                 VirtualView virtualView = allVirtualView.get(receivedMessage.getNickname());
 
-                if(receivedMessage.getMessageType() == MessageType.PLAYER_NUMBER){
+                if(receivedMessage.getMessageType() == MessageType.PLAYERS_NUMBER){
                     PlayersNumber pnSelected = (PlayersNumber) receivedMessage;
                     maxPlayers = pnSelected.getPlayersNumber();
 
