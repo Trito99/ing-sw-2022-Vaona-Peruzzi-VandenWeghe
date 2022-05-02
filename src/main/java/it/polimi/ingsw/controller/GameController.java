@@ -4,8 +4,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.message.ClientMessage;
 import it.polimi.ingsw.message.MessageType;
 import it.polimi.ingsw.message.PlayersNumber;
-import it.polimi.ingsw.model.character.CardEffect;
-import it.polimi.ingsw.model.character.CharacterCard;
+import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.DeckCharacter;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.Game;
@@ -14,11 +13,9 @@ import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.player.Team;
 import it.polimi.ingsw.model.school.TColor;
-import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.view.VirtualView;
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -305,6 +302,12 @@ public class GameController {
             case INIT:
                 gameSession.getTable().extractStudentOnCloud();
                 break;
+            case PLANNING:
+                planning();
+                break;
+            case ACTION:
+                action();
+                break;
             case IN_GAME:
                 //playAssistantCard(assistantName, nickname);
                 //gameSession.getActivePlayer().getPersonalSchool().moveStudentFromEntryToIsland(choice2, choice3);
@@ -318,6 +321,35 @@ public class GameController {
 
     public void setGameSession(Game gameSession) {
         this.gameSession = gameSession;
+    }
+
+    public void planning(){
+        /** fase pianificazione */
+        for(String s: allVirtualView.keySet()){
+            if (!s.equals(getActivePlayer())){
+                allVirtualView.get(s).showPlayerTurn(getActivePlayer());
+                int i = 0;
+                for(i=0; i< maxPlayers; i++){
+                    if (getActivePlayer().equals(gameSession.getListOfPlayers().get(i).getNickname())){
+                        Player current = gameSession.getListOfPlayers().get(i);
+                        DeckAssistant deckPlayer = current.getDeckOfPlayer();
+                        allVirtualView.get(s).askAssistantCardToPlay(deckPlayer);
+                    }
+                }
+            }
+        }
+
+        //allVirtualView.get(getActivePlayer()).askLeaderCardToKeep(leaderCards);
+    }
+
+    public void action(){
+        /** fase azione */
+        for(String s: allVirtualView.keySet()){
+            if (!s.equals(getActivePlayer())){
+                allVirtualView.get(s).showPlayerTurn(getActivePlayer());
+                allVirtualView.get(s).askCharacterCardToPlay(gameSession.getTable().getCharacterCardsOnTable());
+            }
+        }
     }
 
     /**

@@ -22,8 +22,14 @@ public enum MessageType {
     SHOW_PLAYER_INFLUENCE,
 
     //azioni
+    PLAY_CHARACTER_CARD,
+    PLAY_ASSISTANT_CARD,
+    MOVE_STUDENTS,
+    MOVE_MOTHER_EARTH,
 
     //messaggi intermediari
+    WIN_PROF,
+    WIN_TOWER,
 
     //altri
     OTHER_PLAYER_TURN,

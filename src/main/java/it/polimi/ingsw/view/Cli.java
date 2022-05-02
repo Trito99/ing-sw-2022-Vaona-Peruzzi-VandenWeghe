@@ -172,7 +172,7 @@ public class Cli extends ObservableView implements View {
     }
 
     @Override
-    public void askAssistantCardToPlay(ArrayList<CharacterCard> characterCards) {
+    public void askAssistantCardToPlay(DeckAssistant assistantDeck) {
 
     }
 
@@ -182,7 +182,7 @@ public class Cli extends ObservableView implements View {
     }
 
     @Override
-    public void askCharacterCardToPlay(Table table) {
+    public void askCharacterCardToPlay(ArrayList<CharacterCard> characterCard) {
 
     }
 
