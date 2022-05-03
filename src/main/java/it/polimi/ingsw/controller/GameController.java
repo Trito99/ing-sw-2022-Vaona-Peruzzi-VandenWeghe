@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 
 import it.polimi.ingsw.message.ClientMessage;
+import it.polimi.ingsw.message.GameDifficultyChosen;
 import it.polimi.ingsw.message.MessageType;
 import it.polimi.ingsw.message.PlayersNumber;
 import it.polimi.ingsw.model.assistant.AssistantCard;
@@ -17,6 +18,7 @@ import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.player.Team;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.view.VirtualView;
+
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
@@ -52,8 +54,13 @@ public class GameController {
      * @param gameId id della partita a cui il giocatore sta giocando.
      */
     public boolean newPlayer(String nickname, String gameId, VirtualView virtualView) {
+
         if(allVirtualView.isEmpty()){
+            generateTable();
             allVirtualView.put(nickname, virtualView);
+            this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
+            this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
+            this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
             virtualView.showLogin(nickname, gameId, true);
             virtualView.askPlayersNumber();
             return true;
@@ -61,16 +68,19 @@ public class GameController {
         else if(allVirtualView.size() < maxPlayers){
             /** da testare */
             if(allVirtualView.size() == 1){
+                allVirtualView.put(nickname, virtualView);
                 this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
             }
             else if(allVirtualView.size() == 2){
+                allVirtualView.put(nickname, virtualView);
                 this.gameSession.addPlayer(new Player(TColor.GREY, PlayerNumber.PLAYER3));
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
             }
             else if(allVirtualView.size() == 3){
+                allVirtualView.put(nickname, virtualView);
                 this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER4));
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
@@ -195,9 +205,6 @@ public class GameController {
         turnController = new TurnController(this);
         switch(maxPlayers){
             case 4:
-
-                gameSession.getTable().extractStudentOnCloud();
-
                 if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
                     DeckCharacter characterDeck = new DeckCharacter();
                     characterDeck.generateCharacterDeck();
@@ -208,7 +215,6 @@ public class GameController {
                 allVirtualView.get(gameSession.getPlayerListByNickname().get(3)).showPlayerList(gameSession.getPlayerListByNickname());
                 break;
             case 3:
-
                 if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
                     DeckCharacter characterDeck = new DeckCharacter();
                     characterDeck.generateCharacterDeck();
@@ -240,15 +246,14 @@ public class GameController {
         switch (gameState) {
             case INIT:
                 VirtualView virtualView = allVirtualView.get(receivedMessage.getNickname());
-                generateTable();
 
                 if(receivedMessage.getMessageType() == MessageType.PLAYERS_NUMBER){
+                    System.out.println("FFF");
                     PlayersNumber pnSelected = (PlayersNumber) receivedMessage;
                     maxPlayers = pnSelected.getPlayersNumber();
                     switch(pnSelected.getPlayersNumber()){
                         case 4:
                             gameSession.setGameMode(GameMode.COOP);
-                            gameSession.getTable().generateCloudNumber(gameSession.getGameMode());
                             virtualView.showMessage("Gioco in modalità a squadre. \nIn attesa di altri giocatori...");
                             break;
                         case 3:
@@ -262,6 +267,19 @@ public class GameController {
                             virtualView.showMessage("Gioco in modalità a ("+pnSelected.getPlayersNumber()+") giocatori. \nIn attesa di altri giocatori...");
                             break;
                     }
+                    if(receivedMessage.getMessageType()== MessageType.GAME_DIFFICULTY){
+                        System.out.println("DDD");
+                        GameDifficultyChosen difficultySelected = (GameDifficultyChosen) receivedMessage;
+                        switch (difficultySelected.getGameDifficulty()){
+                            case STANDARDMODE:
+                                gameSession.setDifficulty(Difficulty.STANDARDMODE);
+                                break;
+                            case EXPERTMODE:
+                                gameSession.setDifficulty(Difficulty.EXPERTMODE);
+                                break;
+                        }
+                    }
+                    gameSession.getTable().generateCloudNumber(gameSession.getGameMode());
                 }
                 break;
             case IN_GAME:

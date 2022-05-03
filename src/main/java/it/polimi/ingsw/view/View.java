@@ -60,9 +60,6 @@ public interface View {
     /** chiede la difficoltà */
     void askGameDifficulty();
 
-    /** chiede al giocatore il tipo di partita che vuole giocare */
-    void askGameMode(Game game);
-
     /** chiede al giocatore quale carta assistente vuole giocare */
     void askAssistantCardToPlay(ArrayList<AssistantCard> assistantDeck);
 

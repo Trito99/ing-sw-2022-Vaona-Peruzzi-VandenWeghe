@@ -21,8 +21,6 @@ public class TurnController {
         orderPlayers =new ArrayList<String>();
         activePlayer=new HashMap<String, Boolean>();
         for(int i=0; i < gameController.getAllVirtualView().size(); i++){
-            System.out.println((gameController.getAllVirtualView().size()));
-            System.out.println(gameController.getGameSession().getListOfPlayers().size());
             String nickname = gameController.getGameSession().getListOfPlayers().get(i).getNickname();
             activePlayer.put(nickname, true);
             orderPlayers.add(nickname);

@@ -158,8 +158,6 @@ public class Cli extends ObservableView implements View {
             String username = readInput();
             out.print("Enter the gameID: ");
             String gameID = readInput();
-            out.print("Enter game difficulty: (StandardMode / ExpertMode)");
-            String difficulty = readInput();
             notifyObserver(obs -> obs.updateLobby(username, gameID));
         } catch (ExecutionException e) {
             out.println(WRONG_INPUT);
@@ -206,36 +204,6 @@ public class Cli extends ObservableView implements View {
         notifyObserver(obs -> obs.choosePlayersNumber(finalPlayersNumber));
     }
 
-    @Override
-    public void askGameMode(Game game) {
-        //String gm;
-        GameMode gameModeChoosen;
-        try {
-            out.print("Now select the game mode you want to play. \n" +
-                    "You can choose between \"TWOPLAYERS\", \"THREEPLAYERS\" or \"COOP\" (for four-player games)." +
-                    "Which one do you want to play? ");
-            //gm = readInput();
-            //gameModeChoosen = GameMode.valueOf(gm);
-            gameModeChoosen = GameMode.valueOf(readInput());
-            switch (gameModeChoosen){
-                case TWOPLAYERS:
-                    game.setGameMode(GameMode.TWOPLAYERS);
-                    break;
-                case THREEPLAYERS:
-                    game.setGameMode(GameMode.THREEPLAYERS);
-                    break;
-                case COOP:
-                    game.setGameMode(GameMode.COOP);
-                    break;
-                }
-            if(gameModeChoosen.equals(GameMode.TWOPLAYERS) || gameModeChoosen.equals(GameMode.THREEPLAYERS)
-                    || gameModeChoosen.equals(GameMode.COOP)){
-                    notifyObserver(obs -> obs.chooseGameMode(gameModeChoosen));
-                }
-            } catch (Exception e) {
-                out.println(WRONG_INPUT);
-            }
-    }
 
     @Override
     public void askAssistantCardToPlay(ArrayList<AssistantCard> assistantDeck) {

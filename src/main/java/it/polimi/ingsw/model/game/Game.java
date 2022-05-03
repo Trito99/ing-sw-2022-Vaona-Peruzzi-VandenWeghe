@@ -86,6 +86,8 @@ public class Game {
         return difficulty;
     }
 
+    public void setDifficulty(Difficulty difficulty) {this.difficulty = difficulty; }
+
     public ArrayList<Player> getOrder(){
         return order;
     }

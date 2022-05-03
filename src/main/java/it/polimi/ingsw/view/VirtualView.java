@@ -107,14 +107,7 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void askGameDifficulty() {
-        clientHandler.sendMessage(new HostGameReply());
-    }
-
-    @Override
-    public void askGameMode(Game game) {
-        //clientHandler.sendMessage(new ShowGameMode(game.gameMode));
-    }
+    public void askGameDifficulty() {}
 
     @Override
     public void askStudentsToMove(ArrayList<Student> studentsInHall, School school, Table table) {

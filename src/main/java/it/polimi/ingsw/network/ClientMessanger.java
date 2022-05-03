@@ -47,10 +47,6 @@ public class ClientMessanger implements ObserverView, Observer {
         client.sendMessage(new PlayersNumber(nickname, playersNumber));
     }
 
-    public void chooseGameMode(GameMode gameMode) {
-        client.sendMessage(new GameModeChosen(gameMode));
-    }
-
     public void chooseGameDifficulty(Difficulty difficulty) {client.sendMessage(new GameDifficultyChosen(difficulty));}
 
     /** cerca di loggare un giocatore ad una data lobby */
@@ -83,6 +79,7 @@ public class ClientMessanger implements ObserverView, Observer {
                 break;
             case SUCCESSFUL_HOST:
                 queue.execute(() -> view.askPlayersNumber());
+                queue.execute(()->view.askGameDifficulty());
                 break;
             case START_TURN:
                 queue.execute(() -> view.askAction());
