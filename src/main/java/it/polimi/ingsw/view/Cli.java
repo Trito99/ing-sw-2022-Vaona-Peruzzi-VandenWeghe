@@ -3,6 +3,7 @@ package it.polimi.ingsw.view;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CharacterCard;
+import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.PlayerNumber;
@@ -15,6 +16,7 @@ import it.polimi.ingsw.observer.ObservableView;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
@@ -156,10 +158,35 @@ public class Cli extends ObservableView implements View {
             String username = readInput();
             out.print("Enter the gameID: ");
             String gameID = readInput();
+            out.print("Enter game difficulty: (StandardMode / ExpertMode)");
+            String difficulty = readInput();
             notifyObserver(obs -> obs.updateLobby(username, gameID));
         } catch (ExecutionException e) {
             out.println(WRONG_INPUT);
         }
+    }
+
+    @Override
+    public void askGameDifficulty() {
+        Difficulty difficulty = Difficulty.STANDARDMODE;
+        String g;
+        boolean ye;
+        do {
+            out.print("Enter the game difficulty that you want to play ");
+            try {
+                g=readInput().toUpperCase(Locale.ROOT);
+                difficulty = Difficulty.valueOf(g);
+                ye=false;
+                System.out.println(difficulty);
+            } catch (Exception e) {
+                out.println(WRONG_INPUT);
+                ye=true;
+            }
+
+        } while (ye);
+
+        Difficulty finalDifficulty = difficulty;
+        notifyObserver(obs -> obs.chooseGameDifficulty(finalDifficulty));
     }
 
     @Override
@@ -171,10 +198,10 @@ public class Cli extends ObservableView implements View {
                 playersNumber = Integer.parseInt(readInput());
             } catch (Exception e) {
                 out.println(WRONG_INPUT);
-                playersNumber=0;
+                playersNumber=1;
             }
 
-        } while(playersNumber > 4 || playersNumber <= 0);
+        } while(playersNumber > 4 || playersNumber <= 1);
         int finalPlayersNumber = playersNumber;
         notifyObserver(obs -> obs.choosePlayersNumber(finalPlayersNumber));
     }

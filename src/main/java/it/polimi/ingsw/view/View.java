@@ -57,6 +57,9 @@ public interface View {
     /** chiede quanti giocatori avrà il nuovo gioco */
     void askPlayersNumber();
 
+    /** chiede la difficoltà */
+    void askGameDifficulty();
+
     /** chiede al giocatore il tipo di partita che vuole giocare */
     void askGameMode(Game game);
 

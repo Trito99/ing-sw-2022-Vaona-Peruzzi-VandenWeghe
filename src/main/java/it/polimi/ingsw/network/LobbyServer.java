@@ -19,7 +19,7 @@ public class LobbyServer {
         return lobbyMap.get(idLobby);
     }
 
-    /** consente ad un giocatore di uscire dalla Libby */
+    /** consente ad un giocatore di uscire dalla Lobby */
     public void leaveLobby(String idLobby, ClientHandler clientHandler){
         Lobby lobby = lobbyMap.get(idLobby);
         if(lobby.currentPlayers()==1){

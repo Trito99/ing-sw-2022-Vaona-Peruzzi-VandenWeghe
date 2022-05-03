@@ -1,5 +1,6 @@
 package it.polimi.ingsw.observer;
 
+import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.GameMode;
 
 /** interfaccia Observer per la view */
@@ -21,4 +22,7 @@ public interface ObserverView {
 
     /** invia messaggio al server con la modalità di gioco scelta dal giocatore */
     public void chooseGameMode(GameMode gameMode);
+
+    /** invia messaggio al server con la modalità di gioco scelta dal giocatore */
+    public void chooseGameDifficulty(Difficulty difficulty);
 }

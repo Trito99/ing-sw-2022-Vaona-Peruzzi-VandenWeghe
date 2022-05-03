@@ -10,6 +10,7 @@ import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.DeckCharacter;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.Game;
+import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.GameState;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
@@ -38,6 +39,13 @@ public class GameController {
         gameState= GameState.INIT;
     }
 
+    private void generateTable(){
+        gameSession.getTable().generateBagInit();
+        gameSession.getTable().generateIslandCards();
+        gameSession.getTable().generateMotherEarth();
+        gameSession.getTable().extractStudentsInit();
+        gameSession.getTable().addFinalStudents();
+    }
 
     /**
      * @param nickname del Giocatore.
@@ -52,17 +60,20 @@ public class GameController {
         }
         else if(allVirtualView.size() < maxPlayers){
             /** da testare */
-            if(allVirtualView.size() == 2){
+            if(allVirtualView.size() == 1){
                 this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
             }
-            else if(allVirtualView.size() == 3){
+            else if(allVirtualView.size() == 2){
                 this.gameSession.addPlayer(new Player(TColor.GREY, PlayerNumber.PLAYER3));
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
             }
-            else if(allVirtualView.size() == 4){
+            else if(allVirtualView.size() == 3){
                 this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER4));
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
             }
 
             allVirtualView.put(nickname, virtualView);
@@ -76,7 +87,7 @@ public class GameController {
         return false;
     }
 
-    /** maxPlayers(GameMode) e difficulty vanno scelti da chi crea la partita */
+    /** maxPlayers(GameMode) e difficulty vanno scelti da chi crea la partita
     public void initializePlayer(VirtualView view) { // Setto i player a inizio partita
         String nickname = null;
         int year = 0;
@@ -85,12 +96,12 @@ public class GameController {
         int i = 0;
 
         switch (gameSession.getGameMode()){
-                /** Da inserire Nickname, data(età) ecc.. di tutti i player (Anche in Coop!!!) */
+                /** Da inserire Nickname, data(età) ecc.. di tutti i player (Anche in Coop!!!)
             case TWOPLAYERS:
                 System.out.println("Scegli il tuo nickname: ");
-                /** funzione per leggere */
+                /** funzione per leggere
                 System.out.println("Inserisci la tua data di nascita: ");
-                /** funzione per leggere */
+                /** funzione per leggere
                 GregorianCalendar dataPlayer = new GregorianCalendar(year, month , dayOfMonth);
                 this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
                 this.gameSession.getListOfPlayers().get(i).setPlayerDate(dataPlayer);
@@ -100,9 +111,9 @@ public class GameController {
                 //svuoto il campo
                 dataPlayer = null;
                 System.out.println("Scegli il tuo nickname: ");
-                /** funzione per leggere */
+                /** funzione per leggere
                 System.out.println("Inserisci la tua età: ");
-                /** funzione per leggere */
+                /** funzione per leggere
                 dataPlayer = new GregorianCalendar(year, month, dayOfMonth);
                 this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
                 this.gameSession.getListOfPlayers().get(i).setPlayerDate(dataPlayer);
@@ -117,9 +128,9 @@ public class GameController {
                 break;
             case THREEPLAYERS:
                 System.out.println("Scegli il tuo nickname: ");
-                /** funzione per leggere */
+                /** funzione per leggere
                 System.out.println("Inserisci la tua data di nascita: ");
-                /** funzione per leggere */
+                /** funzione per leggere
                 dataPlayer = new GregorianCalendar(year, month, dayOfMonth);
                 this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
                 this.gameSession.getListOfPlayers().get(i).setPlayerDate(dataPlayer);
@@ -129,9 +140,9 @@ public class GameController {
                 //svuoto il campo
                 dataPlayer = null;
                 System.out.println("Scegli il tuo nickname: ");
-                /** funzione per leggere */
+                /** funzione per leggere
                 System.out.println("Inserisci la tua età: ");
-                /** funzione per leggere */
+                /** funzione per leggere *
                 dataPlayer = new GregorianCalendar(year, month, dayOfMonth);
                 this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
                 this.gameSession.getListOfPlayers().get(i).setPlayerDate(dataPlayer);
@@ -141,9 +152,9 @@ public class GameController {
                 //svuoto il campo
                 dataPlayer = null;
                 System.out.println("Scegli il tuo nickname: ");
-                /** funzione per leggere */
+                /** funzione per leggere
                 System.out.println("Inserisci la tua età: ");
-                /** funzione per leggere */
+                /** funzione per leggere
                 dataPlayer = new GregorianCalendar(year, month, dayOfMonth);
                 this.gameSession.addPlayer(new Player(TColor.GREY, PlayerNumber.PLAYER3));
                 this.gameSession.getListOfPlayers().get(i).setPlayerDate(dataPlayer);
@@ -177,65 +188,43 @@ public class GameController {
             default:
                 break;
         }
-    }
+    } */
 
     public void initializeGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
         setGameState(GameState.INIT);
         turnController = new TurnController(this);
         switch(maxPlayers){
             case 4:
-                gameSession.getListOfPlayers().get(3).generateSchool(gameSession.getTable(), gameSession.getGameMode());
-                gameSession.getTable().generateBagInit();
-                gameSession.getTable().generateIslandCards();
-                gameSession.getTable().generateMotherEarth();
-                gameSession.getTable().generateCloudNumber(gameSession.getGameMode());
+
                 gameSession.getTable().extractStudentOnCloud();
-                gameSession.getTable().extractStudentsInit();
-                gameSession.getTable().addFinalStudents();
 
                 if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
                     DeckCharacter characterDeck = new DeckCharacter();
                     characterDeck.generateCharacterDeck();
                     gameSession.getTable().generateCharacterCardsOnTable(characterDeck.getCharacterCards());
-                } else gameSession.getTable().generateCharacterCardsOnTable(null);
+                }
 
                 /** da decidere: cosa mostrare del giocatore a inizio gioco*/
                 allVirtualView.get(gameSession.getPlayerListByNickname().get(3)).showPlayerList(gameSession.getPlayerListByNickname());
                 break;
             case 3:
-                gameSession.getListOfPlayers().get(2).generateSchool(gameSession.getTable(), gameSession.getGameMode());
-                gameSession.getTable().generateBagInit();
-                gameSession.getTable().generateIslandCards();
-                gameSession.getTable().generateMotherEarth();
-                gameSession.getTable().generateCloudNumber(gameSession.getGameMode());
-                gameSession.getTable().extractStudentOnCloud();
-                gameSession.getTable().extractStudentsInit();
-                gameSession.getTable().addFinalStudents();
 
                 if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
                     DeckCharacter characterDeck = new DeckCharacter();
                     characterDeck.generateCharacterDeck();
                     gameSession.getTable().generateCharacterCardsOnTable(characterDeck.getCharacterCards());
-                } else gameSession.getTable().generateCharacterCardsOnTable(null);
+                }
 
                 /** da decidere: cosa mostrare del giocatore a inizio gioco*/
                 allVirtualView.get(gameSession.getPlayerListByNickname().get(2)).showPlayerList(gameSession.getPlayerListByNickname());
                 break;
             case 2:
-                gameSession.getListOfPlayers().get(1).generateSchool(gameSession.getTable(), gameSession.getGameMode());
-                gameSession.getTable().generateBagInit();
-                gameSession.getTable().generateIslandCards();
-                gameSession.getTable().generateMotherEarth();
-                gameSession.getTable().generateCloudNumber(gameSession.getGameMode());
-                gameSession.getTable().extractStudentOnCloud();
-                gameSession.getTable().extractStudentsInit();
-                gameSession.getTable().addFinalStudents();
 
                 if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
                     DeckCharacter characterDeck = new DeckCharacter();
                     characterDeck.generateCharacterDeck();
                     gameSession.getTable().generateCharacterCardsOnTable(characterDeck.getCharacterCards());
-                } else gameSession.getTable().generateCharacterCardsOnTable(null);
+                }
 
                 /** da decidere: cosa mostrare del giocatore a inizio gioco*/
                 allVirtualView.get(gameSession.getPlayerListByNickname().get(1)).showPlayerList(gameSession.getPlayerListByNickname());
@@ -251,23 +240,27 @@ public class GameController {
         switch (gameState) {
             case INIT:
                 VirtualView virtualView = allVirtualView.get(receivedMessage.getNickname());
+                generateTable();
 
                 if(receivedMessage.getMessageType() == MessageType.PLAYERS_NUMBER){
                     PlayersNumber pnSelected = (PlayersNumber) receivedMessage;
                     maxPlayers = pnSelected.getPlayersNumber();
-
-                    if(pnSelected.getPlayersNumber() == 4){
-                        for(int i = 0; i < 4; i++){
-                            //initializePlayer();
-                            }
-                        virtualView.showMessage("Gioco in modalità a squadre. \nIn attesa di altri giocatori...");
-                    }
-                    else{
-                        gameSession = new Game();
-                        for(int i = 0; i < maxPlayers; i++){
-                            //initializePlayer();
-                            }
-                        virtualView.showMessage("Gioco in modalità a ("+pnSelected.getPlayersNumber()+") giocatori. \nIn attesa di altri giocatori...");
+                    switch(pnSelected.getPlayersNumber()){
+                        case 4:
+                            gameSession.setGameMode(GameMode.COOP);
+                            gameSession.getTable().generateCloudNumber(gameSession.getGameMode());
+                            virtualView.showMessage("Gioco in modalità a squadre. \nIn attesa di altri giocatori...");
+                            break;
+                        case 3:
+                            gameSession.setGameMode(GameMode.THREEPLAYERS);
+                            gameSession.getTable().generateCloudNumber(gameSession.getGameMode());
+                            virtualView.showMessage("Gioco in modalità a ("+pnSelected.getPlayersNumber()+") giocatori. \nIn attesa di altri giocatori...");
+                            break;
+                        case 2:
+                            gameSession.setGameMode(GameMode.TWOPLAYERS);
+                            gameSession.getTable().generateCloudNumber(gameSession.getGameMode());
+                            virtualView.showMessage("Gioco in modalità a ("+pnSelected.getPlayersNumber()+") giocatori. \nIn attesa di altri giocatori...");
+                            break;
                     }
                 }
                 break;

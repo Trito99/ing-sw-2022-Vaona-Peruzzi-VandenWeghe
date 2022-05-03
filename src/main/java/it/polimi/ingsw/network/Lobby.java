@@ -2,6 +2,7 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.message.ClientMessage;
+import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.view.VirtualView;
 
 import java.util.*;
@@ -52,6 +53,7 @@ public class Lobby {
             virtualView.showLogin(nickname, gameId, false);
         }
     }
+
 
     /** controlla se il gioco è inattivo o in corso ----> return se il gioco è già cominciato */
     public boolean isGameStarted(){

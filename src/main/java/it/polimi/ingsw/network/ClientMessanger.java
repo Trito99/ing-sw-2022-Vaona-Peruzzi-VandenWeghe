@@ -2,11 +2,11 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.message.Error;
+import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.observer.ObserverView;
 import it.polimi.ingsw.view.View;
-import it.polimi.ingsw.message.*;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -48,8 +48,10 @@ public class ClientMessanger implements ObserverView, Observer {
     }
 
     public void chooseGameMode(GameMode gameMode) {
-        client.sendMessage(new GameModeChoosen(gameMode));
+        client.sendMessage(new GameModeChosen(gameMode));
     }
+
+    public void chooseGameDifficulty(Difficulty difficulty) {client.sendMessage(new GameDifficultyChosen(difficulty));}
 
     /** cerca di loggare un giocatore ad una data lobby */
     public void updateLobby(String nickname, String lobby){
