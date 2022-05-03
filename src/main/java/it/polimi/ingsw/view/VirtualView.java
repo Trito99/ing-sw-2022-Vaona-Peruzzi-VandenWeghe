@@ -1,9 +1,7 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.message.GeneralMessage;
-import it.polimi.ingsw.message.HostGameReply;
-import it.polimi.ingsw.message.ShowPlayerInfo;
-import it.polimi.ingsw.message.StartTurn;
+import it.polimi.ingsw.message.*;
+import it.polimi.ingsw.message.Error;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CharacterCard;
@@ -15,7 +13,6 @@ import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.network.ClientHandlerInterface;
 import it.polimi.ingsw.observer.Observer;
-import it.polimi.ingsw.message.Error;
 
 import java.util.ArrayList;
 
@@ -115,19 +112,19 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void askAssistantCardToPlay(ArrayList<CharacterCard> characterCards) {
-        //clientHandler.sendMessage(new SideAssistantReply(characterCards));
-    }
-
-    @Override
     public void askStudentsToMove(ArrayList<Student> studentsInHall, School school, Table table) {
         //clientHandler.sendMessage(new ShowSchool(studentsInHall, school));
         //clientHandler.sendMessage(new ShowTable(table));
     }
 
     @Override
-    public void askCharacterCardToPlay(Table table) {
-        //clientHandler.sendMessage(new ShowCharacterToPlay(table));
+    public void askCharacterCardToPlay(ArrayList<CharacterCard> characterCard) {
+        clientHandler.sendMessage(new ShowCharacterToPlay(characterCard));
+    }
+
+    @Override
+    public void askAssistantCardToPlay(ArrayList<AssistantCard> assistantDeck) {
+        clientHandler.sendMessage(new ShowAssistantToPlay(assistantDeck));
     }
 
     @Override

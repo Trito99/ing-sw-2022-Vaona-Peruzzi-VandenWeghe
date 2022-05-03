@@ -61,13 +61,13 @@ public interface View {
     void askGameMode(Game game);
 
     /** chiede al giocatore quale carta assistente vuole giocare */
-    void askAssistantCardToPlay(ArrayList<CharacterCard> characterCards);
+    void askAssistantCardToPlay(ArrayList<AssistantCard> assistantDeck);
 
     /** chiede al giocatore dove muovere gli studenti */
     void askStudentsToMove(ArrayList<Student> studentsInHall, School school, Table table);
 
     /** chiede al giocatore quale carta personaggio vuole giocare */
-    void askCharacterCardToPlay(Table table);
+    void askCharacterCardToPlay(ArrayList<CharacterCard> characterCard);
 
     /** chiede al giocatore quanti passi far fare a madre natura*/
     void askMotherEarthSteps(Table table);

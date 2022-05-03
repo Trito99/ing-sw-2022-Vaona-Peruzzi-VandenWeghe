@@ -4,8 +4,9 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.message.ClientMessage;
 import it.polimi.ingsw.message.MessageType;
 import it.polimi.ingsw.message.PlayersNumber;
-import it.polimi.ingsw.model.character.CardEffect;
-import it.polimi.ingsw.model.character.CharacterCard;
+import it.polimi.ingsw.model.assistant.AssistantCard;
+import it.polimi.ingsw.model.assistant.AssistantDeckName;
+import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.DeckCharacter;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.Game;
@@ -14,7 +15,6 @@ import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.player.Team;
 import it.polimi.ingsw.model.school.TColor;
-import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.view.VirtualView;
 
 import java.security.InvalidParameterException;
@@ -46,15 +46,28 @@ public class GameController {
     public boolean newPlayer(String nickname, String gameId, VirtualView virtualView) {
         if(allVirtualView.isEmpty()){
             allVirtualView.put(nickname, virtualView);
-            virtualView.showLogin(nickname,gameId, true);
+            virtualView.showLogin(nickname, gameId, true);
             virtualView.askPlayersNumber();
             return true;
         }
-        else if(allVirtualView.size()<maxPlayers){
-            //this.gameSession.addPlayer(new Player(nickname));
+        else if(allVirtualView.size() < maxPlayers){
+            /** da testare */
+            if(allVirtualView.size() == 2){
+                this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
+            }
+            else if(allVirtualView.size() == 3){
+                this.gameSession.addPlayer(new Player(TColor.GREY, PlayerNumber.PLAYER3));
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
+            }
+            else if(allVirtualView.size() == 4){
+                this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER4));
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
+            }
+
             allVirtualView.put(nickname, virtualView);
             virtualView.showLogin(nickname, gameId,true);
-            if(allVirtualView.size()==maxPlayers){
+            if(allVirtualView.size() == maxPlayers){
                 initializeGame();
             }
             return true;
@@ -168,7 +181,7 @@ public class GameController {
 
     public void initializeGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
         setGameState(GameState.INIT);
-        turnController=new TurnController(this);
+        turnController = new TurnController(this);
         switch(maxPlayers){
             case 4:
                 gameSession.getListOfPlayers().get(3).generateSchool(gameSession.getTable(), gameSession.getGameMode());
@@ -239,7 +252,7 @@ public class GameController {
             case INIT:
                 VirtualView virtualView = allVirtualView.get(receivedMessage.getNickname());
 
-                if(receivedMessage.getMessageType() == MessageType.PLAYER_NUMBER){
+                if(receivedMessage.getMessageType() == MessageType.PLAYERS_NUMBER){
                     PlayersNumber pnSelected = (PlayersNumber) receivedMessage;
                     maxPlayers = pnSelected.getPlayersNumber();
 
@@ -292,6 +305,12 @@ public class GameController {
             case INIT:
                 gameSession.getTable().extractStudentOnCloud();
                 break;
+            case PLANNING:
+                planning();
+                break;
+            case ACTION:
+                action();
+                break;
             case IN_GAME:
                 //playAssistantCard(assistantName, nickname);
                 //gameSession.getActivePlayer().getPersonalSchool().moveStudentFromEntryToIsland(choice2, choice3);
@@ -305,6 +324,36 @@ public class GameController {
 
     public void setGameSession(Game gameSession) {
         this.gameSession = gameSession;
+    }
+
+    public void planning(){
+        /** fase pianificazione */
+        for(String s: allVirtualView.keySet()){
+            if (!s.equals(getActivePlayer())){
+                allVirtualView.get(s).showPlayerTurn(getActivePlayer());
+            }
+        }
+        ArrayList<AssistantCard> assistantCards = new ArrayList<>();
+        for(int i=0; i<maxPlayers; i++){
+            if (getActivePlayer().equals(gameSession.getListOfPlayers().get(i).getNickname())){
+                Player currentPlayer = gameSession.getListOfPlayers().get(i);
+                String currentDeck = currentPlayer.getDeckOfPlayer().getCardsInHand().get(0).getAssistantName();
+                assistantCards.add(gameSession.playAssistantCard(currentDeck, getActivePlayer()));
+            }
+        }
+
+        allVirtualView.get(getActivePlayer()).askAssistantCardToPlay(assistantCards);
+
+    }
+
+    public void action(){
+        /** fase azione */
+        for(String s: allVirtualView.keySet()){
+            if (!s.equals(getActivePlayer())){
+                allVirtualView.get(s).showPlayerTurn(getActivePlayer());
+                allVirtualView.get(s).askCharacterCardToPlay(gameSession.getTable().getCharacterCardsOnTable());
+            }
+        }
     }
 
     /**

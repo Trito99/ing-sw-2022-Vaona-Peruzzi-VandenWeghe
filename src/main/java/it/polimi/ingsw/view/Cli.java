@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Game;
+import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;
@@ -14,14 +15,19 @@ import it.polimi.ingsw.observer.ObservableView;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
+
+import static java.lang.System.out;
 
 public class Cli extends ObservableView implements View {
     private PrintStream output;
     private Thread inputThread;
     private List<String> commandList;
+    private static final String WRONG_INPUT = "Input error. Type again.";
 
     public Cli(){
-        output = System.out;
+        output = out;
         commandList=new ArrayList<String>();
         /**for(Command command: Command.values()) {
             commandList.add(command.getVal());
@@ -29,12 +35,39 @@ public class Cli extends ObservableView implements View {
     }
 
     public void start(){
+        out.println("è partito !!");
         /** ... */
+
+        askConnect();
+    }
+
+    /** legge stringhe da input */
+    public String readInput() throws ExecutionException {
+        FutureTask<String> futureTask = new FutureTask<>(new ReadFromInput());
+        inputThread = new Thread(futureTask);
+        inputThread.start();
+
+        String input = null;
+
+        try {
+            input = futureTask.get();
+        } catch (InterruptedException e) {
+            futureTask.cancel(true);
+            Thread.currentThread().interrupt();
+        }
+        return input;
     }
 
     @Override
     public void showLogin(String nickname, String gameId, boolean wasJoined) {
-
+        if (wasJoined){
+            notifyObserver(obs -> obs.createNickname(nickname));
+            out.println("\nYou joined game: "+gameId+ " as "+ nickname);
+        }
+        else {
+            out.println("\nGame "+gameId+ " not available.");
+            askLobby();
+        }
     }
 
     @Override
@@ -99,26 +132,86 @@ public class Cli extends ObservableView implements View {
 
     @Override
     public void askConnect() {
-
+        boolean succeded;
+        do {
+            try{
+                succeded = false;
+                out.print("Inserisci indirizzo IP valido (127.0.0.1) : ");
+                String ipAddress = readInput();
+                out.print("Inserisci porta valida (4000) : ");
+                int port = Integer.parseInt(readInput());
+                notifyObserver(obs -> obs.updateConnect(ipAddress, port));
+            }
+            catch (Exception e){
+                out.print("Input non valido.");
+                succeded = true;
+            }
+        }while(succeded);
     }
 
     @Override
     public void askLobby() {
-
+        try {
+            out.print("Enter your nickname: ");
+            String username = readInput();
+            out.print("Enter the gameID: ");
+            String gameID = readInput();
+            notifyObserver(obs -> obs.updateLobby(username, gameID));
+        } catch (ExecutionException e) {
+            out.println(WRONG_INPUT);
+        }
     }
 
     @Override
     public void askPlayersNumber() {
+        int playersNumber;
+        do {
+            out.print("Enter the number of players who will join the room (2-4): ");
+            try {
+                playersNumber = Integer.parseInt(readInput());
+            } catch (Exception e) {
+                out.println(WRONG_INPUT);
+                playersNumber=0;
+            }
 
+        } while(playersNumber > 4 || playersNumber <= 0);
+        int finalPlayersNumber = playersNumber;
+        notifyObserver(obs -> obs.choosePlayersNumber(finalPlayersNumber));
     }
 
     @Override
     public void askGameMode(Game game) {
-
+        //String gm;
+        GameMode gameModeChoosen;
+        try {
+            out.print("Now select the game mode you want to play. \n" +
+                    "You can choose between \"TWOPLAYERS\", \"THREEPLAYERS\" or \"COOP\" (for four-player games)." +
+                    "Which one do you want to play? ");
+            //gm = readInput();
+            //gameModeChoosen = GameMode.valueOf(gm);
+            gameModeChoosen = GameMode.valueOf(readInput());
+            switch (gameModeChoosen){
+                case TWOPLAYERS:
+                    game.setGameMode(GameMode.TWOPLAYERS);
+                    break;
+                case THREEPLAYERS:
+                    game.setGameMode(GameMode.THREEPLAYERS);
+                    break;
+                case COOP:
+                    game.setGameMode(GameMode.COOP);
+                    break;
+                }
+            if(gameModeChoosen.equals(GameMode.TWOPLAYERS) || gameModeChoosen.equals(GameMode.THREEPLAYERS)
+                    || gameModeChoosen.equals(GameMode.COOP)){
+                    notifyObserver(obs -> obs.chooseGameMode(gameModeChoosen));
+                }
+            } catch (Exception e) {
+                out.println(WRONG_INPUT);
+            }
     }
 
     @Override
-    public void askAssistantCardToPlay(ArrayList<CharacterCard> characterCards) {
+    public void askAssistantCardToPlay(ArrayList<AssistantCard> assistantDeck) {
 
     }
 
@@ -128,7 +221,7 @@ public class Cli extends ObservableView implements View {
     }
 
     @Override
-    public void askCharacterCardToPlay(Table table) {
+    public void askCharacterCardToPlay(ArrayList<CharacterCard> characterCard) {
 
     }
 
