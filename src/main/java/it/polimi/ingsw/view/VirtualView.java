@@ -27,7 +27,7 @@ public class VirtualView implements View, Observer {
 
     @Override
     public void showLogin(String username, String gameId, boolean wasJoined) {
-        //clientHandler.sendMessage(new LoginReply(username, gameId, wasJoined));
+        clientHandler.sendMessage(new LoginResult(username, gameId, wasJoined));
     }
 
     @Override
@@ -102,12 +102,9 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void askPlayersNumber() {
+    public void askPlayersNumberAndDifficulty() {
         clientHandler.sendMessage(new HostGameReply());
     }
-
-    @Override
-    public void askGameDifficulty() {}
 
     @Override
     public void askStudentsToMove(ArrayList<Student> studentsInHall, School school, Table table) {

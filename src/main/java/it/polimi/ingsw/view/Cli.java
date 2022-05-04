@@ -164,32 +164,14 @@ public class Cli extends ObservableView implements View {
         }
     }
 
+
+
     @Override
-    public void askGameDifficulty() {
+    public void askPlayersNumberAndDifficulty() {
+        int playersNumber;
+        boolean ye;
         Difficulty difficulty = Difficulty.STANDARDMODE;
         String g;
-        boolean ye;
-        do {
-            out.print("Enter the game difficulty that you want to play ");
-            try {
-                g=readInput().toUpperCase(Locale.ROOT);
-                difficulty = Difficulty.valueOf(g);
-                ye=false;
-                System.out.println(difficulty);
-            } catch (Exception e) {
-                out.println(WRONG_INPUT);
-                ye=true;
-            }
-
-        } while (ye);
-
-        Difficulty finalDifficulty = difficulty;
-        notifyObserver(obs -> obs.chooseGameDifficulty(finalDifficulty));
-    }
-
-    @Override
-    public void askPlayersNumber() {
-        int playersNumber;
         do {
             out.print("Enter the number of players who will join the room (2-4): ");
             try {
@@ -200,8 +182,21 @@ public class Cli extends ObservableView implements View {
             }
 
         } while(playersNumber > 4 || playersNumber <= 1);
+        do {
+            out.print("Enter the game difficulty that you want to play (Standard, Expert): ");
+            try {
+                g=readInput().toUpperCase(Locale.ROOT)+"MODE";
+                difficulty = Difficulty.valueOf(g);
+                ye=false;
+            } catch (Exception e) {
+                out.println(WRONG_INPUT);
+                ye=true;
+            }
+
+        } while (ye);
         int finalPlayersNumber = playersNumber;
-        notifyObserver(obs -> obs.choosePlayersNumber(finalPlayersNumber));
+        Difficulty finalDifficulty = difficulty;
+        notifyObserver(obs -> obs.choosePlayersNumberAndDifficulty(finalPlayersNumber,finalDifficulty));
     }
 
 

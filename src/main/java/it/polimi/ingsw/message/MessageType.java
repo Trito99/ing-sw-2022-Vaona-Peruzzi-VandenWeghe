@@ -4,8 +4,7 @@ public enum MessageType {
     //messaggi del gioco
     LOGIN,
     LOGIN_RESULT,
-    PLAYERS_NUMBER,
-    GAME_DIFFICULTY,
+    PLAYERS_NUMBER_AND_DIFFICULTY,
 
     //messaggi di connessione al server
     SUCCESSFUL_HOST,

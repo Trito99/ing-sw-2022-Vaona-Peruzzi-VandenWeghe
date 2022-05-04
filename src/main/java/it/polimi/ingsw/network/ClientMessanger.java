@@ -3,7 +3,6 @@ package it.polimi.ingsw.network;
 import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.message.Error;
 import it.polimi.ingsw.model.game.Difficulty;
-import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.observer.ObserverView;
 import it.polimi.ingsw.view.View;
@@ -43,11 +42,10 @@ public class ClientMessanger implements ObserverView, Observer {
     }
 
     /** comunica il numero di giocatori del gioco in corso */
-    public void choosePlayersNumber(int playersNumber) {
-        client.sendMessage(new PlayersNumber(nickname, playersNumber));
+    public void choosePlayersNumberAndDifficulty(int playersNumber, Difficulty difficulty) {
+        client.sendMessage(new PlayersNumberAndDifficulty(nickname, playersNumber,difficulty));
     }
 
-    public void chooseGameDifficulty(Difficulty difficulty) {client.sendMessage(new GameDifficultyChosen(difficulty));}
 
     /** cerca di loggare un giocatore ad una data lobby */
     public void updateLobby(String nickname, String lobby){
@@ -78,8 +76,7 @@ public class ClientMessanger implements ObserverView, Observer {
                 queue.execute(() -> view.showLogin(loginMessage.getNickname(), loginMessage.getGameId(), loginMessage.wasJoined()));
                 break;
             case SUCCESSFUL_HOST:
-                queue.execute(() -> view.askPlayersNumber());
-                queue.execute(()->view.askGameDifficulty());
+                queue.execute(() -> view.askPlayersNumberAndDifficulty());
                 break;
             case START_TURN:
                 queue.execute(() -> view.askAction());

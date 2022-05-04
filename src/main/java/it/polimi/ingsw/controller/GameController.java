@@ -2,12 +2,9 @@ package it.polimi.ingsw.controller;
 
 
 import it.polimi.ingsw.message.ClientMessage;
-import it.polimi.ingsw.message.GameDifficultyChosen;
 import it.polimi.ingsw.message.MessageType;
-import it.polimi.ingsw.message.PlayersNumber;
+import it.polimi.ingsw.message.PlayersNumberAndDifficulty;
 import it.polimi.ingsw.model.assistant.AssistantCard;
-import it.polimi.ingsw.model.assistant.AssistantDeckName;
-import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.DeckCharacter;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.Game;
@@ -15,14 +12,12 @@ import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.GameState;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
-import it.polimi.ingsw.model.player.Team;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.view.VirtualView;
 
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -62,7 +57,7 @@ public class GameController {
             this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
             this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
             virtualView.showLogin(nickname, gameId, true);
-            virtualView.askPlayersNumber();
+            virtualView.askPlayersNumberAndDifficulty();
             return true;
         }
         else if(allVirtualView.size() < maxPlayers){
@@ -96,109 +91,6 @@ public class GameController {
         else virtualView.showLogin(nickname, gameId,false);
         return false;
     }
-
-    /** maxPlayers(GameMode) e difficulty vanno scelti da chi crea la partita
-    public void initializePlayer(VirtualView view) { // Setto i player a inizio partita
-        String nickname = null;
-        int year = 0;
-        int month = 0;
-        int dayOfMonth = 0;
-        int i = 0;
-
-        switch (gameSession.getGameMode()){
-                /** Da inserire Nickname, data(età) ecc.. di tutti i player (Anche in Coop!!!)
-            case TWOPLAYERS:
-                System.out.println("Scegli il tuo nickname: ");
-                /** funzione per leggere
-                System.out.println("Inserisci la tua data di nascita: ");
-                /** funzione per leggere
-                GregorianCalendar dataPlayer = new GregorianCalendar(year, month , dayOfMonth);
-                this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
-                this.gameSession.getListOfPlayers().get(i).setPlayerDate(dataPlayer);
-                this.gameSession.getListOfPlayers().get(i).setNickname(nickname);
-                i++;
-
-                //svuoto il campo
-                dataPlayer = null;
-                System.out.println("Scegli il tuo nickname: ");
-                /** funzione per leggere
-                System.out.println("Inserisci la tua età: ");
-                /** funzione per leggere
-                dataPlayer = new GregorianCalendar(year, month, dayOfMonth);
-                this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
-                this.gameSession.getListOfPlayers().get(i).setPlayerDate(dataPlayer);
-                this.gameSession.getListOfPlayers().get(i).setNickname(nickname);
-
-                if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
-                    for (Player p : gameSession.getListOfPlayers())
-                        p.setCoinScore(1);
-                    gameSession.getTable().setCoinsOnTable(18);
-                }
-                allVirtualView.put(nickname, view);
-                break;
-            case THREEPLAYERS:
-                System.out.println("Scegli il tuo nickname: ");
-                /** funzione per leggere
-                System.out.println("Inserisci la tua data di nascita: ");
-                /** funzione per leggere
-                dataPlayer = new GregorianCalendar(year, month, dayOfMonth);
-                this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
-                this.gameSession.getListOfPlayers().get(i).setPlayerDate(dataPlayer);
-                this.gameSession.getListOfPlayers().get(i).setNickname(nickname);
-                i++;
-
-                //svuoto il campo
-                dataPlayer = null;
-                System.out.println("Scegli il tuo nickname: ");
-                /** funzione per leggere
-                System.out.println("Inserisci la tua età: ");
-                /** funzione per leggere *
-                dataPlayer = new GregorianCalendar(year, month, dayOfMonth);
-                this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
-                this.gameSession.getListOfPlayers().get(i).setPlayerDate(dataPlayer);
-                this.gameSession.getListOfPlayers().get(i).setNickname(nickname);
-                i++;
-
-                //svuoto il campo
-                dataPlayer = null;
-                System.out.println("Scegli il tuo nickname: ");
-                /** funzione per leggere
-                System.out.println("Inserisci la tua età: ");
-                /** funzione per leggere
-                dataPlayer = new GregorianCalendar(year, month, dayOfMonth);
-                this.gameSession.addPlayer(new Player(TColor.GREY, PlayerNumber.PLAYER3));
-                this.gameSession.getListOfPlayers().get(i).setPlayerDate(dataPlayer);
-                this.gameSession.getListOfPlayers().get(i).setNickname(nickname);
-
-                if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
-                    for (Player p : gameSession.getListOfPlayers())
-                        p.setCoinScore(1);
-                    gameSession.getTable().setCoinsOnTable(17);
-                }
-                allVirtualView.put(nickname, view);
-                break;
-            case COOP:
-
-                this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
-                this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER2));
-                gameSession.getTeam().add(new Team()) ;
-                gameSession.getTeam().get(0).intializeTeam(gameSession.getListOfPlayers().get(0), gameSession.getListOfPlayers().get(1), TColor.WHITE);
-
-                this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER3));
-                this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER4));
-                gameSession.getTeam().add(new Team());
-                gameSession.getTeam().get(1).intializeTeam(gameSession.getListOfPlayers().get(2), gameSession.getListOfPlayers().get(3), TColor.BLACK);
-
-                if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)) {
-                    for (Player p : gameSession.getListOfPlayers())
-                            p.setCoinScore(1);
-                    gameSession.getTable().setCoinsOnTable(16);
-                }
-                break;
-            default:
-                break;
-        }
-    } */
 
     public void initializeGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
         setGameState(GameState.INIT);
@@ -247,11 +139,10 @@ public class GameController {
             case INIT:
                 VirtualView virtualView = allVirtualView.get(receivedMessage.getNickname());
 
-                if(receivedMessage.getMessageType() == MessageType.PLAYERS_NUMBER){
-                    System.out.println("FFF");
-                    PlayersNumber pnSelected = (PlayersNumber) receivedMessage;
-                    maxPlayers = pnSelected.getPlayersNumber();
-                    switch(pnSelected.getPlayersNumber()){
+                if(receivedMessage.getMessageType() == MessageType.PLAYERS_NUMBER_AND_DIFFICULTY){
+                    PlayersNumberAndDifficulty PNaDSelected = (PlayersNumberAndDifficulty) receivedMessage;
+                    maxPlayers = PNaDSelected.getPlayersNumber();
+                    switch(PNaDSelected.getPlayersNumber()){
                         case 4:
                             gameSession.setGameMode(GameMode.COOP);
                             virtualView.showMessage("Gioco in modalità a squadre. \nIn attesa di altri giocatori...");
@@ -259,25 +150,21 @@ public class GameController {
                         case 3:
                             gameSession.setGameMode(GameMode.THREEPLAYERS);
                             gameSession.getTable().generateCloudNumber(gameSession.getGameMode());
-                            virtualView.showMessage("Gioco in modalità a ("+pnSelected.getPlayersNumber()+") giocatori. \nIn attesa di altri giocatori...");
+                            virtualView.showMessage("Gioco in modalità a ("+PNaDSelected.getPlayersNumber()+") giocatori. \nIn attesa di altri giocatori...");
                             break;
                         case 2:
                             gameSession.setGameMode(GameMode.TWOPLAYERS);
                             gameSession.getTable().generateCloudNumber(gameSession.getGameMode());
-                            virtualView.showMessage("Gioco in modalità a ("+pnSelected.getPlayersNumber()+") giocatori. \nIn attesa di altri giocatori...");
+                            virtualView.showMessage("Gioco in modalità a ("+PNaDSelected.getPlayersNumber()+") giocatori. \nIn attesa di altri giocatori...");
                             break;
                     }
-                    if(receivedMessage.getMessageType()== MessageType.GAME_DIFFICULTY){
-                        System.out.println("DDD");
-                        GameDifficultyChosen difficultySelected = (GameDifficultyChosen) receivedMessage;
-                        switch (difficultySelected.getGameDifficulty()){
-                            case STANDARDMODE:
-                                gameSession.setDifficulty(Difficulty.STANDARDMODE);
-                                break;
-                            case EXPERTMODE:
-                                gameSession.setDifficulty(Difficulty.EXPERTMODE);
-                                break;
-                        }
+                    switch (PNaDSelected.getDifficulty()){
+                        case STANDARDMODE:
+                            gameSession.setDifficulty(Difficulty.STANDARDMODE);
+                            break;
+                        case EXPERTMODE:
+                            gameSession.setDifficulty(Difficulty.EXPERTMODE);
+                            break;
                     }
                     gameSession.getTable().generateCloudNumber(gameSession.getGameMode());
                 }

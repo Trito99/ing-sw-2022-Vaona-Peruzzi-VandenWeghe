@@ -18,8 +18,6 @@ public interface ObserverView {
     public void createNickname(String nickname);
 
     /** invia messaggio al server con il numero di giocatori scelti dal giocatore */
-    public void choosePlayersNumber(int playersNumber);
+    public void choosePlayersNumberAndDifficulty(int playersNumber, Difficulty difficulty);
 
-    /** invia messaggio al server con la modalità di gioco scelta dal giocatore */
-    public void chooseGameDifficulty(Difficulty difficulty);
 }

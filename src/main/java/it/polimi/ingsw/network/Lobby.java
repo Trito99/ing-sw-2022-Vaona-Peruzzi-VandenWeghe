@@ -29,7 +29,7 @@ public class Lobby {
         if(!(isGameStarted())){
 
             int i=1;
-            String n = new String(nickname);
+            String n = nickname;
             /** ... */
             /** stampo nickname così: nickname(1) / nickname(2) / ecc. */
             while (clientHandlerMap.containsValue(n)) {

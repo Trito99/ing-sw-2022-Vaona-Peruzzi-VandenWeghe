@@ -3,7 +3,6 @@ package it.polimi.ingsw.view;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CharacterCard;
-import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;
@@ -55,10 +54,7 @@ public interface View {
     void askLobby();
 
     /** chiede quanti giocatori avrà il nuovo gioco */
-    void askPlayersNumber();
-
-    /** chiede la difficoltà */
-    void askGameDifficulty();
+    void askPlayersNumberAndDifficulty();
 
     /** chiede al giocatore quale carta assistente vuole giocare */
     void askAssistantCardToPlay(ArrayList<AssistantCard> assistantDeck);
