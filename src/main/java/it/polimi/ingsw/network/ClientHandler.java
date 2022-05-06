@@ -83,7 +83,7 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
                         LoginRequest loginMsg = (LoginRequest) message;
                         lobby = (lobbyServer.getLobby(loginMsg.getGameId()));
                         gameId=loginMsg.getGameId();
-                        lobby.addPlayer(loginMsg.getNickname(), this);
+                        lobby.addPlayer(loginMsg.getNickname(), loginMsg.getPlayerDate(), this);
                     } else if (lobby != null) {
                         lobby.getMessage(message);
                     }

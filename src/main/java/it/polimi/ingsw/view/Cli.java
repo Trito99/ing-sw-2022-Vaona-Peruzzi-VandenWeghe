@@ -14,9 +14,7 @@ import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.observer.ObservableView;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
@@ -37,7 +35,7 @@ public class Cli extends ObservableView implements View {
     }
 
     public void start(){
-        out.println("è partito !!");
+        out.println("Welcome to Eriantys!! :) ");
         /** ... */
 
         askConnect();
@@ -61,10 +59,12 @@ public class Cli extends ObservableView implements View {
     }
 
     @Override
-    public void showLogin(String nickname, String gameId, boolean wasJoined) {
+    public void showLogin(String nickname, String gameId, GregorianCalendar playerDate, boolean wasJoined) {
         if (wasJoined){
             notifyObserver(obs -> obs.createNickname(nickname));
-            out.println("\nYou joined game: "+gameId+ " as "+ nickname);
+            notifyObserver(obs -> obs.createPlayerDate(playerDate));
+            out.println("\nYou joined the game "+gameId+ " as "+ nickname);
+            out.println("Data di nascita di "+ nickname+ " è "+ playerDate.get(Calendar.DATE)+"/" + playerDate.get(Calendar.MONTH)+"/" + playerDate.get(Calendar.YEAR));
         }
         else {
             out.println("\nGame "+gameId+ " not available.");
@@ -155,10 +155,19 @@ public class Cli extends ObservableView implements View {
     public void askLobby() {
         try {
             out.print("Enter your nickname: ");
-            String username = readInput();
+            String nickname = readInput();
             out.print("Enter the gameID: ");
             String gameID = readInput();
-            notifyObserver(obs -> obs.updateLobby(username, gameID));
+
+            out.print("Enter your Birth Day: ");
+            int birthDay= Integer.parseInt(readInput());
+            out.print("Enter your Birth Month: ");
+            int birthMonth= Integer.parseInt(readInput());
+            out.print("Enter your Birth Year: ");
+            int birthYear= Integer.parseInt(readInput());
+            GregorianCalendar playerDate = new GregorianCalendar(birthYear, birthMonth, birthDay);
+
+            notifyObserver(obs -> obs.updateLobby(nickname, playerDate, gameID));
         } catch (ExecutionException e) {
             out.println(WRONG_INPUT);
         }

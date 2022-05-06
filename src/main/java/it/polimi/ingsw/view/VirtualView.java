@@ -15,6 +15,7 @@ import it.polimi.ingsw.network.ClientHandlerInterface;
 import it.polimi.ingsw.observer.Observer;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 public class VirtualView implements View, Observer {
     private final ClientHandlerInterface clientHandler;
@@ -26,8 +27,8 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void showLogin(String username, String gameId, boolean wasJoined) {
-        clientHandler.sendMessage(new LoginResult(username, gameId, wasJoined));
+    public void showLogin(String username, String gameId, GregorianCalendar playerDate, boolean wasJoined) {
+        clientHandler.sendMessage(new LoginResult(username, gameId, playerDate, wasJoined));
     }
 
     @Override

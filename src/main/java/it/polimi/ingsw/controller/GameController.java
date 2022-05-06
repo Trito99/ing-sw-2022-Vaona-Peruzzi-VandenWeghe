@@ -18,6 +18,7 @@ import it.polimi.ingsw.view.VirtualView;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class GameController {
      * @param nickname del Giocatore.
      * @param gameId id della partita a cui il giocatore sta giocando.
      */
-    public boolean newPlayer(String nickname, String gameId, VirtualView virtualView) {
+    public boolean newPlayer(String nickname, String gameId, GregorianCalendar playerDate, VirtualView virtualView) {
 
         if(allVirtualView.isEmpty()){
             generateTable();
@@ -56,7 +57,7 @@ public class GameController {
             this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
             this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
             this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
-            virtualView.showLogin(nickname, gameId, true);
+            virtualView.showLogin(nickname, gameId, playerDate, true);
             virtualView.askPlayersNumberAndDifficulty();
             return true;
         }
@@ -82,13 +83,13 @@ public class GameController {
             }
 
             allVirtualView.put(nickname, virtualView);
-            virtualView.showLogin(nickname, gameId,true);
+            virtualView.showLogin(nickname, gameId, playerDate,true);
             if(allVirtualView.size() == maxPlayers){
                 initializeGame();
             }
             return true;
         }
-        else virtualView.showLogin(nickname, gameId,false);
+        else virtualView.showLogin(nickname, gameId, playerDate, false);
         return false;
     }
 

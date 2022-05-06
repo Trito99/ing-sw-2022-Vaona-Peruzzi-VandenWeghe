@@ -7,11 +7,13 @@ import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.observer.ObserverView;
 import it.polimi.ingsw.view.View;
 
+import java.util.GregorianCalendar;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ClientMessanger implements ObserverView, Observer {
     private String nickname;
+    private GregorianCalendar playerDate;
     private View view;
     private ExecutorService queue;
     private ClientSocket client;
@@ -41,6 +43,11 @@ public class ClientMessanger implements ObserverView, Observer {
         this.nickname = nickname;
     }
 
+    @Override
+    public void createPlayerDate(GregorianCalendar playerDate) {
+        this.playerDate = playerDate;
+    }
+
     /** comunica il numero di giocatori del gioco in corso */
     public void choosePlayersNumberAndDifficulty(int playersNumber, Difficulty difficulty) {
         client.sendMessage(new PlayersNumberAndDifficulty(nickname, playersNumber,difficulty));
@@ -48,10 +55,11 @@ public class ClientMessanger implements ObserverView, Observer {
 
 
     /** cerca di loggare un giocatore ad una data lobby */
-    public void updateLobby(String nickname, String lobby){
+    public void updateLobby(String nickname, GregorianCalendar playerDate, String lobby){
         this.nickname = nickname;
         this.lobby = lobby;
-        client.sendMessage(new LoginRequest(nickname, lobby));
+        this.playerDate = playerDate;
+        client.sendMessage(new LoginRequest(nickname, lobby, playerDate));
     }
 
     public void updateDisconnect(){
@@ -73,7 +81,7 @@ public class ClientMessanger implements ObserverView, Observer {
         switch (message.getMessageType()) {
             case LOGIN_RESULT:
                 LoginResult loginMessage = (LoginResult) message;
-                queue.execute(() -> view.showLogin(loginMessage.getNickname(), loginMessage.getGameId(), loginMessage.wasJoined()));
+                queue.execute(() -> view.showLogin(loginMessage.getNickname(), loginMessage.getGameId(), loginMessage.getPlayerDate(), loginMessage.wasJoined()));
                 break;
             case SUCCESSFUL_HOST:
                 queue.execute(() -> view.askPlayersNumberAndDifficulty());

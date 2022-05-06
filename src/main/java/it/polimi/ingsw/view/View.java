@@ -10,11 +10,12 @@ import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 /** la classe rappresenta la View generica che poi sarà implementata da CLI e GUI*/
 public interface View {
 
-    void showLogin(String nickname, String gameId, boolean wasJoined);
+    void showLogin(String nickname, String gameId, GregorianCalendar playerDate, boolean wasJoined);
 
     /** mostra un messaggio generico */
     void showMessage(String message);

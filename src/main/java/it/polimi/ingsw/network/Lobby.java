@@ -23,7 +23,7 @@ public class Lobby {
     }
 
     /** aggiungo nuovo giocatore alla Lobby */
-    public void addPlayer(String nickname, ClientHandler clientHandler){
+    public void addPlayer(String nickname, GregorianCalendar playerDate, ClientHandler clientHandler){
         VirtualView virtualView = new VirtualView(clientHandler);
 
         if(!(isGameStarted())){
@@ -38,7 +38,7 @@ public class Lobby {
                 i++;
             }
             clientHandlerMap.put(clientHandler, n);
-            if(!gameController.newPlayer(n, gameId, virtualView)){
+            if(!gameController.newPlayer(n, gameId, playerDate, virtualView)){
                 clientHandlerMap.remove(clientHandler);
             }
         }
@@ -50,7 +50,7 @@ public class Lobby {
             }
         }
         else{
-            virtualView.showLogin(nickname, gameId, false);
+            virtualView.showLogin(nickname, gameId, playerDate, false);
         }
     }
 
