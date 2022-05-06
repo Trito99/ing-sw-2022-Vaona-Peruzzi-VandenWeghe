@@ -197,6 +197,7 @@ public class Cli extends ObservableView implements View {
                 g=readInput().toUpperCase(Locale.ROOT)+"MODE";
                 difficulty = Difficulty.valueOf(g);
                 ye=false;
+                out.println("Waiting others players to start the Game...");
             } catch (Exception e) {
                 out.println(WRONG_INPUT);
                 ye=true;
