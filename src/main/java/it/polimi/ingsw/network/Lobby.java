@@ -30,6 +30,7 @@ public class Lobby {
 
             int i=1;
             String n = nickname;
+            clientHandlerMap.put(clientHandler, n);
             /** ... */
             /** stampo nickname così: nickname(1) / nickname(2) / ecc. */
             while (clientHandlerMap.containsValue(n)) {
@@ -37,7 +38,7 @@ public class Lobby {
                 System.out.println(n);
                 i++;
             }
-            clientHandlerMap.put(clientHandler, n);
+
             if(!gameController.newPlayer(n, gameId, playerDate, virtualView)){
                 clientHandlerMap.remove(clientHandler);
             }

@@ -98,9 +98,7 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void askLobby() {
-
-    }
+    public void askLobby() { }
 
     @Override
     public void askPlayersNumberAndDifficulty() {
