@@ -71,17 +71,14 @@ public class PlayerTest {
 
         player.setNickname("Giocatore");
         player.setPlayerDate(new GregorianCalendar(1999, 03, 17));
-        player.setAge(player.getPlayerDate());
 
         assertNotNull(player.getNickname());
         assertNotNull(player.getPlayerDate());
-        assertNotNull(player.getAge());
         assertNotNull(player.getPlayerNumber());
         assertEquals("Giocatore", player.getNickname());
         assertEquals(1999, player.getPlayerDate().get(YEAR));
         assertEquals(03, player.getPlayerDate().get(MONTH));
         assertEquals(17, player.getPlayerDate().get(DAY_OF_MONTH));
-        assertEquals(23, player.getAge());
         assertEquals(PlayerNumber.PLAYER1, player.getPlayerNumber());
 
    }

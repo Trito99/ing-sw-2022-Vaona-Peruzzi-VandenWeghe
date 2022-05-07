@@ -38,7 +38,6 @@ public class Player {
     public Player(TColor tColor, PlayerNumber playerNumber) {   //+ nickname e data
         nickname = new String(); //= nickname
         playerDate = null;
-        age = 0;                 //= data
         this.playerNumber = playerNumber;      /** DA RIFARE COSTRUTTORE */
         influenceOnIsland = 0;
         personalSchool = new School();
@@ -113,17 +112,6 @@ public class Player {
 
     public void setPlayerDate(GregorianCalendar playerDate) {
         this.playerDate = playerDate;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public int setAge(GregorianCalendar playerDate){
-        /** da modificare il calcolo della data */
-        int currentYear = 2022;
-        this.age = currentYear - playerDate.get(YEAR);
-        return age;
     }
 
     public PlayerNumber getPlayerNumber() {

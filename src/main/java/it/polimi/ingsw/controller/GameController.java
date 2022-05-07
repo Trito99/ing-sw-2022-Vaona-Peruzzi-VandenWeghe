@@ -56,6 +56,7 @@ public class GameController {
             allVirtualView.put(nickname, virtualView);
             this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
             this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
+            this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
             virtualView.showLogin(nickname, gameId, playerDate, true);
             virtualView.askPlayersNumberAndDifficulty();
             return true;
@@ -66,6 +67,7 @@ public class GameController {
                 allVirtualView.put(nickname, virtualView);
                 this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
                 this.gameSession.getListOfPlayers().get(0).generateSchool(gameSession.getTable(),gameSession.getGameMode());
             }
@@ -73,12 +75,14 @@ public class GameController {
                 allVirtualView.put(nickname, virtualView);
                 this.gameSession.addPlayer(new Player(TColor.GREY, PlayerNumber.PLAYER3));
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
             }
             else if(allVirtualView.size() == 3){
                 allVirtualView.put(nickname, virtualView);
                 this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER4));
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
             }
 

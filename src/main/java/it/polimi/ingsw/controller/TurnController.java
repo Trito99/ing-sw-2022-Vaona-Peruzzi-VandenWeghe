@@ -17,7 +17,7 @@ public class TurnController {
     //dichiarare attributi
     /** costruttore */
     public TurnController(GameController gameController){
-        playingPlayer =  gameController.getGameSession().getListOfPlayers().get(0).getNickname();
+        playingPlayer =  YoungestPlayer(gameController).getNickname();
         orderPlayers =new ArrayList<String>();
         activePlayer=new HashMap<String, Boolean>();
         for(int i=0; i < gameController.getAllVirtualView().size(); i++){
@@ -25,6 +25,18 @@ public class TurnController {
             activePlayer.put(nickname, true);
             orderPlayers.add(nickname);
         }
+    }
+
+    private Player YoungestPlayer(GameController gameController){
+        Player youngestPlayer=gameController.getGameSession().getListOfPlayers().get(0);
+        for(int i=1;i<gameController.getGameSession().getListOfPlayers().size();i++) {
+            if (youngestPlayer.getPlayerDate().compareTo(gameController.getGameSession().getListOfPlayers().get(i).getPlayerDate())==1){
+                youngestPlayer=gameController.getGameSession().getListOfPlayers().get(i);
+            }else if ((youngestPlayer.getPlayerDate().compareTo(gameController.getGameSession().getListOfPlayers().get(i).getPlayerDate())==-1) || youngestPlayer.getPlayerDate().compareTo(gameController.getGameSession().getListOfPlayers().get(i).getPlayerDate())==0){
+                youngestPlayer=gameController.getGameSession().getListOfPlayers().get(i-1);
+            }
+        }
+        return youngestPlayer;
     }
 
 
