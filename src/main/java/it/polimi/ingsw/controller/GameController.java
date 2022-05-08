@@ -101,7 +101,7 @@ public class GameController {
         return false;
     }
 
-    public void initializeExpertModeGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
+    public void initializeExpertModeGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isol, motherEarth, nuvole, bag, cartePersonaggioontable) */
         setGameState(GameState.INIT);
         turnController = new TurnController(this);
         switch(maxPlayers){
