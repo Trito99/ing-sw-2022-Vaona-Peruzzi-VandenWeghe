@@ -64,7 +64,6 @@ public class Cli extends ObservableView implements View {
             notifyObserver(obs -> obs.createNickname(nickname));
             notifyObserver(obs -> obs.createPlayerDate(playerDate));
             out.println("\nYou joined the game "+gameId+ " as "+ nickname);
-            out.println("Data di nascita di "+ nickname+ " è "+ playerDate.get(Calendar.DATE)+"/" + playerDate.get(Calendar.MONTH)+"/" + playerDate.get(Calendar.YEAR));
         }
         else {
             out.println("\nGame "+gameId+ " not available.");
@@ -138,14 +137,14 @@ public class Cli extends ObservableView implements View {
         do {
             try{
                 succeded = false;
-                out.print("Inserisci indirizzo IP valido (127.0.0.1) : ");
+                out.print("Insert a valid ip address (127.0.0.1) : ");
                 String ipAddress = readInput();
-                out.print("Inserisci porta valida (4000) : ");
+                out.print("Insert a valid port (4000) : ");
                 int port = Integer.parseInt(readInput());
                 notifyObserver(obs -> obs.updateConnect(ipAddress, port));
             }
             catch (Exception e){
-                out.print("Input non valido.");
+                out.print("Wrong input.");
                 succeded = true;
             }
         }while(succeded);
@@ -156,11 +155,11 @@ public class Cli extends ObservableView implements View {
         try {
             out.print("Enter your nickname: ");
             String nickname = readInput();
-            out.print("Enter your Birth Day: ");
+            out.print("Enter your Birth Day (gg): ");
             int birthDay= Integer.parseInt(readInput());
-            out.print("Enter your Birth Month: ");
+            out.print("Enter your Birth Month (mm): ");
             int birthMonth= Integer.parseInt(readInput());
-            out.print("Enter your Birth Year: ");
+            out.print("Enter your Birth Year (aaaa): ");
             int birthYear= Integer.parseInt(readInput());
             GregorianCalendar playerDate = new GregorianCalendar(birthYear, birthMonth, birthDay);
 
