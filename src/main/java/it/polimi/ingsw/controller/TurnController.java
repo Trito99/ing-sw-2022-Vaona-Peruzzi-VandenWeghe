@@ -12,7 +12,7 @@ public class TurnController {
     private String playingPlayer;
 
     private ArrayList<String> orderPlayers;
-    private ArrayList<Player> playersOrder; // Messo per changeOrder--> andrà tenuto solo orderPlayers(?)
+    ArrayList<Player> playerOrder = null;
 
     //dichiarare attributi
     /** costruttore */
@@ -24,6 +24,7 @@ public class TurnController {
             String nickname = gameController.getGameSession().getListOfPlayers().get(i).getNickname();
             activePlayer.put(nickname, true);
             orderPlayers.add(nickname);
+            playerOrder.add(gameController.getGameSession().getListOfPlayers().get(i));
         }
     }
 
@@ -44,17 +45,15 @@ public class TurnController {
         return playingPlayer;
     }
 
-    /** primo giocatore del turno */
-    public String firstPlayer(){
-        return getActivePlayers().get(0);
-    }
 
     /** cambia l'active player */
     public String nextPlayer(){
-        int player = getActivePlayers().indexOf(playingPlayer)+1;
-        if(player >= getActivePlayers().size()) player = 0;
-        playingPlayer = getActivePlayers().get(player);
-        //setMainAction(false);
+        int player;
+        if((orderPlayers.indexOf(playingPlayer)+1)>(orderPlayers.size()-1))
+            player = 0;
+        else
+            player = orderPlayers.indexOf(playingPlayer)+1;
+        playingPlayer = orderPlayers.get(player);
 
         return playingPlayer;
     }
@@ -90,9 +89,11 @@ public class TurnController {
         return(nickname.equals(getActivePlayer()));
     }
 
-    public void changeOrder(ArrayList<Player> playerOrder){   //setta ordine dei giocatori nel round
+    public void changeStartingPlayer(){   //setta ordine dei giocatori nel round
 
-        Collections.sort(playerOrder, (o1, o2) -> Integer.valueOf(o1.getTrash().getTurnValue()).compareTo(o2.getTrash().getTurnValue()));
+        ArrayList<Player>  NewPlayerOrder = (ArrayList<Player>) playerOrder.clone();
+        Collections.sort(NewPlayerOrder, (o1, o2) -> Integer.valueOf(o1.getTrash().getTurnValue()).compareTo(o2.getTrash().getTurnValue()));
+        playingPlayer= NewPlayerOrder.get(0).getNickname();
     }
 
 }
