@@ -74,7 +74,7 @@ public class Cli extends ObservableView implements View {
 
     @Override
     public void showMessage(String message) {
-
+        out.println("\n" + message);
     }
 
     @Override
@@ -156,9 +156,6 @@ public class Cli extends ObservableView implements View {
         try {
             out.print("Enter your nickname: ");
             String nickname = readInput();
-            out.print("Enter the gameID: ");
-            String gameID = readInput();
-
             out.print("Enter your Birth Day: ");
             int birthDay= Integer.parseInt(readInput());
             out.print("Enter your Birth Month: ");
@@ -166,6 +163,9 @@ public class Cli extends ObservableView implements View {
             out.print("Enter your Birth Year: ");
             int birthYear= Integer.parseInt(readInput());
             GregorianCalendar playerDate = new GregorianCalendar(birthYear, birthMonth, birthDay);
+
+            out.print("Enter the gameID: ");
+            String gameID = readInput();
 
             notifyObserver(obs -> obs.updateLobby(nickname, playerDate, gameID));
         } catch (ExecutionException e) {
@@ -197,7 +197,6 @@ public class Cli extends ObservableView implements View {
                 g=readInput().toUpperCase(Locale.ROOT)+"MODE";
                 difficulty = Difficulty.valueOf(g);
                 ye=false;
-                out.println("Waiting others players to start the Game...");
             } catch (Exception e) {
                 out.println(WRONG_INPUT);
                 ye=true;

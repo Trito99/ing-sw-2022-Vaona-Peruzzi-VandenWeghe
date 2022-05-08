@@ -89,7 +89,7 @@ public class GameController {
             allVirtualView.put(nickname, virtualView);
             virtualView.showLogin(nickname, gameId, playerDate,true);
             if(allVirtualView.size() == maxPlayers){
-                initializeGame();
+                startGame();
             }
             return true;
         }
@@ -97,38 +97,24 @@ public class GameController {
         return false;
     }
 
-    public void initializeGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
+    public void startGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
         setGameState(GameState.INIT);
         turnController = new TurnController(this);
+        if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
+            DeckCharacter characterDeck = new DeckCharacter();
+            characterDeck.generateCharacterDeck();
+            gameSession.getTable().generateCharacterCardsOnTable(characterDeck.getCharacterCards());
+        }
         switch(maxPlayers){
             case 4:
-                if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
-                    DeckCharacter characterDeck = new DeckCharacter();
-                    characterDeck.generateCharacterDeck();
-                    gameSession.getTable().generateCharacterCardsOnTable(characterDeck.getCharacterCards());
-                }
-
                 /** da decidere: cosa mostrare del giocatore a inizio gioco*/
                 allVirtualView.get(gameSession.getPlayerListByNickname().get(3)).showPlayerList(gameSession.getPlayerListByNickname());
                 break;
             case 3:
-                if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
-                    DeckCharacter characterDeck = new DeckCharacter();
-                    characterDeck.generateCharacterDeck();
-                    gameSession.getTable().generateCharacterCardsOnTable(characterDeck.getCharacterCards());
-                }
-
                 /** da decidere: cosa mostrare del giocatore a inizio gioco*/
                 allVirtualView.get(gameSession.getPlayerListByNickname().get(2)).showPlayerList(gameSession.getPlayerListByNickname());
                 break;
             case 2:
-
-                if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
-                    DeckCharacter characterDeck = new DeckCharacter();
-                    characterDeck.generateCharacterDeck();
-                    gameSession.getTable().generateCharacterCardsOnTable(characterDeck.getCharacterCards());
-                }
-
                 /** da decidere: cosa mostrare del giocatore a inizio gioco*/
                 allVirtualView.get(gameSession.getPlayerListByNickname().get(1)).showPlayerList(gameSession.getPlayerListByNickname());
                 break;
@@ -150,17 +136,15 @@ public class GameController {
                     switch(PNaDSelected.getPlayersNumber()){
                         case 4:
                             gameSession.setGameMode(GameMode.COOP);
-                            virtualView.showMessage("Gioco in modalità a squadre. \nIn attesa di altri giocatori...");
+                            virtualView.showMessage("Coop Mode. \nWaiting for other players...");
                             break;
                         case 3:
                             gameSession.setGameMode(GameMode.THREEPLAYERS);
-                            gameSession.getTable().generateCloudNumber(gameSession.getGameMode());
-                            virtualView.showMessage("Gioco in modalità a ("+PNaDSelected.getPlayersNumber()+") giocatori. \nIn attesa di altri giocatori...");
+                            virtualView.showMessage("Three Players Mode. \nWaiting for other players...");
                             break;
                         case 2:
                             gameSession.setGameMode(GameMode.TWOPLAYERS);
-                            gameSession.getTable().generateCloudNumber(gameSession.getGameMode());
-                            virtualView.showMessage("Gioco in modalità a ("+PNaDSelected.getPlayersNumber()+") giocatori. \nIn attesa di altri giocatori...");
+                            virtualView.showMessage("Two Players Mode. \nWaiting for other players...");
                             break;
                     }
                     switch (PNaDSelected.getDifficulty()){
