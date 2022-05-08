@@ -88,8 +88,12 @@ public class GameController {
 
             allVirtualView.put(nickname, virtualView);
             virtualView.showLogin(nickname, gameId, playerDate,true);
+
+            if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
+                initializeExpertModeGame();
+
             if(allVirtualView.size() == maxPlayers){
-                initializeGame();
+                startTurn();
             }
             return true;
         }
@@ -97,7 +101,7 @@ public class GameController {
         return false;
     }
 
-    public void initializeGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
+    public void initializeExpertModeGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
         setGameState(GameState.INIT);
         turnController = new TurnController(this);
         switch(maxPlayers){
@@ -154,12 +158,10 @@ public class GameController {
                             break;
                         case 3:
                             gameSession.setGameMode(GameMode.THREEPLAYERS);
-                            gameSession.getTable().generateCloudNumber(gameSession.getGameMode());
                             virtualView.showMessage("Gioco in modalità a ("+PNaDSelected.getPlayersNumber()+") giocatori. \nIn attesa di altri giocatori...");
                             break;
                         case 2:
                             gameSession.setGameMode(GameMode.TWOPLAYERS);
-                            gameSession.getTable().generateCloudNumber(gameSession.getGameMode());
                             virtualView.showMessage("Gioco in modalità a ("+PNaDSelected.getPlayersNumber()+") giocatori. \nIn attesa di altri giocatori...");
                             break;
                     }

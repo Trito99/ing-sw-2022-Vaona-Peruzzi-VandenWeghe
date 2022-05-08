@@ -74,6 +74,7 @@ public class Cli extends ObservableView implements View {
 
     @Override
     public void showMessage(String message) {
+        out.println("\n" + message);
 
     }
 
