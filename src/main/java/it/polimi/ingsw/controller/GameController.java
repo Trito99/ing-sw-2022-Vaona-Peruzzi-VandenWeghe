@@ -88,8 +88,14 @@ public class GameController {
 
             allVirtualView.put(nickname, virtualView);
             virtualView.showLogin(nickname, gameId, playerDate,true);
+
+            if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
+                initializeExpertModeGame();
+
             if(allVirtualView.size() == maxPlayers){
-                startGame();
+                broadcastMessage("Everyone joined the game!");
+                turnController = new TurnController(this);
+                startTurn();
             }
             return true;
         }
@@ -97,32 +103,11 @@ public class GameController {
         return false;
     }
 
-    public void startGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
-        setGameState(GameState.INIT);
-        turnController = new TurnController(this);
-        if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)){
-            DeckCharacter characterDeck = new DeckCharacter();
-            characterDeck.generateCharacterDeck();
-            gameSession.getTable().generateCharacterCardsOnTable(characterDeck.getCharacterCards());
-        }
-        switch(maxPlayers){
-            case 4:
-                /** da decidere: cosa mostrare del giocatore a inizio gioco*/
-                allVirtualView.get(gameSession.getPlayerListByNickname().get(3)).showPlayerList(gameSession.getPlayerListByNickname());
-                break;
-            case 3:
-                /** da decidere: cosa mostrare del giocatore a inizio gioco*/
-                allVirtualView.get(gameSession.getPlayerListByNickname().get(2)).showPlayerList(gameSession.getPlayerListByNickname());
-                break;
-            case 2:
-                /** da decidere: cosa mostrare del giocatore a inizio gioco*/
-                allVirtualView.get(gameSession.getPlayerListByNickname().get(1)).showPlayerList(gameSession.getPlayerListByNickname());
-                break;
-            default:
-                break;
-        }
-        broadcastMessage("Everyone joined the game!");
-        startTurn();
+    public void initializeExpertModeGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
+    DeckCharacter characterDeck = new DeckCharacter();
+    characterDeck.generateCharacterDeck();
+    gameSession.getTable().generateCharacterCardsOnTable(characterDeck.getCharacterCards());
+
     }
 
     public void getMessage(ClientMessage receivedMessage) throws InvalidParameterException {
@@ -188,6 +173,7 @@ public class GameController {
     /** DA CONTROLLARE */
     /** inizia il turno */
     public void startTurn(){
+
         switch(gameState){
             case INIT:
                 gameSession.getTable().extractStudentOnCloud();
