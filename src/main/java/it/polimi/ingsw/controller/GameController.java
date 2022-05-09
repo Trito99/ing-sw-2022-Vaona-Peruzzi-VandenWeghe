@@ -256,7 +256,7 @@ public class GameController {
     /** rimouove giocatore dal gioco e controlla se era l'active player---> inizia nuovo turno */
     public void disconnect(String nickname){
         if(nickname.equals(getActivePlayer())) {
-            if(turnController.nextPlayer().equals(turnController.firstPlayer())&&turnController.getActivePlayers().size()!=0){
+           /* if(turnController.nextPlayer().equals(turnController.firstPlayer())&&turnController.getActivePlayers().size()!=0){ */
                 switch(gameState){
                     case INIT:
                         if(maxPlayers>=2){
@@ -270,7 +270,7 @@ public class GameController {
                         }
                         break;
                 }
-            }
+           // }
             turnController.disconnect(nickname);
             startTurn();
         }
