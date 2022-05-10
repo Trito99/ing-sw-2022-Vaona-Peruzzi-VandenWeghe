@@ -103,7 +103,7 @@ public class GameController {
         return false;
     }
 
-    public void initializeExpertModeGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
+    private void initializeExpertModeGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
     DeckCharacter characterDeck = new DeckCharacter();
     characterDeck.generateCharacterDeck();
     gameSession.getTable().generateCharacterCardsOnTable(characterDeck.getCharacterCards());
@@ -173,11 +173,11 @@ public class GameController {
     /** DA CONTROLLARE */
     /** inizia il turno */
     public void startTurn(){
-
+        gameSession.getTable().extractStudentOnCloud();
+        for(String s: allVirtualView.keySet()){
+            allVirtualView.get(s).showTable(gameSession.getTable());
+        }
         switch(gameState){
-            case INIT:
-                gameSession.getTable().extractStudentOnCloud();
-                break;
             case PLANNING:
                 planning();
                 break;

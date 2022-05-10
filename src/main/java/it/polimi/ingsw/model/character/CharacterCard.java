@@ -2,9 +2,10 @@ package it.polimi.ingsw.model.character;
 
 import it.polimi.ingsw.model.student.Student;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CharacterCard {
+public class CharacterCard implements Serializable {
 
     private int costCharacter;
     private final CardEffect cardEffect;

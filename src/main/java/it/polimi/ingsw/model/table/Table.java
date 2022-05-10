@@ -11,11 +11,12 @@ import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public class Table {
+public class Table implements Serializable {
 
     private ArrayList<CloudCard> cloudNumber = new ArrayList<>() ;
     private ArrayList<IslandCard> listOfIsland = new ArrayList<>();

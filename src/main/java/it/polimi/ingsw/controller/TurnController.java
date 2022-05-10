@@ -17,9 +17,10 @@ public class TurnController {
     //dichiarare attributi
     /** costruttore */
     public TurnController(GameController gameController){
-        playingPlayer =  YoungestPlayer(gameController).getNickname();
-        orderPlayers =new ArrayList<String>();
-        activePlayer=new HashMap<String, Boolean>();
+        playingPlayer = YoungestPlayer(gameController).getNickname();
+        playerOrder = new ArrayList<>();
+        orderPlayers = new ArrayList<>();
+        activePlayer= new HashMap<>();
         for(int i=0; i < gameController.getAllVirtualView().size(); i++){
             String nickname = gameController.getGameSession().getListOfPlayers().get(i).getNickname();
             activePlayer.put(nickname, true);

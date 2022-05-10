@@ -7,9 +7,10 @@ import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.school.TColor;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class IslandCard {
+public class IslandCard implements Serializable {
 
     private int idIsland;
     private ArrayList<Student> studentOnIsland ;

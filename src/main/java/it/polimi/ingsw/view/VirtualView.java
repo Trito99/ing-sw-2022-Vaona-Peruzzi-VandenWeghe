@@ -79,7 +79,7 @@ public class VirtualView implements View, Observer {
 
     @Override
     public void showTable(Table table) {
-        //clientHandler.sendMessage(new ShowTable(game.getTable()));
+        clientHandler.sendMessage(new ShowTable(table));
     }
 
     @Override

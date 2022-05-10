@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;
@@ -36,8 +37,6 @@ public class Cli extends ObservableView implements View {
 
     public void start(){
         out.println("Welcome to Eriantys!! :) ");
-        /** ... */
-
         askConnect();
     }
 
@@ -113,7 +112,18 @@ public class Cli extends ObservableView implements View {
 
     @Override
     public void showTable(Table table) {
-
+        out.print("\nId  | MotherEarth |   Tower   | Students");
+        for(IslandCard islandCard : table.getListOfIsland()) {
+            if (islandCard.towerIsOnIsland()) {
+                out.print("\n" + islandCard.getIdIsland() + "   | " + islandCard.getMotherEarthOnIsland() + "       | " + islandCard.getTowerOnIsland() + " ");
+                for (Student student: islandCard.getStudentOnIsland())
+                    out.print(student.getsColour()+" ");
+            } else {
+                out.print("\n" + islandCard.getIdIsland() + "   | " + islandCard.getMotherEarthOnIsland() + "       | " + " No Tower |" + " ");
+                for (Student student: islandCard.getStudentOnIsland())
+                    out.print(student.getsColour()+" ");
+            }
+        }
     }
 
     @Override

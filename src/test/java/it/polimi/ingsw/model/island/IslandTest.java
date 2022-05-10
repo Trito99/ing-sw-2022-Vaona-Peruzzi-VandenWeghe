@@ -387,8 +387,8 @@ public class IslandTest {
          table.moveMotherEarth(13-table.getPosMotherEarth());
          for (IslandCard islandCard: table.getListOfIsland()){
             if(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE) !=null && islandCard.towerIsOnIsland()) {
-               System.out.println((islandCard.getTowerOnIsland().getTColour()));
-               System.out.println(islandCard.calculateInfluence(game.getListOfPlayers(), CardEffect.STANDARDMODE).getTColor());
+               //System.out.println((islandCard.getTowerOnIsland().getTColour()));
+               //System.out.println(islandCard.calculateInfluence(game.getListOfPlayers(), CardEffect.STANDARDMODE).getTColor());
             }
             int size=0;
             Player prev=null;

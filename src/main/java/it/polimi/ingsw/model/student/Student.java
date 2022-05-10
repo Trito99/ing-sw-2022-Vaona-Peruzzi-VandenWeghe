@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model.student;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
 
     private int idStudent;
     private SColor sColor;

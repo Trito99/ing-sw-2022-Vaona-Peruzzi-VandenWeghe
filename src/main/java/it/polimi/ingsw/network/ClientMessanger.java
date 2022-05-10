@@ -89,6 +89,10 @@ public class ClientMessanger implements ObserverView, Observer {
             case START_TURN:
                 queue.execute(() -> view.askAction());
                 break;
+            case SHOW_TABLE:
+                ShowTable table = (ShowTable) message;
+                queue.execute(() -> view.showTable(table.getTable()));
+                break;
             case WIN: /** da controllare */
                 queue.execute(() -> view.showWinMessage(((WinMessage) message).getNumberOfTower()));
                 queue.execute(() -> view.showWinMessage(((WinMessage) message).getNumberOfIsland()));
