@@ -74,7 +74,7 @@ public class VirtualView implements View, Observer {
 
     @Override
     public void showPersonalSchool(School school) {
-        //clientHandler.sendMessage(new ShowPersonalSchool(player.getPersonalSchool()));
+        clientHandler.sendMessage(new ShowPersonalSchool(school));
     }
 
     @Override

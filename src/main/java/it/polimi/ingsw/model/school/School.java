@@ -8,10 +8,10 @@ import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class School {
+public class School implements Serializable {
 
     private ArrayList<Student> entry;
     private ArrayList<Student> GTable;

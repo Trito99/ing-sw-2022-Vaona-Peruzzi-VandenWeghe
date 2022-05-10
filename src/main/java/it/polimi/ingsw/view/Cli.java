@@ -107,23 +107,26 @@ public class Cli extends ObservableView implements View {
 
     @Override
     public void showPersonalSchool(School school) {
+       out.print("\n Entry: ");
 
     }
 
     @Override
     public void showTable(Table table) {
-        out.print("\nId  | MotherEarth |   Tower   | Students");
+        out.print("\n**** TABLE ****");
+        out.print("\nIsland Id  | MotherEarth |   Tower   | Students");
         for(IslandCard islandCard : table.getListOfIsland()) {
             if (islandCard.towerIsOnIsland()) {
-                out.print("\n" + islandCard.getIdIsland() + "   | " + islandCard.getMotherEarthOnIsland() + "       | " + islandCard.getTowerOnIsland() + " ");
+                out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       | " + islandCard.getTowerOnIsland() + " ");
                 for (Student student: islandCard.getStudentOnIsland())
                     out.print(student.getsColour()+" ");
             } else {
-                out.print("\n" + islandCard.getIdIsland() + "   | " + islandCard.getMotherEarthOnIsland() + "       | " + " No Tower |" + " ");
+                out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       | " + " No Tower |" + " ");
                 for (Student student: islandCard.getStudentOnIsland())
                     out.print(student.getsColour()+" ");
             }
         }
+        out.println("\n----------------------------------------------");
     }
 
     @Override

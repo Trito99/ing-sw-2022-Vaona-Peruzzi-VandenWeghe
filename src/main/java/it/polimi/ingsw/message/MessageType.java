@@ -21,6 +21,7 @@ public enum MessageType {
     SHOW_PLAYER,
     SHOW_PLAYER_INFLUENCE,
     SHOW_TABLE,
+    SHOW_PERSONAL_SCHOOL,
 
     //azioni
     PLAY_CHARACTER_CARD,

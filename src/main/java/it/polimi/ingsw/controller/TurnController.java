@@ -12,7 +12,7 @@ public class TurnController {
     private String playingPlayer;
 
     private ArrayList<String> orderPlayers;
-    ArrayList<Player> playerOrder = null;
+    ArrayList<Player> playerOrder;
 
     //dichiarare attributi
     /** costruttore */

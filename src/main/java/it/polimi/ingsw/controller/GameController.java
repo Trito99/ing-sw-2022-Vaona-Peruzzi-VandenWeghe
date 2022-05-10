@@ -25,7 +25,7 @@ import java.util.List;
 public class GameController {
     private Game gameSession;
     private int maxPlayers;
-    private TurnController turnController; //?
+    private TurnController turnController;
     private GameState gameState;
     private final HashMap<String, VirtualView> allVirtualView;
 
@@ -33,7 +33,6 @@ public class GameController {
     public GameController(){
         this.allVirtualView= new HashMap<>();
         gameSession = new Game();
-        //turnController  = null; ?
         gameState= GameState.INIT;
     }
 
@@ -176,6 +175,7 @@ public class GameController {
         gameSession.getTable().extractStudentOnCloud();
         for(String s: allVirtualView.keySet()){
             allVirtualView.get(s).showTable(gameSession.getTable());
+            allVirtualView.get(s).showPersonalSchool(gameSession.getPlayer(s).getPersonalSchool());
         }
         switch(gameState){
             case PLANNING:

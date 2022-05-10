@@ -2,7 +2,9 @@ package it.polimi.ingsw.model.school;
 
 import it.polimi.ingsw.model.student.SColor;
 
-public class Prof {
+import java.io.Serializable;
+
+public class Prof implements Serializable {
 
     private final SColor sColor;
     private boolean isInHall = false;
