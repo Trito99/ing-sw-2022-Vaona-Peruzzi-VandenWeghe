@@ -106,7 +106,6 @@ public class GameController {
     DeckCharacter characterDeck = new DeckCharacter();
     characterDeck.generateCharacterDeck();
     gameSession.getTable().generateCharacterCardsOnTable(characterDeck.getCharacterCards());
-
     }
 
     public void getMessage(ClientMessage receivedMessage) throws InvalidParameterException {
@@ -165,6 +164,10 @@ public class GameController {
         this.gameState = gameState;
     }
 
+    public GameState getGameState() {
+        return gameState;
+    }
+
     public Game getGameSession() {
         return gameSession;
     }
@@ -218,7 +221,6 @@ public class GameController {
         }
 
         allVirtualView.get(getActivePlayer()).askAssistantCardToPlay(assistantCards);
-
     }
 
     public void action(){
