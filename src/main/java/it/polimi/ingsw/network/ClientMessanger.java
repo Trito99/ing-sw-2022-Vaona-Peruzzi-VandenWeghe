@@ -95,7 +95,7 @@ public class ClientMessanger implements ObserverView, Observer {
                 break;
             case SHOW_PERSONAL_SCHOOL:
                 ShowPersonalSchool school = (ShowPersonalSchool) message;
-                queue.execute(() -> view.showPersonalSchool(school.getSchool()));
+                queue.execute(() -> view.showPersonalSchool(school.getSchool(), school.getNickname()));
                 break;
             case WIN: /** da controllare */
                 queue.execute(() -> view.showWinMessage(((WinMessage) message).getNumberOfTower()));

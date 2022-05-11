@@ -10,6 +10,7 @@ import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;
+import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.observer.ObservableView;
@@ -106,9 +107,44 @@ public class Cli extends ObservableView implements View {
     }
 
     @Override
-    public void showPersonalSchool(School school) {
-       out.print("\n Entry: ");
+    public void showPersonalSchool(School school, String nickname) {
 
+        out.print("\n****School of Player "+ nickname + "**** ");
+        out.print("\nEntry: ");
+       for(Student s : school.getEntry()){
+           out.print(s.getsColour() + " ");
+       }
+       out.println("\nGreen Table: ");
+       for(Student s : school.getGTable()){
+           out.print(s.getsColour() + " ");
+       }
+       out.print("Is prof Green in hall? "+ school.getProfInHall(SColor.GREEN));
+
+       out.println("\nRed Table: ");
+       for(Student s : school.getRTable()){
+            out.print(s.getsColour() + " ");
+       }
+        out.print("Is prof Red in hall? "+ school.getProfInHall(SColor.RED));
+
+       out.println("\nYellow Table: ");
+       for(Student s : school.getYTable()){
+            out.print(s.getsColour() + " ");
+       }
+        out.print("Is prof Yellow in hall? "+ school.getProfInHall(SColor.YELLOW));
+
+       out.println("\nPink Table: ");
+       for(Student s : school.getPTable()){
+            out.print(s.getsColour() + " ");
+       }
+        out.print("Is prof Pink in hall? "+ school.getProfInHall(SColor.PINK));
+
+       out.println("\nBlue Table: ");
+       for(Student s : school.getBTable()){
+            out.print(s.getsColour() + " ");
+       }
+        out.print("Is prof Blue in hall? "+ school.getProfInHall(SColor.BLUE));
+
+       out.println("\n----------------------------------------------");
     }
 
     @Override

@@ -175,7 +175,9 @@ public class GameController {
         gameSession.getTable().extractStudentOnCloud();
         for(String s: allVirtualView.keySet()){
             allVirtualView.get(s).showTable(gameSession.getTable());
-            allVirtualView.get(s).showPersonalSchool(gameSession.getPlayer(s).getPersonalSchool());
+            for(Player p : gameSession.getListOfPlayers()) {
+                allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname());
+            }
         }
         switch(gameState){
             case PLANNING:
@@ -248,7 +250,7 @@ public class GameController {
         turnController.reconnect(nickname);
         broadcastMessage(nickname + " si è riconnesso.");
         showPlayer(gameSession.getPlayer(nickname),nickname);
-        allVirtualView.get(nickname).showPersonalSchool(gameSession.getPlayer(nickname).getPersonalSchool());
+        allVirtualView.get(nickname).showPersonalSchool(gameSession.getPlayer(nickname).getPersonalSchool(), nickname);
         allVirtualView.get(nickname).showTable(gameSession.getTable());
         allVirtualView.get(nickname).showPlayerTurn(getActivePlayer());
     }
