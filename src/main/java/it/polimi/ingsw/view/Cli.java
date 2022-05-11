@@ -3,6 +3,7 @@ package it.polimi.ingsw.view;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CharacterCard;
+import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
@@ -149,6 +150,8 @@ public class Cli extends ObservableView implements View {
 
     @Override
     public void showTable(Table table) {
+        int i=1;
+
         out.print("\n**** TABLE ****");
         out.print("\nIsland Id  | MotherEarth |   Tower   | Students");
         for(IslandCard islandCard : table.getListOfIsland()) {
@@ -161,6 +164,16 @@ public class Cli extends ObservableView implements View {
                 for (Student student: islandCard.getStudentOnIsland())
                     out.print(student.getsColour()+" ");
             }
+        }
+        out.println("\n----------------------------------------------");
+        out.print("\n**** CLOUDS ****");
+        for(CloudCard c : table.getCloudNumber()){
+            out.print("\nCloud "+ i + ") ");
+            for(Student s : table.getCloudNumber().get(i-1).getStudentOnCloud()){
+                out.print("Id Student: "+ s.getIdStudent() + "Student Color: " + s.getsColour() +"| ");
+
+            }
+            i++;
         }
         out.println("\n----------------------------------------------");
     }
