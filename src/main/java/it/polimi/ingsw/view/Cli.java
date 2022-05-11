@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.message.ShowAssistantDeck;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CharacterCard;
@@ -11,6 +12,7 @@ import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;
+import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
@@ -110,10 +112,10 @@ public class Cli extends ObservableView implements View {
     @Override
     public void showPersonalSchool(School school, String nickname) {
 
-        out.print("\n****School of Player "+ nickname + "**** ");
+        out.print("\n****School of "+ nickname + "**** ");
         out.print("\nEntry: ");
        for(Student s : school.getEntry()){
-           out.print(s.getsColour() + " ");
+           out.print(s.getsColour() + " "+s.getIdStudent()+ " | ");
        }
        out.println("\nGreen Table: ");
        for(Student s : school.getGTable()){
@@ -145,6 +147,11 @@ public class Cli extends ObservableView implements View {
        }
         out.print("Is prof Blue in hall? "+ school.getProfInHall(SColor.BLUE));
 
+        out.print("\nTowers: ");
+        for(Tower t : school.getTower()){
+            out.print(t.getTColour() + " " +t.getIdTower()+ " | ");
+        }
+
        out.println("\n----------------------------------------------");
     }
 
@@ -170,12 +177,20 @@ public class Cli extends ObservableView implements View {
         for(CloudCard c : table.getCloudNumber()){
             out.print("\nCloud "+ i + ") ");
             for(Student s : table.getCloudNumber().get(i-1).getStudentOnCloud()){
-                out.print("Id Student: "+ s.getIdStudent() + "Student Color: " + s.getsColour() +"| ");
+                out.print("Id Student: "+ s.getIdStudent() + " Student Color: " + s.getsColour() +"| ");
 
             }
             i++;
         }
         out.println("\n----------------------------------------------");
+    }
+
+    @Override
+    public void showDeckAssistant(DeckAssistant deckAssistant, String nickname) {
+        out.print("\n****Deck of "+ nickname + "**** ");
+        for(AssistantCard card : deckAssistant.getCardsInHand() ){
+            out.print("\n"+card.getAssistantName() + " Turn Value: " +card.getTurnValue()+ " MotherEarth Steps: "+card.getStepMotherEarth()+" | ");
+        }
     }
 
     @Override

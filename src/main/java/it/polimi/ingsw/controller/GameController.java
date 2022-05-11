@@ -5,6 +5,8 @@ import it.polimi.ingsw.message.ClientMessage;
 import it.polimi.ingsw.message.MessageType;
 import it.polimi.ingsw.message.PlayersNumberAndDifficulty;
 import it.polimi.ingsw.model.assistant.AssistantCard;
+import it.polimi.ingsw.model.assistant.AssistantDeckName;
+import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.DeckCharacter;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.Game;
@@ -68,7 +70,9 @@ public class GameController {
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK2));
                 this.gameSession.getListOfPlayers().get(0).generateSchool(gameSession.getTable(),gameSession.getGameMode());
+                this.gameSession.getListOfPlayers().get(0).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK1));
             }
             else if(allVirtualView.size() == 2){
                 allVirtualView.put(nickname, virtualView);
@@ -76,6 +80,7 @@ public class GameController {
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK3));
             }
             else if(allVirtualView.size() == 3){
                 allVirtualView.put(nickname, virtualView);
@@ -83,6 +88,7 @@ public class GameController {
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK4));
             }
 
             allVirtualView.put(nickname, virtualView);
@@ -176,9 +182,21 @@ public class GameController {
         for(String s: allVirtualView.keySet()){
             allVirtualView.get(s).showTable(gameSession.getTable());
             for(Player p : gameSession.getListOfPlayers()) {
-                allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname());
+                if (p.getNickname() != s)
+                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname());
             }
+            for(Player p : gameSession.getListOfPlayers()){
+                if (p.getNickname()==s) {
+                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname());
+                    allVirtualView.get(s).showDeckAssistant(p.getDeckOfPlayer(),p.getNickname());
+                }
+            }
+            if (s == turnController.getActivePlayer())
+                allVirtualView.get(s).showMessage("\n\nYour Turn");
+            else
+                allVirtualView.get(s).showMessage("\n\nTurn of " + turnController.getActivePlayer());
         }
+        allVirtualView.get(turnController.getActivePlayer()).showMessage("\nChoose an Assistant Card");
         switch(gameState){
             case PLANNING:
                 planning();

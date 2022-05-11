@@ -1,8 +1,9 @@
 package it.polimi.ingsw.model.assistant;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DeckAssistant {
+public class DeckAssistant implements Serializable {
 
     private ArrayList<AssistantCard> cardsInHand;
     private AssistantDeckName assistantDeckName;

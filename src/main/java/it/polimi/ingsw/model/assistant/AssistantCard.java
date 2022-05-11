@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model.assistant;
 
-public class AssistantCard {
+import java.io.Serializable;
+
+public class AssistantCard implements Serializable {
 
     private String assistantName;
     private int stepMotherEarth;

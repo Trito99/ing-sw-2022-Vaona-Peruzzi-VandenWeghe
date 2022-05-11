@@ -38,6 +38,8 @@ public interface View {
 
     void showTable(Table table);
 
+    void showDeckAssistant(DeckAssistant deckAssistant, String nickname);
+
     void showWinMessage(int numberOfTower);
 
     void showErrorMessage(String message);
