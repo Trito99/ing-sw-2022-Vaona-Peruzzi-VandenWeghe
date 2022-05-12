@@ -79,6 +79,7 @@ public class Player {
         personalSchool.getProfOfPlayer().add(new Prof(SColor.PINK));
         personalSchool.getProfOfPlayer().add(new Prof(SColor.BLUE));
 
+
     }
 
     public AssistantCard getAssistantCard(String assistantCard){

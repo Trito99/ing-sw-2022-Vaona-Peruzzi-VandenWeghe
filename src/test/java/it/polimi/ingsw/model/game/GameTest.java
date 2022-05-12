@@ -23,7 +23,7 @@ class GameTest {
 
     @Test
     void gameIsFinished() {
-        Game game= new Game();
+        Game game = new Game();
         Player player = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
         player.setNickname("Gino");
         game.addPlayer(player);

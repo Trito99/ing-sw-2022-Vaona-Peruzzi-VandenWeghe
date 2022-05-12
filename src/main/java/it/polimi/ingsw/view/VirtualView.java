@@ -83,6 +83,11 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
+    public void showDeckAssistant(DeckAssistant deckAssistant, String nickname) {
+        clientHandler.sendMessage(new ShowAssistantDeck(deckAssistant,nickname));
+    }
+
+    @Override
     public void showWinMessage(int numberOfTower) {
 
     }
