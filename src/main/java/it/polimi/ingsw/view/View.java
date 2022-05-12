@@ -34,7 +34,7 @@ public interface View {
     void showPlayer(String nickname, PlayerNumber playerNumber, TColor tColor, int influenceOnIsland, School personalSchool,
                     DeckAssistant deckOfPlayer, AssistantCard trash, int coinscore, String player);
 
-    void showPersonalSchool(School school, String nickname);
+    void showPersonalSchool(School school, String nickname, AssistantCard trash);
 
     void showTable(Table table);
 

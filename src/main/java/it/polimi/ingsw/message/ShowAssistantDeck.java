@@ -1,15 +1,18 @@
 package it.polimi.ingsw.message;
 
+import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 
 
 public class ShowAssistantDeck extends ServerMessage{
     private DeckAssistant deckAssistant;
     private String nickname;
-    public ShowAssistantDeck(DeckAssistant deckAssistant,String nickname) {
+    private AssistantCard trash;
+    public ShowAssistantDeck(DeckAssistant deckAssistant, String nickname) {
         super(MessageType.SHOW_ASSISTANT_DECK);
         this.deckAssistant = deckAssistant;
         this.nickname=nickname;
+        this.trash = trash;
     }
 
     public DeckAssistant getDeckAssistant() {
