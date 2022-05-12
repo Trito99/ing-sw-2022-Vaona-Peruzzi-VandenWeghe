@@ -32,10 +32,10 @@ public class GameController {
 
 
     public GameController(){
-        this.allVirtualView= new HashMap<>();
+        this.allVirtualView = new HashMap<>();
         gameSession = new Game();
-        gameState= GameState.INIT;
-        roundIndex=0;
+        gameState = GameState.INIT;
+        roundIndex =0;
     }
 
     private void generateTable(){
