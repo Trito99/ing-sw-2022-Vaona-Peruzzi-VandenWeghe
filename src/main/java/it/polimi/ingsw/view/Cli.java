@@ -27,6 +27,7 @@ public class Cli extends ObservableView implements View {
     private Thread inputThread;
     private List<String> commandList;
     private static final String WRONG_INPUT = "Input error. Type again.";
+
     public static final  String ANSI_RESET = "\u001B[0m";
     public static final  String ANSI_GREEN = "\u001B[32m";
     public static final  String ANSI_YELLOW = "\u001B[33m";
@@ -45,7 +46,7 @@ public class Cli extends ObservableView implements View {
     }
 
     public void start(){
-        out.println("Welcome to Eriantys!! :) ");
+        out.println("😛  Welcome to Eriantys!! 😛 ");
         askConnect();
     }
 
