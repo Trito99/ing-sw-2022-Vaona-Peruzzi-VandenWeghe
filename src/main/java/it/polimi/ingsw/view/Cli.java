@@ -123,31 +123,31 @@ public class Cli extends ObservableView implements View {
        for(Student s : school.getEntry()){
            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | " );
        }
-       out.println("\nGreen Table: ");
+       out.println(ANSI_GREEN + "\nGreen Table: " + ANSI_RESET);
        for(Student s : school.getGTable()){
            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " ");
        }
        out.print("Is prof Green in hall? "+ school.getProfInHall(SColor.GREEN));
 
-       out.println("\nRed Table: ");
+       out.println(ANSI_RED + "\nRed Table: " + ANSI_RESET);
        for(Student s : school.getRTable()){
             out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " ");
        }
         out.print("Is prof Red in hall? "+ school.getProfInHall(SColor.RED));
 
-       out.println("\nYellow Table: ");
+       out.println(ANSI_YELLOW + "\nYellow Table: " + ANSI_RESET);
        for(Student s : school.getYTable()){
             out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " ");
        }
         out.print("Is prof Yellow in hall? "+ school.getProfInHall(SColor.YELLOW));
 
-       out.println("\nPink Table: ");
+       out.println(ANSI_PINK+ "\nPink Table: " + ANSI_RESET);
        for(Student s : school.getPTable()){
             out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " ");
        }
         out.print("Is prof Pink in hall? "+ school.getProfInHall(SColor.PINK));
 
-       out.println("\nBlue Table: ");
+       out.println(ANSI_BLUE + "\nBlue Table: " + ANSI_RESET);
        for(Student s : school.getBTable()){
             out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " ");
        }
