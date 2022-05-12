@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.message.ChoosePlaceAndStudentForMove;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CharacterCard;
@@ -196,10 +197,13 @@ public class Cli extends ObservableView implements View {
         out.print("\n**** CLOUDS ****");
         for(CloudCard c : table.getCloudNumber()){
             out.print("\nCloud "+ i + ") ");
-            for(Student s : table.getCloudNumber().get(i-1).getStudentOnCloud()){
-                out.print("Id Student: "+ getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET +" | ");
+            if (table.getCloudNumber().get(i-1).getStudentOnCloud().size()>0) {
+                for (Student s : table.getCloudNumber().get(i - 1).getStudentOnCloud()) {
+                    out.print("Id Student: " + getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
 
-            }
+                }
+            }else
+                out.print("Empty");
             i++;
         }
         out.println("\n----------------------------------------------");
@@ -332,8 +336,27 @@ public class Cli extends ObservableView implements View {
     }
 
     @Override
-    public void askChooseCloud(Table table) {
+    public void askChooseCloud() {
+        try {
+            out.print("\nChoose a Cloud Card (id) ");
+            int id = Integer.parseInt(readInput());
+            notifyObserver(obs -> obs.chooseCloudCard(id));
+        } catch (ExecutionException e) {
+            out.println(WRONG_INPUT);
+        }
+    }
 
+    @Override
+    public void askPlaceAndStudentForMove() {
+        try {
+            out.print("\nWich Student do you want to move? (id)\n");
+            int id = Integer.parseInt(readInput());
+            out.print("\nWhere do you want to move the Student? (Island,School)\n");
+            String place = readInput();
+            notifyObserver(obs -> obs.choosePlaceAndStudentForMove(place,id));
+        } catch (ExecutionException e) {
+            out.println(WRONG_INPUT);
+        }
     }
 
     private String getStudentAnsiColor(Student student) {

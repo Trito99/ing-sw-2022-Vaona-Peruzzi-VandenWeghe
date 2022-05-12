@@ -5,26 +5,28 @@ import it.polimi.ingsw.model.player.Player;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.util.Collections.*;
-
 public class TurnController {
     private HashMap<String, Boolean> activePlayer;
     private String playingPlayer;
 
-    private ArrayList<String> orderPlayers;
-    ArrayList<Player> playerOrder;
+    private ArrayList<String> playerOrderByName;
+    private ArrayList<Player> playerOrder;
+    private ArrayList<String> newPlayerOrderByName;
+    private ArrayList<Player> newPlayerOrder;
 
     //dichiarare attributi
     /** costruttore */
     public TurnController(GameController gameController){
         playingPlayer = YoungestPlayer(gameController).getNickname();
         playerOrder = new ArrayList<>();
-        orderPlayers = new ArrayList<>();
+        playerOrderByName = new ArrayList<>();
+        newPlayerOrderByName = new ArrayList<>();
+        newPlayerOrder = new ArrayList<>();
         activePlayer= new HashMap<>();
         for(int i=0; i < gameController.getAllVirtualView().size(); i++){
             String nickname = gameController.getGameSession().getListOfPlayers().get(i).getNickname();
             activePlayer.put(nickname, true);
-            orderPlayers.add(nickname);
+            playerOrderByName.add(nickname);
             playerOrder.add(gameController.getGameSession().getListOfPlayers().get(i));
         }
     }
@@ -42,25 +44,22 @@ public class TurnController {
     }
 
 
-    public String getActivePlayer() {
-        return playingPlayer;
-    }
-
-
     /** cambia l'active player */
-    public void nextPlayer(){
+    public void nextPlayer(ArrayList<String> playerOrderByName){
         int player;
-        if((orderPlayers.indexOf(playingPlayer)+1)>(orderPlayers.size()-1))
+        if((playerOrderByName.indexOf(playingPlayer)+1)>(playerOrderByName.size()-1))
             player = 0;
         else
-            player = orderPlayers.indexOf(playingPlayer)+1;
-        playingPlayer = orderPlayers.get(player);
+            player = playerOrderByName.indexOf(playingPlayer)+1;
+        playingPlayer = playerOrderByName.get(player);
     }
+
+
 
     /** giocatore ancora connessi ordinati con l'ordine del turno */
     public ArrayList<String> getActivePlayers(){
         ArrayList<String> activePlayers = new ArrayList<String>();
-        for (String orderPlayer : orderPlayers) {
+        for (String orderPlayer : playerOrderByName) {
             if (activePlayer.get(orderPlayer))
                 activePlayers.add(orderPlayer);
         }
@@ -88,11 +87,19 @@ public class TurnController {
         return(nickname.equals(getActivePlayer()));
     }
 
-    public void changeStartingPlayer(){   //setta ordine dei giocatori nel round
-
+    public void changeOrder(){
         ArrayList<Player>  NewPlayerOrder = (ArrayList<Player>) playerOrder.clone();
+        newPlayerOrderByName.clear();
         Collections.sort(NewPlayerOrder, (o1, o2) -> Integer.valueOf(o1.getTrash().getTurnValue()).compareTo(o2.getTrash().getTurnValue()));
-        playingPlayer= NewPlayerOrder.get(0).getNickname();
+        for(Player player:NewPlayerOrder)
+            newPlayerOrderByName.add(player.getNickname());
+        newPlayerOrder=NewPlayerOrder;
     }
-
+    public String getActivePlayer() {
+        return playingPlayer;
+    }
+    public ArrayList<String> getPlayerOrderByName() {return playerOrderByName;}
+    public ArrayList<Player> getPlayerOrder() { return playerOrder; }
+    public ArrayList<String> getNewPlayerOrderByName() {return newPlayerOrderByName;}
+    public ArrayList<Player> getNewPlayerOrder() { return newPlayerOrder; }
 }

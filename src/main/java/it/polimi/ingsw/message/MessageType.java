@@ -6,6 +6,8 @@ public enum MessageType {
     LOGIN_RESULT,
     PLAYERS_NUMBER_AND_DIFFICULTY_CHOSEN,
     ASSISTANTCARD_PLAYED,
+    CLOUDCARD_CHOSEN,
+    PLACE_AND_STUDENT_FOR_MOVE_CHOSEN,
 
     //messaggi di connessione al server
     SUCCESSFUL_HOST,
@@ -28,7 +30,8 @@ public enum MessageType {
     //azioni
     PLAY_CHARACTER_CARD,
     PLAY_ASSISTANT_CARD,
-    MOVE_STUDENTS,
+    CHOOSE_CLOUD_CARD,
+    CHOOSE_PLACE_AND_STUDENT_FOR_MOVE,
     MOVE_MOTHER_EARTH,
 
     //messaggi intermediari

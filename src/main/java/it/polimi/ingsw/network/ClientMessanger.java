@@ -57,6 +57,14 @@ public class ClientMessanger implements ObserverView, Observer {
         client.sendMessage(new AssistantCardPlayed(nickname,cardNickname));
     }
 
+    public void chooseCloudCard(int id){
+        client.sendMessage(new CloudCardChosen(nickname,id));
+    }
+
+    public void choosePlaceAndStudentForMove(String place,int id){
+        client.sendMessage(new PlaceAndStudentForMoveChosen(nickname,place,id));
+    }
+
 
     /** cerca di loggare un giocatore ad una data lobby */
     public void updateLobby(String nickname, GregorianCalendar playerDate, String lobby){
@@ -107,6 +115,12 @@ public class ClientMessanger implements ObserverView, Observer {
                 break;
             case PLAY_ASSISTANT_CARD:
                 queue.execute(()->view.askAssistantCardToPlay());
+                break;
+            case CHOOSE_CLOUD_CARD:
+                queue.execute(()->view.askChooseCloud());
+                break;
+            case CHOOSE_PLACE_AND_STUDENT_FOR_MOVE:
+                queue.execute(()->view.askPlaceAndStudentForMove());
                 break;
             case WIN: /** da controllare */
                 queue.execute(() -> view.showWinMessage(((WinMessage) message).getNumberOfTower()));

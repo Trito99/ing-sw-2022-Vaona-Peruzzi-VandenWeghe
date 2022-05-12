@@ -132,10 +132,14 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void askChooseCloud(Table table) {
-        //clientHandler.sendMessage(new ShowCloudChoosen(table));
+    public void askChooseCloud() {
+        clientHandler.sendMessage(new ChooseCloudCard());
     }
 
+    @Override
+    public void askPlaceAndStudentForMove() {
+        clientHandler.sendMessage(new ChoosePlaceAndStudentForMove());
+    }
 
     /** riceve un messaggio aggiornato dal model e lo invia tramite il network al client  */
     @Override

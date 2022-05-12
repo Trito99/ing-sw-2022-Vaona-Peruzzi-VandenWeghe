@@ -92,8 +92,7 @@ public class Game {
         return order;
     }
 
-    public void setOrder(ArrayList<Player> order, String nickname) {
-        order.add(getPlayer(nickname));
+    public void setOrder(ArrayList<Player> order) {
         this.order = order;
     }
 

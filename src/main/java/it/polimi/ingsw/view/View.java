@@ -72,8 +72,8 @@ public interface View {
     void askMotherEarthSteps(Table table);
 
     /** chiede al giocatore di scegliere una tessera nuvola */
-    void askChooseCloud(Table table);
+    void askChooseCloud();
 
-
+    public void askPlaceAndStudentForMove();
 
 }

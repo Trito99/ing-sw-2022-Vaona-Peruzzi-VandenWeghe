@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.school;
 
 import it.polimi.ingsw.model.character.CardEffect;
+import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
@@ -35,6 +36,13 @@ public class School implements Serializable {
 
     public ArrayList<Student> getEntry() {
         return entry;
+    }
+
+    public void moveStudentFromCloudToEntry(CloudCard cloudCard){
+        for (Student s : cloudCard.getStudentOnCloud() ) {
+            entry.add(s);
+            cloudCard.getStudentOnCloud().remove(s);
+        }
     }
 
     public void moveStudentFromEntryToIsland(IslandCard islandCard, int id){ //Specifico Studente va spostato (sceglie player)

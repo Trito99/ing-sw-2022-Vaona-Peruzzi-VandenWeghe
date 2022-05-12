@@ -6,10 +6,8 @@ import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.DeckCharacter;
-import it.polimi.ingsw.model.game.Difficulty;
-import it.polimi.ingsw.model.game.Game;
-import it.polimi.ingsw.model.game.GameMode;
-import it.polimi.ingsw.model.game.GameState;
+import it.polimi.ingsw.model.cloud.CloudCard;
+import it.polimi.ingsw.model.game.*;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.TColor;
@@ -30,6 +28,7 @@ public class GameController {
     private final HashMap<String, VirtualView> allVirtualView;
     private int roundIndex;
     boolean again=false;
+    private ActionState actionState;
 
 
     public GameController(){
@@ -105,7 +104,8 @@ public class GameController {
                 broadcastMessage("Everyone joined the game!");
                 turnController = new TurnController(this);
                 gameState=GameState.PLANNING;
-                startTurn();
+                gameSession.getTable().extractStudentOnCloud();
+                planning();
             }
             return true;
         }
@@ -171,7 +171,6 @@ public class GameController {
                             }
                         }
                     }
-                    System.out.println(exists+" "+present);
                     if (exists) {
                         if (!present) {
                             again = false;
@@ -188,9 +187,36 @@ public class GameController {
                     }
                 }
                 if(!again) {
-                    turnController.nextPlayer();
+                    turnController.nextPlayer(turnController.getPlayerOrderByName());
                     roundIndex++;
-                    startTurn();
+                    planning();
+                }
+                break;
+            case ACTION:
+                boolean turn = false;
+                if(receivedMessage.getMessageType() == MessageType.PLACE_AND_STUDENT_FOR_MOVE_CHOSEN){
+                    PlaceAndStudentForMoveChosen Choice = (PlaceAndStudentForMoveChosen) receivedMessage;
+                    if(Choice.getPlace().equals("School")){
+                        gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromEntryToHall(gameSession.getPlayer(turnController.getActivePlayer()), Choice.getId(), gameSession.getTable(), gameSession.getDifficulty());
+                    }else if (Choice.getPlace().equals("Island")){
+                        //AskIdForIsland
+                    }
+                    action();
+                }
+                if(receivedMessage.getMessageType() == MessageType.CLOUDCARD_CHOSEN){
+                    CloudCardChosen Cloud = (CloudCardChosen) receivedMessage;
+                    CloudCard cloudCard=null;
+                    for(CloudCard cl:gameSession.getTable().getCloudNumber()){
+                        if(cl.getIdCloud()==Cloud.getId())
+                            cloudCard=cl;
+                    }
+                    gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromCloudToEntry(cloudCard);
+                    turn=true;
+                }
+                if(!again && turn) {
+                    turnController.nextPlayer(turnController.getNewPlayerOrderByName());
+                    roundIndex++;
+                    action();
                 }
                 break;
             case END_GAME:
@@ -215,6 +241,10 @@ public class GameController {
         this.gameState = gameState;
     }
 
+    public void setActionState(ActionState actionState){
+        this.actionState = actionState;
+    }
+
     public GameState getGameState() {
         return gameState;
     }
@@ -225,29 +255,33 @@ public class GameController {
 
     /** DA CONTROLLARE */
     /** inizia il turno */
-    public void startTurn(){
-        gameSession.getTable().extractStudentOnCloud();
+    public void planning(){
         showGame();
         if (roundIndex<maxPlayers)
             allVirtualView.get(turnController.getActivePlayer()).askAssistantCardToPlay();
-        if (roundIndex==maxPlayers)
-            roundIndex = 0;
-        /**switch(gameState){
-            case PLANNING:
-                planning();
-                break;
-            case ACTION:
-                action();
-                break;
-            case IN_GAME:
-                //playAssistantCard(assistantName, nickname);
-                //gameSession.getActivePlayer().getPersonalSchool().moveStudentFromEntryToIsland(choice2, choice3);
-                //gameSession.getActivePlayer().getPersonalSchool().moveStudentInHall(choice1, choice2, choice3, choice4);
-                //moveMotherEarth(choice5);
-            case END_GAME:
-                allVirtualView.get(getActivePlayer()).askAction();
-                break;
-        }*/
+        if (roundIndex==maxPlayers) {
+            roundIndex=0;
+            turnController.changeOrder();
+            gameSession.setOrder(turnController.getNewPlayerOrder());
+            this.setGameState(GameState.ACTION);
+            this.setActionState(ActionState.STUDENT);
+            action();
+        }
+    }
+
+    public void action(){
+        if (roundIndex<maxPlayers) {
+            switch(actionState) {
+                case CLOUDCARD:
+                    allVirtualView.get(turnController.getActivePlayer()).askChooseCloud();
+                    break;
+                case STUDENT:
+                    allVirtualView.get(turnController.getActivePlayer()).askPlaceAndStudentForMove();
+                    break;
+                case MOTHERNATURE:
+                    break;
+            }
+        }
     }
 
     private void showGame(){
@@ -274,34 +308,6 @@ public class GameController {
         this.gameSession = gameSession;
     }
 
-    public void planning(){
-        /** fase pianificazione */
-        for(String s: allVirtualView.keySet()){
-            if (!s.equals(getActivePlayer())){
-                allVirtualView.get(s).showPlayerTurn(getActivePlayer());
-            }
-        }
-        ArrayList<AssistantCard> assistantCards = new ArrayList<>();
-        for(int i=0; i<maxPlayers; i++){
-            if (getActivePlayer().equals(gameSession.getListOfPlayers().get(i).getNickname())){
-                Player currentPlayer = gameSession.getListOfPlayers().get(i);
-                String currentDeck = currentPlayer.getDeckOfPlayer().getCardsInHand().get(0).getAssistantName();
-                assistantCards.add(gameSession.playAssistantCard(currentDeck, getActivePlayer()));
-            }
-        }
-
-        //allVirtualView.get(getActivePlayer()).askAssistantCardToPlay(assistantCards);
-    }
-
-    public void action(){
-        /** fase azione */
-        for(String s: allVirtualView.keySet()){
-            if (!s.equals(getActivePlayer())){
-                allVirtualView.get(s).showPlayerTurn(getActivePlayer());
-                allVirtualView.get(s).askCharacterCardToPlay(gameSession.getTable().getCharacterCardsOnTable());
-            }
-        }
-    }
 
     /**
      * METODI USATI PER CONNESSIONE CLIENT - SERVER
@@ -346,7 +352,7 @@ public class GameController {
                 }
            // }
             turnController.disconnect(nickname);
-            startTurn();
+            planning();
         }
         allVirtualView.remove(nickname);
         turnController.disconnect(nickname);

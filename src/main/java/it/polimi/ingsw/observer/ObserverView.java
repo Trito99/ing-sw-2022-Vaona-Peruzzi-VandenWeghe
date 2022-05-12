@@ -26,4 +26,8 @@ public interface ObserverView {
 
     public void chooseAssistantCard(String cardNickname);
 
+    public void chooseCloudCard(int id);
+
+    public void choosePlaceAndStudentForMove(String place,int id);
+
 }
