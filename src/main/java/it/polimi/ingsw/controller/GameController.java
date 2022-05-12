@@ -186,11 +186,11 @@ public class GameController {
             allVirtualView.get(s).showTable(gameSession.getTable());
             for(Player p : gameSession.getListOfPlayers()) {
                 if (p.getNickname() != s)
-                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname());
+                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname(),p.getTrash());
             }
             for(Player p : gameSession.getListOfPlayers()){
                 if (p.getNickname()==s) {
-                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname());
+                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname(), p.getTrash());
                     allVirtualView.get(s).showDeckAssistant(p.getDeckOfPlayer(),p.getNickname());
                 }
             }
@@ -270,7 +270,7 @@ public class GameController {
         turnController.reconnect(nickname);
         broadcastMessage(nickname + " si è riconnesso.");
         showPlayer(gameSession.getPlayer(nickname),nickname);
-        allVirtualView.get(nickname).showPersonalSchool(gameSession.getPlayer(nickname).getPersonalSchool(), nickname);
+        allVirtualView.get(nickname).showPersonalSchool(gameSession.getPlayer(nickname).getPersonalSchool(), nickname,gameSession.getPlayer(nickname).getTrash());
         allVirtualView.get(nickname).showTable(gameSession.getTable());
         allVirtualView.get(nickname).showPlayerTurn(getActivePlayer());
     }

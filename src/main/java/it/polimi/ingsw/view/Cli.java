@@ -110,7 +110,7 @@ public class Cli extends ObservableView implements View {
     }
 
     @Override
-    public void showPersonalSchool(School school, String nickname) {
+    public void showPersonalSchool(School school, String nickname, AssistantCard trash) {
 
         out.print("\n****School of "+ nickname + "**** ");
         out.print("\nEntry: ");
@@ -151,6 +151,10 @@ public class Cli extends ObservableView implements View {
         for(Tower t : school.getTower()){
             out.print(t.getTColour() + " " +t.getIdTower()+ " | ");
         }
+
+        out.print("\nTrash Card: ");
+        if (trash!=null)
+            out.print(trash.getAssistantName());
 
        out.println("\n----------------------------------------------");
     }
