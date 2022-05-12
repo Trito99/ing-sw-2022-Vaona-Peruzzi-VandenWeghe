@@ -154,12 +154,12 @@ public class GameController {
             case PLANNING:
                 if(receivedMessage.getMessageType() == MessageType.ASSISTANTCARD_PLAYED){
                     AssistantCardPlayed CardSelected = (AssistantCardPlayed) receivedMessage;
-                    int indexOfCurrentPlayer=gameSession.getListOfPlayers().indexOf(gameSession.getPlayer(receivedMessage.getNickname()));
+                    int indexOfCurrentPlayer = gameSession.getListOfPlayers().indexOf(gameSession.getPlayer(receivedMessage.getNickname()));
                     System.out.println(indexOfCurrentPlayer);
-                    boolean present=false;
-                    for(int i=0;i<indexOfCurrentPlayer;i++){
+                    boolean present = false;
+                    for(int i = 0 ; i < indexOfCurrentPlayer; i++){
                         if(gameSession.getListOfPlayers().get(i).getTrash().getAssistantName().equals(CardSelected.getCardNickname()))
-                            present=true;
+                            present = true;
                     }
                     if(!present) {
                         again = false;
@@ -167,7 +167,7 @@ public class GameController {
                     }else{
                         virtualView.showMessage("\nCard already played by another player. Try again");
                         virtualView.askAssistantCardToPlay();
-                        again=true;
+                        again = true;
                     }
                 }
                 if(!again) {
@@ -175,6 +175,19 @@ public class GameController {
                     roundIndex++;
                     startTurn();
                 }
+
+                /** da controllare */
+                int indexOfCurrentPlayer = gameSession.getListOfPlayers().indexOf(gameSession.getPlayer(receivedMessage.getNickname()));
+                while(gameSession.getOrder().size() != gameSession.getListOfPlayers().size()){
+                    for(int i = 0 ; i < indexOfCurrentPlayer; i++){
+                        if(gameSession.getListOfPlayers().get(i).getTrash().getTurnValue() < gameSession.getListOfPlayers().get(i+1).getTrash().getTurnValue()){
+                            gameSession.setOrder(gameSession.getListOfPlayers(), gameSession.getListOfPlayers().get(i).getNickname());
+                        }
+                    }
+                }
+                // questa volevo stamparla solo per vedere se li metteva in ordine corretto
+                virtualView.showMessage("current players order:" + "\n" + "gameSession.getOrder()" + "\n");
+
                 break;
             case END_GAME:
                 /** inGame è qualcosa che riconosca le varie azioni del gioco da svolgere, e chiama le funzioni*/
