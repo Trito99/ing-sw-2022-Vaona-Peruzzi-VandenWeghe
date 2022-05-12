@@ -123,7 +123,7 @@ public class GameController {
         VirtualView virtualView = allVirtualView.get(receivedMessage.getNickname());
         switch (gameState) {
             case INIT:
-                if(receivedMessage.getMessageType() == MessageType.PLAYERS_NUMBER_AND_DIFFICULTY){
+                if(receivedMessage.getMessageType() == MessageType.PLAYERS_NUMBER_AND_DIFFICULTY_CHOSEN){
                     PlayersNumberAndDifficulty PNaDSelected = (PlayersNumberAndDifficulty) receivedMessage;
                     maxPlayers = PNaDSelected.getPlayersNumber();
                     switch(PNaDSelected.getPlayersNumber()){
@@ -155,19 +155,36 @@ public class GameController {
                 if(receivedMessage.getMessageType() == MessageType.ASSISTANTCARD_PLAYED){
                     AssistantCardPlayed CardSelected = (AssistantCardPlayed) receivedMessage;
                     int indexOfCurrentPlayer=gameSession.getListOfPlayers().indexOf(gameSession.getPlayer(receivedMessage.getNickname()));
-                    System.out.println(indexOfCurrentPlayer);
-                    boolean present=false;
-                    for(int i=0;i<indexOfCurrentPlayer;i++){
-                        if(gameSession.getListOfPlayers().get(i).getTrash().getAssistantName().equals(CardSelected.getCardNickname()))
-                            present=true;
+                    boolean present=false,exists=false;
+                    for(AssistantCard assistantCard : gameSession.getPlayer(turnController.getActivePlayer()).getDeckOfPlayer().getCardsInHand()){
+                        if(assistantCard.getAssistantName().equals(CardSelected.getCardNickname()))
+                            exists=true;
                     }
-                    if(!present) {
-                        again = false;
-                        gameSession.playAssistantCard(CardSelected.getCardNickname(), receivedMessage.getNickname());
+                    if(gameSession.getPlayer(turnController.getActivePlayer()).getDeckOfPlayer().getCardsInHand().size()>1){
+                        for (int i = 1; i < (roundIndex + 1); i++) {
+                            if ((indexOfCurrentPlayer - i) < 0) {
+                                if (gameSession.getListOfPlayers().get(indexOfCurrentPlayer - i + maxPlayers).getTrash().getAssistantName().equals(CardSelected.getCardNickname()))
+                                    present = true;
+                            } else {
+                                if (gameSession.getListOfPlayers().get(indexOfCurrentPlayer - i).getTrash().getAssistantName().equals(CardSelected.getCardNickname()))
+                                    present = true;
+                            }
+                        }
+                    }
+                    System.out.println(exists+" "+present);
+                    if (exists) {
+                        if (!present) {
+                            again = false;
+                            gameSession.playAssistantCard(CardSelected.getCardNickname(), receivedMessage.getNickname());
+                        } else {
+                            virtualView.showMessage("\nCard already played by another player. Try again");
+                            virtualView.askAssistantCardToPlay();
+                            again = true;
+                        }
                     }else{
-                        virtualView.showMessage("\nCard already played by another player. Try again");
+                        virtualView.showMessage("\nCard doesn't exist or has already been played. Try again");
                         virtualView.askAssistantCardToPlay();
-                        again=true;
+                        again = true;
                     }
                 }
                 if(!again) {
