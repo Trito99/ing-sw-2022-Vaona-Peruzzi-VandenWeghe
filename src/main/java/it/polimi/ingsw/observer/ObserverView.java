@@ -24,4 +24,6 @@ public interface ObserverView {
     /** invia messaggio al server con il numero di giocatori scelti dal giocatore */
     public void choosePlayersNumberAndDifficulty(int playersNumber, Difficulty difficulty);
 
+    public void chooseAssistantCard(String cardNickname);
+
 }

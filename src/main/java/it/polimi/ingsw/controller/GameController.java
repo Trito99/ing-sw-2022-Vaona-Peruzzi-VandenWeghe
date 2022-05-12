@@ -1,9 +1,7 @@
 package it.polimi.ingsw.controller;
 
 
-import it.polimi.ingsw.message.ClientMessage;
-import it.polimi.ingsw.message.MessageType;
-import it.polimi.ingsw.message.PlayersNumberAndDifficulty;
+import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
@@ -30,12 +28,14 @@ public class GameController {
     private TurnController turnController;
     private GameState gameState;
     private final HashMap<String, VirtualView> allVirtualView;
+    private int roundIndex;
 
 
     public GameController(){
         this.allVirtualView= new HashMap<>();
         gameSession = new Game();
         gameState= GameState.INIT;
+        roundIndex=0;
     }
 
     private void generateTable(){
@@ -73,6 +73,7 @@ public class GameController {
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK2));
                 this.gameSession.getListOfPlayers().get(0).generateSchool(gameSession.getTable(),gameSession.getGameMode());
                 this.gameSession.getListOfPlayers().get(0).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK1));
+                virtualView.showMessage("Waiting for other players...");
             }
             else if(allVirtualView.size() == 2){
                 allVirtualView.put(nickname, virtualView);
@@ -81,6 +82,7 @@ public class GameController {
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK3));
+                virtualView.showMessage("Waiting for other players...");
             }
             else if(allVirtualView.size() == 3){
                 allVirtualView.put(nickname, virtualView);
@@ -89,6 +91,7 @@ public class GameController {
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK4));
+                virtualView.showMessage("Waiting for other players...");
             }
 
             allVirtualView.put(nickname, virtualView);
@@ -100,6 +103,7 @@ public class GameController {
             if(allVirtualView.size() == maxPlayers){
                 broadcastMessage("Everyone joined the game!");
                 turnController = new TurnController(this);
+                gameState=GameState.PLANNING;
                 startTurn();
             }
             return true;
@@ -115,10 +119,9 @@ public class GameController {
     }
 
     public void getMessage(ClientMessage receivedMessage) throws InvalidParameterException {
+        VirtualView virtualView = allVirtualView.get(receivedMessage.getNickname());
         switch (gameState) {
             case INIT:
-                VirtualView virtualView = allVirtualView.get(receivedMessage.getNickname());
-
                 if(receivedMessage.getMessageType() == MessageType.PLAYERS_NUMBER_AND_DIFFICULTY){
                     PlayersNumberAndDifficulty PNaDSelected = (PlayersNumberAndDifficulty) receivedMessage;
                     maxPlayers = PNaDSelected.getPlayersNumber();
@@ -147,7 +150,15 @@ public class GameController {
                     gameSession.getTable().generateCloudNumber(gameSession.getGameMode());
                 }
                 break;
-            case IN_GAME:
+            case PLANNING:
+                if(receivedMessage.getMessageType() == MessageType.ASSISTANTCARD_PLAYED){
+                    AssistantCardPlayed CardSelected = (AssistantCardPlayed) receivedMessage;
+                    gameSession.playAssistantCard(CardSelected.getCardNickname(),receivedMessage.getNickname());
+                }
+                turnController.nextPlayer();
+                roundIndex++;
+                startTurn();
+                break;
             case END_GAME:
                 /** inGame è qualcosa che riconosca le varie azioni del gioco da svolgere, e chiama le funzioni*/
                 //inGame(receivedMessage);
@@ -199,8 +210,11 @@ public class GameController {
             else
                 allVirtualView.get(s).showMessage("\n\nTurn of " + turnController.getActivePlayer());
         }
-        allVirtualView.get(turnController.getActivePlayer()).showMessage("\nChoose an Assistant Card from your Deck");
-        switch(gameState){
+        if (roundIndex<maxPlayers)
+            allVirtualView.get(turnController.getActivePlayer()).askAssistantCardToPlay();
+        if (roundIndex==maxPlayers)
+            roundIndex = 0;
+        /**switch(gameState){
             case PLANNING:
                 planning();
                 break;
@@ -215,7 +229,7 @@ public class GameController {
             case END_GAME:
                 allVirtualView.get(getActivePlayer()).askAction();
                 break;
-        }
+        }*/
     }
 
     public void setGameSession(Game gameSession) {
@@ -238,7 +252,7 @@ public class GameController {
             }
         }
 
-        allVirtualView.get(getActivePlayer()).askAssistantCardToPlay(assistantCards);
+        //allVirtualView.get(getActivePlayer()).askAssistantCardToPlay(assistantCards);
     }
 
     public void action(){

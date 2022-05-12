@@ -60,7 +60,7 @@ public interface View {
     void askPlayersNumberAndDifficulty();
 
     /** chiede al giocatore quale carta assistente vuole giocare */
-    void askAssistantCardToPlay(ArrayList<AssistantCard> assistantDeck);
+    void askAssistantCardToPlay();
 
     /** chiede al giocatore dove muovere gli studenti */
     void askStudentsToMove(ArrayList<Student> studentsInHall, School school, Table table);

@@ -52,7 +52,7 @@ public class Game {
 
     public Player getPlayer(String nickname){
         int indexPlayer = getPlayerListByNickname().indexOf(nickname);
-        return getListOfPlayers().get(indexPlayer);
+        return listOfPlayers.get(indexPlayer);
     }
 
     public ArrayList<String> getPlayerListByNickname() {

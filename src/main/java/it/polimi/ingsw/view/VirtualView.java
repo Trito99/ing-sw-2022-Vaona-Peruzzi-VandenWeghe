@@ -122,8 +122,8 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void askAssistantCardToPlay(ArrayList<AssistantCard> assistantDeck) {
-        clientHandler.sendMessage(new ShowAssistantToPlay(assistantDeck));
+    public void askAssistantCardToPlay() {
+        clientHandler.sendMessage(new PlayAssistantCard());
     }
 
     @Override

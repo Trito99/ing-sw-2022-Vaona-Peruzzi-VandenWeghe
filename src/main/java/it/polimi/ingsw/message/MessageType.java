@@ -5,6 +5,7 @@ public enum MessageType {
     LOGIN,
     LOGIN_RESULT,
     PLAYERS_NUMBER_AND_DIFFICULTY,
+    ASSISTANTCARD_PLAYED,
 
     //messaggi di connessione al server
     SUCCESSFUL_HOST,

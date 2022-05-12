@@ -53,6 +53,10 @@ public class ClientMessanger implements ObserverView, Observer {
         client.sendMessage(new PlayersNumberAndDifficulty(nickname, playersNumber,difficulty));
     }
 
+    public void chooseAssistantCard(String cardNickname){
+        client.sendMessage(new AssistantCardPlayed(nickname,cardNickname));
+    }
+
 
     /** cerca di loggare un giocatore ad una data lobby */
     public void updateLobby(String nickname, GregorianCalendar playerDate, String lobby){
@@ -100,6 +104,9 @@ public class ClientMessanger implements ObserverView, Observer {
             case SHOW_ASSISTANT_DECK:
                 ShowAssistantDeck deck = (ShowAssistantDeck) message;
                 queue.execute(() -> view.showDeckAssistant(deck.getDeckAssistant(), deck.getNickname()));
+                break;
+            case PLAY_ASSISTANT_CARD:
+                queue.execute(()->view.askAssistantCardToPlay());
                 break;
             case WIN: /** da controllare */
                 queue.execute(() -> view.showWinMessage(((WinMessage) message).getNumberOfTower()));

@@ -48,15 +48,13 @@ public class TurnController {
 
 
     /** cambia l'active player */
-    public String nextPlayer(){
+    public void nextPlayer(){
         int player;
         if((orderPlayers.indexOf(playingPlayer)+1)>(orderPlayers.size()-1))
             player = 0;
         else
             player = orderPlayers.indexOf(playingPlayer)+1;
         playingPlayer = orderPlayers.get(player);
-
-        return playingPlayer;
     }
 
     /** giocatore ancora connessi ordinati con l'ordine del turno */

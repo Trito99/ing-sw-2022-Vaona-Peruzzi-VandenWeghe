@@ -306,8 +306,14 @@ public class Cli extends ObservableView implements View {
 
 
     @Override
-    public void askAssistantCardToPlay(ArrayList<AssistantCard> assistantDeck) {
-
+    public void askAssistantCardToPlay() {
+        try {
+            out.print("\nChoose an Assistant Card from your Deck (nickname): ");
+            String nickname = readInput();
+            notifyObserver(obs -> obs.chooseAssistantCard(nickname));
+        } catch (ExecutionException e) {
+            out.println(WRONG_INPUT);
+        }
     }
 
     @Override
