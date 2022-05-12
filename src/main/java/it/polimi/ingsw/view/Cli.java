@@ -46,7 +46,17 @@ public class Cli extends ObservableView implements View {
     }
 
     public void start(){
-        out.println("😛  Welcome to Eriantys!! 😛 ");
+        out.println(ANSI_BLUE + "\n" +
+                "    __      ______          _                   _                      __   \n" +
+                "   / /     |  ____|        (_)                 | |                     \\ \\  \n" +
+                "  | |      | |__     _ __   _    __ _   _ __   | |_   _   _   ___       | | \n" +
+                " / /       |  __|   | '__| | |  / _` | | '_ \\  | __| | | | | / __|       \\ \\\n" +
+                " \\ \\       | |____  | |    | | | (_| | | | | | | |_  | |_| | \\__ \\       / /\n" +
+                "  | |      |______| |_|    |_|  \\__,_| |_| |_|  \\__|  \\__, | |___/      | | \n" +
+                "   \\_\\                                                 __/ |           /_/  \n" +
+                "                                                      |___/                 " +
+                "\n");
+        out.println(ANSI_RESET + "😛  Welcome to Eriantys!! 😛 ");
         askConnect();
     }
 
