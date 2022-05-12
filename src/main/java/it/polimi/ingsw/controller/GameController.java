@@ -199,7 +199,7 @@ public class GameController {
             else
                 allVirtualView.get(s).showMessage("\n\nTurn of " + turnController.getActivePlayer());
         }
-        allVirtualView.get(turnController.getActivePlayer()).showMessage("\nChoose an Assistant Card");
+        allVirtualView.get(turnController.getActivePlayer()).showMessage("\nChoose an Assistant Card from your Deck");
         switch(gameState){
             case PLANNING:
                 planning();
