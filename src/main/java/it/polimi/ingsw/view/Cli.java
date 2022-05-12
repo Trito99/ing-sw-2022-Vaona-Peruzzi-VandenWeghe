@@ -1,13 +1,10 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.message.ShowAssistantDeck;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.Difficulty;
-import it.polimi.ingsw.model.game.Game;
-import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.School;
@@ -31,6 +28,15 @@ public class Cli extends ObservableView implements View {
     private List<String> commandList;
     private static final String WRONG_INPUT = "Input error. Type again.";
 
+    public static final  String ANSI_RESET = "\u001B[0m";
+    public static final  String ANSI_GREEN = "\u001B[32m";
+    public static final  String ANSI_YELLOW = "\u001B[33m";
+    public static final  String ANSI_RED = "\u001B[31m";
+    public static final  String ANSI_PINK = "\u001B[35m";
+    public static final  String ANSI_BLUE = "\u001B[34m";
+    public static final  String ANSI_GREY = "\u001B[37m";
+    public static final  String ANSI_BLACK = "\u001B[30m";
+
     public Cli(){
         output = out;
         commandList=new ArrayList<String>();
@@ -40,7 +46,17 @@ public class Cli extends ObservableView implements View {
     }
 
     public void start(){
-        out.println("Welcome to Eriantys!! :) ");
+        out.println(ANSI_BLUE + "\n" +
+                "    __      ______          _                   _                      __   \n" +
+                "   / /     |  ____|        (_)                 | |                     \\ \\  \n" +
+                "  | |      | |__     _ __   _    __ _   _ __   | |_   _   _   ___       | | \n" +
+                " / /       |  __|   | '__| | |  / _` | | '_ \\  | __| | | | | / __|       \\ \\\n" +
+                " \\ \\       | |____  | |    | | | (_| | | | | | | |_  | |_| | \\__ \\       / /\n" +
+                "  | |      |______| |_|    |_|  \\__,_| |_| |_|  \\__|  \\__, | |___/      | | \n" +
+                "   \\_\\                                                 __/ |           /_/  \n" +
+                "                                                      |___/                 " +
+                "\n");
+        out.println(ANSI_RESET + "😛  Welcome to Eriantys!! 😛 ");
         askConnect();
     }
 
@@ -115,41 +131,41 @@ public class Cli extends ObservableView implements View {
         out.print("\n****School of "+ nickname + "**** ");
         out.print("\nEntry: ");
        for(Student s : school.getEntry()){
-           out.print(s.getsColour() + " "+s.getIdStudent()+ " | ");
+           out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | " );
        }
-       out.println("\nGreen Table: ");
+       out.println(ANSI_GREEN + "\nGreen Table: " + ANSI_RESET);
        for(Student s : school.getGTable()){
-           out.print(s.getsColour() + " ");
+           out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " ");
        }
        out.print("Is prof Green in hall? "+ school.getProfInHall(SColor.GREEN));
 
-       out.println("\nRed Table: ");
+       out.println(ANSI_RED + "\nRed Table: " + ANSI_RESET);
        for(Student s : school.getRTable()){
-            out.print(s.getsColour() + " ");
+            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " ");
        }
         out.print("Is prof Red in hall? "+ school.getProfInHall(SColor.RED));
 
-       out.println("\nYellow Table: ");
+       out.println(ANSI_YELLOW + "\nYellow Table: " + ANSI_RESET);
        for(Student s : school.getYTable()){
-            out.print(s.getsColour() + " ");
+            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " ");
        }
         out.print("Is prof Yellow in hall? "+ school.getProfInHall(SColor.YELLOW));
 
-       out.println("\nPink Table: ");
+       out.println(ANSI_PINK+ "\nPink Table: " + ANSI_RESET);
        for(Student s : school.getPTable()){
-            out.print(s.getsColour() + " ");
+            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " ");
        }
         out.print("Is prof Pink in hall? "+ school.getProfInHall(SColor.PINK));
 
-       out.println("\nBlue Table: ");
+       out.println(ANSI_BLUE + "\nBlue Table: " + ANSI_RESET);
        for(Student s : school.getBTable()){
-            out.print(s.getsColour() + " ");
+            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " ");
        }
         out.print("Is prof Blue in hall? "+ school.getProfInHall(SColor.BLUE));
 
         out.print("\nTowers: ");
         for(Tower t : school.getTower()){
-            out.print(t.getTColour() + " " +t.getIdTower()+ " | ");
+            out.print(getTowerAnsiColor(t) + t.getIdTower() + ANSI_RESET + " | ");
         }
 
         out.print("\nTrash Card: ");
@@ -169,11 +185,11 @@ public class Cli extends ObservableView implements View {
             if (islandCard.towerIsOnIsland()) {
                 out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       | " + islandCard.getTowerOnIsland() + " ");
                 for (Student student: islandCard.getStudentOnIsland())
-                    out.print(student.getsColour()+" ");
+                    out.print(getStudentAnsiColor(student) + student.getIdStudent() + " " + ANSI_RESET);
             } else {
                 out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       | " + " No Tower |" + " ");
                 for (Student student: islandCard.getStudentOnIsland())
-                    out.print(student.getsColour()+" ");
+                    out.print(getStudentAnsiColor(student) + student.getIdStudent() + " " + ANSI_RESET);
             }
         }
         out.println("\n----------------------------------------------");
@@ -181,7 +197,7 @@ public class Cli extends ObservableView implements View {
         for(CloudCard c : table.getCloudNumber()){
             out.print("\nCloud "+ i + ") ");
             for(Student s : table.getCloudNumber().get(i-1).getStudentOnCloud()){
-                out.print("Id Student: "+ s.getIdStudent() + " Student Color: " + s.getsColour() +"| ");
+                out.print("Id Student: "+ getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET +" | ");
 
             }
             i++;
@@ -193,7 +209,7 @@ public class Cli extends ObservableView implements View {
     public void showDeckAssistant(DeckAssistant deckAssistant, String nickname) {
         out.print("\n****Deck of "+ nickname + "**** ");
         for(AssistantCard card : deckAssistant.getCardsInHand() ){
-            out.print("\n"+card.getAssistantName() + " Turn Value: " +card.getTurnValue()+ " MotherEarth Steps: "+card.getStepMotherEarth()+" | ");
+            out.print("\n"+card.getAssistantName() + " -> Turn Value: " +card.getTurnValue()+ " MotherEarth Steps: "+card.getStepMotherEarth()+" | ");
         }
     }
 
@@ -225,7 +241,7 @@ public class Cli extends ObservableView implements View {
                 notifyObserver(obs -> obs.updateConnect(ipAddress, port));
             }
             catch (Exception e){
-                out.print("Wrong input.");
+                out.println("⚠️Wrong input. ⚠️");
                 succeded = true;
             }
         }while(succeded);
@@ -312,5 +328,30 @@ public class Cli extends ObservableView implements View {
     @Override
     public void askChooseCloud(Table table) {
 
+    }
+
+    private String getStudentAnsiColor(Student student) {
+        switch (student.getsColour()) {
+            case GREEN:
+                return ANSI_GREEN;
+            case YELLOW:
+                return ANSI_YELLOW;
+            case RED:
+                return ANSI_RED;
+            case PINK:
+                return ANSI_PINK;
+            case BLUE:
+                return ANSI_BLUE;
+            default:
+                return ANSI_RESET;
+        }
+    }
+
+        private String getTowerAnsiColor(Tower tower) {
+            switch (tower.getTColour()){
+                case BLACK: return ANSI_BLACK;
+                case GREY: return ANSI_GREY;
+                default: return ANSI_RESET;
+            }
     }
 }
