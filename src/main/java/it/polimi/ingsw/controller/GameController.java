@@ -29,6 +29,7 @@ public class GameController {
     private GameState gameState;
     private final HashMap<String, VirtualView> allVirtualView;
     private int roundIndex;
+    boolean again=false;
 
 
     public GameController(){
@@ -153,11 +154,27 @@ public class GameController {
             case PLANNING:
                 if(receivedMessage.getMessageType() == MessageType.ASSISTANTCARD_PLAYED){
                     AssistantCardPlayed CardSelected = (AssistantCardPlayed) receivedMessage;
-                    gameSession.playAssistantCard(CardSelected.getCardNickname(),receivedMessage.getNickname());
+                    int indexOfCurrentPlayer=gameSession.getListOfPlayers().indexOf(gameSession.getPlayer(receivedMessage.getNickname()));
+                    System.out.println(indexOfCurrentPlayer);
+                    boolean present=false;
+                    for(int i=0;i<indexOfCurrentPlayer;i++){
+                        if(gameSession.getListOfPlayers().get(i).getTrash().getAssistantName().equals(CardSelected.getCardNickname()))
+                            present=true;
+                    }
+                    if(!present) {
+                        again = false;
+                        gameSession.playAssistantCard(CardSelected.getCardNickname(), receivedMessage.getNickname());
+                    }else{
+                        virtualView.showMessage("\nCard already played by another player. Try again");
+                        virtualView.askAssistantCardToPlay();
+                        again=true;
+                    }
                 }
-                turnController.nextPlayer();
-                roundIndex++;
-                startTurn();
+                if(!again) {
+                    turnController.nextPlayer();
+                    roundIndex++;
+                    startTurn();
+                }
                 break;
             case END_GAME:
                 /** inGame è qualcosa che riconosca le varie azioni del gioco da svolgere, e chiama le funzioni*/
@@ -193,23 +210,7 @@ public class GameController {
     /** inizia il turno */
     public void startTurn(){
         gameSession.getTable().extractStudentOnCloud();
-        for(String s: allVirtualView.keySet()){
-            allVirtualView.get(s).showTable(gameSession.getTable());
-            for(Player p : gameSession.getListOfPlayers()) {
-                if (p.getNickname() != s)
-                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname(),p.getTrash());
-            }
-            for(Player p : gameSession.getListOfPlayers()){
-                if (p.getNickname()==s) {
-                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname(), p.getTrash());
-                    allVirtualView.get(s).showDeckAssistant(p.getDeckOfPlayer(),p.getNickname());
-                }
-            }
-            if (s == turnController.getActivePlayer())
-                allVirtualView.get(s).showMessage("\n\nYour Turn");
-            else
-                allVirtualView.get(s).showMessage("\n\nTurn of " + turnController.getActivePlayer());
-        }
+        showGame();
         if (roundIndex<maxPlayers)
             allVirtualView.get(turnController.getActivePlayer()).askAssistantCardToPlay();
         if (roundIndex==maxPlayers)
@@ -230,6 +231,26 @@ public class GameController {
                 allVirtualView.get(getActivePlayer()).askAction();
                 break;
         }*/
+    }
+
+    private void showGame(){
+        for(String s: allVirtualView.keySet()){
+            allVirtualView.get(s).showTable(gameSession.getTable());
+            for(Player p : gameSession.getListOfPlayers()) {
+                if (p.getNickname() != s)
+                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname(),p.getTrash());
+            }
+            for(Player p : gameSession.getListOfPlayers()){
+                if (p.getNickname()==s) {
+                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname(), p.getTrash());
+                    allVirtualView.get(s).showDeckAssistant(p.getDeckOfPlayer(),p.getNickname());
+                }
+            }
+            if (s == turnController.getActivePlayer())
+                allVirtualView.get(s).showMessage("\n\nYour Turn");
+            else
+                allVirtualView.get(s).showMessage("\n\nTurn of " + turnController.getActivePlayer());
+        }
     }
 
     public void setGameSession(Game gameSession) {
