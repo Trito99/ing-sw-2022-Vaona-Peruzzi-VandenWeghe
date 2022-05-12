@@ -92,6 +92,11 @@ public class Game {
         return order;
     }
 
+    public void setOrder(ArrayList<Player> order, String nickname) {
+        order.add(getPlayer(nickname));
+        this.order = order;
+    }
+
     /**
      * winnerIs deve rimanere all'interno di Game   (?)
      */
