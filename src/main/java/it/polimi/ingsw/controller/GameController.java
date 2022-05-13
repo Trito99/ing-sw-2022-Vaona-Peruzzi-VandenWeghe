@@ -281,9 +281,10 @@ public class GameController {
     /** DA CONTROLLARE */
     /** inizia il turno */
     public void planning(){
-        if (roundIndex<maxPlayers)
+        if (roundIndex<maxPlayers) {
             showGame();
             allVirtualView.get(turnController.getActivePlayer()).askAssistantCardToPlay();
+        }
         if (roundIndex==maxPlayers) {
             roundIndex=0;
             turnController.changeOrder();
@@ -307,6 +308,8 @@ public class GameController {
                     break;
                 case MOTHERNATURE:
                     allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash());
+                    break;
+                default:
                     break;
             }
         }

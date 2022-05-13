@@ -161,7 +161,7 @@ public class Cli extends ObservableView implements View {
 
         out.print("\n\nTowers: ");
         for(Tower t : school.getTower()){
-            out.print(getTowerAnsiColor(t) + t.getIdTower() + ANSI_RESET + " | ");
+            out.print(getTowerAnsiColor(t) + "T" + ANSI_RESET + " | ");
         }
 
         out.print("\n\nTrash Card: ");
@@ -179,7 +179,7 @@ public class Cli extends ObservableView implements View {
         out.print("\nIsland Id  | MotherEarth |   Tower   | Students");
         for(IslandCard islandCard : table.getListOfIsland()) {
             if (islandCard.towerIsOnIsland()) {
-                out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       |    " + getTowerAnsiColor(islandCard.getTowerOnIsland()) + islandCard.getTowerOnIsland().getIdTower() +ANSI_RESET+"    | ");
+                out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       |    " + getTowerAnsiColor(islandCard.getTowerOnIsland()) + "T" +ANSI_RESET+"    | ");
                 for (Student student: islandCard.getStudentOnIsland())
                     out.print(getStudentAnsiColor(student) + student.getIdStudent() + " " + ANSI_RESET);
             } else {

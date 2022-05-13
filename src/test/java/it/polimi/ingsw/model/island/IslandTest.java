@@ -116,13 +116,12 @@ public class IslandTest {
                case WHITE:
                case BLACK:
                case GREY:
-                  Tower tw = new Tower(i+1, color);
+                  Tower tw = new Tower(color);
                   island.setTowerOnIsland(player.getPersonalSchool().getTower().get(i));
                   island.setTowerIsOnIsland(true);
                   assertNotNull(island.getTowerOnIsland());
                   assertNotNull(island.towerIsOnIsland());
                   assertEquals(tw.getTColour(), island.getTowerOnIsland().getTColour());
-                  assertEquals(tw.getIdTower(), island.getTowerOnIsland().getIdTower());
                   assertEquals(true, island.towerIsOnIsland());
                   break;
             }
@@ -342,9 +341,9 @@ public class IslandTest {
             islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE);
             for(Player player : game.getListOfPlayers()){
                if(islandCard.towerIsOnIsland()){
-                  if(player.getTColor()==islandCard.getTowerOnIsland().getTColour())
-                     if(player.getPersonalSchool().getTower().size()!=0)
-                        assertEquals(islandCard.getTowerOnIsland().getIdTower()-1, player.getPersonalSchool().getTower().get(player.getPersonalSchool().getTower().size()-1).getIdTower());
+                  //if(player.getTColor()==islandCard.getTowerOnIsland().getTColour())
+                     //if(player.getPersonalSchool().getTower().size()!=0)
+                        //assertEquals(islandCard.getTowerOnIsland().getIdTower()-1, player.getPersonalSchool().getTower().get(player.getPersonalSchool().getTower().size()-1).getIdTower());
                }
             }
             if(islandCard.towerIsOnIsland())

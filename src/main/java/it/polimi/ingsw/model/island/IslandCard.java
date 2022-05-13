@@ -72,19 +72,18 @@ public class IslandCard implements Serializable {
                 setXCardCounter(getXCardCounter() - 1);
                 if (xCardCounter == 0) setXCardOnIsland(false);
             } else {
-                if (playerFound == null) {
-                    return;             /** Se nessuno ha influenza non buildo */
-                }
-
-                TColor towerColour = playerFound.getTColor();      //Colore delle torri del player che ha influenza
-                if (playerFound.getPersonalSchool().getTower().size() != 0) {
-                    if(!towerIsOnIsland) {
-                        towerOnIsland = new Tower(playerFound.getPersonalSchool().getTower().size(), towerColour);
-                        playerFound.getPersonalSchool().removeTower();
-                        setTowerIsOnIsland(true);
-                    }else if(!playerFound.getTColor().equals(towerOnIsland.getTColour())){
-                        System.out.println(4567890);
-                        changeTowerColour(listOfPlayer, cardEffectPlayed, playerFound);
+                if (playerFound != null) {
+                    if (playerFound.getPersonalSchool().getTower().size() != 0) {
+                        if (!towerIsOnIsland) {
+                            towerOnIsland = new Tower(playerFound.getTColor());
+                            playerFound.getPersonalSchool().removeTower();
+                            towerIsOnIsland = true;
+                        }else{
+                            if (!playerFound.getTColor().equals(towerOnIsland.getTColour())) {
+                                System.out.println(4567890);
+                                changeTowerColour(listOfPlayer, cardEffectPlayed, playerFound);
+                            }
+                        }
                     }
                 }
             }
@@ -100,8 +99,11 @@ public class IslandCard implements Serializable {
                 prevPlayer = player;
         }
         if(!playerBuilder.getTColor().equals(towerOnIsland.getTColour())){
-            prevPlayer.getPersonalSchool().getTower().add(towerOnIsland);
-            setTowerOnIsland(playerBuilder.getPersonalSchool().getTower().get(playerBuilder.getPersonalSchool().getTower().size() - 1));
+            for(int i=0;i<mergedIsland;i++) {
+                prevPlayer.getPersonalSchool().getTower().add(new Tower(prevPlayer.getTColor()));
+                playerBuilder.getPersonalSchool().removeTower();
+            }
+            setTowerOnIsland(new Tower(playerBuilder.getTColor()));
             playerBuilder.getPersonalSchool().removeTower();
         }
     }

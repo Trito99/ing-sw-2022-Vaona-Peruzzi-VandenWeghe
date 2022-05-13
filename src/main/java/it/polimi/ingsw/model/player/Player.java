@@ -66,11 +66,11 @@ public class Player {
         }
         for (int f = 1; f < t+1; f++) {
             if(gameMode == GameMode.COOP && playerNumber == PlayerNumber.PLAYER1 )
-                personalSchool.addTower(f, tColor);
+                personalSchool.addTower(tColor);
             else if(gameMode == GameMode.COOP && playerNumber == PlayerNumber.PLAYER3)
-                personalSchool.addTower(f, tColor);
+                personalSchool.addTower(tColor);
             else if(gameMode!=GameMode.COOP)
-                personalSchool.addTower(f, tColor);
+                personalSchool.addTower(tColor);
         }
 
         personalSchool.getProfOfPlayer().add(new Prof(SColor.GREEN));

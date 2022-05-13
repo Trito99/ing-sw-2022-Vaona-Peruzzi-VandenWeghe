@@ -37,8 +37,8 @@ class GameTest {
 
         game.getTable().getBag().add(new Student(0, SColor.GREEN));
 
-        game.getPlayer("Gino").getPersonalSchool().getTower().add(new Tower(0,TColor.WHITE));
-        game.getPlayer("Gino").getPersonalSchool().getTower().add(new Tower(1,TColor.WHITE));
+        game.getPlayer("Gino").getPersonalSchool().getTower().add(new Tower(TColor.WHITE));
+        game.getPlayer("Gino").getPersonalSchool().getTower().add(new Tower(TColor.WHITE));
         game.getPlayer("Gino").getDeckOfPlayer().getCardsInHand().add(new AssistantCard("lion",3,4));
 
         assertEquals(false, game.gameIsFinished("Gino"));
@@ -56,7 +56,7 @@ class GameTest {
         game.getPlayer("Gino").getPersonalSchool().removeTower();
         assertEquals(true, game.gameIsFinished("Gino")); /** Control if return true when a player finishes his tower */
 
-        game.getPlayer("Gino").getPersonalSchool().addTower(0,TColor.WHITE);
+        game.getPlayer("Gino").getPersonalSchool().addTower(TColor.WHITE);
 
         /** MANCA CONTROLLO BAG VUOTA E 3 GRUPPI DI ISOLE */
     }

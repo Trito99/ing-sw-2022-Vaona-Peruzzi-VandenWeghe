@@ -276,8 +276,8 @@ public class School implements Serializable {
         return towerZone;
     }
 
-    public void addTower(int id, TColor tColor) {
-        towerZone.add(new Tower(id, tColor));
+    public void addTower(TColor tColor) {
+        towerZone.add(new Tower(tColor));
         // ci sarà una notify observer
     }
 
