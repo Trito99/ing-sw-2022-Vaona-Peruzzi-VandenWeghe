@@ -8,7 +8,7 @@ public class ShowAssistantDeck extends ServerMessage{
     private DeckAssistant deckAssistant;
     private String nickname;
     private AssistantCard trash;
-    public ShowAssistantDeck(DeckAssistant deckAssistant, String nickname) {
+    public ShowAssistantDeck(DeckAssistant deckAssistant) {
         super(MessageType.SHOW_ASSISTANT_DECK);
         this.deckAssistant = deckAssistant;
         this.nickname=nickname;

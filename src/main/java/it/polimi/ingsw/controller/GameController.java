@@ -15,7 +15,6 @@ import it.polimi.ingsw.view.VirtualView;
 
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -213,6 +212,11 @@ public class GameController {
                     gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromCloudToEntry(cloudCard);
                     turn=true;
                 }
+                if(receivedMessage.getMessageType() == MessageType.STEP_MOTHER_EARTH_CHOSEN){
+                    MotherEarthStepsChosen step = (MotherEarthStepsChosen) receivedMessage;
+                    int steps= step.getSteps();
+                    gameSession.getTable().moveMotherEarth(steps);
+                }
                 if(!again && turn) {
                     turnController.nextPlayer(turnController.getNewPlayerOrderByName());
                     roundIndex++;
@@ -294,7 +298,7 @@ public class GameController {
             for(Player p : gameSession.getListOfPlayers()){
                 if (p.getNickname()==s) {
                     allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname(), p.getTrash());
-                    allVirtualView.get(s).showDeckAssistant(p.getDeckOfPlayer(),p.getNickname());
+                    allVirtualView.get(s).showDeckAssistant(p.getDeckOfPlayer());
                 }
             }
             if (s == turnController.getActivePlayer())

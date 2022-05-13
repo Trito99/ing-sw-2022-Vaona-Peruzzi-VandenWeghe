@@ -32,7 +32,8 @@ public enum MessageType {
     PLAY_ASSISTANT_CARD,
     CHOOSE_CLOUD_CARD,
     CHOOSE_PLACE_AND_STUDENT_FOR_MOVE,
-    MOVE_MOTHER_EARTH,
+    CHOOSE_MOTHER_EARTH_STEPS,
+    STEP_MOTHER_EARTH_CHOSEN,
 
     //messaggi intermediari
     WIN_PROF,

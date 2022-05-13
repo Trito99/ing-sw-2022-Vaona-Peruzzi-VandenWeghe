@@ -38,7 +38,7 @@ public interface View {
 
     void showTable(Table table);
 
-    void showDeckAssistant(DeckAssistant deckAssistant, String nickname);
+    void showDeckAssistant(DeckAssistant deckAssistant);
 
     void showWinMessage(int numberOfTower);
 
@@ -69,7 +69,7 @@ public interface View {
     void askCharacterCardToPlay(ArrayList<CharacterCard> characterCard);
 
     /** chiede al giocatore quanti passi far fare a madre natura*/
-    void askMotherEarthSteps(Table table);
+    void askMotherEarthSteps(AssistantCard trash);
 
     /** chiede al giocatore di scegliere una tessera nuvola */
     void askChooseCloud();
