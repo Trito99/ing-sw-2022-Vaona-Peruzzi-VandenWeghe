@@ -124,7 +124,6 @@ public class GameControllerTest {
         assertNotNull(gc.getGameState());
 
         gc.setGameState(GameState.PLANNING);
-        gc.planning();
 
         assertNotNull(gc.getGameState());
         assertEquals(GameState.PLANNING, gc.getGameState());

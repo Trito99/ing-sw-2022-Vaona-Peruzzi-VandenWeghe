@@ -58,16 +58,19 @@ public class ClientMessanger implements ObserverView, Observer {
     }
 
     public void chooseCloudCard(int id){
-        client.sendMessage(new CloudCardChosen(nickname,id));
+        client.sendMessage(new CloudChosen(nickname,id));
     }
 
     public void choosePlaceAndStudentForMove(String place,int id){
         client.sendMessage(new PlaceAndStudentForMoveChosen(nickname,place,id));
     }
 
-    @Override
+    public void chooseIdIsland(int id){
+        client.sendMessage(new IdIslandChosen(nickname,id));
+    }
+
     public void chooseMotherEarthSteps(int steps) {
-        client.sendMessage((new MotherEarthStepsChosen(nickname, steps)));
+        client.sendMessage(new MotherEarthStepsChosen(nickname, steps));
     }
 
 
@@ -122,10 +125,14 @@ public class ClientMessanger implements ObserverView, Observer {
                 queue.execute(()->view.askAssistantCardToPlay());
                 break;
             case CHOOSE_CLOUD_CARD:
-                queue.execute(()->view.askChooseCloud());
+                queue.execute(()->view.askCloud());
                 break;
             case CHOOSE_PLACE_AND_STUDENT_FOR_MOVE:
-                queue.execute(()->view.askPlaceAndStudentForMove());
+                ChoosePlaceAndStudentForMove entry = (ChoosePlaceAndStudentForMove) message;
+                queue.execute(()->view.askPlaceAndStudentForMove(entry.getEntry()));
+                break;
+            case CHOOSE_ID_ISLAND:
+                queue.execute(()->view.askIdIsland());
                 break;
             case CHOOSE_MOTHER_EARTH_STEPS:
                 ChooseMotherEarthSteps steps = (ChooseMotherEarthSteps) message;

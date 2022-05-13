@@ -83,7 +83,6 @@ public class Player {
     }
 
     public AssistantCard getAssistantCard(String assistantCard){
-        System.out.println("Carta "+assistantCard);
         int indexPlayer = getAssistantCardByNickname().indexOf(assistantCard);
         return deckOfPlayer.getCardsInHand().get(indexPlayer);
     }

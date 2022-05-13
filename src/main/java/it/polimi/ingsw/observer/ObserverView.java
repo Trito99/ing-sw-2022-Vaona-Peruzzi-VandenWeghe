@@ -30,6 +30,8 @@ public interface ObserverView {
 
     public void choosePlaceAndStudentForMove(String place,int id);
 
+    public void chooseIdIsland(int id);
+
     public void chooseMotherEarthSteps(int steps);
 
 }

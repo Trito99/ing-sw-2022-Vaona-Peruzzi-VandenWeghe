@@ -179,11 +179,11 @@ public class Cli extends ObservableView implements View {
         out.print("\nIsland Id  | MotherEarth |   Tower   | Students");
         for(IslandCard islandCard : table.getListOfIsland()) {
             if (islandCard.towerIsOnIsland()) {
-                out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       | " + islandCard.getTowerOnIsland() + " ");
+                out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       |    " + getTowerAnsiColor(islandCard.getTowerOnIsland()) + islandCard.getTowerOnIsland().getIdTower() +ANSI_RESET+"    | ");
                 for (Student student: islandCard.getStudentOnIsland())
                     out.print(getStudentAnsiColor(student) + student.getIdStudent() + " " + ANSI_RESET);
             } else {
-                out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       | " + " No Tower |" + " ");
+                out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       | " + " No Tower | ");
                 for (Student student: islandCard.getStudentOnIsland())
                     out.print(getStudentAnsiColor(student) + student.getIdStudent() + " " + ANSI_RESET);
             }
@@ -329,7 +329,7 @@ public class Cli extends ObservableView implements View {
     @Override
     public void askMotherEarthSteps(AssistantCard trash) {
         try{
-            out.print("\nChoose how many steps you want to make MotherEarth move: (max "+trash.getStepMotherEarth()+")");
+            out.print("\nChoose how many steps you want to make MotherEarth move: (max "+trash.getStepMotherEarth()+")\n");
             int steps = Integer.parseInt(readInput());
             notifyObserver(obs -> obs.chooseMotherEarthSteps(steps));
         } catch (ExecutionException e) {
@@ -339,7 +339,7 @@ public class Cli extends ObservableView implements View {
     }
 
     @Override
-    public void askChooseCloud() {
+    public void askCloud() {
         try {
             out.print("\nChoose a Cloud Card (id) ");
             int id = Integer.parseInt(readInput());
@@ -350,13 +350,28 @@ public class Cli extends ObservableView implements View {
     }
 
     @Override
-    public void askPlaceAndStudentForMove() {
+    public void askPlaceAndStudentForMove(ArrayList<Student> entry) {
         try {
-            out.print("\nWich Student do you want to move? (id)\n");
+            out.print("\nWhich student of your entry do you want to move? (id)");
+            out.print("\nEntry: ");
+            for(Student s : entry){
+                out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | " );
+            }
+            out.print("\n");
             int id = Integer.parseInt(readInput());
-            out.print("\nWhere do you want to move the Student? (Island,School)\n");
-            String place = readInput();
+            out.print("\nWhere do you want to move the student? (Island,School)\n");
+            String place = readInput().toUpperCase(Locale.ROOT);
             notifyObserver(obs -> obs.choosePlaceAndStudentForMove(place,id));
+        } catch (ExecutionException e) {
+            out.println(WRONG_INPUT);
+        }
+    }
+    @Override
+    public void askIdIsland() {
+        try {
+            out.print("\nIn which island do you want to move the student? (id)\n");
+            int id = Integer.parseInt(readInput());
+            notifyObserver(obs -> obs.chooseIdIsland(id));
         } catch (ExecutionException e) {
             out.println(WRONG_INPUT);
         }

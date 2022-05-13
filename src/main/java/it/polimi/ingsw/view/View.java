@@ -72,8 +72,10 @@ public interface View {
     void askMotherEarthSteps(AssistantCard trash);
 
     /** chiede al giocatore di scegliere una tessera nuvola */
-    void askChooseCloud();
+    void askCloud();
 
-    public void askPlaceAndStudentForMove();
+    void askPlaceAndStudentForMove(ArrayList<Student> entry);
+
+    void askIdIsland();
 
 }

@@ -39,10 +39,10 @@ public class School implements Serializable {
     }
 
     public void moveStudentFromCloudToEntry(CloudCard cloudCard){
-        for (Student s : cloudCard.getStudentOnCloud() ) {
+        for(Student s : cloudCard.getStudentOnCloud()) {
             entry.add(s);
-            cloudCard.getStudentOnCloud().remove(s);
         }
+        cloudCard.getStudentOnCloud().clear();
     }
 
     public void moveStudentFromEntryToIsland(IslandCard islandCard, int id){ //Specifico Studente va spostato (sceglie player)

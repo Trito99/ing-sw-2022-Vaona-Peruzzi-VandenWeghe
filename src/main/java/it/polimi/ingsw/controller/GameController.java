@@ -5,9 +5,11 @@ import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
+import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.DeckCharacter;
 import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.*;
+import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.TColor;
@@ -28,6 +30,8 @@ public class GameController {
     private int roundIndex;
     boolean again=false;
     private ActionState actionState;
+    int studentId;
+    int movedStudents=0;
 
 
     public GameController(){
@@ -37,7 +41,7 @@ public class GameController {
         roundIndex =0;
     }
 
-    private void generateTable(){
+    public void generateTable(){
         gameSession.getTable().generateBagInit();
         gameSession.getTable().generateIslandCards();
         gameSession.getTable().generateMotherEarth();
@@ -192,34 +196,51 @@ public class GameController {
                 }
                 break;
             case ACTION:
-                boolean turn = false;
+                boolean turnFinished = false;
                 if(receivedMessage.getMessageType() == MessageType.PLACE_AND_STUDENT_FOR_MOVE_CHOSEN){
                     PlaceAndStudentForMoveChosen Choice = (PlaceAndStudentForMoveChosen) receivedMessage;
-                    if(Choice.getPlace().equals("School")){
-                        gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromEntryToHall(gameSession.getPlayer(turnController.getActivePlayer()), Choice.getId(), gameSession.getTable(), gameSession.getDifficulty());
-                    }else if (Choice.getPlace().equals("Island")){
-                        //AskIdForIsland
+                    studentId=Choice.getId();
+                    if(Choice.getPlace().equals("SCHOOL")){
+                        gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromEntryToHall(gameSession.getPlayer(turnController.getActivePlayer()), studentId, gameSession.getTable(), gameSession.getDifficulty());
+                        if(gameSession.getDifficulty().equals(Difficulty.STANDARDMODE))
+                            gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(),gameSession.getPlayer(turnController.getActivePlayer()),CardEffect.STANDARDMODE);
+                        movedStudents++;
+                        if (movedStudents==gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces())
+                            setActionState(ActionState.MOTHERNATURE);
+                        action();
+                    }else if (Choice.getPlace().equals("ISLAND")){
+                        virtualView.askIdIsland();
                     }
-                    action();
                 }
-                if(receivedMessage.getMessageType() == MessageType.CLOUDCARD_CHOSEN){
-                    CloudCardChosen Cloud = (CloudCardChosen) receivedMessage;
-                    CloudCard cloudCard=null;
-                    for(CloudCard cl:gameSession.getTable().getCloudNumber()){
-                        if(cl.getIdCloud()==Cloud.getId())
-                            cloudCard=cl;
-                    }
-                    gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromCloudToEntry(cloudCard);
-                    turn=true;
+                if(receivedMessage.getMessageType() == MessageType.ID_ISLAND_CHOSEN){
+                    IdIslandChosen Island = (IdIslandChosen) receivedMessage;
+                    gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromEntryToIsland(gameSession.getTable().getListOfIsland().get(Island.getId()-1),studentId);
+                    movedStudents++;
+                    if (movedStudents==gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces())
+                        setActionState(ActionState.MOTHERNATURE);
+                    action();
                 }
                 if(receivedMessage.getMessageType() == MessageType.STEP_MOTHER_EARTH_CHOSEN){
                     MotherEarthStepsChosen step = (MotherEarthStepsChosen) receivedMessage;
                     int steps= step.getSteps();
                     gameSession.getTable().moveMotherEarth(steps);
+                    if(gameSession.getDifficulty().equals(Difficulty.STANDARDMODE))
+                        gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth()-1).buildTowerOnIsland(gameSession.getListOfPlayers(),CardEffect.STANDARDMODE);
+                    gameSession.getTable().joinIsland(gameSession.getTable().getListOfIsland());
+                    setActionState(ActionState.CLOUDCARD);
+                    action();
                 }
-                if(!again && turn) {
+                if(receivedMessage.getMessageType() == MessageType.CLOUD_CHOSEN){
+                    CloudChosen Cloud = (CloudChosen) receivedMessage;
+                    gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromCloudToEntry(gameSession.getTable().getCloudNumber().get(Cloud.getId()-1));
+                    turnFinished =true;
+                }
+                if(!again && turnFinished) {
+                    movedStudents=0;
                     turnController.nextPlayer(turnController.getNewPlayerOrderByName());
                     roundIndex++;
+                    setActionState(ActionState.STUDENT);
+                    showGame();
                     action();
                 }
                 break;
@@ -260,15 +281,17 @@ public class GameController {
     /** DA CONTROLLARE */
     /** inizia il turno */
     public void planning(){
-        showGame();
         if (roundIndex<maxPlayers)
+            showGame();
             allVirtualView.get(turnController.getActivePlayer()).askAssistantCardToPlay();
         if (roundIndex==maxPlayers) {
             roundIndex=0;
             turnController.changeOrder();
             gameSession.setOrder(turnController.getNewPlayerOrder());
+            turnController.setPlayingPlayer(turnController.getNewPlayerOrderByName().get(0));
             this.setGameState(GameState.ACTION);
             this.setActionState(ActionState.STUDENT);
+            showGame();
             action();
         }
     }
@@ -277,14 +300,22 @@ public class GameController {
         if (roundIndex<maxPlayers) {
             switch(actionState) {
                 case CLOUDCARD:
-                    allVirtualView.get(turnController.getActivePlayer()).askChooseCloud();
+                    allVirtualView.get(turnController.getActivePlayer()).askCloud();
                     break;
                 case STUDENT:
-                    allVirtualView.get(turnController.getActivePlayer()).askPlaceAndStudentForMove();
+                    allVirtualView.get(turnController.getActivePlayer()).askPlaceAndStudentForMove(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                     break;
                 case MOTHERNATURE:
+                    allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash());
                     break;
             }
+        }
+        if (roundIndex==maxPlayers) {
+            turnController.setPlayingPlayer(turnController.getNewPlayerOrderByName().get(0));
+            roundIndex = 0;
+            gameState=GameState.PLANNING;
+            gameSession.getTable().extractStudentOnCloud();
+            planning();
         }
     }
 

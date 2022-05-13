@@ -94,6 +94,10 @@ public class TurnController {
         for(Player player:NewPlayerOrder)
             newPlayerOrderByName.add(player.getNickname());
         newPlayerOrder=NewPlayerOrder;
+        for(Player player:newPlayerOrder)
+            System.out.println(player.getNickname());
+        for(String nickname:newPlayerOrderByName)
+            System.out.println(nickname);
     }
     public String getActivePlayer() {
         return playingPlayer;
@@ -102,4 +106,5 @@ public class TurnController {
     public ArrayList<Player> getPlayerOrder() { return playerOrder; }
     public ArrayList<String> getNewPlayerOrderByName() {return newPlayerOrderByName;}
     public ArrayList<Player> getNewPlayerOrder() { return newPlayerOrder; }
+    public void setPlayingPlayer(String nickname){ this.playingPlayer=nickname; }
 }
