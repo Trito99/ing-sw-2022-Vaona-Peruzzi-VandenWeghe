@@ -31,14 +31,13 @@ public class TurnController {
         }
     }
 
-    private Player YoungestPlayer(GameController gameController){
+    private Player YoungestPlayer(GameController gameController) {
+
         Player youngestPlayer = gameController.getGameSession().getListOfPlayers().get(0);
-        for(int i = 1; i < gameController.getGameSession().getListOfPlayers().size(); i++) {
-            if (youngestPlayer.getPlayerDate().compareTo(gameController.getGameSession().getListOfPlayers().get(i).getPlayerDate())==-1 || youngestPlayer.getPlayerDate().compareTo(gameController.getGameSession().getListOfPlayers().get(i).getPlayerDate())==0){
-                youngestPlayer=gameController.getGameSession().getListOfPlayers().get(i);
-            }else if (youngestPlayer.getPlayerDate().compareTo(gameController.getGameSession().getListOfPlayers().get(i).getPlayerDate())==1){
-                youngestPlayer=gameController.getGameSession().getListOfPlayers().get(i-1);
-            }
+
+        for (Player p : gameController.getGameSession().getListOfPlayers()){
+            if (youngestPlayer.getPlayerDate().compareTo(p.getPlayerDate()) == -1 || youngestPlayer.getPlayerDate().compareTo(p.getPlayerDate()) == 0)
+                youngestPlayer = p;
         }
         return youngestPlayer;
     }
