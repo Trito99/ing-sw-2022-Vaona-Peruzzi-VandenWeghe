@@ -27,7 +27,7 @@ public class Cli extends ObservableView implements View {
     private PrintStream output;
     private Thread inputThread;
     private List<String> commandList;
-    private static final String WRONG_INPUT = "Input error. Type again.";
+    private static final String WRONG_INPUT = "⚠️Wrong input, Type again  ⚠️";
 
     public static final  String ANSI_RESET = "\u001B[0m";
     public static final  String ANSI_GREEN = "\u001B[32m";
@@ -134,44 +134,39 @@ public class Cli extends ObservableView implements View {
        for(Student s : school.getEntry()){
            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | " );
        }
-       out.println(ANSI_GREEN + "\nGreen Table: " + ANSI_RESET);
+       out.println(ANSI_GREEN +"\n\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.GREEN)+ ANSI_GREEN + " Green Table: " + ANSI_RESET);
        for(Student s : school.getGTable()){
            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " ");
        }
-       out.print("Is prof Green in hall? "+ school.getProfInHall(SColor.GREEN));
 
-       out.println(ANSI_RED + "\nRed Table: " + ANSI_RESET);
+        out.println(ANSI_RED +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.RED)+ ANSI_RED + " Red Table: " + ANSI_RESET);
        for(Student s : school.getRTable()){
             out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " ");
        }
-        out.print("Is prof Red in hall? "+ school.getProfInHall(SColor.RED));
 
-       out.println(ANSI_YELLOW + "\nYellow Table: " + ANSI_RESET);
+        out.println(ANSI_YELLOW +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.YELLOW)+ ANSI_YELLOW + " Yellow Table: " + ANSI_RESET);
        for(Student s : school.getYTable()){
             out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " ");
        }
-        out.print("Is prof Yellow in hall? "+ school.getProfInHall(SColor.YELLOW));
 
-       out.println(ANSI_PINK+ "\nPink Table: " + ANSI_RESET);
+        out.println(ANSI_PINK +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.PINK)+ ANSI_PINK + " Pink Table: " + ANSI_RESET);
        for(Student s : school.getPTable()){
             out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " ");
        }
-        out.print("Is prof Pink in hall? "+ school.getProfInHall(SColor.PINK));
 
-       out.println(ANSI_BLUE + "\nBlue Table: " + ANSI_RESET);
+        out.println(ANSI_BLUE +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.BLUE)+ ANSI_BLUE + " Blue Table: " + ANSI_RESET);
        for(Student s : school.getBTable()){
             out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " ");
        }
-        out.print("Is prof Blue in hall? "+ school.getProfInHall(SColor.BLUE));
 
-        out.print("\nTowers: ");
+        out.print("\n\nTowers: ");
         for(Tower t : school.getTower()){
             out.print(getTowerAnsiColor(t) + t.getIdTower() + ANSI_RESET + " | ");
         }
 
-        out.print("\nTrash Card: ");
+        out.print("\n\nTrash Card: ");
         if (trash!=null)
-            out.print(trash.getAssistantName());
+            out.print(trash.getAssistantName() +" (TurnValue: "+ trash.getTurnValue() + ", StepME: " + trash.getStepMotherEarth()+")");
 
        out.println("\n----------------------------------------------");
     }
@@ -198,8 +193,9 @@ public class Cli extends ObservableView implements View {
         for(CloudCard c : table.getCloudNumber()){
             out.print("\nCloud "+ i + ") ");
             if (table.getCloudNumber().get(i-1).getStudentOnCloud().size()>0) {
+                out.print("Id Students: " );
                 for (Student s : table.getCloudNumber().get(i - 1).getStudentOnCloud()) {
-                    out.print("Id Student: " + getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+                    out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
 
                 }
             }else
@@ -210,8 +206,8 @@ public class Cli extends ObservableView implements View {
     }
 
     @Override
-    public void showDeckAssistant(DeckAssistant deckAssistant, String nickname) {
-        out.print("\n****Deck of "+ nickname + "**** ");
+    public void showDeckAssistant(DeckAssistant deckAssistant) {
+        out.print("\n****Your Cards in hand **** ");
         for(AssistantCard card : deckAssistant.getCardsInHand() ){
             out.print("\n"+card.getAssistantName() + " -> Turn Value: " +card.getTurnValue()+ " MotherEarth Steps: "+card.getStepMotherEarth()+" | ");
         }
@@ -331,7 +327,14 @@ public class Cli extends ObservableView implements View {
     }
 
     @Override
-    public void askMotherEarthSteps(Table table) {
+    public void askMotherEarthSteps(AssistantCard trash) {
+        try{
+            out.print("\nChoose how many steps you want to make MotherEarth move: (max "+trash.getStepMotherEarth()+")");
+            int steps = Integer.parseInt(readInput());
+            notifyObserver(obs -> obs.chooseMotherEarthSteps(steps));
+        } catch (ExecutionException e) {
+            out.println(WRONG_INPUT);
+        }
 
     }
 

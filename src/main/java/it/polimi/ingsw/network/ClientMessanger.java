@@ -65,6 +65,11 @@ public class ClientMessanger implements ObserverView, Observer {
         client.sendMessage(new PlaceAndStudentForMoveChosen(nickname,place,id));
     }
 
+    @Override
+    public void chooseMotherEarthSteps(int steps) {
+        client.sendMessage((new MotherEarthStepsChosen(nickname, steps)));
+    }
+
 
     /** cerca di loggare un giocatore ad una data lobby */
     public void updateLobby(String nickname, GregorianCalendar playerDate, String lobby){
@@ -111,7 +116,7 @@ public class ClientMessanger implements ObserverView, Observer {
                 break;
             case SHOW_ASSISTANT_DECK:
                 ShowAssistantDeck deck = (ShowAssistantDeck) message;
-                queue.execute(() -> view.showDeckAssistant(deck.getDeckAssistant(), deck.getNickname()));
+                queue.execute(() -> view.showDeckAssistant(deck.getDeckAssistant()));
                 break;
             case PLAY_ASSISTANT_CARD:
                 queue.execute(()->view.askAssistantCardToPlay());
@@ -121,6 +126,10 @@ public class ClientMessanger implements ObserverView, Observer {
                 break;
             case CHOOSE_PLACE_AND_STUDENT_FOR_MOVE:
                 queue.execute(()->view.askPlaceAndStudentForMove());
+                break;
+            case CHOOSE_MOTHER_EARTH_STEPS:
+                ChooseMotherEarthSteps steps = (ChooseMotherEarthSteps) message;
+                queue.execute(()->view.askMotherEarthSteps(steps.getTrash()));
                 break;
             case WIN: /** da controllare */
                 queue.execute(() -> view.showWinMessage(((WinMessage) message).getNumberOfTower()));

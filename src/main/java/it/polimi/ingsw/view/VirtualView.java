@@ -5,7 +5,6 @@ import it.polimi.ingsw.message.Error;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CharacterCard;
-import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;
@@ -83,8 +82,8 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void showDeckAssistant(DeckAssistant deckAssistant, String nickname) {
-        clientHandler.sendMessage(new ShowAssistantDeck(deckAssistant,nickname));
+    public void showDeckAssistant(DeckAssistant deckAssistant) {
+        clientHandler.sendMessage(new ShowAssistantDeck(deckAssistant));
     }
 
     @Override
@@ -127,8 +126,8 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void askMotherEarthSteps(Table table) {
-        //clientHandler.sendMessage(new ShowMotherEarthPosition(table));
+    public void askMotherEarthSteps(AssistantCard trash) {
+        clientHandler.sendMessage(new ChooseMotherEarthSteps(trash));
     }
 
     @Override
