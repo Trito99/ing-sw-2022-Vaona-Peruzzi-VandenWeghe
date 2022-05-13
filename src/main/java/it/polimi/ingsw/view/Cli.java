@@ -352,7 +352,7 @@ public class Cli extends ObservableView implements View {
     @Override
     public void askPlaceAndStudentForMove() {
         try {
-            out.print("\nWich Student do you want to move? (id)\n");
+            out.print("\nWhich Student do you want to move? \n Select them from your entry. (Id)\n");
             int id = Integer.parseInt(readInput());
             out.print("\nWhere do you want to move the Student? (Island,School)\n");
             String place = readInput();
