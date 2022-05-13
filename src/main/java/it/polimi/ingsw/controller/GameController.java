@@ -280,7 +280,20 @@ public class GameController {
                     allVirtualView.get(turnController.getActivePlayer()).askChooseCloud();
                     break;
                 case STUDENT:
-                    allVirtualView.get(turnController.getActivePlayer()).askPlaceAndStudentForMove();
+                    switch (gameSession.getGameMode()) {
+                        case TWOPLAYERS:
+                        case COOP:
+                            for (int i = 0; i < 3; i++){
+                                allVirtualView.get(turnController.getActivePlayer()).askPlaceAndStudentForMove();
+                            }
+                            break;
+                        case THREEPLAYERS:
+                            for (int i = 0; i < 4; i++){
+                                allVirtualView.get(turnController.getActivePlayer()).askPlaceAndStudentForMove();
+                            }
+                            break;
+                    }
+                    setActionState(ActionState.MOTHERNATURE);
                     break;
                 case MOTHERNATURE:
                     break;
