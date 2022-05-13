@@ -134,35 +134,36 @@ public class Cli extends ObservableView implements View {
        for(Student s : school.getEntry()){
            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | " );
        }
-       out.println(ANSI_GREEN +"\n\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.GREEN)+ ANSI_GREEN + " Green Table: " + ANSI_RESET);
+       out.print(ANSI_GREEN +"\n\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.GREEN)+ ANSI_GREEN + " Green Table: " + ANSI_RESET);
        for(Student s : school.getGTable()){
-           out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " ");
+           out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
        }
 
-        out.println(ANSI_RED +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.RED)+ ANSI_RED + " Red Table: " + ANSI_RESET);
+        out.print(ANSI_RED +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.RED)+ ANSI_RED + " Red Table: " + ANSI_RESET);
        for(Student s : school.getRTable()){
-            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " ");
+            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
        }
 
-        out.println(ANSI_YELLOW +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.YELLOW)+ ANSI_YELLOW + " Yellow Table: " + ANSI_RESET);
+        out.print(ANSI_YELLOW +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.YELLOW)+ ANSI_YELLOW + " Yellow Table: " + ANSI_RESET);
        for(Student s : school.getYTable()){
-            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " ");
+            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
        }
 
-        out.println(ANSI_PINK +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.PINK)+ ANSI_PINK + " Pink Table: " + ANSI_RESET);
+        out.print(ANSI_PINK +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.PINK)+ ANSI_PINK + " Pink Table: " + ANSI_RESET);
        for(Student s : school.getPTable()){
-            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " ");
+            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
        }
 
-        out.println(ANSI_BLUE +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.BLUE)+ ANSI_BLUE + " Blue Table: " + ANSI_RESET);
+        out.print(ANSI_BLUE +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.BLUE)+ ANSI_BLUE + " Blue Table: " + ANSI_RESET);
        for(Student s : school.getBTable()){
-            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " ");
+            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
        }
 
         out.print("\n\nTowers: ");
         for(Tower t : school.getTower()){
             out.print(getTowerAnsiColor(t) + "T" + ANSI_RESET + " | ");
         }
+        out.print("(" + school.getTower().size() + ")");
 
         out.print("\n\nTrash Card: ");
         if (trash!=null)
