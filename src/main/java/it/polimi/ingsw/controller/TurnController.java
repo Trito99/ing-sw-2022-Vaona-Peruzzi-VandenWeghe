@@ -23,7 +23,7 @@ public class TurnController {
         newPlayerOrderByName = new ArrayList<>();
         newPlayerOrder = new ArrayList<>();
         activePlayer= new HashMap<>();
-        for(int i=0; i < gameController.getAllVirtualView().size(); i++){
+        for(int i = 0; i < gameController.getAllVirtualView().size(); i++){
             String nickname = gameController.getGameSession().getListOfPlayers().get(i).getNickname();
             activePlayer.put(nickname, true);
             playerOrderByName.add(nickname);
@@ -91,12 +91,12 @@ public class TurnController {
         ArrayList<Player>  NewPlayerOrder = (ArrayList<Player>) playerOrder.clone();
         newPlayerOrderByName.clear();
         Collections.sort(NewPlayerOrder, (o1, o2) -> Integer.valueOf(o1.getTrash().getTurnValue()).compareTo(o2.getTrash().getTurnValue()));
-        for(Player player:NewPlayerOrder)
+        for(Player player : NewPlayerOrder)
             newPlayerOrderByName.add(player.getNickname());
-        newPlayerOrder=NewPlayerOrder;
-        for(Player player:newPlayerOrder)
+        newPlayerOrder = NewPlayerOrder;
+        for(Player player : newPlayerOrder)
             System.out.println(player.getNickname());
-        for(String nickname:newPlayerOrderByName)
+        for(String nickname : newPlayerOrderByName)
             System.out.println(nickname);
     }
     public String getActivePlayer() {

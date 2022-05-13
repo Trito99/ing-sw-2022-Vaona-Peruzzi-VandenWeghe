@@ -9,7 +9,7 @@ public class LoginRequest extends ClientMessage {
     public LoginRequest(String nickname, String gameId, GregorianCalendar playerDate) {
         super(nickname, MessageType.LOGIN);
         this.gameId = gameId;
-        this.playerDate= playerDate;
+        this.playerDate = playerDate;
     }
     public String getGameId() {
         return gameId;

@@ -24,7 +24,7 @@ public class StartClient {
             else{
                 if(mode.equals("CLI")){
                     Cli cli = new Cli();
-                    ClientMessanger clientMessenger= new ClientMessanger(cli);
+                    ClientMessanger clientMessenger = new ClientMessanger(cli);
                     cli.addObserver(clientMessenger);
                     cli.start();
                 }

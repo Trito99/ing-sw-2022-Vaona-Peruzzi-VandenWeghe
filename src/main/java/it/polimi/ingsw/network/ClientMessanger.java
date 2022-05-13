@@ -122,21 +122,21 @@ public class ClientMessanger implements ObserverView, Observer {
                 queue.execute(() -> view.showDeckAssistant(deck.getDeckAssistant()));
                 break;
             case PLAY_ASSISTANT_CARD:
-                queue.execute(()->view.askAssistantCardToPlay());
+                queue.execute(() -> view.askAssistantCardToPlay());
                 break;
             case CHOOSE_CLOUD_CARD:
-                queue.execute(()->view.askCloud());
+                queue.execute(() -> view.askCloud());
                 break;
             case CHOOSE_PLACE_AND_STUDENT_FOR_MOVE:
                 ChoosePlaceAndStudentForMove entry = (ChoosePlaceAndStudentForMove) message;
-                queue.execute(()->view.askPlaceAndStudentForMove(entry.getEntry()));
+                queue.execute(() -> view.askPlaceAndStudentForMove(entry.getEntry()));
                 break;
             case CHOOSE_ID_ISLAND:
-                queue.execute(()->view.askIdIsland());
+                queue.execute(() -> view.askIdIsland());
                 break;
             case CHOOSE_MOTHER_EARTH_STEPS:
                 ChooseMotherEarthSteps steps = (ChooseMotherEarthSteps) message;
-                queue.execute(()->view.askMotherEarthSteps(steps.getTrash()));
+                queue.execute(() -> view.askMotherEarthSteps(steps.getTrash()));
                 break;
             case WIN: /** da controllare */
                 queue.execute(() -> view.showWinMessage(((WinMessage) message).getNumberOfTower()));
@@ -144,13 +144,13 @@ public class ClientMessanger implements ObserverView, Observer {
                 queue.execute(() -> view.showWinMessage(((WinMessage) message).getLastStudents()));
                 break;
             case ERROR:
-                queue.execute(()-> view.showErrorMessage(((Error) message).getMessage()));
+                queue.execute(() -> view.showErrorMessage(((Error) message).getMessage()));
                 break;
             case STRING_MESSAGE:
-                queue.execute(()-> view.showMessage(((StringMessage) message).getMessage()));
+                queue.execute(() -> view.showMessage(((StringMessage) message).getMessage()));
                 break;
             case LOSE:
-                queue.execute(()-> view.showLoseMessage());
+                queue.execute(() -> view.showLoseMessage());
                 client.disconnect();
             case SHOW_PLAYER:
                 ShowPlayerInfo player = (ShowPlayerInfo) message;
@@ -158,7 +158,7 @@ public class ClientMessanger implements ObserverView, Observer {
                         player.getPersonalSchool(), player.getDeckOfPlayer(), player.getTrash(), player.getCoinScore(), nickname));
                 break;
             case SHOW_PLAYER_INFLUENCE:
-                queue.execute(()->view.showPlayerInfluence(((ShowPlayerInfluence) message).getInfluence()));
+                queue.execute(() -> view.showPlayerInfluence(((ShowPlayerInfluence) message).getInfluence()));
                 break;
 
         }
