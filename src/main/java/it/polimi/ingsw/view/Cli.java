@@ -180,11 +180,11 @@ public class Cli extends ObservableView implements View {
         for(IslandCard islandCard : table.getListOfIsland()) {
             if (islandCard.towerIsOnIsland()) {
                 out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       |    " + getTowerAnsiColor(islandCard.getTowerOnIsland()) + islandCard.getTowerOnIsland().getIdTower() +ANSI_RESET+"    | ");
-                for (Student student: islandCard.getStudentOnIsland())
+                for (Student student : islandCard.getStudentOnIsland())
                     out.print(getStudentAnsiColor(student) + student.getIdStudent() + " " + ANSI_RESET);
             } else {
                 out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       | " + " No Tower | ");
-                for (Student student: islandCard.getStudentOnIsland())
+                for (Student student : islandCard.getStudentOnIsland())
                     out.print(getStudentAnsiColor(student) + student.getIdStudent() + " " + ANSI_RESET);
             }
         }
@@ -244,7 +244,7 @@ public class Cli extends ObservableView implements View {
                 out.println("⚠️Wrong input. ⚠️");
                 succeded = true;
             }
-        }while(succeded);
+        } while(succeded);
     }
 
     @Override
@@ -274,7 +274,7 @@ public class Cli extends ObservableView implements View {
     @Override
     public void askPlayersNumberAndDifficulty() {
         int playersNumber;
-        boolean ye;
+        boolean success;
         Difficulty difficulty = Difficulty.STANDARDMODE;
         String g;
         do {
@@ -283,22 +283,22 @@ public class Cli extends ObservableView implements View {
                 playersNumber = Integer.parseInt(readInput());
             } catch (Exception e) {
                 out.println(WRONG_INPUT);
-                playersNumber=1;
+                playersNumber = 1;
             }
 
         } while(playersNumber > 4 || playersNumber <= 1);
         do {
             out.print("Enter the game difficulty that you want to play (Standard, Expert): ");
             try {
-                g=readInput().toUpperCase(Locale.ROOT)+"MODE";
+                g = readInput().toUpperCase(Locale.ROOT)+"MODE";
                 difficulty = Difficulty.valueOf(g);
-                ye=false;
+                success = false;
             } catch (Exception e) {
                 out.println(WRONG_INPUT);
-                ye=true;
+                success = true;
             }
 
-        } while (ye);
+        } while (success);
         int finalPlayersNumber = playersNumber;
         Difficulty finalDifficulty = difficulty;
         notifyObserver(obs -> obs.choosePlayersNumberAndDifficulty(finalPlayersNumber,finalDifficulty));

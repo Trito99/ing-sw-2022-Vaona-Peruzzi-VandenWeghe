@@ -14,8 +14,8 @@ public class LobbyServer {
 
     /** return la Lobby associata ad un determinato gameId */
     public Lobby getLobby(String idLobby){
-        Lobby lob = lobbyMap.get(idLobby);
-        if(lob==null) lobbyMap.put(idLobby, new Lobby(idLobby));
+        Lobby lobby = lobbyMap.get(idLobby);
+        if(lobby == null) lobbyMap.put(idLobby, new Lobby(idLobby));
         return lobbyMap.get(idLobby);
     }
 

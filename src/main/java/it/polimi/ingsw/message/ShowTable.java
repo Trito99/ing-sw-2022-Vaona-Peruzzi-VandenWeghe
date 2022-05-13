@@ -6,7 +6,7 @@ public class ShowTable extends ServerMessage{
     private Table table;
     public ShowTable(Table table) {
         super(MessageType.SHOW_TABLE);
-        this.table=table;
+        this.table = table;
     }
 
     public Table getTable() {

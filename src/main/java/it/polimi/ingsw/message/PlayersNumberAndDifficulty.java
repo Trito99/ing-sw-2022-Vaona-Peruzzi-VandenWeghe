@@ -8,8 +8,8 @@ public class PlayersNumberAndDifficulty extends ClientMessage {
 
     public PlayersNumberAndDifficulty(String nickname, int playersNumber, Difficulty difficulty) {
         super(nickname, MessageType.PLAYERS_NUMBER_AND_DIFFICULTY_CHOSEN);
-        this.playersNumber=playersNumber;
-        this.difficulty=difficulty;
+        this.playersNumber = playersNumber;
+        this.difficulty = difficulty;
     }
 
     public int getPlayersNumber() {

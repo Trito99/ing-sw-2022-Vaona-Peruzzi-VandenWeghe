@@ -6,7 +6,7 @@ public class IdIslandChosen extends ClientMessage{
 
     public IdIslandChosen(String nickname, int id) {
         super(nickname, MessageType.ID_ISLAND_CHOSEN);
-        this.id=id;
+        this.id = id;
     }
 
     public int getId() {

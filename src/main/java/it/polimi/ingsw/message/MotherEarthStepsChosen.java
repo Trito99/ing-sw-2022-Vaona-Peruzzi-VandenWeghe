@@ -6,7 +6,7 @@ public class MotherEarthStepsChosen extends ClientMessage{
 
     public MotherEarthStepsChosen(String nickname, int steps) {
         super(nickname, MessageType.STEP_MOTHER_EARTH_CHOSEN);
-        this.steps=steps;
+        this.steps = steps;
     }
 
     public int getSteps() {

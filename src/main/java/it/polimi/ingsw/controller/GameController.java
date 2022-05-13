@@ -31,14 +31,14 @@ public class GameController {
     boolean again=false;
     private ActionState actionState;
     int studentId;
-    int movedStudents=0;
+    int movedStudents = 0;
 
 
     public GameController(){
         this.allVirtualView = new HashMap<>();
         gameSession = new Game();
         gameState = GameState.INIT;
-        roundIndex =0;
+        roundIndex = 0;
     }
 
     public void generateTable(){
@@ -106,7 +106,7 @@ public class GameController {
             if(allVirtualView.size() == maxPlayers){
                 broadcastMessage("Everyone joined the game!");
                 turnController = new TurnController(this);
-                gameState=GameState.PLANNING;
+                gameState = GameState.PLANNING;
                 gameSession.getTable().extractStudentOnCloud();
                 planning();
             }
@@ -157,11 +157,11 @@ public class GameController {
             case PLANNING:
                 if(receivedMessage.getMessageType() == MessageType.ASSISTANTCARD_PLAYED){
                     AssistantCardPlayed CardSelected = (AssistantCardPlayed) receivedMessage;
-                    int indexOfCurrentPlayer=gameSession.getListOfPlayers().indexOf(gameSession.getPlayer(receivedMessage.getNickname()));
-                    boolean present=false,exists=false;
+                    int indexOfCurrentPlayer = gameSession.getListOfPlayers().indexOf(gameSession.getPlayer(receivedMessage.getNickname()));
+                    boolean present = false, exists = false;
                     for(AssistantCard assistantCard : gameSession.getPlayer(turnController.getActivePlayer()).getDeckOfPlayer().getCardsInHand()){
                         if(assistantCard.getAssistantName().equals(CardSelected.getCardNickname()))
-                            exists=true;
+                            exists = true;
                     }
                     if(gameSession.getPlayer(turnController.getActivePlayer()).getDeckOfPlayer().getCardsInHand().size()>1){
                         for (int i = 1; i < (roundIndex + 1); i++) {
@@ -199,13 +199,13 @@ public class GameController {
                 boolean turnFinished = false;
                 if(receivedMessage.getMessageType() == MessageType.PLACE_AND_STUDENT_FOR_MOVE_CHOSEN){
                     PlaceAndStudentForMoveChosen Choice = (PlaceAndStudentForMoveChosen) receivedMessage;
-                    studentId=Choice.getId();
+                    studentId = Choice.getId();
                     if(Choice.getPlace().equals("SCHOOL")){
                         gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromEntryToHall(gameSession.getPlayer(turnController.getActivePlayer()), studentId, gameSession.getTable(), gameSession.getDifficulty());
                         if(gameSession.getDifficulty().equals(Difficulty.STANDARDMODE))
                             gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(),gameSession.getPlayer(turnController.getActivePlayer()),CardEffect.STANDARDMODE);
                         movedStudents++;
-                        if (movedStudents==gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces())
+                        if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces())
                             setActionState(ActionState.MOTHERNATURE);
                         action();
                     }else if (Choice.getPlace().equals("ISLAND")){
@@ -216,13 +216,13 @@ public class GameController {
                     IdIslandChosen Island = (IdIslandChosen) receivedMessage;
                     gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromEntryToIsland(gameSession.getTable().getListOfIsland().get(Island.getId()-1),studentId);
                     movedStudents++;
-                    if (movedStudents==gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces())
+                    if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces())
                         setActionState(ActionState.MOTHERNATURE);
                     action();
                 }
                 if(receivedMessage.getMessageType() == MessageType.STEP_MOTHER_EARTH_CHOSEN){
                     MotherEarthStepsChosen step = (MotherEarthStepsChosen) receivedMessage;
-                    int steps= step.getSteps();
+                    int steps = step.getSteps();
                     gameSession.getTable().moveMotherEarth(steps);
                     if(gameSession.getDifficulty().equals(Difficulty.STANDARDMODE))
                         gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth()-1).buildTowerOnIsland(gameSession.getListOfPlayers(),CardEffect.STANDARDMODE);
@@ -233,10 +233,10 @@ public class GameController {
                 if(receivedMessage.getMessageType() == MessageType.CLOUD_CHOSEN){
                     CloudChosen Cloud = (CloudChosen) receivedMessage;
                     gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromCloudToEntry(gameSession.getTable().getCloudNumber().get(Cloud.getId()-1));
-                    turnFinished =true;
+                    turnFinished = true;
                 }
                 if(!again && turnFinished) {
-                    movedStudents=0;
+                    movedStudents = 0;
                     turnController.nextPlayer(turnController.getNewPlayerOrderByName());
                     roundIndex++;
                     setActionState(ActionState.STUDENT);
@@ -281,11 +281,11 @@ public class GameController {
     /** DA CONTROLLARE */
     /** inizia il turno */
     public void planning(){
-        if (roundIndex<maxPlayers)
+        if (roundIndex < maxPlayers)
             showGame();
             allVirtualView.get(turnController.getActivePlayer()).askAssistantCardToPlay();
-        if (roundIndex==maxPlayers) {
-            roundIndex=0;
+        if (roundIndex == maxPlayers) {
+            roundIndex = 0;
             turnController.changeOrder();
             gameSession.setOrder(turnController.getNewPlayerOrder());
             turnController.setPlayingPlayer(turnController.getNewPlayerOrderByName().get(0));
@@ -297,7 +297,7 @@ public class GameController {
     }
 
     public void action(){
-        if (roundIndex<maxPlayers) {
+        if (roundIndex < maxPlayers) {
             switch(actionState) {
                 case CLOUDCARD:
                     allVirtualView.get(turnController.getActivePlayer()).askCloud();
@@ -310,7 +310,7 @@ public class GameController {
                     break;
             }
         }
-        if (roundIndex==maxPlayers) {
+        if (roundIndex == maxPlayers) {
             turnController.setPlayingPlayer(turnController.getNewPlayerOrderByName().get(0));
             roundIndex = 0;
             gameState=GameState.PLANNING;
@@ -327,7 +327,7 @@ public class GameController {
                     allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname(),p.getTrash());
             }
             for(Player p : gameSession.getListOfPlayers()){
-                if (p.getNickname()==s) {
+                if (p.getNickname() == s) {
                     allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname(), p.getTrash());
                     allVirtualView.get(s).showDeckAssistant(p.getDeckOfPlayer());
                 }

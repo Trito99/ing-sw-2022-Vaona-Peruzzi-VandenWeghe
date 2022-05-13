@@ -28,7 +28,7 @@ public class Lobby {
 
         if(!(isGameStarted())){
 
-            int i=1;
+            int i = 1;
             String n = nickname;
             clientHandlerMap.put(clientHandler, n);
             /** ... */
@@ -95,7 +95,7 @@ public class Lobby {
     }
 
     /** riconnetti giocatore alla Lobby */
-    public void reconnect(String nickname, ClientHandler clientHandler,VirtualView virtualView){
+    public void reconnect(String nickname, ClientHandler clientHandler, VirtualView virtualView){
         clientHandlerMap.put(clientHandler, nickname);
         gameController.reconnect(nickname, virtualView);
     }

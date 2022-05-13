@@ -6,8 +6,8 @@ public class PlaceAndStudentForMoveChosen extends ClientMessage {
 
     public PlaceAndStudentForMoveChosen(String nickname, String place, int id) {
         super(nickname, MessageType.PLACE_AND_STUDENT_FOR_MOVE_CHOSEN);
-        this.id=id;
-        this.place=place;
+        this.id = id;
+        this.place = place;
     }
 
     public int getId() {

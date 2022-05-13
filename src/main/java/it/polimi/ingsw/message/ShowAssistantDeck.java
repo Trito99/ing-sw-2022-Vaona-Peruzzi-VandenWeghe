@@ -11,7 +11,7 @@ public class ShowAssistantDeck extends ServerMessage{
     public ShowAssistantDeck(DeckAssistant deckAssistant) {
         super(MessageType.SHOW_ASSISTANT_DECK);
         this.deckAssistant = deckAssistant;
-        this.nickname=nickname;
+        this.nickname = nickname;
         this.trash = trash;
     }
 
