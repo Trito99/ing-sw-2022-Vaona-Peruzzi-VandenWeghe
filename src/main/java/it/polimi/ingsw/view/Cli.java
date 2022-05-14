@@ -163,7 +163,7 @@ public class Cli extends ObservableView implements View {
         for(Tower t : school.getTower()){
             out.print(getTowerAnsiColor(t) + "T" + ANSI_RESET + " | ");
         }
-        out.print("(" + school.getTower().size() + ")");
+        out.print("(" + school.getTower().size() + " towers remained)");
 
         out.print("\n\nTrash Card: ");
         if (trash!=null)
@@ -177,14 +177,14 @@ public class Cli extends ObservableView implements View {
         int i=1;
 
         out.print("\n**** TABLE ****");
-        out.print("\nIsland Id  | MotherEarth |   Tower   | Students");
+        out.print("\nIsland Id  | MotherEarth |   Tower (n)   | Students");
         for(IslandCard islandCard : table.getListOfIsland()) {
             if (islandCard.towerIsOnIsland()) {
-                out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       |    " + getTowerAnsiColor(islandCard.getTowerOnIsland()) + "T" +ANSI_RESET+"    | ");
+                out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       |    " + getTowerAnsiColor(islandCard.getTowerOnIsland()) + "T" +ANSI_RESET+ "(" + islandCard.getMergedIsland() + ")     | ");
                 for (Student student: islandCard.getStudentOnIsland())
                     out.print(getStudentAnsiColor(student) + student.getIdStudent() + " " + ANSI_RESET);
             } else {
-                out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       | " + " No Tower | ");
+                out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       | " + " No Tower" +"(" + islandCard.getMergedIsland() + ")" + " | ");
                 for (Student student: islandCard.getStudentOnIsland())
                     out.print(getStudentAnsiColor(student) + student.getIdStudent() + " " + ANSI_RESET);
             }
