@@ -76,16 +76,33 @@ public class GameController {
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK2));
                 this.gameSession.getListOfPlayers().get(0).generateSchool(gameSession.getTable(),gameSession.getGameMode());
                 this.gameSession.getListOfPlayers().get(0).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK1));
-                virtualView.showMessage("Waiting for other players...");
+                allVirtualView.put(nickname, virtualView);
+                virtualView.showLogin(nickname, gameId, playerDate,true);
+                if(maxPlayers==3)
+                    virtualView.showMessage("Three Players Mode. You have BLACK towers! \nWaiting for other players...");
+                else if(maxPlayers==4)
+                    virtualView.showMessage("Coop Mode. You have WHITE towers! \nWaiting for other players...");
+                else if(maxPlayers==2)
+                    virtualView.showMessage("Two Players Mode. You have BLACK towers!");
+
             }
             else if(allVirtualView.size() == 2){
                 allVirtualView.put(nickname, virtualView);
-                this.gameSession.addPlayer(new Player(TColor.GREY, PlayerNumber.PLAYER3));
+                if(maxPlayers==3)
+                    this.gameSession.addPlayer(new Player(TColor.GREY, PlayerNumber.PLAYER3));
+                else
+                    this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER3));
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK3));
-                virtualView.showMessage("Waiting for other players...");
+                allVirtualView.put(nickname, virtualView);
+                virtualView.showLogin(nickname, gameId, playerDate,true);
+                if(maxPlayers==3)
+                    virtualView.showMessage("Three Players Mode. You have GREY towers! \nWaiting for other players...");
+                else if(maxPlayers==4)
+                    virtualView.showMessage("Coop Mode. You have BLACK towers! \nWaiting for other players...");
+
             }
             else if(allVirtualView.size() == 3){
                 allVirtualView.put(nickname, virtualView);
@@ -94,11 +111,12 @@ public class GameController {
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
                 this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK4));
-                virtualView.showMessage("Waiting for other players...");
-            }
+                allVirtualView.put(nickname, virtualView);
+                virtualView.showLogin(nickname, gameId, playerDate,true);
+                if(maxPlayers==4)
+                    virtualView.showMessage("Coop Mode. You have BLACK towers! \nWaiting for other players...");
 
-            allVirtualView.put(nickname, virtualView);
-            virtualView.showLogin(nickname, gameId, playerDate,true);
+            }
 
             if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
                 initializeExpertModeGame();
@@ -132,15 +150,15 @@ public class GameController {
                     switch(PNaDSelected.getPlayersNumber()){
                         case 4:
                             gameSession.setGameMode(GameMode.COOP);
-                            virtualView.showMessage("Coop Mode. \nWaiting for other players...");
+                            virtualView.showMessage("Coop Mode. You have WHITE towers! \nWaiting for other players...");
                             break;
                         case 3:
                             gameSession.setGameMode(GameMode.THREEPLAYERS);
-                            virtualView.showMessage("Three Players Mode. \nWaiting for other players...");
+                            virtualView.showMessage("Three Players Mode. You have WHITE towers! \nWaiting for other players...");
                             break;
                         case 2:
                             gameSession.setGameMode(GameMode.TWOPLAYERS);
-                            virtualView.showMessage("Two Players Mode. \nWaiting for other players...");
+                            virtualView.showMessage("Two Players Mode. You have WHITE towers! \nWaiting for other players...");
                             break;
                     }
                     switch (PNaDSelected.getDifficulty()){
