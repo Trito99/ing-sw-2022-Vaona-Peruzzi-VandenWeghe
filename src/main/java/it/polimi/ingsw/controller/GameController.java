@@ -284,6 +284,10 @@ public class GameController {
         this.actionState = actionState;
     }
 
+    public ActionState getActionState() {
+        return actionState;
+    }
+
     public GameState getGameState() {
         return gameState;
     }

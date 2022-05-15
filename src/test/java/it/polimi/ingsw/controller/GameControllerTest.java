@@ -5,9 +5,7 @@ import it.polimi.ingsw.message.PlayersNumberAndDifficulty;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
-import it.polimi.ingsw.model.game.Difficulty;
-import it.polimi.ingsw.model.game.Game;
-import it.polimi.ingsw.model.game.GameState;
+import it.polimi.ingsw.model.game.*;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.TColor;
@@ -17,6 +15,7 @@ import it.polimi.ingsw.network.LobbyServer;
 import it.polimi.ingsw.view.VirtualView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -46,7 +45,6 @@ public class GameControllerTest {
         LobbyServer lobbyServer = new LobbyServer();
         allVirtualView = new HashMap<>();
         gameSession = new Game();
-        //gameState = GameState.INIT;
         roundIndex = 0;
 
         clientHandler = new ClientHandlerInterface(){
@@ -82,6 +80,18 @@ public class GameControllerTest {
         gc.setGameSession(gameSession);
         assertNotNull(gc.getGameSession());
         assertEquals(gameSession, gc.getGameSession());
+
+        gc.setActionState(ActionState.MOTHERNATURE);
+        assertNotNull(gc.getActionState());
+        assertEquals(ActionState.MOTHERNATURE, gc.getActionState());
+
+        gc.setActionState(ActionState.STUDENT);
+        assertNotNull(gc.getActionState());
+        assertEquals(ActionState.STUDENT, gc.getActionState());
+
+        gc.setActionState(ActionState.CLOUDCARD);
+        assertNotNull(gc.getActionState());
+        assertEquals(ActionState.CLOUDCARD, gc.getActionState());
     }
 
     @Test
@@ -187,6 +197,9 @@ public class GameControllerTest {
             if(i == 0){
                 gc.getMessage(new PlayersNumberAndDifficulty("0", 4, Difficulty.STANDARDMODE));
             }
+
+            if(i == 1) assertEquals(2, gc.getAllVirtualView().size());
+            if(i == 2) assertEquals(3, gc.getAllVirtualView().size());
         }
 
         for(int j = 0; j < 10; j++){
@@ -194,6 +207,52 @@ public class GameControllerTest {
         }
 
         assertEquals(4, gc.getAllVirtualView().size());
+    }
+
+    @Test
+    void threePlayers(){
+        assertFalse(gc.isGameStarted());
+        assertEquals(GameState.INIT, gc.getGameState());
+
+        for(int i = 0; i < 3; i++){
+            gc.newPlayer("" + i , "gameId", new GregorianCalendar(), allViews.get(i));
+            assertEquals(i + 1, gc.getAllVirtualView().size());
+
+
+            if(i == 0){
+                gc.getMessage(new PlayersNumberAndDifficulty("0", 3, Difficulty.STANDARDMODE));
+            }
+        }
+
+        assertEquals(3, gc.getAllVirtualView().size());
+        assertTrue(gc.isGameStarted());
+        assertEquals(GameState.PLANNING, gc.getGameState());
+
+        gc.getMessage(new PlayersNumberAndDifficulty("", 3, Difficulty.STANDARDMODE));
+        assertEquals(Difficulty.STANDARDMODE, gc.getGameSession().getDifficulty());
+    }
+
+    @Test
+    void twoPlayers(){
+        assertFalse(gc.isGameStarted());
+        assertEquals(GameState.INIT, gc.getGameState());
+
+        for(int i = 0; i < 2; i++){
+            gc.newPlayer("" + i , "gameId", new GregorianCalendar(), allViews.get(i));
+            assertEquals(i + 1, gc.getAllVirtualView().size());
+
+
+            if(i == 0){
+                gc.getMessage(new PlayersNumberAndDifficulty("0", 2, Difficulty.STANDARDMODE));
+            }
+        }
+
+        assertEquals(2, gc.getAllVirtualView().size());
+        assertTrue(gc.isGameStarted());
+        assertEquals(GameState.PLANNING, gc.getGameState());
+
+        gc.getMessage(new PlayersNumberAndDifficulty("", 2, Difficulty.STANDARDMODE));
+        assertEquals(Difficulty.STANDARDMODE, gc.getGameSession().getDifficulty());
     }
 
     @Test
@@ -205,8 +264,9 @@ public class GameControllerTest {
             gc.newPlayer("" + i , "gameId", new GregorianCalendar(), allViews.get(i));
             assertEquals(i + 1, gc.getAllVirtualView().size());
 
+
             if(i == 0){
-                gc.getMessage(new PlayersNumberAndDifficulty("0", 4, Difficulty.STANDARDMODE));
+                gc.getMessage(new PlayersNumberAndDifficulty("0", 4, Difficulty.EXPERTMODE));
             }
         }
 
@@ -214,8 +274,8 @@ public class GameControllerTest {
         assertTrue(gc.isGameStarted());
         assertEquals(GameState.PLANNING, gc.getGameState());
 
-        gc.getMessage(new PlayersNumberAndDifficulty("", 4, Difficulty.STANDARDMODE));
-        assertEquals(Difficulty.STANDARDMODE, gc.getGameSession().getDifficulty());
+        gc.getMessage(new PlayersNumberAndDifficulty("", 4, Difficulty.EXPERTMODE));
+        assertEquals(Difficulty.EXPERTMODE, gc.getGameSession().getDifficulty());
 
     }
 
