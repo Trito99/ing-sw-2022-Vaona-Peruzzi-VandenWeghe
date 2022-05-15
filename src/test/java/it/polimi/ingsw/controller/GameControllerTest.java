@@ -196,4 +196,29 @@ public class GameControllerTest {
         assertEquals(4, gc.getAllVirtualView().size());
     }
 
+    @Test
+    void gameController(){
+        assertFalse(gc.isGameStarted());
+        assertEquals(GameState.INIT, gc.getGameState());
+
+        for(int i = 0; i < 4; i++){
+            gc.newPlayer("" + i , "gameId", new GregorianCalendar(), allViews.get(i));
+            assertEquals(i + 1, gc.getAllVirtualView().size());
+
+            if(i == 0){
+                gc.getMessage(new PlayersNumberAndDifficulty("0", 4, Difficulty.STANDARDMODE));
+            }
+        }
+
+        assertEquals(4, gc.getAllVirtualView().size());
+        assertTrue(gc.isGameStarted());
+        assertEquals(GameState.PLANNING, gc.getGameState());
+
+        gc.getMessage(new PlayersNumberAndDifficulty("", 4, Difficulty.STANDARDMODE));
+        assertEquals(Difficulty.STANDARDMODE, gc.getGameSession().getDifficulty());
+
+    }
+
+
+
 }

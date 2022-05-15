@@ -1,20 +1,16 @@
 package it.polimi.ingsw.controller;
 
-
 import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.DeckCharacter;
-import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.*;
-import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.view.VirtualView;
-
 
 import java.security.InvalidParameterException;
 import java.util.GregorianCalendar;
@@ -78,17 +74,17 @@ public class GameController {
                 this.gameSession.getListOfPlayers().get(0).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK1));
                 allVirtualView.put(nickname, virtualView);
                 virtualView.showLogin(nickname, gameId, playerDate,true);
-                if(maxPlayers==3)
+                if(maxPlayers == 3)
                     virtualView.showMessage("Three Players Mode. You have BLACK towers! \nWaiting for other players...");
-                else if(maxPlayers==4)
+                else if(maxPlayers == 4)
                     virtualView.showMessage("Coop Mode. You have WHITE towers! \nWaiting for other players...");
-                else if(maxPlayers==2)
+                else if(maxPlayers == 2)
                     virtualView.showMessage("Two Players Mode. You have BLACK towers!");
 
             }
             else if(allVirtualView.size() == 2){
                 allVirtualView.put(nickname, virtualView);
-                if(maxPlayers==3)
+                if(maxPlayers == 3)
                     this.gameSession.addPlayer(new Player(TColor.GREY, PlayerNumber.PLAYER3));
                 else
                     this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER3));
@@ -124,7 +120,7 @@ public class GameController {
             if(allVirtualView.size() == maxPlayers){
                 broadcastMessage("Everyone joined the game!");
                 turnController = new TurnController(this);
-                gameState=GameState.PLANNING;
+                gameState = GameState.PLANNING;
                 gameSession.getTable().extractStudentOnCloud();
                 planning();
             }
@@ -176,10 +172,10 @@ public class GameController {
                 if(receivedMessage.getMessageType() == MessageType.ASSISTANTCARD_PLAYED){
                     AssistantCardPlayed CardSelected = (AssistantCardPlayed) receivedMessage;
                     int indexOfCurrentPlayer=gameSession.getListOfPlayers().indexOf(gameSession.getPlayer(receivedMessage.getNickname()));
-                    boolean present=false,exists=false;
+                    boolean present = false, exists = false;
                     for(AssistantCard assistantCard : gameSession.getPlayer(turnController.getActivePlayer()).getDeckOfPlayer().getCardsInHand()){
                         if(assistantCard.getAssistantName().equals(CardSelected.getCardNickname()))
-                            exists=true;
+                            exists = true;
                     }
                     if(gameSession.getPlayer(turnController.getActivePlayer()).getDeckOfPlayer().getCardsInHand().size()>1){
                         for (int i = 1; i < (roundIndex + 1); i++) {
@@ -217,13 +213,13 @@ public class GameController {
                 boolean turnFinished = false;
                 if(receivedMessage.getMessageType() == MessageType.PLACE_AND_STUDENT_FOR_MOVE_CHOSEN){
                     PlaceAndStudentForMoveChosen Choice = (PlaceAndStudentForMoveChosen) receivedMessage;
-                    studentId=Choice.getId();
+                    studentId = Choice.getId();
                     if(Choice.getPlace().equals("SCHOOL")){
                         gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromEntryToHall(gameSession.getPlayer(turnController.getActivePlayer()), studentId, gameSession.getTable(), gameSession.getDifficulty());
                         if(gameSession.getDifficulty().equals(Difficulty.STANDARDMODE))
                             gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(),gameSession.getPlayer(turnController.getActivePlayer()),CardEffect.STANDARDMODE);
                         movedStudents++;
-                        if (movedStudents==gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces())
+                        if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces())
                             setActionState(ActionState.MOTHERNATURE);
                         action();
                     }else if (Choice.getPlace().equals("ISLAND")){
@@ -234,7 +230,7 @@ public class GameController {
                     IdIslandChosen Island = (IdIslandChosen) receivedMessage;
                     gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromEntryToIsland(gameSession.getTable().getListOfIsland().get(Island.getId()-1),studentId);
                     movedStudents++;
-                    if (movedStudents==gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces())
+                    if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces())
                         setActionState(ActionState.MOTHERNATURE);
                     action();
                 }
@@ -251,10 +247,10 @@ public class GameController {
                 if(receivedMessage.getMessageType() == MessageType.CLOUD_CHOSEN){
                     CloudChosen Cloud = (CloudChosen) receivedMessage;
                     gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromCloudToEntry(gameSession.getTable().getCloudNumber().get(Cloud.getId()-1));
-                    turnFinished =true;
+                    turnFinished = true;
                 }
                 if(!again && turnFinished) {
-                    movedStudents=0;
+                    movedStudents = 0;
                     turnController.nextPlayer(turnController.getNewPlayerOrderByName());
                     roundIndex++;
                     setActionState(ActionState.STUDENT);
@@ -299,12 +295,12 @@ public class GameController {
     /** DA CONTROLLARE */
     /** inizia il turno */
     public void planning(){
-        if (roundIndex<maxPlayers) {
+        if (roundIndex < maxPlayers) {
             showGame();
             allVirtualView.get(turnController.getActivePlayer()).askAssistantCardToPlay();
         }
-        if (roundIndex==maxPlayers) {
-            roundIndex=0;
+        if (roundIndex == maxPlayers) {
+            roundIndex = 0;
             turnController.changeOrder();
             gameSession.setOrder(turnController.getNewPlayerOrder());
             turnController.setPlayingPlayer(turnController.getNewPlayerOrderByName().get(0));
@@ -316,7 +312,7 @@ public class GameController {
     }
 
     public void action(){
-        if (roundIndex<maxPlayers) {
+        if (roundIndex < maxPlayers) {
             switch(actionState) {
                 case CLOUDCARD:
                     allVirtualView.get(turnController.getActivePlayer()).askCloud();
@@ -331,24 +327,24 @@ public class GameController {
                     break;
             }
         }
-        if (roundIndex==maxPlayers) {
+        if (roundIndex == maxPlayers) {
             turnController.setPlayingPlayer(turnController.getNewPlayerOrderByName().get(0));
             roundIndex = 0;
-            gameState=GameState.PLANNING;
+            gameState = GameState.PLANNING;
             gameSession.getTable().extractStudentOnCloud();
             planning();
         }
     }
 
     private void showGame(){
-        for(String s: allVirtualView.keySet()){
+        for(String s : allVirtualView.keySet()){
             allVirtualView.get(s).showTable(gameSession.getTable());
             for(Player p : gameSession.getListOfPlayers()) {
                 if (p.getNickname() != s)
                     allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname(),p.getTrash());
             }
             for(Player p : gameSession.getListOfPlayers()){
-                if (p.getNickname()==s) {
+                if (p.getNickname() == s) {
                     allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname(), p.getTrash());
                     allVirtualView.get(s).showDeckAssistant(p.getDeckOfPlayer());
                 }
@@ -416,7 +412,7 @@ public class GameController {
 
     /** se il gioco non è cominciato ----> return false */
     public boolean isGameStarted(){
-        return gameState!=GameState.INIT;
+        return gameState != GameState.INIT;
     }
 
     /** giocatore attiivo in quel momento */
