@@ -1,15 +1,19 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.message.GeneralMessage;
+import it.polimi.ingsw.message.PlayersNumberAndDifficulty;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
+import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameState;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.table.Table;
-import it.polimi.ingsw.network.ClientHandler;
+import it.polimi.ingsw.network.ClientHandlerInterface;
+import it.polimi.ingsw.network.LobbyServer;
 import it.polimi.ingsw.view.VirtualView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,25 +22,59 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameControllerTest {
+    private GameController gc;
+    private ArrayList <VirtualView> allViews;
+    private VirtualView singleView;
+    private VirtualView extraView;
+    private ClientHandlerInterface clientHandler;
     HashMap<String, VirtualView> allVirtualView;
-    Game gameSession;
-    GameState gameState;
+    private Game gameSession;
+    private GameState gameState;
     int roundIndex;
-    ClientHandler clientHandler;
+    private DeckAssistant deckOfPlayer;
+    private Table table;
+
     @BeforeEach
     void setup(){
-        this.allVirtualView = new HashMap<>();
+        gc = new GameController();
+        allViews = new ArrayList<>();
+        LobbyServer lobbyServer = new LobbyServer();
+        allVirtualView = new HashMap<>();
         gameSession = new Game();
-        gameState = GameState.INIT;
+        //gameState = GameState.INIT;
         roundIndex = 0;
 
+        clientHandler = new ClientHandlerInterface(){
+            @Override
+            public void disconnect() {
+            }
+
+            @Override
+            public void sendMessage(GeneralMessage message) {
+            }
+        };
+
+        for(int i = 0; i < 4; i++){
+            allViews.add(new VirtualView(clientHandler));
+        }
+        singleView = new VirtualView(clientHandler);
+        extraView = new VirtualView(clientHandler);
+
+        table = new Table();
+        deckOfPlayer = new DeckAssistant(AssistantDeckName.DECK1);
+        table.addFinalStudents();
+        table.generateIslandCards();
+        table.generateMotherEarth();
     }
 
     @Test
     void gameSession(){
+        gameState = GameState.INIT;
         GameController gc = new GameController();
         gc.getGameSession();
         assertNotNull(gc.getGameSession());
@@ -49,6 +87,7 @@ public class GameControllerTest {
     @Test
     void gameState(){
         GameController gc = new GameController();
+        gameState = GameState.INIT;
 
         gc.getGameState();
         assertNotNull(gc.getGameState());
@@ -99,6 +138,7 @@ public class GameControllerTest {
     @Test
     void planning(){
         GameController gc = new GameController();
+        gameState = GameState.INIT;
 
         Player player1 = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
         player1.setNickname("Gino");
@@ -133,6 +173,27 @@ public class GameControllerTest {
                 assertNotNull(allVirtualView.get(s));
             }
         }
+    }
+
+    /** provo ad aggiungere 5 giocatori, e */
+    @Test
+    void extraViewTest(){
+        assertFalse(gc.isGameStarted());
+
+        for(int i = 0; i < 3; i++){
+            gc.newPlayer("" + i , "gameId", new GregorianCalendar(), allViews.get(i));
+            assertEquals(i + 1, gc.getAllVirtualView().size());
+
+            if(i == 0){
+                gc.getMessage(new PlayersNumberAndDifficulty("0", 4, Difficulty.STANDARDMODE));
+            }
+        }
+
+        for(int j = 0; j < 10; j++){
+            gc.newPlayer("" + j, "gameId", new GregorianCalendar(), extraView);
+        }
+
+        assertEquals(4, gc.getAllVirtualView().size());
     }
 
 }
