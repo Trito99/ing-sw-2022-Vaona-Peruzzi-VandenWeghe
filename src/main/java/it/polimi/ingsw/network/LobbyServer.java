@@ -25,6 +25,6 @@ public class LobbyServer {
         if(lobby.currentPlayers()==1){
             lobbyMap.remove(idLobby);
         }
-        else lobby.disconnecting(clientHandler);
+       // else lobby.disconnecting(clientHandler);
     }
 }
