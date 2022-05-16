@@ -302,7 +302,7 @@ public class GameController {
                     }else{
                         virtualView.showMessage("\n Cloud is empty or doesn't exist");
                         again=true;
-                        virtualView.askIdIsland();
+                        virtualView.askCloud();
                     }
                 }
                 if(!again && turnFinished) {

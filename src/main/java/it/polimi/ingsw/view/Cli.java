@@ -308,13 +308,18 @@ public class Cli extends ObservableView implements View {
 
     @Override
     public void askAssistantCardToPlay() {
-        try {
-            out.print("\nChoose an Assistant Card from your Deck (nickname): ");
-            String nickname = readInput();
-            notifyObserver(obs -> obs.chooseAssistantCard(nickname));
-        } catch (Exception e) {
-            out.println(WRONG_INPUT);
-        }
+        boolean ye;
+        do {
+            try {
+                ye=false;
+                out.print("\nChoose an Assistant Card from your Deck (nickname): ");
+                String nickname = readInput();
+                notifyObserver(obs -> obs.chooseAssistantCard(nickname));
+            } catch (Exception e) {
+                ye=true;
+                out.println(WRONG_INPUT);
+            }
+        } while (ye);
     }
 
     @Override
@@ -329,53 +334,73 @@ public class Cli extends ObservableView implements View {
 
     @Override
     public void askMotherEarthSteps(AssistantCard trash) {
-        try{
-            out.print("\nChoose how many steps you want to make MotherEarth move: (max "+trash.getStepMotherEarth()+")\n");
-            int steps = Integer.parseInt(readInput());
-            notifyObserver(obs -> obs.chooseMotherEarthSteps(steps));
-        } catch (Exception e) {
-            out.println(WRONG_INPUT);
-        }
+        boolean ye;
+        do {
+            try {
+                ye=false;
+                out.print("\nChoose how many steps you want to make MotherEarth move: (max " + trash.getStepMotherEarth() + ")\n");
+                int steps = Integer.parseInt(readInput());
+                notifyObserver(obs -> obs.chooseMotherEarthSteps(steps));
+            } catch (Exception e) {
+                out.println(WRONG_INPUT);
+                ye=true;
+            }
+        }while(ye);
 
     }
 
     @Override
     public void askCloud() {
-        try {
-            out.print("\nChoose a Cloud Card (id) ");
-            int id = Integer.parseInt(readInput());
-            notifyObserver(obs -> obs.chooseCloudCard(id));
-        } catch (Exception e) {
-            out.println(WRONG_INPUT);
-        }
+        boolean ye;
+        do {
+            try {
+                ye=false;
+                out.print("\nChoose a Cloud Card (id) ");
+                int id = Integer.parseInt(readInput());
+                notifyObserver(obs -> obs.chooseCloudCard(id));
+            } catch (Exception e) {
+                ye=true;
+                out.println(WRONG_INPUT);
+            }
+        }while (ye);
     }
 
     @Override
     public void askPlaceAndStudentForMove(ArrayList<Student> entry) {
-        try {
-            out.print("\nWhich student of your entry do you want to move? (id)");
-            out.print("\nEntry: ");
-            for(Student s : entry){
-                out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | " );
+        boolean ye;
+        do {
+            try {
+                ye=false;
+                out.print("\nWhich student of your entry do you want to move? (id)");
+                out.print("\nEntry: ");
+                for (Student s : entry) {
+                    out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+                }
+                out.print("\n");
+                int id = Integer.parseInt(readInput());
+                out.print("\nWhere do you want to move the student? (Island,School)\n");
+                String place = readInput().toUpperCase(Locale.ROOT);
+                notifyObserver(obs -> obs.choosePlaceAndStudentForMove(place, id));
+            } catch (Exception e) {
+                ye=true;
+                out.println(WRONG_INPUT);
             }
-            out.print("\n");
-            int id = Integer.parseInt(readInput());
-            out.print("\nWhere do you want to move the student? (Island,School)\n");
-            String place = readInput().toUpperCase(Locale.ROOT);
-            notifyObserver(obs -> obs.choosePlaceAndStudentForMove(place,id));
-        } catch (Exception e) {
-            out.println(WRONG_INPUT);
-        }
+        }while(ye);
     }
     @Override
     public void askIdIsland() {
-        try {
-            out.print("\nIn which island do you want to move the student? (id)\n");
-            int id = Integer.parseInt(readInput());
-            notifyObserver(obs -> obs.chooseIdIsland(id));
-        } catch (Exception e) {
-            out.println(WRONG_INPUT);
-        }
+        boolean ye;
+        do {
+            try {
+                ye=false;
+                out.print("\nIn which island do you want to move the student? (id)\n");
+                int id = Integer.parseInt(readInput());
+                notifyObserver(obs -> obs.chooseIdIsland(id));
+            } catch (Exception e) {
+                ye=true;
+                out.println(WRONG_INPUT);
+            }
+        }while (ye);
     }
 
     private String getStudentAnsiColor(Student student) {
