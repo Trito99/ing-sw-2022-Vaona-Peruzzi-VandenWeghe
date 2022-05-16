@@ -15,7 +15,6 @@ import it.polimi.ingsw.view.VirtualView;
 import java.security.InvalidParameterException;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.List;
 
 public class GameController {
     private Game gameSession;
@@ -24,20 +23,20 @@ public class GameController {
     private GameState gameState;
     private final HashMap<String, VirtualView> allVirtualView;
     private int roundIndex;
-    boolean again=false;
+    boolean again = false;
     private ActionState actionState;
     int studentId;
-    int movedStudents=0;
+    int movedStudents = 0;
 
 
-    public GameController(){
+    public GameController() {
         this.allVirtualView = new HashMap<>();
         gameSession = new Game();
         gameState = GameState.INIT;
-        roundIndex =0;
+        roundIndex = 0;
     }
 
-    public void generateTable(){
+    public void generateTable() {
         gameSession.getTable().generateBagInit();
         gameSession.getTable().generateIslandCards();
         gameSession.getTable().generateMotherEarth();
@@ -47,77 +46,74 @@ public class GameController {
 
     /**
      * @param nickname del Giocatore.
-     * @param gameId id della partita a cui il giocatore sta giocando.
+     * @param gameId   id della partita a cui il giocatore sta giocando.
      */
     public boolean newPlayer(String nickname, String gameId, GregorianCalendar playerDate, VirtualView virtualView) {
 
-        if(allVirtualView.isEmpty()){
+        if (allVirtualView.isEmpty()) {
             generateTable();
             allVirtualView.put(nickname, virtualView);
             this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
-            this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
-            this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
+            this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size() - 1).setNickname(nickname);
+            this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size() - 1).setPlayerDate(playerDate);
             virtualView.showLogin(nickname, gameId, playerDate, true);
             virtualView.askPlayersNumberAndDifficulty();
             return true;
-        }
-        else if(allVirtualView.size() < maxPlayers){
+        } else if (allVirtualView.size() < maxPlayers) {
             /** da testare */
-            if(allVirtualView.size() == 1){
+            if (allVirtualView.size() == 1) {
                 allVirtualView.put(nickname, virtualView);
                 this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK2));
-                this.gameSession.getListOfPlayers().get(0).generateSchool(gameSession.getTable(),gameSession.getGameMode());
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size() - 1).setNickname(nickname);
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size() - 1).setPlayerDate(playerDate);
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size() - 1).generateSchool(gameSession.getTable(), gameSession.getGameMode());
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size() - 1).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK2));
+                this.gameSession.getListOfPlayers().get(0).generateSchool(gameSession.getTable(), gameSession.getGameMode());
                 this.gameSession.getListOfPlayers().get(0).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK1));
                 allVirtualView.put(nickname, virtualView);
-                virtualView.showLogin(nickname, gameId, playerDate,true);
-                if(maxPlayers == 3)
+                virtualView.showLogin(nickname, gameId, playerDate, true);
+                if (maxPlayers == 3)
                     virtualView.showMessage("Three Players Mode. You have BLACK towers! \nWaiting for other players...");
-                else if(maxPlayers == 4)
+                else if (maxPlayers == 4)
                     virtualView.showMessage("Coop Mode. You have WHITE towers! \nWaiting for other players...");
-                else if(maxPlayers == 2)
+                else if (maxPlayers == 2)
                     virtualView.showMessage("Two Players Mode. You have BLACK towers!");
 
-            }
-            else if(allVirtualView.size() == 2){
+            } else if (allVirtualView.size() == 2) {
                 allVirtualView.put(nickname, virtualView);
-                if(maxPlayers == 3)
+                if (maxPlayers == 3)
                     this.gameSession.addPlayer(new Player(TColor.GREY, PlayerNumber.PLAYER3));
                 else
                     this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER3));
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK3));
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size() - 1).setNickname(nickname);
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size() - 1).setPlayerDate(playerDate);
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size() - 1).generateSchool(gameSession.getTable(), gameSession.getGameMode());
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size() - 1).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK3));
                 allVirtualView.put(nickname, virtualView);
-                virtualView.showLogin(nickname, gameId, playerDate,true);
-                if(maxPlayers==3)
+                virtualView.showLogin(nickname, gameId, playerDate, true);
+                if (maxPlayers == 3)
                     virtualView.showMessage("Three Players Mode. You have GREY towers! \nWaiting for other players...");
-                else if(maxPlayers==4)
+                else if (maxPlayers == 4)
                     virtualView.showMessage("Coop Mode. You have BLACK towers! \nWaiting for other players...");
 
-            }
-            else if(allVirtualView.size() == 3){
+            } else if (allVirtualView.size() == 3) {
                 allVirtualView.put(nickname, virtualView);
                 this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER4));
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK4));
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size() - 1).setNickname(nickname);
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size() - 1).setPlayerDate(playerDate);
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size() - 1).generateSchool(gameSession.getTable(), gameSession.getGameMode());
+                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size() - 1).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK4));
                 allVirtualView.put(nickname, virtualView);
-                virtualView.showLogin(nickname, gameId, playerDate,true);
-                if(maxPlayers==4)
+                virtualView.showLogin(nickname, gameId, playerDate, true);
+                if (maxPlayers == 4)
                     virtualView.showMessage("Coop Mode. You have BLACK towers! \nWaiting for other players...");
 
             }
 
-            if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
+            if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
                 initializeExpertModeGame();
 
-            if(allVirtualView.size() == maxPlayers){
+            if (allVirtualView.size() == maxPlayers) {
                 broadcastMessage("Everyone joined the game!");
                 turnController = new TurnController(this);
                 gameState = GameState.PLANNING;
@@ -125,25 +121,24 @@ public class GameController {
                 planning();
             }
             return true;
-        }
-        else virtualView.showLogin(nickname, gameId, playerDate, false);
+        } else virtualView.showLogin(nickname, gameId, playerDate, false);
         return false;
     }
 
-    private void initializeExpertModeGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
-    DeckCharacter characterDeck = new DeckCharacter();
-    characterDeck.generateCharacterDeck();
-    gameSession.getTable().generateCharacterCardsOnTable(characterDeck.getCharacterCards());
+    private void initializeExpertModeGame() { /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
+        DeckCharacter characterDeck = new DeckCharacter();
+        characterDeck.generateCharacterDeck();
+        gameSession.getTable().generateCharacterCardsOnTable(characterDeck.getCharacterCards());
     }
 
     public void getMessage(ClientMessage receivedMessage) throws InvalidParameterException {
         VirtualView virtualView = allVirtualView.get(receivedMessage.getNickname());
         switch (gameState) {
             case INIT:
-                if(receivedMessage.getMessageType() == MessageType.PLAYERS_NUMBER_AND_DIFFICULTY_CHOSEN){
+                if (receivedMessage.getMessageType() == MessageType.PLAYERS_NUMBER_AND_DIFFICULTY_CHOSEN) {
                     PlayersNumberAndDifficulty PNaDSelected = (PlayersNumberAndDifficulty) receivedMessage;
                     maxPlayers = PNaDSelected.getPlayersNumber();
-                    switch(PNaDSelected.getPlayersNumber()){
+                    switch (PNaDSelected.getPlayersNumber()) {
                         case 4:
                             gameSession.setGameMode(GameMode.COOP);
                             virtualView.showMessage("Coop Mode. You have WHITE towers! \nWaiting for other players...");
@@ -157,7 +152,7 @@ public class GameController {
                             virtualView.showMessage("Two Players Mode. You have WHITE towers! \nWaiting for other players...");
                             break;
                     }
-                    switch (PNaDSelected.getDifficulty()){
+                    switch (PNaDSelected.getDifficulty()) {
                         case STANDARDMODE:
                             gameSession.setDifficulty(Difficulty.STANDARDMODE);
                             break;
@@ -169,15 +164,15 @@ public class GameController {
                 }
                 break;
             case PLANNING:
-                if(receivedMessage.getMessageType() == MessageType.ASSISTANTCARD_PLAYED){
+                if (receivedMessage.getMessageType() == MessageType.ASSISTANTCARD_PLAYED) {
                     AssistantCardPlayed CardSelected = (AssistantCardPlayed) receivedMessage;
-                    int indexOfCurrentPlayer=gameSession.getListOfPlayers().indexOf(gameSession.getPlayer(receivedMessage.getNickname()));
+                    int indexOfCurrentPlayer = gameSession.getListOfPlayers().indexOf(gameSession.getPlayer(receivedMessage.getNickname()));
                     boolean present = false, exists = false;
-                    for(AssistantCard assistantCard : gameSession.getPlayer(turnController.getActivePlayer()).getDeckOfPlayer().getCardsInHand()){
-                        if(assistantCard.getAssistantName().equals(CardSelected.getCardNickname()))
+                    for (AssistantCard assistantCard : gameSession.getPlayer(turnController.getActivePlayer()).getDeckOfPlayer().getCardsInHand()) {
+                        if (assistantCard.getAssistantName().equals(CardSelected.getCardNickname()))
                             exists = true;
                     }
-                    if(gameSession.getPlayer(turnController.getActivePlayer()).getDeckOfPlayer().getCardsInHand().size()>1){
+                    if (gameSession.getPlayer(turnController.getActivePlayer()).getDeckOfPlayer().getCardsInHand().size() > 1) {
                         for (int i = 1; i < (roundIndex + 1); i++) {
                             if ((indexOfCurrentPlayer - i) < 0) {
                                 if (gameSession.getListOfPlayers().get(indexOfCurrentPlayer - i + maxPlayers).getTrash().getAssistantName().equals(CardSelected.getCardNickname()))
@@ -197,13 +192,13 @@ public class GameController {
                             virtualView.askAssistantCardToPlay();
                             again = true;
                         }
-                    }else{
+                    } else {
                         virtualView.showMessage("\nCard doesn't exist or has already been played. Try again");
                         virtualView.askAssistantCardToPlay();
                         again = true;
                     }
                 }
-                if(!again) {
+                if (!again) {
                     turnController.nextPlayer(turnController.getPlayerOrderByName());
                     roundIndex++;
                     planning();
@@ -211,45 +206,45 @@ public class GameController {
                 break;
             case ACTION:
                 boolean turnFinished = false;
-                if(receivedMessage.getMessageType() == MessageType.PLACE_AND_STUDENT_FOR_MOVE_CHOSEN){
+                if (receivedMessage.getMessageType() == MessageType.PLACE_AND_STUDENT_FOR_MOVE_CHOSEN) {
                     PlaceAndStudentForMoveChosen Choice = (PlaceAndStudentForMoveChosen) receivedMessage;
                     studentId = Choice.getId();
-                    if(Choice.getPlace().equals("SCHOOL")){
+                    if (Choice.getPlace().equals("SCHOOL")) {
                         gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromEntryToHall(gameSession.getPlayer(turnController.getActivePlayer()), studentId, gameSession.getTable(), gameSession.getDifficulty());
-                        if(gameSession.getDifficulty().equals(Difficulty.STANDARDMODE))
-                            gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(),gameSession.getPlayer(turnController.getActivePlayer()),CardEffect.STANDARDMODE);
+                        if (gameSession.getDifficulty().equals(Difficulty.STANDARDMODE))
+                            gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(turnController.getActivePlayer()), CardEffect.STANDARDMODE);
                         movedStudents++;
                         if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces())
                             setActionState(ActionState.MOTHERNATURE);
                         action();
-                    }else if (Choice.getPlace().equals("ISLAND")){
+                    } else if (Choice.getPlace().equals("ISLAND")) {
                         virtualView.askIdIsland();
                     }
                 }
-                if(receivedMessage.getMessageType() == MessageType.ID_ISLAND_CHOSEN){
+                if (receivedMessage.getMessageType() == MessageType.ID_ISLAND_CHOSEN) {
                     IdIslandChosen Island = (IdIslandChosen) receivedMessage;
-                    gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromEntryToIsland(gameSession.getTable().getListOfIsland().get(Island.getId()-1),studentId);
+                    gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromEntryToIsland(gameSession.getTable().getListOfIsland().get(Island.getId() - 1), studentId);
                     movedStudents++;
                     if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces())
                         setActionState(ActionState.MOTHERNATURE);
                     action();
                 }
-                if(receivedMessage.getMessageType() == MessageType.STEP_MOTHER_EARTH_CHOSEN){
+                if (receivedMessage.getMessageType() == MessageType.STEP_MOTHER_EARTH_CHOSEN) {
                     MotherEarthStepsChosen step = (MotherEarthStepsChosen) receivedMessage;
-                    int steps= step.getSteps();
+                    int steps = step.getSteps();
                     gameSession.getTable().moveMotherEarth(steps);
-                    if(gameSession.getDifficulty().equals(Difficulty.STANDARDMODE))
-                        gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth()-1).buildTowerOnIsland(gameSession.getListOfPlayers(),CardEffect.STANDARDMODE);
+                    if (gameSession.getDifficulty().equals(Difficulty.STANDARDMODE))
+                        gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE);
                     gameSession.getTable().joinIsland(gameSession.getTable().getListOfIsland());
                     setActionState(ActionState.CLOUDCARD);
                     action();
                 }
-                if(receivedMessage.getMessageType() == MessageType.CLOUD_CHOSEN){
+                if (receivedMessage.getMessageType() == MessageType.CLOUD_CHOSEN) {
                     CloudChosen Cloud = (CloudChosen) receivedMessage;
-                    gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromCloudToEntry(gameSession.getTable().getCloudNumber().get(Cloud.getId()-1));
+                    gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromCloudToEntry(gameSession.getTable().getCloudNumber().get(Cloud.getId() - 1));
                     turnFinished = true;
                 }
-                if(!again && turnFinished) {
+                if (!again && turnFinished) {
                     movedStudents = 0;
                     turnController.nextPlayer(turnController.getNewPlayerOrderByName());
                     roundIndex++;
@@ -276,11 +271,11 @@ public class GameController {
      * inseriamo le set e le get
      */
 
-    public void setGameState(GameState gameState){
+    public void setGameState(GameState gameState) {
         this.gameState = gameState;
     }
 
-    public void setActionState(ActionState actionState){
+    public void setActionState(ActionState actionState) {
         this.actionState = actionState;
     }
 
@@ -297,8 +292,10 @@ public class GameController {
     }
 
     /** DA CONTROLLARE */
-    /** inizia il turno */
-    public void planning(){
+    /**
+     * inizia il turno
+     */
+    public void planning() {
         if (roundIndex < maxPlayers) {
             showGame();
             allVirtualView.get(turnController.getActivePlayer()).askAssistantCardToPlay();
@@ -315,9 +312,9 @@ public class GameController {
         }
     }
 
-    public void action(){
+    public void action() {
         if (roundIndex < maxPlayers) {
-            switch(actionState) {
+            switch (actionState) {
                 case CLOUDCARD:
                     allVirtualView.get(turnController.getActivePlayer()).askCloud();
                     break;
@@ -340,14 +337,14 @@ public class GameController {
         }
     }
 
-    private void showGame(){
-        for(String s : allVirtualView.keySet()){
+    private void showGame() {
+        for (String s : allVirtualView.keySet()) {
             allVirtualView.get(s).showTable(gameSession.getTable());
-            for(Player p : gameSession.getListOfPlayers()) {
+            for (Player p : gameSession.getListOfPlayers()) {
                 if (p.getNickname() != s)
-                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname(),p.getTrash());
+                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname(), p.getTrash());
             }
-            for(Player p : gameSession.getListOfPlayers()){
+            for (Player p : gameSession.getListOfPlayers()) {
                 if (p.getNickname() == s) {
                     allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname(), p.getTrash());
                     allVirtualView.get(s).showDeckAssistant(p.getDeckOfPlayer());
@@ -364,63 +361,43 @@ public class GameController {
         this.gameSession = gameSession;
     }
 
-
     /**
-     * METODI USATI PER CONNESSIONE CLIENT - SERVER
-     * */
+     * DA CAMBIARE: rimouove giocatore dal gioco e chiama la fine del gioco
 
-    public boolean hasInactivePlayers(){
-        return turnController.hasInactivePlayers();
-    }
-
-    /** @return lista di nickname dei giocatori disconnessi dal gioco */
-    public List<String> getInactivePlayers(){
-        return turnController.getInactivePlayers();
-    }
-
-    /** riconnette giocatore che si era disconnesso, durante il gioco avviato */
-    public void reconnect(String nickname, VirtualView virtualView){
-        allVirtualView.put(nickname, virtualView);
-        turnController.reconnect(nickname);
-        broadcastMessage(nickname + " si è riconnesso.");
-        showPlayer(gameSession.getPlayer(nickname),nickname);
-        allVirtualView.get(nickname).showPersonalSchool(gameSession.getPlayer(nickname).getPersonalSchool(), nickname,gameSession.getPlayer(nickname).getTrash());
-        allVirtualView.get(nickname).showTable(gameSession.getTable());
-        allVirtualView.get(nickname).showPlayerTurn(getActivePlayer());
-    }
-
-    /** rimouove giocatore dal gioco e controlla se era l'active player---> inizia nuovo turno */
-    public void disconnect(String nickname){
-        if(nickname.equals(getActivePlayer())) {
-           /* if(turnController.nextPlayer().equals(turnController.firstPlayer())&&turnController.getActivePlayers().size()!=0){ */
-                switch(gameState){
-                    case INIT:
-                        if(maxPlayers>=2){
-                            setGameState(GameState.IN_GAME);}
-                        break;
-                    case IN_GAME:
-                        for(String s: allVirtualView.keySet()){
-                            if (!s.equals(getActivePlayer())){
-                                allVirtualView.get(s).showPlayerTurn(getActivePlayer());
-                            }
+    public void disconnect(String nickname) {
+        if (nickname.equals(getActivePlayer())) {
+            /* if(turnController.nextPlayer().equals(turnController.firstPlayer())&&turnController.getActivePlayers().size()!=0){
+            switch (gameState) {
+                case INIT:
+                    System.out.println("A player has disconnected, restart a new game.");
+                    break;
+                case IN_GAME:
+                    for (String s : allVirtualView.keySet()) {
+                        if (!s.equals(getActivePlayer())) {
+                            allVirtualView.get(s).showPlayerTurn(getActivePlayer());
                         }
-                        break;
-                }
-           // }
+                    }
+                    break;
+            }
+            // }
             turnController.disconnect(nickname);
             planning();
         }
         allVirtualView.remove(nickname);
         turnController.disconnect(nickname);
-    }
+    } */
 
-    /** se il gioco non è cominciato ----> return false */
-    public boolean isGameStarted(){
+    /**
+     * se il gioco non è cominciato ----> return false
+     */
+    public boolean isGameStarted() {
         return gameState != GameState.INIT;
     }
 
-    /** giocatore attiivo in quel momento */
-    public String getActivePlayer(){
+    /**
+     * giocatore attiivo in quel momento
+     */
+    public String getActivePlayer() {
         return turnController.getActivePlayer();
     }
 
@@ -428,32 +405,18 @@ public class GameController {
         return allVirtualView;
     }
 
-    public void showPlayer(Player player, String nickname){
-        allVirtualView.get(nickname).showPlayer(player.getNickname(), player.getPlayerNumber(),  player.getTColor(),
+    public void showPlayer(Player player, String nickname) {
+        allVirtualView.get(nickname).showPlayer(player.getNickname(), player.getPlayerNumber(), player.getTColor(),
                 player.getInfluenceOnIsland(), player.getPersonalSchool(), player.getDeckOfPlayer(), player.getTrash(),
                 player.getCoinScore(), nickname);
     }
 
-    /** invia un messaggio a ogni giocatore del gioco */
+    /**
+     * invia un messaggio a ogni giocatore del gioco
+     */
     public void broadcastMessage(String message) {
         for (VirtualView vv : allVirtualView.values()) {
             vv.showMessage(message);
         }
     }
-
-
-  /**  @Override
-    public void update(Observable o, Object arg) {
-        if (o != view || !(arg instanceof Choice)){
-            throw new IllegalArgumentException();
-        }
-         model.setPlayerChoice((Choice)arg);
-         game();                 (DA CAMBIARE: preso da esercit)
-    }*/
 }
-
-
-// Classe ModelView che ha come attributo una copia del model(es: Model modelCopy) con soli metodi get.
-// Nella classe Model originale invece ci sono anche i set.
-// Il model avrà come osservatore la modelView (model.addObserver(modelView) nel main,
-// view non "ascolta" direttamente la classe model ma la modelView

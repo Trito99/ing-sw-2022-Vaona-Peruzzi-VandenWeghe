@@ -43,13 +43,6 @@ public class Lobby {
                 clientHandlerMap.remove(clientHandler);
             }
         }
-
-        else if(hasInactivePLayers()){
-            List<String> inactive = getInactivePlayers();
-            if(inactive.contains(nickname)){
-                reconnect(nickname, clientHandler, virtualView);
-            }
-        }
         else{
             virtualView.showLogin(nickname, gameId, playerDate, false);
         }
@@ -61,44 +54,28 @@ public class Lobby {
         return gameController.isGameStarted();
     }
 
-    /** controlla se ci sono giocatori inattivi ----> return true */
-    public boolean hasInactivePLayers(){
-        return gameController.hasInactivePlayers();
-    }
-
-    /** controlla lista di giocatori inattivi  ----> return lista di nickname */
-    public List<String> getInactivePlayers(){
-        return gameController.getInactivePlayers();
-    }
-
     /** return numero di giocatori connessi */
     public int currentPlayers(){
         return clientHandlerMap.size();
     }
 
-    /** disconnette un client */
+    /**  DA CAMBIARE: disconnette un client
     public void disconnecting(ClientHandler clientHandler){
         if (gameController.isGameStarted()){
             disconnect(clientHandler);
         }
         else{
-            /** rimuove giocatore dalla lobby */
+            // rimuove giocatore dalla lobby
             clientHandlerMap.remove(clientHandler);
         }
-    }
+    } */
 
-    /** disconnette un giocatore dalla lobby */
+    /** DA CAMBIARE: disconnette un giocatore dalla lobby
     public void disconnect(ClientHandler clientHandler){
         gameController.disconnect(clientHandlerMap.get(clientHandler));
-        /** rimuove giocatore dalla lobby */
+        // rimuove giocatore dalla lobby
         clientHandlerMap.remove(clientHandler);
-    }
-
-    /** riconnetti giocatore alla Lobby */
-    public void reconnect(String nickname, ClientHandler clientHandler, VirtualView virtualView){
-        clientHandlerMap.put(clientHandler, nickname);
-        gameController.reconnect(nickname, virtualView);
-    }
+    } */
 
 
     /** passa messaggio al GameController*/

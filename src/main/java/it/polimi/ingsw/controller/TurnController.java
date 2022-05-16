@@ -53,34 +53,7 @@ public class TurnController {
         playingPlayer = playerOrderByName.get(player);
     }
 
-
-
-    /** giocatore ancora connessi ordinati con l'ordine del turno */
-    public ArrayList<String> getActivePlayers(){
-        ArrayList<String> activePlayers = new ArrayList<String>();
-        for (String orderPlayer : playerOrderByName) {
-            if (activePlayer.get(orderPlayer))
-                activePlayers.add(orderPlayer);
-        }
-        return activePlayers;
-    }
-
-    /** controlla se il gioco ha giocatori che si sono disconnessi ----> return se ci sono giocatori disconnessi */
-    public boolean hasInactivePlayers(){
-        return(getInactivePlayers().size()!=0);
-    }
-
-    /** lista di giocatori che si sono disconnessi ---> return lista di nickname dei giocatori */
-    public List<String> getInactivePlayers(){
-        return activePlayer.entrySet().stream().filter(entry -> (!entry.getValue())).map(Map.Entry::getKey).collect(Collectors.toList());
-    }
-
-    /** imposta nickname del giocatore come attivo per permettergli di giocare */
-    public void reconnect(String nickname){
-        activePlayer.put(nickname, true);
-    }
-
-    /** imposta giocatore come inattivo per permettere di ricollegarsi più tardi */
+    /** DA CAMBIARE: quando ci si disconnette deve finire la partita */
     public boolean disconnect(String nickname){
         activePlayer.put(nickname,false);
         return(nickname.equals(getActivePlayer()));
