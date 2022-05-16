@@ -6,10 +6,13 @@ import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.DeckCharacter;
+import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.*;
+import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.TColor;
+import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.view.VirtualView;
 
 import java.security.InvalidParameterException;
@@ -213,41 +216,94 @@ public class GameController {
                 boolean turnFinished = false;
                 if(receivedMessage.getMessageType() == MessageType.PLACE_AND_STUDENT_FOR_MOVE_CHOSEN){
                     PlaceAndStudentForMoveChosen Choice = (PlaceAndStudentForMoveChosen) receivedMessage;
-                    studentId = Choice.getId();
-                    if(Choice.getPlace().equals("SCHOOL")){
-                        gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromEntryToHall(gameSession.getPlayer(turnController.getActivePlayer()), studentId, gameSession.getTable(), gameSession.getDifficulty());
-                        if(gameSession.getDifficulty().equals(Difficulty.STANDARDMODE))
-                            gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(),gameSession.getPlayer(turnController.getActivePlayer()),CardEffect.STANDARDMODE);
-                        movedStudents++;
-                        if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces())
-                            setActionState(ActionState.MOTHERNATURE);
-                        action();
-                    }else if (Choice.getPlace().equals("ISLAND")){
-                        virtualView.askIdIsland();
+                    boolean present = false;
+                    for(Student student : gameSession.getPlayer(Choice.getNickname()).getPersonalSchool().getEntry()){
+                        if(student.getIdStudent() == Choice.getId()) {
+                            present = true;
+                            studentId = Choice.getId();
+                        }
+                    }
+                    if(present){
+                        if (Choice.getPlace().equals("SCHOOL") || (Choice.getPlace().equals(("ISLAND")))) {
+                            again = false;
+                            if (Choice.getPlace().equals("SCHOOL")) {
+                                gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromEntryToHall(gameSession.getPlayer(turnController.getActivePlayer()), studentId, gameSession.getTable(), gameSession.getDifficulty());
+                                if (gameSession.getDifficulty().equals(Difficulty.STANDARDMODE))
+                                    gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(turnController.getActivePlayer()), CardEffect.STANDARDMODE);
+                                movedStudents++;
+                                if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces())
+                                    setActionState(ActionState.MOTHERNATURE);
+                                action();
+                            } else if (Choice.getPlace().equals("ISLAND")) {
+                                virtualView.askIdIsland();
+                            }
+                        } else {
+                            virtualView.showMessage("\nWrong input");
+                            again = true;
+                            virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
+                        }
+                    }else{
+                        virtualView.showMessage("\nStudent selected is not available");
+                        again = true;
+                        virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                     }
                 }
                 if(receivedMessage.getMessageType() == MessageType.ID_ISLAND_CHOSEN){
                     IdIslandChosen Island = (IdIslandChosen) receivedMessage;
-                    gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromEntryToIsland(gameSession.getTable().getListOfIsland().get(Island.getId()-1),studentId);
-                    movedStudents++;
-                    if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces())
-                        setActionState(ActionState.MOTHERNATURE);
-                    action();
+                    boolean present=false;
+                    for(IslandCard island : gameSession.getTable().getListOfIsland()){
+                        if(island.getIdIsland() == Island.getId()) {
+                            present = true;
+                        }
+                    }
+                    if(present) {
+                        again = false;
+                        gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromEntryToIsland(gameSession.getTable().getListOfIsland().get(Island.getId() - 1), studentId);
+                        movedStudents++;
+                        if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces())
+                            setActionState(ActionState.MOTHERNATURE);
+                        action();
+                    }else{
+                        virtualView.showMessage("\nIsland doesn't exist");
+                        again=true;
+                        virtualView.askIdIsland();
+                    }
                 }
                 if(receivedMessage.getMessageType() == MessageType.STEP_MOTHER_EARTH_CHOSEN){
                     MotherEarthStepsChosen step = (MotherEarthStepsChosen) receivedMessage;
-                    int steps= step.getSteps();
-                    gameSession.getTable().moveMotherEarth(steps);
-                    if(gameSession.getDifficulty().equals(Difficulty.STANDARDMODE))
-                        gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth()-1).buildTowerOnIsland(gameSession.getListOfPlayers(),CardEffect.STANDARDMODE);
-                    gameSession.getTable().joinIsland(gameSession.getTable().getListOfIsland());
-                    setActionState(ActionState.CLOUDCARD);
-                    action();
+                    if(step.getSteps()>gameSession.getPlayer(step.getNickname()).getTrash().getStepMotherEarth()) {
+                        virtualView.showMessage("\nSteps selected more than maximum available");
+                        again=true;
+                        virtualView.askMotherEarthSteps(gameSession.getPlayer(step.getNickname()).getTrash());
+                    }else{
+                        again=false;
+                        int steps = step.getSteps();
+                        gameSession.getTable().moveMotherEarth(steps);
+                        if (gameSession.getDifficulty().equals(Difficulty.STANDARDMODE))
+                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE);
+                        gameSession.getTable().joinIsland(gameSession.getTable().getListOfIsland());
+                        setActionState(ActionState.CLOUDCARD);
+                        action();
+                    }
                 }
                 if(receivedMessage.getMessageType() == MessageType.CLOUD_CHOSEN){
                     CloudChosen Cloud = (CloudChosen) receivedMessage;
-                    gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromCloudToEntry(gameSession.getTable().getCloudNumber().get(Cloud.getId()-1));
-                    turnFinished = true;
+                    boolean present =false;
+                    for(CloudCard cloud : gameSession.getTable().getCloudNumber()){
+                        if(Cloud.getId()==cloud.getIdCloud()) {
+                            if (!cloud.getStudentOnCloud().isEmpty())
+                                present = true;
+                        }
+                    }
+                    if(present) {
+                        again=false;
+                        gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromCloudToEntry(gameSession.getTable().getCloudNumber().get(Cloud.getId() - 1));
+                        turnFinished = true;
+                    }else{
+                        virtualView.showMessage("\n Cloud is empty or doesn't exist");
+                        again=true;
+                        virtualView.askIdIsland();
+                    }
                 }
                 if(!again && turnFinished) {
                     movedStudents = 0;

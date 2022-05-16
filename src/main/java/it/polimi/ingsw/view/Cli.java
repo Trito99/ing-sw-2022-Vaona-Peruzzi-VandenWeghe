@@ -265,7 +265,7 @@ public class Cli extends ObservableView implements View {
             String gameID = readInput();
 
             notifyObserver(obs -> obs.updateLobby(nickname, playerDate, gameID));
-        } catch (ExecutionException e) {
+        } catch (Exception e) {
             out.println(WRONG_INPUT);
         }
     }
@@ -312,7 +312,7 @@ public class Cli extends ObservableView implements View {
             out.print("\nChoose an Assistant Card from your Deck (nickname): ");
             String nickname = readInput();
             notifyObserver(obs -> obs.chooseAssistantCard(nickname));
-        } catch (ExecutionException e) {
+        } catch (Exception e) {
             out.println(WRONG_INPUT);
         }
     }
@@ -333,7 +333,7 @@ public class Cli extends ObservableView implements View {
             out.print("\nChoose how many steps you want to make MotherEarth move: (max "+trash.getStepMotherEarth()+")\n");
             int steps = Integer.parseInt(readInput());
             notifyObserver(obs -> obs.chooseMotherEarthSteps(steps));
-        } catch (ExecutionException e) {
+        } catch (Exception e) {
             out.println(WRONG_INPUT);
         }
 
@@ -345,7 +345,7 @@ public class Cli extends ObservableView implements View {
             out.print("\nChoose a Cloud Card (id) ");
             int id = Integer.parseInt(readInput());
             notifyObserver(obs -> obs.chooseCloudCard(id));
-        } catch (ExecutionException e) {
+        } catch (Exception e) {
             out.println(WRONG_INPUT);
         }
     }
@@ -363,7 +363,7 @@ public class Cli extends ObservableView implements View {
             out.print("\nWhere do you want to move the student? (Island,School)\n");
             String place = readInput().toUpperCase(Locale.ROOT);
             notifyObserver(obs -> obs.choosePlaceAndStudentForMove(place,id));
-        } catch (ExecutionException e) {
+        } catch (Exception e) {
             out.println(WRONG_INPUT);
         }
     }
@@ -373,7 +373,7 @@ public class Cli extends ObservableView implements View {
             out.print("\nIn which island do you want to move the student? (id)\n");
             int id = Integer.parseInt(readInput());
             notifyObserver(obs -> obs.chooseIdIsland(id));
-        } catch (ExecutionException e) {
+        } catch (Exception e) {
             out.println(WRONG_INPUT);
         }
     }
