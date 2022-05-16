@@ -113,7 +113,7 @@ public class Table implements Serializable {
             maxNumberOfStudents = 3;
         }
         for (int i = 0; i < x; i++) {
-            cloudNumber.add(new CloudCard(i, maxNumberOfStudents));
+            cloudNumber.add(new CloudCard(i+1, maxNumberOfStudents));
         }
     }
 

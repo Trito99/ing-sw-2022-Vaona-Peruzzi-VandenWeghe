@@ -192,7 +192,7 @@ public class Cli extends ObservableView implements View {
         out.println("\n----------------------------------------------");
         out.print("\n**** CLOUDS ****");
         for(CloudCard c : table.getCloudNumber()){
-            out.print("\nCloud "+ i + ") ");
+            out.print("\nCloud "+ table.getCloudNumber().get(i-1).getIdCloud() + ") ");
             if (table.getCloudNumber().get(i-1).getStudentOnCloud().size()>0) {
                 out.print("Id Students: " );
                 for (Student s : table.getCloudNumber().get(i - 1).getStudentOnCloud()) {
