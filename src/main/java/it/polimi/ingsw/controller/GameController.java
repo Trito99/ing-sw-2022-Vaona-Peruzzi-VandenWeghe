@@ -369,16 +369,19 @@ public class GameController {
      * METODI USATI PER CONNESSIONE CLIENT - SERVER
      * */
 
+    /**
     public boolean hasInactivePlayers(){
         return turnController.hasInactivePlayers();
-    }
+    }*/
 
     /** @return lista di nickname dei giocatori disconnessi dal gioco */
+    /**
     public List<String> getInactivePlayers(){
         return turnController.getInactivePlayers();
-    }
+    }/*
 
     /** riconnette giocatore che si era disconnesso, durante il gioco avviato */
+    /**
     public void reconnect(String nickname, VirtualView virtualView){
         allVirtualView.put(nickname, virtualView);
         turnController.reconnect(nickname);
@@ -387,7 +390,7 @@ public class GameController {
         allVirtualView.get(nickname).showPersonalSchool(gameSession.getPlayer(nickname).getPersonalSchool(), nickname,gameSession.getPlayer(nickname).getTrash());
         allVirtualView.get(nickname).showTable(gameSession.getTable());
         allVirtualView.get(nickname).showPlayerTurn(getActivePlayer());
-    }
+    }/*
 
     /** rimouove giocatore dal gioco e controlla se era l'active player---> inizia nuovo turno */
     public void disconnect(String nickname){
