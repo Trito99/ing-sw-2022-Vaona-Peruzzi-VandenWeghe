@@ -313,7 +313,7 @@ public class Cli extends ObservableView implements View {
                         default:
                             break;
                     }
-                    out.println("Effect: \n"+characterCard.getDescription());
+                    out.println("Effect: "+characterCard.getDescription());
                 }
             }else
                 out.print("\nEmpty");
