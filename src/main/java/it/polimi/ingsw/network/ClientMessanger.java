@@ -2,8 +2,6 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.message.Error;
-import it.polimi.ingsw.model.character.CardEffect;
-import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.observer.ObserverView;
@@ -118,7 +116,7 @@ public class ClientMessanger implements ObserverView, Observer {
                 break;
             case SHOW_TABLE:
                 ShowTable table = (ShowTable) message;
-                queue.execute(() -> view.showTable(table.getTable()));
+                queue.execute(() -> view.showTable(table.getTable(),table.getDifficulty()));
                 break;
             case SHOW_PERSONAL_SCHOOL:
                 ShowPersonalSchool school = (ShowPersonalSchool) message;

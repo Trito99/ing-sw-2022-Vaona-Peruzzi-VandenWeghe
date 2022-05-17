@@ -143,7 +143,7 @@ public class Table implements Serializable {
                 case COURTESAN:
                     for (int i = 0; i < 4; i++) {
                         characterCardsOnTable.get(j).getStudentsOnCard().add(bag.get(i));
-                        bag.remove(bag.get(i));
+                        bag.remove(bag.get(0));
                     }
                     break;
                 case CURATOR:
@@ -152,7 +152,7 @@ public class Table implements Serializable {
                 case ACROBAT:
                     for (int i = 0; i < 6; i++) {
                         characterCardsOnTable.get(j).getStudentsOnCard().add(bag.get(i));
-                        bag.remove(bag.get(i));
+                        bag.remove(bag.get(0));
                     }
                     break;
                 default:
@@ -161,7 +161,7 @@ public class Table implements Serializable {
         }
     }
 
-    public void moveMotherEarth(int n) {  /** GUARDA GAMECONTROLLER */
+    public void moveMotherEarth(int n) {
         listOfIsland.get(posMotherEarth - 1).setMotherEarthOnIsland(false);
         if ((posMotherEarth + n) > listOfIsland.size()) {
             listOfIsland.get(posMotherEarth + n - listOfIsland.size() - 1).setMotherEarthOnIsland(true);

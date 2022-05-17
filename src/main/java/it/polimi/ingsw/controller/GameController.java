@@ -19,8 +19,6 @@ import it.polimi.ingsw.view.VirtualView;
 import java.security.InvalidParameterException;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 
 public class GameController {
     private Game gameSession;
@@ -116,8 +114,6 @@ public class GameController {
 
             }
 
-            if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
-                initializeExpertModeGame();
 
             if(allVirtualView.size() == maxPlayers){
                 broadcastMessage("Everyone joined the game!");
@@ -165,6 +161,7 @@ public class GameController {
                             break;
                         case EXPERTMODE:
                             gameSession.setDifficulty(Difficulty.EXPERTMODE);
+                            initializeExpertModeGame();
                             break;
                     }
                     gameSession.getTable().generateCloudNumber(gameSession.getGameMode());
@@ -215,13 +212,11 @@ public class GameController {
                 boolean turnFinished = false;
                 if(receivedMessage.getMessageType() == MessageType.CHARACTER_CARD_PLAYED){
                     CharacterCardPlayed CardSelected = (CharacterCardPlayed) receivedMessage;
-                    int indexOfCurrentPlayer = gameSession.getListOfPlayers().indexOf(gameSession.getPlayer(receivedMessage.getNickname()));
-                    boolean present = false, exists = false;
+                    boolean exists = false;
                     for(CharacterCard characterCard : gameSession.getTable().getCharacterCardsOnTable()){
                         if(characterCard.getCardEffect().equals(CardSelected.getCardNickname()))
                             exists = true;
                     }
-
                     if (exists) {
                             again = false;
                           //  gameSession.playCharacterCard( , gameSession.getPlayer(turnController.getActivePlayer()));
@@ -332,7 +327,10 @@ public class GameController {
                     movedStudents = 0;
                     turnController.nextPlayer(turnController.getNewPlayerOrderByName());
                     roundIndex++;
-                    setActionState(ActionState.STUDENT);
+                    if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
+                        this.setActionState(ActionState.CHARACTER);
+                    else
+                        this.setActionState(ActionState.STUDENT);
                     showGame();
                     action();
                 }
@@ -440,7 +438,7 @@ public class GameController {
 
     private void showGame(){
         for(String s : allVirtualView.keySet()){
-            allVirtualView.get(s).showTable(gameSession.getTable());
+            allVirtualView.get(s).showTable(gameSession.getTable(), gameSession.getDifficulty());
             for(Player p : gameSession.getListOfPlayers()) {
                 if (p.getNickname() != s)
                     allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname(),p.getTrash());

@@ -407,16 +407,6 @@ public class TableTest{
 
     }
 
-    @Test
-    void getCharacterCardTest(){
-        table.getCharacterCardsOnTable().add(new CharacterCard(2, CardEffect.HOST));
-        table.getCharacterCardsOnTable().add(new CharacterCard(1, CardEffect.BEARER));
-        table.getCharacterCardsOnTable().add(new CharacterCard(3, CardEffect.CENTAUR));
-
-        assertEquals(1, table.getCharacterCard(CardEffect.BEARER).getCostCharacter());
-        assertEquals(CardEffect.HOST, table.getCharacterCard(CardEffect.HOST).getCardEffect());
-
-    }
 
     @RepeatedTest(100)
     public void playerIsWinningTest(){

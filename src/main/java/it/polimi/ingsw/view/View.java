@@ -3,6 +3,7 @@ package it.polimi.ingsw.view;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CharacterCard;
+import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;
@@ -36,7 +37,7 @@ public interface View {
 
     void showPersonalSchool(School school, String nickname, AssistantCard trash);
 
-    void showTable(Table table);
+    void showTable(Table table, Difficulty difficulty);
 
     void showDeckAssistant(DeckAssistant deckAssistant);
 

@@ -257,7 +257,7 @@ public class Cli extends ObservableView implements View {
     }
 
     @Override
-    public void showTable(Table table) {
+    public void showTable(Table table, Difficulty difficulty) {
         int i=1;
 
         out.print("\n**** TABLE ****");
@@ -286,6 +286,37 @@ public class Cli extends ObservableView implements View {
             }else
                 out.print("Empty");
             i++;
+        }
+        if(difficulty.equals(Difficulty.EXPERTMODE)){
+            out.println("\n----------------------------------------------");
+            out.print("\n**** CHARACTER CARDS ****");
+            if (table.getCharacterCardsOnTable().size()>0) {
+                for (CharacterCard characterCard : table.getCharacterCardsOnTable()) {
+                    int coins=0;
+                    if(characterCard.getCoinOnCard())
+                        coins=1;
+                    out.println();
+                    out.println(characterCard.getCardEffect().toString()+"("+coins+")");
+                    switch (characterCard.getCardEffect()){
+                        case COURTESAN:
+                        case ABBOT:
+                        case ACROBAT:
+                            out.print("Students : ");
+                            for (Student s : characterCard.getStudentsOnCard()) {
+                                out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+                            }
+                            out.println();
+                            break;
+                        case CURATOR:
+                            out.println("Forbidden cards on curator: "+characterCard.getCardEffect().getXCardOnCard());
+                            break;
+                        default:
+                            break;
+                    }
+                    out.println("Effect: \n"+characterCard.getDescription());
+                }
+            }else
+                out.print("\nEmpty");
         }
         out.println("\n----------------------------------------------");
     }
