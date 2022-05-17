@@ -250,24 +250,29 @@ public class Cli extends ObservableView implements View {
 
     @Override
     public void askLobby() {
-        try {
-            out.print("Enter your nickname: ");
-            String nickname = readInput();
-            out.print("Enter your Birth Day (gg): ");
-            int birthDay= Integer.parseInt(readInput());
-            out.print("Enter your Birth Month (mm): ");
-            int birthMonth= Integer.parseInt(readInput());
-            out.print("Enter your Birth Year (aaaa): ");
-            int birthYear= Integer.parseInt(readInput());
-            GregorianCalendar playerDate = new GregorianCalendar(birthYear, birthMonth, birthDay);
+        boolean ye;
+        do {
+            try {
+                out.print("Enter your nickname: ");
+                String nickname = readInput();
+                out.print("Enter your Birth Day (gg): ");
+                int birthDay= Integer.parseInt(readInput());
+                out.print("Enter your Birth Month (mm): ");
+                int birthMonth= Integer.parseInt(readInput());
+                out.print("Enter your Birth Year (aaaa): ");
+                int birthYear= Integer.parseInt(readInput());
+                GregorianCalendar playerDate = new GregorianCalendar(birthYear, birthMonth, birthDay);
 
-            out.print("Enter the gameID: ");
-            String gameID = readInput();
+                out.print("Enter the gameID: ");
+                String gameID = readInput();
+                ye = false;
 
-            notifyObserver(obs -> obs.updateLobby(nickname, playerDate, gameID));
-        } catch (Exception e) {
-            out.println(WRONG_INPUT);
-        }
+                notifyObserver(obs -> obs.updateLobby(nickname, playerDate, gameID));
+            } catch (Exception e) {
+                out.println(WRONG_INPUT);
+                ye = true;
+            }
+        }while (ye);
     }
 
 
