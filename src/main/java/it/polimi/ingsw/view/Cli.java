@@ -79,6 +79,88 @@ public class Cli extends ObservableView implements View {
     }
 
     @Override
+    public void askConnect() {
+        boolean succeded;
+        do {
+            try{
+                succeded = false;
+                out.print("Insert a valid ip address (127.0.0.1) : ");
+                String ipAddress = readInput();
+                out.print("Insert a valid port (4000) : ");
+                int port = Integer.parseInt(readInput());
+                notifyObserver(obs -> obs.updateConnect(ipAddress, port));
+            }
+            catch (Exception e){
+                out.println("⚠️Wrong input. ⚠️");
+                succeded = true;
+            }
+        }while(succeded);
+    }
+
+    @Override
+    public void askLobby() {
+        boolean ye;
+        do {
+            try {
+                out.print("Enter your nickname: ");
+                String nickname = readInput();
+                out.print("Enter your Birth Day (gg): ");
+                int birthDay= Integer.parseInt(readInput());
+                out.print("Enter your Birth Month (mm): ");
+                int birthMonth= Integer.parseInt(readInput());
+                out.print("Enter your Birth Year (aaaa): ");
+                int birthYear= Integer.parseInt(readInput());
+                GregorianCalendar playerDate = new GregorianCalendar(birthYear, birthMonth, birthDay);
+
+                out.print("Enter the gameID: ");
+                String gameID = readInput();
+                ye = false;
+
+                notifyObserver(obs -> obs.updateLobby(nickname, playerDate, gameID));
+            } catch (Exception e) {
+                out.println(WRONG_INPUT);
+                ye = true;
+            }
+        }while (ye);
+    }
+
+
+
+    @Override
+    public void askPlayersNumberAndDifficulty() {
+        int playersNumber;
+        boolean ye;
+        Difficulty difficulty = Difficulty.STANDARDMODE;
+        String g;
+        do {
+            out.print("Enter the number of players who will join the room (2-4): ");
+            try {
+                playersNumber = Integer.parseInt(readInput());
+            } catch (Exception e) {
+                out.println(WRONG_INPUT);
+                playersNumber=1;
+            }
+
+        } while(playersNumber > 4 || playersNumber <= 1);
+        do {
+            out.print("Enter the game difficulty that you want to play (Standard, Expert): ");
+            try {
+                g=readInput().toUpperCase(Locale.ROOT)+"MODE";
+                difficulty = Difficulty.valueOf(g);
+                ye=false;
+            } catch (Exception e) {
+                out.println(WRONG_INPUT);
+                ye=true;
+            }
+
+        } while (ye);
+        int finalPlayersNumber = playersNumber;
+        Difficulty finalDifficulty = difficulty;
+        notifyObserver(obs -> obs.choosePlayersNumberAndDifficulty(finalPlayersNumber,finalDifficulty));
+    }
+
+
+    @Override
     public void showLogin(String nickname, String gameId, GregorianCalendar playerDate, boolean wasJoined) {
         if (wasJoined){
             notifyObserver(obs -> obs.createNickname(nickname));
@@ -231,86 +313,6 @@ public class Cli extends ObservableView implements View {
 
     }
 
-    @Override
-    public void askConnect() {
-        boolean succeded;
-        do {
-            try{
-                succeded = false;
-                out.print("Insert a valid ip address (127.0.0.1) : ");
-                String ipAddress = readInput();
-                out.print("Insert a valid port (4000) : ");
-                int port = Integer.parseInt(readInput());
-                notifyObserver(obs -> obs.updateConnect(ipAddress, port));
-            }
-            catch (Exception e){
-                out.println("⚠️Wrong input. ⚠️");
-                succeded = true;
-            }
-        }while(succeded);
-    }
-
-    @Override
-    public void askLobby() {
-        boolean ye;
-        do {
-            try {
-                out.print("Enter your nickname: ");
-                String nickname = readInput();
-                out.print("Enter your Birth Day (gg): ");
-                int birthDay= Integer.parseInt(readInput());
-                out.print("Enter your Birth Month (mm): ");
-                int birthMonth= Integer.parseInt(readInput());
-                out.print("Enter your Birth Year (aaaa): ");
-                int birthYear= Integer.parseInt(readInput());
-                GregorianCalendar playerDate = new GregorianCalendar(birthYear, birthMonth, birthDay);
-
-                out.print("Enter the gameID: ");
-                String gameID = readInput();
-                ye = false;
-
-                notifyObserver(obs -> obs.updateLobby(nickname, playerDate, gameID));
-            } catch (Exception e) {
-                out.println(WRONG_INPUT);
-                ye = true;
-            }
-        }while (ye);
-    }
-
-
-
-    @Override
-    public void askPlayersNumberAndDifficulty() {
-        int playersNumber;
-        boolean ye;
-        Difficulty difficulty = Difficulty.STANDARDMODE;
-        String g;
-        do {
-            out.print("Enter the number of players who will join the room (2-4): ");
-            try {
-                playersNumber = Integer.parseInt(readInput());
-            } catch (Exception e) {
-                out.println(WRONG_INPUT);
-                playersNumber=1;
-            }
-
-        } while(playersNumber > 4 || playersNumber <= 1);
-        do {
-            out.print("Enter the game difficulty that you want to play (Standard, Expert): ");
-            try {
-                g=readInput().toUpperCase(Locale.ROOT)+"MODE";
-                difficulty = Difficulty.valueOf(g);
-                ye=false;
-            } catch (Exception e) {
-                out.println(WRONG_INPUT);
-                ye=true;
-            }
-
-        } while (ye);
-        int finalPlayersNumber = playersNumber;
-        Difficulty finalDifficulty = difficulty;
-        notifyObserver(obs -> obs.choosePlayersNumberAndDifficulty(finalPlayersNumber,finalDifficulty));
-    }
 
 
     @Override
