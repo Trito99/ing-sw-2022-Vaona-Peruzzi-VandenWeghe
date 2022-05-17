@@ -62,9 +62,6 @@ public interface View {
     /** chiede al giocatore quale carta assistente vuole giocare */
     void askAssistantCardToPlay();
 
-    /** chiede al giocatore dove muovere gli studenti */
-    void askStudentsToMove(ArrayList<Student> studentsInHall, School school, Table table);
-
     /** chiede al giocatore quale carta personaggio vuole giocare */
     void askCharacterCardToPlay(ArrayList<CharacterCard> characterCard);
 
@@ -72,7 +69,7 @@ public interface View {
     void askMotherEarthSteps(AssistantCard trash);
 
     /** chiede al giocatore di scegliere una tessera nuvola */
-    void askCloud();
+    void askCloud(Table table);
 
     void askPlaceAndStudentForMove(ArrayList<Student> entry);
 

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.message.ChoosePlaceAndStudentForMove;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CharacterCard;
@@ -330,11 +329,6 @@ public class Cli extends ObservableView implements View {
     }
 
     @Override
-    public void askStudentsToMove(ArrayList<Student> studentsInHall, School school, Table table) {
-
-    }
-
-    @Override
     public void askCharacterCardToPlay(ArrayList<CharacterCard> characterCard) {
 
     }
@@ -357,12 +351,27 @@ public class Cli extends ObservableView implements View {
     }
 
     @Override
-    public void askCloud() {
+    public void askCloud(Table table) {
+        int i=1;
         boolean ye;
         do {
             try {
                 ye=false;
                 out.print("\nChoose a Cloud Card (id) ");
+
+                for(CloudCard c : table.getCloudNumber()){
+                    out.print("\nCloud "+ table.getCloudNumber().get(i-1).getIdCloud() + ") ");
+                    if (table.getCloudNumber().get(i-1).getStudentOnCloud().size()>0) {
+                        out.print("Id Students: " );
+                        for (Student s : table.getCloudNumber().get(i - 1).getStudentOnCloud()) {
+                            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+
+                        }
+                    }else
+                        out.print("Empty");
+                    i++;
+                }
+                out.print("\n");
                 int id = Integer.parseInt(readInput());
                 notifyObserver(obs -> obs.chooseCloudCard(id));
             } catch (Exception e) {
