@@ -1,10 +1,18 @@
 package it.polimi.ingsw.message;
 
 
+import it.polimi.ingsw.model.table.Table;
+
 public class ChooseCloudCard extends ServerMessage {
 
-    public ChooseCloudCard() {
+    private Table table;
+
+    public ChooseCloudCard(Table table) {
         super(MessageType.CHOOSE_CLOUD_CARD);
+        this.table = table;
     }
 
+    public Table getTable() {
+        return table;
+    }
 }

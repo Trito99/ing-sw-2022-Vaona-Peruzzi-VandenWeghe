@@ -125,7 +125,8 @@ public class ClientMessanger implements ObserverView, Observer {
                 queue.execute(() -> view.askAssistantCardToPlay());
                 break;
             case CHOOSE_CLOUD_CARD:
-                queue.execute(() -> view.askCloud());
+                ChooseCloudCard tableTwo = (ChooseCloudCard) message;
+                queue.execute(() -> view.askCloud(tableTwo.getTable()));
                 break;
             case CHOOSE_PLACE_AND_STUDENT_FOR_MOVE:
                 ChoosePlaceAndStudentForMove entry = (ChoosePlaceAndStudentForMove) message;

@@ -110,12 +110,6 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void askStudentsToMove(ArrayList<Student> studentsInHall, School school, Table table) {
-        //clientHandler.sendMessage(new ShowSchool(studentsInHall, school));
-        //clientHandler.sendMessage(new ShowTable(table));
-    }
-
-    @Override
     public void askCharacterCardToPlay(ArrayList<CharacterCard> characterCard) {
         clientHandler.sendMessage(new ShowCharacterToPlay(characterCard));
     }
@@ -131,8 +125,8 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void askCloud() {
-        clientHandler.sendMessage(new ChooseCloudCard());
+    public void askCloud(Table table) {
+        clientHandler.sendMessage(new ChooseCloudCard(table));
     }
 
     @Override

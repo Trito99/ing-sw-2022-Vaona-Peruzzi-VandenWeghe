@@ -300,7 +300,7 @@ public class GameController {
                     }else{
                         virtualView.showMessage("\nCloud is empty or doesn't exist");
                         again=true;
-                        virtualView.askCloud();
+                        virtualView.askCloud(gameSession.getTable());
                     }
                 }
                 if(!again && turnFinished) {
@@ -376,7 +376,7 @@ public class GameController {
                     if (gameSession.gameIsFinished(turnController.getActivePlayer())){
                         endGame();
                     }else
-                        allVirtualView.get(turnController.getActivePlayer()).askCloud();
+                        allVirtualView.get(turnController.getActivePlayer()).askCloud(gameSession.getTable());
                     break;
                 case STUDENT:
                     allVirtualView.get(turnController.getActivePlayer()).askPlaceAndStudentForMove(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
