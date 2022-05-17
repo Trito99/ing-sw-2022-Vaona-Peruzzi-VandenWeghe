@@ -2,6 +2,7 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
+import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.Difficulty;
@@ -322,14 +323,26 @@ public class Cli extends ObservableView implements View {
                 String nickname = readInput();
                 notifyObserver(obs -> obs.chooseAssistantCard(nickname));
             } catch (Exception e) {
-                ye=true;
+                ye = true;
                 out.println(WRONG_INPUT);
             }
         } while (ye);
     }
 
     @Override
-    public void askCharacterCardToPlay(ArrayList<CharacterCard> characterCard) {
+    public void askCharacterCardToPlay() {
+        boolean ye;
+        do{
+            try{
+                ye = false;
+                out.print("\n which character do you want to play? (charachter nickname or none) ");
+                String character = readInput();
+                notifyObserver(obs -> obs.chooseCharacterCard(character));
+            } catch (Exception e){
+                ye = true;
+                out.println("the character chosen doesn't exist or you don't have enough money, type again.");
+            }
+        }while (ye);
 
     }
 

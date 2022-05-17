@@ -2,6 +2,8 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.message.Error;
+import it.polimi.ingsw.model.character.CardEffect;
+import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.observer.ObserverView;
@@ -53,8 +55,12 @@ public class ClientMessanger implements ObserverView, Observer {
         client.sendMessage(new PlayersNumberAndDifficulty(nickname, playersNumber,difficulty));
     }
 
+    public void chooseCharacterCard(String cardNickname){
+        client.sendMessage(new CharacterCardPlayed(nickname, cardNickname));
+    }
+
     public void chooseAssistantCard(String cardNickname){
-        client.sendMessage(new AssistantCardPlayed(nickname,cardNickname));
+        client.sendMessage(new AssistantCardPlayed(nickname, cardNickname));
     }
 
     public void chooseCloudCard(int id){
@@ -122,6 +128,8 @@ public class ClientMessanger implements ObserverView, Observer {
                 ShowAssistantDeck deck = (ShowAssistantDeck) message;
                 queue.execute(() -> view.showDeckAssistant(deck.getDeckAssistant()));
                 break;
+            case PLAY_CHARACTER_CARD:
+                queue.execute(() -> view.askCharacterCardToPlay());
             case PLAY_ASSISTANT_CARD:
                 queue.execute(() -> view.askAssistantCardToPlay());
                 break;

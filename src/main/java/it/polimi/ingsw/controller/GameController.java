@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CardEffect;
+import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.DeckCharacter;
 import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.*;
@@ -212,6 +213,30 @@ public class GameController {
                 break;
             case ACTION:
                 boolean turnFinished = false;
+                if(receivedMessage.getMessageType() == MessageType.CHARACTER_CARD_PLAYED){
+                    CharacterCardPlayed CardSelected = (CharacterCardPlayed) receivedMessage;
+                    int indexOfCurrentPlayer = gameSession.getListOfPlayers().indexOf(gameSession.getPlayer(receivedMessage.getNickname()));
+                    boolean present = false, exists = false;
+                    for(CharacterCard characterCard : gameSession.getTable().getCharacterCardsOnTable()){
+                        if(characterCard.getCardEffect().equals(CardSelected.getCardNickname()))
+                            exists = true;
+                    }
+
+                    if (exists) {
+                            again = false;
+                          //  gameSession.playCharacterCard( , gameSession.getPlayer(turnController.getActivePlayer()));
+                        } else {
+                            virtualView.showMessage("\nEffect not present. Try again");
+                            virtualView.askCharacterCardToPlay();
+                            again = true;
+                        }
+                }
+                if(!again) {
+                    turnController.nextPlayer(turnController.getPlayerOrderByName());
+                    roundIndex++;
+                    action();
+                }
+
                 if(receivedMessage.getMessageType() == MessageType.PLACE_AND_STUDENT_FOR_MOVE_CHOSEN){
                     PlaceAndStudentForMoveChosen Choice = (PlaceAndStudentForMoveChosen) receivedMessage;
                     boolean present = false;
@@ -362,7 +387,10 @@ public class GameController {
                 gameSession.setOrder(turnController.getNewPlayerOrder());
                 turnController.setPlayingPlayer(turnController.getNewPlayerOrderByName().get(0));
                 this.setGameState(GameState.ACTION);
-                this.setActionState(ActionState.STUDENT);
+                if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
+                    this.setActionState(ActionState.CHARACTER);
+                else
+                    this.setActionState(ActionState.STUDENT);
                 showGame();
                 action();
             }
@@ -372,6 +400,9 @@ public class GameController {
     public void action(){
         if (roundIndex < maxPlayers) {
             switch(actionState) {
+                case CHARACTER:
+                    allVirtualView.get(turnController.getActivePlayer()).askCharacterCardToPlay();
+                    break;
                 case STUDENT:
                     allVirtualView.get(turnController.getActivePlayer()).askPlaceAndStudentForMove(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                     break;

@@ -63,7 +63,7 @@ public interface View {
     void askAssistantCardToPlay();
 
     /** chiede al giocatore quale carta personaggio vuole giocare */
-    void askCharacterCardToPlay(ArrayList<CharacterCard> characterCard);
+    void askCharacterCardToPlay();
 
     /** chiede al giocatore quanti passi far fare a madre natura*/
     void askMotherEarthSteps(AssistantCard trash);

@@ -4,4 +4,5 @@ public enum ActionState {
     STUDENT,
     MOTHERNATURE,
     CLOUDCARD,
+    CHARACTER,
 }

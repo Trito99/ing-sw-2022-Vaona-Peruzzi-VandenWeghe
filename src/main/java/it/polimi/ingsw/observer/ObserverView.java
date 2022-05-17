@@ -1,5 +1,6 @@
 package it.polimi.ingsw.observer;
 
+import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.GameMode;
 
@@ -35,5 +36,7 @@ public interface ObserverView {
     public void chooseIdIsland(int id);
 
     public void chooseMotherEarthSteps(int steps);
+
+    public void chooseCharacterCard(String characterNickname);
 
 }
