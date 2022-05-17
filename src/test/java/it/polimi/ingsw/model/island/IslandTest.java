@@ -1,12 +1,15 @@
 package it.polimi.ingsw.model.island;
 
+import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CardEffect;
+import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.Prof;
+import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.SColor;
@@ -21,11 +24,21 @@ import org.junit.jupiter.params.provider.EnumSource;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static java.lang.System.out;
 import static org.junit.Assert.*;
 
 public class IslandTest {
    private Table table;
    private ArrayList<Player> players;
+
+   public static final  String ANSI_RESET = "\u001B[0m";
+   public static final  String ANSI_GREEN = "\u001B[32m";
+   public static final  String ANSI_YELLOW = "\u001B[33m";
+   public static final  String ANSI_RED = "\u001B[31m";
+   public static final  String ANSI_PINK = "\u001B[35m";
+   public static final  String ANSI_BLUE = "\u001B[34m";
+   public static final  String ANSI_GREY = "\u001B[37m";
+   public static final  String ANSI_BLACK = "\u001B[30m";
 
    @BeforeEach
    public void setup(){
@@ -39,7 +52,114 @@ public class IslandTest {
       players.add(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
    }
 
-   @Test
+   private void ShowTable(Table table){
+      int i=1;
+
+      out.print("\n**** TABLE ****");
+      out.print("\nIsland Id  | MotherEarth |   Tower (n)   | Students");
+      for(IslandCard islandCard : table.getListOfIsland()) {
+         if (islandCard.towerIsOnIsland()) {
+            out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       |    " + getTowerAnsiColor(islandCard.getTowerOnIsland()) + "T" +ANSI_RESET+ "(" + islandCard.getMergedIsland() + ")     | ");
+            for (Student student: islandCard.getStudentOnIsland())
+               out.print(getStudentAnsiColor(student) + student.getIdStudent() + " " + ANSI_RESET);
+         } else {
+            out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       | " + " No Tower" +"(" + (islandCard.getMergedIsland()-1) + ")" + " | ");
+            for (Student student: islandCard.getStudentOnIsland())
+               out.print(getStudentAnsiColor(student) + student.getIdStudent() + " " + ANSI_RESET);
+         }
+      }
+      out.println("\n----------------------------------------------");
+      out.print("\n**** CLOUDS ****");
+      for(CloudCard c : table.getCloudNumber()){
+         out.print("\nCloud "+ table.getCloudNumber().get(i-1).getIdCloud() + ") ");
+         if (table.getCloudNumber().get(i-1).getStudentOnCloud().size()>0) {
+            out.print("Id Students: " );
+            for (Student s : table.getCloudNumber().get(i - 1).getStudentOnCloud()) {
+               out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+
+            }
+         }else
+            out.print("Empty");
+         i++;
+      }
+      out.println("\n----------------------------------------------");
+   }
+
+   public void showPersonalSchool(School school, String nickname, AssistantCard trash) {
+
+      out.print("\n****School of "+ nickname + "**** ");
+      out.print("\nEntry: ");
+      for(Student s : school.getEntry()){
+         out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | " );
+      }
+      out.print(ANSI_GREEN +"\n\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.GREEN)+ ANSI_GREEN + " Green Table: " + ANSI_RESET);
+      for(Student s : school.getGTable()){
+         out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+      }
+
+      out.print(ANSI_RED +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.RED)+ ANSI_RED + " Red Table: " + ANSI_RESET);
+      for(Student s : school.getRTable()){
+         out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+      }
+
+      out.print(ANSI_YELLOW +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.YELLOW)+ ANSI_YELLOW + " Yellow Table: " + ANSI_RESET);
+      for(Student s : school.getYTable()){
+         out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+      }
+
+      out.print(ANSI_PINK +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.PINK)+ ANSI_PINK + " Pink Table: " + ANSI_RESET);
+      for(Student s : school.getPTable()){
+         out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+      }
+
+      out.print(ANSI_BLUE +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.BLUE)+ ANSI_BLUE + " Blue Table: " + ANSI_RESET);
+      for(Student s : school.getBTable()){
+         out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+      }
+
+      out.print("\n\nTowers: ");
+      for(Tower t : school.getTower()){
+         out.print(getTowerAnsiColor(t) + "T" + ANSI_RESET + " | ");
+      }
+      out.print("(" + school.getTower().size() + " towers remained)");
+
+      out.print("\n\nTrash Card: ");
+      if (trash!=null)
+         out.print(trash.getAssistantName() +" (TurnValue: "+ trash.getTurnValue() + ", StepME: " + trash.getStepMotherEarth()+")");
+
+      out.println("\n----------------------------------------------");
+   }
+
+   private String getStudentAnsiColor(Student student) {
+      switch (student.getsColour()) {
+         case GREEN:
+            return ANSI_GREEN;
+         case YELLOW:
+            return ANSI_YELLOW;
+         case RED:
+            return ANSI_RED;
+         case PINK:
+            return ANSI_PINK;
+         case BLUE:
+            return ANSI_BLUE;
+         default:
+            return ANSI_RESET;
+      }
+   }
+
+
+   private String getTowerAnsiColor(Tower tower) {
+      switch (tower.getTColour()) {
+         case BLACK:
+            return ANSI_BLACK;
+         case GREY:
+            return ANSI_GREY;
+         default:
+            return ANSI_RESET;
+      }
+   }
+
+      @Test
    public void IslandCard(){
       for(int count = 0; count < 12; count++){
          IslandCard island = new IslandCard(count);
@@ -269,7 +389,7 @@ public class IslandTest {
 
 
 
-   @RepeatedTest(100)
+   @RepeatedTest(1)
    public void BuildTowerOnIslandTest(){
       Random rn = new Random();
       int r;
@@ -336,26 +456,21 @@ public class IslandTest {
             }
          }
 
+         ShowTable(table);
+         for(int i=0;i<game.getListOfPlayers().size();i++)
+            showPersonalSchool(game.getListOfPlayers().get(i).getPersonalSchool(),game.getListOfPlayers().get(i).getPlayerNumber().toString(),null);
+
          table.moveMotherEarth(13-table.getPosMotherEarth());
          for (IslandCard islandCard: table.getListOfIsland()){
             islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE);
-            for(Player player : game.getListOfPlayers()){
-               if(islandCard.towerIsOnIsland()){
-                  //if(player.getTColor()==islandCard.getTowerOnIsland().getTColour())
-                     //if(player.getPersonalSchool().getTower().size()!=0)
-                        //assertEquals(islandCard.getTowerOnIsland().getIdTower()-1, player.getPersonalSchool().getTower().get(player.getPersonalSchool().getTower().size()-1).getIdTower());
-               }
-            }
             if(islandCard.towerIsOnIsland())
                assertEquals(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE).getTColor(),islandCard.getTowerOnIsland().getTColour());
             table.moveMotherEarth(1);
          }
-         /**for (int i = 0; i < index+2; i++) {    /** Positions the Professors according to the rules *
-            for (int y = 0; y < 5; y++) {
-               System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getProfOfPlayer().get(y).getIsInHall()+" ");
-            }
-         }   System.out.println();*/
 
+         for (IslandCard islandCard: table.getListOfIsland()){
+            //table.joinIsland(table.getListOfIsland());
+         }
 
 
          for (int i = 0; i < index+2; i++) {    /** Switches true and false of prof */
@@ -375,20 +490,24 @@ public class IslandTest {
                }
             }
          }
-
-         /**for (int i = 0; i < index+2; i++) {    /** Positions the Professors according to the rules *
-            for (int y = 0; y < 5; y++) {
-               System.out.print(game.getListOfPlayers().get(i).getPersonalSchool().getProfOfPlayer().get(y).getIsInHall()+" ");
-            }
-         }   System.out.println();*/
-
+         ShowTable(table);
+         for(int i=0;i<game.getListOfPlayers().size();i++)
+            showPersonalSchool(game.getListOfPlayers().get(i).getPersonalSchool(),game.getListOfPlayers().get(i).getPlayerNumber().toString(),null);
 
          table.moveMotherEarth(13-table.getPosMotherEarth());
          for (IslandCard islandCard: table.getListOfIsland()){
-            if(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE) !=null && islandCard.towerIsOnIsland()) {
-               //System.out.println((islandCard.getTowerOnIsland().getTColour()));
-               //System.out.println(islandCard.calculateInfluence(game.getListOfPlayers(), CardEffect.STANDARDMODE).getTColor());
-            }
+            islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE);
+            if(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE)!=null && islandCard.towerIsOnIsland())
+               //assertEquals(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE).getTColor(),islandCard.getTowerOnIsland().getTColour());
+            table.moveMotherEarth(1);
+         }
+
+         ShowTable(table);
+         for(int i=0;i<game.getListOfPlayers().size();i++)
+            showPersonalSchool(game.getListOfPlayers().get(i).getPersonalSchool(),game.getListOfPlayers().get(i).getPlayerNumber().toString(),null);
+
+         /**table.moveMotherEarth(13-table.getPosMotherEarth());
+         for (IslandCard islandCard: table.getListOfIsland()){
             int size=0;
             Player prev=null;
             if(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE) !=null && islandCard.towerIsOnIsland()){
@@ -424,7 +543,7 @@ public class IslandTest {
             if(islandCard.towerIsOnIsland() && islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE)!=null)
                assertEquals(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE).getTColor(),islandCard.getTowerOnIsland().getTColour());
             table.moveMotherEarth(1);
-         }
+         }*/
       }
    }
 

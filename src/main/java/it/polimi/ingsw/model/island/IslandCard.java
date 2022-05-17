@@ -100,11 +100,12 @@ public class IslandCard implements Serializable {
         }
         if(!playerBuilder.getTColor().equals(towerOnIsland.getTColour())){
             for(int i=0;i<mergedIsland;i++) {
-                prevPlayer.getPersonalSchool().getTower().add(new Tower(prevPlayer.getTColor()));
-                playerBuilder.getPersonalSchool().removeTower();
+                if(!playerBuilder.getPersonalSchool().getTower().isEmpty()) {
+                    prevPlayer.getPersonalSchool().getTower().add(new Tower(prevPlayer.getTColor()));
+                    playerBuilder.getPersonalSchool().removeTower();
+                }
             }
             setTowerOnIsland(new Tower(playerBuilder.getTColor()));
-            playerBuilder.getPersonalSchool().removeTower();
         }
     }
 
@@ -116,7 +117,6 @@ public class IslandCard implements Serializable {
         /** calcolo influenza sull'isola */
         for(Player p : listOfPlayers){
             int countTot = 0;
-
             for(i=0; i<studentOnIsland.size(); i++){
                 switch (studentOnIsland.get(i).getsColour()){   /** guardo colore studente */
                     case GREEN:
@@ -145,12 +145,6 @@ public class IslandCard implements Serializable {
                         }
                         break;
                 }
-                /** EFFETTO CENTAURO */
-                if(towerIsOnIsland) {
-                    if (p.getTColor().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isCentaurPlayed()) {  /** Aggiungo influenza torri */
-                        countTot=countTot+mergedIsland;
-                    }
-                }
 
                 /** EFFETTO CAVALIERE */
                 if(cardEffectPlayed.isKnightPlayed()) {
@@ -159,6 +153,12 @@ public class IslandCard implements Serializable {
                 }
                 else
                     p.setInfluenceOnIsland(countTot);
+            }
+            /** EFFETTO CENTAURO */
+            if(towerIsOnIsland) {
+                if (p.getTColor().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isCentaurPlayed()) {  /** Aggiungo influenza torri */
+                    countTot=countTot+mergedIsland;
+                }
             }
 
             for(SColor c : SColor.values()){            /** controlla se va bene qua (Erborista) */

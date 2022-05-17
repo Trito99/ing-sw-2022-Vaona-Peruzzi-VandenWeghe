@@ -19,18 +19,16 @@ import java.security.InvalidParameterException;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class GameController {
     private Game gameSession;
-    private int maxPlayers;
+    private int maxPlayers, roundIndex, studentId, movedStudents=0;
     private TurnController turnController;
     private GameState gameState;
     private final HashMap<String, VirtualView> allVirtualView;
-    private int roundIndex;
-    boolean again=false;
+    boolean again=false, lastRound=false;
     private ActionState actionState;
-    int studentId;
-    int movedStudents=0;
 
 
     public GameController(){
@@ -300,7 +298,7 @@ public class GameController {
                         gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromCloudToEntry(gameSession.getTable().getCloudNumber().get(Cloud.getId() - 1));
                         turnFinished = true;
                     }else{
-                        virtualView.showMessage("\n Cloud is empty or doesn't exist");
+                        virtualView.showMessage("\nCloud is empty or doesn't exist");
                         again=true;
                         virtualView.askCloud();
                     }
@@ -313,10 +311,6 @@ public class GameController {
                     showGame();
                     action();
                 }
-                break;
-            case END_GAME:
-                /** inGame è qualcosa che riconosca le varie azioni del gioco da svolgere, e chiama le funzioni*/
-                //inGame(receivedMessage);
                 break;
             default:
                 String message = "Errore!";
@@ -360,14 +354,18 @@ public class GameController {
             allVirtualView.get(turnController.getActivePlayer()).askAssistantCardToPlay();
         }
         if (roundIndex == maxPlayers) {
-            roundIndex = 0;
-            turnController.changeOrder();
-            gameSession.setOrder(turnController.getNewPlayerOrder());
-            turnController.setPlayingPlayer(turnController.getNewPlayerOrderByName().get(0));
-            this.setGameState(GameState.ACTION);
-            this.setActionState(ActionState.STUDENT);
-            showGame();
-            action();
+            if(gameSession.gameIsFinished(turnController.getActivePlayer()))
+                endGame();
+            else{
+                roundIndex = 0;
+                turnController.changeOrder();
+                gameSession.setOrder(turnController.getNewPlayerOrder());
+                turnController.setPlayingPlayer(turnController.getNewPlayerOrderByName().get(0));
+                this.setGameState(GameState.ACTION);
+                this.setActionState(ActionState.STUDENT);
+                showGame();
+                action();
+            }
         }
     }
 
@@ -375,7 +373,10 @@ public class GameController {
         if (roundIndex < maxPlayers) {
             switch(actionState) {
                 case CLOUDCARD:
-                    allVirtualView.get(turnController.getActivePlayer()).askCloud();
+                    if (gameSession.gameIsFinished(turnController.getActivePlayer())){
+                        endGame();
+                    }else
+                        allVirtualView.get(turnController.getActivePlayer()).askCloud();
                     break;
                 case STUDENT:
                     allVirtualView.get(turnController.getActivePlayer()).askPlaceAndStudentForMove(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
@@ -390,9 +391,19 @@ public class GameController {
         if (roundIndex == maxPlayers) {
             turnController.setPlayingPlayer(turnController.getNewPlayerOrderByName().get(0));
             roundIndex = 0;
-            gameState = GameState.PLANNING;
-            gameSession.getTable().extractStudentOnCloud();
-            planning();
+            setGameState(GameState.PLANNING);
+            if(!lastRound) {
+                if (gameSession.getTable().getBag().size() >= ((gameSession.getTable().getCloudNumber().size()) * (gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces()))) {
+                    gameSession.getTable().extractStudentOnCloud();
+                    planning();
+                } else if (gameSession.getTable().getBag().size() < ((gameSession.getTable().getCloudNumber().size()) * (gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces())) && gameSession.getTable().getBag().size() > 0) {
+                    planning();
+                    lastRound = true;
+                } else if (gameSession.getTable().getBag().isEmpty()) {
+                    endGame();
+                }
+            }else
+                endGame();
         }
     }
 
@@ -418,6 +429,10 @@ public class GameController {
 
     public void setGameSession(Game gameSession) {
         this.gameSession = gameSession;
+    }
+
+    private void endGame(){
+        broadcastMessage("\n"+gameSession.getTable().playerIsWinning(gameSession).getNickname()+" WINS");
     }
 
 
