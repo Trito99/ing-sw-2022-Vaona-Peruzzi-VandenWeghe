@@ -52,12 +52,12 @@ public class VirtualView implements View, Observer {
 
     @Override
     public void showWinMessage() {
-        //clientHandler.sendMessage(new WinMessage(finalPoints));
+        clientHandler.sendMessage(new WinMessage());
     }
 
     @Override
-    public void showLoseMessage() {
-        //clientHandler.sendMessage(new LoseMessage());
+    public void showLoseMessage(String nickname) {
+        clientHandler.sendMessage(new LoseMessage(nickname));
     }
 
     @Override
@@ -93,7 +93,7 @@ public class VirtualView implements View, Observer {
 
     @Override
     public void askAction() {
-        clientHandler.sendMessage(new StartTurn());
+
     }
 
     @Override

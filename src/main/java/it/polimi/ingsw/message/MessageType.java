@@ -16,8 +16,7 @@ public enum MessageType {
     STRING_MESSAGE,
 
     //messaggi del turno
-    START_TURN,
-    END_TURN,
+    END,
 
     //setup
 

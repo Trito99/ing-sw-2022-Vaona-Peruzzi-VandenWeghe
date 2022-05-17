@@ -28,7 +28,7 @@ public interface View {
 
     void showWinMessage();
 
-    void showLoseMessage();
+    void showLoseMessage(String nickname);
 
     /** mostra tutti i dati del giocatore */
     void showPlayer(String nickname, PlayerNumber playerNumber, TColor tColor, int influenceOnIsland, School personalSchool,

@@ -1,9 +1,6 @@
 package it.polimi.ingsw.network;
 
-import it.polimi.ingsw.message.ClientMessage;
-import it.polimi.ingsw.message.GeneralMessage;
-import it.polimi.ingsw.message.LoginRequest;
-import it.polimi.ingsw.message.MessageType;
+import it.polimi.ingsw.message.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -82,8 +79,12 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
                     if (message.getMessageType() == MessageType.LOGIN) {
                         LoginRequest loginMsg = (LoginRequest) message;
                         lobby = (lobbyServer.getLobby(loginMsg.getGameId()));
-                        gameId=loginMsg.getGameId();
+                        gameId = loginMsg.getGameId();
                         lobby.addPlayer(loginMsg.getNickname(), loginMsg.getPlayerDate(), this);
+                    } else if (message.getMessageType() == MessageType.END){
+                        EndGame EndMsg = (EndGame) message;
+                        lobby.removeExcept(this);
+                        lobbyServer.leaveLobby(EndMsg.getGameId(),this);
                     } else if (lobby != null) {
                         lobby.getMessage(message);
                     }

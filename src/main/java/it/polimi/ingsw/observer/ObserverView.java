@@ -16,6 +16,8 @@ public interface ObserverView {
     /** cerca di connettere un client ad una socket */
     public void updateConnect(String address, int port);
 
+    public void endGame();
+
     /** carica nuovo nickname */
     public void createNickname(String nickname);
 

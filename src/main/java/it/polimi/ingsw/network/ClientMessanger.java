@@ -82,6 +82,10 @@ public class ClientMessanger implements ObserverView, Observer {
         client.sendMessage(new LoginRequest(nickname, lobby, playerDate));
     }
 
+    public void endGame(){
+        client.sendMessage(new EndGame(nickname,lobby));
+    }
+
     public void updateDisconnect(){
         client.disconnect();
     }
@@ -105,9 +109,6 @@ public class ClientMessanger implements ObserverView, Observer {
                 break;
             case SUCCESSFUL_HOST:
                 queue.execute(() -> view.askPlayersNumberAndDifficulty());
-                break;
-            case START_TURN:
-                queue.execute(() -> view.askAction());
                 break;
             case SHOW_TABLE:
                 ShowTable table = (ShowTable) message;
@@ -138,10 +139,8 @@ public class ClientMessanger implements ObserverView, Observer {
                 ChooseMotherEarthSteps steps = (ChooseMotherEarthSteps) message;
                 queue.execute(() -> view.askMotherEarthSteps(steps.getTrash()));
                 break;
-            case WIN: /** da controllare */
-                queue.execute(() -> view.showWinMessage(((WinMessage) message).getNumberOfTower()));
-                queue.execute(() -> view.showWinMessage(((WinMessage) message).getNumberOfIsland()));
-                queue.execute(() -> view.showWinMessage(((WinMessage) message).getLastStudents()));
+            case WIN:
+                queue.execute(() -> view.showWinMessage());
                 break;
             case ERROR:
                 queue.execute(() -> view.showErrorMessage(((Error) message).getMessage()));
@@ -150,7 +149,8 @@ public class ClientMessanger implements ObserverView, Observer {
                 queue.execute(() -> view.showMessage(((StringMessage) message).getMessage()));
                 break;
             case LOSE:
-                queue.execute(() -> view.showLoseMessage());
+                LoseMessage lose = (LoseMessage) message;
+                queue.execute(() -> view.showLoseMessage(lose.getNickname()));
                 client.disconnect();
             case SHOW_PLAYER:
                 ShowPlayerInfo player = (ShowPlayerInfo) message;

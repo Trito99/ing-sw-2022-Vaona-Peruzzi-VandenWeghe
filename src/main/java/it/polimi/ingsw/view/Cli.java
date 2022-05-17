@@ -113,12 +113,14 @@ public class Cli extends ObservableView implements View {
 
     @Override
     public void showWinMessage() {
-
+        out.print("\n****YOU WIN****");
+        notifyObserver(obs -> obs.endGame());
     }
 
     @Override
-    public void showLoseMessage() {
-
+    public void showLoseMessage(String nickname) {
+        out.print("\n****YOU LOSE****");
+        out.print("\n"+nickname+" WINS");
     }
 
     @Override

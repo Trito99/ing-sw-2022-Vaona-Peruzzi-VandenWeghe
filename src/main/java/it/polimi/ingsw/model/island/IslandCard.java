@@ -80,7 +80,6 @@ public class IslandCard implements Serializable {
                             towerIsOnIsland = true;
                         }else{
                             if (!playerFound.getTColor().equals(towerOnIsland.getTColour())) {
-                                System.out.println(4567890);
                                 changeTowerColour(listOfPlayer, cardEffectPlayed, playerFound);
                             }
                         }

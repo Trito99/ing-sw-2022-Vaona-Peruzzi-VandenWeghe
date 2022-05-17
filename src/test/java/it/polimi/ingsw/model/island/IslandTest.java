@@ -389,7 +389,7 @@ public class IslandTest {
 
 
 
-   @RepeatedTest(1)
+   @RepeatedTest(100)
    public void BuildTowerOnIslandTest(){
       Random rn = new Random();
       int r;
@@ -494,17 +494,6 @@ public class IslandTest {
          for(int i=0;i<game.getListOfPlayers().size();i++)
             showPersonalSchool(game.getListOfPlayers().get(i).getPersonalSchool(),game.getListOfPlayers().get(i).getPlayerNumber().toString(),null);
 
-         table.moveMotherEarth(13-table.getPosMotherEarth());
-         for (IslandCard islandCard: table.getListOfIsland()){
-            islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE);
-            if(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE)!=null && islandCard.towerIsOnIsland())
-               //assertEquals(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE).getTColor(),islandCard.getTowerOnIsland().getTColour());
-            table.moveMotherEarth(1);
-         }
-
-         ShowTable(table);
-         for(int i=0;i<game.getListOfPlayers().size();i++)
-            showPersonalSchool(game.getListOfPlayers().get(i).getPersonalSchool(),game.getListOfPlayers().get(i).getPlayerNumber().toString(),null);
 
          /**table.moveMotherEarth(13-table.getPosMotherEarth());
          for (IslandCard islandCard: table.getListOfIsland()){

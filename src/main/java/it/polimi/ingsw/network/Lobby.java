@@ -2,7 +2,6 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.message.ClientMessage;
-import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.view.VirtualView;
 
 import java.util.*;
@@ -59,23 +58,23 @@ public class Lobby {
         return clientHandlerMap.size();
     }
 
-    /**  DA CAMBIARE: disconnette un client
+    //  DA CAMBIARE: disconnette un client
     public void disconnecting(ClientHandler clientHandler){
         if (gameController.isGameStarted()){
-            disconnect(clientHandler);
+            removeExcept(clientHandler);
         }
         else{
             // rimuove giocatore dalla lobby
             clientHandlerMap.remove(clientHandler);
         }
-    } */
+    }
 
-    /** DA CAMBIARE: disconnette un giocatore dalla lobby
-    public void disconnect(ClientHandler clientHandler){
-        gameController.disconnect(clientHandlerMap.get(clientHandler));
-        // rimuove giocatore dalla lobby
-        clientHandlerMap.remove(clientHandler);
-    } */
+    public void removeExcept(ClientHandler clientHandler){
+        for (ClientHandler cl : clientHandlerMap.keySet()){
+            if(cl != clientHandler)
+                clientHandlerMap.remove(cl);
+        }
+    }
 
 
     /** passa messaggio al GameController*/

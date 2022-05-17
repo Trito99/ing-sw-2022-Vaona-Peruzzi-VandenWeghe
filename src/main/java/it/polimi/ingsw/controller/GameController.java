@@ -433,6 +433,12 @@ public class GameController {
 
     private void endGame(){
         broadcastMessage("\n"+gameSession.getTable().playerIsWinning(gameSession).getNickname()+" WINS");
+        for(String nickname: allVirtualView.keySet()) {
+            if(nickname==gameSession.getTable().playerIsWinning(gameSession).getNickname())
+                allVirtualView.get(nickname).showWinMessage();
+            else
+                allVirtualView.get(nickname).showLoseMessage(nickname);
+        }
     }
 
 
@@ -490,7 +496,7 @@ public class GameController {
 
     /** se il gioco non è cominciato ----> return false */
     public boolean isGameStarted(){
-        return gameState != GameState.INIT;
+        return (gameState != GameState.INIT && gameState!= GameState.END_GAME);
     }
 
     /** giocatore attiivo in quel momento */
