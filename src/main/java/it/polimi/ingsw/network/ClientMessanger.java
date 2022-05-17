@@ -83,7 +83,7 @@ public class ClientMessanger implements ObserverView, Observer {
     }
 
     public void endGame(){
-        client.sendMessage(new EndGame(nickname,lobby));
+        client.sendMessage(new EndGame(nickname));
     }
 
     public void updateDisconnect(){

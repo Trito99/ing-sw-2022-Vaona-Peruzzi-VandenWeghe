@@ -82,9 +82,8 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
                         gameId = loginMsg.getGameId();
                         lobby.addPlayer(loginMsg.getNickname(), loginMsg.getPlayerDate(), this);
                     } else if (message.getMessageType() == MessageType.END){
-                        EndGame EndMsg = (EndGame) message;
                         lobby.removeExcept(this);
-                        lobbyServer.leaveLobby(EndMsg.getGameId(),this);
+                        disconnect();
                     } else if (lobby != null) {
                         lobby.getMessage(message);
                     }

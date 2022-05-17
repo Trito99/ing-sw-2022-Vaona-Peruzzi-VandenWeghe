@@ -23,7 +23,8 @@ public class StartServer {
         }
 
         try {
-            socket = new ServerSocket(port,100, InetAddress.getByName(address));
+            socket = new ServerSocket(port,50, InetAddress.getByName(address));
+            System.out.println(InetAddress.getByName(address));
         } catch (IOException exception) {
             System.out.println("impossibile aprire la server socket");
             exception.printStackTrace();

@@ -372,17 +372,17 @@ public class GameController {
     public void action(){
         if (roundIndex < maxPlayers) {
             switch(actionState) {
-                case CLOUDCARD:
-                    if (gameSession.gameIsFinished(turnController.getActivePlayer())){
-                        endGame();
-                    }else
-                        allVirtualView.get(turnController.getActivePlayer()).askCloud(gameSession.getTable());
-                    break;
                 case STUDENT:
                     allVirtualView.get(turnController.getActivePlayer()).askPlaceAndStudentForMove(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                     break;
                 case MOTHERNATURE:
                     allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash());
+                    break;
+                case CLOUDCARD:
+                    if (gameSession.gameIsFinished(turnController.getActivePlayer())){
+                        endGame();
+                    }else
+                        allVirtualView.get(turnController.getActivePlayer()).askCloud(gameSession.getTable());
                     break;
                 default:
                     break;
