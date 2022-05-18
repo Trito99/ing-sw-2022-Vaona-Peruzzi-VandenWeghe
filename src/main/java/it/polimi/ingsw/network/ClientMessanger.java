@@ -53,8 +53,8 @@ public class ClientMessanger implements ObserverView, Observer {
         client.sendMessage(new PlayersNumberAndDifficulty(nickname, playersNumber,difficulty));
     }
 
-    public void chooseCharacterCard(String cardNickname){
-        client.sendMessage(new CharacterCardPlayed(nickname, cardNickname));
+    public void chooseCharacterCard(String cardNickname, boolean choice){
+        client.sendMessage(new CharacterCardPlayed(nickname, cardNickname, choice));
     }
 
     public void chooseAssistantCard(String cardNickname){
@@ -119,15 +119,17 @@ public class ClientMessanger implements ObserverView, Observer {
                 queue.execute(() -> view.showTable(table.getTable(),table.getDifficulty()));
                 break;
             case SHOW_PERSONAL_SCHOOL:
-                ShowPersonalSchool school = (ShowPersonalSchool) message;
-                queue.execute(() -> view.showPersonalSchool(school.getSchool(), school.getNickname(),school.getTrash()));
+                ShowPersonalSchool player = (ShowPersonalSchool) message;
+                queue.execute(() -> view.showPersonalSchool(player.getSchool(), player.getNickname(),player.getTrash(), player.getDifficulty(), player.getCoins()));
                 break;
             case SHOW_ASSISTANT_DECK:
                 ShowAssistantDeck deck = (ShowAssistantDeck) message;
                 queue.execute(() -> view.showDeckAssistant(deck.getDeckAssistant()));
                 break;
             case PLAY_CHARACTER_CARD:
-                queue.execute(() -> view.askCharacterCardToPlay());
+                PlayCharacterCard play = (PlayCharacterCard) message;
+                queue.execute(() -> view.askCharacterCardToPlay(play.getChoice()));
+                break;
             case PLAY_ASSISTANT_CARD:
                 queue.execute(() -> view.askAssistantCardToPlay());
                 break;
@@ -159,15 +161,7 @@ public class ClientMessanger implements ObserverView, Observer {
                 LoseMessage lose = (LoseMessage) message;
                 queue.execute(() -> view.showLoseMessage(lose.getNickname()));
                 client.disconnect();
-            case SHOW_PLAYER:
-                ShowPlayerInfo player = (ShowPlayerInfo) message;
-                queue.execute(() -> view.showPlayer(player.getNickname(), player.getPlayerNumber(), player.gettColor(), player.getInfluenceOnIsland(),
-                        player.getPersonalSchool(), player.getDeckOfPlayer(), player.getTrash(), player.getCoinScore(), nickname));
                 break;
-            case SHOW_PLAYER_INFLUENCE:
-                queue.execute(() -> view.showPlayerInfluence(((ShowPlayerInfluence) message).getInfluence()));
-                break;
-
         }
     }
 }

@@ -130,11 +130,8 @@ public class Game {
         
         Player activePlayer = getPlayer(nickname);
         AssistantCard assistantCardPlayed = activePlayer.getAssistantCard(assistantName);
-        
-        /** DA FARE: Controllo se il giocatore può giocare quella carta (non è già stata giocata da altri) o se è l'unica che può mettere */
                 
         activePlayer.setTrash(assistantCardPlayed);
-        activePlayer.setHasAlreadyPlayed(true);
         activePlayer.getDeckOfPlayer().getCardsInHand().remove(assistantCardPlayed);
 
         return assistantCardPlayed;
@@ -145,29 +142,7 @@ public class Game {
         Player activePlayer = getPlayer(nickname);
         CharacterCard characterCardPlayed = table.getCharacterCard(cardEffect);
 
-        if (characterCardPlayed.getCoinOnCard()) {
-            if (activePlayer.getCoinScore() >= characterCardPlayed.getCostCharacter() + 1) {
-                decreaseCoinScore(nickname, characterCardPlayed.getCostCharacter() + 1);
-                getTable().increaseCoinsOnTable(characterCardPlayed.getCostCharacter() + 1);
-            } else {
-                System.out.println("NON HAI ABBASTANZA MONETE! ");
-                /** Rifai scelta */
-                return;
-            }
-        } else {
-            if (activePlayer.getCoinScore() >= characterCardPlayed.getCostCharacter()) {
-                decreaseCoinScore(nickname, characterCardPlayed.getCostCharacter());
-                getTable().increaseCoinsOnTable(characterCardPlayed.getCostCharacter());
-                characterCardPlayed.setCoinOnCard(true);
-            } else {
-                System.out.println("NON HAI ABBASTANZA MONETE! ");
-                /** Rifai scelta */
-            }
-        }
-
-        //selezione
         switch (characterCardPlayed.getCardEffect()) {
-            /** 1 */
             case ABBOT:
                 Student studentChosen = null;
                 IslandCard islandCardChosen = null;
@@ -181,11 +156,10 @@ public class Game {
                 characterCardPlayed.getStudentsOnCard().add(getTable().getBag().get(0));
                 getTable().getBag().remove(0);
 
-                /** 2 */
             case HOST:
                 characterCardPlayed.getCardEffect().setHostPlayed(true);
 
-            case HERALD:   /** 3 */
+            case HERALD:
                 IslandCard islandChosen = null;
                 //notify (observer)----> islandChosen
                 ArrayList<Player> playersList = new ArrayList<>(getListOfPlayers());
@@ -195,10 +169,10 @@ public class Game {
                 getTable().joinIsland(getTable().getListOfIsland());
                 break;
 
-            case BEARER:   /** 4 */
+            case BEARER:
                 characterCardPlayed.getCardEffect().setBearerPlayed(true);
                 break;
-            case CURATOR:   /** 5 */
+            case CURATOR:
                 IslandCard islandChosenTwo = null;
                 //notify (observer)----> islandChosen
 
@@ -211,11 +185,11 @@ public class Game {
                     System.out.println(" Non puoi!!!");
                 break;
 
-            case CENTAUR:   /** 6 */
+            case CENTAUR:
                 characterCardPlayed.getCardEffect().setCentaurPlayed(true);
                 break;
 
-            case ACROBAT:   /** 7 */
+            case ACROBAT:
                 for (int i = 0; i < 3; i++) {
                     Student choice = null;  //nuovo studente da mettere nella entry
                     Student toChange = null;    //studente da togliere dalla entry
@@ -228,17 +202,17 @@ public class Game {
                 }
                 break;
 
-            case KNIGHT:   /** 8 */
+            case KNIGHT:
                 characterCardPlayed.getCardEffect().setKnightPlayed(true);
                 break;
 
-            case HERBALIST:   /** 9 */
+            case HERBALIST:
                 SColor colorChosen = null;
                 //notify (observer)----> colorChosen
                 colorChosen.lockColor();
                 break;
 
-            case BARD:   /** 10 */
+            case BARD:
                 // TO DO: controlli se sono pieni
                 /** togli da entry e metti in hall */
                 for (int i = 0; i < 3; i++) {
@@ -289,7 +263,7 @@ public class Game {
                 }
                 break;
 
-            case COURTESAN:   /** 11 */
+            case COURTESAN:
                 Student choice = null;
                 int i = 0;
                 //notify (observer)---->scelgo pedina da mettere nel table
@@ -315,7 +289,7 @@ public class Game {
                 getTable().getBag().remove(getTable().getBag().get(getTable().getBag().size() - 1));
                 break;
 
-            case JUNKDEALER:   /** 12 */
+            case JUNKDEALER:
                 SColor colorChoice = null;
                 //notify (observer)---->scelgo un colore
                 for (Player p : getListOfPlayers()) {

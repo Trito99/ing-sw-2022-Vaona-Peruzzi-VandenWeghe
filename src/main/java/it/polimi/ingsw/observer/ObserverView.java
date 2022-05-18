@@ -1,8 +1,6 @@
 package it.polimi.ingsw.observer;
 
-import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.game.Difficulty;
-import it.polimi.ingsw.model.game.GameMode;
 
 import java.util.GregorianCalendar;
 
@@ -37,6 +35,6 @@ public interface ObserverView {
 
     public void chooseMotherEarthSteps(int steps);
 
-    public void chooseCharacterCard(String characterNickname);
+    public void chooseCharacterCard(String characterNickname, boolean choice);
 
 }

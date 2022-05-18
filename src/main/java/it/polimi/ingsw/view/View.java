@@ -2,11 +2,8 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
-import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
-import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.School;
-import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 
@@ -31,11 +28,7 @@ public interface View {
 
     void showLoseMessage(String nickname);
 
-    /** mostra tutti i dati del giocatore */
-    void showPlayer(String nickname, PlayerNumber playerNumber, TColor tColor, int influenceOnIsland, School personalSchool,
-                    DeckAssistant deckOfPlayer, AssistantCard trash, int coinscore, String player);
-
-    void showPersonalSchool(School school, String nickname, AssistantCard trash);
+    void showPersonalSchool(School school, String nickname, AssistantCard trash, Difficulty difficulty,int coins);
 
     void showTable(Table table, Difficulty difficulty);
 
@@ -63,8 +56,9 @@ public interface View {
     /** chiede al giocatore quale carta assistente vuole giocare */
     void askAssistantCardToPlay();
 
-    /** chiede al giocatore quale carta personaggio vuole giocare */
-    void askCharacterCardToPlay();
+    /** chiede al giocatore quale carta personaggio vuole giocare
+     * @param choice*/
+    void askCharacterCardToPlay(boolean choice);
 
     /** chiede al giocatore quanti passi far fare a madre natura*/
     void askMotherEarthSteps(AssistantCard trash);

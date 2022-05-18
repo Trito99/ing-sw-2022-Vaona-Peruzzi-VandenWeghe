@@ -2,14 +2,11 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
-import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.island.IslandCard;
-import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.School;
-import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
@@ -205,13 +202,9 @@ public class Cli extends ObservableView implements View {
         out.print("\n"+nickname+" WINS");
     }
 
-    @Override
-    public void showPlayer(String nickname, PlayerNumber playerNumber, TColor tColor, int influenceOnIsland, School personalSchool, DeckAssistant deckOfPlayer, AssistantCard trash, int coinscore, String player) {
-
-    }
 
     @Override
-    public void showPersonalSchool(School school, String nickname, AssistantCard trash) {
+    public void showPersonalSchool(School school, String nickname, AssistantCard trash, Difficulty difficulty,int coins) {
 
         out.print("\n****School of "+ nickname + "**** ");
         out.print("\nEntry: ");
@@ -252,8 +245,10 @@ public class Cli extends ObservableView implements View {
         out.print("\n\nTrash Card: ");
         if (trash!=null)
             out.print(trash.getAssistantName() +" (TurnValue: "+ trash.getTurnValue() + ", StepME: " + trash.getStepMotherEarth()+")");
-
-       out.println("\n----------------------------------------------");
+        if(difficulty.equals(Difficulty.EXPERTMODE)){
+            out.print("\nCoins: "+coins);
+        }
+        out.println("\n----------------------------------------------");
     }
 
     @Override
@@ -296,7 +291,7 @@ public class Cli extends ObservableView implements View {
                     if(characterCard.getCoinOnCard())
                         coins=1;
                     out.println();
-                    out.println(characterCard.getCardEffect().toString()+"("+coins+")");
+                    out.println(characterCard.getCardEffect().toString()+"("+coins+")"+" Cost: "+characterCard.getCostCharacter());
                     switch (characterCard.getCardEffect()){
                         case COURTESAN:
                         case ABBOT:
@@ -352,7 +347,7 @@ public class Cli extends ObservableView implements View {
         do {
             try {
                 ye=false;
-                out.print("\nChoose an Assistant Card from your Deck (nickname): ");
+                out.print("\nChoose an Assistant Card from your Deck (name): ");
                 String nickname = readInput();
                 notifyObserver(obs -> obs.chooseAssistantCard(nickname));
             } catch (Exception e) {
@@ -363,17 +358,20 @@ public class Cli extends ObservableView implements View {
     }
 
     @Override
-    public void askCharacterCardToPlay() {
+    public void askCharacterCardToPlay(boolean choice) {
         boolean ye;
         do{
             try{
                 ye = false;
-                out.print("\n which character do you want to play? (charachter nickname or none) ");
-                String character = readInput();
-                notifyObserver(obs -> obs.chooseCharacterCard(character));
+                if(!choice)
+                    out.print("\nDo you want to play a Character card?");
+                else
+                    out.print("\nChoose a character card from the table");
+                String character = readInput().toUpperCase(Locale.ROOT);
+                notifyObserver(obs -> obs.chooseCharacterCard(character,choice));
             } catch (Exception e){
                 ye = true;
-                out.println("the character chosen doesn't exist or you don't have enough money, type again.");
+                out.println(WRONG_INPUT);
             }
         }while (ye);
 

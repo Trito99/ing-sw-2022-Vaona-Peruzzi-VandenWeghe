@@ -29,7 +29,6 @@ public class Player {
     private int coinScore;
     private TColor tColor;
     private int influenceOnIsland;
-    private boolean hasAlreadyPlayed; //= True se il player ha già giocato la trashCard nel suo turno
 
 
     /**
@@ -38,13 +37,12 @@ public class Player {
     public Player(TColor tColor, PlayerNumber playerNumber) {   //+ nickname e data
         nickname = new String(); //= nickname
         playerDate = null;
-        this.playerNumber = playerNumber;      /** DA RIFARE COSTRUTTORE */
+        this.playerNumber = playerNumber;
         influenceOnIsland = 0;
         personalSchool = new School();
         this.tColor = tColor;
         trash = null;
         coinScore = 0;
-        hasAlreadyPlayed = false;
     }
 
     public void generateSchool(Table table, GameMode gameMode) {
@@ -168,11 +166,4 @@ public class Player {
         this.influenceOnIsland = influenceOnIsland;
     }
 
-    public boolean hasAlreadyPlayed() {
-        return hasAlreadyPlayed;
-    }
-
-    public void setHasAlreadyPlayed(boolean hasAlreadyPlayed) {
-        this.hasAlreadyPlayed = hasAlreadyPlayed;
-    }
 }

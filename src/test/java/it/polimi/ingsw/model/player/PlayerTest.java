@@ -185,16 +185,6 @@ public class PlayerTest {
    }
 
    @Test
-   public void hasAlreadyPlayedTest(){
-       Player player = new Player(TColor.BLACK, PlayerNumber.PLAYER1);
-       assertNotNull(player.hasAlreadyPlayed());
-       assertEquals(false, player.hasAlreadyPlayed());
-
-       player.setHasAlreadyPlayed(true);
-       assertEquals(true, player.hasAlreadyPlayed());
-   }
-
-   @Test
     void getAssistantCardTest(){
         Player player = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
         DeckAssistant deckAssistant = new DeckAssistant(AssistantDeckName.DECK1);

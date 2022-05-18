@@ -4,7 +4,6 @@ import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.message.Error;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
-import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.School;
@@ -67,14 +66,8 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void showPlayer(String nickname, PlayerNumber playerNumber, TColor tColor, int influenceOnIsland, School personalSchool, DeckAssistant deckOfPlayer, AssistantCard trash, int coinscore, String player) {
-        clientHandler.sendMessage(new ShowPlayerInfo(nickname, playerNumber, tColor, influenceOnIsland, personalSchool, deckOfPlayer,trash, coinscore));
-    }
-
-
-    @Override
-    public void showPersonalSchool(School school, String nickname, AssistantCard trash) {
-        clientHandler.sendMessage(new ShowPersonalSchool(school, nickname, trash));
+    public void showPersonalSchool(School school, String nickname, AssistantCard trash, Difficulty difficulty, int coins) {
+        clientHandler.sendMessage(new ShowPersonalSchool(school, nickname, trash, difficulty, coins));
     }
 
     @Override
@@ -111,8 +104,8 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void askCharacterCardToPlay() {
-        clientHandler.sendMessage(new PlayCharacterCard());
+    public void askCharacterCardToPlay(boolean choice) {
+        clientHandler.sendMessage(new PlayCharacterCard(choice));
     }
 
     @Override

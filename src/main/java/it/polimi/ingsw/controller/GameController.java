@@ -19,6 +19,7 @@ import it.polimi.ingsw.view.VirtualView;
 import java.security.InvalidParameterException;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class GameController {
     private Game gameSession;
@@ -45,6 +46,16 @@ public class GameController {
         gameSession.getTable().addFinalStudents();
     }
 
+    public void generatePlayer(String nickname,GregorianCalendar playerDate,TColor tColor,int index){
+        this.gameSession.addPlayer(new Player(tColor, PlayerNumber.values()[index]));
+        this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
+        this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
+        this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
+        this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.values()[index]));
+        if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
+            this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setCoinScore(1);
+    }
+
     /**
      * @param nickname del Giocatore.
      * @param gameId id della partita a cui il giocatore sta giocando.
@@ -62,17 +73,13 @@ public class GameController {
             return true;
         }
         else if(allVirtualView.size() < maxPlayers){
-            /** da testare */
             if(allVirtualView.size() == 1){
                 allVirtualView.put(nickname, virtualView);
-                this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER2));
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK2));
+                generatePlayer(nickname,playerDate,TColor.BLACK,allVirtualView.size()-1);
                 this.gameSession.getListOfPlayers().get(0).generateSchool(gameSession.getTable(),gameSession.getGameMode());
                 this.gameSession.getListOfPlayers().get(0).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK1));
-                allVirtualView.put(nickname, virtualView);
+                if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
+                    this.gameSession.getListOfPlayers().get(0).setCoinScore(1);
                 virtualView.showLogin(nickname, gameId, playerDate,true);
                 if(maxPlayers == 3)
                     virtualView.showMessage("Three Players Mode. You have BLACK towers! \nWaiting for other players...");
@@ -85,13 +92,9 @@ public class GameController {
             else if(allVirtualView.size() == 2){
                 allVirtualView.put(nickname, virtualView);
                 if(maxPlayers == 3)
-                    this.gameSession.addPlayer(new Player(TColor.GREY, PlayerNumber.PLAYER3));
+                    generatePlayer(nickname,playerDate,TColor.GREY,allVirtualView.size()-1);
                 else
-                    this.gameSession.addPlayer(new Player(TColor.BLACK, PlayerNumber.PLAYER3));
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK3));
+                    generatePlayer(nickname,playerDate,TColor.BLACK,allVirtualView.size()-1);
                 allVirtualView.put(nickname, virtualView);
                 virtualView.showLogin(nickname, gameId, playerDate,true);
                 if(maxPlayers==3)
@@ -102,12 +105,7 @@ public class GameController {
             }
             else if(allVirtualView.size() == 3){
                 allVirtualView.put(nickname, virtualView);
-                this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER4));
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
-                this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK4));
-                allVirtualView.put(nickname, virtualView);
+                generatePlayer(nickname,playerDate,TColor.WHITE,allVirtualView.size()-1);
                 virtualView.showLogin(nickname, gameId, playerDate,true);
                 if(maxPlayers==4)
                     virtualView.showMessage("Coop Mode. You have BLACK towers! \nWaiting for other players...");
@@ -210,28 +208,6 @@ public class GameController {
                 break;
             case ACTION:
                 boolean turnFinished = false;
-                if(receivedMessage.getMessageType() == MessageType.CHARACTER_CARD_PLAYED){
-                    CharacterCardPlayed CardSelected = (CharacterCardPlayed) receivedMessage;
-                    boolean exists = false;
-                    for(CharacterCard characterCard : gameSession.getTable().getCharacterCardsOnTable()){
-                        if(characterCard.getCardEffect().equals(CardSelected.getCardNickname()))
-                            exists = true;
-                    }
-                    if (exists) {
-                            again = false;
-                          //  gameSession.playCharacterCard( , gameSession.getPlayer(turnController.getActivePlayer()));
-                        } else {
-                            virtualView.showMessage("\nEffect not present. Try again");
-                            virtualView.askCharacterCardToPlay();
-                            again = true;
-                        }
-                }
-                if(!again) {
-                    turnController.nextPlayer(turnController.getPlayerOrderByName());
-                    roundIndex++;
-                    action();
-                }
-
                 if(receivedMessage.getMessageType() == MessageType.PLACE_AND_STUDENT_FOR_MOVE_CHOSEN){
                     PlaceAndStudentForMoveChosen Choice = (PlaceAndStudentForMoveChosen) receivedMessage;
                     boolean present = false;
@@ -249,8 +225,12 @@ public class GameController {
                                 if (gameSession.getDifficulty().equals(Difficulty.STANDARDMODE))
                                     gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(turnController.getActivePlayer()), CardEffect.STANDARDMODE);
                                 movedStudents++;
-                                if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces())
-                                    setActionState(ActionState.MOTHERNATURE);
+                                if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces()) {
+                                    if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
+                                        this.setActionState(ActionState.CHARACTER);
+                                    else
+                                        setActionState(ActionState.MOTHERNATURE);
+                                }
                                 action();
                             } else if (Choice.getPlace().equals("ISLAND")) {
                                 virtualView.askIdIsland();
@@ -278,13 +258,86 @@ public class GameController {
                         again = false;
                         gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromEntryToIsland(gameSession.getTable().getListOfIsland().get(Island.getId() - 1), studentId);
                         movedStudents++;
-                        if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces())
-                            setActionState(ActionState.MOTHERNATURE);
+                        if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces()) {
+                            if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
+                                this.setActionState(ActionState.CHARACTER);
+                            else
+                                setActionState(ActionState.MOTHERNATURE);
+                        }
                         action();
                     }else{
                         virtualView.showMessage("\nIsland doesn't exist");
                         again=true;
                         virtualView.askIdIsland();
+                    }
+                }
+                if(receivedMessage.getMessageType() == MessageType.CHARACTER_CARD_PLAYED){
+                    CharacterCardPlayed CardSelected = (CharacterCardPlayed) receivedMessage;
+                    boolean exists = false, enough = true, playable=false;
+                    CharacterCard cc = null;
+                    if(!CardSelected.getChoice()){
+                        if(CardSelected.getCardNickname().equals("YES")) {
+                            for(CharacterCard characterCard : gameSession.getTable().getCharacterCardsOnTable()){
+                                if(characterCard.getCoinOnCard()) {
+                                    if ((characterCard.getCostCharacter() + 1) <= gameSession.getPlayer(CardSelected.getNickname()).getCoinScore())
+                                        playable = true;
+                                }else{
+                                    if(characterCard.getCostCharacter()<=gameSession.getPlayer(CardSelected.getNickname()).getCoinScore())
+                                        playable = true;
+                                }
+                            }
+                            if(playable)
+                                virtualView.askCharacterCardToPlay(true);
+                            else{
+                                virtualView.showMessage("\nYou don't have enough coins for any card");
+                                setActionState(ActionState.MOTHERNATURE);
+                                action();
+                            }
+                        }else if (CardSelected.getCardNickname().equals("NO")){
+                            setActionState(ActionState.MOTHERNATURE);
+                            action();
+                        }else{
+                            virtualView.showMessage("\nWrong Input");
+                            virtualView.askCharacterCardToPlay(false);
+                        }
+                    }else {
+                        for (CharacterCard characterCard : gameSession.getTable().getCharacterCardsOnTable()) {
+                            if (characterCard.getCardEffect().toString().equals(CardSelected.getCardNickname())) {
+                                exists = true;
+                                cc = characterCard;
+                            }
+                        }
+                        if (exists) {
+                            if (cc.getCoinOnCard()) {
+                                if (gameSession.getPlayer(CardSelected.getNickname()).getCoinScore() >= cc.getCostCharacter() + 1) {
+                                    gameSession.decreaseCoinScore(CardSelected.getNickname(), cc.getCostCharacter() + 1);
+                                    gameSession.getTable().increaseCoinsOnTable(cc.getCostCharacter() + 1);
+                                } else {
+                                    enough = false;
+                                }
+                            } else {
+                                if (gameSession.getPlayer(CardSelected.getNickname()).getCoinScore() >= cc.getCostCharacter()) {
+                                    gameSession.decreaseCoinScore(CardSelected.getNickname(), cc.getCostCharacter());
+                                    gameSession.getTable().increaseCoinsOnTable(cc.getCostCharacter());
+                                    cc.setCoinOnCard(true);
+                                } else {
+                                    enough = false;
+                                }
+                            }
+                        }
+                        if (exists && enough) {
+                            again = false;
+                            gameSession.playCharacterCard(cc.getCardEffect(), CardSelected.getNickname());
+                            setActionState(ActionState.MOTHERNATURE);
+                            action();
+                        } else {
+                            again = true;
+                            if (exists)
+                                virtualView.showMessage("\nYou don't have enough coins for this card");
+                            else
+                                virtualView.showMessage("\nEffect not present. Try again");
+                            virtualView.askCharacterCardToPlay(true);
+                        }
                     }
                 }
                 if(receivedMessage.getMessageType() == MessageType.STEP_MOTHER_EARTH_CHOSEN){
@@ -327,10 +380,7 @@ public class GameController {
                     movedStudents = 0;
                     turnController.nextPlayer(turnController.getNewPlayerOrderByName());
                     roundIndex++;
-                    if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
-                        this.setActionState(ActionState.CHARACTER);
-                    else
-                        this.setActionState(ActionState.STUDENT);
+                    this.setActionState(ActionState.STUDENT);
                     showGame();
                     action();
                 }
@@ -385,10 +435,7 @@ public class GameController {
                 gameSession.setOrder(turnController.getNewPlayerOrder());
                 turnController.setPlayingPlayer(turnController.getNewPlayerOrderByName().get(0));
                 this.setGameState(GameState.ACTION);
-                if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
-                    this.setActionState(ActionState.CHARACTER);
-                else
-                    this.setActionState(ActionState.STUDENT);
+                this.setActionState(ActionState.STUDENT);
                 showGame();
                 action();
             }
@@ -398,11 +445,11 @@ public class GameController {
     public void action(){
         if (roundIndex < maxPlayers) {
             switch(actionState) {
-                case CHARACTER:
-                    allVirtualView.get(turnController.getActivePlayer()).askCharacterCardToPlay();
-                    break;
                 case STUDENT:
                     allVirtualView.get(turnController.getActivePlayer()).askPlaceAndStudentForMove(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
+                    break;
+                case CHARACTER:
+                    allVirtualView.get(turnController.getActivePlayer()).askCharacterCardToPlay(false);
                     break;
                 case MOTHERNATURE:
                     allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash());
@@ -441,11 +488,11 @@ public class GameController {
             allVirtualView.get(s).showTable(gameSession.getTable(), gameSession.getDifficulty());
             for(Player p : gameSession.getListOfPlayers()) {
                 if (p.getNickname() != s)
-                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname(),p.getTrash());
+                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname(), p.getTrash(), gameSession.getDifficulty(), p.getCoinScore());
             }
             for(Player p : gameSession.getListOfPlayers()){
                 if (p.getNickname() == s) {
-                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname(), p.getTrash());
+                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname(), p.getTrash(), gameSession.getDifficulty(), p.getCoinScore());
                     allVirtualView.get(s).showDeckAssistant(p.getDeckOfPlayer());
                 }
             }
@@ -537,11 +584,6 @@ public class GameController {
         return allVirtualView;
     }
 
-    public void showPlayer(Player player, String nickname){
-        allVirtualView.get(nickname).showPlayer(player.getNickname(), player.getPlayerNumber(),  player.getTColor(),
-                player.getInfluenceOnIsland(), player.getPersonalSchool(), player.getDeckOfPlayer(), player.getTrash(),
-                player.getCoinScore(), nickname);
-    }
 
     /** invia un messaggio a ogni giocatore del gioco */
     public void broadcastMessage(String message) {
