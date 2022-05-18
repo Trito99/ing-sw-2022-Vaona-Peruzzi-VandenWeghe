@@ -222,8 +222,7 @@ public class GameController {
                             again = false;
                             if (Choice.getPlace().equals("SCHOOL")) {
                                 gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromEntryToHall(gameSession.getPlayer(turnController.getActivePlayer()), studentId, gameSession.getTable(), gameSession.getDifficulty());
-                                if (gameSession.getDifficulty().equals(Difficulty.STANDARDMODE))
-                                    gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(turnController.getActivePlayer()), CardEffect.STANDARDMODE);
+                                gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(turnController.getActivePlayer()), CardEffect.STANDARDMODE);
                                 movedStudents++;
                                 if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces()) {
                                     movedStudents=0;
@@ -358,7 +357,13 @@ public class GameController {
                                     card=true;
                                     virtualView.askId(false,characterCard);
                                     break;
-                                case COURTESAN:
+                                case HOST:
+                                    gameSession.playCharacterCard(characterCard.getCardEffect(), CardSelected.getNickname(), -1,-1 );
+                                    gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(turnController.getActivePlayer()), CardEffect.HOST);
+                                    characterCard.setCoinOnCard(true);
+                                    characterCard.getCardEffect().setHostPlayed(false);
+                                    setActionState(ActionState.MOTHERNATURE);
+                                    action();
                                     break;
                                 default:
                                     gameSession.playCharacterCard(characterCard.getCardEffect(), CardSelected.getNickname(), -1,-1 );
@@ -387,8 +392,7 @@ public class GameController {
                         again=false;
                         int steps = step.getSteps();
                         gameSession.getTable().moveMotherEarth(steps);
-                        if (gameSession.getDifficulty().equals(Difficulty.STANDARDMODE))
-                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE);
+                        gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE);
                         gameSession.getTable().joinIsland(gameSession.getTable().getListOfIsland());
                         setActionState(ActionState.CLOUDCARD);
                         action();

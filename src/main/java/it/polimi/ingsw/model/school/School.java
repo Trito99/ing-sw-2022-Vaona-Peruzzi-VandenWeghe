@@ -260,7 +260,7 @@ public class School implements Serializable {
                     break;
             }
         }
-        cardEffectPlayed.setHostPlayed(false); /** Va Bene??? */
+        cardEffectPlayed.setHostPlayed(false);
     }
 
     public boolean getProfInHall(SColor color){
