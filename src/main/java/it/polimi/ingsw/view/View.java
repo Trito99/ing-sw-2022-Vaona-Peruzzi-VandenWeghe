@@ -2,6 +2,7 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
+import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.student.Student;
@@ -68,6 +69,6 @@ public interface View {
 
     void askPlaceAndStudentForMove(ArrayList<Student> entry);
 
-    void askId(boolean choice);
+    void askId(boolean choice, CharacterCard characterCard);
 
 }

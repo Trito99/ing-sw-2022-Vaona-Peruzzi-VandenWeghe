@@ -234,7 +234,7 @@ public class GameController {
                                 }
                                 action();
                             } else if (Choice.getPlace().equals("ISLAND")) {
-                                virtualView.askId(true);
+                                virtualView.askId(true,null);
                             }
                         } else {
                             virtualView.showMessage("\nWrong input");
@@ -278,7 +278,7 @@ public class GameController {
                         } else {
                             virtualView.showMessage("\nIsland doesn't exist");
                             again = true;
-                            virtualView.askId(true);
+                            virtualView.askId(true,null);
                         }
                     }else{
                         boolean present = false;
@@ -290,11 +290,11 @@ public class GameController {
                         }
                         if (present) {
                             again = false;
-                            virtualView.askId(true);
+                            virtualView.askId(true,null);
                         }else {
                             virtualView.showMessage("\nStudent selected is not available");
                             again = true;
-                            virtualView.askId(false);
+                            virtualView.askId(false,characterCard);
                         }
                     }
                 }
@@ -356,7 +356,7 @@ public class GameController {
                             switch(characterCard.getCardEffect()){
                                 case ABBOT:
                                     card=true;
-                                    virtualView.askId(false);
+                                    virtualView.askId(false,characterCard);
                                     break;
                                 case COURTESAN:
                                     break;

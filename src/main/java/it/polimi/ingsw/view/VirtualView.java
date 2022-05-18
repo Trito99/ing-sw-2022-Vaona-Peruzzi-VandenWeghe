@@ -4,6 +4,7 @@ import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.message.Error;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
+import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.student.Student;
@@ -128,8 +129,8 @@ public class VirtualView implements View, Observer {
 
 
     @Override
-    public void askId(boolean choice) {
-        clientHandler.sendMessage(new ChooseId(choice));
+    public void askId(boolean choice, CharacterCard characterCard) {
+        clientHandler.sendMessage(new ChooseId(choice,characterCard));
     }
 
 

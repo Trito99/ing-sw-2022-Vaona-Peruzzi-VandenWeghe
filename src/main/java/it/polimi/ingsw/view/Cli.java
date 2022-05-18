@@ -450,15 +450,21 @@ public class Cli extends ObservableView implements View {
         }while(ye);
     }
     @Override
-    public void askId(boolean choice) {
+    public void askId(boolean choice,CharacterCard characterCard) {
         boolean ye;
         do {
             try {
                 ye=false;
                 if(choice)
                     out.print("\nIn which island do you want to move the student? (id)\n");
-                else
+                else {
                     out.print("\nWhich student do you want to move? (id)\n");
+                    out.print(characterCard.getCardEffect().toString()+": ");
+                    for (Student s : characterCard.getStudentsOnCard()) {
+                        out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+                    }
+                    out.println();
+                }
                 int id = Integer.parseInt(readInput());
                 notifyObserver(obs -> obs.chooseId(id,choice));
             } catch (Exception e) {

@@ -143,7 +143,7 @@ public class ClientMessanger implements ObserverView, Observer {
                 break;
             case CHOOSE_ID:
                 ChooseId id = (ChooseId) message;
-                queue.execute(() -> view.askId(id.getChoice()));
+                queue.execute(() -> view.askId(id.getChoice(),id.getCharacterCard()));
                 break;
             case CHOOSE_MOTHER_EARTH_STEPS:
                 ChooseMotherEarthSteps steps = (ChooseMotherEarthSteps) message;
