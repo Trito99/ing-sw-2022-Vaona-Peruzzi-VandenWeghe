@@ -127,9 +127,9 @@ public class GameController {
     }
 
     private void initializeExpertModeGame(){ /**Giocatori(+ personalSchool, +DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggioontable) */
-    DeckCharacter characterDeck = new DeckCharacter();
-    characterDeck.generateCharacterDeck();
-    gameSession.getTable().generateCharacterCardsOnTable(characterDeck.getCharacterCards());
+        DeckCharacter characterDeck = new DeckCharacter();
+        characterDeck.generateCharacterDeck();
+        gameSession.getTable().generateCharacterCardsOnTable(characterDeck.getCharacterCards());
     }
 
     public void getMessage(ClientMessage receivedMessage) throws InvalidParameterException {

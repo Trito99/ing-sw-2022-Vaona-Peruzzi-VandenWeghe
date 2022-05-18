@@ -8,7 +8,7 @@ public class CharacterCardPlayed extends ClientMessage {
 
     public CharacterCardPlayed(String nickname, String cardNickname, boolean choice) {
         super(nickname, MessageType.CHARACTER_CARD_PLAYED);
-        this.cardNickname=cardNickname;
+        this.cardNickname = cardNickname;
         this.choice = choice;
     }
 

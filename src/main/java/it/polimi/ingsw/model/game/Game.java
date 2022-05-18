@@ -162,9 +162,11 @@ public class Game {
                 moveStudentFromListToIsland(islandCardChosen,idS,characterCardPlayed.getStudentsOnCard());
                 characterCardPlayed.getStudentsOnCard().add(getTable().getBag().get(0));
                 getTable().getBag().remove(0);
+                break;
 
             case HOST:
                 characterCardPlayed.getCardEffect().setHostPlayed(true);
+                break;
 
             case HERALD:
                 IslandCard islandChosen = null;
