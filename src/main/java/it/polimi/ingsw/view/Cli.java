@@ -287,11 +287,13 @@ public class Cli extends ObservableView implements View {
             out.print("\n**** CHARACTER CARDS ****");
             if (table.getCharacterCardsOnTable().size()>0) {
                 for (CharacterCard characterCard : table.getCharacterCardsOnTable()) {
-                    int coins=0;
-                    if(characterCard.getCoinOnCard())
-                        coins=1;
+                    int coins=0, cost=characterCard.getCostCharacter();
+                    if(characterCard.getCoinOnCard()) {
+                        coins = 1;
+                        cost = cost + 1;
+                    }
                     out.println();
-                    out.println(characterCard.getCardEffect().toString()+"("+coins+")"+" Cost: "+characterCard.getCostCharacter());
+                    out.println(characterCard.getCardEffect().toString()+"("+coins+")"+" Cost: "+cost);
                     switch (characterCard.getCardEffect()){
                         case COURTESAN:
                         case ABBOT:
@@ -364,9 +366,9 @@ public class Cli extends ObservableView implements View {
             try{
                 ye = false;
                 if(!choice)
-                    out.print("\nDo you want to play a Character card?");
+                    out.print("\nDo you want to play a Character card? ");
                 else
-                    out.print("\nChoose a character card from the table");
+                    out.print("\nChoose a character card from the table: (name) ");
                 String character = readInput().toUpperCase(Locale.ROOT);
                 notifyObserver(obs -> obs.chooseCharacterCard(character,choice));
             } catch (Exception e){
@@ -448,14 +450,17 @@ public class Cli extends ObservableView implements View {
         }while(ye);
     }
     @Override
-    public void askIdIsland() {
+    public void askId(boolean choice) {
         boolean ye;
         do {
             try {
                 ye=false;
-                out.print("\nIn which island do you want to move the student? (id)\n");
+                if(choice)
+                    out.print("\nIn which island do you want to move the student? (id)\n");
+                else
+                    out.print("\nWhich student do you want to move? (id)\n");
                 int id = Integer.parseInt(readInput());
-                notifyObserver(obs -> obs.chooseIdIsland(id));
+                notifyObserver(obs -> obs.chooseId(id,choice));
             } catch (Exception e) {
                 ye=true;
                 out.println(WRONG_INPUT);

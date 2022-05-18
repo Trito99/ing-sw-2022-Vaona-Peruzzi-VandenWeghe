@@ -68,6 +68,6 @@ public interface View {
 
     void askPlaceAndStudentForMove(ArrayList<Student> entry);
 
-    void askIdIsland();
+    void askId(boolean choice);
 
 }

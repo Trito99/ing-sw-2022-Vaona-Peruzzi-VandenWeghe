@@ -64,7 +64,7 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
         catch(IOException e){
             e.printStackTrace();
             Thread.currentThread().interrupt();
-            disconnect();
+            //disconnect();
         }
 
     }

@@ -10,7 +10,7 @@ public enum MessageType {
     CLOUD_CHOSEN,
     PLACE_AND_STUDENT_FOR_MOVE_CHOSEN,
     STEP_MOTHER_EARTH_CHOSEN,
-    ID_ISLAND_CHOSEN,
+    ID_CHOSEN,
 
     //messaggi di connessione al server
     SUCCESSFUL_HOST,
@@ -35,7 +35,7 @@ public enum MessageType {
     CHOOSE_CLOUD_CARD,
     CHOOSE_PLACE_AND_STUDENT_FOR_MOVE,
     CHOOSE_MOTHER_EARTH_STEPS,
-    CHOOSE_ID_ISLAND,
+    CHOOSE_ID,
 
 
     //messaggi intermediari

@@ -137,22 +137,29 @@ public class Game {
         return assistantCardPlayed;
     }
 
-    public void playCharacterCard(CardEffect cardEffect, String nickname) {
+    public void moveStudentFromListToIsland(IslandCard islandCard, int id, ArrayList<Student> list){
+        Student student = null;
+        for (Student s : list) {
+            if (id == s.getIdStudent())
+                student = s;
+        }
+        islandCard.getStudentOnIsland().add(list.get(list.indexOf(student)));
+        list.remove(list.get(list.indexOf(student)));
+    }
+
+    public void playCharacterCard(CardEffect cardEffect, String nickname, int idS, int idI) {
 
         Player activePlayer = getPlayer(nickname);
         CharacterCard characterCardPlayed = table.getCharacterCard(cardEffect);
 
         switch (characterCardPlayed.getCardEffect()) {
             case ABBOT:
-                Student studentChosen = null;
                 IslandCard islandCardChosen = null;
-                //notify (observer)----> studentChosen
-                for (Student s : characterCardPlayed.getStudentsOnCard()) {
-                    if (s.equals(studentChosen)) {
-                        characterCardPlayed.getStudentsOnCard().remove(s);
-                        getTable().getListOfIsland().get(islandCardChosen.getIdIsland() - 1).getStudentOnIsland().add(s);
-                    }
+                for(IslandCard islandCard : getTable().getListOfIsland()){
+                    if(idI==islandCard.getIdIsland())
+                        islandCardChosen = islandCard;
                 }
+                moveStudentFromListToIsland(islandCardChosen,idS,characterCardPlayed.getStudentsOnCard());
                 characterCardPlayed.getStudentsOnCard().add(getTable().getBag().get(0));
                 getTable().getBag().remove(0);
 

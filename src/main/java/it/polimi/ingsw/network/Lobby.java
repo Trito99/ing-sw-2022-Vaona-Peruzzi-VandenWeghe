@@ -26,18 +26,14 @@ public class Lobby {
         VirtualView virtualView = new VirtualView(clientHandler);
 
         if(!(isGameStarted())){
-
             int i = 1;
             String n = nickname;
             clientHandlerMap.put(clientHandler, n);
-            /** ... */
-            /** stampo nickname così: nickname(1) / nickname(2) / ecc. */
             while (clientHandlerMap.containsValue(n)) {
                 n = nickname + "(" + i + ")";
                 System.out.println(n);
                 i++;
             }
-
             if(!gameController.newPlayer(n, gameId, playerDate, virtualView)){
                 clientHandlerMap.remove(clientHandler);
             }
@@ -61,10 +57,10 @@ public class Lobby {
     //  DA CAMBIARE: disconnette un client
     public void disconnecting(ClientHandler clientHandler){
         if (gameController.isGameStarted()){
-            removeExcept(clientHandler);
+            gameController.disconnect(clientHandlerMap.get(clientHandler));
+            gameController.endGame();
         }
         else{
-            // rimuove giocatore dalla lobby
             clientHandlerMap.remove(clientHandler);
         }
     }

@@ -131,7 +131,7 @@ public class Table implements Serializable {
     }
 
     public void generateCharacterCardsOnTable(ArrayList<CharacterCard> characterCards){
-        Collections.shuffle(characterCards);
+        //Collections.shuffle(characterCards);
 
         for( int i = 0; i<3; i++){
             characterCardsOnTable.add(characterCards.get(i));
@@ -309,12 +309,14 @@ public class Table implements Serializable {
 
         /** conto il numero di torri presenti sul tavolo per ogni colore */
         for (IslandCard islandCard : listOfIsland) {
-            if ((islandCard.getTowerOnIsland().getTColour()).equals(TColor.GREY)) {
-                countGrey = countGrey + islandCard.getMergedIsland();
-            } else if ((islandCard.getTowerOnIsland().getTColour()).equals(TColor.WHITE)) {
-                countWhite = countWhite + islandCard.getMergedIsland();
-            } else if ((islandCard.getTowerOnIsland().getTColour()).equals(TColor.BLACK)) {
-                countBlack = countBlack + islandCard.getMergedIsland();
+            if(islandCard.towerIsOnIsland()){
+                if ((islandCard.getTowerOnIsland().getTColour()).equals(TColor.GREY)) {
+                    countGrey = countGrey + islandCard.getMergedIsland();
+                } else if ((islandCard.getTowerOnIsland().getTColour()).equals(TColor.WHITE)) {
+                    countWhite = countWhite + islandCard.getMergedIsland();
+                } else if ((islandCard.getTowerOnIsland().getTColour()).equals(TColor.BLACK)) {
+                    countBlack = countBlack + islandCard.getMergedIsland();
+                }
             }
         }
 
