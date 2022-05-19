@@ -170,17 +170,11 @@ public class Game {
             case BEARER:
                 characterCardPlayed.getCardEffect().setBearerPlayed(true);
                 break;
-            case CURATOR:
-                IslandCard islandChosenTwo = null;
-                //notify (observer)----> islandChosen
 
-                islandChosenTwo.setXCardOnIsland(true);
-                if (islandChosenTwo.getXCardCounter() < 4 && characterCardPlayed.getCardEffect().getXCardOnCard() > 0) {
-                    islandChosenTwo.setXCardCounter(islandChosenTwo.getXCardCounter() + 1);
-                    islandChosenTwo.setXCardOnIsland(true);
-                    characterCardPlayed.getCardEffect().setXCardOnCard(characterCardPlayed.getCardEffect().getXCardOnCard() - 1);
-                } else
-                    System.out.println(" Non puoi!!!");
+            case CURATOR:
+                islandCardChosen.setXCardCounter(islandCardChosen.getXCardCounter() + 1);
+                islandCardChosen.setXCardOnIsland(true);
+                characterCardPlayed.setXCardOnCard(characterCardPlayed.getXCardOnCard() - 1);
                 break;
 
             case CENTAUR:

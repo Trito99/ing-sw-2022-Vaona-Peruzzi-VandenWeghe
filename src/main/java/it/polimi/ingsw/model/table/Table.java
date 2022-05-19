@@ -147,7 +147,7 @@ public class Table implements Serializable {
                     }
                     break;
                 case CURATOR:
-                        characterCardsOnTable.get(j).getCardEffect().setXCardOnCard(4);
+                        characterCardsOnTable.get(j).setXCardOnCard(4);
                     break;
                 case ACROBAT:
                     for (int i = 0; i < 6; i++) {

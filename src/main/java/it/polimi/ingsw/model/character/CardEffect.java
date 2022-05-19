@@ -15,20 +15,11 @@ public enum CardEffect {
     COURTESAN, //CORTIGIANA,
     JUNKDEALER; //RIGATTIERE
 
-    private int xCardOnCard = 0;
+
     private boolean hostPlayed;
     private boolean knightPlayed;
     private boolean centaurPlayed;
     private boolean bearerPlayed;
-
-
-    public int getXCardOnCard() {
-        return xCardOnCard;
-    }
-
-    public void setXCardOnCard(int xCardOnCard) {
-        this.xCardOnCard = xCardOnCard;
-    }
 
     public boolean isKnightPlayed() { return knightPlayed; }
 

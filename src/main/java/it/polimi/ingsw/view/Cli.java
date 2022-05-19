@@ -256,16 +256,34 @@ public class Cli extends ObservableView implements View {
     @Override
     public void showTable(Table table, Difficulty difficulty) {
         int i=1;
+        boolean forbidden = false;
+
+        if (difficulty.equals(Difficulty.EXPERTMODE)) {
+            for (CharacterCard card : table.getCharacterCardsOnTable()) {
+                if (card.getCardEffect().equals(CardEffect.CURATOR))
+                    forbidden = true;
+            }
+        }
 
         out.print("\n**** TABLE ****");
-        out.print("\nIsland Id  | MotherEarth |   Tower (n)   | Students");
+        if(forbidden)
+            out.print("\nIsland Id  | MotherEarth |   Tower (n)   | Forbidden | Students");
+        else
+            out.print("\nIsland Id  | MotherEarth |   Tower (n)   | Students");
+
         for(IslandCard islandCard : table.getListOfIsland()) {
             if (islandCard.towerIsOnIsland()) {
-                out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       |    " + getTowerAnsiColor(islandCard.getTowerOnIsland()) + "T" +ANSI_RESET+ "(" + islandCard.getMergedIsland() + ")     | ");
+                if(forbidden)
+                    out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       |    " + getTowerAnsiColor(islandCard.getTowerOnIsland()) + "T" +ANSI_RESET+ "(" + islandCard.getMergedIsland() + ")     |   "+islandCard.isXCardOnIsland()+"   | ");
+                else
+                    out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       |    " + getTowerAnsiColor(islandCard.getTowerOnIsland()) + "T" +ANSI_RESET+ "(" + islandCard.getMergedIsland() + ")     | ");
                 for (Student student: islandCard.getStudentOnIsland())
                     out.print(getStudentAnsiColor(student) + student.getIdStudent() + " " + ANSI_RESET);
             } else {
-                out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       | " + " No Tower" +"(" + (islandCard.getMergedIsland()-1) + ")" + " | ");
+                if(forbidden)
+                    out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       | " + " No Tower" +"(" + (islandCard.getMergedIsland()-1) + ")" + "  |   "+islandCard.isXCardOnIsland()+"   | ");
+                else
+                    out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       | " + " No Tower" +"(" + (islandCard.getMergedIsland()-1) + ")" + "  | ");
                 for (Student student: islandCard.getStudentOnIsland())
                     out.print(getStudentAnsiColor(student) + student.getIdStudent() + " " + ANSI_RESET);
             }
@@ -307,7 +325,7 @@ public class Cli extends ObservableView implements View {
                             out.println();
                             break;
                         case CURATOR:
-                            out.println("Forbidden cards on curator: "+characterCard.getCardEffect().getXCardOnCard());
+                            out.println("Forbidden cards on curator: "+characterCard.getXCardOnCard());
                             break;
                         default:
                             break;
@@ -470,9 +488,10 @@ public class Cli extends ObservableView implements View {
                 ye=false;
                 if (choice) {
                     if (characterCard != null) {
-                        if (characterCard.getCardEffect().equals(CardEffect.HERALD)) {
+                        if (characterCard.getCardEffect().equals(CardEffect.HERALD))
                             out.print("\nIn which island do you want to virtually position Mother Nature? (id)\n");
-                        }
+                        if (characterCard.getCardEffect().equals(CardEffect.CURATOR))
+                            out.print("\nIn which island do you want to place the forbidden card? (id)\n");
                     } else
                         out.print("\nIn which island do you want to move the student? (id)\n");
                 }else {

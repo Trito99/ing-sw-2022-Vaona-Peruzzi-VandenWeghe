@@ -12,6 +12,7 @@ public class CharacterCard implements Serializable {
     private boolean coinOnCard;
     private ArrayList<Student> studentsOnCard = new ArrayList<>();
     private String description;
+    private int xCardOnCard;
 
     public CharacterCard (int costCharacter, CardEffect cardEffect, String description){
         this.costCharacter = costCharacter;
@@ -41,6 +42,13 @@ public class CharacterCard implements Serializable {
 
     public ArrayList<Student> getStudentsOnCard() {
         return studentsOnCard;
+    }
+    public int getXCardOnCard() {
+        return xCardOnCard;
+    }
+
+    public void setXCardOnCard(int xCardOnCard) {
+        this.xCardOnCard = xCardOnCard;
     }
 
 }

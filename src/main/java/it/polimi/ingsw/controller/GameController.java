@@ -249,13 +249,18 @@ public class GameController {
                 if(receivedMessage.getMessageType() == MessageType.ID_CHOSEN){
                     IdChosen Choice = (IdChosen) receivedMessage;
                     if(Choice.getChoice()) {
-                        boolean present = false;
+                        boolean present = false, xCardPresent = false;
                         for (IslandCard island : gameSession.getTable().getListOfIsland()) {
                             if (island.getIdIsland() == Choice.getId()) {
                                 present = true;
+                                if (card) {
+                                    if (island.isXCardOnIsland())
+                                        xCardPresent = true;
+                                }
                             }
                         }
-                        if (present) {
+
+                        if (present && !xCardPresent) {
                             again = false;
                             if(!card) {
                                 gameSession.moveStudentFromListToIsland(gameSession.getTable().getListOfIsland().get(Choice.getId() - 1), studentId, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
@@ -274,10 +279,14 @@ public class GameController {
                                     setActionState(ActionState.MOTHERNATURE);
                             }
                             action();
-                        } else {
+                        } else if (!present) {
                             virtualView.showMessage("\nIsland doesn't exist or doesn't exists");
                             again = true;
-                            virtualView.askId(true,null);
+                            virtualView.askId(true,characterCard);
+                        } else {
+                            virtualView.showMessage("\nForbidden Card already on Island");
+                            again = true;
+                            virtualView.askId(true,characterCard);
                         }
                     }else{
                         boolean present = false;
@@ -332,6 +341,7 @@ public class GameController {
                                 characterCard = cc;
                             }
                         }
+                        boolean empty = false;
                         if (exists) {
                             if (characterCard.getCoinOnCard()) {
                                 if (gameSession.getPlayer(CardSelected.getNickname()).getCoinScore() >= characterCard.getCostCharacter() + 1) {
@@ -349,8 +359,20 @@ public class GameController {
                                     enough = false;
                                 }
                             }
+                            switch(characterCard.getCardEffect()){
+                                case ACROBAT:
+                                case COURTESAN:
+                                case ABBOT:
+                                    if (characterCard.getStudentsOnCard().isEmpty())
+                                        empty = true;
+                                    break;
+                                case CURATOR:
+                                    if (characterCard.getXCardOnCard()==0)
+                                        empty = true;
+                                    break;
+                            }
                         }
-                        if (exists && enough) {
+                        if (exists && enough && !empty) {
                             again = false;
                             switch(characterCard.getCardEffect()){
                                 case ABBOT:
@@ -358,6 +380,7 @@ public class GameController {
                                     virtualView.askId(false,characterCard);
                                     break;
                                 case HERALD:
+                                case CURATOR:
                                     card = true;
                                     virtualView.askId(true,characterCard);
                                     break;
@@ -370,10 +393,12 @@ public class GameController {
                             }
                         } else {
                             again = true;
-                            if (exists)
+                            if (exists && !empty)
                                 virtualView.showMessage("\nYou don't have enough coins for this card");
-                            else
+                            else if (!exists)
                                 virtualView.showMessage("\nEffect not present. Try again");
+                            else if (empty)
+                                virtualView.showMessage("\nCard selected is empty");
                             virtualView.askCharacterCardToPlay(true, -1, null);
                         }
                     }
@@ -393,6 +418,8 @@ public class GameController {
                         gameSession.getTable().moveMotherEarth(steps);
                         if(characterCard!=null && characterCard.getCardEffect().isBearerPlayed())
                             characterCard.getCardEffect().setBearerPlayed(false);
+                        if (characterCard!=null && characterCard.getCardEffect().equals(CardEffect.CURATOR) && gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).isXCardOnIsland())
+                            characterCard.setXCardOnCard(characterCard.getXCardOnCard()+1);
                         gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE);
                         gameSession.getTable().joinIsland(gameSession.getTable().getListOfIsland());
                         setActionState(ActionState.CLOUDCARD);
