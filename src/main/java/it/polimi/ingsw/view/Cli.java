@@ -393,14 +393,14 @@ public class Cli extends ObservableView implements View {
     }
 
     @Override
-    public void askMotherEarthSteps(AssistantCard trash) {
+    public void askMotherEarthSteps(int maxSteps) {
         boolean ye;
         do {
             try {
                 ye=false;
-                out.print("\nChoose how many steps you want to make MotherEarth move: (max " + trash.getStepMotherEarth() + ")\n");
+                out.print("\nChoose how many steps you want to make MotherEarth move: (max " + maxSteps + ")\n");
                 int steps = Integer.parseInt(readInput());
-                notifyObserver(obs -> obs.chooseMotherEarthSteps(steps));
+                notifyObserver(obs -> obs.chooseMotherEarthSteps(steps,maxSteps));
             } catch (Exception e) {
                 out.println(WRONG_INPUT);
                 ye=true;

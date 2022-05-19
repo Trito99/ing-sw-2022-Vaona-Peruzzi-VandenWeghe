@@ -73,8 +73,8 @@ public class ClientMessanger implements ObserverView, Observer {
         client.sendMessage(new IdChosen(nickname,id,choice));
     }
 
-    public void chooseMotherEarthSteps(int steps) {
-        client.sendMessage(new MotherEarthStepsChosen(nickname, steps));
+    public void chooseMotherEarthSteps(int steps, int maxSteps) {
+        client.sendMessage(new MotherEarthStepsChosen(nickname, steps, maxSteps));
     }
 
 
@@ -147,7 +147,7 @@ public class ClientMessanger implements ObserverView, Observer {
                 break;
             case CHOOSE_MOTHER_EARTH_STEPS:
                 ChooseMotherEarthSteps steps = (ChooseMotherEarthSteps) message;
-                queue.execute(() -> view.askMotherEarthSteps(steps.getTrash()));
+                queue.execute(() -> view.askMotherEarthSteps(steps.getMaxSteps()));
                 break;
             case WIN:
                 queue.execute(() -> view.showWinMessage());

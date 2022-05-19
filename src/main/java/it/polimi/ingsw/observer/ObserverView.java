@@ -33,7 +33,7 @@ public interface ObserverView {
 
     public void chooseId(int id, boolean choice);
 
-    public void chooseMotherEarthSteps(int steps);
+    public void chooseMotherEarthSteps(int steps, int maxSteps);
 
     public void chooseCharacterCard(String characterNickname, boolean choice);
 

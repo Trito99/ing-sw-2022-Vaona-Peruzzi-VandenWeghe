@@ -3,14 +3,14 @@ package it.polimi.ingsw.message;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 
 public class ChooseMotherEarthSteps extends  ServerMessage {
-    private AssistantCard trash;
+    private int maxSteps;
 
-    public ChooseMotherEarthSteps(AssistantCard trash){
+    public ChooseMotherEarthSteps(int maxSteps){
         super(MessageType.CHOOSE_MOTHER_EARTH_STEPS);
-        this.trash = trash;
+        this.maxSteps = maxSteps;
     }
 
-    public AssistantCard getTrash(){
-        return trash;
+    public int getMaxSteps(){
+        return maxSteps;
     }
 }

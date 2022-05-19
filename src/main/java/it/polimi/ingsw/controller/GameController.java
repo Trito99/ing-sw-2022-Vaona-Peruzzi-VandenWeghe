@@ -17,7 +17,6 @@ import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.view.VirtualView;
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
@@ -381,14 +380,19 @@ public class GameController {
                 }
                 if(receivedMessage.getMessageType() == MessageType.STEP_MOTHER_EARTH_CHOSEN){
                     MotherEarthStepsChosen step = (MotherEarthStepsChosen) receivedMessage;
-                    if(step.getSteps()>gameSession.getPlayer(step.getNickname()).getTrash().getStepMotherEarth()) {
+                    if(step.getSteps()>step.getMaxSteps()) {
                         virtualView.showMessage("\nSteps selected more than maximum available");
                         again=true;
-                        virtualView.askMotherEarthSteps(gameSession.getPlayer(step.getNickname()).getTrash());
+                        if(characterCard!=null && characterCard.getCardEffect().isBearerPlayed()){
+                            allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth()+2);
+                        }else
+                            allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth());
                     }else{
                         again=false;
                         int steps = step.getSteps();
                         gameSession.getTable().moveMotherEarth(steps);
+                        if(characterCard!=null && characterCard.getCardEffect().isBearerPlayed())
+                            characterCard.getCardEffect().setBearerPlayed(false);
                         gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE);
                         gameSession.getTable().joinIsland(gameSession.getTable().getListOfIsland());
                         setActionState(ActionState.CLOUDCARD);
@@ -483,7 +487,10 @@ public class GameController {
                     allVirtualView.get(turnController.getActivePlayer()).askCharacterCardToPlay(false, gameSession.getPlayer(turnController.getActivePlayer()).getCoinScore(), gameSession.getTable().getCharacterCardsOnTable());
                     break;
                 case MOTHERNATURE:
-                    allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash());
+                    if(characterCard!=null && characterCard.getCardEffect().isBearerPlayed())
+                        allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth() + 2);
+                    else
+                        allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth());
                     break;
                 case CLOUDCARD:
                     if (gameSession.gameIsFinished(turnController.getActivePlayer())){

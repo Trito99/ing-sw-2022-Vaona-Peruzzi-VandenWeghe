@@ -6,7 +6,6 @@ import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
-import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
@@ -114,8 +113,8 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void askMotherEarthSteps(AssistantCard trash) {
-        clientHandler.sendMessage(new ChooseMotherEarthSteps(trash));
+    public void askMotherEarthSteps(int maxSteps) {
+        clientHandler.sendMessage(new ChooseMotherEarthSteps(maxSteps));
     }
 
     @Override

@@ -4,7 +4,6 @@ import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
-import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
@@ -63,8 +62,9 @@ public interface View {
      * @param list*/
     void askCharacterCardToPlay(boolean choice, int coins, ArrayList<CharacterCard> list);
 
-    /** chiede al giocatore quanti passi far fare a madre natura*/
-    void askMotherEarthSteps(AssistantCard trash);
+    /** chiede al giocatore quanti passi far fare a madre natura
+     * @param maxSteps*/
+    void askMotherEarthSteps(int maxSteps);
 
     /** chiede al giocatore di scegliere una tessera nuvola */
     void askCloud(Table table);
