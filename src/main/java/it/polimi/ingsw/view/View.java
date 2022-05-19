@@ -60,7 +60,6 @@ public interface View {
 
     /** chiede al giocatore quale carta personaggio vuole giocare
      * @param choice
-     * @param player
      * @param list*/
     void askCharacterCardToPlay(boolean choice, int coins, ArrayList<CharacterCard> list);
 

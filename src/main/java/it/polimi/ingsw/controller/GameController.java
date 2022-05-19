@@ -313,7 +313,7 @@ public class GameController {
                                 }
                             }
                             if(playable)
-                                virtualView.askCharacterCardToPlay(true, -1, gameSession.getTable().getCharacterCardsOnTable());
+                                virtualView.askCharacterCardToPlay(true, -1, null);
                             else{
                                 virtualView.showMessage("\nYou don't have enough coins for any card");
                                 setActionState(ActionState.MOTHERNATURE);
@@ -324,7 +324,7 @@ public class GameController {
                             action();
                         }else{
                             virtualView.showMessage("\nWrong Input");
-                            virtualView.askCharacterCardToPlay(false, gameSession.getPlayer(turnController.getActivePlayer()).getCoinScore(), null);
+                            virtualView.askCharacterCardToPlay(false, gameSession.getPlayer(turnController.getActivePlayer()).getCoinScore(), gameSession.getTable().getCharacterCardsOnTable());
                         }
                     }else {
                         for (CharacterCard cc : gameSession.getTable().getCharacterCardsOnTable()) {
@@ -375,7 +375,7 @@ public class GameController {
                                 virtualView.showMessage("\nYou don't have enough coins for this card");
                             else
                                 virtualView.showMessage("\nEffect not present. Try again");
-                            virtualView.askCharacterCardToPlay(true, -1, gameSession.getTable().getCharacterCardsOnTable());
+                            virtualView.askCharacterCardToPlay(true, -1, null);
                         }
                     }
                 }
@@ -480,7 +480,7 @@ public class GameController {
                     allVirtualView.get(turnController.getActivePlayer()).askPlaceAndStudentForMove(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                     break;
                 case CHARACTER:
-                    allVirtualView.get(turnController.getActivePlayer()).askCharacterCardToPlay(false, gameSession.getPlayer(turnController.getActivePlayer()).getCoinScore(), null);
+                    allVirtualView.get(turnController.getActivePlayer()).askCharacterCardToPlay(false, gameSession.getPlayer(turnController.getActivePlayer()).getCoinScore(), gameSession.getTable().getCharacterCardsOnTable());
                     break;
                 case MOTHERNATURE:
                     allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash());

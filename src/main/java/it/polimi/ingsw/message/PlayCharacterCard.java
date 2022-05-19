@@ -20,6 +20,6 @@ public class PlayCharacterCard extends ServerMessage {
      public boolean getChoice(){
         return  choice;
      }
-    public ArrayList getList() { return list; }
+    public ArrayList<CharacterCard> getList() { return list; }
     public int getCoins(){ return coins; }
 }

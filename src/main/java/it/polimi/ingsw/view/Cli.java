@@ -2,6 +2,7 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
+import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.Difficulty;
@@ -366,18 +367,20 @@ public class Cli extends ObservableView implements View {
         do{
             try{
                 ye = false;
-                if(!choice)
-                    out.print("\nYou have "+coins+" coins.\nDo you want to play a Character card? (yes/no) ");
-                else{
-                    out.print("\nChoose a character card from the table: (name) \n");
-                    for(CharacterCard cc : list){
-                        int cost=cc.getCostCharacter();
-                        if(cc.getCoinOnCard()) {
-                            cost = cost + 1;
-                        }
-                        out.print(cc.getCardEffect().toString()+" Cost: "+cost+" | ");
-                    }
+                if(!choice) {
                     out.println();
+                    for (CharacterCard cc : list) {
+                        int cost = cc.getCostCharacter();
+                        if (cc.getCoinOnCard())
+                            cost = cost + 1;
+                        out.print(cc.getCardEffect().toString() + " Cost: " + cost + " | ");
+                    }
+                    if(coins==1)
+                        out.print("\nYou have " + coins + " coin.\nDo you want to play a Character card? (yes/no) ");
+                    else
+                        out.print("\nYou have " + coins + " coins.\nDo you want to play a Character card? (yes/no) ");
+                }else{
+                    out.print("\nChoose a character card from the table: (name) \n");
                 }
                 String character = readInput().toUpperCase(Locale.ROOT);
                 notifyObserver(obs -> obs.chooseCharacterCard(character,choice));
@@ -465,9 +468,14 @@ public class Cli extends ObservableView implements View {
         do {
             try {
                 ye=false;
-                if(choice)
-                    out.print("\nIn which island do you want to move the student? (id)\n");
-                else {
+                if (choice) {
+                    if (characterCard != null) {
+                        if (characterCard.getCardEffect().equals(CardEffect.HERALD)) {
+                            out.print("\nIn which island do you want to virtually position Mother Nature? (id)\n");
+                        }
+                    } else
+                        out.print("\nIn which island do you want to move the student? (id)\n");
+                }else {
                     out.print("\nWhich student do you want to move? (id)\n");
                     out.print(characterCard.getCardEffect().toString()+": ");
                     for (Student s : characterCard.getStudentsOnCard()) {
