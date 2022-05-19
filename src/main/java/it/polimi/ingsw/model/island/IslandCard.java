@@ -63,9 +63,12 @@ public class IslandCard implements Serializable {
         this.towerOnIsland = towerOnIsland;
     }
 
-    public void buildTowerOnIsland(ArrayList<Player> listOfPlayer,  CardEffect cardEffectPlayed){        //Builda la torre del colore del Player che ha l'influenza sull'isola
+    public void buildTowerOnIsland(ArrayList<Player> listOfPlayer,  CardEffect cardEffectPlayed){
+        if(cardEffectPlayed.equals(CardEffect.HERALD))
+            MotherEarthOnIsland=true;
+
         if(MotherEarthOnIsland) {
-            Player playerFound = calculateInfluence(listOfPlayer, cardEffectPlayed);//Player che ha influenza sull'isola
+            Player playerFound = calculateInfluence(listOfPlayer, cardEffectPlayed);
 
             /** CURATRICE: controllo che non ci sia una tessera divieto sull'isola */
             if (xCardOnIsland) {
@@ -80,16 +83,19 @@ public class IslandCard implements Serializable {
                             towerIsOnIsland = true;
                         }else{
                             if (!playerFound.getTColor().equals(towerOnIsland.getTColour())) {
-                                changeTowerColour(listOfPlayer, cardEffectPlayed, playerFound);
+                                changeTowerColour(listOfPlayer, playerFound);
                             }
                         }
                     }
                 }
             }
         }
+
+        if(cardEffectPlayed.equals(CardEffect.HERALD))
+            MotherEarthOnIsland=false;
     }
 
-    private void changeTowerColour(ArrayList<Player> listOfPlayers, CardEffect cardEffectPlayed, Player playerBuilder){        //cambio colore della torre se è cambiata l'influenza sull'isola
+    private void changeTowerColour(ArrayList<Player> listOfPlayers, Player playerBuilder){        //cambio colore della torre se è cambiata l'influenza sull'isola
 
         Player prevPlayer = null;
 
@@ -180,7 +186,7 @@ public class IslandCard implements Serializable {
         }
 
         cardEffectPlayed.setKnightPlayed(false);
-        cardEffectPlayed.setCentaurPlayed(false);           /** controlla se va bene qua (Centauro) */
+        cardEffectPlayed.setCentaurPlayed(false);
         if (count==1)
             return playerWithInfluence;
         else

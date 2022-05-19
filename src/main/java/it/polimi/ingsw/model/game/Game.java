@@ -20,7 +20,6 @@ public class Game {
     private GameMode gameMode;
     private ArrayList<Player> listOfPlayers;
     private State state;
-    private ArrayList<Player> order;
     private Difficulty difficulty;
     private Table table;
     private ArrayList<Team> team;
@@ -32,7 +31,6 @@ public class Game {
         this.gameMode = null;
         this.listOfPlayers = new ArrayList<>();
         this.state = null;
-        this.order = new ArrayList<>();
         this.difficulty = null;
         this.table = new Table();
         this.team = new ArrayList<>();
@@ -88,14 +86,6 @@ public class Game {
 
     public void setDifficulty(Difficulty difficulty) {this.difficulty = difficulty; }
 
-    public ArrayList<Player> getOrder(){
-        return order;
-    }
-
-    public void setOrder(ArrayList<Player> order) {
-        this.order = order;
-    }
-
     /**
      * winnerIs deve rimanere all'interno di Game   (?)
      */
@@ -108,7 +98,7 @@ public class Game {
     }
 
     public ArrayList<Team> getTeam() {
-        return (ArrayList<Team>) team.clone();
+        return (ArrayList<Team>) team;
     }
 
     public boolean gameIsFinished(String nickname) {
@@ -147,18 +137,20 @@ public class Game {
         list.remove(list.get(list.indexOf(student)));
     }
 
-    public void playCharacterCard(CardEffect cardEffect, String nickname, int idS, int idI) {
+    public void playCharacterCard(CardEffect cardEffect, String nickname, int idS, int idI, String ActivePlayer) {
 
         Player activePlayer = getPlayer(nickname);
         CharacterCard characterCardPlayed = table.getCharacterCard(cardEffect);
 
+        IslandCard islandCardChosen = null;
+        for(IslandCard islandCard : getTable().getListOfIsland()){
+            if(idI==islandCard.getIdIsland())
+                islandCardChosen = islandCard;
+        }
+
+
         switch (characterCardPlayed.getCardEffect()) {
             case ABBOT:
-                IslandCard islandCardChosen = null;
-                for(IslandCard islandCard : getTable().getListOfIsland()){
-                    if(idI==islandCard.getIdIsland())
-                        islandCardChosen = islandCard;
-                }
                 moveStudentFromListToIsland(islandCardChosen,idS,characterCardPlayed.getStudentsOnCard());
                 characterCardPlayed.getStudentsOnCard().add(getTable().getBag().get(0));
                 getTable().getBag().remove(0);
@@ -166,15 +158,12 @@ public class Game {
 
             case HOST:
                 characterCardPlayed.getCardEffect().setHostPlayed(true);
+                getPlayer(ActivePlayer).getPersonalSchool().winProf(getListOfPlayers(),  getPlayer(ActivePlayer), CardEffect.HOST);
+                characterCardPlayed.getCardEffect().setHostPlayed(false);
                 break;
 
             case HERALD:
-                IslandCard islandChosen = null;
-                //notify (observer)----> islandChosen
-                ArrayList<Player> playersList = new ArrayList<>(getListOfPlayers());
-
-                islandChosen.calculateInfluence(playersList, characterCardPlayed.getCardEffect());
-                islandChosen.buildTowerOnIsland(playersList, characterCardPlayed.getCardEffect());
+                islandCardChosen.buildTowerOnIsland(getListOfPlayers(), characterCardPlayed.getCardEffect());
                 getTable().joinIsland(getTable().getListOfIsland());
                 break;
 
