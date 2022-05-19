@@ -103,8 +103,8 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void askCharacterCardToPlay(boolean choice, ArrayList<CharacterCard> list) {
-        clientHandler.sendMessage(new PlayCharacterCard(choice, list));
+    public void askCharacterCardToPlay(boolean choice) {
+        clientHandler.sendMessage(new PlayCharacterCard(choice));
     }
 
     @Override

@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.school.Prof;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.table.Table;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -16,7 +17,7 @@ import static java.util.Calendar.*;
 /**
  * This class represents the player and contains all his information.
  */
-public class Player {
+public class Player implements Serializable {
 
     private String nickname;
     private GregorianCalendar playerDate;

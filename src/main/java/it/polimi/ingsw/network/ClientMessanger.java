@@ -128,7 +128,7 @@ public class ClientMessanger implements ObserverView, Observer {
                 break;
             case PLAY_CHARACTER_CARD:
                 PlayCharacterCard play = (PlayCharacterCard) message;
-                queue.execute(() -> view.askCharacterCardToPlay(play.getChoice(), play.getList()));
+                queue.execute(() -> view.askCharacterCardToPlay(play.getChoice()));
                 break;
             case PLAY_ASSISTANT_CARD:
                 queue.execute(() -> view.askAssistantCardToPlay());

@@ -59,7 +59,7 @@ public interface View {
 
     /** chiede al giocatore quale carta personaggio vuole giocare
      * @param choice*/
-    void askCharacterCardToPlay(boolean choice, ArrayList<CharacterCard> list);
+    void askCharacterCardToPlay(boolean choice);
 
     /** chiede al giocatore quanti passi far fare a madre natura*/
     void askMotherEarthSteps(AssistantCard trash);
