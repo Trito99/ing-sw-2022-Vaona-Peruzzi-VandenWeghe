@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.island.IslandCard;
+import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.SColor;
@@ -360,15 +361,24 @@ public class Cli extends ObservableView implements View {
     }
 
     @Override
-    public void askCharacterCardToPlay(boolean choice) {
+    public void askCharacterCardToPlay(boolean choice, int coins, ArrayList<CharacterCard> list) {
         boolean ye;
         do{
             try{
                 ye = false;
                 if(!choice)
-                    out.print("\nDo you want to play a Character card? ");
-                else
-                    out.print("\nChoose a character card from the table: (name) ");
+                    out.print("\nYou have "+coins+" coins.\nDo you want to play a Character card? (yes/no) ");
+                else{
+                    out.print("\nChoose a character card from the table: (name) \n");
+                    for(CharacterCard cc : list){
+                        int cost=cc.getCostCharacter();
+                        if(cc.getCoinOnCard()) {
+                            cost = cost + 1;
+                        }
+                        out.print(cc.getCardEffect().toString()+" Cost: "+cost+" | ");
+                    }
+                    out.println();
+                }
                 String character = readInput().toUpperCase(Locale.ROOT);
                 notifyObserver(obs -> obs.chooseCharacterCard(character,choice));
             } catch (Exception e){

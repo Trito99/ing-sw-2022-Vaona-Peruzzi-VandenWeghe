@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
+import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
@@ -58,8 +59,10 @@ public interface View {
     void askAssistantCardToPlay();
 
     /** chiede al giocatore quale carta personaggio vuole giocare
-     * @param choice*/
-    void askCharacterCardToPlay(boolean choice);
+     * @param choice
+     * @param player
+     * @param list*/
+    void askCharacterCardToPlay(boolean choice, int coins, ArrayList<CharacterCard> list);
 
     /** chiede al giocatore quanti passi far fare a madre natura*/
     void askMotherEarthSteps(AssistantCard trash);

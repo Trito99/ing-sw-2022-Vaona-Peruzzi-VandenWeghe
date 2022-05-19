@@ -17,6 +17,7 @@ import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.view.VirtualView;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
@@ -261,7 +262,7 @@ public class GameController {
                                 gameSession.moveStudentFromListToIsland(gameSession.getTable().getListOfIsland().get(Choice.getId() - 1), studentId, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                                 movedStudents++;
                             } else {
-                                gameSession.playCharacterCard(characterCard.getCardEffect(),Choice.getNickname(),studentId,Choice.getId());
+                                gameSession.playCharacterCard(characterCard.getCardEffect(),Choice.getNickname(),studentId,Choice.getId(), null);
                                 setActionState(ActionState.MOTHERNATURE);
                                 card=false;
                             }
@@ -275,7 +276,7 @@ public class GameController {
                             }
                             action();
                         } else {
-                            virtualView.showMessage("\nIsland doesn't exist");
+                            virtualView.showMessage("\nIsland doesn't exist or doesn't exists");
                             again = true;
                             virtualView.askId(true,null);
                         }
@@ -312,7 +313,7 @@ public class GameController {
                                 }
                             }
                             if(playable)
-                                virtualView.askCharacterCardToPlay(true);
+                                virtualView.askCharacterCardToPlay(true, -1, gameSession.getTable().getCharacterCardsOnTable());
                             else{
                                 virtualView.showMessage("\nYou don't have enough coins for any card");
                                 setActionState(ActionState.MOTHERNATURE);
@@ -323,7 +324,7 @@ public class GameController {
                             action();
                         }else{
                             virtualView.showMessage("\nWrong Input");
-                            virtualView.askCharacterCardToPlay(false);
+                            virtualView.askCharacterCardToPlay(false, gameSession.getPlayer(turnController.getActivePlayer()).getCoinScore(), null);
                         }
                     }else {
                         for (CharacterCard cc : gameSession.getTable().getCharacterCardsOnTable()) {
@@ -354,19 +355,15 @@ public class GameController {
                             again = false;
                             switch(characterCard.getCardEffect()){
                                 case ABBOT:
-                                    card=true;
+                                    card = true;
                                     virtualView.askId(false,characterCard);
                                     break;
-                                case HOST:
-                                    gameSession.playCharacterCard(characterCard.getCardEffect(), CardSelected.getNickname(), -1,-1 );
-                                    gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(turnController.getActivePlayer()), CardEffect.HOST);
-                                    characterCard.setCoinOnCard(true);
-                                    characterCard.getCardEffect().setHostPlayed(false);
-                                    setActionState(ActionState.MOTHERNATURE);
-                                    action();
+                                case HERALD:
+                                    card = true;
+                                    virtualView.askId(true,characterCard);
                                     break;
                                 default:
-                                    gameSession.playCharacterCard(characterCard.getCardEffect(), CardSelected.getNickname(), -1,-1 );
+                                    gameSession.playCharacterCard(characterCard.getCardEffect(), CardSelected.getNickname(), -1,-1 , turnController.getActivePlayer());
                                     characterCard.setCoinOnCard(true);
                                     setActionState(ActionState.MOTHERNATURE);
                                     action();
@@ -378,7 +375,7 @@ public class GameController {
                                 virtualView.showMessage("\nYou don't have enough coins for this card");
                             else
                                 virtualView.showMessage("\nEffect not present. Try again");
-                            virtualView.askCharacterCardToPlay(true);
+                            virtualView.askCharacterCardToPlay(true, -1, gameSession.getTable().getCharacterCardsOnTable());
                         }
                     }
                 }
@@ -467,7 +464,6 @@ public class GameController {
             else{
                 roundIndex = 0;
                 turnController.changeOrder();
-                gameSession.setOrder(turnController.getNewPlayerOrder());
                 turnController.setPlayingPlayer(turnController.getNewPlayerOrderByName().get(0));
                 this.setGameState(GameState.ACTION);
                 this.setActionState(ActionState.STUDENT);
@@ -484,7 +480,7 @@ public class GameController {
                     allVirtualView.get(turnController.getActivePlayer()).askPlaceAndStudentForMove(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                     break;
                 case CHARACTER:
-                    allVirtualView.get(turnController.getActivePlayer()).askCharacterCardToPlay(false);
+                    allVirtualView.get(turnController.getActivePlayer()).askCharacterCardToPlay(false, gameSession.getPlayer(turnController.getActivePlayer()).getCoinScore(), null);
                     break;
                 case MOTHERNATURE:
                     allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash());
@@ -558,29 +554,29 @@ public class GameController {
      * */
 
     /**
-    public boolean hasInactivePlayers(){
-        return turnController.hasInactivePlayers();
-    }*/
+     public boolean hasInactivePlayers(){
+     return turnController.hasInactivePlayers();
+     }*/
 
     /** @return lista di nickname dei giocatori disconnessi dal gioco */
     /**
-    public List<String> getInactivePlayers(){
-        return turnController.getInactivePlayers();
-    }/*
+     public List<String> getInactivePlayers(){
+     return turnController.getInactivePlayers();
+     }/*
 
-    /** riconnette giocatore che si era disconnesso, durante il gioco avviato */
+     /** riconnette giocatore che si era disconnesso, durante il gioco avviato */
     /**
-    public void reconnect(String nickname, VirtualView virtualView){
-        allVirtualView.put(nickname, virtualView);
-        turnController.reconnect(nickname);
-        broadcastMessage(nickname + " si è riconnesso.");
-        showPlayer(gameSession.getPlayer(nickname),nickname);
-        allVirtualView.get(nickname).showPersonalSchool(gameSession.getPlayer(nickname).getPersonalSchool(), nickname,gameSession.getPlayer(nickname).getTrash());
-        allVirtualView.get(nickname).showTable(gameSession.getTable());
-        allVirtualView.get(nickname).showPlayerTurn(getActivePlayer());
-    }/*
+     public void reconnect(String nickname, VirtualView virtualView){
+     allVirtualView.put(nickname, virtualView);
+     turnController.reconnect(nickname);
+     broadcastMessage(nickname + " si è riconnesso.");
+     showPlayer(gameSession.getPlayer(nickname),nickname);
+     allVirtualView.get(nickname).showPersonalSchool(gameSession.getPlayer(nickname).getPersonalSchool(), nickname,gameSession.getPlayer(nickname).getTrash());
+     allVirtualView.get(nickname).showTable(gameSession.getTable());
+     allVirtualView.get(nickname).showPlayerTurn(getActivePlayer());
+     }/*
 
-    /** rimouove giocatore dal gioco e controlla se era l'active player---> inizia nuovo turno */
+     /** rimouove giocatore dal gioco e controlla se era l'active player---> inizia nuovo turno */
     public void disconnect(String nickname){
         allVirtualView.remove(nickname);
         System.out.println(allVirtualView.keySet());
@@ -609,13 +605,13 @@ public class GameController {
     }
 
 
-  /**  @Override
+    /**  @Override
     public void update(Observable o, Object arg) {
-        if (o != view || !(arg instanceof Choice)){
-            throw new IllegalArgumentException();
-        }
-         model.setPlayerChoice((Choice)arg);
-         game();                 (DA CAMBIARE: preso da esercit)
+    if (o != view || !(arg instanceof Choice)){
+    throw new IllegalArgumentException();
+    }
+    model.setPlayerChoice((Choice)arg);
+    game();                 (DA CAMBIARE: preso da esercit)
     }*/
 }
 
