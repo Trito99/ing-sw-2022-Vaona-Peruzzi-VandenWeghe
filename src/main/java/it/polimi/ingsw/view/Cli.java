@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.island.IslandCard;
+import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.SColor;
@@ -285,7 +286,7 @@ public class Cli extends ObservableView implements View {
         if(difficulty.equals(Difficulty.EXPERTMODE)){
             out.println("\n----------------------------------------------");
             out.print("\n**** CHARACTER CARDS ****");
-            if (table.getCharacterCardsOnTable().size()>0) {
+            if (table.getCharacterCardsOnTable().size() > 0) {
                 for (CharacterCard characterCard : table.getCharacterCardsOnTable()) {
                     int coins=0, cost=characterCard.getCostCharacter();
                     if(characterCard.getCoinOnCard()) {
@@ -360,13 +361,13 @@ public class Cli extends ObservableView implements View {
     }
 
     @Override
-    public void askCharacterCardToPlay(boolean choice) {
+    public void askCharacterCardToPlay(boolean choice, Player player) {
         boolean ye;
         do{
             try{
                 ye = false;
                 if(!choice)
-                    out.print("\nDo you want to play a Character card? ");
+                    out.print("\nYou have "+player.getCoinScore()+" coins.\nDo you want to play a Character card? (yes/no) ");
                 else
                     out.print("\nChoose a character card from the table: (name) ");
                 String character = readInput().toUpperCase(Locale.ROOT);

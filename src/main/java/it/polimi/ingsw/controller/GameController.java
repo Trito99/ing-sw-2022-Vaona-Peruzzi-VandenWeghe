@@ -291,7 +291,7 @@ public class GameController {
                             again = false;
                             virtualView.askId(true,null);
                         }else {
-                            virtualView.showMessage("\nStudent selected is not available");
+                            virtualView.showMessage("\nStudent selected is not available or doesn't exists");
                             again = true;
                             virtualView.askId(false,characterCard);
                         }
@@ -312,7 +312,7 @@ public class GameController {
                                 }
                             }
                             if(playable)
-                                virtualView.askCharacterCardToPlay(true);
+                                virtualView.askCharacterCardToPlay(true, gameSession.getPlayer(turnController.getActivePlayer()));
                             else{
                                 virtualView.showMessage("\nYou don't have enough coins for any card");
                                 setActionState(ActionState.MOTHERNATURE);
@@ -323,7 +323,7 @@ public class GameController {
                             action();
                         }else{
                             virtualView.showMessage("\nWrong Input");
-                            virtualView.askCharacterCardToPlay(false);
+                            virtualView.askCharacterCardToPlay(false, gameSession.getPlayer(turnController.getActivePlayer()));
                         }
                     }else {
                         for (CharacterCard cc : gameSession.getTable().getCharacterCardsOnTable()) {
@@ -378,7 +378,7 @@ public class GameController {
                                 virtualView.showMessage("\nYou don't have enough coins for this card");
                             else
                                 virtualView.showMessage("\nEffect not present. Try again");
-                            virtualView.askCharacterCardToPlay(true);
+                            virtualView.askCharacterCardToPlay(true, gameSession.getPlayer(turnController.getActivePlayer()));
                         }
                     }
                 }
@@ -484,7 +484,7 @@ public class GameController {
                     allVirtualView.get(turnController.getActivePlayer()).askPlaceAndStudentForMove(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                     break;
                 case CHARACTER:
-                    allVirtualView.get(turnController.getActivePlayer()).askCharacterCardToPlay(false);
+                    allVirtualView.get(turnController.getActivePlayer()).askCharacterCardToPlay(false, gameSession.getPlayer(turnController.getActivePlayer()));
                     break;
                 case MOTHERNATURE:
                     allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash());
