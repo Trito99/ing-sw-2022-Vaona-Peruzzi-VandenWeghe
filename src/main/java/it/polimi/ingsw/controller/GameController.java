@@ -249,18 +249,14 @@ public class GameController {
                 if(receivedMessage.getMessageType() == MessageType.ID_CHOSEN){
                     IdChosen Choice = (IdChosen) receivedMessage;
                     if(Choice.getChoice()) {
-                        boolean present = false, xCardPresent = false;
+                        boolean present = false;
                         for (IslandCard island : gameSession.getTable().getListOfIsland()) {
                             if (island.getIdIsland() == Choice.getId()) {
                                 present = true;
-                                if (card) {
-                                    if (island.isXCardOnIsland())
-                                        xCardPresent = true;
                                 }
                             }
-                        }
 
-                        if (present && !xCardPresent) {
+                        if (present) {
                             again = false;
                             if(!card) {
                                 gameSession.moveStudentFromListToIsland(gameSession.getTable().getListOfIsland().get(Choice.getId() - 1), studentId, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
@@ -279,14 +275,10 @@ public class GameController {
                                     setActionState(ActionState.MOTHERNATURE);
                             }
                             action();
-                        } else if (!present) {
+                        } else {
                             virtualView.showMessage("\nIsland doesn't exist or doesn't exists");
                             again = true;
-                            virtualView.askId(true,characterCard);
-                        } else {
-                            virtualView.showMessage("\nForbidden Card already on Island");
-                            again = true;
-                            virtualView.askId(true,characterCard);
+                            virtualView.askId(true, characterCard);
                         }
                     }else{
                         boolean present = false;

@@ -274,14 +274,14 @@ public class Cli extends ObservableView implements View {
         for(IslandCard islandCard : table.getListOfIsland()) {
             if (islandCard.towerIsOnIsland()) {
                 if(forbidden)
-                    out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       |    " + getTowerAnsiColor(islandCard.getTowerOnIsland()) + "T" +ANSI_RESET+ "(" + islandCard.getMergedIsland() + ")     |   "+islandCard.isXCardOnIsland()+"   | ");
+                    out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       |    " + getTowerAnsiColor(islandCard.getTowerOnIsland()) + "T" +ANSI_RESET+ "(" + islandCard.getMergedIsland() + ")     | "+islandCard.isXCardOnIsland()+"("+islandCard.getXCardCounter()+")"+"  | ");
                 else
                     out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       |    " + getTowerAnsiColor(islandCard.getTowerOnIsland()) + "T" +ANSI_RESET+ "(" + islandCard.getMergedIsland() + ")     | ");
                 for (Student student: islandCard.getStudentOnIsland())
                     out.print(getStudentAnsiColor(student) + student.getIdStudent() + " " + ANSI_RESET);
             } else {
                 if(forbidden)
-                    out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       | " + " No Tower" +"(" + (islandCard.getMergedIsland()-1) + ")" + "  |   "+islandCard.isXCardOnIsland()+"   | ");
+                    out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       | " + " No Tower" +"(" + (islandCard.getMergedIsland()-1) + ") | "+islandCard.isXCardOnIsland()+"("+islandCard.getXCardCounter()+")"+"  | ");
                 else
                     out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       | " + " No Tower" +"(" + (islandCard.getMergedIsland()-1) + ")" + "  | ");
                 for (Student student: islandCard.getStudentOnIsland())
