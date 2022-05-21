@@ -8,7 +8,9 @@ import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.observer.ObservableView;
+import it.polimi.ingsw.view.GUI.scene.SetupGame;
 import it.polimi.ingsw.view.View;
+import javafx.application.Platform;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -19,6 +21,11 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void askConnect() {
+        SetupGame setupGame = new SetupGame();
+        setupGame.addAllObservers(observers);
+        Platform.runLater(() -> {
+            //GuiManager.changeRootPane(observers, "/fxml/setup_game_scene");
+        });
 
     }
 
