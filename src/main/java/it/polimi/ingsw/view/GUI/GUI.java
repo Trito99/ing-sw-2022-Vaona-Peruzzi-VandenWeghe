@@ -9,6 +9,7 @@ import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.observer.ObservableView;
 import it.polimi.ingsw.view.GUI.scene.ConnectToServer;
+import it.polimi.ingsw.view.GUI.scene.PNandDifficulty;
 import it.polimi.ingsw.view.GUI.scene.SetupGame;
 import it.polimi.ingsw.view.View;
 import javafx.application.Platform;
@@ -24,26 +25,25 @@ public class GUI extends ObservableView implements View {
     public void askConnect() {
         ConnectToServer connectToServer = new ConnectToServer();
         connectToServer.addAllObservers(observers);
-        Platform.runLater(() -> {
-            GuiManager.changeRootPane(observers, "/fxml/connect_to_server_scene");
-        });
+        Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/connect_to_server_scene") );
     }
 
     @Override
     public void askLobby() {
         SetupGame setupGame = new SetupGame();
         setupGame.addAllObservers(observers);
-        Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/setup_game_scene")
-        );
-    }
-
-    @Override
-    public void askAction() {
-
+        Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/setup_game_scene") );
     }
 
     @Override
     public void askPlayersNumberAndDifficulty() {
+        PNandDifficulty pNandDifficulty = new PNandDifficulty();
+        pNandDifficulty.addAllObservers(observers);
+        Platform.runLater(()-> GuiManager.changeRootPane(observers,"/fxml/players_number_and_difficulty_scene") );
+    }
+
+    @Override
+    public void askAction() {
 
     }
 
