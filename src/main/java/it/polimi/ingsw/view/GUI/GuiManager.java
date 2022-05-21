@@ -17,7 +17,6 @@ public class GuiManager extends ObservableView {
     private static Parent mainRoot;
 
     public static <T> T changeRootPane(List<ObserverView> observerViewList, Scene newScene, String fxml) {
-
         T controller = null;
 
         try {
@@ -29,11 +28,16 @@ public class GuiManager extends ObservableView {
             activeController = (GenericScene) controller;
             scene = newScene;
             scene.setRoot(root);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
         return controller;
     }
+
+    public static <T> T changeRootPane(List<ObserverView> observerList, String fxml) {
+        return changeRootPane(observerList, scene, fxml);
+    }
+
 
 
 }

@@ -24,7 +24,7 @@ public class GUI extends ObservableView implements View {
         SetupGame setupGame = new SetupGame();
         setupGame.addAllObservers(observers);
         Platform.runLater(() -> {
-            //GuiManager.changeRootPane(observers, "/fxml/setup_game_scene");
+            GuiManager.changeRootPane(observers, "/fxml/setup_game_scene");
         });
 
     }
