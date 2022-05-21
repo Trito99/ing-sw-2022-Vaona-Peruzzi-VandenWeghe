@@ -38,6 +38,25 @@ public class GuiManager extends ObservableView {
         return changeRootPane(observerList, scene, fxml);
     }
 
+    public static void changeRootPane(GenericScene controller, String fxml) {
+        changeRootPane(controller, scene, fxml);
+    }
+
+    public static void changeRootPane(GenericScene controller, Scene scene, String fxml) {
+        try {
+            FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource(fxml + ".fxml"));
+
+            loader.setController(controller);
+            GuiManager.activeController = controller;
+            Parent root = loader.load();
+
+            GuiManager.scene = scene;
+            GuiManager.scene.setRoot(root);
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+    }
+
 
 
 }

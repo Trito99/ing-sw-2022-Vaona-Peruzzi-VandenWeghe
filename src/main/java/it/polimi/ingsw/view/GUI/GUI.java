@@ -8,10 +8,7 @@ import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.observer.ObservableView;
-import it.polimi.ingsw.view.GUI.scene.ConnectToServer;
-import it.polimi.ingsw.view.GUI.scene.Message;
-import it.polimi.ingsw.view.GUI.scene.PNandDifficulty;
-import it.polimi.ingsw.view.GUI.scene.SetupGame;
+import it.polimi.ingsw.view.GUI.scene.*;
 import it.polimi.ingsw.view.View;
 import javafx.application.Platform;
 
@@ -100,7 +97,9 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void showWinMessage(int numberOfTower) {
-
+        Winner win = new Winner();
+        win.addAllObservers(observers);
+        Platform.runLater(() -> GuiManager.changeRootPane(win, "/fxml/winner_scene"));
     }
 
     @Override
