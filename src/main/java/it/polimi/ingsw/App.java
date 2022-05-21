@@ -1,29 +1,37 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.controller.GameController;
-import it.polimi.ingsw.model.game.Game;
+import it.polimi.ingsw.network.StartClient;
+import it.polimi.ingsw.network.StartServer;
 
+import java.util.Scanner;
 
 /**
  * Hello world!
- *
  */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println("Hi Guys !!!");
-      /**  Game model = new Game();
-        ModelView modelView = new ModelView();
-        View view = new View();
-        GameController controller = new GameController(model, view);
+public class App {
+    private static Selection choice = null;
 
-        view.addObserver(controller);  //(= controller osserva view)
-        //model.addObserver(modelView);
-        modelView.addObserver(view);
+    public static void main (String[] args) {
+        Scanner in = new Scanner(System.in);
 
-        view.run();
+        System.out.println("type \"C\" to start the Client-app");
+        System.out.println("type \"S\" to start the Server-app");
+        System.out.print(" -> ");
+        String input = in.nextLine();
 
-    }*/
+        if (input.equals("c")) {
+            choice = Selection.CLIENT;
+        }
+        else if(input.equals("s")) {
+            choice = Selection.SERVER;
+        }
+
+        if(choice == Selection.SERVER) StartServer.main(args);
+        else if(choice == Selection.CLIENT) StartClient.main(args);
+    }
+
+    private enum Selection {
+        SERVER,
+        CLIENT
     }
 }
