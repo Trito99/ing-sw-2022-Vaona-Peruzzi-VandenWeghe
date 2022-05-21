@@ -9,6 +9,7 @@ import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.observer.ObservableView;
 import it.polimi.ingsw.view.GUI.scene.ConnectToServer;
+import it.polimi.ingsw.view.GUI.scene.Message;
 import it.polimi.ingsw.view.GUI.scene.PNandDifficulty;
 import it.polimi.ingsw.view.GUI.scene.SetupGame;
 import it.polimi.ingsw.view.View;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class GUI extends ObservableView implements View {
-
+    private static ArrayList<String> playerList = new ArrayList<>();
 
 
     @Override
@@ -49,7 +50,7 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void showLogin(String nickname, String gameId, GregorianCalendar playerDate, boolean wasJoined) {
-
+        GUI.playerList.add(nickname);
     }
 
     @Override
@@ -104,7 +105,7 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void showErrorMessage(String message) {
-
+        Platform.runLater(() -> Message.display("Error", message));
     }
 
     @Override
@@ -131,8 +132,6 @@ public class GUI extends ObservableView implements View {
     public void askCloud(Table table) {
 
     }
-
-
 
     @Override
     public void askId(boolean choice, CharacterCard characterCard) {
