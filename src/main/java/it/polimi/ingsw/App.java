@@ -16,7 +16,7 @@ public class App {
 
         System.out.println("type \"C\" to start the Client-app");
         System.out.println("type \"S\" to start the Server-app");
-        System.out.print(" -> ");
+        System.out.print("---> ");
         String input = in.nextLine();
 
         if (input.equals("c")) {
