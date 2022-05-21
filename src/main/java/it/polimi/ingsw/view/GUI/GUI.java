@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.observer.ObservableView;
+import it.polimi.ingsw.view.GUI.scene.ConnectToServer;
 import it.polimi.ingsw.view.GUI.scene.SetupGame;
 import it.polimi.ingsw.view.View;
 import javafx.application.Platform;
@@ -21,17 +22,19 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void askConnect() {
-        SetupGame setupGame = new SetupGame();
-        setupGame.addAllObservers(observers);
+        ConnectToServer connectToServer = new ConnectToServer();
+        connectToServer.addAllObservers(observers);
         Platform.runLater(() -> {
-            GuiManager.changeRootPane(observers, "/fxml/setup_game_scene");
+            GuiManager.changeRootPane(observers, "/fxml/connect_to_server_scene");
         });
-
     }
 
     @Override
     public void askLobby() {
-
+        SetupGame setupGame = new SetupGame();
+        setupGame.addAllObservers(observers);
+        Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/setup_game_scene")
+        );
     }
 
     @Override
