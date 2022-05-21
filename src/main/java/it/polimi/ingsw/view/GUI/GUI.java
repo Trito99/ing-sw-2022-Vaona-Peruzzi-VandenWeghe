@@ -76,11 +76,6 @@ public class GUI extends ObservableView implements View {
     }
 
     @Override
-    public void showLoseMessage(String nickname) {
-
-    }
-
-    @Override
     public void showPersonalSchool(School school, String nickname, AssistantCard trash, Difficulty difficulty, int coins) {
 
     }
@@ -100,6 +95,13 @@ public class GUI extends ObservableView implements View {
         Winner win = new Winner();
         win.addAllObservers(observers);
         Platform.runLater(() -> GuiManager.changeRootPane(win, "/fxml/winner_scene"));
+    }
+
+    @Override
+    public void showLoseMessage(String nickname) {
+        Loser lost = new Loser();
+        lost.addAllObservers(observers);
+        Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/lose_scene"));
     }
 
     @Override
