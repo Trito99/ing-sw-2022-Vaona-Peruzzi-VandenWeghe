@@ -1,7 +1,7 @@
 package it.polimi.ingsw.network;
 
 
-import it.polimi.ingsw.view.Cli;
+import it.polimi.ingsw.view.CLI;
 //import javafx.application.Application;
 
 import java.util.Locale;
@@ -23,7 +23,7 @@ public class StartClient {
             }
             else{
                 if(mode.equals("CLI")){
-                    Cli cli = new Cli();
+                    CLI cli = new CLI();
                     ClientMessanger clientMessenger = new ClientMessanger(cli);
                     cli.addObserver(clientMessenger);
                     cli.start();

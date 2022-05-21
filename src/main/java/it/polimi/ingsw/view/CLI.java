@@ -7,7 +7,6 @@ import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.island.IslandCard;
-import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.SColor;
@@ -22,7 +21,7 @@ import java.util.concurrent.FutureTask;
 
 import static java.lang.System.out;
 
-public class Cli extends ObservableView implements View {
+public class CLI extends ObservableView implements View {
     private PrintStream output;
     private Thread inputThread;
     private List<String> commandList;
@@ -37,7 +36,7 @@ public class Cli extends ObservableView implements View {
     public static final  String ANSI_GREY = "\u001B[37m";
     public static final  String ANSI_BLACK = "\u001B[30m";
 
-    public Cli(){
+    public CLI(){
         output = out;
         commandList=new ArrayList<String>();
         /**for(Command command: Command.values()) {
