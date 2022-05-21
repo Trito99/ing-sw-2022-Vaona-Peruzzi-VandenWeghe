@@ -3,7 +3,6 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.view.CLI;
 import it.polimi.ingsw.view.GUI.StartGUI;
-import javafx.application.Application;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -30,7 +29,8 @@ public class StartClient {
                     cli.start();
                 }
                 else{
-                    Application.launch(StartGUI.class);
+                    //Application.launch(StartGUI.class);
+                    StartGUI.main();
                 }
             }
         }
