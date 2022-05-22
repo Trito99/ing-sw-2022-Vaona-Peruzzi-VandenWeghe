@@ -59,4 +59,26 @@ public class GuiManager extends ObservableView {
 
 
 
+
+
+
+
+    public static void setScene(String fxml){
+        FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource(fxml + ".fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        GuiManager.scene.setRoot(root);
+    }
+
+    public static Scene getScene() {
+        return scene;
+    }
+
+
+
+
 }

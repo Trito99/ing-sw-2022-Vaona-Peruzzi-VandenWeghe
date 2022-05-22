@@ -24,6 +24,7 @@ public class ConnectToServer extends ObservableView implements GenericScene {
     public void initialize(){
         submit_button.addEventHandler(MouseEvent.MOUSE_CLICKED, this :: onConnectBtm);
     }
+
     private void onConnectBtm(Event event){
         ip_address_field.setDisable(true);
         port_number_field.setDisable(true);
