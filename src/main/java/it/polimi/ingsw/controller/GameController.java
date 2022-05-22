@@ -419,7 +419,11 @@ public class GameController {
                             characterCard.getCardEffect().setBearerPlayed(false);
                         if (characterCard!=null && characterCard.getCardEffect().equals(CardEffect.CURATOR) && gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).isXCardOnIsland())
                             characterCard.setXCardOnCard(characterCard.getXCardOnCard()+1);
-                        gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE);
+                        if(characterCard!=null && characterCard.getCardEffect().isCentaurPlayed()) {
+                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.CENTAUR);
+                            characterCard.getCardEffect().setCentaurPlayed(false);
+                        }else
+                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE);
                         gameSession.getTable().joinIsland(gameSession.getTable().getListOfIsland());
                         setActionState(ActionState.CLOUDCARD);
                         action();
