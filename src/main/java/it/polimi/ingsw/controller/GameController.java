@@ -30,7 +30,7 @@ public class GameController {
     boolean again=false, lastRound=false, card=false;
     private ActionState actionState;
     private CharacterCard characterCard;
-    private SColor sColorBlocked;
+
 
 
     public GameController(){
@@ -411,10 +411,11 @@ public class GameController {
                     }
                 }
                 if(receivedMessage.getMessageType() == MessageType.COLOR_CHOSEN) {
-                    BlockColor blockColor = (BlockColor) receivedMessage;
+                    ColorBlocked blockColor = (ColorBlocked) receivedMessage;
                     Boolean exists=false;
+                    SColor sColorBlocked = null;
                     for (SColor color : SColor.values()) {
-                        if (color.toString().equals(blockColor.getColorToBlock())) {
+                        if (color.toString().equals(blockColor.getColor())) {
                             exists = true;
                             sColorBlocked= color;
                         }
@@ -450,14 +451,12 @@ public class GameController {
                         if (characterCard!=null && characterCard.getCardEffect().equals(CardEffect.CURATOR) && gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).isXCardOnIsland())
                             characterCard.setXCardOnCard(characterCard.getXCardOnCard()+1);
                         if(characterCard!=null && characterCard.getCardEffect().isCentaurPlayed()) {
-                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.CENTAUR);
-                            characterCard.getCardEffect().setCentaurPlayed(false);
+                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.CENTAUR, gameSession.getPlayer(turnController.getActivePlayer()));
                         }
                         if(characterCard!=null && characterCard.getCardEffect().isKnightPlayed()){
-                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.CENTAUR);
-                            characterCard.getCardEffect().setCentaurPlayed(false);
+                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.KNIGHT, gameSession.getPlayer(turnController.getActivePlayer()));
                         }else
-                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE);
+                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE, gameSession.getPlayer(turnController.getActivePlayer()));
                         gameSession.getTable().joinIsland(gameSession.getTable().getListOfIsland());
                         setActionState(ActionState.CLOUDCARD);
                         action();

@@ -63,12 +63,12 @@ public class IslandCard implements Serializable {
         this.towerOnIsland = towerOnIsland;
     }
 
-    public void buildTowerOnIsland(ArrayList<Player> listOfPlayer,  CardEffect cardEffectPlayed){
+    public void buildTowerOnIsland(ArrayList<Player> listOfPlayer,  CardEffect cardEffectPlayed, Player activePlayer){
         if(cardEffectPlayed.equals(CardEffect.HERALD))
             MotherEarthOnIsland=true;
 
         if(MotherEarthOnIsland) {
-            Player playerFound = calculateInfluence(listOfPlayer, cardEffectPlayed);
+            Player playerFound = calculateInfluence(listOfPlayer, cardEffectPlayed, activePlayer);
 
             /** CURATRICE: controllo che non ci sia una tessera divieto sull'isola */
             if (xCardOnIsland) {
@@ -114,7 +114,7 @@ public class IslandCard implements Serializable {
         }
     }
 
-    public Player calculateInfluence(ArrayList<Player> listOfPlayers, CardEffect cardEffectPlayed){   //Restituisce il Player che ha influenza sull'isola
+    public Player calculateInfluence(ArrayList<Player> listOfPlayers, CardEffect cardEffectPlayed, Player activePlayer){   //Restituisce il Player che ha influenza sull'isola
         int i ;
         int maxInfluence = 0;
         Player playerWithInfluence = null;
@@ -122,43 +122,43 @@ public class IslandCard implements Serializable {
         /** calcolo influenza sull'isola */
         for(Player p : listOfPlayers){
             int countTot = 0;
-            for(i=0; i<studentOnIsland.size(); i++){
-                switch (studentOnIsland.get(i).getsColour()){   /** guardo colore studente */
+            for(i=0; i<studentOnIsland.size(); i++) {
+                switch (studentOnIsland.get(i).getsColour()) {   /** guardo colore studente */
                     case GREEN:
-                        if(p.getPersonalSchool().getProfInHall(SColor.GREEN) && !SColor.GREEN.isColorBlocked()){ /** se ho il prof verde e stud è verde incremento influenza */
+                        if (p.getPersonalSchool().getProfInHall(SColor.GREEN) && !SColor.GREEN.isColorBlocked()) { /** se ho il prof verde e stud è verde incremento influenza */
                             countTot++;
                         }
                         break;
                     case RED:
-                        if(p.getPersonalSchool().getProfInHall(SColor.RED) && !SColor.RED.isColorBlocked()){
+                        if (p.getPersonalSchool().getProfInHall(SColor.RED) && !SColor.RED.isColorBlocked()) {
                             countTot++;
                         }
                         break;
                     case YELLOW:
-                        if(p.getPersonalSchool().getProfInHall(SColor.YELLOW) && !SColor.YELLOW.isColorBlocked()){
+                        if (p.getPersonalSchool().getProfInHall(SColor.YELLOW) && !SColor.YELLOW.isColorBlocked()) {
                             countTot++;
                         }
                         break;
                     case PINK:
-                        if(p.getPersonalSchool().getProfInHall(SColor.PINK) && !SColor.PINK.isColorBlocked()){
+                        if (p.getPersonalSchool().getProfInHall(SColor.PINK) && !SColor.PINK.isColorBlocked()) {
                             countTot++;
                         }
                         break;
                     case BLUE:
-                        if(p.getPersonalSchool().getProfInHall(SColor.BLUE) && !SColor.BLUE.isColorBlocked()){
+                        if (p.getPersonalSchool().getProfInHall(SColor.BLUE) && !SColor.BLUE.isColorBlocked()) {
                             countTot++;
                         }
                         break;
                 }
 
                 /** EFFETTO CAVALIERE */
-                if(cardEffectPlayed.isKnightPlayed()) {
+                if(cardEffectPlayed.isKnightPlayed() && p.equals(activePlayer)) {
                     p.setInfluenceOnIsland(countTot + 2);
-                    /** controlla  se va bene qua */
                 }
                 else
                     p.setInfluenceOnIsland(countTot);
             }
+
             /** EFFETTO CENTAURO */
             if(towerIsOnIsland) {
                 if (p.getTColor().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isCentaurPlayed()) {  /** Aggiungo influenza torri */

@@ -59,7 +59,7 @@ public class ClientMessanger implements ObserverView, Observer {
 
     @Override
     public void chooseColorToBlock(String color) {
-        client.sendMessage(new BlockColor(nickname, color));
+        client.sendMessage(new ColorBlocked(nickname, color));
     }
 
     public void chooseAssistantCard(String cardNickname){

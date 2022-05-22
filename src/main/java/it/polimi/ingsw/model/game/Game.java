@@ -163,7 +163,7 @@ public class Game {
                 break;
 
             case HERALD:
-                islandCardChosen.buildTowerOnIsland(getListOfPlayers(), characterCardPlayed.getCardEffect());
+                islandCardChosen.buildTowerOnIsland(getListOfPlayers(), characterCardPlayed.getCardEffect(), null);
                 getTable().joinIsland(getTable().getListOfIsland());
                 break;
 
