@@ -23,14 +23,16 @@ public class GUI extends ObservableView implements View {
     public void askConnect() {
         ConnectToServer connectToServer = new ConnectToServer();
         connectToServer.addAllObservers(observers);
-        Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/connect_to_server_scene") );
+        Platform.runLater(() -> {
+            GuiManager.changeRootPane(observers, "/fxml/connect_to_server_scene.fxml");
+        });
     }
 
     @Override
     public void askLobby() {
         SetupGame setupGame = new SetupGame();
         setupGame.addAllObservers(observers);
-        Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/setup_game_scene") );
+        Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/setup_game_scene.fxml") );
     }
 
     @Override
