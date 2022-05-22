@@ -406,7 +406,24 @@ public class CLI extends ObservableView implements View {
                 out.println(WRONG_INPUT);
             }
         }while (ye);
+    }
 
+    public void askColorToBlock(){
+        boolean ye;
+        do{
+            try{
+                ye = false;
+                out.print("\nWhich color do you want to block? ");
+                String color = readInput().toUpperCase(Locale.ROOT);
+                notifyObserver(obs -> obs.chooseColorToBlock(color));
+
+            }
+            catch (Exception e){
+                ye = true;
+
+            }
+
+        }while (ye);
     }
 
     @Override

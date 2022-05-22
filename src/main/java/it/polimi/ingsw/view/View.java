@@ -62,6 +62,8 @@ public interface View {
      * @param list*/
     void askCharacterCardToPlay(boolean choice, int coins, ArrayList<CharacterCard> list);
 
+    void askColorToBlock();
+
     /** chiede al giocatore quanti passi far fare a madre natura
      * @param maxSteps*/
     void askMotherEarthSteps(int maxSteps);

@@ -1,7 +1,5 @@
 package it.polimi.ingsw.message;
 
-import it.polimi.ingsw.model.character.CardEffect;
-
 public class CharacterCardPlayed extends ClientMessage {
     private String cardNickname;
     private boolean choice;

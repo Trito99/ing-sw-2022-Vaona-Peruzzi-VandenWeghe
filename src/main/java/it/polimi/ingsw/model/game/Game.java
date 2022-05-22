@@ -200,7 +200,6 @@ public class Game {
 
             case HERBALIST:
                 SColor colorChosen = null;
-                //notify (observer)----> colorChosen
                 colorChosen.lockColor();
                 break;
 

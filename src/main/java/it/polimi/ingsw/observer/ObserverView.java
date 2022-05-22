@@ -37,4 +37,6 @@ public interface ObserverView {
 
     public void chooseCharacterCard(String characterNickname, boolean choice);
 
+    public void chooseColorToBlock(String color);
+
 }

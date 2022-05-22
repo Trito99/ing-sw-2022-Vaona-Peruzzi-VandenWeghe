@@ -8,6 +8,7 @@ public enum MessageType {
     ASSISTANTCARD_PLAYED,
     CHARACTER_CARD_PLAYED,
     CLOUD_CHOSEN,
+    COLOR_CHOSEN,
     PLACE_AND_STUDENT_FOR_MOVE_CHOSEN,
     STEP_MOTHER_EARTH_CHOSEN,
     ID_CHOSEN,
@@ -36,6 +37,7 @@ public enum MessageType {
     CHOOSE_PLACE_AND_STUDENT_FOR_MOVE,
     CHOOSE_MOTHER_EARTH_STEPS,
     CHOOSE_ID,
+    CHOOSE_COLOR_TO_BLOCK,
 
 
     //messaggi intermediari

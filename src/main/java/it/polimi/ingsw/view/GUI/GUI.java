@@ -122,6 +122,11 @@ public class GUI extends ObservableView implements View {
     }
 
     @Override
+    public void askColorToBlock() {
+
+    }
+
+    @Override
     public void askPlaceAndStudentForMove(ArrayList<Student> entry) {
 
     }

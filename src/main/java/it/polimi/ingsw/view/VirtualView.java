@@ -108,6 +108,11 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
+    public void askColorToBlock() {
+        clientHandler.sendMessage(new ChooseColor());
+    }
+
+    @Override
     public void askAssistantCardToPlay() {
         clientHandler.sendMessage(new PlayAssistantCard());
     }

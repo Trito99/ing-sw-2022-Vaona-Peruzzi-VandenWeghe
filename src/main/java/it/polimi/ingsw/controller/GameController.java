@@ -13,6 +13,7 @@ import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.school.TColor;
+import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.view.VirtualView;
 
@@ -29,6 +30,7 @@ public class GameController {
     boolean again=false, lastRound=false, card=false;
     private ActionState actionState;
     private CharacterCard characterCard;
+    private SColor sColorBlocked;
 
 
     public GameController(){
@@ -385,7 +387,7 @@ public class GameController {
                                     break;
                                 case HERBALIST:
                                     card = true;
-                                    //virtualView.askColor();
+                                    virtualView.askColorToBlock();
                                     break;
                                 default:
                                     gameSession.playCharacterCard(characterCard.getCardEffect(), CardSelected.getNickname(), -1,-1 , turnController.getActivePlayer());
@@ -406,6 +408,28 @@ public class GameController {
                             if (!changeIdea)
                             virtualView.askCharacterCardToPlay(true, -1, null);
                         }
+                    }
+                }
+                if(receivedMessage.getMessageType() == MessageType.COLOR_CHOSEN) {
+                    BlockColor blockColor = (BlockColor) receivedMessage;
+                    Boolean exists=false;
+                    for (SColor color : SColor.values()) {
+                        if (color.toString().equals(blockColor.getColorToBlock())) {
+                            exists = true;
+                            sColorBlocked= color;
+                        }
+                    }
+
+                    if(exists){
+                        again=false;
+                        sColorBlocked.lockColor();
+                        setActionState(ActionState.MOTHERNATURE);
+                        action();
+                    }
+                    else {
+                        again = true;
+                        virtualView.showMessage("\nColor selected doesn't exists! ");
+                        virtualView.askColorToBlock();
                     }
                 }
                 if(receivedMessage.getMessageType() == MessageType.STEP_MOTHER_EARTH_CHOSEN){
@@ -458,6 +482,7 @@ public class GameController {
                         virtualView.askCloud(gameSession.getTable());
                     }
                 }
+
                 if(!again && turnFinished) {
                     turnController.nextPlayer(turnController.getNewPlayerOrderByName());
                     roundIndex++;

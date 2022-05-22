@@ -57,6 +57,11 @@ public class ClientMessanger implements ObserverView, Observer {
         client.sendMessage(new CharacterCardPlayed(nickname, cardNickname, choice));
     }
 
+    @Override
+    public void chooseColorToBlock(String color) {
+        client.sendMessage(new BlockColor(nickname, color));
+    }
+
     public void chooseAssistantCard(String cardNickname){
         client.sendMessage(new AssistantCardPlayed(nickname, cardNickname));
     }
@@ -144,6 +149,9 @@ public class ClientMessanger implements ObserverView, Observer {
             case CHOOSE_ID:
                 ChooseId id = (ChooseId) message;
                 queue.execute(() -> view.askId(id.getChoice(),id.getCharacterCard()));
+                break;
+            case CHOOSE_COLOR_TO_BLOCK:
+                queue.execute(() -> view.askColorToBlock());
                 break;
             case CHOOSE_MOTHER_EARTH_STEPS:
                 ChooseMotherEarthSteps steps = (ChooseMotherEarthSteps) message;
