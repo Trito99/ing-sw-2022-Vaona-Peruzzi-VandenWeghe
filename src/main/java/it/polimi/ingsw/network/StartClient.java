@@ -1,8 +1,9 @@
 package it.polimi.ingsw.network;
 
 
-import it.polimi.ingsw.view.Cli;
-//import javafx.application.Application;
+import it.polimi.ingsw.view.CLI;
+import it.polimi.ingsw.view.GUI.StartGUI;
+import javafx.application.Application;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -23,13 +24,13 @@ public class StartClient {
             }
             else{
                 if(mode.equals("CLI")){
-                    Cli cli = new Cli();
+                    CLI cli = new CLI();
                     ClientMessanger clientMessenger = new ClientMessanger(cli);
                     cli.addObserver(clientMessenger);
                     cli.start();
                 }
                 else{
-                    /**Application.launch(MainApp.class);*/
+                    Application.launch(StartGUI.class);
                 }
             }
         }

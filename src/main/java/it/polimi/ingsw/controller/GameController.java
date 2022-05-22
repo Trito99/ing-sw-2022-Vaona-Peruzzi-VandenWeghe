@@ -276,7 +276,7 @@ public class GameController {
                             }
                             action();
                         } else {
-                            virtualView.showMessage("\nIsland doesn't exist or doesn't exists");
+                            virtualView.showMessage("\nIsland selected doesn't exist. ");
                             again = true;
                             virtualView.askId(true, characterCard);
                         }
@@ -300,7 +300,7 @@ public class GameController {
                 }
                 if(receivedMessage.getMessageType() == MessageType.CHARACTER_CARD_PLAYED){
                     CharacterCardPlayed CardSelected = (CharacterCardPlayed) receivedMessage;
-                    boolean exists = false, enough = true, playable=false;
+                    boolean exists = false, enough = true, playable=false, changeIdea = false;
                     if(!CardSelected.getChoice()){
                         if(CardSelected.getCardNickname().equals("YES")) {
                             for(CharacterCard characterCard : gameSession.getTable().getCharacterCardsOnTable()){
@@ -332,6 +332,12 @@ public class GameController {
                                 exists = true;
                                 characterCard = cc;
                             }
+                        }
+
+                        if (CardSelected.getCardNickname().equals("NONE")){
+                            changeIdea = true;
+                            setActionState(ActionState.MOTHERNATURE);
+                            action();
                         }
                         boolean empty = false;
                         if (exists) {
@@ -387,10 +393,11 @@ public class GameController {
                             again = true;
                             if (exists && !empty)
                                 virtualView.showMessage("\nYou don't have enough coins for this card");
-                            else if (!exists)
+                            else if (!exists && !changeIdea)
                                 virtualView.showMessage("\nEffect not present. Try again");
-                            else if (empty)
+                            else if (empty )
                                 virtualView.showMessage("\nCard selected is empty");
+                            if (!changeIdea)
                             virtualView.askCharacterCardToPlay(true, -1, null);
                         }
                     }

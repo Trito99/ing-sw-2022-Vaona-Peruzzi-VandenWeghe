@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="it.polimi.ingsw.view.GUI.scene.ConnectToServer">
+    <children>
+        <TextField id="ip_address" fx:id="ip_address_field" layoutX="209.0" layoutY="174.0" promptText="127.0.0.1" />
+        <TextField id="port_number" fx:id="port_number_field" layoutX="209.0" layoutY="218.0" promptText="4000" />
+        <Label fx:id="title" layoutX="192.0" layoutY="140.0" text="Let's try to connect to the Server" />
+        <Label layoutX="135.0" layoutY="179.0" text="Ip address:" />
+        <Label layoutX="130.0" layoutY="223.0" text="Port number:" />
+        <Button fx:id="submit_button" layoutX="253.0" layoutY="259.0" mnemonicParsing="false" text="submit" />
+    </children>
+</AnchorPane>

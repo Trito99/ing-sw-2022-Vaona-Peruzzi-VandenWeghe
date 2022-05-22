@@ -7,7 +7,6 @@ import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.island.IslandCard;
-import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.SColor;
@@ -22,7 +21,7 @@ import java.util.concurrent.FutureTask;
 
 import static java.lang.System.out;
 
-public class Cli extends ObservableView implements View {
+public class CLI extends ObservableView implements View {
     private PrintStream output;
     private Thread inputThread;
     private List<String> commandList;
@@ -37,7 +36,7 @@ public class Cli extends ObservableView implements View {
     public static final  String ANSI_GREY = "\u001B[37m";
     public static final  String ANSI_BLACK = "\u001B[30m";
 
-    public Cli(){
+    public CLI(){
         output = out;
         commandList=new ArrayList<String>();
         /**for(Command command: Command.values()) {
@@ -398,7 +397,7 @@ public class Cli extends ObservableView implements View {
                     else
                         out.print("\nYou have " + coins + " coins.\nDo you want to play a Character card? (yes/no) ");
                 }else{
-                    out.print("\nChoose a character card from the table: (name) \n");
+                    out.print("\nWhich character card do you want to play: (name or none) \n");
                 }
                 String character = readInput().toUpperCase(Locale.ROOT);
                 notifyObserver(obs -> obs.chooseCharacterCard(character,choice));
@@ -489,7 +488,7 @@ public class Cli extends ObservableView implements View {
                 if (choice) {
                     if (characterCard != null) {
                         if (characterCard.getCardEffect().equals(CardEffect.HERALD))
-                            out.print("\nIn which island do you want to virtually position Mother Nature? (id)\n");
+                            out.print("\nIn which island do you want to calculate influence? (id)\n");
                         if (characterCard.getCardEffect().equals(CardEffect.CURATOR))
                             out.print("\nIn which island do you want to place the forbidden card? (id)\n");
                     } else
