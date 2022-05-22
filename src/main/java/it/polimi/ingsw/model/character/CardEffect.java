@@ -29,8 +29,8 @@ public enum CardEffect {
         return hostPlayed;
     }
 
-    public void setHostPlayed(boolean ostePlayed) {
-        this.hostPlayed = ostePlayed;
+    public void setHostPlayed(boolean hostPlayed) {
+        this.hostPlayed = hostPlayed;
     }
 
     public boolean isCentaurPlayed() {

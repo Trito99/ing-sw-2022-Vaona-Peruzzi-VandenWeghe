@@ -368,6 +368,7 @@ public class GameController {
                                     if (characterCard.getXCardOnCard()==0)
                                         empty = true;
                                     break;
+
                             }
                         }
                         if (exists && enough && !empty) {
@@ -382,12 +383,17 @@ public class GameController {
                                     card = true;
                                     virtualView.askId(true,characterCard);
                                     break;
+                                case HERBALIST:
+                                    card = true;
+                                    //virtualView.askColor();
+                                    break;
                                 default:
                                     gameSession.playCharacterCard(characterCard.getCardEffect(), CardSelected.getNickname(), -1,-1 , turnController.getActivePlayer());
                                     characterCard.setCoinOnCard(true);
                                     setActionState(ActionState.MOTHERNATURE);
                                     action();
                                     break;
+
                             }
                         } else {
                             again = true;
@@ -420,6 +426,10 @@ public class GameController {
                         if (characterCard!=null && characterCard.getCardEffect().equals(CardEffect.CURATOR) && gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).isXCardOnIsland())
                             characterCard.setXCardOnCard(characterCard.getXCardOnCard()+1);
                         if(characterCard!=null && characterCard.getCardEffect().isCentaurPlayed()) {
+                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.CENTAUR);
+                            characterCard.getCardEffect().setCentaurPlayed(false);
+                        }
+                        if(characterCard!=null && characterCard.getCardEffect().isKnightPlayed()){
                             gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.CENTAUR);
                             characterCard.getCardEffect().setCentaurPlayed(false);
                         }else
