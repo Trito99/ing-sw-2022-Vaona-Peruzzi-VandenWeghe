@@ -397,7 +397,7 @@ public class CLI extends ObservableView implements View {
                     else
                         out.print("\nYou have " + coins + " coins.\nDo you want to play a Character card? (yes/no) ");
                 }else{
-                    out.print("\nChoose a character card from the table: (name) \n");
+                    out.print("\nWhich character card do you want to play: (name or none) \n");
                 }
                 String character = readInput().toUpperCase(Locale.ROOT);
                 notifyObserver(obs -> obs.chooseCharacterCard(character,choice));
@@ -488,7 +488,7 @@ public class CLI extends ObservableView implements View {
                 if (choice) {
                     if (characterCard != null) {
                         if (characterCard.getCardEffect().equals(CardEffect.HERALD))
-                            out.print("\nIn which island do you want to virtually position Mother Nature? (id)\n");
+                            out.print("\nIn which island do you want to calculate influence? (id)\n");
                         if (characterCard.getCardEffect().equals(CardEffect.CURATOR))
                             out.print("\nIn which island do you want to place the forbidden card? (id)\n");
                     } else
