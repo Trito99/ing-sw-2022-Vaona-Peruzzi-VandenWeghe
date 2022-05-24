@@ -1,8 +1,10 @@
 package it.polimi.ingsw.view.GUI.scene;
 
 import it.polimi.ingsw.observer.ObservableView;
+import it.polimi.ingsw.observer.ObserverView;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -12,26 +14,39 @@ import javafx.scene.input.MouseEvent;
 public class ConnectToServer extends ObservableView implements GenericScene {
 
     @FXML
-    private TextField ip_address_field;
+    private TextField ipAddressField;
 
     @FXML
-    private TextField port_number_field;
+    private TextField portNumberField;
 
     @FXML
-    private Button submit_button;
+    private Button connectButton;
 
     @FXML
     public void initialize(){
-        submit_button.addEventHandler(MouseEvent.MOUSE_CLICKED, this :: onConnectBtm);
+        connectButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickConnect);
     }
 
-    private void onConnectBtm(Event event){
-        ip_address_field.setDisable(true);
-        port_number_field.setDisable(true);
-        String address = ip_address_field.getText();
-        Integer chosenPort = Integer.parseInt(port_number_field.getText());
-        submit_button.setDisable(true);
+    @FXML
+    private void clickConnect(Event event){
+        ipAddressField.setDisable(true);
+        portNumberField.setDisable(true);
+
+        String address = ipAddressField.getText();
+        Integer chosenPort = Integer.parseInt(portNumberField.getText());
+
+        connectButton.setDisable(true);
 
         notifyObserver(obs -> obs.updateConnect(address, chosenPort));
+
+        /** carica scena successiva */
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/setup_game_scene.fxml"));
+    }
+
+    @FXML
+    private void closeGui(){
+        notifyObserver(ObserverView :: updateDisconnect);
+        System.exit(0);
     }
 }

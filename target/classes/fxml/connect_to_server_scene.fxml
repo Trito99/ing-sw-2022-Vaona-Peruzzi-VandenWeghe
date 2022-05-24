@@ -1,22 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="it.polimi.ingsw.view.GUI.scene.ConnectToServer">
-    <children>
-        <TextField id="ip_address" fx:id="ip_address_field" layoutX="209.0" layoutY="174.0" promptText="127.0.0.1" />
-        <TextField id="port_number" fx:id="port_number_field" layoutX="209.0" layoutY="218.0" promptText="4000" />
-        <Label fx:id="title" layoutX="192.0" layoutY="140.0" text="Let's try to connect to the Server" />
-        <Label layoutX="135.0" layoutY="179.0" text="Ip address:" />
-        <Label layoutX="130.0" layoutY="223.0" text="Port number:" />
-        <Button fx:id="submit_button" layoutX="253.0" layoutY="259.0" mnemonicParsing="false" text="submit" />
-    </children>
+<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.scene.ConnectToServer">
+   <children>
+      <ButtonBar layoutX="386.0" layoutY="346.0" prefHeight="40.0" prefWidth="254.0" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="40.0">
+         <buttons>
+            <Button fx:id="leaveButton" cancelButton="true" mnemonicParsing="false" onAction="#closeGui" prefHeight="26.0" prefWidth="170.0" style="-fx-background-radius: 25; -fx-background-color: floralwhite;" text="Leave the app" />
+            <Button fx:id="connectButton" alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#clickConnect" style="-fx-background-color: black; -fx-background-radius: 25;" text="Connect" textFill="WHITE" />
+         </buttons>
+      </ButtonBar>
+      <Label fx:id="details" layoutX="51.0" layoutY="47.0" text="Server details" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="45.0">
+         <font>
+            <Font name="Verdana" size="40.0" />
+         </font>
+      </Label>
+      <Pane layoutX="156.0" layoutY="158.0" AnchorPane.leftAnchor="156.0" AnchorPane.topAnchor="158.0">
+         <children>
+            <Label fx:id="ipAddressLabel" layoutX="-20.0" text="Ip address:">
+               <font>
+                  <Font name="Verdana" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="ipAddressTextField" alignment="CENTER" layoutX="108.0" prefHeight="26.0" prefWidth="180.0" promptText="127.0.0.1" />
+         </children>
+      </Pane>
+      <Pane layoutX="156.0" layoutY="210.0" AnchorPane.leftAnchor="156.0" AnchorPane.topAnchor="210.0">
+         <children>
+            <Label fx:id="portLabel" layoutX="-37.0" text="Port number:">
+               <font>
+                  <Font name="Verdana" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="portTextField" alignment="CENTER" layoutX="108.0" prefHeight="26.0" prefWidth="180.0" promptText="4000" />
+         </children>
+      </Pane>
+   </children>
 </AnchorPane>

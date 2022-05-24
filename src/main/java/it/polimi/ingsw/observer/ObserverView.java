@@ -15,6 +15,9 @@ public interface ObserverView {
     /** cerca di connettere un client ad una socket */
     public void updateConnect(String address, int port);
 
+    /** cerca di disconnettere un client da una socket */
+    public void updateDisconnect();
+
     public void endGame();
 
     /** carica nuovo nickname */
@@ -31,7 +34,7 @@ public interface ObserverView {
 
     public void choosePlaceAndStudentForMove(String place,int id);
 
-    public void chooseId(int id, boolean choice);
+    public void chooseId(int id, boolean choice, int index);
 
     public void chooseMotherEarthSteps(int steps, int maxSteps);
 
