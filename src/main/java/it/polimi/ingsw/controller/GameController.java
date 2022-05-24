@@ -452,8 +452,7 @@ public class GameController {
                             characterCard.setXCardOnCard(characterCard.getXCardOnCard()+1);
                         if(characterCard!=null && characterCard.getCardEffect().isCentaurPlayed()) {
                             gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.CENTAUR, gameSession.getPlayer(turnController.getActivePlayer()));
-                        }
-                        if(characterCard!=null && characterCard.getCardEffect().isKnightPlayed()){
+                        }else if(characterCard!=null && characterCard.getCardEffect().isKnightPlayed()){
                             gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.KNIGHT, gameSession.getPlayer(turnController.getActivePlayer()));
                         }else
                             gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE, gameSession.getPlayer(turnController.getActivePlayer()));

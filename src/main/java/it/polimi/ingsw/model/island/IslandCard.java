@@ -165,11 +165,10 @@ public class IslandCard implements Serializable {
                     countTot=countTot+mergedIsland;
                 }
             }
-
-            for(SColor c : SColor.values()){            /** controlla se va bene qua (Erborista) */
-                if(c.isColorBlocked)
-                    c.unlockColor();
-            }
+        }
+        for(SColor c : SColor.values()){            /** controlla se va bene qua (Erborista) */
+            if(c.isColorBlocked)
+                c.unlockColor();
         }
         int count=0;
         for(Player p : listOfPlayers) {
