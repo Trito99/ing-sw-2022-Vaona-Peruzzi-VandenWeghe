@@ -544,10 +544,10 @@ public class CLI extends ObservableView implements View {
                 }
                 String input = readInput().toUpperCase(Locale.ROOT);
                 if(input.equals("NONE") && marker == -2) {
-                    notifyObserver(obs -> obs.chooseId(-2, choice, index));
+                    notifyObserver(obs -> obs.chooseId(-2, choice, index, true));
                 }else {
                     int id = Integer.parseInt(input);
-                    notifyObserver(obs -> obs.chooseId(id,choice,index));
+                    notifyObserver(obs -> obs.chooseId(id,choice,index, false));
                 }
             } catch (Exception e) {
                 ye=true;

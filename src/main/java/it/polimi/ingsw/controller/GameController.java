@@ -331,7 +331,7 @@ public class GameController {
                                     acrobatIndex++;
                                     virtualView.askId(false, characterCard, acrobatIndex, null);
                                 } else {
-                                    if (Choice.getId() == -2) {
+                                    if (Choice.getId() == -2 && Choice.getNone()) {
                                         acrobatIndex = 0;
                                         setActionState(ActionState.STUDENT);
                                         action();
