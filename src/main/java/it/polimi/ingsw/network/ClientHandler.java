@@ -27,7 +27,7 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
      */
     public ClientHandler(Socket client, LobbyServer lobbyServer) {
         this.client = client;
-        this.lobbyServer=lobbyServer;
+        this.lobbyServer = lobbyServer;
         lockHandleMessage = new Object();
         lockSendMessage = new Object();
         lobby = null;

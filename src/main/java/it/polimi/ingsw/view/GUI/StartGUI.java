@@ -45,9 +45,4 @@ public class StartGUI extends Application {
         stage.show();
     }
 
-    /**@FXML
-    protected void handleCloseButton(){
-        System.exit();
-    }*/
-
 }

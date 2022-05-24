@@ -39,9 +39,4 @@ ObservableView {
         }
     }
 
-    /** da verificare
-    @FXML
-    protected void handleCloseButton(){
-        this.observers.removeAll(observers);
-    }*/
 }
