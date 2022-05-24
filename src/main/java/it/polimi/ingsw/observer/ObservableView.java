@@ -1,11 +1,16 @@
 package it.polimi.ingsw.observer;
 
+import it.polimi.ingsw.view.GUI.StartGUI;
+import javafx.fxml.FXML;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public abstract class ObservableView {
+public abstract class
+ObservableView {
     protected final List<ObserverView> observers = new ArrayList<>();
+    protected StartGUI main;
 
     /** aggiunge observer */
     public void addObserver(ObserverView observer) {
@@ -33,5 +38,11 @@ public abstract class ObservableView {
         for (ObserverView observer : observers) {
             lambda.accept(observer);
         }
+    }
+
+    /** da verificare
+    @FXML
+    protected void handleCloseButton(){
+        this.observers.removeAll(observers);
     }
 }
