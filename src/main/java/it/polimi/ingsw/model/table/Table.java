@@ -142,7 +142,7 @@ public class Table implements Serializable {
                 case ABBOT:
                 case COURTESAN:
                     for (int i = 0; i < 4; i++) {
-                        characterCardsOnTable.get(j).getStudentsOnCard().add(bag.get(i));
+                        characterCardsOnTable.get(j).getStudentsOnCard().add(bag.get(0));
                         bag.remove(bag.get(0));
                     }
                     break;
@@ -151,7 +151,7 @@ public class Table implements Serializable {
                     break;
                 case ACROBAT:
                     for (int i = 0; i < 6; i++) {
-                        characterCardsOnTable.get(j).getStudentsOnCard().add(bag.get(i));
+                        characterCardsOnTable.get(j).getStudentsOnCard().add(bag.get(0));
                         bag.remove(bag.get(0));
                     }
                     break;

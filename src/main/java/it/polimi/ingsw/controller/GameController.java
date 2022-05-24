@@ -331,9 +331,15 @@ public class GameController {
                                     acrobatIndex++;
                                     virtualView.askId(false, characterCard, acrobatIndex, null);
                                 } else {
-                                    virtualView.showMessage("\nStudent selected is not available");
-                                    again = true;
-                                    virtualView.askId(false, characterCard, acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
+                                    if (Choice.getId() == -2) {
+                                        acrobatIndex = 0;
+                                        setActionState(ActionState.STUDENT);
+                                        action();
+                                    }else{
+                                        virtualView.showMessage("\nStudent selected is not available");
+                                        again = true;
+                                        virtualView.askId(false, characterCard, acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
+                                    }
                                 }
                             }
                         }

@@ -499,6 +499,7 @@ public class CLI extends ObservableView implements View {
     @Override
     public void askId(boolean choice,CharacterCard characterCard, int index, ArrayList<Student> entry) {
         boolean ye;
+        int marker = 0 ;
         do {
             try {
                 ye=false;
@@ -520,7 +521,12 @@ public class CLI extends ObservableView implements View {
                             }
                             out.println();
                         }else {
-                            out.print("\nWhich student from the entry do you want to switch? (id)\n");
+                            if (index<2)
+                                out.print("\nWhich student from the entry do you want to switch? (id)\n");
+                            else {
+                                out.print("\nWhich student from the entry do you want to switch? (id or none)\n");
+                                marker = -2;
+                            }
                             out.print("Entry: ");
                             for (Student s : entry) {
                                 out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
@@ -536,8 +542,13 @@ public class CLI extends ObservableView implements View {
                         out.println();
                     }
                 }
-                int id = Integer.parseInt(readInput());
-                notifyObserver(obs -> obs.chooseId(id,choice,index));
+                String input = readInput().toUpperCase(Locale.ROOT);
+                if(input.equals("NONE") && marker == -2) {
+                    notifyObserver(obs -> obs.chooseId(-2, choice, index));
+                }else {
+                    int id = Integer.parseInt(input);
+                    notifyObserver(obs -> obs.chooseId(id,choice,index));
+                }
             } catch (Exception e) {
                 ye=true;
                 out.println(WRONG_INPUT);
