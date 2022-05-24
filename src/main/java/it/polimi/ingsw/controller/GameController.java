@@ -228,10 +228,7 @@ public class GameController {
                                 movedStudents++;
                                 if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces()) {
                                     movedStudents=0;
-                                    if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
-                                        this.setActionState(ActionState.CHARACTER);
-                                    else
-                                        setActionState(ActionState.MOTHERNATURE);
+                                    setActionState(ActionState.MOTHERNATURE);
                                 }
                                 action();
                             } else if (Choice.getPlace().equals("ISLAND")) {
@@ -265,16 +262,13 @@ public class GameController {
                                 movedStudents++;
                             } else {
                                 gameSession.playCharacterCard(characterCard.getCardEffect(),Choice.getNickname(),studentId,Choice.getId(), null, -1);
-                                setActionState(ActionState.MOTHERNATURE);
+                                setActionState(ActionState.STUDENT);
                                 card=false;
                             }
 
                             if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces()) {
                                 movedStudents=0;
-                                if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
-                                    this.setActionState(ActionState.CHARACTER);
-                                else
-                                    setActionState(ActionState.MOTHERNATURE);
+                                setActionState(ActionState.MOTHERNATURE);
                             }
                             action();
                         } else {
@@ -322,7 +316,7 @@ public class GameController {
 
                                 if (acrobatIndex == 6) {
                                     acrobatIndex = 0;
-                                    setActionState(ActionState.MOTHERNATURE);
+                                    setActionState(ActionState.STUDENT);
                                     action();
                                 }
                             }else {
@@ -363,11 +357,11 @@ public class GameController {
                                 virtualView.askCharacterCardToPlay(true, -1, null);
                             else{
                                 virtualView.showMessage("\nYou don't have enough coins for any card");
-                                setActionState(ActionState.MOTHERNATURE);
+                                setActionState(ActionState.STUDENT);
                                 action();
                             }
                         }else if (CardSelected.getCardNickname().equals("NO")){
-                            setActionState(ActionState.MOTHERNATURE);
+                            setActionState(ActionState.STUDENT);
                             action();
                         }else{
                             virtualView.showMessage("\nWrong Input");
@@ -383,7 +377,7 @@ public class GameController {
 
                         if (CardSelected.getCardNickname().equals("NONE")){
                             changeIdea = true;
-                            setActionState(ActionState.MOTHERNATURE);
+                            setActionState(ActionState.STUDENT);
                             action();
                         }
                         boolean empty = false;
@@ -438,7 +432,7 @@ public class GameController {
                                 default:
                                     gameSession.playCharacterCard(characterCard.getCardEffect(), CardSelected.getNickname(), -1,-1 , turnController.getActivePlayer(), -1);
                                     characterCard.setCoinOnCard(true);
-                                    setActionState(ActionState.MOTHERNATURE);
+                                    setActionState(ActionState.STUDENT);
                                     action();
                                     break;
 
@@ -470,7 +464,7 @@ public class GameController {
                     if(exists){
                         again=false;
                         sColorBlocked.lockColor();
-                        setActionState(ActionState.MOTHERNATURE);
+                        setActionState(ActionState.STUDENT);
                         action();
                     }
                     else {
@@ -530,7 +524,10 @@ public class GameController {
                 if(!again && turnFinished) {
                     turnController.nextPlayer(turnController.getNewPlayerOrderByName());
                     roundIndex++;
-                    this.setActionState(ActionState.STUDENT);
+                    if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
+                        this.setActionState(ActionState.CHARACTER);
+                    else
+                        setActionState(ActionState.STUDENT);
                     showGame();
                     action();
                 }
@@ -579,7 +576,10 @@ public class GameController {
                 turnController.changeOrder();
                 turnController.setPlayingPlayer(turnController.getNewPlayerOrderByName().get(0));
                 this.setGameState(GameState.ACTION);
-                this.setActionState(ActionState.STUDENT);
+                if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
+                    this.setActionState(ActionState.CHARACTER);
+                else
+                    setActionState(ActionState.STUDENT);
                 showGame();
                 action();
             }
