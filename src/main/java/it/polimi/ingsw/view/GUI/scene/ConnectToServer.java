@@ -12,25 +12,25 @@ import javafx.scene.input.MouseEvent;
 public class ConnectToServer extends ObservableView implements GenericScene {
 
     @FXML
-    private TextField ip_address_field;
+    private TextField ipAddressField;
 
     @FXML
-    private TextField port_number_field;
+    private TextField portNumberField;
 
     @FXML
-    private Button submit_button;
+    private Button connectButton;
 
     @FXML
     public void initialize(){
-        submit_button.addEventHandler(MouseEvent.MOUSE_CLICKED, this :: onConnectBtm);
+        connectButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickConnect);
     }
 
-    private void onConnectBtm(Event event){
-        ip_address_field.setDisable(true);
-        port_number_field.setDisable(true);
-        String address = ip_address_field.getText();
-        Integer chosenPort = Integer.parseInt(port_number_field.getText());
-        submit_button.setDisable(true);
+    private void clickConnect(Event event){
+        ipAddressField.setDisable(true);
+        portNumberField.setDisable(true);
+        String address = ipAddressField.getText();
+        Integer chosenPort = Integer.parseInt(portNumberField.getText());
+        connectButton.setDisable(true);
 
         notifyObserver(obs -> obs.updateConnect(address, chosenPort));
     }
