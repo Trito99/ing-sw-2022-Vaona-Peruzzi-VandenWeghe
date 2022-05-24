@@ -21,9 +21,9 @@ public class DeckCharacter {
         characterCards.add(new CharacterCard(1, CardEffect.BEARER, "You can move Mother Nature up to 2 more steps of your maximum."));
         characterCards.add(new CharacterCard(1, CardEffect.CURATOR, "Place a 'Forbidden Card' on an Island. A 'Forbidden card' blocks the function of Mother Nature when she lands on that Island."));
         characterCards.add(new CharacterCard(3, CardEffect.CENTAUR, "Towers aren't considered in influence."));
-        characterCards.add(new CharacterCard(1, CardEffect.ACROBAT, "You can choose up to 3 students of this card and switch them with the students of your Hall."));
-        characterCards.add(new CharacterCard(0, CardEffect.KNIGHT, "In this round you have 2 more influence points."));
-        characterCards.add(new CharacterCard(0, CardEffect.HERBALIST, "Choose a color. The students of that color aren't considered in the influence."));
+        characterCards.add(new CharacterCard(0, CardEffect.ACROBAT, "You can choose up to 3 students of this card and switch them with the students of your Hall."));
+        characterCards.add(new CharacterCard(2, CardEffect.KNIGHT, "In this round you have 2 more influence points."));
+        characterCards.add(new CharacterCard(3, CardEffect.HERBALIST, "Choose a color. The students of that color aren't considered in the influence."));
         characterCards.add(new CharacterCard(1, CardEffect.BARD,"You can switch up to 2 students between your Hall and the Tables"));
         characterCards.add(new CharacterCard(2, CardEffect.COURTESAN,"Choose 1 student from this card and place him on his table"));
         characterCards.add(new CharacterCard(3, CardEffect.JUNKDEALER,"Choose a color; Every player has to replace 3 students from his table of that color in the bag. "));

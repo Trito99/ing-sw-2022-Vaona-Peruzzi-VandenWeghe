@@ -74,8 +74,8 @@ public class ClientMessanger implements ObserverView, Observer {
         client.sendMessage(new PlaceAndStudentForMoveChosen(nickname,place,id));
     }
 
-    public void chooseId(int id, boolean choice){
-        client.sendMessage(new IdChosen(nickname,id,choice));
+    public void chooseId(int id, boolean choice,int index){
+        client.sendMessage(new IdChosen(nickname,id,choice,index));
     }
 
     public void chooseMotherEarthSteps(int steps, int maxSteps) {
@@ -148,7 +148,7 @@ public class ClientMessanger implements ObserverView, Observer {
                 break;
             case CHOOSE_ID:
                 ChooseId id = (ChooseId) message;
-                queue.execute(() -> view.askId(id.getChoice(),id.getCharacterCard()));
+                queue.execute(() -> view.askId(id.getChoice(),id.getCharacterCard(), id.getIndex(), id.getEntry()));
                 break;
             case CHOOSE_COLOR_TO_BLOCK:
                 queue.execute(() -> view.askColorToBlock());

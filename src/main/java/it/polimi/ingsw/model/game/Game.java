@@ -12,7 +12,6 @@ import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Game {
 
@@ -137,7 +136,7 @@ public class Game {
         list.remove(list.get(list.indexOf(student)));
     }
 
-    public void playCharacterCard(CardEffect cardEffect, String nickname, int idS, int idI, String ActivePlayer) {
+    public void playCharacterCard(CardEffect cardEffect, String nickname, int idS, int idI, String ActivePlayer, int idSE) {
 
         Player activePlayer = getPlayer(nickname);
         CharacterCard characterCardPlayed = table.getCharacterCard(cardEffect);
@@ -182,16 +181,20 @@ public class Game {
                 break;
 
             case ACROBAT:
-                for (int i = 0; i < 3; i++) {
-                    Student choice = null;  //nuovo studente da mettere nella entry
-                    Student toChange = null;    //studente da togliere dalla entry
-                    //notify (observer)---->scelta studente in entry da scambiare
-                    activePlayer.getPersonalSchool().getEntry().remove(toChange);
-                    //notify (observer)---->scelta studente nella carta da scambiare
-                    activePlayer.getPersonalSchool().getEntry().add(choice);
-                    characterCardPlayed.getStudentsOnCard().remove(choice);
-                    characterCardPlayed.getStudentsOnCard().add(toChange);
+                Student StudentChoice = null;
+                Student toChange = null;
+                for(Student student : characterCardPlayed.getStudentsOnCard()){
+                    if(idS==student.getIdStudent())
+                        StudentChoice = student;
                 }
+                for(Student student : activePlayer.getPersonalSchool().getEntry()){
+                    if(idSE==student.getIdStudent())
+                        toChange = student;
+                }
+                activePlayer.getPersonalSchool().getEntry().remove(toChange);
+                activePlayer.getPersonalSchool().getEntry().add(StudentChoice);
+                characterCardPlayed.getStudentsOnCard().remove(StudentChoice);
+                characterCardPlayed.getStudentsOnCard().add(toChange);
                 break;
 
             case KNIGHT:
