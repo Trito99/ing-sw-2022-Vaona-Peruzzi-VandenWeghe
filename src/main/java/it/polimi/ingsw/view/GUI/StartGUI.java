@@ -3,7 +3,6 @@ package it.polimi.ingsw.view.GUI;
 import it.polimi.ingsw.network.ClientMessanger;
 import it.polimi.ingsw.view.GUI.scene.StartGame;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -46,9 +45,9 @@ public class StartGUI extends Application {
         stage.show();
     }
 
-    @FXML
+    /**@FXML
     protected void handleCloseButton(){
         System.exit();
-    }
+    }*/
 
 }
