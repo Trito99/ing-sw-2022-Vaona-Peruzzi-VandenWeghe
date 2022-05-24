@@ -1,7 +1,6 @@
 package it.polimi.ingsw.observer;
 
 import it.polimi.ingsw.view.GUI.StartGUI;
-import javafx.fxml.FXML;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,5 +43,5 @@ ObservableView {
     @FXML
     protected void handleCloseButton(){
         this.observers.removeAll(observers);
-    }
+    }*/
 }
