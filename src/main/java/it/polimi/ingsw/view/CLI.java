@@ -497,7 +497,7 @@ public class CLI extends ObservableView implements View {
         }while(ye);
     }
     @Override
-    public void askId(boolean choice,CharacterCard characterCard) {
+    public void askId(boolean choice,CharacterCard characterCard, int index, ArrayList<Student> entry) {
         boolean ye;
         do {
             try {
@@ -511,15 +511,33 @@ public class CLI extends ObservableView implements View {
                     } else
                         out.print("\nIn which island do you want to move the student? (id)\n");
                 }else {
-                    out.print("\nWhich student do you want to move? (id)\n");
-                    out.print(characterCard.getCardEffect().toString()+": ");
-                    for (Student s : characterCard.getStudentsOnCard()) {
-                        out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+                    if (characterCard.getCardEffect().equals(CardEffect.ACROBAT)) {
+                        if(index%2==1) {
+                            out.print("\nWhich student from the card do you want to switch? (id)\n");
+                            out.print(characterCard.getCardEffect().toString() + ": ");
+                            for (Student s : characterCard.getStudentsOnCard()) {
+                                out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+                            }
+                            out.println();
+                        }else {
+                            out.print("\nWhich student from the entry do you want to switch? (id)\n");
+                            out.print("Entry: ");
+                            for (Student s : entry) {
+                                out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+                            }
+                            out.println();
+                        }
+                    }else {
+                        out.print("\nWhich student do you want to move? (id)\n");
+                        out.print(characterCard.getCardEffect().toString() + ": ");
+                        for (Student s : characterCard.getStudentsOnCard()) {
+                            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+                        }
+                        out.println();
                     }
-                    out.println();
                 }
                 int id = Integer.parseInt(readInput());
-                notifyObserver(obs -> obs.chooseId(id,choice));
+                notifyObserver(obs -> obs.chooseId(id,choice,index));
             } catch (Exception e) {
                 ye=true;
                 out.println(WRONG_INPUT);
