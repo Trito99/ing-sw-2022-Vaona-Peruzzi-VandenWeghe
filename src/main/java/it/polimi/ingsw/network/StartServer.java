@@ -13,7 +13,8 @@ public class StartServer {
 
         String address;
         if (args.length < 2) {
-            System.out.println("Errore: Usa la porta di default 4000 e localhost di default.");
+            //System.out.println("Errore: Usa la porta di default 4000 e localhost di default.");
+            System.out.println("Usa localhost di default e la porta di default 4000.");
             port = 4000;
             address = "localhost";
         }

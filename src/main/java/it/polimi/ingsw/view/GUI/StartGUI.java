@@ -40,7 +40,7 @@ public class StartGUI extends Application {
         //stage.getIcons().add("/images/logo.jpg");
         stage.setResizable(true);
         stage.setMaximized(true);
-        stage.setFullScreen(true);
+        stage.setFullScreen(false);
 
         stage.show();
     }
