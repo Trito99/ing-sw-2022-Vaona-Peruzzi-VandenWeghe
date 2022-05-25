@@ -333,11 +333,12 @@ public class GameController {
                                     virtualView.askId(false,characterCard,acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                                     break;
                                 case HERBALIST:
+                                case JUNKDEALER:
                                     card = true;
-                                    virtualView.askColorToBlock();
+                                    virtualView.askColorToBlock(characterCard.getCardEffect());
                                     break;
                                 default:
-                                    gameSession.playCharacterCard(characterCard.getCardEffect(), CardSelected.getNickname(), -1,-1 , -1);
+                                    gameSession.playCharacterCard(characterCard.getCardEffect(), CardSelected.getNickname(), -1,-1 , -1, null);
                                     characterCard.setCoinOnCard(true);
                                     setActionState(ActionState.STUDENT);
                                     action();
@@ -373,7 +374,7 @@ public class GameController {
                                 gameSession.moveStudentFromListToIsland(gameSession.getTable().getListOfIsland().get(Choice.getId() - 1), studentId, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                                 movedStudents++;
                             } else {
-                                gameSession.playCharacterCard(characterCard.getCardEffect(),Choice.getNickname(),studentId,Choice.getId(), -1);
+                                gameSession.playCharacterCard(characterCard.getCardEffect(),Choice.getNickname(),studentId,Choice.getId(), -1, null);
                                 setActionState(ActionState.STUDENT);
                                 card=false;
                             }
@@ -417,7 +418,7 @@ public class GameController {
                                 if (present) {
                                     again = false;
                                     acrobatIndex++;
-                                    gameSession.playCharacterCard(characterCard.getCardEffect(), Choice.getNickname(), studentIdCard, -1, studentId);
+                                    gameSession.playCharacterCard(characterCard.getCardEffect(), Choice.getNickname(), studentIdCard, -1, studentId, null);
                                     if (acrobatIndex<6)
                                         virtualView.askId(false, characterCard, acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                                 }else{
@@ -465,7 +466,7 @@ public class GameController {
                             }
                             if (present) {
                                 again = false;
-                                gameSession.playCharacterCard(characterCard.getCardEffect(),turnController.getActivePlayer(), studentId,-1,-1);
+                                gameSession.playCharacterCard(characterCard.getCardEffect(),turnController.getActivePlayer(), studentId,-1,-1, null);
                                 setActionState(ActionState.STUDENT);
                                 action();
 
@@ -480,24 +481,30 @@ public class GameController {
                 if(receivedMessage.getMessageType() == MessageType.COLOR_CHOSEN) {
                     ColorBlocked blockColor = (ColorBlocked) receivedMessage;
                     Boolean exists=false;
-                    SColor sColorBlocked = null;
+                    SColor colorChosen = null;
                     for (SColor color : SColor.values()) {
                         if (color.toString().equals(blockColor.getColor())) {
                             exists = true;
-                            sColorBlocked= color;
+                            colorChosen = color;
                         }
                     }
 
-                    if(exists){
+                    if(exists && characterCard.getCardEffect().equals(CardEffect.HERBALIST)){
                         again=false;
-                        sColorBlocked.lockColor();
+                        gameSession.playCharacterCard(CardEffect.HERBALIST, turnController.getActivePlayer(), -1,-1,-1, colorChosen);
+                        setActionState(ActionState.STUDENT);
+                        action();
+                    }
+                    else if(exists && characterCard.getCardEffect().equals(CardEffect.JUNKDEALER)){
+                        again=false;
+                        gameSession.playCharacterCard(CardEffect.JUNKDEALER, turnController.getActivePlayer(), -1,-1,-1, colorChosen);
                         setActionState(ActionState.STUDENT);
                         action();
                     }
                     else {
                         again = true;
                         virtualView.showMessage("\nColor selected doesn't exists! ");
-                        virtualView.askColorToBlock();
+                        virtualView.askColorToBlock(characterCard.getCardEffect());
                     }
                 }
                 if(receivedMessage.getMessageType() == MessageType.STEP_MOTHER_EARTH_CHOSEN){

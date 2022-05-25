@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
+import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.school.School;
@@ -122,7 +123,7 @@ public class GUI extends ObservableView implements View {
     }
 
     @Override
-    public void askColorToBlock() {
+    public void askColorToBlock(CardEffect cardEffect) {
 
     }
 

@@ -2,6 +2,7 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
+import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.school.School;
@@ -62,7 +63,7 @@ public interface View {
      * @param list*/
     void askCharacterCardToPlay(boolean choice, int coins, ArrayList<CharacterCard> list);
 
-    void askColorToBlock();
+    void askColorToBlock(CardEffect cardEffect);
 
     /** chiede al giocatore quanti passi far fare a madre natura
      * @param maxSteps*/

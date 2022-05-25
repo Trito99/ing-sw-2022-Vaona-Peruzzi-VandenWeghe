@@ -408,14 +408,20 @@ public class CLI extends ObservableView implements View {
         }while (ye);
     }
 
-    public void askColorToBlock(){
+    public void askColorToBlock(CardEffect color){
         boolean ye;
         do{
             try{
                 ye = false;
-                out.print("\nWhich color do you want to block? ");
-                String color = readInput().toUpperCase(Locale.ROOT);
-                notifyObserver(obs -> obs.chooseColorToBlock(color));
+                if(color.equals(CardEffect.HERBALIST)) {
+                    out.print("\nWhich color do you want to block? ");
+
+                }
+                else if(color.equals(CardEffect.JUNKDEALER)){
+                    out.print("\nDo you want to remove the students of which color?");
+                }
+                String colorChosen = readInput().toUpperCase(Locale.ROOT);
+                notifyObserver(obs -> obs.chooseColorToBlock(colorChosen));
 
             }
             catch (Exception e){

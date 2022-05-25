@@ -151,7 +151,8 @@ public class ClientMessanger implements ObserverView, Observer {
                 queue.execute(() -> view.askId(id.getChoice(),id.getCharacterCard(), id.getIndex(), id.getEntry()));
                 break;
             case CHOOSE_COLOR_TO_BLOCK:
-                queue.execute(() -> view.askColorToBlock());
+                ChooseColor color = (ChooseColor) message;
+                queue.execute(() -> view.askColorToBlock(color.getCardEffect()));
                 break;
             case CHOOSE_MOTHER_EARTH_STEPS:
                 ChooseMotherEarthSteps steps = (ChooseMotherEarthSteps) message;

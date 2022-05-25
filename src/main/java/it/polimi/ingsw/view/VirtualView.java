@@ -4,6 +4,7 @@ import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.message.Error;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
+import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.school.School;
@@ -108,8 +109,8 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void askColorToBlock() {
-        clientHandler.sendMessage(new ChooseColor());
+    public void askColorToBlock(CardEffect effect) {
+        clientHandler.sendMessage(new ChooseColor(effect));
     }
 
     @Override

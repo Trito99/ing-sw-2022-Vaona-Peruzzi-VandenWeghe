@@ -172,7 +172,7 @@ public class Game {
         }
     }
 
-    public void playCharacterCard(CardEffect cardEffect, String nickname, int idS, int idI, int idSE) {
+    public void playCharacterCard(CardEffect cardEffect, String nickname, int idS, int idI, int idSE, SColor colorChosen) {
 
         Player activePlayer = getPlayer(nickname);
         CharacterCard characterCardPlayed = table.getCharacterCard(cardEffect);
@@ -238,7 +238,6 @@ public class Game {
                 break;
 
             case HERBALIST:
-                SColor colorChosen = null;
                 colorChosen.lockColor();
                 break;
 
@@ -301,34 +300,45 @@ public class Game {
                 break;
 
             case JUNKDEALER:
-                SColor colorChoice = null;
-                //notify (observer)---->scelgo un colore
+
                 for (Player p : getListOfPlayers()) {
-                    if (colorChoice.equals(SColor.GREEN)) {
-                        for (int j = 0; j < 3; j++) {
-                            if (activePlayer.getPersonalSchool().getGTable().size() != 0)
-                                activePlayer.getPersonalSchool().getGTable().remove(activePlayer.getPersonalSchool().getGTable().size() - 1);
-                        }
-                    } else if (colorChoice.equals(SColor.RED)) {
-                        for (int j = 0; j < 3; j++) {
-                            if (activePlayer.getPersonalSchool().getRTable().size() != 0)
-                                activePlayer.getPersonalSchool().getRTable().remove(activePlayer.getPersonalSchool().getRTable().size() - 1);
-                        }
-                    } else if (colorChoice.equals(SColor.YELLOW)) {
-                        for (int j = 0; j < 3; j++) {
-                            if (activePlayer.getPersonalSchool().getYTable().size() != 0)
-                                activePlayer.getPersonalSchool().getYTable().remove(activePlayer.getPersonalSchool().getYTable().size() - 1);
-                        }
-                    } else if (colorChoice.equals(SColor.PINK)) {
-                        for (int j = 0; j < 3; j++) {
-                            if (activePlayer.getPersonalSchool().getPTable().size() != 0)
-                                activePlayer.getPersonalSchool().getPTable().remove(activePlayer.getPersonalSchool().getPTable().size() - 1);
-                        }
-                    } else if (colorChoice.equals(SColor.BLUE)) {
-                        for (int j = 0; j < 3; j++) {
-                            if (activePlayer.getPersonalSchool().getBTable().size() != 0)
-                                activePlayer.getPersonalSchool().getBTable().remove(activePlayer.getPersonalSchool().getBTable().size() - 1);
-                        }
+                    switch (colorChosen) {
+                        case GREEN:
+                            for (int j = 0; j < 3; j++) {
+                                if (p.getPersonalSchool().getGTable().size() != 0)
+                                    table.getBag().add(p.getPersonalSchool().getGTable().get(p.getPersonalSchool().getGTable().size() - 1));
+                                    p.getPersonalSchool().getGTable().remove(activePlayer.getPersonalSchool().getGTable().size() - 1);
+                            }
+                            break;
+                        case RED:
+                            for (int j = 0; j < 3; j++) {
+                                if (p.getPersonalSchool().getRTable().size() != 0)
+                                    table.getBag().add(p.getPersonalSchool().getRTable().get(p.getPersonalSchool().getRTable().size() - 1));
+                                    p.getPersonalSchool().getRTable().remove(activePlayer.getPersonalSchool().getRTable().size() - 1);
+                            }
+                            break;
+                        case YELLOW:
+                            for (int j = 0; j < 3; j++) {
+                                if (p.getPersonalSchool().getYTable().size() != 0)
+                                    table.getBag().add(p.getPersonalSchool().getYTable().get(p.getPersonalSchool().getYTable().size() - 1));
+                                    p.getPersonalSchool().getYTable().remove(activePlayer.getPersonalSchool().getYTable().size() - 1);
+                            }
+                            break;
+                        case PINK:
+                            for (int j = 0; j < 3; j++) {
+                                if (p.getPersonalSchool().getPTable().size() != 0)
+                                    table.getBag().add(p.getPersonalSchool().getPTable().get(p.getPersonalSchool().getPTable().size() - 1));
+                                    p.getPersonalSchool().getPTable().remove(activePlayer.getPersonalSchool().getPTable().size() - 1);
+                            }
+                            break;
+                        case BLUE:
+                            for (int j = 0; j < 3; j++) {
+                                if (p.getPersonalSchool().getBTable().size() != 0)
+                                    table.getBag().add(p.getPersonalSchool().getBTable().get(p.getPersonalSchool().getBTable().size() - 1));
+                                    p.getPersonalSchool().getBTable().remove(activePlayer.getPersonalSchool().getBTable().size() - 1);
+
+                            }
+                            break;
                     }
                 }
                 break;
