@@ -74,6 +74,6 @@ public interface View {
 
     void askPlaceAndStudentForMove(ArrayList<Student> entry);
 
-    void askId(boolean choice, CharacterCard characterCard, int indexAcrobat, ArrayList<Student> entry);
+    void askId(boolean choice, CharacterCard characterCard, int indexAcrobat, School school);
 
 }
