@@ -391,7 +391,7 @@ public class GameController {
                         }
                     }else{
                         boolean present = false;
-                        if(!characterCard.getCardEffect().equals(CardEffect.ACROBAT) && !characterCard.getCardEffect().equals(CardEffect.COURTESAN)){
+                        if(!characterCard.getCardEffect().equals(CardEffect.ACROBAT) && !characterCard.getCardEffect().equals(CardEffect.COURTESAN) && !characterCard.getCardEffect().equals(CardEffect.BARD)){
                             for (Student student : characterCard.getStudentsOnCard()) {
                                 if (student.getIdStudent() == Choice.getId()) {
                                     present = true;

@@ -244,43 +244,65 @@ public class Game {
                 break;
 
             case BARD:
-                Student toChangeB = null;
+                Student studentEntry = null;
+                Student studentHall = null;
                 for(Student student : activePlayer.getPersonalSchool().getGTable()){
                     if(idS==student.getIdStudent()) {
-                        activePlayer.getPersonalSchool().getGTable().remove(student);
-                        activePlayer.getPersonalSchool().getEntry().add(student);
+                        studentHall = student;
                     }
                 }
                 for(Student student : activePlayer.getPersonalSchool().getRTable()){
                     if(idS==student.getIdStudent()) {
-                        activePlayer.getPersonalSchool().getRTable().remove(student);
-                        activePlayer.getPersonalSchool().getEntry().add(student);
+                        studentHall = student;
                     }
                 }
                 for(Student student : activePlayer.getPersonalSchool().getYTable()){
                     if(idS==student.getIdStudent()) {
-                        activePlayer.getPersonalSchool().getYTable().remove(student);
-                        activePlayer.getPersonalSchool().getEntry().add(student);
+                        studentHall = student;
                     }
                 }
                 for(Student student : activePlayer.getPersonalSchool().getPTable()){
                     if(idS==student.getIdStudent()) {
-                        activePlayer.getPersonalSchool().getPTable().remove(student);
-                        activePlayer.getPersonalSchool().getEntry().add(student);
+                        studentHall = student;
                     }
                 }
                 for(Student student : activePlayer.getPersonalSchool().getBTable()){
                     if(idS==student.getIdStudent()) {
-                        activePlayer.getPersonalSchool().getBTable().remove(student);
-                        activePlayer.getPersonalSchool().getEntry().add(student);
+                        studentHall = student;
+
                     }
                 }
                 for(Student student : activePlayer.getPersonalSchool().getEntry()){
                     if(idSE==student.getIdStudent()) {
-                        moveStudentFromListToHall(activePlayer, idSE, activePlayer.getPersonalSchool().getEntry());
-                        activePlayer.getPersonalSchool().getEntry().remove(student);
+                        studentEntry = student;
                     }
                 }
+                switch(studentHall.getsColour()){
+                    case GREEN:
+                        activePlayer.getPersonalSchool().getGTable().remove(studentHall);
+                        getCoinFromStudentMove(activePlayer,activePlayer.getPersonalSchool().getGTable());
+                        break;
+                    case RED:
+                        activePlayer.getPersonalSchool().getRTable().remove(studentHall);
+                        getCoinFromStudentMove(activePlayer,activePlayer.getPersonalSchool().getGTable());
+                        break;
+                    case YELLOW:
+                        activePlayer.getPersonalSchool().getYTable().remove(studentHall);
+                        getCoinFromStudentMove(activePlayer,activePlayer.getPersonalSchool().getGTable());
+                        break;
+                    case PINK:
+                        activePlayer.getPersonalSchool().getPTable().remove(studentHall);
+                        getCoinFromStudentMove(activePlayer,activePlayer.getPersonalSchool().getGTable());
+                        break;
+                    case BLUE:
+                        activePlayer.getPersonalSchool().getBTable().remove(studentHall);
+                        getCoinFromStudentMove(activePlayer,activePlayer.getPersonalSchool().getGTable());
+                        break;
+                }
+
+                activePlayer.getPersonalSchool().getEntry().add(studentHall);
+                moveStudentFromListToHall(activePlayer, idSE, activePlayer.getPersonalSchool().getEntry());
+                activePlayer.getPersonalSchool().getEntry().remove(studentEntry);
                 break;
 
             case COURTESAN:
