@@ -13,6 +13,8 @@ import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class Game {
 
@@ -305,44 +307,49 @@ public class Game {
                     switch (colorChosen) {
                         case GREEN:
                             for (int j = 0; j < 3; j++) {
-                                if (p.getPersonalSchool().getGTable().size() != 0)
+                                if (p.getPersonalSchool().getGTable().size() != 0) {
                                     table.getBag().add(p.getPersonalSchool().getGTable().get(p.getPersonalSchool().getGTable().size() - 1));
-                                    p.getPersonalSchool().getGTable().remove(activePlayer.getPersonalSchool().getGTable().size() - 1);
+                                    p.getPersonalSchool().getGTable().remove(p.getPersonalSchool().getGTable().size() - 1);
+                                }
                             }
                             break;
                         case RED:
                             for (int j = 0; j < 3; j++) {
-                                if (p.getPersonalSchool().getRTable().size() != 0)
+                                if (p.getPersonalSchool().getRTable().size() != 0) {
                                     table.getBag().add(p.getPersonalSchool().getRTable().get(p.getPersonalSchool().getRTable().size() - 1));
-                                    p.getPersonalSchool().getRTable().remove(activePlayer.getPersonalSchool().getRTable().size() - 1);
+                                    p.getPersonalSchool().getRTable().remove(p.getPersonalSchool().getRTable().size() - 1);
+                                }
                             }
                             break;
                         case YELLOW:
                             for (int j = 0; j < 3; j++) {
-                                if (p.getPersonalSchool().getYTable().size() != 0)
+                                if (p.getPersonalSchool().getYTable().size() != 0) {
                                     table.getBag().add(p.getPersonalSchool().getYTable().get(p.getPersonalSchool().getYTable().size() - 1));
-                                    p.getPersonalSchool().getYTable().remove(activePlayer.getPersonalSchool().getYTable().size() - 1);
+                                    p.getPersonalSchool().getYTable().remove(p.getPersonalSchool().getYTable().size() - 1);
+                                }
                             }
                             break;
                         case PINK:
                             for (int j = 0; j < 3; j++) {
-                                if (p.getPersonalSchool().getPTable().size() != 0)
+                                if (p.getPersonalSchool().getPTable().size() != 0) {
                                     table.getBag().add(p.getPersonalSchool().getPTable().get(p.getPersonalSchool().getPTable().size() - 1));
-                                    p.getPersonalSchool().getPTable().remove(activePlayer.getPersonalSchool().getPTable().size() - 1);
+                                    p.getPersonalSchool().getPTable().remove(p.getPersonalSchool().getPTable().size() - 1);
+                                }
                             }
                             break;
                         case BLUE:
                             for (int j = 0; j < 3; j++) {
-                                if (p.getPersonalSchool().getBTable().size() != 0)
+                                if (p.getPersonalSchool().getBTable().size() != 0) {
                                     table.getBag().add(p.getPersonalSchool().getBTable().get(p.getPersonalSchool().getBTable().size() - 1));
-                                    p.getPersonalSchool().getBTable().remove(activePlayer.getPersonalSchool().getBTable().size() - 1);
-
+                                    p.getPersonalSchool().getBTable().remove(p.getPersonalSchool().getBTable().size() - 1);
+                                }
                             }
                             break;
                     }
                 }
                 break;
         }
+        Collections.shuffle(table.getBag());
     }
 
     private void getCoinFromStudentMove(Player activePlayer, ArrayList<Student> tableColor) {
