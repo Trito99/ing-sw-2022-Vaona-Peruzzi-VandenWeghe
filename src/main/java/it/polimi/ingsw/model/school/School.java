@@ -45,66 +45,6 @@ public class School implements Serializable {
         cloudCard.getStudentOnCloud().clear();
     }
 
-    public void moveStudentFromEntryToIsland(IslandCard islandCard, int id){ //Specifico Studente va spostato (sceglie player)
-        Student student = new Student(131,null);
-        for (Student s : entry) {
-            if (id == s.getIdStudent())
-                student = s;
-        }
-        islandCard.getStudentOnIsland().add(entry.get(entry.indexOf(student)));
-        entry.remove(entry.get(entry.indexOf(student)));
-    }
-
-    public void moveStudentFromEntryToHall(Player playerMoving, int id, Table table, Difficulty difficulty) {
-        Student student = new Student(131, null);
-        for (Student s : entry) {
-            if (id == s.getIdStudent())
-                student = s;
-        }
-        switch(student.getsColour()) {
-            case GREEN:
-                GTable.add(student);
-                getCoinFromStudentMove(playerMoving, GTable,table, difficulty);
-                entry.remove(entry.get(entry.indexOf(student)));
-                break;
-            case RED:
-                RTable.add(student);
-                getCoinFromStudentMove(playerMoving, RTable, table, difficulty);
-                entry.remove(entry.get(entry.indexOf(student)));
-                break;
-            case YELLOW:
-                YTable.add(student);
-                getCoinFromStudentMove(playerMoving, YTable, table, difficulty);
-                entry.remove(entry.get(entry.indexOf(student)));
-                break;
-            case PINK:
-                PTable.add(student);
-                getCoinFromStudentMove(playerMoving, PTable, table, difficulty);
-                entry.remove(entry.get(entry.indexOf(student)));
-                break;
-            case BLUE:
-                BTable.add(student);
-                getCoinFromStudentMove(playerMoving, BTable, table, difficulty);
-                entry.remove(entry.get(entry.indexOf(student)));
-                break;
-        }
-    }
-
-    private void getCoinFromStudentMove(Player playerMoving,ArrayList<Student> tableColor, Table table, Difficulty difficulty) {
-        if(difficulty.equals(Difficulty.EXPERTMODE) && (tableColor.size()==3)){
-            playerMoving.setCoinScore(playerMoving.getCoinScore() + 1);
-            table.setCoinsOnTable(table.getCoinsOnTable() - 1);
-        }
-        else if(difficulty.equals(Difficulty.EXPERTMODE) && (tableColor.size()==6)){
-            playerMoving.setCoinScore(playerMoving.getCoinScore() + 1);
-            table.setCoinsOnTable(table.getCoinsOnTable() - 1);
-        }
-        else if(difficulty.equals(Difficulty.EXPERTMODE) && (tableColor.size()==9)){
-            playerMoving.setCoinScore(playerMoving.getCoinScore() + 1);
-            table.setCoinsOnTable(table.getCoinsOnTable() - 1);
-        }
-    }
-
     public ArrayList<Prof> getProfOfPlayer(){
         return profOfPlayer;
     }
