@@ -27,7 +27,7 @@ public class GameController {
     private TurnController turnController;
     private GameState gameState;
     private final HashMap<String, VirtualView> allVirtualView;
-    boolean again=false, lastRound=false, card=false;
+    boolean again = false, lastRound = false, card = false;
     private ActionState actionState;
     private CharacterCard characterCard;
 
@@ -322,19 +322,18 @@ public class GameController {
                             again = false;
                             switch(characterCard.getCardEffect()){
                                 case ABBOT:
-                                    card = true;
-                                    virtualView.askId(false,characterCard,-1, null);
-                                    break;
-                                case HERALD:
-                                case CURATOR:
                                 case ACROBAT:
                                 case COURTESAN:
                                     card = true;
                                     virtualView.askId(false,characterCard,acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                                     break;
+                                case HERALD:
+                                case CURATOR:
+                                    card = true;
+                                    virtualView.askId(true,characterCard, -1, null);
+                                    break;
                                 case HERBALIST:
                                 case JUNKDEALER:
-                                    card = true;
                                     virtualView.askColorToBlock(characterCard.getCardEffect());
                                     break;
                                 default:
@@ -376,7 +375,7 @@ public class GameController {
                             } else {
                                 gameSession.playCharacterCard(characterCard.getCardEffect(),Choice.getNickname(),studentId,Choice.getId(), -1, null);
                                 setActionState(ActionState.STUDENT);
-                                card=false;
+                                card = false;
                             }
 
                             if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces()) {
@@ -467,6 +466,7 @@ public class GameController {
                             if (present) {
                                 again = false;
                                 gameSession.playCharacterCard(characterCard.getCardEffect(),turnController.getActivePlayer(), studentId,-1,-1, null);
+                                card = false;
                                 setActionState(ActionState.STUDENT);
                                 action();
 
@@ -498,6 +498,10 @@ public class GameController {
                     else if(exists && characterCard.getCardEffect().equals(CardEffect.JUNKDEALER)){
                         again=false;
                         gameSession.playCharacterCard(CardEffect.JUNKDEALER, turnController.getActivePlayer(), -1,-1,-1, colorChosen);
+                        for (VirtualView vv : allVirtualView.values()) {
+                            if (vv!=virtualView)
+                                vv.showMessage(turnController.getActivePlayer()+" has played the JUNKDEALER Character Card for the color "+ colorChosen.toString());
+                        };
                         setActionState(ActionState.STUDENT);
                         action();
                     }
@@ -750,7 +754,7 @@ public class GameController {
     /** invia un messaggio a ogni giocatore del gioco */
     public void broadcastMessage(String message) {
         for (VirtualView vv : allVirtualView.values()) {
-            //vv.showMessage(message);
+            vv.showMessage(message);
         }
     }
 
