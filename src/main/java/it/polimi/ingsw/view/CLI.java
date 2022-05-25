@@ -497,7 +497,7 @@ public class CLI extends ObservableView implements View {
         }while(ye);
     }
     @Override
-    public void askId(boolean choice,CharacterCard characterCard, int index, ArrayList<Student> entry) {
+    public void askId(boolean choice, CharacterCard characterCard, int indexAcrobat, ArrayList<Student> entry) {
         boolean ye;
         int marker = 0 ;
         do {
@@ -513,7 +513,7 @@ public class CLI extends ObservableView implements View {
                         out.print("\nIn which island do you want to move the student? (id)\n");
                 }else {
                     if (characterCard.getCardEffect().equals(CardEffect.ACROBAT)) {
-                        if(index%2==1) {
+                        if(indexAcrobat %2==1) {
                             out.print("\nWhich student from the card do you want to switch? (id)\n");
                             out.print(characterCard.getCardEffect().toString() + ": ");
                             for (Student s : characterCard.getStudentsOnCard()) {
@@ -521,7 +521,7 @@ public class CLI extends ObservableView implements View {
                             }
                             out.println();
                         }else {
-                            if (index<2)
+                            if (indexAcrobat <2)
                                 out.print("\nWhich student from the entry do you want to switch? (id)\n");
                             else {
                                 out.print("\nWhich student from the entry do you want to switch? (id or none)\n");
@@ -533,7 +533,16 @@ public class CLI extends ObservableView implements View {
                             }
                             out.println();
                         }
-                    }else {
+                    }
+                    else if (characterCard.getCardEffect().equals(CardEffect.COURTESAN)){
+                        out.print("\nWhich student do you want to move in your hall?\n");
+                        out.print(characterCard.getCardEffect().toString() + ": ");
+                        for (Student s : characterCard.getStudentsOnCard()) {
+                            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+                        }
+                        out.println();
+                    }
+                    else {
                         out.print("\nWhich student do you want to move? (id)\n");
                         out.print(characterCard.getCardEffect().toString() + ": ");
                         for (Student s : characterCard.getStudentsOnCard()) {
@@ -544,10 +553,10 @@ public class CLI extends ObservableView implements View {
                 }
                 String input = readInput().toUpperCase(Locale.ROOT);
                 if(input.equals("NONE") && marker == -2) {
-                    notifyObserver(obs -> obs.chooseId(-2, choice, index, true));
+                    notifyObserver(obs -> obs.chooseId(-2, choice, indexAcrobat, true));
                 }else {
                     int id = Integer.parseInt(input);
-                    notifyObserver(obs -> obs.chooseId(id,choice,index, false));
+                    notifyObserver(obs -> obs.chooseId(id,choice, indexAcrobat, false));
                 }
             } catch (Exception e) {
                 ye=true;

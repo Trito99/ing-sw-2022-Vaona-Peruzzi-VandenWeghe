@@ -245,106 +245,6 @@ public class GameController {
                         virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                     }
                 }
-                if(receivedMessage.getMessageType() == MessageType.ID_CHOSEN){
-                    IdChosen Choice = (IdChosen) receivedMessage;
-                    if(Choice.getChoice()) {
-                        boolean present = false;
-                        for (IslandCard island : gameSession.getTable().getListOfIsland()) {
-                            if (island.getIdIsland() == Choice.getId()) {
-                                present = true;
-                                }
-                            }
-
-                        if (present) {
-                            again = false;
-                            if(!card) {
-                                gameSession.moveStudentFromListToIsland(gameSession.getTable().getListOfIsland().get(Choice.getId() - 1), studentId, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
-                                movedStudents++;
-                            } else {
-                                gameSession.playCharacterCard(characterCard.getCardEffect(),Choice.getNickname(),studentId,Choice.getId(), null, -1);
-                                setActionState(ActionState.STUDENT);
-                                card=false;
-                            }
-
-                            if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces()) {
-                                movedStudents=0;
-                                setActionState(ActionState.MOTHERNATURE);
-                            }
-                            action();
-                        } else {
-                            virtualView.showMessage("\nIsland selected doesn't exist. ");
-                            again = true;
-                            virtualView.askId(true, characterCard,-1, null);
-                        }
-                    }else{
-                        boolean present = false;
-                        if(!characterCard.getCardEffect().equals(CardEffect.ACROBAT)){
-                            for (Student student : characterCard.getStudentsOnCard()) {
-                                if (student.getIdStudent() == Choice.getId()) {
-                                    present = true;
-                                    studentId = Choice.getId();
-                                }
-                            }
-                            if (present) {
-                                again = false;
-                                virtualView.askId(true,null,-1, null);
-                            }else {
-                                virtualView.showMessage("\nStudent selected is not available");
-                                again = true;
-                                virtualView.askId(false,characterCard,-1, null);
-                            }
-                        }else{
-                            if(Choice.getIndex()%2==1) {
-                                int studentIdCard = -1;
-                                for (Student student : characterCard.getStudentsOnCard()) {
-                                    if (student.getIdStudent() == Choice.getId()) {
-                                        present = true;
-                                        studentIdCard = Choice.getId();
-                                    }
-                                }
-                                if (present) {
-                                    again = false;
-                                    acrobatIndex++;
-                                    gameSession.playCharacterCard(characterCard.getCardEffect(), Choice.getNickname(), studentIdCard, -1, turnController.getActivePlayer(), studentId);
-                                    if (acrobatIndex<6)
-                                        virtualView.askId(false, characterCard, acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
-                                }else{
-                                    virtualView.showMessage("\nStudent selected is not available");
-                                    again = true;
-                                    virtualView.askId(false,characterCard,acrobatIndex, null);
-                                }
-
-                                if (acrobatIndex == 6) {
-                                    acrobatIndex = 0;
-                                    setActionState(ActionState.STUDENT);
-                                    action();
-                                }
-                            }else {
-                                for (Student student : gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry()) {
-                                    if (student.getIdStudent() == Choice.getId()) {
-                                        present = true;
-                                        studentId = Choice.getId();
-                                    }
-                                }
-                                if (present) {
-                                    again = false;
-                                    acrobatIndex++;
-                                    virtualView.askId(false, characterCard, acrobatIndex, null);
-                                } else {
-                                    if (Choice.getId() == -2 && Choice.getNone()) {
-                                        acrobatIndex = 0;
-                                        setActionState(ActionState.STUDENT);
-                                        action();
-                                    }else{
-                                        virtualView.showMessage("\nStudent selected is not available");
-                                        again = true;
-                                        virtualView.askId(false, characterCard, acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
                 if(receivedMessage.getMessageType() == MessageType.CHARACTER_CARD_PLAYED){
                     CharacterCardPlayed CardSelected = (CharacterCardPlayed) receivedMessage;
                     boolean exists = false, enough = true, playable=false, changeIdea = false;
@@ -428,6 +328,7 @@ public class GameController {
                                 case HERALD:
                                 case CURATOR:
                                 case ACROBAT:
+                                case COURTESAN:
                                     card = true;
                                     virtualView.askId(false,characterCard,acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                                     break;
@@ -436,7 +337,7 @@ public class GameController {
                                     virtualView.askColorToBlock();
                                     break;
                                 default:
-                                    gameSession.playCharacterCard(characterCard.getCardEffect(), CardSelected.getNickname(), -1,-1 , turnController.getActivePlayer(), -1);
+                                    gameSession.playCharacterCard(characterCard.getCardEffect(), CardSelected.getNickname(), -1,-1 , -1);
                                     characterCard.setCoinOnCard(true);
                                     setActionState(ActionState.STUDENT);
                                     action();
@@ -453,6 +354,126 @@ public class GameController {
                                 virtualView.showMessage("\nCard selected is empty");
                             if (!changeIdea)
                             virtualView.askCharacterCardToPlay(true, -1, null);
+                        }
+                    }
+                }
+                if(receivedMessage.getMessageType() == MessageType.ID_CHOSEN){
+                    IdChosen Choice = (IdChosen) receivedMessage;
+                    if(Choice.getChoice()) {
+                        boolean present = false;
+                        for (IslandCard island : gameSession.getTable().getListOfIsland()) {
+                            if (island.getIdIsland() == Choice.getId()) {
+                                present = true;
+                            }
+                        }
+
+                        if (present) {
+                            again = false;
+                            if(!card) {
+                                gameSession.moveStudentFromListToIsland(gameSession.getTable().getListOfIsland().get(Choice.getId() - 1), studentId, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
+                                movedStudents++;
+                            } else {
+                                gameSession.playCharacterCard(characterCard.getCardEffect(),Choice.getNickname(),studentId,Choice.getId(), -1);
+                                setActionState(ActionState.STUDENT);
+                                card=false;
+                            }
+
+                            if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces()) {
+                                movedStudents=0;
+                                setActionState(ActionState.MOTHERNATURE);
+                            }
+                            action();
+                        } else {
+                            virtualView.showMessage("\nIsland selected doesn't exist. ");
+                            again = true;
+                            virtualView.askId(true, characterCard,-1, null);
+                        }
+                    }else{
+                        boolean present = false;
+                        if(!characterCard.getCardEffect().equals(CardEffect.ACROBAT) && !characterCard.getCardEffect().equals(CardEffect.COURTESAN)){
+                            for (Student student : characterCard.getStudentsOnCard()) {
+                                if (student.getIdStudent() == Choice.getId()) {
+                                    present = true;
+                                    studentId = Choice.getId();
+                                }
+                            }
+                            if (present) {
+                                again = false;
+                                virtualView.askId(true,null,-1, null);
+                            }else {
+                                virtualView.showMessage("\nStudent selected is not available");
+                                again = true;
+                                virtualView.askId(false,characterCard,-1, null);
+                            }
+                        }else if (characterCard.getCardEffect().equals(CardEffect.ACROBAT)){
+                            if(Choice.getIndex()%2==1) {
+                                int studentIdCard = -1;
+                                for (Student student : characterCard.getStudentsOnCard()) {
+                                    if (student.getIdStudent() == Choice.getId()) {
+                                        present = true;
+                                        studentIdCard = Choice.getId();
+                                    }
+                                }
+                                if (present) {
+                                    again = false;
+                                    acrobatIndex++;
+                                    gameSession.playCharacterCard(characterCard.getCardEffect(), Choice.getNickname(), studentIdCard, -1, studentId);
+                                    if (acrobatIndex<6)
+                                        virtualView.askId(false, characterCard, acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
+                                }else{
+                                    virtualView.showMessage("\nStudent selected is not available");
+                                    again = true;
+                                    virtualView.askId(false,characterCard,acrobatIndex, null);
+                                }
+
+                                if (acrobatIndex == 6) {
+                                    acrobatIndex = 0;
+                                    setActionState(ActionState.STUDENT);
+                                    action();
+                                }
+                            }
+                            else {
+                                for (Student student : gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry()) {
+                                    if (student.getIdStudent() == Choice.getId()) {
+                                        present = true;
+                                        studentId = Choice.getId();
+                                    }
+                                }
+                                if (present) {
+                                    again = false;
+                                    acrobatIndex++;
+                                    virtualView.askId(false, characterCard, acrobatIndex, null);
+                                } else {
+                                    if (Choice.getId() == -2 && Choice.getNone()) {
+                                        acrobatIndex = 0;
+                                        setActionState(ActionState.STUDENT);
+                                        action();
+                                    }else{
+                                        virtualView.showMessage("\nStudent selected is not available");
+                                        again = true;
+                                        virtualView.askId(false, characterCard, acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
+                                    }
+                                }
+                            }
+                        }
+                        else if(characterCard.getCardEffect().equals(CardEffect.COURTESAN)){
+                            for (Student student : characterCard.getStudentsOnCard()) {
+                                if (student.getIdStudent() == Choice.getId()) {
+                                    present = true;
+                                    studentId = Choice.getId();
+                                }
+                            }
+                            if (present) {
+                                again = false;
+                                gameSession.playCharacterCard(characterCard.getCardEffect(),turnController.getActivePlayer(), studentId,-1,-1);
+                                setActionState(ActionState.STUDENT);
+                                action();
+
+                            }else {
+                                virtualView.showMessage("\nStudent selected is not available");
+                                again = true;
+                                virtualView.askId(false,characterCard,-1, null);
+                            }
                         }
                     }
                 }

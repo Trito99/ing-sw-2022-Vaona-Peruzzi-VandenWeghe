@@ -172,7 +172,7 @@ public class Game {
         }
     }
 
-    public void playCharacterCard(CardEffect cardEffect, String nickname, int idS, int idI, String ActivePlayer, int idSE) {
+    public void playCharacterCard(CardEffect cardEffect, String nickname, int idS, int idI, int idSE) {
 
         Player activePlayer = getPlayer(nickname);
         CharacterCard characterCardPlayed = table.getCharacterCard(cardEffect);
@@ -193,7 +193,7 @@ public class Game {
 
             case HOST:
                 characterCardPlayed.getCardEffect().setHostPlayed(true);
-                getPlayer(ActivePlayer).getPersonalSchool().winProf(getListOfPlayers(),  getPlayer(ActivePlayer), CardEffect.HOST);
+                activePlayer.getPersonalSchool().winProf(getListOfPlayers(), activePlayer, CardEffect.HOST);
                 characterCardPlayed.getCardEffect().setHostPlayed(false);
                 break;
 
@@ -243,11 +243,10 @@ public class Game {
                 break;
 
             case BARD:
-                // TO DO: controlli se sono pieni
+
                 /** togli da entry e metti in hall */
                 for (int i = 0; i < 3; i++) {
                     Student choice = null;
-                    //notify (observer)---->scelta 2 studenti
                     if (choice.getsColour().equals(SColor.GREEN)) {
                         activePlayer.getPersonalSchool().getGTable().add(choice);
                         getCoinFromStudentMove(activePlayer, activePlayer.getPersonalSchool().getGTable());
@@ -294,29 +293,11 @@ public class Game {
                 break;
 
             case COURTESAN:
-                Student choice = null;
-                int i = 0;
-                //notify (observer)---->scelgo pedina da mettere nel table
-                if (choice.getsColour().equals(SColor.GREEN)) {
-                    activePlayer.getPersonalSchool().getGTable().add(choice);
-                    getCoinFromStudentMove(activePlayer, activePlayer.getPersonalSchool().getGTable());
-                } else if (choice.getsColour().equals(SColor.RED)) {
-                    activePlayer.getPersonalSchool().getRTable().add(choice);
-                    getCoinFromStudentMove(activePlayer, activePlayer.getPersonalSchool().getRTable());
-                } else if (choice.getsColour().equals(SColor.YELLOW)) {
-                    activePlayer.getPersonalSchool().getYTable().add(choice);
-                    getCoinFromStudentMove(activePlayer, activePlayer.getPersonalSchool().getYTable());
-                } else if (choice.getsColour().equals(SColor.PINK)) {
-                    activePlayer.getPersonalSchool().getPTable().add(choice);
-                    getCoinFromStudentMove(activePlayer, activePlayer.getPersonalSchool().getPTable());
-                } else if (choice.getsColour().equals(SColor.BLUE)) {
-                    activePlayer.getPersonalSchool().getBTable().add(choice);
-                    getCoinFromStudentMove(activePlayer, activePlayer.getPersonalSchool().getBTable());
-                }
-                characterCardPlayed.getStudentsOnCard().remove(choice);
-                //notify (observer)---->pesco pedina da mettere sulla carta
-                characterCardPlayed.getStudentsOnCard().add(getTable().getBag().get(getTable().getBag().size() - 1));
-                getTable().getBag().remove(getTable().getBag().get(getTable().getBag().size() - 1));
+
+                moveStudentFromListToHall(activePlayer,idS, characterCardPlayed.getStudentsOnCard());
+                //pesco pedina da mettere sulla carta
+                characterCardPlayed.getStudentsOnCard().add(table.getBag().get(0));
+                table.getBag().remove(table.getBag().get(0));
                 break;
 
             case JUNKDEALER:
