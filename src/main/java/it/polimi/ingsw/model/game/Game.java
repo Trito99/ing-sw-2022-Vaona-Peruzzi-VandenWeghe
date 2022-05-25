@@ -284,19 +284,15 @@ public class Game {
                         break;
                     case RED:
                         activePlayer.getPersonalSchool().getRTable().remove(studentHall);
-                        getCoinFromStudentMove(activePlayer,activePlayer.getPersonalSchool().getGTable());
                         break;
                     case YELLOW:
                         activePlayer.getPersonalSchool().getYTable().remove(studentHall);
-                        getCoinFromStudentMove(activePlayer,activePlayer.getPersonalSchool().getGTable());
                         break;
                     case PINK:
                         activePlayer.getPersonalSchool().getPTable().remove(studentHall);
-                        getCoinFromStudentMove(activePlayer,activePlayer.getPersonalSchool().getGTable());
                         break;
                     case BLUE:
                         activePlayer.getPersonalSchool().getBTable().remove(studentHall);
-                        getCoinFromStudentMove(activePlayer,activePlayer.getPersonalSchool().getGTable());
                         break;
                 }
 
