@@ -280,7 +280,6 @@ public class Game {
                 switch(studentHall.getsColour()){
                     case GREEN:
                         activePlayer.getPersonalSchool().getGTable().remove(studentHall);
-                        getCoinFromStudentMove(activePlayer,activePlayer.getPersonalSchool().getGTable());
                         break;
                     case RED:
                         activePlayer.getPersonalSchool().getRTable().remove(studentHall);
