@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.Team;
+import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
@@ -134,6 +135,41 @@ public class Game {
         }
         islandCard.getStudentOnIsland().add(list.get(list.indexOf(student)));
         list.remove(list.get(list.indexOf(student)));
+    }
+
+    public void moveStudentFromListToHall(Player playerMoving, int id, ArrayList<Student> list) {
+        Student student = null;
+        for (Student s : list) {
+            if (id == s.getIdStudent())
+                student = s;
+        }
+        switch(student.getsColour()) {
+            case GREEN:
+                playerMoving.getPersonalSchool().getGTable().add(student);
+                getCoinFromStudentMove(playerMoving, playerMoving.getPersonalSchool().getGTable());
+                list.remove(list.get(list.indexOf(student)));
+                break;
+            case RED:
+                playerMoving.getPersonalSchool().getRTable().add(student);
+                getCoinFromStudentMove(playerMoving, playerMoving.getPersonalSchool().getRTable());
+                list.remove(list.get(list.indexOf(student)));
+                break;
+            case YELLOW:
+                playerMoving.getPersonalSchool().getYTable().add(student);
+                getCoinFromStudentMove(playerMoving, playerMoving.getPersonalSchool().getYTable());
+                list.remove(list.get(list.indexOf(student)));
+                break;
+            case PINK:
+                playerMoving.getPersonalSchool().getPTable().add(student);
+                getCoinFromStudentMove(playerMoving, playerMoving.getPersonalSchool().getPTable());
+                list.remove(list.get(list.indexOf(student)));
+                break;
+            case BLUE:
+                playerMoving.getPersonalSchool().getBTable().add(student);
+                getCoinFromStudentMove(playerMoving, playerMoving.getPersonalSchool().getBTable());
+                list.remove(list.get(list.indexOf(student)));
+                break;
+        }
     }
 
     public void playCharacterCard(CardEffect cardEffect, String nickname, int idS, int idI, String ActivePlayer, int idSE) {
@@ -333,7 +369,7 @@ public class Game {
             getTable().setCoinsOnTable(getTable().getCoinsOnTable() - 1);
         }
     }
-    
+
 
 
 }
