@@ -97,7 +97,7 @@ public class CLI extends ObservableView implements View {
     }
 
     @Override
-    public void askLobby() throws DataFormatException {
+    public void askLobby(){
         boolean ye;
         do {
             try {
@@ -113,12 +113,15 @@ public class CLI extends ObservableView implements View {
                 out.print("Enter the gameID: ");
                 String gameID = readInput();
 
-                GregorianCalendar playerDate = new GregorianCalendar(birthYear, birthMonth, birthDay);
+                GregorianCalendar playerDate = new GregorianCalendar();
+                playerDate.setLenient(false);
+                playerDate.set(birthYear,birthMonth -1,birthDay,0,0,0);
+                playerDate.getTime();
 
                 notifyObserver(obs -> obs.updateLobby(nickname, playerDate, gameID));
-            } catch (DataFormatException exception) {
-                out.print("Error in selecting the date of birth! Try again.");
+            } catch (IllegalArgumentException exception){
                 ye = true;
+                out.print("Error in selecting the date of birth! Try again.\n");
             } catch (Exception exception){
                 ye = true;
                 out.println(WRONG_INPUT);
