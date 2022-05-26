@@ -100,6 +100,7 @@ public class CLI extends ObservableView implements View {
         boolean ye;
         do {
             try {
+                ye = false;
                 out.print("Enter your nickname: ");
                 String nickname = readInput();
                 out.print("Enter your Birth Day (gg): ");
@@ -108,11 +109,13 @@ public class CLI extends ObservableView implements View {
                 int birthMonth= Integer.parseInt(readInput());
                 out.print("Enter your Birth Year (aaaa): ");
                 int birthYear= Integer.parseInt(readInput());
-                GregorianCalendar playerDate = new GregorianCalendar(birthYear, birthMonth, birthDay);
-
                 out.print("Enter the gameID: ");
                 String gameID = readInput();
-                ye = false;
+                if((birthDay < 1 || birthDay > 31) || (birthMonth < 1 || birthMonth > 12) || (birthYear < 1900 || birthYear > 2022)){
+                    ye = true;
+                    out.println("Error in selecting the date of birth! Try again. \n");
+                }
+                GregorianCalendar playerDate = new GregorianCalendar(birthYear, birthMonth, birthDay);
 
                 notifyObserver(obs -> obs.updateLobby(nickname, playerDate, gameID));
             } catch (Exception e) {
@@ -574,9 +577,7 @@ public class CLI extends ObservableView implements View {
                 case ABBOT:
                 case ACROBAT:
                     out.print("Students : ");
-                    for (Student s : characterCard.getStudentsOnCard()) {
-                        out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
-                    }
+                    printStudentsOnCard(characterCard);
                     out.println();
                     break;
                 case CURATOR:
@@ -588,8 +589,6 @@ public class CLI extends ObservableView implements View {
             out.println("Effect: " + characterCard.getDescription());
         }
     }
-
-
 
     private void printStudentsOnCard(CharacterCard characterCard){
         out.print(characterCard.getCardEffect().toString() + ": ");

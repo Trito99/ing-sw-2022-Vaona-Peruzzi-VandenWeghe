@@ -152,9 +152,9 @@ public class Game {
         }
         switch(student.getsColour()) {
             case GREEN:
-                playerMoving.getPersonalSchool().getGTable().add(student);
-                getCoinFromStudentMove(playerMoving, playerMoving.getPersonalSchool().getGTable());
-                list.remove(list.get(list.indexOf(student)));
+                    playerMoving.getPersonalSchool().getGTable().add(student);
+                    getCoinFromStudentMove(playerMoving, playerMoving.getPersonalSchool().getGTable());
+                    list.remove(list.get(list.indexOf(student)));
                 break;
             case RED:
                 playerMoving.getPersonalSchool().getRTable().add(student);

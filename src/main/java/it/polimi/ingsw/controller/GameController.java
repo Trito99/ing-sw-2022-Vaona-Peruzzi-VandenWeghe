@@ -12,6 +12,7 @@ import it.polimi.ingsw.model.game.*;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
+import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
@@ -793,7 +794,6 @@ public class GameController {
     public HashMap<String, VirtualView> getAllVirtualView() {
         return allVirtualView;
     }
-
 
     /** invia un messaggio a ogni giocatore del gioco */
     public void broadcastMessage(String message) {
