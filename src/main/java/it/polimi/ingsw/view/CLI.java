@@ -118,7 +118,12 @@ public class CLI extends ObservableView implements View {
                 playerDate.set(birthYear,birthMonth -1,birthDay,0,0,0);
                 playerDate.getTime();
 
-                notifyObserver(obs -> obs.updateLobby(nickname, playerDate, gameID));
+
+                if(birthYear < 1900 || birthYear > 2022){
+                    out.print("Error in selecting the date of birth! Try again.\n");
+                    ye = true;
+                }else
+                    notifyObserver(obs -> obs.updateLobby(nickname, playerDate, gameID));
             } catch (IllegalArgumentException exception){
                 ye = true;
                 out.print("Error in selecting the date of birth! Try again.\n");
