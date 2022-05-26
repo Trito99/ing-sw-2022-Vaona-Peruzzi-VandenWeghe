@@ -18,6 +18,7 @@ import java.io.PrintStream;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
+import java.util.zip.DataFormatException;
 
 import static java.lang.System.out;
 
@@ -96,7 +97,7 @@ public class CLI extends ObservableView implements View {
     }
 
     @Override
-    public void askLobby() {
+    public void askLobby() throws DataFormatException {
         boolean ye;
         do {
             try {
@@ -111,17 +112,18 @@ public class CLI extends ObservableView implements View {
                 int birthYear= Integer.parseInt(readInput());
                 out.print("Enter the gameID: ");
                 String gameID = readInput();
-                if((birthDay < 1 || birthDay > 31) || (birthMonth < 1 || birthMonth > 12) || (birthYear < 1900 || birthYear > 2022)){
-                    ye = true;
-                    out.println("Error in selecting the date of birth! Try again. \n");
-                }
+
                 GregorianCalendar playerDate = new GregorianCalendar(birthYear, birthMonth, birthDay);
 
                 notifyObserver(obs -> obs.updateLobby(nickname, playerDate, gameID));
-            } catch (Exception e) {
-                out.println(WRONG_INPUT);
+            } catch (DataFormatException exception) {
+                out.print("Error in selecting the date of birth! Try again.");
                 ye = true;
+            } catch (Exception exception){
+                ye = true;
+                out.println(WRONG_INPUT);
             }
+
         }while (ye);
     }
 
