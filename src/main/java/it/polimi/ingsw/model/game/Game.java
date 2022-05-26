@@ -244,59 +244,65 @@ public class Game {
                 break;
 
             case BARD:
+                Student studentEntry = null;
+                Student studentHall = null;
+                for(Student student : activePlayer.getPersonalSchool().getGTable()){
+                    if(idS==student.getIdStudent()) {
+                        studentHall = student;
+                    }
+                }
+                for(Student student : activePlayer.getPersonalSchool().getRTable()){
+                    if(idS==student.getIdStudent()) {
+                        studentHall = student;
+                    }
+                }
+                for(Student student : activePlayer.getPersonalSchool().getYTable()){
+                    if(idS==student.getIdStudent()) {
+                        studentHall = student;
+                    }
+                }
+                for(Student student : activePlayer.getPersonalSchool().getPTable()){
+                    if(idS==student.getIdStudent()) {
+                        studentHall = student;
+                    }
+                }
+                for(Student student : activePlayer.getPersonalSchool().getBTable()){
+                    if(idS==student.getIdStudent()) {
+                        studentHall = student;
 
-                /** togli da entry e metti in hall */
-                for (int i = 0; i < 3; i++) {
-                    Student choice = null;
-                    if (choice.getsColour().equals(SColor.GREEN)) {
-                        activePlayer.getPersonalSchool().getGTable().add(choice);
-                        getCoinFromStudentMove(activePlayer, activePlayer.getPersonalSchool().getGTable());
-                        activePlayer.getPersonalSchool().getEntry().remove(choice);
-                    } else if (choice.getsColour().equals(SColor.RED)) {
-                        activePlayer.getPersonalSchool().getRTable().add(choice);
-                        getCoinFromStudentMove(activePlayer, activePlayer.getPersonalSchool().getRTable());
-                        activePlayer.getPersonalSchool().getEntry().remove(choice);
-                    } else if (choice.getsColour().equals(SColor.YELLOW)) {
-                        activePlayer.getPersonalSchool().getYTable().add(choice);
-                        getCoinFromStudentMove(activePlayer, activePlayer.getPersonalSchool().getYTable());
-                        activePlayer.getPersonalSchool().getEntry().remove(choice);
-                    } else if (choice.getsColour().equals(SColor.PINK)) {
-                        activePlayer.getPersonalSchool().getPTable().add(choice);
-                        getCoinFromStudentMove(activePlayer, activePlayer.getPersonalSchool().getPTable());
-                        activePlayer.getPersonalSchool().getEntry().remove(choice);
-                    } else if (choice.getsColour().equals(SColor.BLUE)) {
-                        activePlayer.getPersonalSchool().getBTable().add(choice);
-                        getCoinFromStudentMove(activePlayer, activePlayer.getPersonalSchool().getBTable());
-                        activePlayer.getPersonalSchool().getEntry().remove(choice);
                     }
                 }
-                /** togli da hall e metti in entry */
-                for (int i = 0; i < 3; i++) {
-                    Student choice = null;
-                    //notify (observer)---->scelta 2 studenti
-                    if (choice.getsColour().equals(SColor.GREEN)) {
-                        activePlayer.getPersonalSchool().getGTable().remove(choice);
-                        activePlayer.getPersonalSchool().getEntry().add(choice);
-                    } else if (choice.getsColour().equals(SColor.RED)) {
-                        activePlayer.getPersonalSchool().getRTable().remove(choice);
-                        activePlayer.getPersonalSchool().getEntry().add(choice);
-                    } else if (choice.getsColour().equals(SColor.YELLOW)) {
-                        activePlayer.getPersonalSchool().getYTable().remove(choice);
-                        activePlayer.getPersonalSchool().getEntry().add(choice);
-                    } else if (choice.getsColour().equals(SColor.PINK)) {
-                        activePlayer.getPersonalSchool().getPTable().remove(choice);
-                        activePlayer.getPersonalSchool().getEntry().add(choice);
-                    } else if (choice.getsColour().equals(SColor.BLUE)) {
-                        activePlayer.getPersonalSchool().getBTable().remove(choice);
-                        activePlayer.getPersonalSchool().getEntry().add(choice);
+                for(Student student : activePlayer.getPersonalSchool().getEntry()){
+                    if(idSE==student.getIdStudent()) {
+                        studentEntry = student;
                     }
                 }
+                switch(studentHall.getsColour()){
+                    case GREEN:
+                        activePlayer.getPersonalSchool().getGTable().remove(studentHall);
+                        break;
+                    case RED:
+                        activePlayer.getPersonalSchool().getRTable().remove(studentHall);
+                        break;
+                    case YELLOW:
+                        activePlayer.getPersonalSchool().getYTable().remove(studentHall);
+                        break;
+                    case PINK:
+                        activePlayer.getPersonalSchool().getPTable().remove(studentHall);
+                        break;
+                    case BLUE:
+                        activePlayer.getPersonalSchool().getBTable().remove(studentHall);
+                        break;
+                }
+
+                activePlayer.getPersonalSchool().getEntry().add(studentHall);
+                moveStudentFromListToHall(activePlayer, idSE, activePlayer.getPersonalSchool().getEntry());
+                activePlayer.getPersonalSchool().getEntry().remove(studentEntry);
                 break;
 
             case COURTESAN:
 
                 moveStudentFromListToHall(activePlayer,idS, characterCardPlayed.getStudentsOnCard());
-                //pesco pedina da mettere sulla carta
                 characterCardPlayed.getStudentsOnCard().add(table.getBag().get(0));
                 table.getBag().remove(table.getBag().get(0));
                 break;

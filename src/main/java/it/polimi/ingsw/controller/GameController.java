@@ -324,8 +324,9 @@ public class GameController {
                                 case ABBOT:
                                 case ACROBAT:
                                 case COURTESAN:
+                                case BARD:
                                     card = true;
-                                    virtualView.askId(false,characterCard,acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
+                                    virtualView.askId(false,characterCard,acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool());
                                     break;
                                 case HERALD:
                                 case CURATOR:
@@ -390,7 +391,7 @@ public class GameController {
                         }
                     }else{
                         boolean present = false;
-                        if(!characterCard.getCardEffect().equals(CardEffect.ACROBAT) && !characterCard.getCardEffect().equals(CardEffect.COURTESAN)){
+                        if(!characterCard.getCardEffect().equals(CardEffect.ACROBAT) && !characterCard.getCardEffect().equals(CardEffect.COURTESAN) && !characterCard.getCardEffect().equals(CardEffect.BARD)){
                             for (Student student : characterCard.getStudentsOnCard()) {
                                 if (student.getIdStudent() == Choice.getId()) {
                                     present = true;
@@ -405,28 +406,66 @@ public class GameController {
                                 again = true;
                                 virtualView.askId(false,characterCard,-1, null);
                             }
-                        }else if (characterCard.getCardEffect().equals(CardEffect.ACROBAT)){
+                        }else if (characterCard.getCardEffect().equals(CardEffect.ACROBAT) || characterCard.getCardEffect().equals(CardEffect.BARD)){
                             if(Choice.getIndex()%2==1) {
-                                int studentIdCard = -1;
-                                for (Student student : characterCard.getStudentsOnCard()) {
-                                    if (student.getIdStudent() == Choice.getId()) {
-                                        present = true;
-                                        studentIdCard = Choice.getId();
+                                int studentIdCard = -1, max;
+                                if(characterCard.getCardEffect().equals(CardEffect.ACROBAT)) {
+                                    max = 6;
+                                    for (Student student : characterCard.getStudentsOnCard()) {
+                                        if (student.getIdStudent() == Choice.getId()) {
+                                            present = true;
+                                            studentIdCard = Choice.getId();
+                                        }
+                                    }
+                                }else{
+                                    max = 4;
+                                    for (Student student : gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getGTable()) {
+                                        if (student.getIdStudent() == Choice.getId() && gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getGTable().indexOf(student) == (gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getGTable().size()-1)) {
+                                            present = true;
+                                            studentIdCard = Choice.getId();
+                                        }
+                                    }
+                                    for (Student student : gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getRTable()) {
+                                        if (student.getIdStudent() == Choice.getId() && gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getRTable().indexOf(student) == (gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getRTable().size()-1)) {
+                                            present = true;
+                                            studentIdCard = Choice.getId();
+                                        }
+                                    }
+                                    for (Student student : gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getYTable()) {
+                                        if (student.getIdStudent() == Choice.getId() && gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getYTable().indexOf(student) == (gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getYTable().size()-1)) {
+                                            present = true;
+                                            studentIdCard = Choice.getId();
+                                        }
+                                    }
+                                    for (Student student : gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getPTable()) {
+                                        if (student.getIdStudent() == Choice.getId() && gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getPTable().indexOf(student) == (gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getPTable().size()-1)) {
+                                            present = true;
+                                            studentIdCard = Choice.getId();
+                                        }
+                                    }
+                                    for (Student student : gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getBTable()) {
+                                        if (student.getIdStudent() == Choice.getId() && gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getBTable().indexOf(student) == (gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getBTable().size()-1)) {
+                                            present = true;
+                                            studentIdCard = Choice.getId();
+                                        }
                                     }
                                 }
                                 if (present) {
                                     again = false;
                                     acrobatIndex++;
                                     gameSession.playCharacterCard(characterCard.getCardEffect(), Choice.getNickname(), studentIdCard, -1, studentId, null);
-                                    if (acrobatIndex<6)
-                                        virtualView.askId(false, characterCard, acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
+                                    if (acrobatIndex<max)
+                                        virtualView.askId(false, characterCard, acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool());
                                 }else{
-                                    virtualView.showMessage("\nStudent selected is not available");
+                                    if (characterCard.getCardEffect().equals(CardEffect.ACROBAT))
+                                        virtualView.showMessage("\nStudent selected is not available");
+                                    else
+                                        virtualView.showMessage("\nStudent selected is not available or isn't the last on the table you selected");
                                     again = true;
-                                    virtualView.askId(false,characterCard,acrobatIndex, null);
+                                    virtualView.askId(false,characterCard,acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool());
                                 }
 
-                                if (acrobatIndex == 6) {
+                                if (acrobatIndex == max) {
                                     acrobatIndex = 0;
                                     setActionState(ActionState.STUDENT);
                                     action();
@@ -442,7 +481,7 @@ public class GameController {
                                 if (present) {
                                     again = false;
                                     acrobatIndex++;
-                                    virtualView.askId(false, characterCard, acrobatIndex, null);
+                                    virtualView.askId(false, characterCard, acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool());
                                 } else {
                                     if (Choice.getId() == -2 && Choice.getNone()) {
                                         acrobatIndex = 0;
@@ -451,7 +490,7 @@ public class GameController {
                                     }else{
                                         virtualView.showMessage("\nStudent selected is not available");
                                         again = true;
-                                        virtualView.askId(false, characterCard, acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
+                                        virtualView.askId(false, characterCard, acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool());
                                     }
                                 }
                             }

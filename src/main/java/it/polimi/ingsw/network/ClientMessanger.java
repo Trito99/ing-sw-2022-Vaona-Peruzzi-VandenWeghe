@@ -148,7 +148,7 @@ public class ClientMessanger implements ObserverView, Observer {
                 break;
             case CHOOSE_ID:
                 ChooseId id = (ChooseId) message;
-                queue.execute(() -> view.askId(id.getChoice(),id.getCharacterCard(), id.getIndex(), id.getEntry()));
+                queue.execute(() -> view.askId(id.getChoice(),id.getCharacterCard(), id.getIndex(), id.getSchool()));
                 break;
             case CHOOSE_COLOR_TO_BLOCK:
                 ChooseColor color = (ChooseColor) message;

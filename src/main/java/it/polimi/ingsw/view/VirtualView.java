@@ -135,8 +135,8 @@ public class VirtualView implements View, Observer {
 
 
     @Override
-    public void askId(boolean choice, CharacterCard characterCard, int indexAcrobat, ArrayList<Student> entry) {
-        clientHandler.sendMessage(new ChooseId(choice,characterCard, indexAcrobat, entry));
+    public void askId(boolean choice, CharacterCard characterCard, int indexAcrobat, School school) {
+        clientHandler.sendMessage(new ChooseId(choice,characterCard, indexAcrobat, school));
     }
 
 

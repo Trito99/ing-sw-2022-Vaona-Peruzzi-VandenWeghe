@@ -143,7 +143,7 @@ public class GUI extends ObservableView implements View {
     }
 
     @Override
-    public void askId(boolean choice, CharacterCard characterCard, int indexAcrobat, ArrayList<Student> entry) {
+    public void askId(boolean choice, CharacterCard characterCard, int indexAcrobat, School school) {
 
     }
 }

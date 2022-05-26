@@ -503,7 +503,7 @@ public class CLI extends ObservableView implements View {
         }while(ye);
     }
     @Override
-    public void askId(boolean choice, CharacterCard characterCard, int indexAcrobat, ArrayList<Student> entry) {
+    public void askId(boolean choice, CharacterCard characterCard, int indexAcrobat, School school) {
         boolean ye;
         int marker = 0 ;
         do {
@@ -534,7 +534,49 @@ public class CLI extends ObservableView implements View {
                                 marker = -2;
                             }
                             out.print("Entry: ");
-                            for (Student s : entry) {
+                            for (Student s : school.getEntry()) {
+                                out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+                            }
+                            out.println();
+                        }
+                    }
+                    else if (characterCard.getCardEffect().equals(CardEffect.BARD)) {
+                        if (indexAcrobat % 2 == 1) {
+                            out.print("\nWhich student from the school do you want to switch? (id)\n");
+                            out.print(ANSI_GREEN +"\n\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.GREEN)+ ANSI_GREEN + " Green Table: " + ANSI_RESET);
+                            for(Student s : school.getGTable()){
+                                out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+                            }
+
+                            out.print(ANSI_RED +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.RED)+ ANSI_RED + " Red Table: " + ANSI_RESET);
+                            for(Student s : school.getRTable()){
+                                out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+                            }
+
+                            out.print(ANSI_YELLOW +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.YELLOW)+ ANSI_YELLOW + " Yellow Table: " + ANSI_RESET);
+                            for(Student s : school.getYTable()){
+                                out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+                            }
+
+                            out.print(ANSI_PINK +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.PINK)+ ANSI_PINK + " Pink Table: " + ANSI_RESET);
+                            for(Student s : school.getPTable()){
+                                out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+                            }
+
+                            out.print(ANSI_BLUE +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.BLUE)+ ANSI_BLUE + " Blue Table: " + ANSI_RESET);
+                            for(Student s : school.getBTable()){
+                                out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+                            }
+                            out.println();
+                        } else {
+                            if (indexAcrobat < 2)
+                                out.print("\nWhich student from the entry do you want to switch? (id)\n");
+                            else {
+                                out.print("\nWhich student from the entry do you want to switch? (id or none)\n");
+                                marker = -2;
+                            }
+                            out.print("Entry: ");
+                            for (Student s : school.getEntry()) {
                                 out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
                             }
                             out.println();
