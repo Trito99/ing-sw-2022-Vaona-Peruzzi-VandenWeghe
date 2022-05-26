@@ -320,7 +320,7 @@ class GameTest {
                             id.remove(id.get(pos));
                         }
                         int count=0;
-                        for(int iTable=0;iTable<6;iTable++){
+                        for(int iTable=0;iTable<5;iTable++){
                             switch(iTable){
                                 case 0:
                                     for(int s3=0;s3<game.getListOfPlayers().get(i).getPersonalSchool().getGTable().size()/3;s3++)

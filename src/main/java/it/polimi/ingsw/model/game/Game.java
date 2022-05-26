@@ -152,9 +152,9 @@ public class Game {
         }
         switch(student.getsColour()) {
             case GREEN:
-                    playerMoving.getPersonalSchool().getGTable().add(student);
-                    getCoinFromStudentMove(playerMoving, playerMoving.getPersonalSchool().getGTable());
-                    list.remove(list.get(list.indexOf(student)));
+                playerMoving.getPersonalSchool().getGTable().add(student);
+                getCoinFromStudentMove(playerMoving, playerMoving.getPersonalSchool().getGTable());
+                list.remove(list.get(list.indexOf(student)));
                 break;
             case RED:
                 playerMoving.getPersonalSchool().getRTable().add(student);
@@ -366,16 +366,16 @@ public class Game {
     private void getCoinFromStudentMove(Player activePlayer, ArrayList<Student> tableColor) {
         
         if(getDifficulty().equals(Difficulty.EXPERTMODE) && (tableColor.size()==3)){
-            increaseCoinScore(activePlayer.getNickname(),1);
-            getTable().decreaseCoinsOnTable(1);
+            activePlayer.setCoinScore(activePlayer.getCoinScore() + 1);
+            getTable().setCoinsOnTable(getTable().getCoinsOnTable() - 1);
         }
         else if( getDifficulty().equals(Difficulty.EXPERTMODE) && (tableColor.size()==6)){
-            increaseCoinScore(activePlayer.getNickname(),1);
-            getTable().decreaseCoinsOnTable(1);
+            activePlayer.setCoinScore(activePlayer.getCoinScore() + 1);
+            getTable().setCoinsOnTable(getTable().getCoinsOnTable() - 1);
         }
         else if( getDifficulty().equals(Difficulty.EXPERTMODE) && (tableColor.size()==9)){
-            increaseCoinScore(activePlayer.getNickname(),1);
-            getTable().decreaseCoinsOnTable(1);
+            activePlayer.setCoinScore(activePlayer.getCoinScore() + 1);
+            getTable().setCoinsOnTable(getTable().getCoinsOnTable() - 1);
         }
     }
 
