@@ -305,6 +305,7 @@ public class CLI extends ObservableView implements View {
             out.println("\n----------------------------------------------");
             out.print("\n**** CHARACTER CARDS ****");
             if (table.getCharacterCardsOnTable().size()>0) {
+                out.print("\nCoins on table: "+table.getCoinsOnTable()+"\n");
                 for (CharacterCard characterCard : table.getCharacterCardsOnTable()) {
                     int coins=0, cost=characterCard.getCostCharacter();
                     if(characterCard.getCoinOnCard()) {

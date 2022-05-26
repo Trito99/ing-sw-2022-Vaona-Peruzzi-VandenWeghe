@@ -112,6 +112,11 @@ public class Game {
                 table.getListOfIsland().size() == 3;
     }
 
+    public void increaseCoinScore(String nickname, int increaseValue) {
+        Player activePlayer = getPlayer(nickname);
+        activePlayer.setCoinScore(activePlayer.getCoinScore() + increaseValue);
+    }
+
     public void decreaseCoinScore(String nickname, int decreaseValue) {
         Player activePlayer = getPlayer(nickname);
         activePlayer.setCoinScore(activePlayer.getCoinScore() - decreaseValue);
@@ -361,16 +366,16 @@ public class Game {
     private void getCoinFromStudentMove(Player activePlayer, ArrayList<Student> tableColor) {
         
         if(getDifficulty().equals(Difficulty.EXPERTMODE) && (tableColor.size()==3)){
-            activePlayer.setCoinScore(activePlayer.getCoinScore() + 1);
-            getTable().setCoinsOnTable(getTable().getCoinsOnTable() - 1);
+            increaseCoinScore(activePlayer.getNickname(),1);
+            getTable().decreaseCoinsOnTable(1);
         }
         else if( getDifficulty().equals(Difficulty.EXPERTMODE) && (tableColor.size()==6)){
-              activePlayer.setCoinScore(activePlayer.getCoinScore() + 1);
-             getTable().setCoinsOnTable(getTable().getCoinsOnTable() - 1);
+            increaseCoinScore(activePlayer.getNickname(),1);
+            getTable().decreaseCoinsOnTable(1);
         }
         else if( getDifficulty().equals(Difficulty.EXPERTMODE) && (tableColor.size()==9)){
-             activePlayer.setCoinScore(activePlayer.getCoinScore() + 1);
-            getTable().setCoinsOnTable(getTable().getCoinsOnTable() - 1);
+            increaseCoinScore(activePlayer.getNickname(),1);
+            getTable().decreaseCoinsOnTable(1);
         }
     }
 
