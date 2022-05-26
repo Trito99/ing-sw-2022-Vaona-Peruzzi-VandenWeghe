@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.island;
 
 import it.polimi.ingsw.model.character.CardEffect;
+import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.SColor;
@@ -63,27 +64,58 @@ public class IslandCard implements Serializable {
         this.towerOnIsland = towerOnIsland;
     }
 
-    public void buildTowerOnIsland(ArrayList<Player> listOfPlayer,  CardEffect cardEffectPlayed, Player activePlayer){
+    public void buildTowerOnIsland(ArrayList<Player> listOfPlayer,  CardEffect cardEffectPlayed, Player activePlayer, GameMode gameMode){
+        Player teamLeader = null;
+
         if(cardEffectPlayed.equals(CardEffect.HERALD))
             MotherEarthOnIsland=true;
 
         if(MotherEarthOnIsland) {
             Player playerFound = calculateInfluence(listOfPlayer, cardEffectPlayed, activePlayer);
 
-            /** CURATRICE: controllo che non ci sia una tessera divieto sull'isola */
-            if (xCardOnIsland) {
-                setXCardCounter(getXCardCounter() - 1);
-                if (xCardCounter == 0) setXCardOnIsland(false);
+            if (gameMode == GameMode.COOP) {
+                for (Player p : listOfPlayer) {
+                    if (playerFound.getPersonalSchool().getTower().size() == 0 && playerFound.getTeamMate().equals(p.getNickname())) {
+                        teamLeader = p;
+                    } else
+                        teamLeader = playerFound;
+                }
+                if (xCardOnIsland) {
+                    setXCardCounter(getXCardCounter() - 1);
+                    if (xCardCounter == 0) setXCardOnIsland(false);
+                } else {
+                    if (teamLeader != null) {
+                        if (teamLeader.getPersonalSchool().getTower().size() != 0) {
+                            if (!towerIsOnIsland) {
+                                towerOnIsland = new Tower(teamLeader.getTColor());
+                                teamLeader.getPersonalSchool().removeTower();
+                                towerIsOnIsland = true;
+                            } else {
+                                if (!teamLeader.getTColor().equals(towerOnIsland.getTColour())) {
+                                    changeTowerColour(listOfPlayer, teamLeader, gameMode);
+                                }
+                            }
+                        }
+                    }
+                }
+
             } else {
-                if (playerFound != null) {
-                    if (playerFound.getPersonalSchool().getTower().size() != 0) {
-                        if (!towerIsOnIsland) {
-                            towerOnIsland = new Tower(playerFound.getTColor());
-                            playerFound.getPersonalSchool().removeTower();
-                            towerIsOnIsland = true;
-                        }else{
-                            if (!playerFound.getTColor().equals(towerOnIsland.getTColour())) {
-                                changeTowerColour(listOfPlayer, playerFound);
+
+                /** CURATRICE: controllo che non ci sia una tessera divieto sull'isola */
+                if (xCardOnIsland) {
+                    setXCardCounter(getXCardCounter() - 1);
+                    if (xCardCounter == 0) setXCardOnIsland(false);
+                } else {
+                    if (playerFound != null) {
+                        if (playerFound.getPersonalSchool().getTower().size() != 0) {
+                            if (!towerIsOnIsland) {
+                                towerOnIsland = new Tower(playerFound.getTColor());
+                                playerFound.getPersonalSchool().removeTower();
+                                towerIsOnIsland = true;
+                            } else {
+                                if (!playerFound.getTColor().equals(towerOnIsland.getTColour())) {
+                                    changeTowerColour(listOfPlayer, playerFound, gameMode);
+                                }
                             }
                         }
                     }
@@ -95,22 +127,45 @@ public class IslandCard implements Serializable {
             MotherEarthOnIsland=false;
     }
 
-    private void changeTowerColour(ArrayList<Player> listOfPlayers, Player playerBuilder){        //cambio colore della torre se è cambiata l'influenza sull'isola
-
+    private void changeTowerColour(ArrayList<Player> listOfPlayers, Player playerBuilder, GameMode gameMode){        //cambio colore della torre se è cambiata l'influenza sull'isola
         Player prevPlayer = null;
+        Player teamLeader = null;
 
         for(Player player : listOfPlayers){
             if(player.getTColor().equals(towerOnIsland.getTColour()))          //determina il prevPlayer
                 prevPlayer = player;
         }
-        if(!playerBuilder.getTColor().equals(towerOnIsland.getTColour())){
-            for(int i=0;i<mergedIsland;i++) {
-                if(!playerBuilder.getPersonalSchool().getTower().isEmpty()) {
-                    prevPlayer.getPersonalSchool().getTower().add(new Tower(prevPlayer.getTColor()));
-                    playerBuilder.getPersonalSchool().removeTower();
+
+        if(gameMode==GameMode.COOP) {
+            for (Player p : listOfPlayers) {
+                if(playerBuilder.getPersonalSchool().getTower().size() == 0 && playerBuilder.getTeamMate().equals(p.getNickname())){
+                    teamLeader = p;
                 }
+                else
+                    teamLeader = playerBuilder;
+
             }
-            setTowerOnIsland(new Tower(playerBuilder.getTColor()));
+            if(!teamLeader.getTColor().equals(towerOnIsland.getTColour())){
+                for(int i=0;i<mergedIsland;i++) {
+                    if(!teamLeader.getPersonalSchool().getTower().isEmpty()) {
+                        teamLeader.getPersonalSchool().getTower().add(new Tower(prevPlayer.getTColor()));
+                        teamLeader.getPersonalSchool().removeTower();
+                    }
+                }
+                setTowerOnIsland(new Tower(teamLeader.getTColor()));
+            }
+
+        }
+        else {
+            if (!playerBuilder.getTColor().equals(towerOnIsland.getTColour())) {
+                for (int i = 0; i < mergedIsland; i++) {
+                    if (!playerBuilder.getPersonalSchool().getTower().isEmpty()) {
+                        prevPlayer.getPersonalSchool().getTower().add(new Tower(prevPlayer.getTColor()));
+                        playerBuilder.getPersonalSchool().removeTower();
+                    }
+                }
+                setTowerOnIsland(new Tower(playerBuilder.getTColor()));
+            }
         }
     }
 

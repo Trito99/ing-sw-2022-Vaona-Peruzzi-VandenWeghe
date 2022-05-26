@@ -21,7 +21,6 @@ public class Player implements Serializable {
 
     private String nickname;
     private GregorianCalendar playerDate;
-    private int age;               // CONTROLLARE LIBRERIA DATA
     private final PlayerNumber playerNumber;
     private TurnState turnState;
     private School personalSchool;
@@ -30,6 +29,7 @@ public class Player implements Serializable {
     private int coinScore;
     private TColor tColor;
     private int influenceOnIsland;
+    private String teamMate;
 
 
     /**
@@ -44,6 +44,7 @@ public class Player implements Serializable {
         this.tColor = tColor;
         trash = null;
         coinScore = 0;
+        teamMate = null;
     }
 
     public void generateSchool(Table table, GameMode gameMode) {
@@ -167,4 +168,11 @@ public class Player implements Serializable {
         this.influenceOnIsland = influenceOnIsland;
     }
 
+    public String getTeamMate() {
+        return teamMate;
+    }
+
+    public void setTeamMate(String teamMate) {
+        this.teamMate = teamMate;
+    }
 }

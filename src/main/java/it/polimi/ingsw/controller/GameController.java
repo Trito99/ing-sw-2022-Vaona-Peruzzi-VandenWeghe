@@ -122,6 +122,12 @@ public class GameController {
 
 
             if(allVirtualView.size() == maxPlayers){
+                if(gameSession.getGameMode().equals(GameMode.COOP)){
+                    gameSession.getListOfPlayers().get(0).setTeamMate(gameSession.getListOfPlayers().get(1).getNickname());
+                    gameSession.getListOfPlayers().get(1).setTeamMate(gameSession.getListOfPlayers().get(0).getNickname());
+                    gameSession.getListOfPlayers().get(2).setTeamMate(gameSession.getListOfPlayers().get(3).getNickname());
+                    gameSession.getListOfPlayers().get(3).setTeamMate(gameSession.getListOfPlayers().get(2).getNickname());
+                }
                 broadcastMessage("Everyone joined the game!");
                 turnController = new TurnController(this);
                 gameState = GameState.PLANNING;
@@ -574,11 +580,11 @@ public class GameController {
                         if (characterCard!=null && characterCard.getCardEffect().equals(CardEffect.CURATOR) && gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).isXCardOnIsland())
                             characterCard.setXCardOnCard(characterCard.getXCardOnCard()+1);
                         if(characterCard!=null && characterCard.getCardEffect().isCentaurPlayed()) {
-                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.CENTAUR, gameSession.getPlayer(turnController.getActivePlayer()));
+                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.CENTAUR, gameSession.getPlayer(turnController.getActivePlayer()),gameSession.getGameMode());
                         }else if(characterCard!=null && characterCard.getCardEffect().isKnightPlayed()){
-                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.KNIGHT, gameSession.getPlayer(turnController.getActivePlayer()));
+                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.KNIGHT, gameSession.getPlayer(turnController.getActivePlayer()),gameSession.getGameMode());
                         }else
-                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE, gameSession.getPlayer(turnController.getActivePlayer()));
+                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE, gameSession.getPlayer(turnController.getActivePlayer()),gameSession.getGameMode() );
                         gameSession.getTable().joinIsland(gameSession.getTable().getListOfIsland());
                         setActionState(ActionState.CLOUDCARD);
                         action();
