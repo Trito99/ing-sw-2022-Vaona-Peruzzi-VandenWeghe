@@ -208,53 +208,16 @@ public class CLI extends ObservableView implements View {
     public void showPersonalSchool(School school, String nickname, AssistantCard trash, Difficulty difficulty,int coins) {
 
         out.print("\n****School of "+ nickname + "**** ");
-        out.print("\nEntry: ");
-       for(Student s : school.getEntry()){
-           out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | " );
-       }
-       out.print(ANSI_GREEN +"\n\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.GREEN)+ ANSI_GREEN + " Green Table: " + ANSI_RESET);
-       for(Student s : school.getGTable()){
-           out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
-       }
-
-        out.print(ANSI_RED +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.RED)+ ANSI_RED + " Red Table: " + ANSI_RESET);
-       for(Student s : school.getRTable()){
-            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
-       }
-
-        out.print(ANSI_YELLOW +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.YELLOW)+ ANSI_YELLOW + " Yellow Table: " + ANSI_RESET);
-       for(Student s : school.getYTable()){
-            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
-       }
-
-        out.print(ANSI_PINK +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.PINK)+ ANSI_PINK + " Pink Table: " + ANSI_RESET);
-       for(Student s : school.getPTable()){
-            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
-       }
-
-        out.print(ANSI_BLUE +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.BLUE)+ ANSI_BLUE + " Blue Table: " + ANSI_RESET);
-       for(Student s : school.getBTable()){
-            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
-       }
-
-        out.print("\n\nTowers: ");
-        for(Tower t : school.getTower()){
-            out.print(getTowerAnsiColor(t) + "T" + ANSI_RESET + " | ");
-        }
-        out.print("(" + school.getTower().size() + " towers remained)");
-
-        out.print("\n\nTrash Card: ");
-        if (trash!=null)
-            out.print(trash.getAssistantName() +" (TurnValue: "+ trash.getTurnValue() + ", StepME: " + trash.getStepMotherEarth()+")");
-        if(difficulty.equals(Difficulty.EXPERTMODE)){
-            out.print("\nCoins: "+coins);
-        }
+        printEntry(school.getEntry());
+        printHall(school);
+        printTowers(school.getTower());
+        printTrash(trash);
+        printCoinScore(difficulty, coins);
         out.println("\n----------------------------------------------");
     }
 
     @Override
     public void showTable(Table table, Difficulty difficulty) {
-        int i=1;
         boolean forbidden = false;
 
         if (difficulty.equals(Difficulty.EXPERTMODE)) {
@@ -288,52 +251,12 @@ public class CLI extends ObservableView implements View {
             }
         }
         out.println("\n----------------------------------------------");
-        out.print("\n**** CLOUDS ****");
-        for(CloudCard c : table.getCloudNumber()){
-            out.print("\nCloud "+ table.getCloudNumber().get(i-1).getIdCloud() + ") ");
-            if (table.getCloudNumber().get(i-1).getStudentOnCloud().size()>0) {
-                out.print("Id Students: " );
-                for (Student s : table.getCloudNumber().get(i - 1).getStudentOnCloud()) {
-                    out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
 
-                }
-            }else
-                out.print("Empty");
-            i++;
-        }
+        printClouds(table.getCloudNumber());
+
         if(difficulty.equals(Difficulty.EXPERTMODE)){
             out.println("\n----------------------------------------------");
-            out.print("\n**** CHARACTER CARDS ****");
-            if (table.getCharacterCardsOnTable().size()>0) {
-                out.print("\nCoins on table: "+table.getCoinsOnTable()+"\n");
-                for (CharacterCard characterCard : table.getCharacterCardsOnTable()) {
-                    int coins=0, cost=characterCard.getCostCharacter();
-                    if(characterCard.getCoinOnCard()) {
-                        coins = 1;
-                        cost = cost + 1;
-                    }
-                    out.println();
-                    out.println(characterCard.getCardEffect().toString()+"("+coins+")"+" Cost: "+cost);
-                    switch (characterCard.getCardEffect()){
-                        case COURTESAN:
-                        case ABBOT:
-                        case ACROBAT:
-                            out.print("Students : ");
-                            for (Student s : characterCard.getStudentsOnCard()) {
-                                out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
-                            }
-                            out.println();
-                            break;
-                        case CURATOR:
-                            out.println("Forbidden cards on curator: "+characterCard.getXCardOnCard());
-                            break;
-                        default:
-                            break;
-                    }
-                    out.println("Effect: "+characterCard.getDescription());
-                }
-            }else
-                out.print("\nEmpty");
+            printCharacterCards(table);
         }
         out.println("\n----------------------------------------------");
     }
@@ -458,20 +381,9 @@ public class CLI extends ObservableView implements View {
             try {
                 ye=false;
                 out.print("\nChoose a Cloud Card (id) ");
-
-                for(CloudCard c : table.getCloudNumber()){
-                    out.print("\nCloud "+ table.getCloudNumber().get(i-1).getIdCloud() + ") ");
-                    if (table.getCloudNumber().get(i-1).getStudentOnCloud().size()>0) {
-                        out.print("Id Students: " );
-                        for (Student s : table.getCloudNumber().get(i - 1).getStudentOnCloud()) {
-                            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
-
-                        }
-                    }else
-                        out.print("Empty");
-                    i++;
-                }
+                printClouds(table.getCloudNumber());
                 out.print("\n");
+
                 int id = Integer.parseInt(readInput());
                 notifyObserver(obs -> obs.chooseCloudCard(id));
             } catch (Exception e) {
@@ -488,11 +400,9 @@ public class CLI extends ObservableView implements View {
             try {
                 ye=false;
                 out.print("\nWhich student of your entry do you want to move? (id)");
-                out.print("\nEntry: ");
-                for (Student s : entry) {
-                    out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
-                }
+                printEntry(entry);
                 out.print("\n");
+
                 int id = Integer.parseInt(readInput());
                 out.print("\nWhere do you want to move the student? (Island,School)\n");
                 String place = readInput().toUpperCase(Locale.ROOT);
@@ -522,10 +432,7 @@ public class CLI extends ObservableView implements View {
                     if (characterCard.getCardEffect().equals(CardEffect.ACROBAT)) {
                         if(indexAcrobat %2==1) {
                             out.print("\nWhich student from the card do you want to switch? (id)\n");
-                            out.print(characterCard.getCardEffect().toString() + ": ");
-                            for (Student s : characterCard.getStudentsOnCard()) {
-                                out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
-                            }
+                            printStudentsOnCard(characterCard);
                             out.println();
                         }else {
                             if (indexAcrobat <2)
@@ -534,40 +441,14 @@ public class CLI extends ObservableView implements View {
                                 out.print("\nWhich student from the entry do you want to switch? (id or none)\n");
                                 marker = -2;
                             }
-                            out.print("Entry: ");
-                            for (Student s : school.getEntry()) {
-                                out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
-                            }
+                            printEntry(school.getEntry());
                             out.println();
                         }
                     }
                     else if (characterCard.getCardEffect().equals(CardEffect.BARD)) {
                         if (indexAcrobat % 2 == 1) {
                             out.print("\nWhich student from the school do you want to switch? (id)\n");
-                            out.print(ANSI_GREEN +"\n\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.GREEN)+ ANSI_GREEN + " Green Table: " + ANSI_RESET);
-                            for(Student s : school.getGTable()){
-                                out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
-                            }
-
-                            out.print(ANSI_RED +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.RED)+ ANSI_RED + " Red Table: " + ANSI_RESET);
-                            for(Student s : school.getRTable()){
-                                out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
-                            }
-
-                            out.print(ANSI_YELLOW +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.YELLOW)+ ANSI_YELLOW + " Yellow Table: " + ANSI_RESET);
-                            for(Student s : school.getYTable()){
-                                out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
-                            }
-
-                            out.print(ANSI_PINK +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.PINK)+ ANSI_PINK + " Pink Table: " + ANSI_RESET);
-                            for(Student s : school.getPTable()){
-                                out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
-                            }
-
-                            out.print(ANSI_BLUE +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.BLUE)+ ANSI_BLUE + " Blue Table: " + ANSI_RESET);
-                            for(Student s : school.getBTable()){
-                                out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
-                            }
+                            printHall(school);
                             out.println();
                         } else {
                             if (indexAcrobat < 2)
@@ -576,27 +457,19 @@ public class CLI extends ObservableView implements View {
                                 out.print("\nWhich student from the entry do you want to switch? (id or none)\n");
                                 marker = -2;
                             }
-                            out.print("Entry: ");
-                            for (Student s : school.getEntry()) {
-                                out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
-                            }
+
+                            printEntry(school.getEntry());
                             out.println();
                         }
                     }
                     else if (characterCard.getCardEffect().equals(CardEffect.COURTESAN)){
                         out.print("\nWhich student do you want to move in your hall?\n");
-                        out.print(characterCard.getCardEffect().toString() + ": ");
-                        for (Student s : characterCard.getStudentsOnCard()) {
-                            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
-                        }
+                        printStudentsOnCard(characterCard);
                         out.println();
                     }
                     else {
                         out.print("\nWhich student do you want to move? (id)\n");
-                        out.print(characterCard.getCardEffect().toString() + ": ");
-                        for (Student s : characterCard.getStudentsOnCard()) {
-                            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
-                        }
+                        printStudentsOnCard(characterCard);
                         out.println();
                     }
                 }
@@ -612,6 +485,117 @@ public class CLI extends ObservableView implements View {
                 out.println(WRONG_INPUT);
             }
         }while (ye);
+    }
+
+    private void printHall(School school) {
+        out.print(ANSI_GREEN +"\n\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.GREEN)+ ANSI_GREEN + " Green Table: " + ANSI_RESET);
+        for(Student s : school.getGTable()){
+            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+        }
+
+        out.print(ANSI_RED +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.RED)+ ANSI_RED + " Red Table: " + ANSI_RESET);
+        for(Student s : school.getRTable()){
+            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+        }
+
+        out.print(ANSI_YELLOW +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.YELLOW)+ ANSI_YELLOW + " Yellow Table: " + ANSI_RESET);
+        for(Student s : school.getYTable()){
+            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+        }
+
+        out.print(ANSI_PINK +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.PINK)+ ANSI_PINK + " Pink Table: " + ANSI_RESET);
+        for(Student s : school.getPTable()){
+            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+        }
+
+        out.print(ANSI_BLUE +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.BLUE)+ ANSI_BLUE + " Blue Table: " + ANSI_RESET);
+        for(Student s : school.getBTable()){
+            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+        }
+    }
+
+    private void printTowers(ArrayList<Tower> towers){
+        out.print("\n\nTowers: ");
+        for(Tower t : towers){
+            out.print(getTowerAnsiColor(t) + "T" + ANSI_RESET + " | ");
+        }
+        out.print("(" + towers.size() + " towers remained)");
+    }
+
+    private void printEntry(ArrayList<Student> entry){
+        out.print("\nEntry: ");
+        for(Student s : entry){
+            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | " );
+        }
+    }
+
+    private void printTrash(AssistantCard trash){
+        out.print("\n\nTrash Card: ");
+        if (trash!=null)
+            out.print(trash.getAssistantName() +" (TurnValue: "+ trash.getTurnValue() + ", StepME: " + trash.getStepMotherEarth()+")");
+    }
+
+    private void printCoinScore(Difficulty difficulty, int coins){
+        if(difficulty.equals(Difficulty.EXPERTMODE)){
+            out.print("\nCoins: "+coins);
+        }
+    }
+
+    private void printClouds(ArrayList<CloudCard> cloudCards){
+        int i=1;
+
+        out.print("\n**** CLOUDS ****");
+        for(CloudCard c : cloudCards){
+            out.print("\nCloud "+ i + ") ");
+            if (c.getStudentOnCloud().size()>0) {
+                out.print("Id Students: " );
+                for (Student s : c.getStudentOnCloud()) {
+                    out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+                }
+            }else
+                out.print("Empty");
+            i++;
+        }
+    }
+
+    private void printCharacterCards(Table table) {
+        out.print("\nCoins on table: " + table.getCoinsOnTable() + "\n");
+        out.print("\n**** CHARACTER CARDS ****");
+        for (CharacterCard characterCard : table.getCharacterCardsOnTable()) {
+            int coins = 0, cost = characterCard.getCostCharacter();
+            if (characterCard.getCoinOnCard()) {
+                coins = 1;
+                cost = cost + 1;
+            }
+            out.println();
+            out.println(characterCard.getCardEffect().toString() + "(" + coins + ")" + " Cost: " + cost);
+            switch (characterCard.getCardEffect()) {
+                case COURTESAN:
+                case ABBOT:
+                case ACROBAT:
+                    out.print("Students : ");
+                    for (Student s : characterCard.getStudentsOnCard()) {
+                        out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+                    }
+                    out.println();
+                    break;
+                case CURATOR:
+                    out.println("Forbidden cards on curator: " + characterCard.getXCardOnCard());
+                    break;
+                default:
+                    break;
+            }
+            out.println("Effect: " + characterCard.getDescription());
+        }
+    }
+
+
+
+    private void printStudentsOnCard(CharacterCard characterCard){
+        out.print(characterCard.getCardEffect().toString() + ": ");
+        for (Student s : characterCard.getStudentsOnCard()) {
+            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+        }
     }
 
     private String getStudentAnsiColor(Student student) {

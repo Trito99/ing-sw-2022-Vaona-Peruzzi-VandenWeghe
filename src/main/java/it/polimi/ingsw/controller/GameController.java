@@ -801,20 +801,4 @@ public class GameController {
             vv.showMessage(message);
         }
     }
-
-
-    /**  @Override
-    public void update(Observable o, Object arg) {
-    if (o != view || !(arg instanceof Choice)){
-    throw new IllegalArgumentException();
-    }
-    model.setPlayerChoice((Choice)arg);
-    game();                 (DA CAMBIARE: preso da esercit)
-    }*/
 }
-
-
-// Classe ModelView che ha come attributo una copia del model(es: Model modelCopy) con soli metodi get.
-// Nella classe Model originale invece ci sono anche i set.
-// Il model avrà come osservatore la modelView (model.addObserver(modelView) nel main,
-// view non "ascolta" direttamente la classe model ma la modelView
