@@ -131,9 +131,9 @@ public class Table implements Serializable {
     }
 
     public void generateCharacterCardsOnTable(ArrayList<CharacterCard> characterCards){
-        //Collections.shuffle(characterCards);
+        Collections.shuffle(characterCards);
 
-        for( int i = 6; i<9; i++){
+        for( int i = 0; i<3; i++){
             characterCardsOnTable.add(characterCards.get(i));
         }
 
@@ -211,6 +211,10 @@ public class Table implements Serializable {
 
     public void increaseCoinsOnTable(int coinsValue){
         setCoinsOnTable(getCoinsOnTable() + coinsValue);
+    }
+
+    public void decreaseCoinsOnTable(int coinsValue){
+        setCoinsOnTable(getCoinsOnTable() - coinsValue);
     }
 
     public ArrayList<CharacterCard> getCharacterCardsOnTable() {

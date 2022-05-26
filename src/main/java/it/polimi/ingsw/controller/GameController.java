@@ -49,13 +49,15 @@ public class GameController {
     }
 
     public void generatePlayer(String nickname,GregorianCalendar playerDate,TColor tColor,int index){
-        this.gameSession.addPlayer(new Player(tColor, PlayerNumber.values()[index]));
-        this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
-        this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
-        this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
-        this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.values()[index]));
-        if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
-            this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setCoinScore(1);
+        gameSession.addPlayer(new Player(tColor, PlayerNumber.values()[index]));
+        gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
+        gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
+        gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).generateSchool(gameSession.getTable(),gameSession.getGameMode());
+        gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.values()[index]));
+        if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)) {
+            gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size() - 1).setCoinScore(1);
+            gameSession.getTable().decreaseCoinsOnTable(1);
+        }
     }
 
     /**
@@ -77,11 +79,14 @@ public class GameController {
         else if(allVirtualView.size() < maxPlayers){
             if(allVirtualView.size() == 1){
                 allVirtualView.put(nickname, virtualView);
+                if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)) {
+                    gameSession.getTable().setCoinsOnTable(20);
+                    gameSession.getListOfPlayers().get(0).setCoinScore(1);
+                    gameSession.getTable().decreaseCoinsOnTable(1);
+                }
+                gameSession.getListOfPlayers().get(0).generateSchool(gameSession.getTable(),gameSession.getGameMode());
+                gameSession.getListOfPlayers().get(0).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK1));
                 generatePlayer(nickname,playerDate,TColor.BLACK,allVirtualView.size()-1);
-                this.gameSession.getListOfPlayers().get(0).generateSchool(gameSession.getTable(),gameSession.getGameMode());
-                this.gameSession.getListOfPlayers().get(0).setDeckOfPlayer(new DeckAssistant(AssistantDeckName.DECK1));
-                if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
-                    this.gameSession.getListOfPlayers().get(0).setCoinScore(1);
                 virtualView.showLogin(nickname, gameId, playerDate,true);
                 if(maxPlayers == 3)
                     virtualView.showMessage("Three Players Mode. You have BLACK towers! \nWaiting for other players...");
@@ -298,7 +303,7 @@ public class GameController {
                             } else {
                                 if (gameSession.getPlayer(CardSelected.getNickname()).getCoinScore() >= characterCard.getCostCharacter()) {
                                     gameSession.decreaseCoinScore(CardSelected.getNickname(), characterCard.getCostCharacter());
-                                    gameSession.getTable().increaseCoinsOnTable(characterCard.getCostCharacter());
+                                    gameSession.getTable().increaseCoinsOnTable(characterCard.getCostCharacter()-1);
                                     characterCard.setCoinOnCard(true);
                                 } else {
                                     enough = false;
