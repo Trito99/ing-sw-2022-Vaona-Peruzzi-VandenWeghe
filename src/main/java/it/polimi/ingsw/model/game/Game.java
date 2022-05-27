@@ -111,14 +111,13 @@ public class Game {
                     table.getListOfIsland().size() == 3;
         }
         else{
-            for (Player p : listOfPlayers){
-                if(p.getPersonalSchool().getTower().size()!=0 && p.getNickname().equals(activePlayer.getTeamMate())) {
+            for (Player p : listOfPlayers) {
+                if (activePlayer.getPersonalSchool().getTower().size() == 0 && activePlayer.getTeamMate().equals(p.getNickname()))
                     teamLeader = p;
-                    break;
-                }
-                else
-                    teamLeader = activePlayer;
             }
+            if (teamLeader==null)
+                teamLeader = activePlayer;
+
             return teamLeader.getDeckOfPlayer().getCardsInHand().isEmpty() ||
                     teamLeader.getPersonalSchool().getTower().isEmpty() ||
                     table.getBag().isEmpty() ||

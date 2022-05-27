@@ -79,9 +79,8 @@ public class IslandCard implements Serializable {
                         if (playerFound.getPersonalSchool().getTower().size() == 0 && playerFound.getTeamMate().equals(p.getNickname()))
                             teamLeader = p;
                     }
-                    if (teamLeader==null){
+                    if (teamLeader==null)
                         teamLeader = playerFound;
-                    }
                 }
                 if (xCardOnIsland) {
                     setXCardCounter(getXCardCounter() - 1);
@@ -142,13 +141,12 @@ public class IslandCard implements Serializable {
 
         if(gameMode==GameMode.COOP) {
             for (Player p : listOfPlayers) {
-                if(playerBuilder.getPersonalSchool().getTower().size() == 0 && playerBuilder.getTeamMate().equals(p.getNickname())){
+                if (playerBuilder.getPersonalSchool().getTower().size() == 0 && playerBuilder.getTeamMate().equals(p.getNickname()))
                     teamLeader = p;
-                }
-                else
-                    teamLeader = playerBuilder;
-
             }
+            if (teamLeader==null)
+                teamLeader = playerBuilder;
+
             if(!teamLeader.getTColor().equals(towerOnIsland.getTColour())){
                 for(int i=0;i<mergedIsland;i++) {
                     if(!teamLeader.getPersonalSchool().getTower().isEmpty()) {
