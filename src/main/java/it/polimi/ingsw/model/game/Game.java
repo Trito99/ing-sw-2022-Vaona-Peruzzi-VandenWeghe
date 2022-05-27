@@ -112,8 +112,10 @@ public class Game {
         }
         else{
             for (Player p : listOfPlayers){
-                if(p.getPersonalSchool().getTower().size()!=0 && p.getNickname().equals(activePlayer.getTeamMate()))
+                if(p.getPersonalSchool().getTower().size()!=0 && p.getNickname().equals(activePlayer.getTeamMate())) {
                     teamLeader = p;
+                    break;
+                }
                 else
                     teamLeader = activePlayer;
             }

@@ -744,13 +744,13 @@ public class GameController {
     }
 
     public void endGame(){
-       /** broadcastMessage("\n"+gameSession.getTable().playerIsWinning(gameSession).getNickname()+" WINS");
+        broadcastMessage("\n"+gameSession.getTable().playerIsWinning(gameSession).getNickname()+" WINS");
         for(String nickname : allVirtualView.keySet()) {
             if(nickname == gameSession.getTable().playerIsWinning(gameSession).getNickname())
                 allVirtualView.get(nickname).showWinMessage();
             else
                 allVirtualView.get(nickname).showLoseMessage(nickname);
-        } */
+        }
     }
 
 
