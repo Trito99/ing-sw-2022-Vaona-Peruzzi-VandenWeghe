@@ -744,12 +744,22 @@ public class GameController {
     }
 
     public void endGame(){
-        broadcastMessage("\n"+gameSession.getTable().playerIsWinning(gameSession).getNickname()+" WINS");
-        for(String nickname : allVirtualView.keySet()) {
-            if(nickname == gameSession.getTable().playerIsWinning(gameSession).getNickname())
-                allVirtualView.get(nickname).showWinMessage();
+        if(gameSession.getGameMode()==GameMode.COOP){
+            if (gameSession.getTable().playerIsWinning(gameSession).getPlayerNumber().equals(PlayerNumber.PLAYER1) || gameSession.getTable().playerIsWinning(gameSession).getPlayerNumber().equals(PlayerNumber.PLAYER2)){
+                broadcastMessage("Team 1 WINS!!");
+            }
             else
-                allVirtualView.get(nickname).showLoseMessage(nickname);
+                broadcastMessage("Team 2 WINS!!");
+
+        }
+        else {
+            broadcastMessage("\n" + gameSession.getTable().playerIsWinning(gameSession).getNickname() + " WINS");
+            for (String nickname : allVirtualView.keySet()) {
+                if (nickname == gameSession.getTable().playerIsWinning(gameSession).getNickname())
+                    allVirtualView.get(nickname).showWinMessage();
+                else
+                    allVirtualView.get(nickname).showLoseMessage(nickname);
+            }
         }
     }
 
