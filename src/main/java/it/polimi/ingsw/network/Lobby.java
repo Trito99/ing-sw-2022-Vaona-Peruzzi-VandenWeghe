@@ -54,21 +54,11 @@ public class Lobby {
         return clientHandlerMap.size();
     }
 
-    //  DA CAMBIARE: disconnette un client
-    public void disconnecting(ClientHandler clientHandler){
-        if (gameController.isGameStarted()){
-            gameController.disconnect(clientHandlerMap.get(clientHandler));
-            gameController.endGame();
-        }
-        else{
-            clientHandlerMap.remove(clientHandler);
-        }
-    }
 
-    public void removeExcept(ClientHandler clientHandler){
+    public void remove(){
         for (ClientHandler cl : clientHandlerMap.keySet()){
-            if(cl != clientHandler)
-                clientHandlerMap.remove(cl);
+            cl.disconnect();
+            clientHandlerMap.remove(cl);
         }
     }
 

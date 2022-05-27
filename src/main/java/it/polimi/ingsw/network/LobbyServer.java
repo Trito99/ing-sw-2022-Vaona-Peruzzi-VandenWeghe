@@ -20,11 +20,9 @@ public class LobbyServer {
     }
 
     /** consente ad un giocatore di uscire dalla Lobby */
-    public void leaveLobby(String idLobby, ClientHandler clientHandler){
+    public void leaveLobby(String idLobby) {
         Lobby lobby = lobbyMap.get(idLobby);
-        if(lobby.currentPlayers()==1)
+        if (lobby.currentPlayers() == 0)
             lobbyMap.remove(idLobby);
-        else
-            lobby.disconnecting(clientHandler);
     }
 }

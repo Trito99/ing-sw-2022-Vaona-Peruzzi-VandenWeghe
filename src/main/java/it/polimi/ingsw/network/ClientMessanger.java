@@ -170,7 +170,6 @@ public class ClientMessanger implements ObserverView, Observer {
             case LOSE:
                 LoseMessage lose = (LoseMessage) message;
                 queue.execute(() -> view.showLoseMessage(lose.getNickname()));
-                client.disconnect();
                 break;
         }
     }

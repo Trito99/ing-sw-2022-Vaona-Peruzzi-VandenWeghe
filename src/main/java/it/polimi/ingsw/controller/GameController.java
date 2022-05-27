@@ -70,9 +70,9 @@ public class GameController {
         if(allVirtualView.isEmpty()){
             generateTable();
             allVirtualView.put(nickname, virtualView);
-            this.gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
-            this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
-            this.gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
+            gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
+            gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
+            gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
             virtualView.showLogin(nickname, gameId, playerDate, true);
             virtualView.askPlayersNumberAndDifficulty();
             return true;
@@ -753,14 +753,15 @@ public class GameController {
 
         }
         else {
-            broadcastMessage("\n" + gameSession.getTable().playerIsWinning(gameSession).getNickname() + " WINS");
+            //broadcastMessage("\n" + gameSession.getTable().playerIsWinning(gameSession).getNickname() + " WINS");
             for (String nickname : allVirtualView.keySet()) {
                 if (nickname == gameSession.getTable().playerIsWinning(gameSession).getNickname())
                     allVirtualView.get(nickname).showWinMessage();
                 else
-                    allVirtualView.get(nickname).showLoseMessage(nickname);
+                    allVirtualView.get(nickname).showLoseMessage(gameSession.getTable().playerIsWinning(gameSession).getNickname());
             }
         }
+        disconnect();
     }
 
 
@@ -792,9 +793,10 @@ public class GameController {
      }/*
 
      /** rimouove giocatore dal gioco e controlla se era l'active player---> inizia nuovo turno */
-    public void disconnect(String nickname){
-        allVirtualView.remove(nickname);
-        System.out.println(allVirtualView.keySet());
+    public void disconnect(){
+        for(VirtualView vv : allVirtualView.values()) {
+            allVirtualView.remove(vv);
+        }
     }
 
     /** se il gioco non è cominciato ----> return false */

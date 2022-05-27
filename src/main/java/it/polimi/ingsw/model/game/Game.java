@@ -107,7 +107,6 @@ public class Game {
         if(gameMode!=GameMode.COOP) {
             return activePlayer.getDeckOfPlayer().getCardsInHand().isEmpty() ||
                     activePlayer.getPersonalSchool().getTower().isEmpty() ||
-                    table.getBag().isEmpty() ||
                     table.getListOfIsland().size() == 3;
         }
         else{
@@ -120,7 +119,6 @@ public class Game {
 
             return teamLeader.getDeckOfPlayer().getCardsInHand().isEmpty() ||
                     teamLeader.getPersonalSchool().getTower().isEmpty() ||
-                    table.getBag().isEmpty() ||
                     table.getListOfIsland().size() == 3;
         }
     }
