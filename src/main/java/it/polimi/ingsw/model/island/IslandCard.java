@@ -76,10 +76,11 @@ public class IslandCard implements Serializable {
             if (gameMode == GameMode.COOP) {
                 if(playerFound!=null){
                     for (Player p : listOfPlayer) {
-                        if (playerFound.getPersonalSchool().getTower().size() == 0 && playerFound.getTeamMate().equals(p.getNickname())) {
+                        if (playerFound.getPersonalSchool().getTower().size() == 0 && playerFound.getTeamMate().equals(p.getNickname()))
                             teamLeader = p;
-                        }   else
-                            teamLeader = playerFound;
+                    }
+                    if (teamLeader==null){
+                        teamLeader = playerFound;
                     }
                 }
                 if (xCardOnIsland) {
