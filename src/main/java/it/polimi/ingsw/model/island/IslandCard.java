@@ -74,11 +74,13 @@ public class IslandCard implements Serializable {
             Player playerFound = calculateInfluence(listOfPlayer, cardEffectPlayed, activePlayer);
 
             if (gameMode == GameMode.COOP) {
-                for (Player p : listOfPlayer) {
-                    if (playerFound.getPersonalSchool().getTower().size() == 0 && playerFound.getTeamMate().equals(p.getNickname())) {
-                        teamLeader = p;
-                    } else
-                        teamLeader = playerFound;
+                if(playerFound!=null){
+                    for (Player p : listOfPlayer) {
+                        if (playerFound.getPersonalSchool().getTower().size() == 0 && playerFound.getTeamMate().equals(p.getNickname())) {
+                            teamLeader = p;
+                        }   else
+                            teamLeader = playerFound;
+                    }
                 }
                 if (xCardOnIsland) {
                     setXCardCounter(getXCardCounter() - 1);
@@ -105,7 +107,8 @@ public class IslandCard implements Serializable {
                 if (xCardOnIsland) {
                     setXCardCounter(getXCardCounter() - 1);
                     if (xCardCounter == 0) setXCardOnIsland(false);
-                } else {
+                }
+                else {
                     if (playerFound != null) {
                         if (playerFound.getPersonalSchool().getTower().size() != 0) {
                             if (!towerIsOnIsland) {
