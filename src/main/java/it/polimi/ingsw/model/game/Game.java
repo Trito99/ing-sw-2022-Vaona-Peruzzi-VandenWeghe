@@ -7,13 +7,11 @@ import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.Team;
-import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public class Game {
@@ -104,12 +102,28 @@ public class Game {
     }
 
     public boolean gameIsFinished(String nickname) {
-        Player player = getPlayer(nickname);
-
-        return player.getDeckOfPlayer().getCardsInHand().isEmpty() ||
-                player.getPersonalSchool().getTower().isEmpty() ||
-                table.getBag().isEmpty() ||
-                table.getListOfIsland().size() == 3;
+        Player activePlayer = getPlayer(nickname);
+        Player teamLeader = null;
+        if(gameMode!=GameMode.COOP) {
+            return activePlayer.getDeckOfPlayer().getCardsInHand().isEmpty() ||
+                    activePlayer.getPersonalSchool().getTower().isEmpty() ||
+                    table.getBag().isEmpty() ||
+                    table.getListOfIsland().size() == 3;
+        }
+        else{
+            for (Player p : listOfPlayers){
+                if(p.getPersonalSchool().getTower().size()!=0 && p.getNickname().equals(activePlayer.getTeamMate())) {
+                    teamLeader = p;
+                    break;
+                }
+                else
+                    teamLeader = activePlayer;
+            }
+            return teamLeader.getDeckOfPlayer().getCardsInHand().isEmpty() ||
+                    teamLeader.getPersonalSchool().getTower().isEmpty() ||
+                    table.getBag().isEmpty() ||
+                    table.getListOfIsland().size() == 3;
+        }
     }
 
     public void increaseCoinScore(String nickname, int increaseValue) {
