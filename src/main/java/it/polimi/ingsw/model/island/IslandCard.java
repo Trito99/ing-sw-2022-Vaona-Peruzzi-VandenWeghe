@@ -64,26 +64,34 @@ public class IslandCard implements Serializable {
         this.towerOnIsland = towerOnIsland;
     }
 
+    /**
+     *
+     * @param listOfPlayer list of player of the match
+     * @param cardEffectPlayed effect played in this turn
+     * @param activePlayer player that is playing his turn
+     * @param gameMode gameMode of the match (2,3 or 4 players)
+     */
     public void buildTowerOnIsland(ArrayList<Player> listOfPlayer,  CardEffect cardEffectPlayed, Player activePlayer, GameMode gameMode){
-        Player teamLeader = null;
+        Player teamLeader = null; /** The team leader is the player of the team that has the towers (Coop mode) */
 
-        if(cardEffectPlayed.equals(CardEffect.HERALD))
+        if(cardEffectPlayed.equals(CardEffect.HERALD)) /** Herald effect */
             MotherEarthOnIsland=true;
 
         if(MotherEarthOnIsland) {
-            Player playerFound = calculateInfluence(listOfPlayer, cardEffectPlayed, activePlayer);
+            Player playerFound = calculateInfluence(listOfPlayer, cardEffectPlayed, activePlayer); /** Finds the player that will build the tower (null if it doesn't exists) */
 
             if (gameMode == GameMode.COOP) {
                 if(playerFound!=null){
-                    for (Player p : listOfPlayer) {
+                    for (Player p : listOfPlayer) {         /** Finds the team leader */
                         if (playerFound.getPersonalSchool().getTower().size() == 0 && playerFound.getTeamMate().equals(p.getNickname()))
                             teamLeader = p;
                     }
                     if (teamLeader==null)
                         teamLeader = playerFound;
                 }
+                /** CURATOR: Checks that there aren't forbidden cards on the island */
                 if (xCardOnIsland) {
-                    setXCardCounter(getXCardCounter() - 1);
+                    setXCardCounter(getXCardCounter() - 1);         /** Curator effect */
                     if (xCardCounter == 0) setXCardOnIsland(false);
                 } else {
                     if (teamLeader != null) {
@@ -103,9 +111,9 @@ public class IslandCard implements Serializable {
 
             } else {
 
-                /** CURATRICE: controllo che non ci sia una tessera divieto sull'isola */
+                /** CURATOR: Checks that there aren't forbidden cards on the island */
                 if (xCardOnIsland) {
-                    setXCardCounter(getXCardCounter() - 1);
+                    setXCardCounter(getXCardCounter() - 1);         /** Curator effect */
                     if (xCardCounter == 0) setXCardOnIsland(false);
                 }
                 else {
@@ -130,12 +138,18 @@ public class IslandCard implements Serializable {
             MotherEarthOnIsland=false;
     }
 
+    /**
+     *
+     * @param listOfPlayers list of player of the match
+     * @param playerBuilder the player that has influence and has to place a tower
+     * @param gameMode gameMode of the match (2,3 or 4 players)
+     */
     private void changeTowerColour(ArrayList<Player> listOfPlayers, Player playerBuilder, GameMode gameMode){        //cambio colore della torre se è cambiata l'influenza sull'isola
-        Player prevPlayer = null;
-        Player teamLeader = null;
+        Player prevPlayer = null; /** Player that has the towers on island before */
+        Player teamLeader = null; /** The team leader is the player of the team that has the towers (Coop mode) */
 
         for(Player player : listOfPlayers){
-            if(player.getTColor().equals(towerOnIsland.getTColour()))          //determina il prevPlayer
+            if(player.getTColor().equals(towerOnIsland.getTColour()))          /**determines the prevPlayer */
                 prevPlayer = player;
         }
 
@@ -144,7 +158,7 @@ public class IslandCard implements Serializable {
                 if (playerBuilder.getPersonalSchool().getTower().size() == 0 && playerBuilder.getTeamMate().equals(p.getNickname()))
                     teamLeader = p;
             }
-            if (teamLeader==null)
+            if (teamLeader==null)               /** Finds the team leader */
                 teamLeader = playerBuilder;
 
             if(!teamLeader.getTColor().equals(towerOnIsland.getTColour())){
@@ -171,18 +185,26 @@ public class IslandCard implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param listOfPlayers list of player of the match
+     * @param cardEffectPlayed effect played in this turn
+     * @param activePlayer player that is playing his turn
+     * @return the player with the influence on the island, return null if no one has influence or there is a draw.
+     */
     public Player calculateInfluence(ArrayList<Player> listOfPlayers, CardEffect cardEffectPlayed, Player activePlayer){   //Restituisce il Player che ha influenza sull'isola
         int i ;
         int maxInfluence = 0;
         Player playerWithInfluence = null;
 
-        /** calcolo influenza sull'isola */
+        /** calculate influence on island for all the players */
         for(Player p : listOfPlayers){
             int countTot = 0;
             for(i=0; i<studentOnIsland.size(); i++) {
-                switch (studentOnIsland.get(i).getsColour()) {   /** guardo colore studente */
-                    case GREEN:
-                        if (p.getPersonalSchool().getProfInHall(SColor.GREEN) && !SColor.GREEN.isColorBlocked()) { /** se ho il prof verde e stud è verde incremento influenza */
+                switch (studentOnIsland.get(i).getsColour()) {   /** checks student color */
+                   /** if The player has the prof of the color of the student and the color isn't blocked (herbalist effect) increments the count of the influence */
+                case GREEN:
+                        if (p.getPersonalSchool().getProfInHall(SColor.GREEN) && !SColor.GREEN.isColorBlocked()) {
                             countTot++;
                         }
                         break;
@@ -208,7 +230,7 @@ public class IslandCard implements Serializable {
                         break;
                 }
 
-                /** EFFETTO CAVALIERE */
+                /** Knight effect */
                 if(cardEffectPlayed.isKnightPlayed() && p.equals(activePlayer)) {
                     p.setInfluenceOnIsland(countTot + 2);
                 }
@@ -216,37 +238,39 @@ public class IslandCard implements Serializable {
                     p.setInfluenceOnIsland(countTot);
             }
 
-            /** EFFETTO CENTAURO */
+            /** CENTAUR EFFECT */
             if(towerIsOnIsland) {
-                if (p.getTColor().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isCentaurPlayed()) {  /** Aggiungo influenza torri */
-                    countTot=countTot+mergedIsland;
+                if (p.getTColor().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isCentaurPlayed()) {  /** Adds influence of the towers if centaur effect isn't activated */
+                    countTot += mergedIsland;
                 }
             }
         }
-        for(SColor c : SColor.values()){            /** controlla se va bene qua (Erborista) */
+
+        for(SColor c : SColor.values()){            /** Disable Herbalist effect */
             if(c.isColorBlocked)
                 c.unlockColor();
         }
-        int count=0;
+
+        int count = 0;
         for(Player p : listOfPlayers) {
             if (p.getInfluenceOnIsland() > maxInfluence){
-                maxInfluence = p.getInfluenceOnIsland();
+                maxInfluence = p.getInfluenceOnIsland();    /** finds the max value of the influence */
             }
         }
 
         for(Player p : listOfPlayers) {
             if (p.getInfluenceOnIsland() == maxInfluence){
-                playerWithInfluence = p;
-                count++;
+                playerWithInfluence = p;                    /** update the player with the highest value of influence */
+                count++;                                    /** counts the number of players that have the max value of influence */
             }
         }
 
-        cardEffectPlayed.setKnightPlayed(false);
-        cardEffectPlayed.setCentaurPlayed(false);
+        cardEffectPlayed.setKnightPlayed(false);            /** Disable Knight effect */
+        cardEffectPlayed.setCentaurPlayed(false);           /** Disable Centaur effect */
         if (count==1)
             return playerWithInfluence;
         else
-            return null;
+            return null;                                    /** if there is a draw, no one has influence on the island */
 
     }
 
