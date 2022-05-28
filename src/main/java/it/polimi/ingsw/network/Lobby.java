@@ -55,11 +55,8 @@ public class Lobby {
     }
 
 
-    public void remove(){
-        for (ClientHandler cl : clientHandlerMap.keySet()){
-            cl.disconnect();
-            clientHandlerMap.remove(cl);
-        }
+    public void remove(ClientHandler clientHandler){
+        clientHandlerMap.remove(clientHandler);
     }
 
 
