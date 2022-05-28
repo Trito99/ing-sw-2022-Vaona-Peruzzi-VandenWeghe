@@ -18,9 +18,10 @@ public class StartGame extends ObservableView implements GenericScene{
     }
 
     /** gestisce il click sul pulsante */
+    @FXML
     private void clickButton(Event event){
         buttonStart.setDisable(true);
-        GuiManager.changeRootPane(observers, event,"/fxml/connect_to_server_scene.fxml");
+        GuiManager.changeRootPane(observers, event,"/fxml/new_connect_to_server_scene.fxml");
     }
 
 }

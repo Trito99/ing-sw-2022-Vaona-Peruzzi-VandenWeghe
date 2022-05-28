@@ -13,7 +13,7 @@
             <Image url="@../images/eriantys_home.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="buttonStart" layoutX="629.0" layoutY="509.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="73.0" text="Start">
+      <Button fx:id="buttonStart" layoutX="629.0" layoutY="509.0" mnemonicParsing="false" onAction="#clickButton" prefHeight="31.0" prefWidth="73.0" text="Start">
          <font>
             <Font name="Verdana" size="18.0" />
          </font>

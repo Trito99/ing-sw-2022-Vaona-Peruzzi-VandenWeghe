@@ -12,7 +12,7 @@
    <children>
       <ButtonBar layoutX="386.0" layoutY="346.0" prefHeight="40.0" prefWidth="254.0" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="40.0">
          <buttons>
-            <Button fx:id="leaveButton" cancelButton="true" mnemonicParsing="false" onAction="#closeGui" prefHeight="26.0" prefWidth="170.0" style="-fx-background-radius: 25; -fx-background-color: floralwhite;" text="Leave the app" />
+            <Button fx:id="leaveButton" cancelButton="true" mnemonicParsing="false" onAction="#closeGui" prefHeight="26.0" prefWidth="170.0" style="-fx-background-radius: 25; -fx-background-color: floralwhite;" text="Exit" />
             <Button fx:id="connectButton" alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#clickConnect" style="-fx-background-color: black; -fx-background-radius: 25;" text="Connect" textFill="WHITE" />
          </buttons>
       </ButtonBar>

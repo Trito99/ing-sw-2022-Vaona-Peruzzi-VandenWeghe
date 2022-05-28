@@ -34,10 +34,6 @@ public class Game {
         this.difficulty = null;
         this.table = new Table();
         this.team = new ArrayList<>();
-
-        /**table.generateIslandCards();
-        table.generateMotherEarth();
-        table.generateCloudNumber(gameMode);  */
     }
 
     public GameMode getGameMode() {
@@ -48,11 +44,20 @@ public class Game {
         return listOfPlayers;
     }
 
+    /**
+     *
+     * @param nickname
+     * @return Returns the Player from the list of players with the nickname selected
+     */
     public Player getPlayer(String nickname){
         int indexPlayer = getPlayerListByNickname().indexOf(nickname);
         return listOfPlayers.get(indexPlayer);
     }
 
+    /**
+     *
+     * @return Returns an array with the nicknames of the players of the game
+     */
     public ArrayList<String> getPlayerListByNickname() {
         ArrayList<String> playerList = new ArrayList<>();
         for (int i = 0; i < listOfPlayers.size(); i++) {
@@ -61,7 +66,10 @@ public class Game {
         return playerList;
     }
 
-    /** aggiunge giocatore alla lista giocatori */
+    /**
+     *
+     * @param player Add a player at the list of players of the game.
+     */
     public void addPlayer(Player player) {
         if(listOfPlayers.size()<4){
             listOfPlayers.add(player);
@@ -86,9 +94,6 @@ public class Game {
 
     public void setDifficulty(Difficulty difficulty) {this.difficulty = difficulty; }
 
-    /**
-     * winnerIs deve rimanere all'interno di Game   (?)
-     */
     public Table getTable() {
         return table;
     }
@@ -101,50 +106,66 @@ public class Game {
         return (ArrayList<Team>) team;
     }
 
+    /**
+     *
+     * @param nickname is the nickname of the player that is playing his turn.
+     * @return Return true if the game is finished. Otherwise, return false
+     */
     public boolean gameIsFinished(String nickname) {
         Player activePlayer = getPlayer(nickname);
-        Player teamLeader = null;
+        Player teamLeader = null;                       /** The team leader is the player of the team that has the towers */
         if(gameMode!=GameMode.COOP) {
-            return activePlayer.getDeckOfPlayer().getCardsInHand().isEmpty() ||
+            return activePlayer.getDeckOfPlayer().getCardsInHand().isEmpty() || /** conditions to finish the game */
                     activePlayer.getPersonalSchool().getTower().isEmpty() ||
-                    table.getListOfIsland().size() == 3;
+                    table.getListOfIsland().size() <= 3;
         }
         else{
-            for (Player p : listOfPlayers) {
+            for (Player p : listOfPlayers) {            /** Finds the team leader */
                 if (activePlayer.getPersonalSchool().getTower().size() == 0 && activePlayer.getTeamMate().equals(p.getNickname()))
                     teamLeader = p;
             }
             if (teamLeader==null)
                 teamLeader = activePlayer;
 
-            return teamLeader.getDeckOfPlayer().getCardsInHand().isEmpty() ||
+            return teamLeader.getDeckOfPlayer().getCardsInHand().isEmpty() ||  /** conditions to finish the game */
                     teamLeader.getPersonalSchool().getTower().isEmpty() ||
-                    table.getListOfIsland().size() == 3;
+                    table.getListOfIsland().size() <= 3;
         }
     }
 
-    public void increaseCoinScore(String nickname, int increaseValue) {
-        Player activePlayer = getPlayer(nickname);
-        activePlayer.setCoinScore(activePlayer.getCoinScore() + increaseValue);
-    }
-
+    /**
+     *
+     * @param nickname nickname of the player
+     * @param decreaseValue number of coins to remove at the player
+     */
     public void decreaseCoinScore(String nickname, int decreaseValue) {
         Player activePlayer = getPlayer(nickname);
         activePlayer.setCoinScore(activePlayer.getCoinScore() - decreaseValue);
     }
 
-    /** AssistantName is the card chosen by the Player, nickname is the player that chooses the assistant card to play */
+    /**
+     *
+     * @param assistantName  is the assistant card chosen by the Player
+     * @param nickname nickname of the player that chooses the assistant card to play
+     * @return the assistant card played
+     */
     public AssistantCard playAssistantCard(String assistantName, String nickname){
         
         Player activePlayer = getPlayer(nickname);
         AssistantCard assistantCardPlayed = activePlayer.getAssistantCard(assistantName);
                 
-        activePlayer.setTrash(assistantCardPlayed);
-        activePlayer.getDeckOfPlayer().getCardsInHand().remove(assistantCardPlayed);
+        activePlayer.setTrash(assistantCardPlayed);                                     /** update the TrashDeck of the player */
+        activePlayer.getDeckOfPlayer().getCardsInHand().remove(assistantCardPlayed);    /** remove the assistant card played from the hand of the player */
 
         return assistantCardPlayed;
     }
 
+    /**
+     *
+     * @param islandCard the island where the student has to be moved
+     * @param id id of the student to move
+     * @param list list of students where there is the id selected (entry, character card ecc...)
+     */
     public void moveStudentFromListToIsland(IslandCard islandCard, int id, ArrayList<Student> list){
         Student student = null;
         for (Student s : list) {
@@ -155,6 +176,12 @@ public class Game {
         list.remove(list.get(list.indexOf(student)));
     }
 
+    /**
+     *
+     * @param playerMoving player that select the student to move in the school
+     * @param id id of the student selected
+     * @param list list of students where there is the id selected (entry, character card ecc...)
+     */
     public void moveStudentFromListToHall(Player playerMoving, int id, ArrayList<Student> list) {
         Student student = null;
         for (Student s : list) {
@@ -190,13 +217,22 @@ public class Game {
         }
     }
 
+    /**
+     *
+     * @param cardEffect the effect selected
+     * @param nickname the player that plays the card
+     * @param idS id of the student
+     * @param idI id of the island
+     * @param idSE id student from the entry
+     * @param colorChosen if the effect selected needs a color
+     */
     public void playCharacterCard(CardEffect cardEffect, String nickname, int idS, int idI, int idSE, SColor colorChosen) {
 
         Player activePlayer = getPlayer(nickname);
         CharacterCard characterCardPlayed = table.getCharacterCard(cardEffect);
 
         IslandCard islandCardChosen = null;
-        for(IslandCard islandCard : getTable().getListOfIsland()){
+        for(IslandCard islandCard : getTable().getListOfIsland()){ /** Finds the island from the id */
             if(idI==islandCard.getIdIsland())
                 islandCardChosen = islandCard;
         }
@@ -234,7 +270,7 @@ public class Game {
                 characterCardPlayed.getCardEffect().setCentaurPlayed(true);
                 break;
 
-            case ACROBAT:
+            case ACROBAT: /** exchange a student from the entry with a student on the Acrobat card */
                 Student StudentChoice = null;
                 Student toChange = null;
                 for(Student student : characterCardPlayed.getStudentsOnCard()){
@@ -374,6 +410,11 @@ public class Game {
         Collections.shuffle(table.getBag());
     }
 
+    /** If in expert mode, when you move a student in the third, sixth or ninth space of the hall you get a coin
+     *
+     * @param activePlayer player that moves the student
+     * @param tableColor table where the player want to move the student
+     */
     private void getCoinFromStudentMove(Player activePlayer, ArrayList<Student> tableColor) {
         
         if(getDifficulty().equals(Difficulty.EXPERTMODE) && (tableColor.size()==3)){

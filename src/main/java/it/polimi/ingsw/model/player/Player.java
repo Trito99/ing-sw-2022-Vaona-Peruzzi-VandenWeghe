@@ -82,11 +82,20 @@ public class Player implements Serializable {
 
     }
 
+    /**
+     *
+     * @param assistantCard name of the assistant card
+     * @return Returns the assistant card from the list of assistant card with the name selected
+     */
     public AssistantCard getAssistantCard(String assistantCard){
         int indexPlayer = getAssistantCardByNickname().indexOf(assistantCard);
         return deckOfPlayer.getCardsInHand().get(indexPlayer);
     }
 
+    /**
+     *
+     * @return Returns an array with the names of the assistant cards in hand
+     */
     public ArrayList<String> getAssistantCardByNickname() {
         ArrayList<String> assistantCardList = new ArrayList<>();
         for (int i = 0; i < deckOfPlayer.getCardsInHand().size(); i++) {
