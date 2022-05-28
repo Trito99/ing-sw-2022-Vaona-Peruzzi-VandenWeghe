@@ -242,6 +242,7 @@ public class IslandCard implements Serializable {
             if(towerIsOnIsland) {
                 if (p.getTColor().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isCentaurPlayed()) {  /** Adds influence of the towers if centaur effect isn't activated */
                     countTot += mergedIsland;
+                    p.setInfluenceOnIsland(countTot);
                 }
             }
         }
