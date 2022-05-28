@@ -220,6 +220,7 @@ public class IslandCard implements Serializable {
             if(towerIsOnIsland) {
                 if (p.getTColor().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isCentaurPlayed()) {  /** Aggiungo influenza torri */
                     countTot=countTot+mergedIsland;
+                    p.setInfluenceOnIsland(countTot);
                 }
             }
         }
