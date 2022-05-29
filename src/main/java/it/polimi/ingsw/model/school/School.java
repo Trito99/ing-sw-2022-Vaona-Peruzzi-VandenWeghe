@@ -2,12 +2,9 @@ package it.polimi.ingsw.model.school;
 
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.cloud.CloudCard;
-import it.polimi.ingsw.model.game.Difficulty;
-import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
-import it.polimi.ingsw.model.table.Table;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -38,6 +35,10 @@ public class School implements Serializable {
         return entry;
     }
 
+    /**
+     *
+     * @param cloudCard cloudCard chosen
+     */
     public void moveStudentFromCloudToEntry(CloudCard cloudCard){
         for(Student s : cloudCard.getStudentOnCloud()) {
             entry.add(s);
@@ -69,6 +70,11 @@ public class School implements Serializable {
         return  BTable;
     }
 
+    /**
+     *
+     * @param color color of the table where we want to count the students
+     * @return the number of students in the table selected
+     */
     public int numberOfStudentsInHall(SColor color){
         switch(color){
             case GREEN:
@@ -85,30 +91,37 @@ public class School implements Serializable {
         return 0;
     }
 
+    /** Assign professors at the players with the most students in their table
+     *
+     * @param players players of the match
+     * @param playerTurn player that is playing
+     * @param cardEffectPlayed card effect played in the turn
+     */
     public void winProf(ArrayList<Player> players, Player playerTurn, CardEffect cardEffectPlayed) {
 
         for (int i=0;i<SColor.values().length;i++) {
             int max = 0;
             int playerWithMax = 0;
             Player maxPlayer = null;
+
             switch (SColor.values()[i]) {
                 case GREEN:
-                    for (Player p : players) {                         /** In questo for trovo max numero di verdi generale*/
+                    for (Player p : players) {                         /** find the highest number of green students between all the tables*/
                         if (p.getPersonalSchool().numberOfStudentsInHall(SColor.GREEN) > max) {
                             max = p.getPersonalSchool().numberOfStudentsInHall(SColor.GREEN);
                         }
                     }
-                    for (Player p : players) {                          /** In questo for conto i giocatori che hanno il max numero di verdi*/
+                    for (Player p : players) {                          /** find how many players has the max number of green students */
                         if (p.getPersonalSchool().numberOfStudentsInHall(SColor.GREEN) == max) {
                             playerWithMax++;
-                            maxPlayer = p;      /** Se è solo uno lo salvo in maxPlayer*/
+                            maxPlayer = p;      /** when a player has the max value of green I update maxPlayer*/
                         } else p.getPersonalSchool().getProfOfPlayer().get(0).setInHall(false);
                     }
-                    if (playerWithMax == 1) {   /** Setto a true il prof verde del maxplayer */
+                    if (playerWithMax == 1) {                                               /** ---> No draw */
                         maxPlayer.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true);
-                    } else if (playerWithMax > 1 && cardEffectPlayed.isHostPlayed()) {       /** Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di CiccioPanza*/
+                    } else if (playerWithMax > 1 && cardEffectPlayed.isHostPlayed()) {      /** Draw, but Host effect is played */
                         playerTurn.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true);
-                    } else if (playerWithMax > 1) {
+                    } else if (playerWithMax > 1) {                                         /** Draw */
                         for (Player p : players)
                             p.getPersonalSchool().getProfOfPlayer().get(0).setInHall(false);
                     }
@@ -128,7 +141,7 @@ public class School implements Serializable {
                     if (playerWithMax == 1) {
                         maxPlayer.getPersonalSchool().getProfOfPlayer().get(1).setInHall(true);
 
-                    } else if (playerWithMax > 1 && cardEffectPlayed.isHostPlayed()) { /**Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di CiccioPanza*/
+                    } else if (playerWithMax > 1 && cardEffectPlayed.isHostPlayed()) {
                         playerTurn.getPersonalSchool().getProfOfPlayer().get(1).setInHall(true);
                     } else if (playerWithMax > 1) {
                         for (Player p : players)
@@ -149,7 +162,7 @@ public class School implements Serializable {
                     }
                     if (playerWithMax == 1) {
                         maxPlayer.getPersonalSchool().getProfOfPlayer().get(2).setInHall(true);
-                    } else if (playerWithMax > 1 && cardEffectPlayed.isHostPlayed()) { /**Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di Oste*/
+                    } else if (playerWithMax > 1 && cardEffectPlayed.isHostPlayed()) {
                         playerTurn.getPersonalSchool().getProfOfPlayer().get(2).setInHall(true);
                     } else if (playerWithMax > 1) {
                         for (Player p : players)
@@ -170,7 +183,7 @@ public class School implements Serializable {
                     }
                     if (playerWithMax == 1) {
                         maxPlayer.getPersonalSchool().getProfOfPlayer().get(3).setInHall(true);
-                    } else if (playerWithMax > 1 && cardEffectPlayed.isHostPlayed()) { /**Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di Oste*/
+                    } else if (playerWithMax > 1 && cardEffectPlayed.isHostPlayed()) {
                         playerTurn.getPersonalSchool().getProfOfPlayer().get(3).setInHall(true);
                     } else if (playerWithMax > 1){
                         for (Player p : players)
@@ -191,7 +204,7 @@ public class School implements Serializable {
                     }
                     if (playerWithMax == 1) {
                         maxPlayer.getPersonalSchool().getProfOfPlayer().get(4).setInHall(true);
-                    } else if (playerWithMax > 1 && cardEffectPlayed.isHostPlayed()) { /**Se ho più giocatori in pareggio, setto a true solo il prof di chi ha l'effetto di Oste*/
+                    } else if (playerWithMax > 1 && cardEffectPlayed.isHostPlayed()) {
                         playerTurn.getPersonalSchool().getProfOfPlayer().get(4).setInHall(true);
                     } else if (playerWithMax > 1){
                         for (Player p : players)
@@ -203,6 +216,11 @@ public class School implements Serializable {
         cardEffectPlayed.setHostPlayed(false);
     }
 
+    /**
+     *
+     * @param color color of the prof
+     * @return true if there is the prof of color "color" in the school, otherwise return false
+     */
     public boolean getProfInHall(SColor color){
         boolean x=false;
         for(Prof p : profOfPlayer) {
@@ -212,19 +230,25 @@ public class School implements Serializable {
         return x;
     }
 
-    public ArrayList<Tower> getTower() {
+    public ArrayList<Tower> getTowers() {
         return towerZone;
     }
 
     public void addTower(TColor tColor) {
         towerZone.add(new Tower(tColor));
-        // ci sarà una notify observer
     }
 
+    /**
+     * remove the last tower from the towerZone of the school
+     */
     public void removeTower() {
         towerZone.remove(towerZone.size() - 1);
     }
 
+    /**
+     *
+     * @return the number of prof currently in the school
+     */
     public int numberOfProf(){
         int countProf = 0;
 

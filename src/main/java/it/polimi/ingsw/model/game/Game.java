@@ -46,7 +46,7 @@ public class Game {
 
     /**
      *
-     * @param nickname
+     * @param nickname the nickname selected
      * @return Returns the Player from the list of players with the nickname selected
      */
     public Player getPlayer(String nickname){
@@ -56,7 +56,7 @@ public class Game {
 
     /**
      *
-     * @return Returns an array with the nicknames of the players of the game
+     * @return Returns an array with the nicknames of the players of the match
      */
     public ArrayList<String> getPlayerListByNickname() {
         ArrayList<String> playerList = new ArrayList<>();
@@ -116,19 +116,19 @@ public class Game {
         Player teamLeader = null;                       /** The team leader is the player of the team that has the towers */
         if(gameMode!=GameMode.COOP) {
             return activePlayer.getDeckOfPlayer().getCardsInHand().isEmpty() || /** conditions to finish the game */
-                    activePlayer.getPersonalSchool().getTower().isEmpty() ||
+                    activePlayer.getPersonalSchool().getTowers().isEmpty() ||
                     table.getListOfIsland().size() <= 3;
         }
         else{
             for (Player p : listOfPlayers) {            /** Finds the team leader */
-                if (activePlayer.getPersonalSchool().getTower().size() == 0 && activePlayer.getTeamMate().equals(p.getNickname()))
+                if (activePlayer.getPersonalSchool().getTowers().size() == 0 && activePlayer.getTeamMate().equals(p.getNickname()))
                     teamLeader = p;
             }
             if (teamLeader==null)
                 teamLeader = activePlayer;
 
             return teamLeader.getDeckOfPlayer().getCardsInHand().isEmpty() ||  /** conditions to finish the game */
-                    teamLeader.getPersonalSchool().getTower().isEmpty() ||
+                    teamLeader.getPersonalSchool().getTowers().isEmpty() ||
                     table.getListOfIsland().size() <= 3;
         }
     }

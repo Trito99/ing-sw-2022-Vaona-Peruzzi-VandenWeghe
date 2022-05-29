@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model.island;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
-import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.Game;
@@ -118,10 +117,10 @@ public class IslandTest {
       }
 
       out.print("\n\nTowers: ");
-      for(Tower t : school.getTower()){
+      for(Tower t : school.getTowers()){
          out.print(getTowerAnsiColor(t) + "T" + ANSI_RESET + " | ");
       }
-      out.print("(" + school.getTower().size() + " towers remained)");
+      out.print("(" + school.getTowers().size() + " towers remained)");
 
       out.print("\n\nTrash Card: ");
       if (trash!=null)
@@ -237,7 +236,7 @@ public class IslandTest {
                case BLACK:
                case GREY:
                   Tower tw = new Tower(color);
-                  island.setTowerOnIsland(player.getPersonalSchool().getTower().get(i));
+                  island.setTowerOnIsland(player.getPersonalSchool().getTowers().get(i));
                   island.setTowerIsOnIsland(true);
                   assertNotNull(island.getTowerOnIsland());
                   assertNotNull(island.towerIsOnIsland());
@@ -505,26 +504,26 @@ public class IslandTest {
                   for (Player player : game.getListOfPlayers()) {
                      if (islandCard.towerIsOnIsland()) {
                         if (player.getTColor() == islandCard.getTowerOnIsland().getTColour()){
-                           if (player.getPersonalSchool().getTower().size() != 0) {
-                              size = player.getPersonalSchool().getTower().size();
+                           if (player.getPersonalSchool().getTowers().size() != 0) {
+                              size = player.getPersonalSchool().getTowers().size();
                               prev = player;
                            }
                         }
                      }
                   }
                   islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE);
-                  assertEquals(size+1,prev.getPersonalSchool().getTower().size());
+                  assertEquals(size+1,prev.getPersonalSchool().getTowers().size());
                }else if (islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE).getTColor().equals(islandCard.getTowerOnIsland().getTColour())){
                   for (Player player : game.getListOfPlayers()) {
                      if (islandCard.towerIsOnIsland()) {
                         if (player.getTColor() == islandCard.getTowerOnIsland().getTColour()){
-                              size = player.getPersonalSchool().getTower().size();
+                              size = player.getPersonalSchool().getTowers().size();
                               prev = player;
                         }
                      }
                   }
                   islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE);
-                  assertEquals(size,prev.getPersonalSchool().getTower().size());
+                  assertEquals(size,prev.getPersonalSchool().getTowers().size());
                }
             }else
                islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE);

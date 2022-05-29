@@ -40,24 +40,24 @@ public class PlayerTest {
         player3.generateSchool(table, gm);
         assertNotNull(player1.getPersonalSchool());
         assertNotNull(player1.getPersonalSchool().getEntry());
-        assertNotNull(player1.getPersonalSchool().getTower());
+        assertNotNull(player1.getPersonalSchool().getTowers());
 
         switch (gm){
             case TWOPLAYERS:
                 assertEquals(7, player1.getPersonalSchool().getEntry().size());
-                assertEquals(8, player1.getPersonalSchool().getTower().size());
+                assertEquals(8, player1.getPersonalSchool().getTowers().size());
                 break;
             case THREEPLAYERS:
                 assertEquals(9, player1.getPersonalSchool().getEntry().size());
-                assertEquals(6, player1.getPersonalSchool().getTower().size());
+                assertEquals(6, player1.getPersonalSchool().getTowers().size());
                 break;
             case COOP:
                 assertEquals(7, player1.getPersonalSchool().getEntry().size());
-                assertEquals(8, player1.getPersonalSchool().getTower().size());
+                assertEquals(8, player1.getPersonalSchool().getTowers().size());
                 assertEquals(7, player2.getPersonalSchool().getEntry().size());
-                assertEquals(0, player2.getPersonalSchool().getTower().size());
+                assertEquals(0, player2.getPersonalSchool().getTowers().size());
                 assertEquals(7, player1.getPersonalSchool().getEntry().size());
-                assertEquals(8, player1.getPersonalSchool().getTower().size());
+                assertEquals(8, player1.getPersonalSchool().getTowers().size());
             default:
                 break;
         }

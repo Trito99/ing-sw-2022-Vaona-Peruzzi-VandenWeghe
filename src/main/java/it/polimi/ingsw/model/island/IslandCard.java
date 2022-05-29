@@ -6,7 +6,6 @@ import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
-import it.polimi.ingsw.model.school.TColor;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -83,7 +82,7 @@ public class IslandCard implements Serializable {
             if (gameMode == GameMode.COOP) {
                 if(playerFound!=null){
                     for (Player p : listOfPlayer) {         /** Finds the team leader */
-                        if (playerFound.getPersonalSchool().getTower().size() == 0 && playerFound.getTeamMate().equals(p.getNickname()))
+                        if (playerFound.getPersonalSchool().getTowers().size() == 0 && playerFound.getTeamMate().equals(p.getNickname()))
                             teamLeader = p;
                     }
                     if (teamLeader==null)
@@ -95,7 +94,7 @@ public class IslandCard implements Serializable {
                     if (xCardCounter == 0) setXCardOnIsland(false);
                 } else {
                     if (teamLeader != null) {
-                        if (teamLeader.getPersonalSchool().getTower().size() != 0) {
+                        if (teamLeader.getPersonalSchool().getTowers().size() != 0) {
                             if (!towerIsOnIsland) {
                                 towerOnIsland = new Tower(teamLeader.getTColor());
                                 teamLeader.getPersonalSchool().removeTower();
@@ -118,7 +117,7 @@ public class IslandCard implements Serializable {
                 }
                 else {
                     if (playerFound != null) {
-                        if (playerFound.getPersonalSchool().getTower().size() != 0) {
+                        if (playerFound.getPersonalSchool().getTowers().size() != 0) {
                             if (!towerIsOnIsland) {
                                 towerOnIsland = new Tower(playerFound.getTColor());
                                 playerFound.getPersonalSchool().removeTower();
@@ -155,7 +154,7 @@ public class IslandCard implements Serializable {
 
         if(gameMode==GameMode.COOP) {
             for (Player p : listOfPlayers) {
-                if (playerBuilder.getPersonalSchool().getTower().size() == 0 && playerBuilder.getTeamMate().equals(p.getNickname()))
+                if (playerBuilder.getPersonalSchool().getTowers().size() == 0 && playerBuilder.getTeamMate().equals(p.getNickname()))
                     teamLeader = p;
             }
             if (teamLeader==null)               /** Finds the team leader */
@@ -163,8 +162,8 @@ public class IslandCard implements Serializable {
 
             if(!teamLeader.getTColor().equals(towerOnIsland.getTColour())){
                 for(int i=0;i<mergedIsland;i++) {
-                    if(!teamLeader.getPersonalSchool().getTower().isEmpty()) {
-                        teamLeader.getPersonalSchool().getTower().add(new Tower(prevPlayer.getTColor()));
+                    if(!teamLeader.getPersonalSchool().getTowers().isEmpty()) {
+                        teamLeader.getPersonalSchool().getTowers().add(new Tower(prevPlayer.getTColor()));
                         teamLeader.getPersonalSchool().removeTower();
                     }
                 }
@@ -175,8 +174,8 @@ public class IslandCard implements Serializable {
         else {
             if (!playerBuilder.getTColor().equals(towerOnIsland.getTColour())) {
                 for (int i = 0; i < mergedIsland; i++) {
-                    if (!playerBuilder.getPersonalSchool().getTower().isEmpty()) {
-                        prevPlayer.getPersonalSchool().getTower().add(new Tower(prevPlayer.getTColor()));
+                    if (!playerBuilder.getPersonalSchool().getTowers().isEmpty()) {
+                        prevPlayer.getPersonalSchool().getTowers().add(new Tower(prevPlayer.getTColor()));
                         playerBuilder.getPersonalSchool().removeTower();
                     }
                 }

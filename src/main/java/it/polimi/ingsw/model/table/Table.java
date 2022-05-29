@@ -25,6 +25,9 @@ public class Table implements Serializable {
     private int posMotherEarth = 0;
     private ArrayList<Student> bag = new ArrayList<>();
 
+    /**
+     * generate the initial bag with the 10 students, each 2 of a different color, and shuffle them.
+     */
     public void generateBagInit() {
         SColor green = SColor.GREEN;
         SColor red = SColor.RED;
@@ -47,6 +50,9 @@ public class Table implements Serializable {
         Collections.shuffle(bag);
     }
 
+    /**
+     * Places the initial 10 students in the islands
+     */
     public void extractStudentsInit(){
         for(int i=0;i<listOfIsland.size();i++){
             if(posMotherEarth+6>listOfIsland.size()){
@@ -63,6 +69,9 @@ public class Table implements Serializable {
         }
     }
 
+    /**
+     * Adds in the bag the remaining 120 students and shuffle them.
+     */
     public void addFinalStudents() {
         SColor green = SColor.GREEN;
         SColor red = SColor.RED;
@@ -172,11 +181,20 @@ public class Table implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param cardEffect the effect selected
+     * @return Returns the character card from the list of character cards on the table with the effect selected
+     */
     public CharacterCard getCharacterCard(CardEffect cardEffect){
         int indexCharacter = getCharacterCardByEffect().indexOf(cardEffect);
         return characterCardsOnTable.get(indexCharacter);
     }
 
+    /**
+     *
+     * @return Returns an array with the effects of the character card of the match
+     */
     public ArrayList<CardEffect> getCharacterCardByEffect() {
         ArrayList<CardEffect> cardEffectList = new ArrayList<>();
         for (int i = 0; i < characterCardsOnTable.size(); i++) {
@@ -221,10 +239,14 @@ public class Table implements Serializable {
         return characterCardsOnTable;
     }
 
+    /** Evaluate if 2 or more islands needs to merge
+     *
+     * @param listOfIsland list of the islands of the match
+     */
     public void joinIsland(ArrayList<IslandCard> listOfIsland) {      //valuto se due isole mergiano, in caso le unisco
 
         int i = posMotherEarth - 1;
-        if (listOfIsland.get(i).towerIsOnIsland()) {/** isole adiacenti */
+        if (listOfIsland.get(i).towerIsOnIsland()) {
             if (i == (listOfIsland.size() - 1)) {
                 if (!listOfIsland.get(i - 1).towerIsOnIsland() && listOfIsland.get(0).towerIsOnIsland()) {
                     MergeNoTower(listOfIsland,i,0);
@@ -311,7 +333,7 @@ public class Table implements Serializable {
         Player winner = null;
         Player alsoWinner = null;
 
-        /** conto il numero di torri presenti sul tavolo per ogni colore */
+        /** Counts for each color, the number of tower placed */
         for (IslandCard islandCard : listOfIsland) {
             if(islandCard.towerIsOnIsland()){
                 if ((islandCard.getTowerOnIsland().getTColour()).equals(TColor.GREY)) {
@@ -324,7 +346,7 @@ public class Table implements Serializable {
             }
         }
 
-        /** confronto e cerco chi ha maggior influenza */
+        /** comparison and looking for who has the most towers, if someone has the highest number of towers is winning */
         if(game.getGameMode().equals(GameMode.THREEPLAYERS)){
             if (countBlack > countGrey && countBlack > countWhite) {
                 for (Player player : game.getListOfPlayers()) {
@@ -346,7 +368,8 @@ public class Table implements Serializable {
                 }
             }
 
-            /** in caso di parità, confronto i player e vince quello con più prof */
+            /** in case of a tie, I compare the players and the one with the most prof wins
+            Black and Grey case */
             else if (countBlack == countGrey && countBlack > countWhite) {
                 for (Player player : game.getListOfPlayers()) {
                     if (player.getTColor().equals(TColor.BLACK)) {
@@ -363,8 +386,10 @@ public class Table implements Serializable {
                 else if (profWinner < profAlsoWinner)
                     return alsoWinner;
                 else
-                    return null; //Black Grey
+                    return null; /** if they tie also the number of professors */
             }
+            /** in case of a tie, I compare the players and the one with the most prof wins
+             White and Grey case */
             else if (countGrey == countWhite && countGrey > countBlack) {
                 for (Player player : game.getListOfPlayers()) {
                     if (player.getTColor().equals(TColor.GREY)) {
@@ -381,8 +406,10 @@ public class Table implements Serializable {
                 else if (profWinner < profAlsoWinner)
                     return alsoWinner;
                 else
-                    return null; //grey white
+                    return null;
             }
+            /** in case of a tie, I compare the players and the one with the most prof wins
+             Black and White case */
             else if (countWhite == countBlack && countWhite > countGrey) {
                 for (Player player : game.getListOfPlayers()) {
                     if (player.getTColor().equals(TColor.WHITE)) {
@@ -399,7 +426,7 @@ public class Table implements Serializable {
                 else if (profWinner < profAlsoWinner)
                     return alsoWinner;
                 else
-                    return null; //white black
+                    return null;
             }else{
                 int profWinner = game.getListOfPlayers().get(0).getPersonalSchool().numberOfProf();
                 int profAlsoWinner = game.getListOfPlayers().get(1).getPersonalSchool().numberOfProf();

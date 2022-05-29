@@ -46,8 +46,8 @@ class GameTest {
 
         game.getTable().getBag().add(new Student(0, SColor.GREEN));
 
-        game.getPlayer("Gino").getPersonalSchool().getTower().add(new Tower(TColor.WHITE));
-        game.getPlayer("Gino").getPersonalSchool().getTower().add(new Tower(TColor.WHITE));
+        game.getPlayer("Gino").getPersonalSchool().getTowers().add(new Tower(TColor.WHITE));
+        game.getPlayer("Gino").getPersonalSchool().getTowers().add(new Tower(TColor.WHITE));
         game.getPlayer("Gino").getDeckOfPlayer().getCardsInHand().add(new AssistantCard("lion",3,4));
 
         assertEquals(false, game.gameIsFinished("Gino"));

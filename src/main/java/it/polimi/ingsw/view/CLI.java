@@ -18,7 +18,6 @@ import java.io.PrintStream;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
-import java.util.zip.DataFormatException;
 
 import static java.lang.System.out;
 
@@ -223,7 +222,7 @@ public class CLI extends ObservableView implements View {
         out.print("\n****School of "+ nickname + "**** ");
         printEntry(school.getEntry());
         printHall(school);
-        printTowers(school.getTower());
+        printTowers(school.getTowers());
         printTrash(trash);
         printCoinScore(difficulty, coins);
         out.println("\n----------------------------------------------");

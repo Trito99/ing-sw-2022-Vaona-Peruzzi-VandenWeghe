@@ -238,22 +238,22 @@ public class TableTest{
         for (int p = 0; p < table.getListOfIsland().size(); p++) {
             table.moveMotherEarth(13+p-table.getPosMotherEarth());
             if (p == 0) {
-                table.getListOfIsland().get(11).setTowerOnIsland(player.getPersonalSchool().getTower().get(0));
+                table.getListOfIsland().get(11).setTowerOnIsland(player.getPersonalSchool().getTowers().get(0));
                 table.getListOfIsland().get(11).setTowerIsOnIsland(true);
             } else {
-                table.getListOfIsland().get(p - 1).setTowerOnIsland(player.getPersonalSchool().getTower().get(0));
+                table.getListOfIsland().get(p - 1).setTowerOnIsland(player.getPersonalSchool().getTowers().get(0));
                 table.getListOfIsland().get(p - 1).setTowerIsOnIsland(true);
             }
 
             if (p == 11) {
-                table.getListOfIsland().get(0).setTowerOnIsland(player.getPersonalSchool().getTower().get(0));
+                table.getListOfIsland().get(0).setTowerOnIsland(player.getPersonalSchool().getTowers().get(0));
                 table.getListOfIsland().get(0).setTowerIsOnIsland(true);
             } else {
-                table.getListOfIsland().get(p + 1).setTowerOnIsland(player.getPersonalSchool().getTower().get(0));
+                table.getListOfIsland().get(p + 1).setTowerOnIsland(player.getPersonalSchool().getTowers().get(0));
                 table.getListOfIsland().get(p + 1).setTowerIsOnIsland(true);
             }
 
-            table.getListOfIsland().get(p).setTowerOnIsland(player.getPersonalSchool().getTower().get(0));
+            table.getListOfIsland().get(p).setTowerOnIsland(player.getPersonalSchool().getTowers().get(0));
             table.getListOfIsland().get(p).setTowerIsOnIsland(true);
             table.joinIsland(table.getListOfIsland());
 
@@ -293,22 +293,22 @@ public class TableTest{
         for (int p2 = 0; p2 < table.getListOfIsland().size(); p2++) {
             table.moveMotherEarth(13+p2-table.getPosMotherEarth());
             if (p2 == 0) {
-                table.getListOfIsland().get(11).setTowerOnIsland(player.getPersonalSchool().getTower().get(0));
+                table.getListOfIsland().get(11).setTowerOnIsland(player.getPersonalSchool().getTowers().get(0));
                 table.getListOfIsland().get(11).setTowerIsOnIsland(true);
             } else {
-                table.getListOfIsland().get(p2 - 1).setTowerOnIsland(player.getPersonalSchool().getTower().get(0));
+                table.getListOfIsland().get(p2 - 1).setTowerOnIsland(player.getPersonalSchool().getTowers().get(0));
                 table.getListOfIsland().get(p2 - 1).setTowerIsOnIsland(true);
             }
 
             if (p2 == 11) {
-                table.getListOfIsland().get(0).setTowerOnIsland(player2.getPersonalSchool().getTower().get(0));
+                table.getListOfIsland().get(0).setTowerOnIsland(player2.getPersonalSchool().getTowers().get(0));
                 table.getListOfIsland().get(0).setTowerIsOnIsland(true);
             } else if (p2%2==1) {
-                table.getListOfIsland().get(p2 + 1).setTowerOnIsland(player2.getPersonalSchool().getTower().get(0));
+                table.getListOfIsland().get(p2 + 1).setTowerOnIsland(player2.getPersonalSchool().getTowers().get(0));
                 table.getListOfIsland().get(p2 + 1).setTowerIsOnIsland(true);
             }
 
-            table.getListOfIsland().get(p2).setTowerOnIsland(player.getPersonalSchool().getTower().get(0));
+            table.getListOfIsland().get(p2).setTowerOnIsland(player.getPersonalSchool().getTowers().get(0));
             table.getListOfIsland().get(p2).setTowerIsOnIsland(true);
 
             table.joinIsland(table.getListOfIsland());
@@ -351,23 +351,23 @@ public class TableTest{
             table.moveMotherEarth(13+p3-table.getPosMotherEarth());
 
             if (p3 == 0) {
-                table.getListOfIsland().get(11).setTowerOnIsland(player2.getPersonalSchool().getTower().get(0));
+                table.getListOfIsland().get(11).setTowerOnIsland(player2.getPersonalSchool().getTowers().get(0));
                 table.getListOfIsland().get(11).setTowerIsOnIsland(true);
             } else if (p3%2==0) {
-                table.getListOfIsland().get(p3 - 1).setTowerOnIsland(player2.getPersonalSchool().getTower().get(0));
+                table.getListOfIsland().get(p3 - 1).setTowerOnIsland(player2.getPersonalSchool().getTowers().get(0));
                 table.getListOfIsland().get(p3 - 1).setTowerIsOnIsland(true);
             }
 
             if (p3 == 11) {
-                table.getListOfIsland().get(0).setTowerOnIsland(player.getPersonalSchool().getTower().get(0));
+                table.getListOfIsland().get(0).setTowerOnIsland(player.getPersonalSchool().getTowers().get(0));
                 table.getListOfIsland().get(0).setTowerIsOnIsland(true);
             } else {
-                table.getListOfIsland().get(p3 + 1).setTowerOnIsland(player.getPersonalSchool().getTower().get(0));
+                table.getListOfIsland().get(p3 + 1).setTowerOnIsland(player.getPersonalSchool().getTowers().get(0));
                 table.getListOfIsland().get(p3 + 1).setTowerIsOnIsland(true);
             }
 
 
-            table.getListOfIsland().get(p3).setTowerOnIsland(player.getPersonalSchool().getTower().get(0));
+            table.getListOfIsland().get(p3).setTowerOnIsland(player.getPersonalSchool().getTowers().get(0));
             table.getListOfIsland().get(p3).setTowerIsOnIsland(true);
 
             table.joinIsland(table.getListOfIsland());
@@ -441,7 +441,7 @@ public class TableTest{
                     table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
                     table.getBag().remove(0);
                 }
-                table.getListOfIsland().get(i).setTowerOnIsland(game.getListOfPlayers().get(rn.nextInt(game.getListOfPlayers().size())).getPersonalSchool().getTower().get(0));
+                table.getListOfIsland().get(i).setTowerOnIsland(game.getListOfPlayers().get(rn.nextInt(game.getListOfPlayers().size())).getPersonalSchool().getTowers().get(0));
                 table.getListOfIsland().get(i).setTowerIsOnIsland(true);
             }
 
