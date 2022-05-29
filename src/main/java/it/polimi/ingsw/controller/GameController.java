@@ -691,6 +691,7 @@ public class GameController {
                         allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth());
                     break;
                 case CLOUDCARD:
+                    endGame();
                     if (gameSession.gameIsFinished(turnController.getActivePlayer())){
                         endGame();
                     }else

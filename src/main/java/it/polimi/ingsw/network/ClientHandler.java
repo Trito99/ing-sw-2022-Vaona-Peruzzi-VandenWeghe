@@ -50,6 +50,7 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
             e.printStackTrace();
         }
         Thread.currentThread().interrupt();
+        lobby.remove(this);
         lobbyServer.leaveLobby(gameId);
     }
 
@@ -64,7 +65,7 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
         catch(IOException e){
             e.printStackTrace();
             Thread.currentThread().interrupt();
-            //disconnect();
+            disconnect();
         }
 
     }
@@ -81,8 +82,6 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
                         lobby = (lobbyServer.getLobby(loginMsg.getGameId()));
                         gameId = loginMsg.getGameId();
                         lobby.addPlayer(loginMsg.getNickname(), loginMsg.getPlayerDate(), this);
-                    } else if (message.getMessageType() == MessageType.END){
-                        lobby.remove();
                     } else if (lobby != null) {
                         lobby.getMessage(message);
                     }
