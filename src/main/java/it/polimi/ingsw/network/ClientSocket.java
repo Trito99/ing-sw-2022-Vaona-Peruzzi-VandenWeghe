@@ -52,11 +52,10 @@ public class ClientSocket extends Observable {
                 ServerMessage message;
                 try {
                     message = (ServerMessage) input.readObject();
+                    notifyObserver(message);
                 } catch (Exception e) {
-                    message = new StringMessage("Connection lost.");
                     disconnect();
                 }
-                notifyObserver(message);
             }
         });
     }

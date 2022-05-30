@@ -224,25 +224,57 @@ public class GameController {
                 boolean turnFinished = false;
                 if(receivedMessage.getMessageType() == MessageType.PLACE_AND_STUDENT_FOR_MOVE_CHOSEN){
                     PlaceAndStudentForMoveChosen Choice = (PlaceAndStudentForMoveChosen) receivedMessage;
-                    boolean present = false;
+                    boolean present = false, full = false;
+                    SColor studentColor = null;
+
                     for(Student student : gameSession.getPlayer(Choice.getNickname()).getPersonalSchool().getEntry()){
                         if(student.getIdStudent() == Choice.getId()) {
                             present = true;
-                            studentId = Choice.getId();
+                            studentId = student.getIdStudent();
+                            studentColor = student.getsColour();
                         }
                     }
                     if(present){
                         if (Choice.getPlace().equals("SCHOOL") || (Choice.getPlace().equals(("ISLAND")))) {
                             again = false;
                             if (Choice.getPlace().equals("SCHOOL")) {
-                                gameSession.moveStudentFromListToHall(gameSession.getPlayer(turnController.getActivePlayer()), studentId, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
-                                gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(turnController.getActivePlayer()), CardEffect.STANDARDMODE);
-                                movedStudents++;
-                                if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces()) {
-                                    movedStudents=0;
-                                    setActionState(ActionState.MOTHERNATURE);
+                                switch(studentColor){
+                                    case GREEN:
+                                        if(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getGTable().size()==10)
+                                            full = true;
+                                        break;
+                                    case RED:
+                                        if(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getRTable().size()==10)
+                                            full = true;
+                                        break;
+                                    case YELLOW:
+                                        if(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getYTable().size()==10)
+                                            full = true;
+                                        break;
+                                    case PINK:
+                                        if(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getPTable().size()==10)
+                                            full = true;
+                                        break;
+                                    case BLUE:
+                                        if(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getBTable().size()==10)
+                                            full = true;
+                                        break;
                                 }
-                                action();
+                                if(!full) {
+                                    gameSession.moveStudentFromListToHall(gameSession.getPlayer(turnController.getActivePlayer()), studentId, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
+                                    gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(turnController.getActivePlayer()), CardEffect.STANDARDMODE);
+                                    movedStudents++;
+                                    if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces()) {
+                                        movedStudents=0;
+                                        setActionState(ActionState.MOTHERNATURE);
+                                    }
+                                    action();
+                                }else{
+                                    virtualView.showMessage("Table already full. Select another student");
+                                    again = true;
+                                    virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
+                                }
+
                             } else if (Choice.getPlace().equals("ISLAND")) {
                                 virtualView.askId(true,null,-1, null);
                             }
@@ -691,7 +723,6 @@ public class GameController {
                         allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth());
                     break;
                 case CLOUDCARD:
-                    //endGame();
                     if (gameSession.gameIsFinished(turnController.getActivePlayer())){
                         endGame();
                     }else
