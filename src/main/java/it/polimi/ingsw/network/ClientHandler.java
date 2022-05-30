@@ -2,6 +2,7 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.message.*;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -87,6 +88,8 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
                     }
                 }
             }
+        } catch (EOFException exception) {
+            disconnect();
         } catch (Exception exception) {
             exception.printStackTrace();
             System.out.println("invalid stream from client");
