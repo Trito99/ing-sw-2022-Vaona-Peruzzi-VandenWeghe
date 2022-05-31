@@ -133,7 +133,7 @@ public class GUI extends ObservableView implements View {
     }
 
     @Override
-    public void askMotherEarthSteps(int maxSteps) {
+    public void askMotherEarthSteps(int maxSteps, Table table, Difficulty difficulty) {
 
     }
 

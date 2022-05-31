@@ -262,6 +262,7 @@ public class GameController {
                                 }
                                 if(!full) {
                                     gameSession.moveStudentFromListToHall(gameSession.getPlayer(turnController.getActivePlayer()), studentId, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
+                                    virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore());
                                     gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(turnController.getActivePlayer()), CardEffect.STANDARDMODE);
                                     movedStudents++;
                                     if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces()) {
@@ -498,6 +499,7 @@ public class GameController {
                                     again = false;
                                     acrobatIndex++;
                                     gameSession.playCharacterCard(characterCard.getCardEffect(), Choice.getNickname(), studentIdCard, -1, studentId, null);
+                                    virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore());
                                     if (acrobatIndex<max)
                                         virtualView.askId(false, characterCard, acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool());
                                 }else{
@@ -549,6 +551,7 @@ public class GameController {
                             if (present) {
                                 again = false;
                                 gameSession.playCharacterCard(characterCard.getCardEffect(),turnController.getActivePlayer(), studentId,-1,-1, null);
+                                virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore());
                                 card = false;
                                 setActionState(ActionState.STUDENT);
                                 action();
@@ -574,13 +577,15 @@ public class GameController {
 
                     if(exists && characterCard.getCardEffect().equals(CardEffect.HERBALIST)){
                         again=false;
-                        gameSession.playCharacterCard(CardEffect.HERBALIST, turnController.getActivePlayer(), -1,-1,-1, colorChosen);
+                        gameSession.playCharacterCard(characterCard.getCardEffect(), turnController.getActivePlayer(), -1,-1,-1, colorChosen);
                         setActionState(ActionState.STUDENT);
                         action();
                     }
                     else if(exists && characterCard.getCardEffect().equals(CardEffect.JUNKDEALER)){
                         again=false;
                         gameSession.playCharacterCard(CardEffect.JUNKDEALER, turnController.getActivePlayer(), -1,-1,-1, colorChosen);
+                        virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore());
+
                         for (VirtualView vv : allVirtualView.values()) {
                             if (vv!=virtualView)
                                 vv.showMessage(turnController.getActivePlayer()+" has played the JUNKDEALER Character Card for the color "+ colorChosen.toString());
@@ -600,9 +605,9 @@ public class GameController {
                         virtualView.showMessage("\n⚠️Steps selected more than maximum available ⚠️");
                         again=true;
                         if(characterCard!=null && characterCard.getCardEffect().isBearerPlayed()){
-                            allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth()+2);
+                            allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth()+2, gameSession.getTable(), gameSession.getDifficulty());
                         }else
-                            allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth());
+                            allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth(), gameSession.getTable(), gameSession.getDifficulty());
                     }else{
                         again=false;
                         int steps = step.getSteps();
@@ -717,9 +722,9 @@ public class GameController {
                     break;
                 case MOTHERNATURE:
                     if(characterCard!=null && characterCard.getCardEffect().isBearerPlayed())
-                        allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth() + 2);
+                        allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth() + 2, gameSession.getTable(), gameSession.getDifficulty());
                     else
-                        allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth());
+                        allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth(), gameSession.getTable(), gameSession.getDifficulty());
                     break;
                 case CLOUDCARD:
                     if (gameSession.gameIsFinished(turnController.getActivePlayer())){

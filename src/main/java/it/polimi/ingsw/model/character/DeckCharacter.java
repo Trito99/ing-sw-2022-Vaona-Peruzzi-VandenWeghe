@@ -25,7 +25,7 @@ public class DeckCharacter {
         characterCards.add(new CharacterCard(2, CardEffect.KNIGHT, "During this round, you have 2 more influence points."));
         characterCards.add(new CharacterCard(3, CardEffect.HERBALIST, "Choose a color. During this round, the students of that color aren't considered in the calculate of influence."));
         characterCards.add(new CharacterCard(1, CardEffect.BARD,"You can switch up to 2 students between your Hall and your Entry"));
-        characterCards.add(new CharacterCard(2, CardEffect.COURTESAN,"Choose 1 student from this card and place it on its table"));
+        characterCards.add(new CharacterCard(2, CardEffect.COURTESAN,"Choose 1 student from this card and place it in the Hall"));
         characterCards.add(new CharacterCard(3, CardEffect.JUNKDEALER,"Choose a color; Every player has to remove 3 students from his table of that color in the bag. "));
     }
 }

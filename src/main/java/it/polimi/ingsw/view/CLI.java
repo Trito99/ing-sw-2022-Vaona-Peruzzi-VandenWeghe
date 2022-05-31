@@ -231,38 +231,12 @@ public class CLI extends ObservableView implements View {
 
     @Override
     public void showTable(Table table, Difficulty difficulty) {
-        boolean forbidden = false;
 
-        if (difficulty.equals(Difficulty.EXPERTMODE)) {
-            for (CharacterCard card : table.getCharacterCardsOnTable()) {
-                if (card.getCardEffect().equals(CardEffect.CURATOR))
-                    forbidden = true;
-            }
-        }
+
+
 
         out.print("\n**** TABLE ****");
-        if(forbidden)
-            out.print("\nIsland Id  | MotherEarth |   Tower (n)   | Forbidden | Students");
-        else
-            out.print("\nIsland Id  | MotherEarth |   Tower (n)   | Students");
-
-        for(IslandCard islandCard : table.getListOfIsland()) {
-            if (islandCard.towerIsOnIsland()) {
-                if(forbidden)
-                    out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       |    " + getTowerAnsiColor(islandCard.getTowerOnIsland()) + "T" +ANSI_RESET+ "(" + islandCard.getMergedIsland() + ")     | "+islandCard.isXCardOnIsland()+"("+islandCard.getXCardCounter()+")"+"  | ");
-                else
-                    out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       |    " + getTowerAnsiColor(islandCard.getTowerOnIsland()) + "T" +ANSI_RESET+ "(" + islandCard.getMergedIsland() + ")     | ");
-                for (Student student: islandCard.getStudentOnIsland())
-                    out.print(getStudentAnsiColor(student) + student.getIdStudent() + " " + ANSI_RESET);
-            } else {
-                if(forbidden)
-                    out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       | " + " No Tower" +"(" + (islandCard.getMergedIsland()-1) + ") | "+islandCard.isXCardOnIsland()+"("+islandCard.getXCardCounter()+")"+"  | ");
-                else
-                    out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       | " + " No Tower" +"(" + (islandCard.getMergedIsland()-1) + ")" + "  | ");
-                for (Student student: islandCard.getStudentOnIsland())
-                    out.print(getStudentAnsiColor(student) + student.getIdStudent() + " " + ANSI_RESET);
-            }
-        }
+        printIslandCards(table, difficulty);
         out.println("\n----------------------------------------------");
 
         printClouds(table.getCloudNumber());
@@ -371,12 +345,15 @@ public class CLI extends ObservableView implements View {
     }
 
     @Override
-    public void askMotherEarthSteps(int maxSteps) {
+    public void askMotherEarthSteps(int maxSteps, Table table, Difficulty difficulty) {
         boolean ye;
         do {
             try {
                 ye=false;
+
                 out.print("\nChoose how many steps do you want to move MotherEarth: (max " + maxSteps + ")\n");
+                printIslandCards(table, difficulty);
+
                 int steps = Integer.parseInt(readInput());
                 notifyObserver(obs -> obs.chooseMotherEarthSteps(steps,maxSteps));
             } catch (Exception e) {
@@ -436,22 +413,22 @@ public class CLI extends ObservableView implements View {
                 if (choice) {
                     if (characterCard != null) {
                         if (characterCard.getCardEffect().equals(CardEffect.HERALD))
-                            out.print("\nIn which island do you want to calculate influence? (id)\n");
+                            out.print("\nHERALD EFFECT\nIn which island do you want to calculate influence? (id)\n");
                         if (characterCard.getCardEffect().equals(CardEffect.CURATOR))
-                            out.print("\nIn which island do you want to place the forbidden card? (id)\n");
+                            out.print("\nCURATOR EFFECT\nIn which island do you want to place the forbidden card? (id)\n");
                     } else
                         out.print("\nIn which island do you want to move the student? (id)\n");
                 }else {
                     if (characterCard.getCardEffect().equals(CardEffect.ACROBAT)) {
                         if(indexAcrobat %2==1) {
-                            out.print("\nWhich student from the card do you want to switch? (id)\n");
+                            out.print("\nACROBAT EFFECT\nWhich student from the card do you want to switch? (id)\n");
                             printStudentsOnCard(characterCard);
                             out.println();
                         }else {
                             if (indexAcrobat <2)
-                                out.print("\nWhich student from the entry do you want to switch? (id)\n");
+                                out.print("\nACROBAT EFFECT\nWhich student from the entry do you want to switch? (id)\n");
                             else {
-                                out.print("\nWhich student from the entry do you want to switch? (id or none)\n");
+                                out.print("\nACROBAT EFFECT\nWhich student from the entry do you want to switch? (id or none)\n");
                                 marker = -2;
                             }
                             printEntry(school.getEntry());
@@ -460,14 +437,14 @@ public class CLI extends ObservableView implements View {
                     }
                     else if (characterCard.getCardEffect().equals(CardEffect.BARD)) {
                         if (indexAcrobat % 2 == 1) {
-                            out.print("\nWhich student from the hall do you want to switch? (Last id of the tables)\n");
+                            out.print("\nBARD EFFECT\nWhich student from the hall do you want to switch? (Last id of the tables)\n");
                             printHall(school);
                             out.println();
                         } else {
                             if (indexAcrobat < 2)
-                                out.print("\nWhich student from the entry do you want to switch? (id)\n");
+                                out.print("\nBARD EFFECT\nWhich student from the entry do you want to switch? (id)\n");
                             else {
-                                out.print("\nWhich student from the entry do you want to switch? (id or none)\n");
+                                out.print("\nBARD EFFECT\nWhich student from the entry do you want to switch? (id or none)\n");
                                 marker = -2;
                             }
 
@@ -476,7 +453,7 @@ public class CLI extends ObservableView implements View {
                         }
                     }
                     else if (characterCard.getCardEffect().equals(CardEffect.COURTESAN)){
-                        out.print("\nWhich student do you want to move in your hall?\n");
+                        out.print("\nCOURTESAN EFFECT\nWhich student do you want to move in your hall?\n");
                         printStudentsOnCard(characterCard);
                         out.println();
                     }
@@ -605,6 +582,41 @@ public class CLI extends ObservableView implements View {
         for (Student s : characterCard.getStudentsOnCard()) {
             out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
         }
+    }
+
+    private void printIslandCards(Table table, Difficulty difficulty){
+        boolean forbidden = false;
+
+        if (difficulty.equals(Difficulty.EXPERTMODE)) {
+            for (CharacterCard card : table.getCharacterCardsOnTable()) {
+                if (card.getCardEffect().equals(CardEffect.CURATOR))
+                    forbidden = true;
+            }
+        }
+
+        if(forbidden)
+            out.print("\nIsland Id  | MotherEarth |   Tower (n)   | Forbidden | Students");
+        else
+            out.print("\nIsland Id  | MotherEarth |   Tower (n)   | Students");
+
+        for(IslandCard islandCard : table.getListOfIsland()) {
+            if (islandCard.towerIsOnIsland()) {
+                if(forbidden)
+                    out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       |    " + getTowerAnsiColor(islandCard.getTowerOnIsland()) + "T" +ANSI_RESET+ "(" + islandCard.getMergedIsland() + ")     | "+islandCard.isXCardOnIsland()+"("+islandCard.getXCardCounter()+")"+"  | ");
+                else
+                    out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       |    " + getTowerAnsiColor(islandCard.getTowerOnIsland()) + "T" +ANSI_RESET+ "(" + islandCard.getMergedIsland() + ")     | ");
+                for (Student student: islandCard.getStudentOnIsland())
+                    out.print(getStudentAnsiColor(student) + student.getIdStudent() + " " + ANSI_RESET);
+            } else {
+                if(forbidden)
+                    out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       | " + " No Tower" +"(" + (islandCard.getMergedIsland()-1) + ") | "+islandCard.isXCardOnIsland()+"("+islandCard.getXCardCounter()+")"+"  | ");
+                else
+                    out.print("\n" + islandCard.getIdIsland() + "          | " + islandCard.getMotherEarthOnIsland() + "       | " + " No Tower" +"(" + (islandCard.getMergedIsland()-1) + ")" + "  | ");
+                for (Student student: islandCard.getStudentOnIsland())
+                    out.print(getStudentAnsiColor(student) + student.getIdStudent() + " " + ANSI_RESET);
+            }
+        }
+        out.print("\n");
     }
 
     private String getStudentAnsiColor(Student student) {
