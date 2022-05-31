@@ -88,11 +88,7 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
                     }
                 }
             }
-        } catch (EOFException exception) {
-            disconnect();
         } catch (Exception exception) {
-            exception.printStackTrace();
-            System.out.println("invalid stream from client");
             disconnect();
         }
     }
