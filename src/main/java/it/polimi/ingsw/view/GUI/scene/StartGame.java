@@ -10,18 +10,28 @@ import javafx.scene.input.MouseEvent;
 public class StartGame extends ObservableView implements GenericScene{
 
     @FXML
-    private Button buttonStart;
+    private Button startButton;
+
+    @FXML
+    private Button rulesButton;
 
     @FXML
     public void initialize(){
-        buttonStart.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickButton);
+        startButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickButtonStart);
     }
 
     /** gestisce il click sul pulsante */
     @FXML
-    private void clickButton(Event event){
-        buttonStart.setDisable(true);
-        GuiManager.changeRootPane(observers, event,"/fxml/new_connect_to_server_scene.fxml");
+    private void clickButtonStart(Event event){
+        startButton.setDisable(true);
+        GuiManager.changeRootPane(observers, event,"/fxml/connect_to_server_scene");
+    }
+
+    /** DA IMPLEMENTARE schermata rules */
+    @FXML
+    private void clickButtonRules(Event event){
+        rulesButton.setDisable(true);
+        GuiManager.changeRootPane(observers, event, "/fxml/rules_scene");
     }
 
 }

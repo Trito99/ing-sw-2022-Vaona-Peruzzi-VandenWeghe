@@ -35,12 +35,11 @@ public class ConnectToServer extends ObservableView implements GenericScene {
     @FXML
     public void initialize(){
         connectButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickConnect);
+        //closeGui.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::closeGui);
     }
 
     @FXML
     private void clickConnect(Event event){
-        closeGui.setDisable(true);
-
         ipAddressField.setDisable(true);
         portNumberField.setDisable(true);
 
@@ -53,11 +52,13 @@ public class ConnectToServer extends ObservableView implements GenericScene {
 
         /** carica scena successiva */
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/setup_game_scene.fxml"));
+        loader.setLocation(getClass().getResource("/fxml/setup_game_scene"));
     }
 
     @FXML
     private void closeGui(){
+        closeGui.setDisable(true);
+
         notifyObserver(ObserverView :: updateDisconnect);
         System.exit(0);
     }
