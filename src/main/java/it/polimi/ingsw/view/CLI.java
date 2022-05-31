@@ -220,7 +220,7 @@ public class CLI extends ObservableView implements View {
     @Override
     public void showPersonalSchool(School school, String nickname, AssistantCard trash, Difficulty difficulty,int coins) {
 
-        out.print("\n****"+ nickname + " school**** ");
+        out.println("\n****"+ nickname +"School****");
         printEntry(school.getEntry());
         printHall(school);
         printTowers(school.getTowers());
