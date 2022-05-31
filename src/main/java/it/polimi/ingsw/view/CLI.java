@@ -89,7 +89,7 @@ public class CLI extends ObservableView implements View {
                 notifyObserver(obs -> obs.updateConnect(ipAddress, port));
             }
             catch (Exception e){
-                out.println("⚠️Wrong input. ⚠️");
+                out.println(WRONG_INPUT);
                 succeded = true;
             }
         }while(succeded);
@@ -118,14 +118,14 @@ public class CLI extends ObservableView implements View {
                 playerDate.getTime();
 
 
-                if(birthYear < 1900 || birthYear > 2022){
-                    out.print("Error in selecting the date of birth! Try again.\n");
+                if(birthYear < 1900 || birthYear > 2021){
+                    out.print("⚠️Error in selecting the date of birth! Try again. ⚠️\n");
                     ye = true;
                 }else
                     notifyObserver(obs -> obs.updateLobby(nickname, playerDate, gameID));
             } catch (IllegalArgumentException exception){
                 ye = true;
-                out.print("Error in selecting the date of birth! Try again.\n");
+                out.print("⚠️Error in selecting the date of birth! Try again. ⚠️\n");
             } catch (Exception exception){
                 ye = true;
                 out.println(WRONG_INPUT);
@@ -152,6 +152,7 @@ public class CLI extends ObservableView implements View {
             }
 
         } while(playersNumber > 4 || playersNumber <= 1);
+
         do {
             out.print("Enter the game difficulty that you want to play (Standard, Expert): ");
             try {
@@ -162,7 +163,6 @@ public class CLI extends ObservableView implements View {
                 out.println(WRONG_INPUT);
                 ye=true;
             }
-
         } while (ye);
         int finalPlayersNumber = playersNumber;
         Difficulty finalDifficulty = difficulty;
@@ -178,7 +178,7 @@ public class CLI extends ObservableView implements View {
             out.println("\nYou joined the game "+gameId+ " as "+ nickname);
         }
         else {
-            out.println("\nGame "+gameId+ " not available.");
+            out.println("\nGame "+gameId+ " is already full.");
             askLobby();
         }
     }
@@ -205,14 +205,14 @@ public class CLI extends ObservableView implements View {
 
     @Override
     public void showWinMessage() {
-        out.print("\n****YOU WIN****");
+        out.print("\n****🎉 YOU WIN 🎉****");
         notifyObserver(obs -> obs.updateDisconnect());
     }
 
     @Override
     public void showLoseMessage(String nickname) {
-        out.print("\n****YOU LOSE****");
-        out.print("\n"+nickname+" WINS");
+        out.print("\n****😞 YOU LOSE 😞****");
+        out.print("\n"+nickname+" WINS!");
         notifyObserver(obs -> obs.updateDisconnect());
     }
 
@@ -220,7 +220,7 @@ public class CLI extends ObservableView implements View {
     @Override
     public void showPersonalSchool(School school, String nickname, AssistantCard trash, Difficulty difficulty,int coins) {
 
-        out.print("\n****School of "+ nickname + "**** ");
+        out.print("\n****"+ nickname + " school**** ");
         printEntry(school.getEntry());
         printHall(school);
         printTowers(school.getTowers());
@@ -363,6 +363,7 @@ public class CLI extends ObservableView implements View {
             }
             catch (Exception e){
                 ye = true;
+                out.println(WRONG_INPUT);
 
             }
 
@@ -375,7 +376,7 @@ public class CLI extends ObservableView implements View {
         do {
             try {
                 ye=false;
-                out.print("\nChoose how many steps you want to make MotherEarth move: (max " + maxSteps + ")\n");
+                out.print("\nChoose how many steps do you want to move MotherEarth: (max " + maxSteps + ")\n");
                 int steps = Integer.parseInt(readInput());
                 notifyObserver(obs -> obs.chooseMotherEarthSteps(steps,maxSteps));
             } catch (Exception e) {
@@ -388,7 +389,6 @@ public class CLI extends ObservableView implements View {
 
     @Override
     public void askCloud(Table table) {
-        int i=1;
         boolean ye;
         do {
             try {
@@ -460,7 +460,7 @@ public class CLI extends ObservableView implements View {
                     }
                     else if (characterCard.getCardEffect().equals(CardEffect.BARD)) {
                         if (indexAcrobat % 2 == 1) {
-                            out.print("\nWhich student from the school do you want to switch? (id)\n");
+                            out.print("\nWhich student from the hall do you want to switch? (Last id of the tables)\n");
                             printHall(school);
                             out.println();
                         } else {
