@@ -59,10 +59,6 @@ public class TurnController {
         for(Player player : NewPlayerOrder)
             newPlayerOrderByName.add(player.getNickname());
         newPlayerOrder = NewPlayerOrder;
-        for(Player player : newPlayerOrder)
-            System.out.println(player.getNickname());
-        for(String nickname : newPlayerOrderByName)
-            System.out.println(nickname);
     }
     public String getActivePlayer() {
         return playingPlayer;

@@ -371,18 +371,22 @@ public class GameController {
                                 case COURTESAN:
                                 case BARD:
                                     card = true;
+                                    broadcastMessage(gameSession.getPlayer(getActivePlayer()).getNickname() +" has activated " + characterCard.getCardEffect().toString() + "effect!");
                                     virtualView.askId(false,characterCard,acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool());
                                     break;
                                 case HERALD:
                                 case CURATOR:
                                     card = true;
+                                    broadcastMessage(gameSession.getPlayer(getActivePlayer()).getNickname() +" has activated " + characterCard.getCardEffect().toString() + "effect!");
                                     virtualView.askId(true,characterCard, -1, null);
                                     break;
                                 case HERBALIST:
                                 case JUNKDEALER:
+                                    broadcastMessage(gameSession.getPlayer(getActivePlayer()).getNickname() +" has activated " + characterCard.getCardEffect().toString() + "effect!");
                                     virtualView.askColorToBlock(characterCard.getCardEffect());
                                     break;
                                 default:
+                                    broadcastMessage(gameSession.getPlayer(getActivePlayer()).getNickname() +" has activated " + characterCard.getCardEffect().toString() + " effect!");
                                     gameSession.playCharacterCard(characterCard.getCardEffect(), CardSelected.getNickname(), -1,-1 , -1, null);
                                     characterCard.setCoinOnCard(true);
                                     setActionState(ActionState.STUDENT);
@@ -792,7 +796,8 @@ public class GameController {
             for (String nickname : allVirtualView.keySet()) {
                 if (nickname == gameSession.getTable().playerIsWinning(gameSession).getNickname())
                     allVirtualView.get(nickname).showWinMessage();
-
+                else if(nickname == null)
+                    broadcastMessage("Tie");
                 else
                     allVirtualView.get(nickname).showLoseMessage(gameSession.getTable().playerIsWinning(gameSession).getNickname());
             }

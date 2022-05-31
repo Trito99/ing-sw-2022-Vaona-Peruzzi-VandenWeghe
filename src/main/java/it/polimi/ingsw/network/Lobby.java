@@ -66,5 +66,7 @@ public class Lobby {
 
     }
 
-
+    public GameController getGameController() {
+        return gameController;
+    }
 }
