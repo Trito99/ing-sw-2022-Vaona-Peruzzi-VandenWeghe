@@ -126,8 +126,8 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void askMotherEarthSteps(int maxSteps) {
-        clientHandler.sendMessage(new ChooseMotherEarthSteps(maxSteps));
+    public void askMotherEarthSteps(int maxSteps, Table table, Difficulty difficulty) {
+        clientHandler.sendMessage(new ChooseMotherEarthSteps(maxSteps, table, difficulty));
     }
 
     @Override

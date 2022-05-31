@@ -40,7 +40,7 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void askPlayersNumberAndDifficulty() {
-        PNandDifficulty pNandDifficulty = new PNandDifficulty();
+        NewGame pNandDifficulty = new NewGame();
         pNandDifficulty.addAllObservers(observers);
         Platform.runLater(()-> GuiManager.changeRootPane(observers,"/fxml/players_number_and_difficulty_scene") );
     }
@@ -140,7 +140,7 @@ public class GUI extends ObservableView implements View {
     }
 
     @Override
-    public void askMotherEarthSteps(int maxSteps) {
+    public void askMotherEarthSteps(int maxSteps, Table table, Difficulty difficulty) {
 
     }
 

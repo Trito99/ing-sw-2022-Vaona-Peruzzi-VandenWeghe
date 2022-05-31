@@ -64,7 +64,7 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
             }
         }
         catch(IOException e){
-            e.printStackTrace();
+            //e.printStackTrace();
             Thread.currentThread().interrupt();
             disconnect();
         }
@@ -89,7 +89,7 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
                 }
             }
         } catch (Exception exception) {
-            exception.printStackTrace();
+            lobby.getGameController().endGame();
             disconnect();
         }
     }

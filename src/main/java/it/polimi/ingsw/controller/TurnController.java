@@ -14,7 +14,6 @@ public class TurnController {
     private ArrayList<String> newPlayerOrderByName;
     private ArrayList<Player> newPlayerOrder;
 
-    //dichiarare attributi
     /** costruttore */
     public TurnController(GameController gameController){
         playingPlayer = YoungestPlayer(gameController).getNickname();
@@ -53,12 +52,6 @@ public class TurnController {
         playingPlayer = playerOrderByName.get(player);
     }
 
-    /** DA CAMBIARE: quando ci si disconnette deve finire la partita */
-    public boolean disconnect(String nickname){
-        activePlayer.put(nickname,false);
-        return(nickname.equals(getActivePlayer()));
-    }
-
     public void changeOrder(){
         ArrayList<Player>  NewPlayerOrder = (ArrayList<Player>) playerOrder.clone();
         newPlayerOrderByName.clear();
@@ -66,17 +59,11 @@ public class TurnController {
         for(Player player : NewPlayerOrder)
             newPlayerOrderByName.add(player.getNickname());
         newPlayerOrder = NewPlayerOrder;
-        for(Player player : newPlayerOrder)
-            System.out.println(player.getNickname());
-        for(String nickname : newPlayerOrderByName)
-            System.out.println(nickname);
     }
     public String getActivePlayer() {
         return playingPlayer;
     }
     public ArrayList<String> getPlayerOrderByName() {return playerOrderByName;}
-    public ArrayList<Player> getPlayerOrder() { return playerOrder; }
     public ArrayList<String> getNewPlayerOrderByName() {return newPlayerOrderByName;}
-    public ArrayList<Player> getNewPlayerOrder() { return newPlayerOrder; }
     public void setPlayingPlayer(String nickname){ this.playingPlayer=nickname; }
 }

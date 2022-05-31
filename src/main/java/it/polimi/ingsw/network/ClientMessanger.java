@@ -167,7 +167,7 @@ public class ClientMessanger implements ObserverView, Observer {
                 break;
             case CHOOSE_MOTHER_EARTH_STEPS:
                 ChooseMotherEarthSteps steps = (ChooseMotherEarthSteps) message;
-                queue.execute(() -> view.askMotherEarthSteps(steps.getMaxSteps()));
+                queue.execute(() -> view.askMotherEarthSteps(steps.getMaxSteps(), steps.getTable(), steps.getDifficulty()));
                 break;
             case WIN:
                 queue.execute(() -> view.showWinMessage());

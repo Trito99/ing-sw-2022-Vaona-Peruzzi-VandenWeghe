@@ -71,7 +71,7 @@ public interface View {
 
     /** chiede al giocatore quanti passi far fare a madre natura
      * @param maxSteps*/
-    void askMotherEarthSteps(int maxSteps);
+    void askMotherEarthSteps(int maxSteps, Table table, Difficulty difficulty);
 
     /** chiede al giocatore di scegliere una tessera nuvola */
     void askCloud(Table table);

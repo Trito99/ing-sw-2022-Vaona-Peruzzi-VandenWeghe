@@ -213,12 +213,12 @@ public class GameController {
                             again = false;
                             gameSession.playAssistantCard(CardSelected.getCardNickname(), receivedMessage.getNickname());
                         } else {
-                            virtualView.showMessage("\nCard already played by another player. Try again");
+                            virtualView.showMessage("\n⚠️Card already played by another player. Try again ⚠️");
                             virtualView.askAssistantCardToPlay();
                             again = true;
                         }
                     }else{
-                        virtualView.showMessage("\nCard doesn't exist or has already been played. Try again");
+                        virtualView.showMessage("\n⚠️Card doesn't exist or has already been played. Try again ⚠️");
                         virtualView.askAssistantCardToPlay();
                         again = true;
                     }
@@ -271,6 +271,7 @@ public class GameController {
                                 }
                                 if(!full) {
                                     gameSession.moveStudentFromListToHall(gameSession.getPlayer(turnController.getActivePlayer()), studentId, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
+                                    virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore());
                                     gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(turnController.getActivePlayer()), CardEffect.STANDARDMODE);
                                     movedStudents++;
                                     if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces()) {
@@ -279,7 +280,7 @@ public class GameController {
                                     }
                                     action();
                                 }else{
-                                    virtualView.showMessage("Table already full. Select another student");
+                                    virtualView.showMessage("⚠️Table already full. Select another student ⚠️");
                                     again = true;
                                     virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                                 }
@@ -288,12 +289,12 @@ public class GameController {
                                 virtualView.askId(true,null,-1, null);
                             }
                         } else {
-                            virtualView.showMessage("\nWrong input");
+                            virtualView.showMessage("\n⚠️Wrong input  ⚠️");
                             again = true;
                             virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                         }
                     }else{
-                        virtualView.showMessage("\nStudent selected is not available");
+                        virtualView.showMessage("\n⚠️Student selected is not available ⚠️");
                         again = true;
                         virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                     }
@@ -315,7 +316,7 @@ public class GameController {
                             if(playable)
                                 virtualView.askCharacterCardToPlay(true, -1, null);
                             else{
-                                virtualView.showMessage("\nYou don't have enough coins for any card");
+                                virtualView.showMessage("\n⚠️You don't have enough coins for any card ⚠️");
                                 setActionState(ActionState.STUDENT);
                                 action();
                             }
@@ -323,7 +324,7 @@ public class GameController {
                             setActionState(ActionState.STUDENT);
                             action();
                         }else{
-                            virtualView.showMessage("\nWrong Input");
+                            virtualView.showMessage("\n⚠️Wrong input  ⚠️");
                             virtualView.askCharacterCardToPlay(false, gameSession.getPlayer(turnController.getActivePlayer()).getCoinScore(), gameSession.getTable().getCharacterCardsOnTable());
                         }
                     }else {
@@ -379,18 +380,22 @@ public class GameController {
                                 case COURTESAN:
                                 case BARD:
                                     card = true;
+                                    broadcastMessage(gameSession.getPlayer(getActivePlayer()).getNickname() +" has activated " + characterCard.getCardEffect().toString() + "effect!");
                                     virtualView.askId(false,characterCard,acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool());
                                     break;
                                 case HERALD:
                                 case CURATOR:
                                     card = true;
+                                    broadcastMessage(gameSession.getPlayer(getActivePlayer()).getNickname() +" has activated " + characterCard.getCardEffect().toString() + "effect!");
                                     virtualView.askId(true,characterCard, -1, null);
                                     break;
                                 case HERBALIST:
                                 case JUNKDEALER:
+                                    broadcastMessage(gameSession.getPlayer(getActivePlayer()).getNickname() +" has activated " + characterCard.getCardEffect().toString() + "effect!");
                                     virtualView.askColorToBlock(characterCard.getCardEffect());
                                     break;
                                 default:
+                                    broadcastMessage(gameSession.getPlayer(getActivePlayer()).getNickname() +" has activated " + characterCard.getCardEffect().toString() + " effect!");
                                     gameSession.playCharacterCard(characterCard.getCardEffect(), CardSelected.getNickname(), -1,-1 , -1, null);
                                     characterCard.setCoinOnCard(true);
                                     setActionState(ActionState.STUDENT);
@@ -401,11 +406,11 @@ public class GameController {
                         } else {
                             again = true;
                             if (exists && !empty)
-                                virtualView.showMessage("\nYou don't have enough coins for this card");
+                                virtualView.showMessage("\n⚠️You don't have enough coins for this card ⚠️");
                             else if (!exists && !changeIdea)
-                                virtualView.showMessage("\nEffect not present. Try again");
+                                virtualView.showMessage("\n⚠️Effect not present. Try again ⚠️");
                             else if (empty )
-                                virtualView.showMessage("\nCard selected is empty");
+                                virtualView.showMessage("\n⚠️Card selected is empty ⚠️");
                             if (!changeIdea)
                             virtualView.askCharacterCardToPlay(true, -1, null);
                         }
@@ -438,7 +443,7 @@ public class GameController {
                             }
                             action();
                         } else {
-                            virtualView.showMessage("\nIsland selected doesn't exist. ");
+                            virtualView.showMessage("\n⚠️Island selected doesn't exist. ⚠️");
                             again = true;
                             virtualView.askId(true, characterCard,-1, null);
                         }
@@ -455,7 +460,7 @@ public class GameController {
                                 again = false;
                                 virtualView.askId(true,null,-1, null);
                             }else {
-                                virtualView.showMessage("\nStudent selected is not available");
+                                virtualView.showMessage("\n⚠️Student selected is not available ⚠️");
                                 again = true;
                                 virtualView.askId(false,characterCard,-1, null);
                             }
@@ -507,13 +512,14 @@ public class GameController {
                                     again = false;
                                     acrobatIndex++;
                                     gameSession.playCharacterCard(characterCard.getCardEffect(), Choice.getNickname(), studentIdCard, -1, studentId, null);
+                                    virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore());
                                     if (acrobatIndex<max)
                                         virtualView.askId(false, characterCard, acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool());
                                 }else{
                                     if (characterCard.getCardEffect().equals(CardEffect.ACROBAT))
-                                        virtualView.showMessage("\nStudent selected is not available");
+                                        virtualView.showMessage("\n⚠️Student selected is not available ⚠️");
                                     else
-                                        virtualView.showMessage("\nStudent selected is not available or isn't the last on the table you selected");
+                                        virtualView.showMessage("\n⚠️Student selected is not available or isn't the last on the table you selected ⚠️");
                                     again = true;
                                     virtualView.askId(false,characterCard,acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool());
                                 }
@@ -541,7 +547,7 @@ public class GameController {
                                         setActionState(ActionState.STUDENT);
                                         action();
                                     }else{
-                                        virtualView.showMessage("\nStudent selected is not available");
+                                        virtualView.showMessage("\n⚠️Student selected is not available ⚠️");
                                         again = true;
                                         virtualView.askId(false, characterCard, acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool());
                                     }
@@ -558,12 +564,13 @@ public class GameController {
                             if (present) {
                                 again = false;
                                 gameSession.playCharacterCard(characterCard.getCardEffect(),turnController.getActivePlayer(), studentId,-1,-1, null);
+                                virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore());
                                 card = false;
                                 setActionState(ActionState.STUDENT);
                                 action();
 
                             }else {
-                                virtualView.showMessage("\nStudent selected is not available");
+                                virtualView.showMessage("\n⚠️Student selected is not available ⚠️");
                                 again = true;
                                 virtualView.askId(false,characterCard,-1, null);
                             }
@@ -583,13 +590,15 @@ public class GameController {
 
                     if(exists && characterCard.getCardEffect().equals(CardEffect.HERBALIST)){
                         again=false;
-                        gameSession.playCharacterCard(CardEffect.HERBALIST, turnController.getActivePlayer(), -1,-1,-1, colorChosen);
+                        gameSession.playCharacterCard(characterCard.getCardEffect(), turnController.getActivePlayer(), -1,-1,-1, colorChosen);
                         setActionState(ActionState.STUDENT);
                         action();
                     }
                     else if(exists && characterCard.getCardEffect().equals(CardEffect.JUNKDEALER)){
                         again=false;
                         gameSession.playCharacterCard(CardEffect.JUNKDEALER, turnController.getActivePlayer(), -1,-1,-1, colorChosen);
+                        virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore());
+
                         for (VirtualView vv : allVirtualView.values()) {
                             if (vv!=virtualView)
                                 vv.showMessage(turnController.getActivePlayer()+" has played the JUNKDEALER Character Card for the color "+ colorChosen.toString());
@@ -599,19 +608,19 @@ public class GameController {
                     }
                     else {
                         again = true;
-                        virtualView.showMessage("\nColor selected doesn't exists! ");
+                        virtualView.showMessage("\n⚠️Color selected doesn't exists! ⚠️ ");
                         virtualView.askColorToBlock(characterCard.getCardEffect());
                     }
                 }
                 if(receivedMessage.getMessageType() == MessageType.STEP_MOTHER_EARTH_CHOSEN){
                     MotherEarthStepsChosen step = (MotherEarthStepsChosen) receivedMessage;
                     if(step.getSteps()>step.getMaxSteps()) {
-                        virtualView.showMessage("\nSteps selected more than maximum available");
+                        virtualView.showMessage("\n⚠️Steps selected more than maximum available ⚠️");
                         again=true;
                         if(characterCard!=null && characterCard.getCardEffect().isBearerPlayed()){
-                            allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth()+2);
+                            allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth()+2, gameSession.getTable(), gameSession.getDifficulty());
                         }else
-                            allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth());
+                            allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth(), gameSession.getTable(), gameSession.getDifficulty());
                     }else{
                         again=false;
                         int steps = step.getSteps();
@@ -645,7 +654,7 @@ public class GameController {
                         gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromCloudToEntry(gameSession.getTable().getCloudNumber().get(Cloud.getId() - 1));
                         turnFinished = true;
                     }else{
-                        virtualView.showMessage("\nCloud is empty or doesn't exist");
+                        virtualView.showMessage("\n⚠️Cloud is empty or doesn't exist ⚠️");
                         again=true;
                         virtualView.askCloud(gameSession.getTable());
                     }
@@ -663,7 +672,7 @@ public class GameController {
                 }
                 break;
             default:
-                String message = "Errore!";
+                String message = "⚠️Error! ⚠️";
                 for (VirtualView vv : allVirtualView.values()) {
                     vv.showMessage(message);
                 }
@@ -691,7 +700,6 @@ public class GameController {
         return gameSession;
     }
 
-    /** DA CONTROLLARE */
     /** inizia il turno */
     public void planning(){
         if (roundIndex < maxPlayers) {
@@ -727,9 +735,9 @@ public class GameController {
                     break;
                 case MOTHERNATURE:
                     if(characterCard!=null && characterCard.getCardEffect().isBearerPlayed())
-                        allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth() + 2);
+                        allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth() + 2, gameSession.getTable(), gameSession.getDifficulty());
                     else
-                        allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth());
+                        allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth(), gameSession.getTable(), gameSession.getDifficulty());
                     break;
                 case CLOUDCARD:
                     if (gameSession.gameIsFinished(turnController.getActivePlayer())){
@@ -765,11 +773,11 @@ public class GameController {
             allVirtualView.get(s).showTable(gameSession.getTable(), gameSession.getDifficulty());
             for(Player p : gameSession.getListOfPlayers()) {
                 if (p.getNickname() != s)
-                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname(), p.getTrash(), gameSession.getDifficulty(), p.getCoinScore());
+                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname()+"'s ", p.getTrash(), gameSession.getDifficulty(), p.getCoinScore());
             }
             for(Player p : gameSession.getListOfPlayers()){
                 if (p.getNickname() == s) {
-                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname(), p.getTrash(), gameSession.getDifficulty(), p.getCoinScore());
+                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), "Your", p.getTrash(), gameSession.getDifficulty(), p.getCoinScore());
                     allVirtualView.get(s).showDeckAssistant(p.getDeckOfPlayer());
                 }
             }
@@ -787,20 +795,23 @@ public class GameController {
     public void endGame(){
         if(gameSession.getGameMode()==GameMode.COOP){
             if (gameSession.getTable().playerIsWinning(gameSession).getPlayerNumber().equals(PlayerNumber.PLAYER1) || gameSession.getTable().playerIsWinning(gameSession).getPlayerNumber().equals(PlayerNumber.PLAYER2)){
-                broadcastMessage("Team 1 WINS!!");
+                broadcastMessage("🎉 Team 1 WINS!! 🎉");
             }
             else
-                broadcastMessage("Team 2 WINS!!");
+                broadcastMessage("🎉 Team 2 WINS!! 🎉");
 
         }
         else {
-            //broadcastMessage("\n" + gameSession.getTable().playerIsWinning(gameSession).getNickname() + " WINS");
-            for (String nickname : allVirtualView.keySet()) {
-                if (nickname == gameSession.getTable().playerIsWinning(gameSession).getNickname())
-                    allVirtualView.get(nickname).showWinMessage();
+            if(gameSession.getTable().playerIsWinning(gameSession) == null)
+                broadcastMessage("Tie");
+            else {
+                for (String nickname : allVirtualView.keySet()) {
 
-                else
-                    allVirtualView.get(nickname).showLoseMessage(gameSession.getTable().playerIsWinning(gameSession).getNickname());
+                    if (nickname == gameSession.getTable().playerIsWinning(gameSession).getNickname())
+                        allVirtualView.get(nickname).showWinMessage();
+                    else
+                        allVirtualView.get(nickname).showLoseMessage(gameSession.getTable().playerIsWinning(gameSession).getNickname());
+                }
             }
         }
         disconnect();
@@ -810,29 +821,6 @@ public class GameController {
     /**
      * METODI USATI PER CONNESSIONE CLIENT - SERVER
      * */
-
-    /**
-     public boolean hasInactivePlayers(){
-     return turnController.hasInactivePlayers();
-     }*/
-
-    /** @return lista di nickname dei giocatori disconnessi dal gioco */
-    /**
-     public List<String> getInactivePlayers(){
-     return turnController.getInactivePlayers();
-     }/*
-
-     /** riconnette giocatore che si era disconnesso, durante il gioco avviato */
-    /**
-     public void reconnect(String nickname, VirtualView virtualView){
-     allVirtualView.put(nickname, virtualView);
-     turnController.reconnect(nickname);
-     broadcastMessage(nickname + " si è riconnesso.");
-     showPlayer(gameSession.getPlayer(nickname),nickname);
-     allVirtualView.get(nickname).showPersonalSchool(gameSession.getPlayer(nickname).getPersonalSchool(), nickname,gameSession.getPlayer(nickname).getTrash());
-     allVirtualView.get(nickname).showTable(gameSession.getTable());
-     allVirtualView.get(nickname).showPlayerTurn(getActivePlayer());
-     }/*
 
      /** rimouove giocatore dal gioco e controlla se era l'active player---> inizia nuovo turno */
     public void disconnect(){
