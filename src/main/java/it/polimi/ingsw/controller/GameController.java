@@ -793,13 +793,16 @@ public class GameController {
 
         }
         else {
-            for (String nickname : allVirtualView.keySet()) {
-                if (nickname == gameSession.getTable().playerIsWinning(gameSession).getNickname())
-                    allVirtualView.get(nickname).showWinMessage();
-                else if(nickname == null)
-                    broadcastMessage("Tie");
-                else
-                    allVirtualView.get(nickname).showLoseMessage(gameSession.getTable().playerIsWinning(gameSession).getNickname());
+            if(gameSession.getTable().playerIsWinning(gameSession) == null)
+                broadcastMessage("Tie");
+            else {
+                for (String nickname : allVirtualView.keySet()) {
+
+                    if (nickname == gameSession.getTable().playerIsWinning(gameSession).getNickname())
+                        allVirtualView.get(nickname).showWinMessage();
+                    else
+                        allVirtualView.get(nickname).showLoseMessage(gameSession.getTable().playerIsWinning(gameSession).getNickname());
+                }
             }
         }
         disconnect();
