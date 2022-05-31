@@ -755,7 +755,7 @@ public class GameController {
             allVirtualView.get(s).showTable(gameSession.getTable(), gameSession.getDifficulty());
             for(Player p : gameSession.getListOfPlayers()) {
                 if (p.getNickname() != s)
-                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname()+"'s", p.getTrash(), gameSession.getDifficulty(), p.getCoinScore());
+                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname()+"'s ", p.getTrash(), gameSession.getDifficulty(), p.getCoinScore());
             }
             for(Player p : gameSession.getListOfPlayers()){
                 if (p.getNickname() == s) {
