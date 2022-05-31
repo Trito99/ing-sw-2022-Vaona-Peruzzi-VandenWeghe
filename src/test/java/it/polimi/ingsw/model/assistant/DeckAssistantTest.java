@@ -10,7 +10,7 @@ public class DeckAssistantTest {
     @Test
     public void generateAssistantDeckTest(){
 
-        DeckAssistant deckAssistant = new DeckAssistant(AssistantDeckName.DECK1);
+        DeckAssistant deckAssistant = new DeckAssistant(AssistantDeckName.WIZARD1);
         deckAssistant.generateAssistantDeck();
         int countCard = 0,countStepMotherEarth = 0,countTurnValue = 0,n=1;
         assertNotNull(deckAssistant.getCardsInHand());

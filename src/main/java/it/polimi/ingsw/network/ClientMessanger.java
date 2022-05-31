@@ -2,7 +2,9 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.message.Error;
+import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.game.Difficulty;
+import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.observer.ObserverView;
 import it.polimi.ingsw.view.View;
@@ -51,6 +53,10 @@ public class ClientMessanger implements ObserverView, Observer {
     /** comunica il numero di giocatori del gioco in corso */
     public void choosePlayersNumberAndDifficulty(int playersNumber, Difficulty difficulty) {
         client.sendMessage(new PlayersNumberAndDifficulty(nickname, playersNumber,difficulty));
+    }
+
+    public void chooseTowerColorAndDeck(TColor towerColorChosen, AssistantDeckName assistantDeckChosen) {
+        client.sendMessage(new TowerColorAndDeckChosen(nickname, towerColorChosen, assistantDeckChosen));
     }
 
     public void chooseCharacterCard(String cardNickname, boolean choice){
@@ -146,6 +152,10 @@ public class ClientMessanger implements ObserverView, Observer {
             case CHOOSE_PLACE_AND_STUDENT_FOR_MOVE:
                 ChoosePlaceAndStudentForMove entry = (ChoosePlaceAndStudentForMove) message;
                 queue.execute(() -> view.askPlaceAndStudentForMove(entry.getEntry()));
+                break;
+            case CHOOSE_TOWER_COLOR_AND_DECK:
+                ChooseTowerColorAndDeck choice = (ChooseTowerColorAndDeck) message;
+                queue.execute(() -> view.askTowerColorAndDeck(choice.getTowerColors(),choice.getAssistantDeckNames()));
                 break;
             case CHOOSE_ID:
                 ChooseId id = (ChooseId) message;

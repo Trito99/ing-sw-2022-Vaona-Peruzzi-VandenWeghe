@@ -1,6 +1,8 @@
 package it.polimi.ingsw.observer;
 
+import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.game.Difficulty;
+import it.polimi.ingsw.model.school.TColor;
 
 import java.util.GregorianCalendar;
 
@@ -27,6 +29,8 @@ public interface ObserverView {
 
     /** invia messaggio al server con il numero di giocatori scelti dal giocatore */
     public void choosePlayersNumberAndDifficulty(int playersNumber, Difficulty difficulty);
+
+    public void chooseTowerColorAndDeck(TColor towerColorChosen, AssistantDeckName assistantDeckChosen);
 
     public void chooseAssistantCard(String cardNickname);
 

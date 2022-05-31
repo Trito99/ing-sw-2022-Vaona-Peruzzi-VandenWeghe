@@ -1,11 +1,13 @@
 package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
+import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.school.School;
+import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.observer.ObservableView;
@@ -41,6 +43,11 @@ public class GUI extends ObservableView implements View {
         PNandDifficulty pNandDifficulty = new PNandDifficulty();
         pNandDifficulty.addAllObservers(observers);
         Platform.runLater(()-> GuiManager.changeRootPane(observers,"/fxml/players_number_and_difficulty_scene") );
+    }
+
+    @Override
+    public void askTowerColorAndDeck(ArrayList<TColor> towerColors, ArrayList<AssistantDeckName> assistantDeckNames) {
+
     }
 
     @Override

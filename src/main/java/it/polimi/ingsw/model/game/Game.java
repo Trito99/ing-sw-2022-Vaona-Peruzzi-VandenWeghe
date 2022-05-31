@@ -2,11 +2,13 @@ package it.polimi.ingsw.model.game;
 
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
+import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.Team;
+import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
@@ -23,6 +25,8 @@ public class Game {
     private Difficulty difficulty;
     private Table table;
     private ArrayList<Team> team;
+    private ArrayList<TColor> towerColors = new ArrayList<>();
+    private ArrayList<AssistantDeckName> assistantDeckNames = new ArrayList<>();
 
     /**
      * Default constructor.
@@ -42,6 +46,42 @@ public class Game {
 
     public ArrayList<Player> getListOfPlayers(){
         return listOfPlayers;
+    }
+
+    public ArrayList<AssistantDeckName> getAssistantDeckNames(){
+        return assistantDeckNames;
+    }
+
+    public ArrayList<TColor> getTowerColors(){
+        return towerColors;
+    }
+
+
+    /** generates lists witch available tower colors and
+     *
+     */
+    public void generateTowerColorsAndAssistantDeckName(){
+        int playerNumber = 0;
+        switch(gameMode){
+            case TWOPLAYERS:
+                playerNumber = 2;
+                break;
+            case THREEPLAYERS:
+                playerNumber = 3;
+                break;
+            case COOP:
+                playerNumber = 4;
+                break;
+        }
+        if(gameMode.equals(GameMode.COOP)){
+            for (int i = 0; i < playerNumber-2; i++)
+                towerColors.add(TColor.values()[i]);
+        }else {
+            for (int i = 0; i < playerNumber; i++)
+                towerColors.add(TColor.values()[i]);
+        }
+        for (int i = 0; i < playerNumber; i++)
+            assistantDeckNames.add(AssistantDeckName.values()[i]);
     }
 
     /**
@@ -68,7 +108,7 @@ public class Game {
 
     /**
      *
-     * @param player Add a player at the list of players of the game.
+     * @param player Adds a player at the list of players of the game.
      */
     public void addPlayer(Player player) {
         if(listOfPlayers.size()<4){

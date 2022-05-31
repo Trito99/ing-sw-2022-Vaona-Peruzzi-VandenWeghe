@@ -64,7 +64,7 @@ public class GameControllerTest {
         extraView = new VirtualView(clientHandler);
 
         table = new Table();
-        deckOfPlayer = new DeckAssistant(AssistantDeckName.DECK1);
+        deckOfPlayer = new DeckAssistant(AssistantDeckName.WIZARD1);
         table.addFinalStudents();
         table.generateIslandCards();
         table.generateMotherEarth();
@@ -159,9 +159,9 @@ public class GameControllerTest {
         gameSession.addPlayer(player2);
 
         Table table = new Table();
-        DeckAssistant deckAssistant1 = new DeckAssistant(AssistantDeckName.DECK1);
+        DeckAssistant deckAssistant1 = new DeckAssistant(AssistantDeckName.WIZARD1);
         ArrayList<AssistantCard> assistantCards1 = new ArrayList<>();
-        DeckAssistant deckAssistant2 = new DeckAssistant(AssistantDeckName.DECK2);
+        DeckAssistant deckAssistant2 = new DeckAssistant(AssistantDeckName.WIZARD2);
         ArrayList<AssistantCard> assistantCards2 = new ArrayList<>();
         table.generateIslandCards();
 

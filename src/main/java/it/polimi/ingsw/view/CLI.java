@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
+import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
@@ -8,6 +9,7 @@ import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.school.School;
+import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
@@ -167,6 +169,55 @@ public class CLI extends ObservableView implements View {
         int finalPlayersNumber = playersNumber;
         Difficulty finalDifficulty = difficulty;
         notifyObserver(obs -> obs.choosePlayersNumberAndDifficulty(finalPlayersNumber,finalDifficulty));
+    }
+
+    @Override
+    public void askTowerColorAndDeck(ArrayList<TColor> towerColors, ArrayList<AssistantDeckName> assistantDeckNames){
+        TColor towerColorChosen = null;
+        AssistantDeckName assistantDeckNameChosen = null;
+        boolean present = false;
+        do {
+            out.print("\nChoose a color for your towers:\n");
+            for(TColor color : towerColors)
+                out.print(color.toString()+" | ");
+            out.print("\n");
+
+            try {
+                towerColorChosen = TColor.valueOf(readInput().toUpperCase(Locale.ROOT));
+                for (TColor color : towerColors){
+                    if (color.toString().equals(towerColorChosen.toString()))
+                        present = true;
+                }
+                if(!present)
+                    out.print("\nColor selected doesn't exist or isn't available");
+            } catch (Exception e) {
+                out.println(WRONG_INPUT);
+            }
+
+        } while(!present);
+        do {
+            present = false;
+            out.print("\nChoose an Assistant Deck: \n");
+            for(AssistantDeckName deckName : assistantDeckNames)
+                out.print(deckName.toString()+" | ");
+            out.print("\n");
+
+            try {
+                assistantDeckNameChosen= AssistantDeckName.valueOf(readInput().toUpperCase(Locale.ROOT));
+                for (AssistantDeckName assistantDeckName : assistantDeckNames){
+                    if (assistantDeckName.toString().equals(assistantDeckNameChosen.toString()))
+                        present = true;
+                }
+                if(!present)
+                    out.print("\nAssistant Deck selected doesn't exist or isn't available");
+            } catch (Exception e) {
+                out.println(WRONG_INPUT);
+            }
+
+        } while(!present);
+        TColor finalTowerColorChosen = towerColorChosen;
+        AssistantDeckName finalAssistantDeckNameChosen = assistantDeckNameChosen;
+        notifyObserver(obs -> obs.chooseTowerColorAndDeck(finalTowerColorChosen, finalAssistantDeckNameChosen));
     }
 
 

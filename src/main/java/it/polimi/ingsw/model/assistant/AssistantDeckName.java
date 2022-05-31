@@ -1,8 +1,8 @@
 package it.polimi.ingsw.model.assistant;
 
 public enum AssistantDeckName {
-    DECK1,
-    DECK2,
-    DECK3,
-    DECK4,
+    WIZARD1,
+    WIZARD2,
+    WIZARD3,
+    WIZARD4,
 }

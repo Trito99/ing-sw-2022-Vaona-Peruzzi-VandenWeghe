@@ -3,11 +3,13 @@ package it.polimi.ingsw.view;
 import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.message.Error;
 import it.polimi.ingsw.model.assistant.AssistantCard;
+import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.school.School;
+import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.network.ClientHandlerInterface;
@@ -101,6 +103,11 @@ public class VirtualView implements View, Observer {
     @Override
     public void askPlayersNumberAndDifficulty() {
         clientHandler.sendMessage(new HostGameReply());
+    }
+
+    @Override
+    public void askTowerColorAndDeck(ArrayList<TColor> towerColors, ArrayList<AssistantDeckName> assistantDeckNames) {
+        clientHandler.sendMessage(new ChooseTowerColorAndDeck(towerColors, assistantDeckNames));
     }
 
     @Override

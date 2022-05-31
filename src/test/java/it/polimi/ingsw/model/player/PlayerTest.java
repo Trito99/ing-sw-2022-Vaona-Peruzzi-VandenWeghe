@@ -23,7 +23,7 @@ public class PlayerTest {
     @BeforeEach
     public void setup(){
         table = new Table();
-        deckOfPlayer = new DeckAssistant(AssistantDeckName.DECK1);
+        deckOfPlayer = new DeckAssistant(AssistantDeckName.WIZARD1);
         table.addFinalStudents();
         table.generateIslandCards();
         table.generateMotherEarth();
@@ -150,7 +150,7 @@ public class PlayerTest {
    @Test
    public void deckOfPlayerTest(){
        Player player = new Player(TColor.BLACK, PlayerNumber.PLAYER1);
-       DeckAssistant deckOfPlayer = new DeckAssistant(AssistantDeckName.DECK1);
+       DeckAssistant deckOfPlayer = new DeckAssistant(AssistantDeckName.WIZARD1);
        assertNull(player.getDeckOfPlayer());
 
        player.setDeckOfPlayer(deckOfPlayer);
@@ -187,7 +187,7 @@ public class PlayerTest {
    @Test
     void getAssistantCardTest(){
         Player player = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
-        DeckAssistant deckAssistant = new DeckAssistant(AssistantDeckName.DECK1);
+        DeckAssistant deckAssistant = new DeckAssistant(AssistantDeckName.WIZARD1);
 
         player.setDeckOfPlayer(deckAssistant);
         AssistantCard card = player.getAssistantCard("lion");

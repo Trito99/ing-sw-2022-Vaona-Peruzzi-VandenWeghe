@@ -37,7 +37,7 @@ class GameTest {
         player.setNickname("Gino");
         game.addPlayer(player);
         Table table = new Table();
-        DeckAssistant deckAssistant = new DeckAssistant(AssistantDeckName.DECK1);
+        DeckAssistant deckAssistant = new DeckAssistant(AssistantDeckName.WIZARD1);
         table.generateIslandCards();
 
         game.setTable(table);
@@ -76,7 +76,7 @@ class GameTest {
         Player player = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
         player.setNickname("Gino");
         game.addPlayer(player);
-        DeckAssistant deckAssistant = new DeckAssistant(AssistantDeckName.DECK1);
+        DeckAssistant deckAssistant = new DeckAssistant(AssistantDeckName.WIZARD1);
         game.getPlayer("Gino").setDeckOfPlayer(deckAssistant);
 
         game.playAssistantCard("lion", "Gino");
