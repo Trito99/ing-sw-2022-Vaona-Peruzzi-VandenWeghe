@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="ing-sw-2022-Vaona-Peruzzi-VandenWeghe" />
         <module name="softeng-GC25" />
+        <module name="GC25" />
       </profile>
     </annotationProcessing>
   </component>
