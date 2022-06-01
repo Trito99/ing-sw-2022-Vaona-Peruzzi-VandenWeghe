@@ -13,7 +13,12 @@
             <Image url="@../images/eriantys_home.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="buttonStart" layoutX="629.0" layoutY="509.0" mnemonicParsing="false" onAction="#clickButton" prefHeight="31.0" prefWidth="73.0" text="Start">
+      <Button fx:id="startButton" layoutX="629.0" layoutY="509.0" mnemonicParsing="false" onAction="#clickButtonStart" prefHeight="31.0" prefWidth="73.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" text="Start">
+         <font>
+            <Font name="Verdana" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="rulesButton" layoutX="634.0" layoutY="236.0" mnemonicParsing="false" onAction="#clickButtonRules" prefHeight="31.0" prefWidth="73.0" styleClass="exit-button" stylesheets="@../css/ConnectToServer.css" text="Rules" textFill="#f3f3f3">
          <font>
             <Font name="Verdana" size="18.0" />
          </font>
