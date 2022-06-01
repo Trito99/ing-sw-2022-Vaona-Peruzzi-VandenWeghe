@@ -24,7 +24,7 @@ import java.util.HashMap;
 
 public class GameController {
     private Game gameSession;
-    private int maxPlayers, roundIndex, studentId, movedStudents=0, acrobatIndex=0;
+    private int maxPlayers, roundIndex, studentId, movedStudents=0, acrobatIndex=0, round=1;
     private TurnController turnController;
     private GameState gameState;
     private final HashMap<String, VirtualView> allVirtualView;
@@ -86,12 +86,6 @@ public class GameController {
                 generatePlayer(nickname,playerDate,allVirtualView.size()-1);
                 virtualView.showLogin(nickname, gameId, playerDate,true);
                 virtualView.askTowerColorAndDeck(gameSession.getTowerColors(),gameSession.getAssistantDeckNames());
-                if(maxPlayers == 3)
-                    virtualView.showMessage("Three Players Mode. You have BLACK towers! \nWaiting for other players...");
-                else if(maxPlayers == 4)
-                    virtualView.showMessage("Coop Mode. You have WHITE towers! \nWaiting for other players...");
-                else if(maxPlayers == 2)
-                    virtualView.showMessage("Two Players Mode. You have BLACK towers!");
 
             }
             else if(allVirtualView.size() == 2){
@@ -103,30 +97,16 @@ public class GameController {
                 allVirtualView.put(nickname, virtualView);
                 virtualView.showLogin(nickname, gameId, playerDate,true);
                 virtualView.askTowerColorAndDeck(gameSession.getTowerColors(),gameSession.getAssistantDeckNames());
-                if(maxPlayers==3)
-                    virtualView.showMessage("Three Players Mode. You have GREY towers! \nWaiting for other players...");
-                else if(maxPlayers==4)
-                    virtualView.showMessage("Coop Mode. You have BLACK towers! \nWaiting for other players...");
-
             }
             else if(allVirtualView.size() == 3){
                 allVirtualView.put(nickname, virtualView);
                 generatePlayer(nickname,playerDate,allVirtualView.size()-1);
                 virtualView.showLogin(nickname, gameId, playerDate,true);
                 virtualView.askTowerColorAndDeck(gameSession.getTowerColors(),gameSession.getAssistantDeckNames());
-                if(maxPlayers==4)
-                    virtualView.showMessage("Coop Mode. You have BLACK towers! \nWaiting for other players...");
-
             }
 
 
             if(allVirtualView.size() == maxPlayers){
-                if(gameSession.getGameMode().equals(GameMode.COOP)){
-                    gameSession.getListOfPlayers().get(0).setTeamMate(gameSession.getListOfPlayers().get(1).getNickname());
-                    gameSession.getListOfPlayers().get(1).setTeamMate(gameSession.getListOfPlayers().get(0).getNickname());
-                    gameSession.getListOfPlayers().get(2).setTeamMate(gameSession.getListOfPlayers().get(3).getNickname());
-                    gameSession.getListOfPlayers().get(3).setTeamMate(gameSession.getListOfPlayers().get(2).getNickname());
-                }
                 broadcastMessage("Everyone joined the game!");
                 turnController = new TurnController(this);
             }
@@ -182,6 +162,24 @@ public class GameController {
                     gameSession.getAssistantDeckNames().remove((TCaDSelected.getAssistantDeckName()));
                     virtualView.showMessage(gameSession.getGameMode()+" Mode.You have "+gameSession.getPlayer(TCaDSelected.getNickname()).getTColor()+" towers! \nWaiting for other players...");
                     if(gameSession.getListOfPlayers().size()==maxPlayers){
+                        if(gameSession.getGameMode().equals(GameMode.COOP)){
+                            for(Player player : gameSession.getListOfPlayers()){
+                                for(Player player2 : gameSession.getListOfPlayers()){
+                                    if(!player2.equals(player)) {
+                                        if (player.getTColor().equals(player2.getTColor())) {
+                                            player.setTeamMate(player2.getNickname());
+                                        }
+                                    }
+                                }
+                            }
+                            for(int i=0;i<2;i++){
+                                for(Player player : gameSession.getListOfPlayers()){
+                                    if(player.getTColor().equals(TColor.values()[i]) && !player.getPersonalSchool().getTowers().isEmpty()){
+                                        gameSession.getPlayer(player.getTeamMate()).getPersonalSchool().getTowers().clear();
+                                    }
+                                }
+                            }
+                        }
                         gameState = GameState.PLANNING;
                         gameSession.getTable().extractStudentOnCloud();
                         planning();
@@ -752,6 +750,7 @@ public class GameController {
         if (roundIndex == maxPlayers) {
             turnController.setPlayingPlayer(turnController.getNewPlayerOrderByName().get(0));
             roundIndex = 0;
+            round++;
             setGameState(GameState.PLANNING);
             if(!lastRound) {
                 if (gameSession.getTable().getBag().size() >= ((gameSession.getTable().getCloudNumber().size()) * (gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces()))) {
@@ -782,9 +781,9 @@ public class GameController {
                 }
             }
             if (s == turnController.getActivePlayer())
-                allVirtualView.get(s).showMessage("\n\nYour Turn");
+                allVirtualView.get(s).showMessage("\nRound "+round+" | Your Turn");
             else
-                allVirtualView.get(s).showMessage("\n\nTurn of " + turnController.getActivePlayer());
+                allVirtualView.get(s).showMessage("\nRound "+round+" | Turn of " + turnController.getActivePlayer());
         }
     }
 
