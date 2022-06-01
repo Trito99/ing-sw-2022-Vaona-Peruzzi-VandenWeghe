@@ -12,6 +12,7 @@ public enum MessageType {
     PLACE_AND_STUDENT_FOR_MOVE_CHOSEN,
     STEP_MOTHER_EARTH_CHOSEN,
     ID_CHOSEN,
+    TOWER_COLOR_AND_DECK_CHOSEN,
 
     //messaggi di connessione al server
     SUCCESSFUL_HOST,
@@ -38,6 +39,7 @@ public enum MessageType {
     CHOOSE_MOTHER_EARTH_STEPS,
     CHOOSE_ID,
     CHOOSE_COLOR_TO_BLOCK,
+    CHOOSE_TOWER_COLOR_AND_DECK,
 
 
     //messaggi intermediari
