@@ -74,8 +74,10 @@ public class Game {
                 break;
         }
         if(gameMode.equals(GameMode.COOP)){
-            for (int i = 0; i < playerNumber-2; i++)
-                towerColors.add(TColor.values()[i]);
+            for(int twice=0;twice<2;twice++) {
+                for (int i = 0; i < playerNumber - 2; i++)
+                    towerColors.add(TColor.values()[i]);
+            }
         }else {
             for (int i = 0; i < playerNumber; i++)
                 towerColors.add(TColor.values()[i]);

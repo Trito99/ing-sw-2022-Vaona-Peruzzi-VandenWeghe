@@ -89,6 +89,7 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
                 }
             }
         } catch (Exception exception) {
+            exception.printStackTrace();
             lobby.getGameController().endGame();
             disconnect();
         }

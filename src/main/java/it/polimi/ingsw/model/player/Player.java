@@ -65,12 +65,7 @@ public class Player implements Serializable {
             table.getBag().remove(table.getBag().get(s));
         }
         for (int f = 1; f < t+1; f++) {
-            if(gameMode == GameMode.COOP && playerNumber == PlayerNumber.PLAYER1 )
-                personalSchool.addTower(tColor);
-            else if(gameMode == GameMode.COOP && playerNumber == PlayerNumber.PLAYER3)
-                personalSchool.addTower(tColor);
-            else if(gameMode!=GameMode.COOP)
-                personalSchool.addTower(tColor);
+            personalSchool.addTower(tColor);
         }
 
         personalSchool.getProfOfPlayer().add(new Prof(SColor.GREEN));

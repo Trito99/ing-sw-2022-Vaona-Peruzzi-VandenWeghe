@@ -178,8 +178,8 @@ public class CLI extends ObservableView implements View {
         boolean present = false;
         do {
             out.print("\nChoose a color for your towers:\n");
-            for(TColor color : towerColors)
-                out.print(color.toString()+" | ");
+            for (TColor color : towerColors)
+                out.print(getTowerAnsiColor(new Tower(color)) + color.toString() + ANSI_RESET + " | ");
             out.print("\n");
 
             try {
@@ -667,7 +667,7 @@ public class CLI extends ObservableView implements View {
                     out.print(getStudentAnsiColor(student) + student.getIdStudent() + " " + ANSI_RESET);
             }
         }
-        out.print("\n");
+        out.print("\n\n");
     }
 
     private String getStudentAnsiColor(Student student) {
