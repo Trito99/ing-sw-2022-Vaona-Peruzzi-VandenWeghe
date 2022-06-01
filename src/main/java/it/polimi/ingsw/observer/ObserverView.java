@@ -17,6 +17,8 @@ public interface ObserverView {
     /** cerca di connettere un client ad una socket */
     public void updateConnect(String address, int port);
 
+    public void askLobbyServerInfo();
+
     /** cerca di disconnettere un client da una socket */
     public void updateDisconnect();
 

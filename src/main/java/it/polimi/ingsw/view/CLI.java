@@ -14,6 +14,8 @@ import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
+import it.polimi.ingsw.network.Lobby;
+import it.polimi.ingsw.network.LobbyForPrint;
 import it.polimi.ingsw.observer.ObservableView;
 
 import java.io.PrintStream;
@@ -98,23 +100,30 @@ public class CLI extends ObservableView implements View {
     }
 
     @Override
-    public void askLobby(){
+    public void askLobby(Map<String, LobbyForPrint> lobbyMap){
         boolean ye;
+        String nickname = new String();
+        GregorianCalendar playerDate = new GregorianCalendar();
+        do{
+            try{
+                ye = false;
+                out.print("Enter your nickname: ");
+                nickname = readInput();
+            }catch(Exception exception){
+                ye = true;
+                out.println(WRONG_INPUT);
+            }
+        } while(ye);
         do {
             try {
                 ye = false;
-                out.print("Enter your nickname: ");
-                String nickname = readInput();
                 out.print("Enter your Birth Day (gg): ");
                 int birthDay= Integer.parseInt(readInput());
                 out.print("Enter your Birth Month (mm): ");
                 int birthMonth= Integer.parseInt(readInput());
                 out.print("Enter your Birth Year (aaaa): ");
                 int birthYear= Integer.parseInt(readInput());
-                out.print("Enter the gameID: ");
-                String gameID = readInput();
 
-                GregorianCalendar playerDate = new GregorianCalendar();
                 playerDate.setLenient(false);
                 playerDate.set(birthYear,birthMonth -1,birthDay,0,0,0);
                 playerDate.getTime();
@@ -123,8 +132,7 @@ public class CLI extends ObservableView implements View {
                 if(birthYear < 1900 || birthYear > 2021){
                     out.print("⚠️Error in selecting the date of birth! Try again. ⚠️\n");
                     ye = true;
-                }else
-                    notifyObserver(obs -> obs.updateLobby(nickname, playerDate, gameID));
+                }
             } catch (IllegalArgumentException exception){
                 ye = true;
                 out.print("⚠️Error in selecting the date of birth! Try again. ⚠️\n");
@@ -134,6 +142,25 @@ public class CLI extends ObservableView implements View {
             }
 
         }while (ye);
+        do{
+            try{
+                ye = false;
+                if(lobbyMap != null){
+                    out.print("\nLobby Id | Difficulty   | Game Mode  | Current Players\n");
+                    for(String lobbyId : lobbyMap.keySet()){
+                        out.println("    " + lobbyId + "    | " + lobbyMap.get(lobbyId).getDifficulty()+ " | " + lobbyMap.get(lobbyId).getGameMode() + " | " + lobbyMap.get(lobbyId).getCurrentPlayers());
+                    }
+                }
+                out.print("\nEnter the gameID: ");
+                String gameID = readInput();
+                String finalNickname = nickname;
+                notifyObserver(obs -> obs.updateLobby(finalNickname, playerDate, gameID));
+            }catch(Exception exception){
+                exception.printStackTrace();
+                ye = true;
+                out.println(WRONG_INPUT);
+            }
+        } while(ye);
     }
 
 
@@ -230,7 +257,7 @@ public class CLI extends ObservableView implements View {
         }
         else {
             out.println("\nGame "+gameId+ " is already full.");
-            askLobby();
+            notifyObserver(obs -> obs.askLobbyServerInfo() );
         }
     }
 

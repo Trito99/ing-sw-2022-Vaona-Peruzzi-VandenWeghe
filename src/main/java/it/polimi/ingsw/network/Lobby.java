@@ -4,11 +4,12 @@ import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.message.ClientMessage;
 import it.polimi.ingsw.view.VirtualView;
 
+import java.io.Serializable;
 import java.util.*;
 
 /** la classe tiene traccia di tutti i clients connessi al server che stanno giocando allo stesso gioco */
 
-public class Lobby {
+public class Lobby implements Serializable {
 
     private Map<ClientHandler, String> clientHandlerMap;
     private GameController gameController;
@@ -69,4 +70,9 @@ public class Lobby {
     public GameController getGameController() {
         return gameController;
     }
+
+    public void setGameController(GameController gameController) {
+        this.gameController=gameController;
+    }
+
 }

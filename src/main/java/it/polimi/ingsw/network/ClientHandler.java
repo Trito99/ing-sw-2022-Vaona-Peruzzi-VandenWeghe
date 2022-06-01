@@ -2,10 +2,7 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.message.*;
 
-import java.io.EOFException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 
 /** rappresenta il client a lato server.
@@ -64,7 +61,7 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
             }
         }
         catch(IOException e){
-            //e.printStackTrace();
+            e.printStackTrace();
             Thread.currentThread().interrupt();
             disconnect();
         }
@@ -78,7 +75,10 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
                 synchronized (lockHandleMessage) {
                     ClientMessage message = (ClientMessage) input.readObject();
 
-                    if (message.getMessageType() == MessageType.LOGIN) {
+                    if (message.getMessageType() == MessageType.LOBBY_SERVER_REQUEST) {
+                        sendMessage(new LobbyServerInfo(lobbyServer.getNewLobbyMap()));
+                    }
+                    else if (message.getMessageType() == MessageType.LOGIN) {
                         LoginRequest loginMsg = (LoginRequest) message;
                         lobby = (lobbyServer.getLobby(loginMsg.getGameId()));
                         gameId = loginMsg.getGameId();
