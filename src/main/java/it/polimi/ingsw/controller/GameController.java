@@ -2,7 +2,6 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.model.assistant.AssistantCard;
-import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
@@ -12,7 +11,6 @@ import it.polimi.ingsw.model.game.*;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
-import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
@@ -28,7 +26,7 @@ public class GameController {
     private TurnController turnController;
     private GameState gameState;
     private final HashMap<String, VirtualView> allVirtualView;
-    boolean again = false, lastRound = false, card = false;
+    boolean again = false, lastRound = false, card = false, cardPlayed = false;
     private ActionState actionState;
     private CharacterCard characterCard;
 
@@ -272,11 +270,7 @@ public class GameController {
                                     virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore());
                                     gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(turnController.getActivePlayer()), CardEffect.STANDARDMODE);
                                     movedStudents++;
-                                    if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces()) {
-                                        movedStudents=-1;
-                                        setActionState(ActionState.CHARACTER);
-                                    }
-                                    action();
+                                    allStudentsMoved();
                                 }else{
                                     virtualView.showMessage("⚠️Table already full. Select another student ⚠️");
                                     again = true;
@@ -315,12 +309,12 @@ public class GameController {
                                 virtualView.askCharacterCardToPlay(true, -1, null);
                             else{
                                 virtualView.showMessage("\n⚠️You don't have enough coins for any card ⚠️");
-                                    if(movedStudents!=-1)
-                                        setActionState(ActionState.STUDENT);
-                                    else {
-                                        setActionState(ActionState.MOTHERNATURE);
-                                        movedStudents++;
-                                    }
+                                if(movedStudents!=-1)
+                                    setActionState(ActionState.STUDENT);
+                                else {
+                                    setActionState(ActionState.MOTHERNATURE);
+                                    movedStudents++;
+                                }
                                 action();
                             }
                         }else if (CardSelected.getCardNickname().equals("NO")){
@@ -411,6 +405,7 @@ public class GameController {
                                     broadcastMessage(gameSession.getPlayer(getActivePlayer()).getNickname() +" has activated " + characterCard.getCardEffect().toString() + " effect!");
                                     gameSession.playCharacterCard(characterCard.getCardEffect(), CardSelected.getNickname(), -1,-1 , -1, null);
                                     characterCard.setCoinOnCard(true);
+                                    cardPlayed=true;
                                     if(movedStudents!=-1)
                                         setActionState(ActionState.STUDENT);
                                     else {
@@ -451,15 +446,16 @@ public class GameController {
                                 movedStudents++;
                             } else {
                                 gameSession.playCharacterCard(characterCard.getCardEffect(),Choice.getNickname(),studentId,Choice.getId(), -1, null);
-                                setActionState(ActionState.STUDENT);
+                                cardPlayed=true;
+                                if(movedStudents!=-1)
+                                    setActionState(ActionState.STUDENT);
+                                else {
+                                    setActionState(ActionState.MOTHERNATURE);
+                                    movedStudents++;
+                                }
                                 card = false;
                             }
-
-                            if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces()) {
-                                movedStudents=0;
-                                setActionState(ActionState.MOTHERNATURE);
-                            }
-                            action();
+                            allStudentsMoved();
                         } else {
                             virtualView.showMessage("\n⚠️Island selected doesn't exist. ⚠️");
                             again = true;
@@ -544,7 +540,13 @@ public class GameController {
 
                                 if (acrobatIndex == max) {
                                     acrobatIndex = 0;
-                                    setActionState(ActionState.STUDENT);
+                                    cardPlayed=true;
+                                    if(movedStudents!=-1)
+                                        setActionState(ActionState.STUDENT);
+                                    else {
+                                        setActionState(ActionState.MOTHERNATURE);
+                                        movedStudents++;
+                                    }
                                     action();
                                 }
                             }
@@ -562,7 +564,13 @@ public class GameController {
                                 } else {
                                     if (Choice.getId() == -2 && Choice.getNone()) {
                                         acrobatIndex = 0;
-                                        setActionState(ActionState.STUDENT);
+                                        cardPlayed=true;
+                                        if(movedStudents!=-1)
+                                            setActionState(ActionState.STUDENT);
+                                        else {
+                                            setActionState(ActionState.MOTHERNATURE);
+                                            movedStudents++;
+                                        }
                                         action();
                                     }else{
                                         virtualView.showMessage("\n⚠️Student selected is not available ⚠️");
@@ -584,7 +592,13 @@ public class GameController {
                                 gameSession.playCharacterCard(characterCard.getCardEffect(),turnController.getActivePlayer(), studentId,-1,-1, null);
                                 virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore());
                                 card = false;
-                                setActionState(ActionState.STUDENT);
+                                cardPlayed=true;
+                                if(movedStudents!=-1)
+                                    setActionState(ActionState.STUDENT);
+                                else {
+                                    setActionState(ActionState.MOTHERNATURE);
+                                    movedStudents++;
+                                }
                                 action();
 
                             }else {
@@ -609,7 +623,13 @@ public class GameController {
                     if(exists && characterCard.getCardEffect().equals(CardEffect.HERBALIST)){
                         again=false;
                         gameSession.playCharacterCard(characterCard.getCardEffect(), turnController.getActivePlayer(), -1,-1,-1, colorChosen);
-                        setActionState(ActionState.STUDENT);
+                        cardPlayed=true;
+                        if(movedStudents!=-1)
+                            setActionState(ActionState.STUDENT);
+                        else {
+                            setActionState(ActionState.MOTHERNATURE);
+                            movedStudents++;
+                        }
                         action();
                     }
                     else if(exists && characterCard.getCardEffect().equals(CardEffect.JUNKDEALER)){
@@ -621,7 +641,13 @@ public class GameController {
                             if (vv!=virtualView)
                                 vv.showMessage(turnController.getActivePlayer()+" has played the JUNKDEALER Character Card for the color "+ colorChosen.toString());
                         };
-                        setActionState(ActionState.STUDENT);
+                        cardPlayed=true;
+                        if(movedStudents!=-1)
+                            setActionState(ActionState.STUDENT);
+                        else {
+                            setActionState(ActionState.MOTHERNATURE);
+                            movedStudents++;
+                        }
                         action();
                     }
                     else {
@@ -696,6 +722,22 @@ public class GameController {
                 }
         }
 
+    }
+
+    private void allStudentsMoved() {
+        if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces()) {
+            if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE) && !cardPlayed) {
+                movedStudents = -1;
+                setActionState(ActionState.CHARACTER);
+            }
+            else {
+                movedStudents = 0;
+                setActionState(ActionState.MOTHERNATURE);
+            }
+        }
+        if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE) && !cardPlayed)
+            setActionState(ActionState.CHARACTER);
+        action();
     }
 
     public void setGameState(GameState gameState){
