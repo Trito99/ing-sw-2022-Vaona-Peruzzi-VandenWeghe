@@ -55,7 +55,7 @@ public class PlayerTest {
                 assertEquals(7, player1.getPersonalSchool().getEntry().size());
                 assertEquals(8, player1.getPersonalSchool().getTowers().size());
                 assertEquals(7, player2.getPersonalSchool().getEntry().size());
-                assertEquals(0, player2.getPersonalSchool().getTowers().size());
+                assertEquals(8, player2.getPersonalSchool().getTowers().size());
                 assertEquals(7, player1.getPersonalSchool().getEntry().size());
                 assertEquals(8, player1.getPersonalSchool().getTowers().size());
             default:
