@@ -27,13 +27,21 @@ public class Lobby {
 
         if(!(isGameStarted())){
             int i = 1;
-            String n = nickname;
-            clientHandlerMap.put(clientHandler, n);
-            while (clientHandlerMap.containsValue(n)) {
-                n = nickname + "(" + i + ")";
+            String n = nickname + "(" + i + ")";
+
+            if(!(clientHandlerMap.containsValue(n))) {
+                clientHandlerMap.put(clientHandler, n);
                 System.out.println(n);
-                i++;
             }
+            else{
+                while (clientHandlerMap.containsValue(n)) {
+                    n = nickname + "(" + i + ")";
+                    i++;
+                }
+
+                clientHandlerMap.put(clientHandler, n);
+            }
+
             if(!gameController.newPlayer(n, gameId, playerDate, virtualView)){
                 clientHandlerMap.remove(clientHandler);
             }
