@@ -140,7 +140,7 @@ public class ClientMessanger implements ObserverView, Observer {
                 break;
             case SHOW_PERSONAL_SCHOOL:
                 ShowPersonalSchool player = (ShowPersonalSchool) message;
-                queue.execute(() -> view.showPersonalSchool(player.getSchool(), player.getNickname(),player.getTrash(), player.getDifficulty(), player.getCoins()));
+                queue.execute(() -> view.showPersonalSchool(player.getSchool(), player.getNickname(),player.getTrash(), player.getDifficulty(), player.getCoins(), player.getGameMode(), player.getTeamMate()));
                 break;
             case SHOW_ASSISTANT_DECK:
                 ShowAssistantDeck deck = (ShowAssistantDeck) message;

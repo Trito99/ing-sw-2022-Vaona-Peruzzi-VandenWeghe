@@ -177,6 +177,11 @@ public class GameController {
                                     }
                                 }
                             }
+                            if(gameSession.getGameMode().equals(GameMode.COOP)){
+                                for(String nick : allVirtualView.keySet()){
+                                    allVirtualView.get(nick).showMessage("Your teamMate is " + gameSession.getPlayer(nick).getTeamMate());
+                                }
+                            }
                         }
                         gameState = GameState.PLANNING;
                         gameSession.getTable().extractStudentOnCloud();
@@ -267,7 +272,7 @@ public class GameController {
                                 }
                                 if(!full) {
                                     gameSession.moveStudentFromListToHall(gameSession.getPlayer(turnController.getActivePlayer()), studentId, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
-                                    virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore());
+                                    virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore(), gameSession.getGameMode(), gameSession.getPlayer(getActivePlayer()).getTeamMate());
                                     gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(turnController.getActivePlayer()), CardEffect.STANDARDMODE);
                                     movedStudents++;
                                     allStudentsMoved();
@@ -526,7 +531,7 @@ public class GameController {
                                     again = false;
                                     acrobatIndex++;
                                     gameSession.playCharacterCard(characterCard.getCardEffect(), Choice.getNickname(), studentIdCard, -1, studentId, null);
-                                    virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore());
+                                    virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore(), gameSession.getGameMode(), gameSession.getPlayer(getActivePlayer()).getTeamMate());
                                     if (acrobatIndex<max)
                                         virtualView.askId(false, characterCard, acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool());
                                 }else{
@@ -590,7 +595,7 @@ public class GameController {
                             if (present) {
                                 again = false;
                                 gameSession.playCharacterCard(characterCard.getCardEffect(),turnController.getActivePlayer(), studentId,-1,-1, null);
-                                virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore());
+                                virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore(), gameSession.getGameMode(), gameSession.getPlayer(getActivePlayer()).getTeamMate());
                                 card = false;
                                 cardPlayed=true;
                                 if(movedStudents!=-1)
@@ -635,7 +640,7 @@ public class GameController {
                     else if(exists && characterCard.getCardEffect().equals(CardEffect.JUNKDEALER)){
                         again=false;
                         gameSession.playCharacterCard(CardEffect.JUNKDEALER, turnController.getActivePlayer(), -1,-1,-1, colorChosen);
-                        virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore());
+                        virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore(), gameSession.getGameMode(), gameSession.getPlayer(getActivePlayer()).getTeamMate());
 
                         for (VirtualView vv : allVirtualView.values()) {
                             if (vv!=virtualView)
@@ -834,11 +839,11 @@ public class GameController {
             allVirtualView.get(s).showTable(gameSession.getTable(), gameSession.getDifficulty());
             for(Player p : gameSession.getListOfPlayers()) {
                 if (p.getNickname() != s)
-                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname()+"'s ", p.getTrash(), gameSession.getDifficulty(), p.getCoinScore());
+                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname()+"'s ", p.getTrash(), gameSession.getDifficulty(), p.getCoinScore(), gameSession.getGameMode(), p.getTeamMate());
             }
             for(Player p : gameSession.getListOfPlayers()){
                 if (p.getNickname() == s) {
-                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), "Your ", p.getTrash(), gameSession.getDifficulty(), p.getCoinScore());
+                    allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), "Your ", p.getTrash(), gameSession.getDifficulty(), p.getCoinScore(), gameSession.getGameMode(), p.getTeamMate());
                     allVirtualView.get(s).showDeckAssistant(p.getDeckOfPlayer());
                 }
             }

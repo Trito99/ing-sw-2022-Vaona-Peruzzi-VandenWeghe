@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
+import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.Student;
@@ -88,7 +89,7 @@ public class GUI extends ObservableView implements View {
     }
 
     @Override
-    public void showPersonalSchool(School school, String nickname, AssistantCard trash, Difficulty difficulty, int coins) {
+    public void showPersonalSchool(School school, String nickname, AssistantCard trash, Difficulty difficulty, int coins, GameMode gameMode, String teamMate) {
 
     }
 
