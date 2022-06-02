@@ -34,10 +34,14 @@ public class ClientMessanger implements ObserverView, Observer {
             client = new ClientSocket(address, port);
             client.add(this);
             client.listen();
-            queue.execute(view::askLobby);
+            askLobbyServerInfo();
         } catch (Exception e) {
             queue.execute(view::askConnect);
         }
+    }
+
+    public void askLobbyServerInfo(){
+        client.sendMessage(new LobbyServerRequest());
     }
 
     /** crea/aggiorna il nickname se un giocatore era già presente con lo stesso nome*/
@@ -119,6 +123,10 @@ public class ClientMessanger implements ObserverView, Observer {
     @Override
     public void update(GeneralMessage message) {
         switch (message.getMessageType()) {
+            case LOBBY_SERVER_INFO:
+                LobbyServerInfo lobbyServerInfo = (LobbyServerInfo) message;
+                queue.execute(() -> view.askLobby(lobbyServerInfo.getLobbyMap()));
+                break;
             case LOGIN_RESULT:
                 LoginResult loginMessage = (LoginResult) message;
                 queue.execute(() -> view.showLogin(loginMessage.getNickname(), loginMessage.getGameId(), loginMessage.getPlayerDate(), loginMessage.wasJoined()));

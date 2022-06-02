@@ -10,6 +10,7 @@ import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
+import it.polimi.ingsw.network.LobbyForPrint;
 import it.polimi.ingsw.observer.ObservableView;
 import it.polimi.ingsw.view.GUI.scene.*;
 import it.polimi.ingsw.view.View;
@@ -17,6 +18,7 @@ import javafx.application.Platform;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Map;
 
 public class GUI extends ObservableView implements View {
     private static ArrayList<String> playerList = new ArrayList<>();
@@ -32,7 +34,7 @@ public class GUI extends ObservableView implements View {
     }
 
     @Override
-    public void askLobby() {
+    public void askLobby(Map<String, LobbyForPrint> lobbyMap) {
         SetupGame setupGame = new SetupGame();
         setupGame.addAllObservers(observers);
         Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/setup_game_scene") );

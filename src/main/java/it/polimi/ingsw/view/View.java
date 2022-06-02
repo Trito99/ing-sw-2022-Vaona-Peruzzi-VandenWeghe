@@ -10,9 +10,12 @@ import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
+import it.polimi.ingsw.network.Lobby;
+import it.polimi.ingsw.network.LobbyForPrint;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Map;
 
 /** la classe rappresenta la View generica che poi sarà implementata da CLI e GUI*/
 public interface View {
@@ -51,10 +54,11 @@ public interface View {
     /** chiede al giocatore di connettersi al server fornendo indirizzo ip e porta */
     void askConnect();
 
-    /** chiede al giocatore di connettersi al gioco fornendo username e game id */
-    void askLobby();
+    /** chiede al giocatore di connettersi al gioco fornendo username e game id
+     * @param lobbyMap*/
+    void askLobby(Map<String, LobbyForPrint> lobbyMap);
 
-    /** chiede quanti giocatori avrà il nuovo gioco */
+    /** chiede numero di giocatori e la difficoltà del nuovo gioco */
     void askPlayersNumberAndDifficulty();
 
     void askTowerColorAndDeck(ArrayList<TColor> towerColors, ArrayList<AssistantDeckName> assistantDeckNames);

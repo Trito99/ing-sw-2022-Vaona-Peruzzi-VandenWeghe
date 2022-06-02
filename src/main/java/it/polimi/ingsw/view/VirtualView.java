@@ -13,10 +13,12 @@ import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.network.ClientHandlerInterface;
+import it.polimi.ingsw.network.LobbyForPrint;
 import it.polimi.ingsw.observer.Observer;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Map;
 
 public class VirtualView implements View, Observer {
     private final ClientHandlerInterface clientHandler;
@@ -98,7 +100,7 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void askLobby() { }
+    public void askLobby(Map<String, LobbyForPrint> lobbyMap) { }
 
     @Override
     public void askPlayersNumberAndDifficulty() {

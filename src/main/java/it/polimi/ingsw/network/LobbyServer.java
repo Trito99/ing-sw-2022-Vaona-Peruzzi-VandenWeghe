@@ -1,5 +1,9 @@
 package it.polimi.ingsw.network;
 
+import it.polimi.ingsw.model.game.Difficulty;
+import it.polimi.ingsw.model.game.GameMode;
+
+import java.io.Serializable;
 import java.util.*;
 
 /** classe che tiene traccia di tutti i giochi in corso contemporaneamente */
@@ -26,5 +30,13 @@ public class LobbyServer {
             if (lobby.currentPlayers() == 0)
                 lobbyMap.remove(idLobby);
         }
+    }
+
+    public Map<String, LobbyForPrint> getNewLobbyMap() {
+        Map<String, LobbyForPrint> newLobbyMap = new HashMap<>();
+        for(String lobbyId : lobbyMap.keySet()){
+            newLobbyMap.put(lobbyId, new LobbyForPrint(lobbyId,lobbyMap.get(lobbyId).getGameController().getGameSession().getDifficulty(),lobbyMap.get(lobbyId).getGameController().getGameSession().getGameMode(),lobbyMap.get(lobbyId).currentPlayers()));
+        }
+        return newLobbyMap;
     }
 }
