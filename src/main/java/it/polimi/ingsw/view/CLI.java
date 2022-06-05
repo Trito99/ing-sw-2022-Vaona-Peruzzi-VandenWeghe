@@ -43,7 +43,7 @@ public class CLI extends ObservableView implements View {
 
     public CLI(){
         output = out;
-        commandList=new ArrayList<String>();
+        commandList=new ArrayList<>();
         /**for(Command command: Command.values()) {
             commandList.add(command.getVal());
         }*/
@@ -64,23 +64,6 @@ public class CLI extends ObservableView implements View {
         askConnect();
     }
 
-    /** legge stringhe da input */
-    public String readInput() throws ExecutionException {
-        FutureTask<String> futureTask = new FutureTask<>(new ReadFromInput());
-        inputThread = new Thread(futureTask);
-        inputThread.start();
-
-        String input = null;
-
-        try {
-            input = futureTask.get();
-        } catch (InterruptedException e) {
-            futureTask.cancel(true);
-            Thread.currentThread().interrupt();
-        }
-        return input;
-    }
-
     @Override
     public void askConnect() {
         boolean succeded;
@@ -98,6 +81,23 @@ public class CLI extends ObservableView implements View {
                 succeded = true;
             }
         }while(succeded);
+    }
+
+    /** legge stringhe da input */
+    public String readInput() throws ExecutionException {
+        FutureTask<String> futureTask = new FutureTask<>(new ReadFromInput());
+        inputThread = new Thread(futureTask);
+        inputThread.start();
+
+        String input = null;
+
+        try {
+            input = futureTask.get();
+        } catch (InterruptedException e) {
+            futureTask.cancel(true);
+            Thread.currentThread().interrupt();
+        }
+        return input;
     }
 
     @Override

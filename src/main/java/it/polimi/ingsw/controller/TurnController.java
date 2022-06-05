@@ -14,9 +14,8 @@ public class TurnController {
     private ArrayList<String> newPlayerOrderByName;
     private ArrayList<Player> newPlayerOrder;
 
-    /** costruttore */
     public TurnController(GameController gameController){
-        playingPlayer = YoungestPlayer(gameController).getNickname();
+        playingPlayer = YoungestPlayer(gameController.getGameSession().getListOfPlayers()).getNickname();
         playerOrder = new ArrayList<>();
         playerOrderByName = new ArrayList<>();
         newPlayerOrderByName = new ArrayList<>();
@@ -30,11 +29,16 @@ public class TurnController {
         }
     }
 
-    private Player YoungestPlayer(GameController gameController) {
+    /** (At the first round, in the planning phase, the youngest player moves first.)
+     *
+     * @param listOfPlayers list of the players of the match
+     * @return the youngest player of the match.
+     */
+    private Player YoungestPlayer(ArrayList<Player> listOfPlayers) {
 
-        Player youngestPlayer = gameController.getGameSession().getListOfPlayers().get(0);
+        Player youngestPlayer = listOfPlayers.get(0);
 
-        for (Player p : gameController.getGameSession().getListOfPlayers()){
+        for (Player p : listOfPlayers){
             if (youngestPlayer.getPlayerDate().compareTo(p.getPlayerDate()) == -1 || youngestPlayer.getPlayerDate().compareTo(p.getPlayerDate()) == 0)
                 youngestPlayer = p;
         }
@@ -42,7 +46,10 @@ public class TurnController {
     }
 
 
-    /** cambia l'active player */
+    /** changes the active player
+     *
+     * @param playerOrderByName list of the nickname of the players
+     */
     public void nextPlayer(ArrayList<String> playerOrderByName){
         int player;
         if((playerOrderByName.indexOf(playingPlayer)+1)>(playerOrderByName.size()-1))
@@ -52,6 +59,9 @@ public class TurnController {
         playingPlayer = playerOrderByName.get(player);
     }
 
+    /** in the Action phase, the player turns are in ascendant order of their turnValue (value played with the assistant card).
+     *
+     */
     public void changeOrder(){
         ArrayList<Player>  NewPlayerOrder = (ArrayList<Player>) playerOrder.clone();
         newPlayerOrderByName.clear();
@@ -60,6 +70,7 @@ public class TurnController {
             newPlayerOrderByName.add(player.getNickname());
         newPlayerOrder = NewPlayerOrder;
     }
+
     public String getActivePlayer() {
         return playingPlayer;
     }
