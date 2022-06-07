@@ -175,10 +175,19 @@ public class GameController {
                                         if(!player2.equals(player)) {
                                             if (player.getTColor().equals(player2.getTColor())) {
                                                 player.setTeamMate(player2.getNickname());
-                                                //gameSession.getTeam().add(new Team(player, player2, player.getTColor()));
+                                                boolean present = false;
+                                                for(Team team : gameSession.getTeam()){
+                                                    if(team.getTeamColor().equals(player.getTColor())){
+                                                        present = true;
+                                                    }
+                                                }
+                                                if (!present){
+                                                    gameSession.getTeam().add(new Team(player, player2, player.getTColor()));
+                                                }
                                             }
                                         }
                                     }
+                                    System.out.println(gameSession.getTeam().size());
                                 }
                                 for(int i=0;i<2;i++){
                                     for(Player player : gameSession.getListOfPlayers()){
@@ -889,13 +898,15 @@ public class GameController {
             broadcastMessage("Tie");
         else {
             if(gameSession.getGameMode()==GameMode.COOP){
-                for (String nickname : allVirtualView.keySet()) {
-                    if (nickname == gameSession.getTable().playerIsWinning(gameSession).getNickname())
-                        allVirtualView.get(nickname).showWinMessage();
-                    else
-                        allVirtualView.get(nickname).showLoseMessage(gameSession.getTable().playerIsWinning(gameSession).getNickname());
+                for (Team team : gameSession.getTeam()) {
+                    if (team.getTeamColor() == gameSession.getTable().playerIsWinning(gameSession).getTColor()) {
+                        for (Player player : team.getTeam())
+                            allVirtualView.get(player.getNickname()).showWinMessage();
+                    } else {
+                        for (Player player : team.getTeam())
+                            allVirtualView.get(player.getNickname()).showLoseMessage("Team " + gameSession.getTable().playerIsWinning(gameSession).getTColor().toString());
+                    }
                 }
-
             }
             else {
                 for (String nickname : allVirtualView.keySet()) {
