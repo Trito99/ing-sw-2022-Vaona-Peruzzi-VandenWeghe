@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.model.assistant.AssistantCard;
+import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
@@ -11,6 +12,7 @@ import it.polimi.ingsw.model.game.*;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
+import it.polimi.ingsw.model.player.Team;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
@@ -19,6 +21,8 @@ import it.polimi.ingsw.view.VirtualView;
 import java.security.InvalidParameterException;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+
+import static java.lang.System.out;
 
 public class GameController {
     private Game gameSession;
@@ -48,7 +52,7 @@ public class GameController {
     }
 
     public void generatePlayer(String nickname,GregorianCalendar playerDate, int index){
-        gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.values()[index]));
+        gameSession.addPlayer(new Player(null, PlayerNumber.values()[index]));
         gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
         gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
         if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)) {
@@ -66,7 +70,7 @@ public class GameController {
         if(allVirtualView.isEmpty()){
             generateTable();
             allVirtualView.put(nickname, virtualView);
-            gameSession.addPlayer(new Player(TColor.WHITE, PlayerNumber.PLAYER1));
+            gameSession.addPlayer(new Player(null, PlayerNumber.PLAYER1));
             gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
             gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(playerDate);
             virtualView.showLogin(nickname, gameId, playerDate, true);
@@ -101,12 +105,6 @@ public class GameController {
                 generatePlayer(nickname,playerDate,allVirtualView.size()-1);
                 virtualView.showLogin(nickname, gameId, playerDate,true);
                 virtualView.askTowerColorAndDeck(gameSession.getTowerColors(),gameSession.getAssistantDeckNames());
-            }
-
-
-            if(allVirtualView.size() == maxPlayers){
-                broadcastMessage("Everyone joined the game!");
-                turnController = new TurnController(this);
             }
             return true;
         }
@@ -152,40 +150,68 @@ public class GameController {
                     virtualView.askTowerColorAndDeck(gameSession.getTowerColors(),gameSession.getAssistantDeckNames());
                 }
                 if(receivedMessage.getMessageType() == MessageType.TOWER_COLOR_AND_DECK_CHOSEN){
+                    boolean colorPresent = false, deckPresent = false;
                     TowerColorAndDeckChosen TCaDSelected = (TowerColorAndDeckChosen) receivedMessage;
-                    gameSession.getPlayer(TCaDSelected.getNickname()).setTColor(TCaDSelected.getTowerColor());
-                    gameSession.getPlayer(TCaDSelected.getNickname()).generateSchool(gameSession.getTable(),gameSession.getGameMode());
-                    gameSession.getPlayer(TCaDSelected.getNickname()).setDeckOfPlayer(new DeckAssistant(TCaDSelected.getAssistantDeckName()));
-                    gameSession.getTowerColors().remove((TCaDSelected.getTowerColor()));
-                    gameSession.getAssistantDeckNames().remove((TCaDSelected.getAssistantDeckName()));
-                    virtualView.showMessage(gameSession.getGameMode()+" Mode.You have "+gameSession.getPlayer(TCaDSelected.getNickname()).getTColor()+" towers! \nWaiting for other players...");
-                    if(gameSession.getListOfPlayers().size()==maxPlayers){
-                        if(gameSession.getGameMode().equals(GameMode.COOP)){
-                            for(Player player : gameSession.getListOfPlayers()){
-                                for(Player player2 : gameSession.getListOfPlayers()){
-                                    if(!player2.equals(player)) {
-                                        if (player.getTColor().equals(player2.getTColor())) {
-                                            player.setTeamMate(player2.getNickname());
+                    for (TColor color : gameSession.getTowerColors()){
+                        if (color.toString().equals(TCaDSelected.getTowerColor().toString()))
+                            colorPresent = true;
+                    }
+                    for (AssistantDeckName assistantDeckName : gameSession.getAssistantDeckNames()){
+                        if (assistantDeckName.toString().equals(TCaDSelected.getAssistantDeckName().toString()))
+                            deckPresent = true;
+                    }
+                    if(colorPresent && deckPresent) {
+                        again = false;
+                        gameSession.getPlayer(TCaDSelected.getNickname()).setTColor(TCaDSelected.getTowerColor());
+                        gameSession.getPlayer(TCaDSelected.getNickname()).generateSchool(gameSession.getTable(),gameSession.getGameMode());
+                        gameSession.getPlayer(TCaDSelected.getNickname()).setDeckOfPlayer(new DeckAssistant(TCaDSelected.getAssistantDeckName()));
+                        gameSession.getTowerColors().remove((TCaDSelected.getTowerColor()));
+                        gameSession.getAssistantDeckNames().remove((TCaDSelected.getAssistantDeckName()));
+                        virtualView.showMessage(gameSession.getGameMode()+" Mode.You have "+gameSession.getPlayer(TCaDSelected.getNickname()).getTColor()+" towers! \nWaiting for other players...");
+                        if(gameSession.getListOfPlayers().size()==maxPlayers){
+                            if(gameSession.getGameMode().equals(GameMode.COOP)){
+                                for(Player player : gameSession.getListOfPlayers()){
+                                    for(Player player2 : gameSession.getListOfPlayers()){
+                                        if(!player2.equals(player)) {
+                                            if (player.getTColor().equals(player2.getTColor())) {
+                                                player.setTeamMate(player2.getNickname());
+                                                //gameSession.getTeam().add(new Team(player, player2, player.getTColor()));
+                                            }
                                         }
                                     }
                                 }
-                            }
-                            for(int i=0;i<2;i++){
-                                for(Player player : gameSession.getListOfPlayers()){
-                                    if(player.getTColor().equals(TColor.values()[i]) && !player.getPersonalSchool().getTowers().isEmpty()){
-                                        gameSession.getPlayer(player.getTeamMate()).getPersonalSchool().getTowers().clear();
+                                for(int i=0;i<2;i++){
+                                    for(Player player : gameSession.getListOfPlayers()){
+                                        if(player.getTColor().equals(TColor.values()[i]) && !player.getPersonalSchool().getTowers().isEmpty()){
+                                            gameSession.getPlayer(player.getTeamMate()).getPersonalSchool().getTowers().clear();
+                                        }
+                                    }
+                                }
+                                if(gameSession.getGameMode().equals(GameMode.COOP)){
+                                    for(String nick : allVirtualView.keySet()){
+                                        allVirtualView.get(nick).showMessage("Your teamMate is " + gameSession.getPlayer(nick).getTeamMate());
                                     }
                                 }
                             }
-                            if(gameSession.getGameMode().equals(GameMode.COOP)){
-                                for(String nick : allVirtualView.keySet()){
-                                    allVirtualView.get(nick).showMessage("Your teamMate is " + gameSession.getPlayer(nick).getTeamMate());
-                                }
-                            }
                         }
-                        gameState = GameState.PLANNING;
-                        gameSession.getTable().extractStudentOnCloud();
-                        planning();
+                    }else {
+                        virtualView.showMessage("\n⚠️Tower Color or Assistant Deck isn't available ⚠️");
+                        virtualView.askTowerColorAndDeck(gameSession.getTowerColors(), gameSession.getAssistantDeckNames());
+                        again = true;
+                    }
+                    if(allVirtualView.size() == maxPlayers){
+                        boolean chosenColor = true;
+                        for(Player player : gameSession.getListOfPlayers()){
+                            if (player.getTColor() == null)
+                                chosenColor = false;
+                        }
+                        if(chosenColor) {
+                            broadcastMessage("Everyone joined the game!");
+                            turnController = new TurnController(this);
+                            gameState = GameState.PLANNING;
+                            gameSession.getTable().extractStudentOnCloud();
+                            planning();
+                        }
                     }
                 }
                 break;
@@ -859,20 +885,20 @@ public class GameController {
     }
 
     public void endGame(){
-        if(gameSession.getGameMode()==GameMode.COOP){
-            if (gameSession.getTable().playerIsWinning(gameSession).getPlayerNumber().equals(PlayerNumber.PLAYER1) || gameSession.getTable().playerIsWinning(gameSession).getPlayerNumber().equals(PlayerNumber.PLAYER2)){
-                broadcastMessage("🎉 Team 1 WINS!! 🎉");
-            }
-            else
-                broadcastMessage("🎉 Team 2 WINS!! 🎉");
-
-        }
+        if(gameSession.getTable().playerIsWinning(gameSession) == null)
+            broadcastMessage("Tie");
         else {
-            if(gameSession.getTable().playerIsWinning(gameSession) == null)
-                broadcastMessage("Tie");
+            if(gameSession.getGameMode()==GameMode.COOP){
+                for (String nickname : allVirtualView.keySet()) {
+                    if (nickname == gameSession.getTable().playerIsWinning(gameSession).getNickname())
+                        allVirtualView.get(nickname).showWinMessage();
+                    else
+                        allVirtualView.get(nickname).showLoseMessage(gameSession.getTable().playerIsWinning(gameSession).getNickname());
+                }
+
+            }
             else {
                 for (String nickname : allVirtualView.keySet()) {
-
                     if (nickname == gameSession.getTable().playerIsWinning(gameSession).getNickname())
                         allVirtualView.get(nickname).showWinMessage();
                     else

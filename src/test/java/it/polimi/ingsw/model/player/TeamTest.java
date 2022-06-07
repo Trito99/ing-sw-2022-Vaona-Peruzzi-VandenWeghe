@@ -9,8 +9,7 @@ public class TeamTest {
 
     @Test
     public void initializeTeam(){
-        Team team = new Team();
-        team.intializeTeam(new Player(TColor.BLACK, PlayerNumber.PLAYER1), new Player(TColor.BLACK, PlayerNumber.PLAYER2), TColor.BLACK);
+        Team team = new Team(new Player(TColor.BLACK, PlayerNumber.PLAYER1), new Player(TColor.BLACK, PlayerNumber.PLAYER2), TColor.BLACK);
         assertNotNull(team.getTeam().get(0));
         assertNotNull(team.getTeam().get(1));
         assertEquals(2, team.getTeam().size());

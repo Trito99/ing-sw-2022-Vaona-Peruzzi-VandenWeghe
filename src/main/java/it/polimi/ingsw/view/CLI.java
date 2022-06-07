@@ -203,7 +203,7 @@ public class CLI extends ObservableView implements View {
     public void askTowerColorAndDeck(ArrayList<TColor> towerColors, ArrayList<AssistantDeckName> assistantDeckNames){
         TColor towerColorChosen = null;
         AssistantDeckName assistantDeckNameChosen = null;
-        boolean present = false;
+        boolean ye;
         do {
             out.print("\nChoose a color for your towers:\n");
             for (TColor color : towerColors)
@@ -212,19 +212,15 @@ public class CLI extends ObservableView implements View {
 
             try {
                 towerColorChosen = TColor.valueOf(readInput().toUpperCase(Locale.ROOT));
-                for (TColor color : towerColors){
-                    if (color.toString().equals(towerColorChosen.toString()))
-                        present = true;
-                }
-                if(!present)
-                    out.print("\nColor selected doesn't exist or isn't available");
+                ye=false;
             } catch (Exception e) {
                 out.println(WRONG_INPUT);
+                ye=true;
             }
 
-        } while(!present);
+        } while(ye);
         do {
-            present = false;
+
             out.print("\nChoose an Assistant Deck: \n");
             for(AssistantDeckName deckName : assistantDeckNames)
                 out.print(deckName.toString()+" | ");
@@ -232,17 +228,13 @@ public class CLI extends ObservableView implements View {
 
             try {
                 assistantDeckNameChosen= AssistantDeckName.valueOf(readInput().toUpperCase(Locale.ROOT));
-                for (AssistantDeckName assistantDeckName : assistantDeckNames){
-                    if (assistantDeckName.toString().equals(assistantDeckNameChosen.toString()))
-                        present = true;
-                }
-                if(!present)
-                    out.print("\nAssistant Deck selected doesn't exist or isn't available");
+                ye = false;
             } catch (Exception e) {
                 out.println(WRONG_INPUT);
+                ye = true;
             }
 
-        } while(!present);
+        } while(ye);
         TColor finalTowerColorChosen = towerColorChosen;
         AssistantDeckName finalAssistantDeckNameChosen = assistantDeckNameChosen;
         notifyObserver(obs -> obs.chooseTowerColorAndDeck(finalTowerColorChosen, finalAssistantDeckNameChosen));
