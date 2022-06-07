@@ -27,6 +27,22 @@ public class LobbyForPrint implements Serializable {
         return currentPlayers;
     }
 
+    public int getMaxPlayers(){
+        int maxPlayers = 0;
+        switch(gameMode){
+            case TWOPLAYERS:
+                maxPlayers = 2;
+                break;
+            case THREEPLAYERS:
+                maxPlayers = 3;
+                break;
+            case COOP:
+                maxPlayers = 4;
+                break;
+        }
+        return  maxPlayers;
+    }
+
 
     public Difficulty getDifficulty() {
         return difficulty;
