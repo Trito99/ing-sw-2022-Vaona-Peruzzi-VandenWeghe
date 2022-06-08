@@ -849,10 +849,15 @@ public class GameController {
                         allVirtualView.get(turnController.getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(turnController.getActivePlayer()).getTrash().getStepMotherEarth(), gameSession.getTable(), gameSession.getDifficulty());
                     break;
                 case CLOUDCARD:
-                    if (gameSession.gameIsFinished(turnController.getActivePlayer())){
-                        endGame();
-                    }else
-                        allVirtualView.get(turnController.getActivePlayer()).askCloud(gameSession.getTable());
+                    if (lastRound){
+                        turnController.nextPlayer(turnController.getNewPlayerOrderByName());
+                        planning();
+                    }else {
+                        if (gameSession.gameIsFinished(turnController.getActivePlayer())) {
+                            endGame();
+                        } else
+                            allVirtualView.get(turnController.getActivePlayer()).askCloud(gameSession.getTable());
+                    }
                     break;
                 default:
                     break;
