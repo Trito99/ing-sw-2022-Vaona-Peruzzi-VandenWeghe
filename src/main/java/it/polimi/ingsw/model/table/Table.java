@@ -80,7 +80,7 @@ public class Table implements Serializable {
         SColor pink = SColor.PINK;
         SColor blue = SColor.BLUE;
 
-        for (int s = 11; s < 131; s++) {
+        /**for (int s = 11; s < 131; s++) {
             if (s < 35)
                 bag.add(new Student(s, green));
             else if (s < 59)
@@ -88,6 +88,18 @@ public class Table implements Serializable {
             else if (s < 83)
                 bag.add(new Student(s, yellow));
             else if (s < 107)
+                bag.add(new Student(s, pink));
+            else
+                bag.add(new Student(s, blue));
+        }*/
+        for (int s = 11; s < 71; s++) {
+            if (s < 23)
+                bag.add(new Student(s, green));
+            else if (s < 35)
+                bag.add(new Student(s, red));
+            else if (s < 47)
+                bag.add(new Student(s, yellow));
+            else if (s < 59)
                 bag.add(new Student(s, pink));
             else
                 bag.add(new Student(s, blue));
@@ -323,7 +335,8 @@ public class Table implements Serializable {
     }
 
 
-    public Player playerIsWinning(Game game, ArrayList<Team> teams) {  //calcola influenza torri sul tavolo e restituisce quello con più influenza
+    public Player playerIsWinning(Game game) {  //calcola influenza torri sul tavolo e restituisce quello con più influenza
+        ArrayList<Team> teams = game.getTeams();
         int countGrey = 0;
         int countWhite = 0;
         int countBlack = 0;
