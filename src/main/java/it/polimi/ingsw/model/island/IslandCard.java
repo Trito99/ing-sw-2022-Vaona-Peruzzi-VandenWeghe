@@ -97,7 +97,7 @@ public class IslandCard implements Serializable {
                             towerIsOnIsland = true;
                         } else {
                             if (!playerFound.getTColor().equals(towerOnIsland.getTColour())) {
-                                changeTowerColour(listOfPlayer, playerFound, gameMode);
+                                changeTowerColour(listOfPlayer, playerFound);
                             }
                         }
                     }
@@ -113,9 +113,8 @@ public class IslandCard implements Serializable {
      *
      * @param listOfPlayers list of player of the match
      * @param playerBuilder the player that has influence and has to place a tower
-     * @param gameMode gameMode of the match (2,3 or 4 players)
      */
-    private void changeTowerColour(ArrayList<Player> listOfPlayers, Player playerBuilder, GameMode gameMode){        //cambio colore della torre se è cambiata l'influenza sull'isola
+    private void changeTowerColour(ArrayList<Player> listOfPlayers, Player playerBuilder){        //cambio colore della torre se è cambiata l'influenza sull'isola
         Player prevPlayer = null; /** Player that has the towers on island before */
 
         for(Player player : listOfPlayers){

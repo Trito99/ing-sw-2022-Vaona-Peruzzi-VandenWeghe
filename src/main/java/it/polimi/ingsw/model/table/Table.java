@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.Team;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
@@ -322,7 +323,7 @@ public class Table implements Serializable {
     }
 
 
-    public Player playerIsWinning(Game game) {  //calcola influenza torri sul tavolo e restituisce quello con più influenza
+    public Player playerIsWinning(Game game, ArrayList<Team> teams) {  //calcola influenza torri sul tavolo e restituisce quello con più influenza
         int countGrey = 0;
         int countWhite = 0;
         int countBlack = 0;
@@ -422,7 +423,7 @@ public class Table implements Serializable {
                 else
                     return null;
             }
-        }else{
+        }else if(game.getGameMode().equals(GameMode.TWOPLAYERS)){
             if (countBlack > countWhite) {
                 for (Player player : game.getListOfPlayers()) {
                     if (player.getTColor().equals(TColor.BLACK)) {
@@ -437,6 +438,45 @@ public class Table implements Serializable {
                 }
             } else if(countWhite == countBlack){
                 return returnWinner(game);
+            }
+        }
+        else{
+
+
+            if(countWhite > countBlack) {
+                int i=0;
+                while (!teams.get(i).getTeamColor().equals(TColor.WHITE))
+                    i++;
+                return teams.get(i).getTeamLeader();
+            }
+            else if(countWhite < countBlack){
+                int i=0;
+                while (!teams.get(i).getTeamColor().equals(TColor.WHITE))
+                    i++;
+                return teams.get(i).getTeamLeader();
+            }
+            else {
+                int countProfWhite = 0;
+                int countProfBlack = 0;
+                Player teamLeaderWhite = null;
+                Player teamLeaderBlack = null;
+                for (Team t : teams){
+                    for(Player p : t.getTeam()){
+                        if(p.getTColor().equals(TColor.WHITE)){
+                            countProfWhite += p.getPersonalSchool().numberOfProf();
+                            teamLeaderWhite = t.getTeamLeader();
+                        }
+                        else {
+                            countProfBlack += p.getPersonalSchool().numberOfProf();
+                            teamLeaderBlack = t.getTeamLeader();
+                        }
+                    }
+                }
+
+                if(countProfWhite > countProfBlack)
+                    return teamLeaderWhite;
+                else if(countProfWhite < countProfBlack)
+                    return teamLeaderBlack;
             }
         }
         return null;
