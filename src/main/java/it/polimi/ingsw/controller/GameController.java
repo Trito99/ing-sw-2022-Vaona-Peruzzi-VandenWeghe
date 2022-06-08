@@ -851,7 +851,13 @@ public class GameController {
                 case CLOUDCARD:
                     if (lastRound){
                         turnController.nextPlayer(turnController.getNewPlayerOrderByName());
-                        planning();
+                        roundIndex++;
+                        if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
+                            this.setActionState(ActionState.CHARACTER);
+                        else
+                            setActionState(ActionState.STUDENT);
+                        showGame();
+                        action();
                     }else {
                         if (gameSession.gameIsFinished(turnController.getActivePlayer())) {
                             endGame();
