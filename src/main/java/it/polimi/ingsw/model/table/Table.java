@@ -23,7 +23,7 @@ public class Table implements Serializable {
     private ArrayList<CharacterCard> characterCardsOnTable = new ArrayList<>();
     private int coinsOnTable;
     private int posMotherEarth = 0;
-    private final ArrayList<Student> bag = new ArrayList<>();
+    private ArrayList<Student> bag = new ArrayList<>();
 
     /**
      * generate the initial bag with the 10 students, each 2 of a different color, and shuffle them.

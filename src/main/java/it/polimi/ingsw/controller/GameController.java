@@ -27,7 +27,7 @@ public class GameController {
     private int maxPlayers, roundIndex, studentId, movedStudents=0, acrobatIndex=0, round=1;
     private TurnController turnController;
     private GameState gameState;
-    private final HashMap<String, VirtualView> allVirtualView;
+    private HashMap<String, VirtualView> allVirtualView;
     boolean again = false, lastRound = false, card = false, cardPlayed = false;
     private ActionState actionState;
     private CharacterCard characterCard;

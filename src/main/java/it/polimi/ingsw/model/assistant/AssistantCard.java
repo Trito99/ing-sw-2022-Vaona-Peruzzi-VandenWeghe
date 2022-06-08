@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class AssistantCard implements Serializable {
 
     private final String assistantName;
-    private final int stepMotherEarth;
-    private final int turnValue;
+    private int stepMotherEarth;
+    private int turnValue;
 
     //Constructs an AssistantCard.
 

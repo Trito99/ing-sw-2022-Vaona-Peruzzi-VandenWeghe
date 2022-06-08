@@ -20,12 +20,12 @@ public class Game {
 
     //private int gameId;   servirebbe per partite multiple
     private GameMode gameMode;
-    private final ArrayList<Player> listOfPlayers;
+    private ArrayList<Player> listOfPlayers;
     private Difficulty difficulty;
     private Table table;
-    private final ArrayList<Team> team;
-    private final ArrayList<TColor> towerColors = new ArrayList<>();
-    private final ArrayList<AssistantDeckName> assistantDeckNames = new ArrayList<>();
+    private ArrayList<Team> team;
+    private ArrayList<TColor> towerColors = new ArrayList<>();
+    private ArrayList<AssistantDeckName> assistantDeckNames = new ArrayList<>();
 
     /**
      * Default constructor.
