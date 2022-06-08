@@ -145,6 +145,9 @@ public class IslandCard implements Serializable {
         int maxInfluence = 0;
         Player playerWithInfluence = null;
 
+        if(studentOnIsland.isEmpty())
+            return null;
+
         /** calculate influence on island for all the players */
         for(Player p : listOfPlayers){
             int countTot = 0;
