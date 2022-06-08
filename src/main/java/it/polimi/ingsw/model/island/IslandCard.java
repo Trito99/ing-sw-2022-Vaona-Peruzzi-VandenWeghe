@@ -72,52 +72,32 @@ public class IslandCard implements Serializable {
      * @param activePlayer player that is playing his turn
      * @param gameMode gameMode of the match (2,3 or 4 players)
      */
-    public void buildTowerOnIsland(ArrayList<Player> listOfPlayer, CardEffect cardEffectPlayed, Player activePlayer, GameMode gameMode){
+    public void buildTowerOnIsland(ArrayList<Player> listOfPlayer, CardEffect cardEffectPlayed, Player activePlayer, GameMode gameMode, ArrayList<Team> teams){
 
         if(cardEffectPlayed.equals(CardEffect.HERALD)) /** Herald effect */
             MotherEarthOnIsland=true;
 
         if(MotherEarthOnIsland) {
-
-            if (gameMode == GameMode.COOP) {
-                Team teamFound = calculateInfluenceCoop(listOfPlayer, cardEffectPlayed, activePlayer); /** Finds the player that will build the tower (null if it doesn't exists) */
-                /** CURATOR: Checks that there aren't forbidden cards on the island */
-                if (xCardOnIsland) {
-                    setXCardCounter(getXCardCounter() - 1);         /** Curator effect */
-                    if (xCardCounter == 0) setXCardOnIsland(false);
-                } else {
-                    if (teamFound != null) {
-                        if (teamFound.getTeamLeader().getPersonalSchool().getTowers().size() != 0) {
-                            if (!towerIsOnIsland) {
-                                towerOnIsland = new Tower(teamFound.getTeamColor());
-                                teamFound.getTeamLeader().getPersonalSchool().removeTower();
-                                towerIsOnIsland = true;
-                            } else {
-                                if (!teamFound.getTeamColor().equals(towerOnIsland.getTColour())) {
-                                    changeTowerColour(listOfPlayer, teamFound.getTeamLeader(), gameMode);
-                                }
-                            }
-                        }
-                    }
-                }
-
+            Player playerFound;
+            /** Finds the player that will build the tower (null if it doesn't exists) */
+            if(gameMode.equals(GameMode.COOP))
+                playerFound = calculateInfluenceCoop(listOfPlayer, cardEffectPlayed, activePlayer, teams);
+            else
+                playerFound = calculateInfluence(listOfPlayer, cardEffectPlayed, activePlayer);
+            /** CURATOR: Checks that there aren't forbidden cards on the island */
+            if (xCardOnIsland) {
+                setXCardCounter(getXCardCounter() - 1);         /** Curator effect */
+                if (xCardCounter == 0) setXCardOnIsland(false);
             } else {
-                Player playerFound = calculateInfluence(listOfPlayer, cardEffectPlayed, activePlayer); /** Finds the player that will build the tower (null if it doesn't exists) */
-                /** CURATOR: Checks that there aren't forbidden cards on the island */
-                if (xCardOnIsland) {
-                    setXCardCounter(getXCardCounter() - 1);         /** Curator effect */
-                    if (xCardCounter == 0) setXCardOnIsland(false);
-                } else {
-                    if (playerFound != null) {
-                        if (playerFound.getPersonalSchool().getTowers().size() != 0) {
-                            if (!towerIsOnIsland) {
-                                towerOnIsland = new Tower(playerFound.getTColor());
-                                playerFound.getPersonalSchool().removeTower();
-                                towerIsOnIsland = true;
-                            } else {
-                                if (!playerFound.getTColor().equals(towerOnIsland.getTColour())) {
-                                    changeTowerColour(listOfPlayer, playerFound, gameMode);
-                                }
+                if (playerFound != null) {
+                    if (playerFound.getPersonalSchool().getTowers().size() != 0) {
+                        if (!towerIsOnIsland) {
+                            towerOnIsland = new Tower(playerFound.getTColor());
+                            playerFound.getPersonalSchool().removeTower();
+                            towerIsOnIsland = true;
+                        } else {
+                            if (!playerFound.getTColor().equals(towerOnIsland.getTColour())) {
+                                changeTowerColour(listOfPlayer, playerFound, gameMode);
                             }
                         }
                     }
@@ -137,42 +117,20 @@ public class IslandCard implements Serializable {
      */
     private void changeTowerColour(ArrayList<Player> listOfPlayers, Player playerBuilder, GameMode gameMode){        //cambio colore della torre se è cambiata l'influenza sull'isola
         Player prevPlayer = null; /** Player that has the towers on island before */
-        Player teamLeader = null; /** The team leader is the player of the team that has the towers (Coop mode) */
 
         for(Player player : listOfPlayers){
             if(player.getTColor().equals(towerOnIsland.getTColour()))          /**determines the prevPlayer */
                 prevPlayer = player;
         }
 
-        if(gameMode==GameMode.COOP) {
-            for (Player p : listOfPlayers) {
-                if (playerBuilder.getPersonalSchool().getTowers().size() == 0 && playerBuilder.getTeamMate().equals(p.getNickname()))
-                    teamLeader = p;
-            }
-            if (teamLeader==null)               /** Finds the team leader */
-                teamLeader = playerBuilder;
-
-            if(!teamLeader.getTColor().equals(towerOnIsland.getTColour())){
-                for(int i=0;i<mergedIsland;i++) {
-                    if(!teamLeader.getPersonalSchool().getTowers().isEmpty()) {
-                        teamLeader.getPersonalSchool().getTowers().add(new Tower(prevPlayer.getTColor()));
-                        teamLeader.getPersonalSchool().removeTower();
-                    }
+        if (!playerBuilder.getTColor().equals(towerOnIsland.getTColour())) {
+            for (int i = 0; i < mergedIsland; i++) {
+                if (!playerBuilder.getPersonalSchool().getTowers().isEmpty()) {
+                    prevPlayer.getPersonalSchool().getTowers().add(new Tower(prevPlayer.getTColor()));
+                    playerBuilder.getPersonalSchool().removeTower();
                 }
-                setTowerOnIsland(new Tower(teamLeader.getTColor()));
             }
-
-        }
-        else {
-            if (!playerBuilder.getTColor().equals(towerOnIsland.getTColour())) {
-                for (int i = 0; i < mergedIsland; i++) {
-                    if (!playerBuilder.getPersonalSchool().getTowers().isEmpty()) {
-                        prevPlayer.getPersonalSchool().getTowers().add(new Tower(prevPlayer.getTColor()));
-                        playerBuilder.getPersonalSchool().removeTower();
-                    }
-                }
-                setTowerOnIsland(new Tower(playerBuilder.getTColor()));
-            }
+            setTowerOnIsland(new Tower(playerBuilder.getTColor()));
         }
     }
 
@@ -266,116 +224,29 @@ public class IslandCard implements Serializable {
 
     }
 
-    public Team calculateInfluenceCoop(ArrayList<Player> listOfPlayers, CardEffect cardEffectPlayed, Player activePlayer){   //Restituisce il Player che ha influenza sull'isola
-        int i ;
-        Team TeamWithInfluence = null;
-
-        /** calculate influence on island for all the players */
-        for(Player p : listOfPlayers){
-            int countTotTeamWhite = 0;
-            int countTotTeamBlack = 0;
-            for(i=0; i<studentOnIsland.size(); i++) {
-                switch (studentOnIsland.get(i).getsColour()) {   /** checks student color */
-                    /** if The player has the prof of the color of the student and the color isn't blocked (herbalist effect) increments the count of the influence */
-                    case GREEN:
-                        if (p.getPersonalSchool().getProfInHall(SColor.GREEN) && !SColor.GREEN.isColorBlocked()) {
-                            if(p.getTColor().equals(TColor.WHITE))
-                                countTotTeamWhite++;
-                            else
-                                countTotTeamBlack++;
-                        }
-                        break;
-                    case RED:
-                        if (p.getPersonalSchool().getProfInHall(SColor.RED) && !SColor.RED.isColorBlocked()) {
-                            if(p.getTColor().equals(TColor.WHITE))
-                                countTotTeamWhite++;
-                            else
-                                countTotTeamBlack++;
-                        }
-                        break;
-                    case YELLOW:
-                        if (p.getPersonalSchool().getProfInHall(SColor.YELLOW) && !SColor.YELLOW.isColorBlocked()) {
-                            if(p.getTColor().equals(TColor.WHITE))
-                                countTotTeamWhite++;
-                            else
-                                countTotTeamBlack++;
-                        }
-                        break;
-                    case PINK:
-                        if (p.getPersonalSchool().getProfInHall(SColor.PINK) && !SColor.PINK.isColorBlocked()) {
-                            if(p.getTColor().equals(TColor.WHITE))
-                                countTotTeamWhite++;
-                            else
-                                countTotTeamBlack++;
-                        }
-                        break;
-                    case BLUE:
-                        if (p.getPersonalSchool().getProfInHall(SColor.BLUE) && !SColor.BLUE.isColorBlocked()) {
-                            if(p.getTColor().equals(TColor.WHITE))
-                                countTotTeamWhite++;
-                            else
-                                countTotTeamBlack++;
-                        }
-                        break;
-                }
-
-                /** Knight effect */
-                if(cardEffectPlayed.isKnightPlayed() && p.equals(activePlayer)) {
-                    if(p.getTColor().equals(TColor.WHITE))
-                        p.setInfluenceOnIsland(countTotTeamWhite + 2);
-                    else
-                        p.setInfluenceOnIsland(countTotTeamBlack + 2);
-                }
-                else
-                if(p.getTColor().equals(TColor.WHITE))
-                    p.setInfluenceOnIsland(countTotTeamWhite);
-                else
-                    p.setInfluenceOnIsland(countTotTeamBlack);
+    public Player calculateInfluenceCoop(ArrayList<Player> listOfPlayers, CardEffect cardEffectPlayed, Player activePlayer, ArrayList<Team> teams){   //Restituisce il Team Leader che ha influenza sull'isola
+        calculateInfluence(listOfPlayers, cardEffectPlayed, activePlayer);
+        int influenceWhite = 0, influenceBlack = 0;
+        Team teamWhite = null, teamBlack = null;
+        for(Team t : teams){
+            int influenceTeam = 0;
+            for (Player player : t.getTeam()){
+                influenceTeam += player.getInfluenceOnIsland();
             }
-
-            /** CENTAUR EFFECT */
-            if(towerIsOnIsland) {
-                if (p.getTColor().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isCentaurPlayed()) {  /** Adds influence of the towers if centaur effect isn't activated */
-                    if(p.getTColor().equals(TColor.WHITE)) {
-                        countTotTeamWhite += mergedIsland;
-                        p.setInfluenceOnIsland(countTotTeamWhite);
-                    }
-                    else {
-                        countTotTeamBlack += mergedIsland;
-                        p.setInfluenceOnIsland(countTotTeamBlack);
-                    }
-
-                }
+            if(t.getTeamColor().equals(TColor.WHITE)) {
+                influenceWhite = influenceTeam;
+                teamWhite = t;
+            }else {
+                influenceBlack = influenceTeam;
+                teamBlack = t;
             }
         }
-
-        int teamWhiteInfluence = 0;
-        int teamBlackInfluence = 0;
-        for (Player p : listOfPlayers){
-            if(p.getTColor().equals(TColor.WHITE))
-                teamWhiteInfluence =+ p.getInfluenceOnIsland();
-            else
-                teamBlackInfluence =+ p.getInfluenceOnIsland();
-        }
-
-        for(SColor c : SColor.values()){            /** Disable Herbalist effect */
-            if(c.isColorBlocked)
-                c.unlockColor();
-        }
-
-        cardEffectPlayed.setKnightPlayed(false);            /** Disable Knight effect */
-        cardEffectPlayed.setCentaurPlayed(false);           /** Disable Centaur effect */
-
-        if(teamWhiteInfluence > teamBlackInfluence)
-            return null; //white
-        else if(teamWhiteInfluence < teamBlackInfluence)
-            return null; //black
+        if(influenceWhite > influenceBlack)
+            return  teamWhite.getTeamLeader();
+        else if (influenceWhite < influenceBlack)
+            return  teamBlack.getTeamLeader();
         else
-            return null; /** if there is a draw, no one has influence on the island */
-
-
-
-
+            return  null;
     }
 
     public int getMergedIsland() {

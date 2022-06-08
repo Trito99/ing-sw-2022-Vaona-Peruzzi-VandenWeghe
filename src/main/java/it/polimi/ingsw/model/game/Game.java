@@ -23,7 +23,7 @@ public class Game {
     private ArrayList<Player> listOfPlayers;
     private Difficulty difficulty;
     private Table table;
-    private ArrayList<Team> team;
+    private ArrayList<Team> teams;
     private ArrayList<TColor> towerColors = new ArrayList<>();
     private ArrayList<AssistantDeckName> assistantDeckNames = new ArrayList<>();
 
@@ -35,7 +35,7 @@ public class Game {
         this.listOfPlayers = new ArrayList<>();
         this.difficulty = null;
         this.table = new Table();
-        this.team = new ArrayList<>();
+        this.teams = new ArrayList<>();
     }
 
     public GameMode getGameMode() {
@@ -112,20 +112,6 @@ public class Game {
         return playerList;
     }
 
-    /**
-     *
-     * @param color the tower color selected
-     * @return Returns the team from the list of teams with the color selected
-     */
-    public Team getTeamByColor(TColor color){
-        Team teamFound = null;
-        for(Team t : team) {
-            if (t.getTeamColor().equals(color))
-                teamFound = t;
-        }
-        return teamFound;
-    }
-
 
     /**
      *
@@ -155,8 +141,8 @@ public class Game {
         this.table = table;
     }
 
-    public ArrayList<Team> getTeam() {
-        return team;
+    public ArrayList<Team> getTeams() {
+        return teams;
     }
 
     /**
@@ -179,7 +165,7 @@ public class Game {
                     table.getListOfIsland().size() <= 3;
         }
         else{
-            for(Team t : team) {                    /** Finds the team leaders */
+            for(Team t : teams) {                    /** Finds the team leaders */
                 Player teamLeader = t.getTeamLeader();
                 if(teamLeader.getTColor().equals(activePlayer.getTColor()))
                     teamLeader1 = teamLeader;
@@ -311,7 +297,7 @@ public class Game {
                 break;
 
             case HERALD:
-                islandCardChosen.buildTowerOnIsland(getListOfPlayers(), characterCardPlayed.getCardEffect(), null, gameMode);
+                islandCardChosen.buildTowerOnIsland(getListOfPlayers(), characterCardPlayed.getCardEffect(), null, gameMode, teams);
                 getTable().joinIsland(getTable().getListOfIsland());
                 break;
 

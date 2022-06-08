@@ -169,41 +169,38 @@ public class GameController {
                         gameSession.getTowerColors().remove((TCaDSelected.getTowerColor()));
                         gameSession.getAssistantDeckNames().remove((TCaDSelected.getAssistantDeckName()));
                         virtualView.showMessage(gameSession.getGameMode()+" Mode.You have "+gameSession.getPlayer(TCaDSelected.getNickname()).getTColor()+" towers! \nWaiting for other players...");
-                        if(gameSession.getListOfPlayers().size()==maxPlayers){
-                            if(gameSession.getGameMode().equals(GameMode.COOP)){
-                                for(Player player : gameSession.getListOfPlayers()){
-                                    for(Player player2 : gameSession.getListOfPlayers()){
-                                        if(!player2.equals(player)) {
-                                            if (player.getTColor().equals(player2.getTColor())) {
-                                                player.setTeamMate(player2.getNickname());
-                                                boolean present = false;
-                                                for(Team team : gameSession.getTeam()){
-                                                    if (team.getTeamColor().equals(player.getTColor())) {
-                                                        present = true;
-                                                        break;
-                                                    }
+                        if(gameSession.getPlayer(TCaDSelected.getNickname()).getPlayerNumber().equals(PlayerNumber.PLAYER4)) {
+                            for (Player player : gameSession.getListOfPlayers()) {
+                                for (Player player2 : gameSession.getListOfPlayers()) {
+                                    if (!player2.equals(player)) {
+                                        if (player.getTColor().equals(player2.getTColor())) {
+                                            player.setTeamMate(player2.getNickname());
+                                            boolean present = false;
+                                            for (Team team : gameSession.getTeams()) {
+                                                if (team.getTeamColor().equals(player.getTColor())) {
+                                                    present = true;
+                                                    break;
                                                 }
-                                                if (!present){
-                                                    gameSession.getTeam().add(new Team(player, player2, player.getTColor()));
-                                                }
+                                            }
+                                            if (!present) {
+                                                gameSession.getTeams().add(new Team(player, player2, player.getTColor()));
                                             }
                                         }
                                     }
-                                    System.out.println(gameSession.getTeam().size());
                                 }
-                                for(int i=0;i<2;i++){
-                                    for(Player player : gameSession.getListOfPlayers()){
-                                        if(player.getTColor().equals(TColor.values()[i]) && !player.getPersonalSchool().getTowers().isEmpty()){
-                                            gameSession.getPlayer(player.getTeamMate()).getPersonalSchool().getTowers().clear();
-                                            player.setTeamLeader(true);
-                                        }
+                                System.out.println(gameSession.getTeams().size());
+                            }
+                            for (int i = 0; i < 2; i++) {
+                                for (Player player : gameSession.getListOfPlayers()) {
+                                    if (player.getTColor().equals(TColor.values()[i]) && !player.getPersonalSchool().getTowers().isEmpty()) {
+                                        gameSession.getPlayer(player.getTeamMate()).getPersonalSchool().getTowers().clear();
+                                        player.setTeamLeader(true);
                                     }
                                 }
-                                if(gameSession.getGameMode().equals(GameMode.COOP)){
-                                    for(String nick : allVirtualView.keySet()){
-                                        allVirtualView.get(nick).showMessage("Your teamMate is " + gameSession.getPlayer(nick).getTeamMate());
-                                    }
-                                }
+                            }
+                            for (String nick : allVirtualView.keySet()) {
+                                allVirtualView.get(nick).showMessage("Your teamMate is " + gameSession.getPlayer(nick).getTeamMate());
+
                             }
                         }
                     }else {
@@ -726,11 +723,11 @@ public class GameController {
                         if (characterCard!=null && characterCard.getCardEffect().equals(CardEffect.CURATOR) && gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).isXCardOnIsland())
                             characterCard.setXCardOnCard(characterCard.getXCardOnCard()+1);
                         if(characterCard!=null && characterCard.getCardEffect().isCentaurPlayed()) {
-                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.CENTAUR, gameSession.getPlayer(turnController.getActivePlayer()),gameSession.getGameMode());
+                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.CENTAUR, gameSession.getPlayer(turnController.getActivePlayer()),gameSession.getGameMode(), gameSession.getTeams());
                         }else if(characterCard!=null && characterCard.getCardEffect().isKnightPlayed()){
-                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.KNIGHT, gameSession.getPlayer(turnController.getActivePlayer()),gameSession.getGameMode());
+                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.KNIGHT, gameSession.getPlayer(turnController.getActivePlayer()),gameSession.getGameMode(), gameSession.getTeams());
                         }else
-                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE, gameSession.getPlayer(turnController.getActivePlayer()),gameSession.getGameMode() );
+                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE, gameSession.getPlayer(turnController.getActivePlayer()),gameSession.getGameMode(), gameSession.getTeams());
                         gameSession.getTable().joinIsland(gameSession.getTable().getListOfIsland());
                         setActionState(ActionState.CLOUDCARD);
                         action();
@@ -910,7 +907,7 @@ public class GameController {
             broadcastMessage("Tie");
         else {
             if(gameSession.getGameMode()==GameMode.COOP){
-                for (Team team : gameSession.getTeam()) {
+                for (Team team : gameSession.getTeams()) {
                     if (team.getTeamColor() == gameSession.getTable().playerIsWinning(gameSession).getTColor()) {
                         for (Player player : team.getTeam())
                             allVirtualView.get(player.getNickname()).showWinMessage();
