@@ -1,6 +1,5 @@
 package it.polimi.ingsw.message;
 
-import it.polimi.ingsw.network.Lobby;
 import it.polimi.ingsw.network.LobbyForPrint;
 
 import java.util.Map;

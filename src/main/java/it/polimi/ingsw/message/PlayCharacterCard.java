@@ -1,7 +1,6 @@
 package it.polimi.ingsw.message;
 
 import it.polimi.ingsw.model.character.CharacterCard;
-import it.polimi.ingsw.model.player.Player;
 
 import java.util.ArrayList;
 

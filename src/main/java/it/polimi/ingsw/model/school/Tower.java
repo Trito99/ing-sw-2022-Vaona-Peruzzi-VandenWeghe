@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Tower implements Serializable {
 
-    private TColor tColor;
+    private final TColor tColor;
 
     public Tower(TColor tColor) {
         this.tColor = tColor;

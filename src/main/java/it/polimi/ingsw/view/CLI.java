@@ -15,11 +15,10 @@ import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
-import it.polimi.ingsw.network.Lobby;
 import it.polimi.ingsw.network.LobbyForPrint;
 import it.polimi.ingsw.observer.ObservableView;
+import it.polimi.ingsw.observer.ObserverView;
 
-import java.io.PrintStream;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
@@ -27,9 +26,7 @@ import java.util.concurrent.FutureTask;
 import static java.lang.System.out;
 
 public class CLI extends ObservableView implements View {
-    private PrintStream output;
-    private Thread inputThread;
-    private List<String> commandList;
+    private final List<String> commandList;
     private static final String WRONG_INPUT = "⚠️Wrong input, Type again  ⚠️";
 
     public static final  String ANSI_RESET = "\u001B[0m";
@@ -42,7 +39,6 @@ public class CLI extends ObservableView implements View {
     public static final  String ANSI_BLACK = "\u001B[30m";
 
     public CLI(){
-        output = out;
         commandList=new ArrayList<>();
         /**for(Command command: Command.values()) {
             commandList.add(command.getVal());
@@ -66,10 +62,10 @@ public class CLI extends ObservableView implements View {
 
     @Override
     public void askConnect() {
-        boolean succeded;
+        boolean succeeded;
         do {
             try{
-                succeded = false;
+                succeeded = false;
                 out.print("Insert a valid ip address (127.0.0.1) : ");
                 String ipAddress = readInput();
                 out.print("Insert a valid port (4000) : ");
@@ -78,15 +74,15 @@ public class CLI extends ObservableView implements View {
             }
             catch (Exception e){
                 out.println(WRONG_INPUT);
-                succeded = true;
+                succeeded = true;
             }
-        }while(succeded);
+        }while(succeeded);
     }
 
     /** legge stringhe da input */
     public String readInput() throws ExecutionException {
         FutureTask<String> futureTask = new FutureTask<>(new ReadFromInput());
-        inputThread = new Thread(futureTask);
+        Thread inputThread = new Thread(futureTask);
         inputThread.start();
 
         String input = null;
@@ -103,7 +99,7 @@ public class CLI extends ObservableView implements View {
     @Override
     public void askLobby(Map<String, LobbyForPrint> lobbyMap){
         boolean ye;
-        String nickname = new String();
+        String nickname = "";
         GregorianCalendar playerDate = new GregorianCalendar();
         do{
             try{
@@ -250,7 +246,7 @@ public class CLI extends ObservableView implements View {
         }
         else {
             out.println("\nGame "+gameId+ " is already full.");
-            notifyObserver(obs -> obs.askLobbyServerInfo() );
+            notifyObserver(ObserverView::askLobbyServerInfo);
         }
     }
 
@@ -260,31 +256,16 @@ public class CLI extends ObservableView implements View {
     }
 
     @Override
-    public void showPlayerInfluence(int influence) {
-
-    }
-
-    @Override
-    public void showPlayerTurn(String activePlayer) {
-
-    }
-
-    @Override
-    public void showPlayerList(ArrayList<String> playerOrder) {
-
-    }
-
-    @Override
     public void showWinMessage() {
         out.print("\n****🎉 YOU WIN 🎉****");
-        notifyObserver(obs -> obs.updateDisconnect());
+        notifyObserver(ObserverView::updateDisconnect);
     }
 
     @Override
     public void showLoseMessage(String nickname) {
         out.print("\n****😞 YOU LOSE 😞****");
         out.print("\n"+nickname+" WINS!");
-        notifyObserver(obs -> obs.updateDisconnect());
+        notifyObserver(ObserverView::updateDisconnect);
     }
 
 
@@ -328,11 +309,6 @@ public class CLI extends ObservableView implements View {
         for(AssistantCard card : deckAssistant.getCardsInHand() ){
             out.print("\n"+card.getAssistantName() + " -> Turn Value: " +card.getTurnValue()+ " MotherEarth Steps: "+card.getStepMotherEarth()+" | ");
         }
-    }
-
-    @Override
-    public void showWinMessage(int numberOfTower) {
-
     }
 
     @Override
@@ -663,8 +639,10 @@ public class CLI extends ObservableView implements View {
 
         if (difficulty.equals(Difficulty.EXPERTMODE)) {
             for (CharacterCard card : table.getCharacterCardsOnTable()) {
-                if (card.getCardEffect().equals(CardEffect.CURATOR))
+                if (card.getCardEffect().equals(CardEffect.CURATOR)) {
                     forbidden = true;
+                    break;
+                }
             }
         }
 

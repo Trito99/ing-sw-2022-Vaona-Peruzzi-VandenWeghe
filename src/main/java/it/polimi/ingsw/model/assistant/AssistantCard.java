@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class AssistantCard implements Serializable {
 
-    private String assistantName;
-    private int stepMotherEarth;
-    private int turnValue;
+    private final String assistantName;
+    private final int stepMotherEarth;
+    private final int turnValue;
 
     //Constructs an AssistantCard.
 
@@ -28,7 +28,4 @@ public class AssistantCard implements Serializable {
         return turnValue;
     }
 
-    public void setTurnValue(int turnValue) {
-        this.turnValue = turnValue;
-    }
 }

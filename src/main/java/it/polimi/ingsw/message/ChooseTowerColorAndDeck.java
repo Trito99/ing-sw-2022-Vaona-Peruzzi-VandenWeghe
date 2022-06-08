@@ -1,9 +1,7 @@
 package it.polimi.ingsw.message;
 
-import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.school.TColor;
-import it.polimi.ingsw.model.student.Student;
 
 import java.util.ArrayList;
 

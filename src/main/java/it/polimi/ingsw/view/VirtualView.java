@@ -24,7 +24,6 @@ import java.util.Map;
 public class VirtualView implements View, Observer {
     private final ClientHandlerInterface clientHandler;
 
-    /** costruttore della classe */
     /** @param clientHandler il clientHandler a cui la view invia messaggi */
     public VirtualView(ClientHandlerInterface clientHandler) {
         this.clientHandler = clientHandler;
@@ -38,21 +37,6 @@ public class VirtualView implements View, Observer {
     @Override
     public void showMessage(String message) {
         clientHandler.sendMessage(new StringMessage(message));
-    }
-
-    @Override
-    public void showPlayerInfluence(int influence) {
-        //clientHandler.sendMessage(new ShowPlayerInfluence(influence));
-    }
-
-    @Override
-    public void showPlayerTurn(String activePlayer) {
-        //clientHandler.sendMessage(new ShowPlayerTurnMsg(activePlayer));
-    }
-
-    @Override
-    public void showPlayerList(ArrayList<String> players) {
-        //clientHandler.sendMessage(new ShowPlayerListMsg(players));
     }
 
     @Override
@@ -83,11 +67,6 @@ public class VirtualView implements View, Observer {
     @Override
     public void showDeckAssistant(DeckAssistant deckAssistant) {
         clientHandler.sendMessage(new ShowAssistantDeck(deckAssistant));
-    }
-
-    @Override
-    public void showWinMessage(int numberOfTower) {
-
     }
 
     @Override

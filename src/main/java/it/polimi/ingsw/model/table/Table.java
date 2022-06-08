@@ -23,7 +23,7 @@ public class Table implements Serializable {
     private ArrayList<CharacterCard> characterCardsOnTable = new ArrayList<>();
     private int coinsOnTable;
     private int posMotherEarth = 0;
-    private ArrayList<Student> bag = new ArrayList<>();
+    private final ArrayList<Student> bag = new ArrayList<>();
 
     /**
      * generate the initial bag with the 10 students, each 2 of a different color, and shuffle them.
@@ -197,18 +197,14 @@ public class Table implements Serializable {
      */
     public ArrayList<CardEffect> getCharacterCardByEffect() {
         ArrayList<CardEffect> cardEffectList = new ArrayList<>();
-        for (int i = 0; i < characterCardsOnTable.size(); i++) {
-            cardEffectList.add(characterCardsOnTable.get(i).getCardEffect());
+        for (CharacterCard cc : characterCardsOnTable) {
+            cardEffectList.add(cc.getCardEffect());
         }
         return cardEffectList;
     }
 
     public int getPosMotherEarth() {
         return posMotherEarth;
-    }
-
-    public void setPosMotherEarth(int posMotherEarth) {
-        this.posMotherEarth = posMotherEarth;
     }
 
     public ArrayList<CloudCard> getCloudNumber() {
@@ -411,22 +407,7 @@ public class Table implements Serializable {
             /** in case of a tie, I compare the players and the one with the most prof wins
              Black and White case */
             else if (countWhite == countBlack && countWhite > countGrey) {
-                for (Player player : game.getListOfPlayers()) {
-                    if (player.getTColor().equals(TColor.WHITE)) {
-                        winner = player;
-                    } else if (player.getTColor().equals(TColor.BLACK)) {
-                        alsoWinner = player;
-                    }
-                }
-                int profWinner = winner.getPersonalSchool().numberOfProf();
-                int profAlsoWinner = alsoWinner.getPersonalSchool().numberOfProf();
-
-                if (profWinner > profAlsoWinner)
-                    return winner;
-                else if (profWinner < profAlsoWinner)
-                    return alsoWinner;
-                else
-                    return null;
+                return returnWinner(game);
             }else{
                 int profWinner = game.getListOfPlayers().get(0).getPersonalSchool().numberOfProf();
                 int profAlsoWinner = game.getListOfPlayers().get(1).getPersonalSchool().numberOfProf();
@@ -455,25 +436,31 @@ public class Table implements Serializable {
                     }
                 }
             } else if(countWhite == countBlack){
-                for (Player player : game.getListOfPlayers()) {
-                    if (player.getTColor().equals(TColor.WHITE)) {
-                        winner = player;
-                    } else if (player.getTColor().equals(TColor.BLACK)) {
-                        alsoWinner = player;
-                    }
-                }
-                int profWinner = winner.getPersonalSchool().numberOfProf();
-                int profAlsoWinner = alsoWinner.getPersonalSchool().numberOfProf();
-
-                if (profWinner > profAlsoWinner)
-                    return winner;
-                else if (profWinner < profAlsoWinner)
-                    return alsoWinner;
-                else
-                    return null;
+                return returnWinner(game);
             }
         }
-        return winner;
+        return null;
+    }
+
+    private Player returnWinner(Game game) {
+        Player winner = null;
+        Player alsoWinner = null;
+        for (Player player : game.getListOfPlayers()) {
+            if (player.getTColor().equals(TColor.WHITE)) {
+                winner = player;
+            } else if (player.getTColor().equals(TColor.BLACK)) {
+                alsoWinner = player;
+            }
+        }
+        int profWinner = winner.getPersonalSchool().numberOfProf();
+        int profAlsoWinner = alsoWinner.getPersonalSchool().numberOfProf();
+
+        if (profWinner > profAlsoWinner)
+            return winner;
+        else if (profWinner < profAlsoWinner)
+            return alsoWinner;
+        else
+            return null;
     }
 
 }

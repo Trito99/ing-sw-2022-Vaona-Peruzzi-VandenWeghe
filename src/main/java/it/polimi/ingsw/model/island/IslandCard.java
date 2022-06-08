@@ -89,52 +89,37 @@ public class IslandCard implements Serializable {
                         teamLeader = playerFound;
                 }
                 /** CURATOR: Checks that there aren't forbidden cards on the island */
-                if (xCardOnIsland) {
-                    setXCardCounter(getXCardCounter() - 1);         /** Curator effect */
-                    if (xCardCounter == 0) setXCardOnIsland(false);
-                } else {
-                    if (teamLeader != null) {
-                        if (teamLeader.getPersonalSchool().getTowers().size() != 0) {
-                            if (!towerIsOnIsland) {
-                                towerOnIsland = new Tower(teamLeader.getTColor());
-                                teamLeader.getPersonalSchool().removeTower();
-                                towerIsOnIsland = true;
-                            } else {
-                                if (!teamLeader.getTColor().equals(towerOnIsland.getTColour())) {
-                                    changeTowerColour(listOfPlayer, teamLeader, gameMode);
-                                }
-                            }
-                        }
-                    }
-                }
+                curator(listOfPlayer, gameMode, teamLeader);
 
             } else {
-
                 /** CURATOR: Checks that there aren't forbidden cards on the island */
-                if (xCardOnIsland) {
-                    setXCardCounter(getXCardCounter() - 1);         /** Curator effect */
-                    if (xCardCounter == 0) setXCardOnIsland(false);
-                }
-                else {
-                    if (playerFound != null) {
-                        if (playerFound.getPersonalSchool().getTowers().size() != 0) {
-                            if (!towerIsOnIsland) {
-                                towerOnIsland = new Tower(playerFound.getTColor());
-                                playerFound.getPersonalSchool().removeTower();
-                                towerIsOnIsland = true;
-                            } else {
-                                if (!playerFound.getTColor().equals(towerOnIsland.getTColour())) {
-                                    changeTowerColour(listOfPlayer, playerFound, gameMode);
-                                }
-                            }
-                        }
-                    }
-                }
+                curator(listOfPlayer, gameMode, playerFound);
             }
         }
 
         if(cardEffectPlayed.equals(CardEffect.HERALD))
             MotherEarthOnIsland=false;
+    }
+
+    private void curator(ArrayList<Player> listOfPlayer, GameMode gameMode, Player teamLeader) {
+        if (xCardOnIsland) {
+            setXCardCounter(getXCardCounter() - 1);         /** Curator effect */
+            if (xCardCounter == 0) setXCardOnIsland(false);
+        } else {
+            if (teamLeader != null) {
+                if (teamLeader.getPersonalSchool().getTowers().size() != 0) {
+                    if (!towerIsOnIsland) {
+                        towerOnIsland = new Tower(teamLeader.getTColor());
+                        teamLeader.getPersonalSchool().removeTower();
+                        towerIsOnIsland = true;
+                    } else {
+                        if (!teamLeader.getTColor().equals(towerOnIsland.getTColour())) {
+                            changeTowerColour(listOfPlayer, teamLeader, gameMode);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**

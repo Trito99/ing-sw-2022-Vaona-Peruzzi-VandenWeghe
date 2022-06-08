@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class Student implements Serializable {
 
-    private int idStudent;
-    private SColor sColor;
+    private final int idStudent;
+    private final SColor sColor;
 
     public Student(int idStudent, SColor sColor) {
         this.idStudent = idStudent;

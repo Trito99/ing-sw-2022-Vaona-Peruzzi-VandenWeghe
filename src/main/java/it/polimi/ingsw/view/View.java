@@ -11,7 +11,6 @@ import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
-import it.polimi.ingsw.network.Lobby;
 import it.polimi.ingsw.network.LobbyForPrint;
 
 import java.util.ArrayList;
@@ -26,12 +25,6 @@ public interface View {
     /** mostra un messaggio generico */
     void showMessage(String message);
 
-    void showPlayerInfluence(int influence);
-
-    void showPlayerTurn(String activePlayer);
-    
-    void showPlayerList(ArrayList<String> playerOrder);
-
     void showWinMessage();
 
     void showLoseMessage(String nickname);
@@ -41,8 +34,6 @@ public interface View {
     void showTable(Table table, Difficulty difficulty);
 
     void showDeckAssistant(DeckAssistant deckAssistant);
-
-    void showWinMessage(int numberOfTower);
 
     void showErrorMessage(String message);
 

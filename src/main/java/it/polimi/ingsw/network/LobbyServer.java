@@ -1,9 +1,5 @@
 package it.polimi.ingsw.network;
 
-import it.polimi.ingsw.model.game.Difficulty;
-import it.polimi.ingsw.model.game.GameMode;
-
-import java.io.Serializable;
 import java.util.*;
 
 /** classe che tiene traccia di tutti i giochi in corso contemporaneamente */

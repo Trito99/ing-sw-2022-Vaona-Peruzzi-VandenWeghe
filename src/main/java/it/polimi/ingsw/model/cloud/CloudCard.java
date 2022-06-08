@@ -7,9 +7,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class CloudCard implements Serializable {
-    private int idCloud;
+    private final int idCloud;
     private ArrayList<Student> studentOnCloud;
-    private int numberOfSpaces;
+    private final int numberOfSpaces;
 
 
     public CloudCard(int idCloud, int numberOfSpaces){

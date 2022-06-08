@@ -52,6 +52,6 @@ public enum MessageType {
     OTHER_PLAYER_TURN,
     ERROR,
     WIN,
-    LOSE;
+    LOSE
 
 }

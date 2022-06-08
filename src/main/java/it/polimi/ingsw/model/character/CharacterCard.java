@@ -11,7 +11,7 @@ public class CharacterCard implements Serializable {
     private final CardEffect cardEffect;
     private boolean coinOnCard;
     private ArrayList<Student> studentsOnCard = new ArrayList<>();
-    private String description;
+    private final String description;
     private int xCardOnCard;
 
     public CharacterCard (int costCharacter, CardEffect cardEffect, String description){

@@ -79,8 +79,4 @@ public class Lobby implements Serializable {
         return gameController;
     }
 
-    public void setGameController(GameController gameController) {
-        this.gameController=gameController;
-    }
-
 }

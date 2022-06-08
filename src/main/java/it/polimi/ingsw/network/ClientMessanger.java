@@ -15,11 +15,9 @@ import java.util.concurrent.Executors;
 
 public class ClientMessanger implements ObserverView, Observer {
     private String nickname;
-    private GregorianCalendar playerDate;
-    private View view;
-    private ExecutorService queue;
+    private final View view;
+    private final ExecutorService queue;
     private ClientSocket client;
-    private String lobby;
 
 
     /** costruttore di default */
@@ -51,7 +49,6 @@ public class ClientMessanger implements ObserverView, Observer {
 
     @Override
     public void createPlayerDate(GregorianCalendar playerDate) {
-        this.playerDate = playerDate;
     }
 
     /** comunica il numero di giocatori del gioco in corso */
@@ -96,28 +93,11 @@ public class ClientMessanger implements ObserverView, Observer {
     /** cerca di loggare un giocatore ad una data lobby */
     public void updateLobby(String nickname, GregorianCalendar playerDate, String lobby){
         this.nickname = nickname;
-        this.lobby = lobby;
-        this.playerDate = playerDate;
         client.sendMessage(new LoginRequest(nickname, lobby, playerDate));
-    }
-
-    public void endGame(){
-        client.sendMessage(new EndGame(nickname));
-        client.disconnect();
     }
 
     public void updateDisconnect(){
         client.disconnect();
-    }
-
-    /** mostra un giocatore */
-    public void updateShowPlayer(String player){
-       // client.sendMessage(new ShowPlayerRequest(nickname, player));
-    }
-
-    /** mostra la nuova influenza di quel giocatore */
-    public void updateShowInfluence(int influence){
-        //client.sendMessage(new PlayerInfluence(nickname, player));
     }
 
     @Override
@@ -132,7 +112,7 @@ public class ClientMessanger implements ObserverView, Observer {
                 queue.execute(() -> view.showLogin(loginMessage.getNickname(), loginMessage.getGameId(), loginMessage.getPlayerDate(), loginMessage.wasJoined()));
                 break;
             case SUCCESSFUL_HOST:
-                queue.execute(() -> view.askPlayersNumberAndDifficulty());
+                queue.execute(view::askPlayersNumberAndDifficulty);
                 break;
             case SHOW_TABLE:
                 ShowTable table = (ShowTable) message;
@@ -151,7 +131,7 @@ public class ClientMessanger implements ObserverView, Observer {
                 queue.execute(() -> view.askCharacterCardToPlay(play.getChoice(), play.getCoins() , play.getList()));
                 break;
             case PLAY_ASSISTANT_CARD:
-                queue.execute(() -> view.askAssistantCardToPlay());
+                queue.execute(view::askAssistantCardToPlay);
                 break;
             case CHOOSE_CLOUD_CARD:
                 ChooseCloudCard tableTwo = (ChooseCloudCard) message;
@@ -178,7 +158,7 @@ public class ClientMessanger implements ObserverView, Observer {
                 queue.execute(() -> view.askMotherEarthSteps(steps.getMaxSteps(), steps.getTable(), steps.getDifficulty()));
                 break;
             case WIN:
-                queue.execute(() -> view.showWinMessage());
+                queue.execute(view::showWinMessage);
                 break;
             case ERROR:
                 queue.execute(() -> view.showErrorMessage(((Error) message).getMessage()));

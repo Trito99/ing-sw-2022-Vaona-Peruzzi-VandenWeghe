@@ -20,13 +20,12 @@ public class Game {
 
     //private int gameId;   servirebbe per partite multiple
     private GameMode gameMode;
-    private ArrayList<Player> listOfPlayers;
-    private State state;
+    private final ArrayList<Player> listOfPlayers;
     private Difficulty difficulty;
     private Table table;
-    private ArrayList<Team> team;
-    private ArrayList<TColor> towerColors = new ArrayList<>();
-    private ArrayList<AssistantDeckName> assistantDeckNames = new ArrayList<>();
+    private final ArrayList<Team> team;
+    private final ArrayList<TColor> towerColors = new ArrayList<>();
+    private final ArrayList<AssistantDeckName> assistantDeckNames = new ArrayList<>();
 
     /**
      * Default constructor.
@@ -34,7 +33,6 @@ public class Game {
     public Game() {
         this.gameMode = null;
         this.listOfPlayers = new ArrayList<>();
-        this.state = null;
         this.difficulty = null;
         this.table = new Table();
         this.team = new ArrayList<>();
@@ -61,6 +59,22 @@ public class Game {
      *
      */
     public void generateTowerColorsAndAssistantDeckName(){
+        int playerNumber = initializePlayerNumber(gameMode);
+
+        if(gameMode.equals(GameMode.COOP)){
+            for(int twice=0; twice<2; twice++) {
+                for (int i = 0; i < playerNumber - 2; i++)
+                    towerColors.add(TColor.values()[i]);
+            }
+        }else {
+            for (int i = 0; i < playerNumber; i++)
+                towerColors.add(TColor.values()[i]);
+        }
+        for (int i = 0; i < playerNumber; i++)
+            assistantDeckNames.add(AssistantDeckName.values()[i]);
+    }
+
+    public static int initializePlayerNumber(GameMode gameMode) {
         int playerNumber = 0;
         switch(gameMode){
             case TWOPLAYERS:
@@ -73,17 +87,7 @@ public class Game {
                 playerNumber = 4;
                 break;
         }
-        if(gameMode.equals(GameMode.COOP)){
-            for(int twice=0;twice<2;twice++) {
-                for (int i = 0; i < playerNumber - 2; i++)
-                    towerColors.add(TColor.values()[i]);
-            }
-        }else {
-            for (int i = 0; i < playerNumber; i++)
-                towerColors.add(TColor.values()[i]);
-        }
-        for (int i = 0; i < playerNumber; i++)
-            assistantDeckNames.add(AssistantDeckName.values()[i]);
+        return playerNumber;
     }
 
     /**
@@ -102,8 +106,8 @@ public class Game {
      */
     public ArrayList<String> getPlayerListByNickname() {
         ArrayList<String> playerList = new ArrayList<>();
-        for (int i = 0; i < listOfPlayers.size(); i++) {
-            playerList.add(listOfPlayers.get(i).getNickname());
+        for (Player player : listOfPlayers) {
+            playerList.add(player.getNickname());
         }
         return playerList;
     }
@@ -116,14 +120,6 @@ public class Game {
         if(listOfPlayers.size()<4){
             listOfPlayers.add(player);
         }
-    }
-
-    public State getState(){
-        return state;
-    }
-
-    public void setState(State state){
-        this.state = state;
     }
 
     public void setGameMode(GameMode gameMode){
@@ -145,7 +141,7 @@ public class Game {
     }
 
     public ArrayList<Team> getTeam() {
-        return (ArrayList<Team>) team;
+        return team;
     }
 
     /**
@@ -189,9 +185,8 @@ public class Game {
      *
      * @param assistantName  is the assistant card chosen by the Player
      * @param nickname nickname of the player that chooses the assistant card to play
-     * @return the assistant card played
      */
-    public AssistantCard playAssistantCard(String assistantName, String nickname){
+    public void playAssistantCard(String assistantName, String nickname){
         
         Player activePlayer = getPlayer(nickname);
         AssistantCard assistantCardPlayed = activePlayer.getAssistantCard(assistantName);
@@ -199,7 +194,6 @@ public class Game {
         activePlayer.setTrash(assistantCardPlayed);                                     /** update the TrashDeck of the player */
         activePlayer.getDeckOfPlayer().getCardsInHand().remove(assistantCardPlayed);    /** remove the assistant card played from the hand of the player */
 
-        return assistantCardPlayed;
     }
 
     /**

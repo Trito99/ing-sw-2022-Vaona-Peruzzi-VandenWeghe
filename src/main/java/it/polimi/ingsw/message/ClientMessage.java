@@ -1,8 +1,5 @@
 package it.polimi.ingsw.message;
 
-
-import it.polimi.ingsw.model.game.GameMode;
-
 /** interfaccia fornita per tutti i messaggi inviati dal client */
 
 public abstract class ClientMessage extends GeneralMessage {

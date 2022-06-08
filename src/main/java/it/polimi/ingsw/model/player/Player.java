@@ -12,8 +12,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-import static java.util.Calendar.*;
-
 /**
  * This class represents the player and contains all his information.
  */
@@ -36,7 +34,7 @@ public class Player implements Serializable {
      * Default constructor.
      */
     public Player(TColor tColor, PlayerNumber playerNumber) {   //+ nickname e data
-        nickname = new String(); //= nickname
+        nickname = "";
         playerDate = null;
         this.playerNumber = playerNumber;
         influenceOnIsland = 0;

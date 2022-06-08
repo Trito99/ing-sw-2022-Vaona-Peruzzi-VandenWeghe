@@ -3,7 +3,8 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.player.Player;
 
 import java.util.*;
-import java.util.stream.Collectors;
+
+import static java.util.Comparator.*;
 
 public class TurnController {
     private HashMap<String, Boolean> activePlayer;
@@ -65,7 +66,7 @@ public class TurnController {
     public void changeOrder(){
         ArrayList<Player>  NewPlayerOrder = (ArrayList<Player>) playerOrder.clone();
         newPlayerOrderByName.clear();
-        Collections.sort(NewPlayerOrder, (o1, o2) -> Integer.valueOf(o1.getTrash().getTurnValue()).compareTo(o2.getTrash().getTurnValue()));
+        NewPlayerOrder.sort(comparingInt(o -> o.getTrash().getTurnValue()));
         for(Player player : NewPlayerOrder)
             newPlayerOrderByName.add(player.getNickname());
         newPlayerOrder = NewPlayerOrder;

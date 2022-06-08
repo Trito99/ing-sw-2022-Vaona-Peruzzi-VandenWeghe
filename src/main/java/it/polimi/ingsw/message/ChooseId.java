@@ -3,9 +3,6 @@ package it.polimi.ingsw.message;
 
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.school.School;
-import it.polimi.ingsw.model.student.Student;
-
-import java.util.ArrayList;
 
 public class ChooseId extends ServerMessage {
 

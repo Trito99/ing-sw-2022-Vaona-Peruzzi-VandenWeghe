@@ -40,9 +40,7 @@ public class School implements Serializable {
      * @param cloudCard cloudCard chosen
      */
     public void moveStudentFromCloudToEntry(CloudCard cloudCard){
-        for(Student s : cloudCard.getStudentOnCloud()) {
-            entry.add(s);
-        }
+        entry.addAll(cloudCard.getStudentOnCloud());
         cloudCard.getStudentOnCloud().clear();
     }
 

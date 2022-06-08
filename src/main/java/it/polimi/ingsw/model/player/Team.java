@@ -15,7 +15,7 @@ public class Team {
     }
 
     public ArrayList<Player> getTeam(){
-        return (ArrayList<Player>) team.clone();
+        return team;
     }
 
     public TColor getTeamColor() {

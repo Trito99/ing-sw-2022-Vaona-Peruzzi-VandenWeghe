@@ -1,16 +1,14 @@
 package it.polimi.ingsw.network;
 
-import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.model.game.Difficulty;
+import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.HashMap;
 
 public class LobbyForPrint implements Serializable {
-    private Difficulty difficulty;
-    private GameMode gameMode;
+    private final Difficulty difficulty;
+    private final GameMode gameMode;
     private int currentPlayers;
     private String gameId;
 
@@ -28,19 +26,7 @@ public class LobbyForPrint implements Serializable {
     }
 
     public int getMaxPlayers(){
-        int maxPlayers = 0;
-        switch(gameMode){
-            case TWOPLAYERS:
-                maxPlayers = 2;
-                break;
-            case THREEPLAYERS:
-                maxPlayers = 3;
-                break;
-            case COOP:
-                maxPlayers = 4;
-                break;
-        }
-        return  maxPlayers;
+        return Game.initializePlayerNumber(gameMode);
     }
 
 
