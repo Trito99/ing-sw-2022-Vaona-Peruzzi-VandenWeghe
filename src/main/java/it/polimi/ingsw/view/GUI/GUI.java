@@ -69,26 +69,6 @@ public class GUI extends ObservableView implements View {
     }
 
     @Override
-    public void showPlayerInfluence(int influence) {
-
-    }
-
-    @Override
-    public void showPlayerTurn(String activePlayer) {
-
-    }
-
-    @Override
-    public void showPlayerList(ArrayList<String> playerOrder) {
-
-    }
-
-    @Override
-    public void showWinMessage() {
-
-    }
-
-    @Override
     public void showPersonalSchool(School school, String nickname, AssistantCard trash, Difficulty difficulty, int coins, GameMode gameMode, String teamMate) {
 
     }
@@ -104,7 +84,7 @@ public class GUI extends ObservableView implements View {
     }
 
     @Override
-    public void showWinMessage(int numberOfTower) {
+    public void showWinMessage() {
         Winner win = new Winner();
         win.addAllObservers(observers);
         Platform.runLater(() -> GuiManager.changeRootPane(win, "/fxml/winner_scene"));
