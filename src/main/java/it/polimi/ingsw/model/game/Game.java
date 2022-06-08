@@ -162,8 +162,7 @@ public class Game {
             }
             return activePlayer.getDeckOfPlayer().getCardsInHand().isEmpty() || /** conditions to finish the game */
                     empty ||
-                    table.getListOfIsland().size() <= 3 ||
-                    table.getBag().isEmpty();
+                    table.getListOfIsland().size() <= 3;
         }
         else{
             for(Team t : teams) {                    /** Finds the team leaders */
@@ -177,8 +176,7 @@ public class Game {
             return activePlayer.getDeckOfPlayer().getCardsInHand().isEmpty() ||  /** conditions to finish the game */
                     teamLeader1.getPersonalSchool().getTowers().isEmpty() ||
                     teamLeader2.getPersonalSchool().getTowers().isEmpty() ||
-                    table.getListOfIsland().size() <= 3 ||
-                    table.getBag().isEmpty();
+                    table.getListOfIsland().size() <= 3;
         }
     }
 
