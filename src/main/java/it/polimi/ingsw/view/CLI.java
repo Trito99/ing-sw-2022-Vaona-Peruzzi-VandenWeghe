@@ -253,6 +253,9 @@ public class CLI extends ObservableView implements View {
     @Override
     public void showMessage(String message) {
         out.println("\n" + message);
+        if (message.equals("Tie")){
+            notifyObserver(ObserverView::updateDisconnect);
+        }
     }
 
     @Override

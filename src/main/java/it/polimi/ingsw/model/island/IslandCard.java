@@ -191,7 +191,7 @@ public class IslandCard implements Serializable {
 
             /** CENTAUR EFFECT */
             if(towerIsOnIsland) {
-                if (p.getTColor().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isCentaurPlayed()) {  /** Adds influence of the towers if centaur effect isn't activated */
+                if (p.getTColor().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isCentaurPlayed()) {/** Adds influence of the towers if centaur effect isn't activated */
                     countTot += mergedIsland;
                     p.setInfluenceOnIsland(countTot);
                 }
@@ -234,6 +234,10 @@ public class IslandCard implements Serializable {
             int influenceTeam = 0;
             for (Player player : t.getTeam()){
                 influenceTeam += player.getInfluenceOnIsland();
+            }
+            if (towerIsOnIsland){
+                if(towerOnIsland.getTColour().equals(t.getTeamColor()))
+                    influenceTeam = influenceTeam - mergedIsland;  /** The amount of towers are added two times (one for each player of the team) so it has to be removed once*/
             }
             if(t.getTeamColor().equals(TColor.WHITE)) {
                 influenceWhite = influenceTeam;
