@@ -151,22 +151,38 @@ public class Game {
      */
     public boolean gameIsFinished(String nickname) {
         Player activePlayer = getPlayer(nickname);
-        Player teamLeader = null;                       /** The team leader is the player of the team that has the towers */
+        Player teamLeader1 = null;      /** The team leader 1 is the player of the playing team that has the towers */
+        Player teamLeader2 = null;      /** The team leader 2 is the player of the not playing team that has the towers */
         if(gameMode!=GameMode.COOP) {
+            boolean empty = false;
+            for (Player player : listOfPlayers){
+                if (player.getPersonalSchool().getTowers().isEmpty())
+                    empty = true;
+            }
             return activePlayer.getDeckOfPlayer().getCardsInHand().isEmpty() || /** conditions to finish the game */
-                    activePlayer.getPersonalSchool().getTowers().isEmpty() ||
+                    empty ||
                     table.getListOfIsland().size() <= 3;
         }
         else{
-            for (Player p : listOfPlayers) {            /** Finds the team leader */
-                if (activePlayer.getPersonalSchool().getTowers().size() == 0 && activePlayer.getTeamMate().equals(p.getNickname()))
-                    teamLeader = p;
-            }
-            if (teamLeader==null)
-                teamLeader = activePlayer;
+            for(Team t : team) {                    /** Finds the team leaders */
+                Player teamLeader = null;
+                for (Player p : t.getTeam()) {
+                    if (p.getPersonalSchool().getTowers().size() != 0)
+                        teamLeader = p;
+                }
+                if (teamLeader==null)
+                    teamLeader=t.getTeam().get(0);
 
-            return teamLeader.getDeckOfPlayer().getCardsInHand().isEmpty() ||  /** conditions to finish the game */
-                    teamLeader.getPersonalSchool().getTowers().isEmpty() ||
+                if(teamLeader.getTColor().equals(activePlayer.getTColor()))
+                    teamLeader1 = teamLeader;
+                else
+                    teamLeader2 = teamLeader;
+
+            }
+
+            return activePlayer.getDeckOfPlayer().getCardsInHand().isEmpty() ||  /** conditions to finish the game */
+                    teamLeader1.getPersonalSchool().getTowers().isEmpty() ||
+                    teamLeader2.getPersonalSchool().getTowers().isEmpty() ||
                     table.getListOfIsland().size() <= 3;
         }
     }
