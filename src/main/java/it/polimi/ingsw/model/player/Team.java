@@ -26,4 +26,13 @@ public class Team {
         this.teamColor = teamColor;
     }
 
+    public Player getTeamLeader(){
+        Player teamLeader = null;
+        for(Player player : team){
+            if (player.isTeamLeader())
+                teamLeader = player;
+        }
+        return  teamLeader;
+    }
+
 }

@@ -195,6 +195,7 @@ public class GameController {
                                     for(Player player : gameSession.getListOfPlayers()){
                                         if(player.getTColor().equals(TColor.values()[i]) && !player.getPersonalSchool().getTowers().isEmpty()){
                                             gameSession.getPlayer(player.getTeamMate()).getPersonalSchool().getTowers().clear();
+                                            player.setTeamLeader(true);
                                         }
                                     }
                                 }

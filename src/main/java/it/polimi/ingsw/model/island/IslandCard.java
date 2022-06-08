@@ -87,14 +87,14 @@ public class IslandCard implements Serializable {
                     if (xCardCounter == 0) setXCardOnIsland(false);
                 } else {
                     if (teamFound != null) {
-                        if (teamFound.getTeamLeder().getPersonalSchool().getTowers().size() != 0) {
+                        if (teamFound.getTeamLeader().getPersonalSchool().getTowers().size() != 0) {
                             if (!towerIsOnIsland) {
                                 towerOnIsland = new Tower(teamFound.getTeamColor());
                                 teamFound.getTeamLeader().getPersonalSchool().removeTower();
                                 towerIsOnIsland = true;
                             } else {
                                 if (!teamFound.getTeamColor().equals(towerOnIsland.getTColour())) {
-                                    changeTowerColour(listOfPlayer, teamLeader, gameMode);
+                                    changeTowerColour(listOfPlayer, teamFound.getTeamLeader(), gameMode);
                                 }
                             }
                         }
@@ -108,15 +108,15 @@ public class IslandCard implements Serializable {
                     setXCardCounter(getXCardCounter() - 1);         /** Curator effect */
                     if (xCardCounter == 0) setXCardOnIsland(false);
                 } else {
-                    if (teamLeader != null) {
-                        if (teamLeader.getPersonalSchool().getTowers().size() != 0) {
+                    if (playerFound != null) {
+                        if (playerFound.getPersonalSchool().getTowers().size() != 0) {
                             if (!towerIsOnIsland) {
-                                towerOnIsland = new Tower(teamLeader.getTColor());
-                                teamLeader.getPersonalSchool().removeTower();
+                                towerOnIsland = new Tower(playerFound.getTColor());
+                                playerFound.getPersonalSchool().removeTower();
                                 towerIsOnIsland = true;
                             } else {
-                                if (!teamLeader.getTColor().equals(towerOnIsland.getTColour())) {
-                                    changeTowerColour(listOfPlayer, teamLeader, gameMode);
+                                if (!playerFound.getTColor().equals(towerOnIsland.getTColour())) {
+                                    changeTowerColour(listOfPlayer, playerFound, gameMode);
                                 }
                             }
                         }
@@ -268,7 +268,6 @@ public class IslandCard implements Serializable {
 
     public Team calculateInfluenceCoop(ArrayList<Player> listOfPlayers, CardEffect cardEffectPlayed, Player activePlayer){   //Restituisce il Player che ha influenza sull'isola
         int i ;
-        int maxInfluence = 0;
         Team TeamWithInfluence = null;
 
         /** calculate influence on island for all the players */
@@ -368,9 +367,9 @@ public class IslandCard implements Serializable {
         cardEffectPlayed.setCentaurPlayed(false);           /** Disable Centaur effect */
 
         if(teamWhiteInfluence > teamBlackInfluence)
-            return teamWhite;
+            return null; //white
         else if(teamWhiteInfluence < teamBlackInfluence)
-            return teamBlack;
+            return null; //black
         else
             return null; /** if there is a draw, no one has influence on the island */
 

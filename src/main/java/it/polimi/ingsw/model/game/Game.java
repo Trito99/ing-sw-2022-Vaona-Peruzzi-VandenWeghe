@@ -114,6 +114,21 @@ public class Game {
 
     /**
      *
+     * @param color the tower color selected
+     * @return Returns the team from the list of teams with the color selected
+     */
+    public Team getTeamByColor(TColor color){
+        Team teamFound = null;
+        for(Team t : team) {
+            if (t.getTeamColor().equals(color))
+                teamFound = t;
+        }
+        return teamFound;
+    }
+
+
+    /**
+     *
      * @param player Adds a player at the list of players of the game.
      */
     public void addPlayer(Player player) {
@@ -165,19 +180,11 @@ public class Game {
         }
         else{
             for(Team t : team) {                    /** Finds the team leaders */
-                Player teamLeader = null;
-                for (Player p : t.getTeam()) {
-                    if (p.getPersonalSchool().getTowers().size() != 0)
-                        teamLeader = p;
-                }
-                if (teamLeader==null)
-                    teamLeader=t.getTeam().get(0);
-
+                Player teamLeader = t.getTeamLeader();
                 if(teamLeader.getTColor().equals(activePlayer.getTColor()))
                     teamLeader1 = teamLeader;
                 else
                     teamLeader2 = teamLeader;
-
             }
 
             return activePlayer.getDeckOfPlayer().getCardsInHand().isEmpty() ||  /** conditions to finish the game */

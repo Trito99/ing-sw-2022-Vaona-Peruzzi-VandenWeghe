@@ -28,6 +28,7 @@ public class Player implements Serializable {
     private TColor tColor;
     private int influenceOnIsland;
     private String teamMate;
+    private boolean teamLeader;
 
 
     /**
@@ -43,6 +44,7 @@ public class Player implements Serializable {
         trash = null;
         coinScore = 0;
         teamMate = null;
+        teamLeader = false;
     }
 
     public void generateSchool(Table table, GameMode gameMode) {
@@ -176,5 +178,13 @@ public class Player implements Serializable {
 
     public void setTeamMate(String teamMate) {
         this.teamMate = teamMate;
+    }
+
+    public boolean isTeamLeader() {
+        return teamLeader;
+    }
+
+    public void setTeamLeader(boolean teamLeader) {
+        this.teamLeader = teamLeader;
     }
 }
