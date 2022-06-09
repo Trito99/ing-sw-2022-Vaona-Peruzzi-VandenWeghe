@@ -101,6 +101,7 @@ public class School implements Serializable {
             int max = 0;
             int playerWithMax = 0;
             Player maxPlayer = null;
+            boolean activePlayerHasMax = false;
 
             switch (SColor.values()[i]) {
                 case GREEN:
@@ -109,6 +110,9 @@ public class School implements Serializable {
                             max = p.getPersonalSchool().numberOfStudentsInHall(SColor.GREEN);
                         }
                     }
+                    if (playerTurn.getPersonalSchool().numberOfStudentsInHall(SColor.GREEN) == max)
+                        activePlayerHasMax = true;
+
                     for (Player p : players) {                          /** find how many players has the max number of green students */
                         if (p.getPersonalSchool().numberOfStudentsInHall(SColor.GREEN) == max) {
                             playerWithMax++;
@@ -117,7 +121,7 @@ public class School implements Serializable {
                     }
                     if (playerWithMax == 1) {                                               /** ---> No draw */
                         maxPlayer.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true);
-                    } else if (playerWithMax > 1 && cardEffectPlayed.isHostPlayed()) {      /** Draw, but Host effect is played */
+                    } else if (playerWithMax > 1 && cardEffectPlayed.isHostPlayed() && activePlayerHasMax) {      /** Draw, but Host effect is played */
                         playerTurn.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true);
                     } else if (playerWithMax > 1) {                                         /** Draw */
                         for (Player p : players)
@@ -130,6 +134,10 @@ public class School implements Serializable {
                             max = p.getPersonalSchool().numberOfStudentsInHall(SColor.RED);
                         }
                     }
+
+                    if (playerTurn.getPersonalSchool().numberOfStudentsInHall(SColor.RED) == max)
+                        activePlayerHasMax = true;
+
                     for (Player p : players) {
                         if (p.getPersonalSchool().numberOfStudentsInHall(SColor.RED) == max) {
                             playerWithMax++;
@@ -152,6 +160,10 @@ public class School implements Serializable {
                             max = p.getPersonalSchool().numberOfStudentsInHall(SColor.YELLOW);
                         }
                     }
+
+                    if (playerTurn.getPersonalSchool().numberOfStudentsInHall(SColor.YELLOW) == max)
+                        activePlayerHasMax = true;
+
                     for (Player p : players) {
                         if (p.getPersonalSchool().numberOfStudentsInHall(SColor.YELLOW) == max) {
                             playerWithMax++;
@@ -173,6 +185,10 @@ public class School implements Serializable {
                             max = p.getPersonalSchool().numberOfStudentsInHall(SColor.PINK);
                         }
                     }
+
+                    if (playerTurn.getPersonalSchool().numberOfStudentsInHall(SColor.PINK) == max)
+                        activePlayerHasMax = true;
+
                     for (Player p : players) {
                         if (p.getPersonalSchool().numberOfStudentsInHall(SColor.PINK) == max) {
                             playerWithMax++;
@@ -194,6 +210,10 @@ public class School implements Serializable {
                             max = p.getPersonalSchool().numberOfStudentsInHall(SColor.BLUE);
                         }
                     }
+
+                    if (playerTurn.getPersonalSchool().numberOfStudentsInHall(SColor.BLUE) == max)
+                        activePlayerHasMax = true;
+
                     for (Player p : players) {
                         if (p.getPersonalSchool().numberOfStudentsInHall(SColor.BLUE) == max) {
                             playerWithMax++;
@@ -211,7 +231,6 @@ public class School implements Serializable {
                     break;
             }
         }
-        cardEffectPlayed.setHostPlayed(false);
     }
 
     /**

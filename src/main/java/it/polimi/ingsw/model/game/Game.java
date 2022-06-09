@@ -293,7 +293,6 @@ public class Game {
             case HOST:
                 characterCardPlayed.getCardEffect().setHostPlayed(true);
                 activePlayer.getPersonalSchool().winProf(getListOfPlayers(), activePlayer, CardEffect.HOST);
-                characterCardPlayed.getCardEffect().setHostPlayed(false);
                 break;
 
             case HERALD:
