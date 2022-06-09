@@ -75,6 +75,7 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
 
     /** gestisce messaggio inviato dal client */
     private void handleMessage() {
+        String nickname = null;
         try {
             while (!Thread.currentThread().isInterrupted()) {
                 synchronized (lockHandleMessage) {
@@ -88,6 +89,7 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
                         lobby = (lobbyServer.getLobby(loginMsg.getGameId()));
                         gameId = loginMsg.getGameId();
                         lobby.addPlayer(loginMsg.getNickname(), loginMsg.getPlayerDate(), this);
+                        nickname = loginMsg.getNickname();
                     } else if (lobby != null) {
                         lobby.getMessage(message);
                     }
@@ -95,12 +97,16 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
             }
         }
         catch (EOFException eofException) {
-            lobby.getGameController().endGame();
+            lobby.getGameController().endGame(null);
+            disconnect();
+        }
+        catch (SocketException socketException) {
+            lobby.getGameController().endGame(nickname);
             disconnect();
         }
         catch (Exception exception) {
             exception.printStackTrace();
-            lobby.getGameController().endGame();
+            lobby.getGameController().endGame(null);
             disconnect();
         }
     }

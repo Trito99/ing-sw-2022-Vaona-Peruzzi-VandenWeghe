@@ -817,7 +817,7 @@ public class GameController {
         }
         if (roundIndex == maxPlayers) {
             if(gameSession.gameIsFinished(turnController.getActivePlayer()))
-                endGame();
+                endGame(null);
             else{
                 roundIndex = 0;
                 turnController.changeOrder();
@@ -860,7 +860,7 @@ public class GameController {
                         action();
                     }else {
                         if (gameSession.gameIsFinished(turnController.getActivePlayer())) {
-                            endGame();
+                            endGame(null);
                         } else
                             allVirtualView.get(turnController.getActivePlayer()).askCloud(gameSession.getTable());
                     }
@@ -882,10 +882,10 @@ public class GameController {
                     planning();
                     lastRound = true;
                 } else if (gameSession.getTable().getBag().isEmpty()) {
-                    endGame();
+                    endGame(null);
                 }
             }else
-                endGame();
+                endGame(null);
         }
     }
 
@@ -913,27 +913,47 @@ public class GameController {
         this.gameSession = gameSession;
     }
 
-    public void endGame(){
-        if(gameSession.getTable().playerIsWinning(gameSession) == null)
+    public void endGame(String disconnectedNickname){
+        if(gameSession.getTable().playerIsWinning(gameSession) == null) {
+            if (disconnectedNickname != null) {
+                broadcastMessage(disconnectedNickname + " has disconnceted!");
+            }
             broadcastMessage("Tie");
+        }
         else {
             if(gameSession.getGameMode()==GameMode.COOP){
                 for (Team team : gameSession.getTeams()) {
                     if (team.getTeamColor() == gameSession.getTable().playerIsWinning(gameSession).getTColor()) {
-                        for (Player player : team.getTeam())
+                        for (Player player : team.getTeam()) {
+                            if (disconnectedNickname != null){
+                                allVirtualView.get(player.getNickname()).showMessage(disconnectedNickname + " has disconnceted!");
+                            }
                             allVirtualView.get(player.getNickname()).showWinMessage();
+                        }
                     } else {
-                        for (Player player : team.getTeam())
+                        for (Player player : team.getTeam()) {
+                            if (disconnectedNickname != null){
+                                allVirtualView.get(player.getNickname()).showMessage(disconnectedNickname + " has disconnceted!");
+                            }
                             allVirtualView.get(player.getNickname()).showLoseMessage("Team " + gameSession.getTable().playerIsWinning(gameSession).getTColor().toString());
+                        }
                     }
                 }
             }
             else {
                 for (String nickname : allVirtualView.keySet()) {
-                    if (nickname.equals(gameSession.getTable().playerIsWinning(gameSession).getNickname()))
+                    if (nickname.equals(gameSession.getTable().playerIsWinning(gameSession).getNickname())) {
+                        if (disconnectedNickname != null){
+                            allVirtualView.get(nickname).showMessage(disconnectedNickname + " has disconnceted!");
+                        }
                         allVirtualView.get(nickname).showWinMessage();
-                    else
+                    }
+                    else {
+                        if (disconnectedNickname != null){
+                            allVirtualView.get(nickname).showMessage(disconnectedNickname + " has disconnceted!");
+                        }
                         allVirtualView.get(nickname).showLoseMessage(gameSession.getTable().playerIsWinning(gameSession).getNickname());
+                    }
                 }
             }
         }
