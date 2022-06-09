@@ -4,6 +4,7 @@ import it.polimi.ingsw.message.*;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 
 /** rappresenta il client a lato server.
  * Gestisce i messaggi ricevuti dal client, e invia i messaggi del GameController al client */
@@ -60,6 +61,10 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
                 output.reset();
             }
         }
+        catch(SocketException socketException){
+            Thread.currentThread().interrupt();
+            disconnect();
+        }
         catch(IOException e){
             e.printStackTrace();
             Thread.currentThread().interrupt();
@@ -88,7 +93,12 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
                     }
                 }
             }
-        } catch (Exception exception) {
+        }
+        catch (EOFException eofException) {
+            lobby.getGameController().endGame();
+            disconnect();
+        }
+        catch (Exception exception) {
             exception.printStackTrace();
             lobby.getGameController().endGame();
             disconnect();
