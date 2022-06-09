@@ -311,7 +311,10 @@ public class GameController {
                                 }
                                 if(!full) {
                                     gameSession.moveStudentFromListToHall(gameSession.getPlayer(turnController.getActivePlayer()), studentId, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
-                                    gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(turnController.getActivePlayer()), CardEffect.STANDARDMODE);
+                                    if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE) && characterCard!=null) {
+                                        gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(turnController.getActivePlayer()), characterCard.getCardEffect());
+                                    }else
+                                        gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(turnController.getActivePlayer()), CardEffect.STANDARDMODE);
                                     virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore(), gameSession.getGameMode(), gameSession.getPlayer(getActivePlayer()).getTeamMate());
                                     movedStudents++;
                                     allStudentsMoved();
@@ -718,14 +721,8 @@ public class GameController {
                         again=false;
                         int steps = step.getSteps();
                         gameSession.getTable().moveMotherEarth(steps);
-                        if(characterCard!=null && characterCard.getCardEffect().isBearerPlayed())
-                            characterCard.getCardEffect().setBearerPlayed(false);
-                        if (characterCard!=null && characterCard.getCardEffect().equals(CardEffect.CURATOR) && gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).isXCardOnIsland())
-                            characterCard.setXCardOnCard(characterCard.getXCardOnCard()+1);
-                        if(characterCard!=null && characterCard.getCardEffect().isCentaurPlayed()) {
-                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.CENTAUR, gameSession.getPlayer(turnController.getActivePlayer()),gameSession.getGameMode(), gameSession.getTeams());
-                        }else if(characterCard!=null && characterCard.getCardEffect().isKnightPlayed()){
-                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.KNIGHT, gameSession.getPlayer(turnController.getActivePlayer()),gameSession.getGameMode(), gameSession.getTeams());
+                        if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE) && characterCard!=null) {
+                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), characterCard.getCardEffect(), gameSession.getPlayer(turnController.getActivePlayer()),gameSession.getGameMode(), gameSession.getTeams());
                         }else
                             gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE, gameSession.getPlayer(turnController.getActivePlayer()),gameSession.getGameMode(), gameSession.getTeams());
                         gameSession.getTable().joinIsland(gameSession.getTable().getListOfIsland());
@@ -754,14 +751,7 @@ public class GameController {
                 }
 
                 if(!again && turnFinished) {
-                    turnController.nextPlayer(turnController.getNewPlayerOrderByName());
-                    roundIndex++;
-                    if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
-                        this.setActionState(ActionState.CHARACTER);
-                    else
-                        setActionState(ActionState.STUDENT);
-                    showGame();
-                    action();
+                    endTurn();
                 }
                 break;
             default:
@@ -850,14 +840,7 @@ public class GameController {
                     break;
                 case CLOUDCARD:
                     if (lastRound){
-                        turnController.nextPlayer(turnController.getNewPlayerOrderByName());
-                        roundIndex++;
-                        if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
-                            this.setActionState(ActionState.CHARACTER);
-                        else
-                            setActionState(ActionState.STUDENT);
-                        showGame();
-                        action();
+                        endTurn();
                     }else {
                         if (gameSession.gameIsFinished(turnController.getActivePlayer())) {
                             endGame(null);
@@ -911,6 +894,23 @@ public class GameController {
 
     public void setGameSession(Game gameSession) {
         this.gameSession = gameSession;
+    }
+
+    private void endTurn(){
+        turnController.nextPlayer(turnController.getNewPlayerOrderByName());
+        roundIndex++;
+        if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)) {
+            if (characterCard != null) {
+                characterCard.getCardEffect().setHostPlayed(false);
+                gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(turnController.getActivePlayer()), characterCard.getCardEffect()); //rimette a false
+                characterCard.getCardEffect().setBearerPlayed(false);
+            }
+            this.setActionState(ActionState.CHARACTER);
+        }
+        else
+            setActionState(ActionState.STUDENT);
+        showGame();
+        action();
     }
 
     public void endGame(String disconnectedNickname){

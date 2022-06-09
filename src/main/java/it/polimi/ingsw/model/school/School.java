@@ -121,11 +121,12 @@ public class School implements Serializable {
                     }
                     if (playerWithMax == 1) {                                               /** ---> No draw */
                         maxPlayer.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true);
-                    } else if (playerWithMax > 1 && cardEffectPlayed.isHostPlayed() && activePlayerHasMax) {      /** Draw, but Host effect is played */
-                        playerTurn.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true);
                     } else if (playerWithMax > 1) {                                         /** Draw */
                         for (Player p : players)
                             p.getPersonalSchool().getProfOfPlayer().get(0).setInHall(false);
+                        if (cardEffectPlayed.isHostPlayed() && activePlayerHasMax){
+                            playerTurn.getPersonalSchool().getProfOfPlayer().get(0).setInHall(true);        /** Draw, but Host effect is played */
+                        }
                     }
                     break;
                 case RED:
@@ -147,11 +148,12 @@ public class School implements Serializable {
                     if (playerWithMax == 1) {
                         maxPlayer.getPersonalSchool().getProfOfPlayer().get(1).setInHall(true);
 
-                    } else if (playerWithMax > 1 && cardEffectPlayed.isHostPlayed()) {
-                        playerTurn.getPersonalSchool().getProfOfPlayer().get(1).setInHall(true);
                     } else if (playerWithMax > 1) {
                         for (Player p : players)
                             p.getPersonalSchool().getProfOfPlayer().get(1).setInHall(false);
+                        if (cardEffectPlayed.isHostPlayed() && activePlayerHasMax){
+                            playerTurn.getPersonalSchool().getProfOfPlayer().get(1).setInHall(true);
+                        }
                     }
                     break;
                 case YELLOW:
@@ -172,11 +174,12 @@ public class School implements Serializable {
                     }
                     if (playerWithMax == 1) {
                         maxPlayer.getPersonalSchool().getProfOfPlayer().get(2).setInHall(true);
-                    } else if (playerWithMax > 1 && cardEffectPlayed.isHostPlayed()) {
-                        playerTurn.getPersonalSchool().getProfOfPlayer().get(2).setInHall(true);
                     } else if (playerWithMax > 1) {
                         for (Player p : players)
                             p.getPersonalSchool().getProfOfPlayer().get(2).setInHall(false);
+                        if (cardEffectPlayed.isHostPlayed() && activePlayerHasMax){
+                            playerTurn.getPersonalSchool().getProfOfPlayer().get(2).setInHall(true);
+                        }
                     }
                     break;
                 case PINK:
@@ -197,11 +200,12 @@ public class School implements Serializable {
                     }
                     if (playerWithMax == 1) {
                         maxPlayer.getPersonalSchool().getProfOfPlayer().get(3).setInHall(true);
-                    } else if (playerWithMax > 1 && cardEffectPlayed.isHostPlayed()) {
-                        playerTurn.getPersonalSchool().getProfOfPlayer().get(3).setInHall(true);
-                    } else if (playerWithMax > 1){
+                    } else if (playerWithMax > 1) {
                         for (Player p : players)
                             p.getPersonalSchool().getProfOfPlayer().get(3).setInHall(false);
+                        if (cardEffectPlayed.isHostPlayed() && activePlayerHasMax){
+                            playerTurn.getPersonalSchool().getProfOfPlayer().get(3).setInHall(true);
+                        }
                     }
                     break;
                 case BLUE:
@@ -222,11 +226,12 @@ public class School implements Serializable {
                     }
                     if (playerWithMax == 1) {
                         maxPlayer.getPersonalSchool().getProfOfPlayer().get(4).setInHall(true);
-                    } else if (playerWithMax > 1 && cardEffectPlayed.isHostPlayed()) {
-                        playerTurn.getPersonalSchool().getProfOfPlayer().get(4).setInHall(true);
-                    } else if (playerWithMax > 1){
+                    } else if (playerWithMax > 1) {
                         for (Player p : players)
                             p.getPersonalSchool().getProfOfPlayer().get(4).setInHall(false);
+                        if (cardEffectPlayed.isHostPlayed() && activePlayerHasMax){
+                            playerTurn.getPersonalSchool().getProfOfPlayer().get(4).setInHall(true);
+                        }
                     }
                     break;
             }
