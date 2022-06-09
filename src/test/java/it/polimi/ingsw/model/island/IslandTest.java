@@ -256,7 +256,7 @@ public class IslandTest {
 
          players.get(0).setInfluenceOnIsland(6);
          players.get(1).setInfluenceOnIsland(3);
-         Player winner = island.calculateInfluence(players, CardEffect.STANDARDMODE, players.get(0));
+         Player winner = island.calculateInfluence(players, CardEffect.STANDARDMODE, players.get(0), null);
          assertNotNull(winner);
          assertEquals(players.get(0), winner);
          assertEquals(6, winner.getInfluenceOnIsland());
@@ -361,7 +361,7 @@ public class IslandTest {
                }
                countInfluence.add(s);
             }
-            table.getListOfIsland().get(i).calculateInfluence(game.getListOfPlayers(), CardEffect.STANDARDMODE, null);
+            table.getListOfIsland().get(i).calculateInfluence(game.getListOfPlayers(), CardEffect.STANDARDMODE, null, null);
             int max = 0, n = 0;
             /** Checks if the influence calculated manually for each player is the same calculated by the function "calculateInfluence"
              *  and finds the maximum between them*/
@@ -379,9 +379,9 @@ public class IslandTest {
                }
             }
             if (n == 1)   /** Checks if the player selected by the function is the one with the most influence*/
-               assertEquals(playerWithMaxInfluence, table.getListOfIsland().get(i).calculateInfluence(game.getListOfPlayers(), CardEffect.STANDARDMODE, null));
+               assertEquals(playerWithMaxInfluence, table.getListOfIsland().get(i).calculateInfluence(game.getListOfPlayers(), CardEffect.STANDARDMODE, null, null));
             else if (n > 1)  /** Checks if in case of a tie the function returns null */
-               assertNull(table.getListOfIsland().get(i).calculateInfluence(game.getListOfPlayers(), CardEffect.STANDARDMODE, null));
+               assertNull(table.getListOfIsland().get(i).calculateInfluence(game.getListOfPlayers(), CardEffect.STANDARDMODE, null, null));
          }
       }
    }
@@ -463,7 +463,7 @@ public class IslandTest {
          for (IslandCard islandCard: table.getListOfIsland()){
             //islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE, null);
             if(islandCard.towerIsOnIsland())
-               assertEquals(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE, null).getTColor(),islandCard.getTowerOnIsland().getTColour());
+               assertEquals(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE, null, null).getTColor(),islandCard.getTowerOnIsland().getTColour());
             table.moveMotherEarth(1);
          }
 

@@ -81,9 +81,9 @@ public class IslandCard implements Serializable {
             Player playerFound;
             /** Finds the player that will build the tower (null if it doesn't exists) */
             if(gameMode.equals(GameMode.COOP))
-                playerFound = calculateInfluenceCoop(listOfPlayer, cardEffectPlayed, activePlayer, teams);
+                playerFound = calculateInfluenceCoop(listOfPlayer, cardEffectPlayed, activePlayer, teams, gameMode);
             else
-                playerFound = calculateInfluence(listOfPlayer, cardEffectPlayed, activePlayer);
+                playerFound = calculateInfluence(listOfPlayer, cardEffectPlayed, activePlayer, gameMode);
             /** CURATOR: Checks that there aren't forbidden cards on the island */
             if (xCardOnIsland) {
                 setXCardCounter(getXCardCounter() - 1);         /** Curator effect */
@@ -140,7 +140,7 @@ public class IslandCard implements Serializable {
      * @param activePlayer player that is playing his turn
      * @return the player with the influence on the island, return null if no one has influence or there is a draw.
      */
-    public Player calculateInfluence(ArrayList<Player> listOfPlayers, CardEffect cardEffectPlayed, Player activePlayer){   //Restituisce il Player che ha influenza sull'isola
+    public Player calculateInfluence(ArrayList<Player> listOfPlayers, CardEffect cardEffectPlayed, Player activePlayer, GameMode gameMode){   //Restituisce il Player che ha influenza sull'isola
         int i ;
         int maxInfluence = 0;
         Player playerWithInfluence = null;
@@ -217,8 +217,16 @@ public class IslandCard implements Serializable {
             }
         }
 
-        cardEffectPlayed.setKnightPlayed(false);            /** Disable Knight effect */
-        cardEffectPlayed.setCentaurPlayed(false);           /** Disable Centaur effect */
+        if(!gameMode.equals(GameMode.COOP)) {
+            for (SColor c : SColor.values()) {            /** Disable Herbalist effect */
+                if (c.isColorBlocked)
+                    c.unlockColor();
+            }
+
+            cardEffectPlayed.setKnightPlayed(false);            /** Disable Knight effect */
+            cardEffectPlayed.setCentaurPlayed(false);           /** Disable Centaur effect */
+        }
+
         if (count==1)
             return playerWithInfluence;
         else
@@ -226,8 +234,10 @@ public class IslandCard implements Serializable {
 
     }
 
-    public Player calculateInfluenceCoop(ArrayList<Player> listOfPlayers, CardEffect cardEffectPlayed, Player activePlayer, ArrayList<Team> teams){   //Restituisce il Team Leader che ha influenza sull'isola
-        calculateInfluence(listOfPlayers, cardEffectPlayed, activePlayer);
+    public Player calculateInfluenceCoop(ArrayList<Player> listOfPlayers, CardEffect cardEffectPlayed, Player activePlayer, ArrayList<Team> teams, GameMode gameMode){   //Restituisce il Team Leader che ha influenza sull'isola
+        if(calculateInfluence(listOfPlayers, cardEffectPlayed, activePlayer, gameMode) == null)
+            return null;
+
         int influenceWhite = 0, influenceBlack = 0;
         Team teamWhite = null, teamBlack = null;
         for(Team t : teams){
@@ -235,7 +245,7 @@ public class IslandCard implements Serializable {
             for (Player player : t.getTeam()){
                 influenceTeam += player.getInfluenceOnIsland();
             }
-            if (towerIsOnIsland){
+            if (towerIsOnIsland && !cardEffectPlayed.isCentaurPlayed()){
                 if(towerOnIsland.getTColour().equals(t.getTeamColor()))
                     influenceTeam = influenceTeam - mergedIsland;  /** The amount of towers are added two times (one for each player of the team) so it has to be removed once*/
             }
@@ -247,6 +257,15 @@ public class IslandCard implements Serializable {
                 teamBlack = t;
             }
         }
+
+        for (SColor c : SColor.values()) {            /** Disable Herbalist effect */
+            if (c.isColorBlocked)
+                c.unlockColor();
+        }
+
+        cardEffectPlayed.setKnightPlayed(false);            /** Disable Knight effect */
+        cardEffectPlayed.setCentaurPlayed(false);           /** Disable Centaur effect */
+
         if(influenceWhite > influenceBlack)
             return  teamWhite.getTeamLeader();
         else if (influenceWhite < influenceBlack)
