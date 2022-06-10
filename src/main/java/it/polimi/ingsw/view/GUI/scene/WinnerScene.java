@@ -4,6 +4,6 @@ import it.polimi.ingsw.observer.ObservableView;
 
 /** scena che mostra al vincitore la schermata di vittoria */
 
-public class Winner extends ObservableView implements GenericScene {
+public class WinnerScene extends ObservableView implements GenericScene {
 
 }

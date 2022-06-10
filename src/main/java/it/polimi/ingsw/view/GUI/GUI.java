@@ -27,7 +27,7 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void askConnect() {
-        ConnectToServer connectToServer = new ConnectToServer();
+        ConnectToServerScene connectToServer = new ConnectToServerScene();
         connectToServer.addAllObservers(observers);
         Platform.runLater(() -> {
             GuiManager.changeRootPane(observers, "/fxml/connect_to_server_scene");
@@ -36,14 +36,14 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void askLobby(Map<String, LobbyForPrint> lobbyMap) {
-        SetupGame setupGame = new SetupGame();
+        SetupGameScene setupGame = new SetupGameScene();
         setupGame.addAllObservers(observers);
         Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/setup_game_scene") );
     }
 
     @Override
     public void askPlayersNumberAndDifficulty() {
-        NewGame pNandDifficulty = new NewGame();
+        NewGameScene pNandDifficulty = new NewGameScene();
         pNandDifficulty.addAllObservers(observers);
         Platform.runLater(()-> GuiManager.changeRootPane(observers,"/fxml/new_game_scene") );
     }
@@ -85,21 +85,21 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void showWinMessage() {
-        Winner win = new Winner();
+        WinnerScene win = new WinnerScene();
         win.addAllObservers(observers);
         Platform.runLater(() -> GuiManager.changeRootPane(win, "/fxml/winner_scene"));
     }
 
     @Override
     public void showLoseMessage(String nickname) {
-        Loser lost = new Loser();
+        LoserScene lost = new LoserScene();
         lost.addAllObservers(observers);
         Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/lose_scene"));
     }
 
     @Override
     public void showErrorMessage(String message) {
-        Platform.runLater(() -> Message.display("Error", message));
+        Platform.runLater(() -> MessageScene.display("Error", message));
     }
 
     @Override

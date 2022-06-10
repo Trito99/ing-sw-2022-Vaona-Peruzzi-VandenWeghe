@@ -1,7 +1,7 @@
 package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.network.ClientMessanger;
-import it.polimi.ingsw.view.GUI.scene.StartGame;
+import it.polimi.ingsw.view.GUI.scene.StartGameScene;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,7 +31,7 @@ public class StartGUI extends Application {
             System.exit(1);
         }
 
-        StartGame controller = loader.getController();
+        StartGameScene controller = loader.getController();
         controller.addObserver(clientMessanger);
         Scene scene = new Scene(rootLayout);
         stage.setScene(scene);

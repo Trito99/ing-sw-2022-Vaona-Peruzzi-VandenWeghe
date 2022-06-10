@@ -6,20 +6,34 @@ import it.polimi.ingsw.view.GUI.GuiManager;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.input.MouseEvent;
 
-/** scena che chiede al giocatore a quale lobby connettersi, chiedendo username, data di nascita, gameId */
-
-public class SetupGame extends ObservableView implements GenericScene {
+public class NewGameScene extends ObservableView implements GenericScene {
+    @FXML
+    public ComboBox difficulty;
+    @FXML
+    public ComboBox numberOfPlayers;
     @FXML
     private Button buttonNext;
     @FXML
     private Button exit;
+
     @FXML
     public void initialize(){
         buttonNext.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickButton);
         //exit.addEventHandler(MouseEvent.MOUSE_CLICKED, this::closeGui);
 
+        difficulty.getItems().add("standard");
+        difficulty.getItems().add("expert");
+
+        difficulty.setValue("standard");
+
+        numberOfPlayers.getItems().add("2");
+        numberOfPlayers.getItems().add("3");
+        numberOfPlayers.getItems().add("4");
+
+        numberOfPlayers.setValue("2");
     }
 
     /** gestisce il click sul pulsante */
@@ -34,4 +48,6 @@ public class SetupGame extends ObservableView implements GenericScene {
         notifyObserver(ObserverView:: updateDisconnect);
         System.exit(0);
     }
+
+
 }

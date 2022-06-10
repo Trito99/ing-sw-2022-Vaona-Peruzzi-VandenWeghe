@@ -13,7 +13,7 @@ import javafx.scene.layout.AnchorPane;
 
 /** scena che gestisce la connessione al server */
 
-public class ConnectToServer extends ObservableView implements GenericScene {
+public class ConnectToServerScene extends ObservableView implements GenericScene {
 
     @FXML
     private AnchorPane mainPane;

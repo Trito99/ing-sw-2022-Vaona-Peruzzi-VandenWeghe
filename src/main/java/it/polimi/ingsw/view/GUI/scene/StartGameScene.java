@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
-public class StartGame extends ObservableView implements GenericScene{
+public class StartGameScene extends ObservableView implements GenericScene{
 
     @FXML
     private Button startButton;
