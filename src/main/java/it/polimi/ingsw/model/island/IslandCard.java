@@ -75,7 +75,7 @@ public class IslandCard implements Serializable {
     public void buildTowerOnIsland(ArrayList<Player> listOfPlayer, CardEffect cardEffectPlayed, Player activePlayer, GameMode gameMode, ArrayList<Team> teams){
 
         if(cardEffectPlayed.equals(CardEffect.HERALD)) /** Herald effect */
-            MotherEarthOnIsland=true;
+            MotherEarthOnIsland = true;
 
         if(MotherEarthOnIsland) {
             Player playerFound;

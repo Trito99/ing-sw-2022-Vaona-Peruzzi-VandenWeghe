@@ -434,18 +434,18 @@ public class GameController {
                                 case COURTESAN:
                                 case BARD:
                                     card = true;
-                                    broadcastMessage(gameSession.getPlayer(getActivePlayer()).getNickname() +" has activated " + characterCard.getCardEffect().toString() + "effect!");
+                                    broadcastMessage(gameSession.getPlayer(getActivePlayer()).getNickname() +" has activated " + characterCard.getCardEffect().toString() + " effect!");
                                     virtualView.askId(false,characterCard,acrobatIndex, gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool());
                                     break;
                                 case HERALD:
                                 case CURATOR:
                                     card = true;
-                                    broadcastMessage(gameSession.getPlayer(getActivePlayer()).getNickname() +" has activated " + characterCard.getCardEffect().toString() + "effect!");
-                                    virtualView.askId(true,characterCard, -1, null);
+                                    broadcastMessage(gameSession.getPlayer(getActivePlayer()).getNickname() +" has activated " + characterCard.getCardEffect().toString() + " effect!");
+                                    virtualView.askId(true, characterCard, -1, null);
                                     break;
                                 case HERBALIST:
                                 case JUNKDEALER:
-                                    broadcastMessage(gameSession.getPlayer(getActivePlayer()).getNickname() +" has activated " + characterCard.getCardEffect().toString() + "effect!");
+                                    broadcastMessage(gameSession.getPlayer(getActivePlayer()).getNickname() +" has activated " + characterCard.getCardEffect().toString() + " effect!");
                                     virtualView.askColorToBlock(characterCard.getCardEffect());
                                     break;
                                 default:
@@ -722,7 +722,11 @@ public class GameController {
                         int steps = step.getSteps();
                         gameSession.getTable().moveMotherEarth(steps);
                         if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE) && characterCard!=null) {
-                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), characterCard.getCardEffect(), gameSession.getPlayer(turnController.getActivePlayer()),gameSession.getGameMode(), gameSession.getTeams());
+                            if(!characterCard.getCardEffect().equals(CardEffect.HERALD))
+                                gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), characterCard.getCardEffect(), gameSession.getPlayer(turnController.getActivePlayer()),gameSession.getGameMode(), gameSession.getTeams());
+                            else
+                                gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE, gameSession.getPlayer(turnController.getActivePlayer()),gameSession.getGameMode(), gameSession.getTeams());
+
                         }else
                             gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE, gameSession.getPlayer(turnController.getActivePlayer()),gameSession.getGameMode(), gameSession.getTeams());
                         gameSession.getTable().joinIsland(gameSession.getTable().getListOfIsland());
