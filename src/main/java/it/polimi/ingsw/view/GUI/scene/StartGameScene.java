@@ -5,6 +5,7 @@ import it.polimi.ingsw.view.GUI.GuiManager;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class StartGameScene extends ObservableView implements GenericScene{
@@ -14,6 +15,14 @@ public class StartGameScene extends ObservableView implements GenericScene{
 
     @FXML
     private Button rulesButton;
+    @FXML
+    private ImageView bluBackground;
+    @FXML
+    private ImageView cloudBackground;
+    @FXML
+    private ImageView logo;
+
+
 
     @FXML
     public void initialize(){

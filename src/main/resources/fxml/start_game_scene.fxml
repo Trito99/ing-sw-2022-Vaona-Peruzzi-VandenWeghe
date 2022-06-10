@@ -6,19 +6,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.scene.StartGameScene">
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.scene.StartGameScene">
    <children>
-      <ImageView fitHeight="815.0" fitWidth="1346.0" layoutX="-9.0" layoutY="-29.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="bluBackground" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/eriantys_home.jpg" />
+            <Image url="@../images/BG.png" />
          </image>
       </ImageView>
-      <Button fx:id="startButton" layoutX="629.0" layoutY="509.0" mnemonicParsing="false" onAction="#clickButtonStart" prefHeight="31.0" prefWidth="73.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" text="Start">
+      <ImageView fx:id="cloudBackground" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0">
+         <image>
+            <Image url="@../images/Clouds.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="logo" fitHeight="321.0" fitWidth="864.0" layoutX="960.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="563.0">
+         <image>
+            <Image url="@../images/Logo_Eriantys.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="startButton" layoutX="933.0" layoutY="751.0" mnemonicParsing="false" onAction="#clickButtonStart" prefHeight="31.0" prefWidth="73.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" text="Start">
          <font>
             <Font name="Verdana" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="rulesButton" layoutX="634.0" layoutY="236.0" mnemonicParsing="false" onAction="#clickButtonRules" prefHeight="31.0" prefWidth="73.0" styleClass="exit-button" stylesheets="@../css/ConnectToServer.css" text="Rules" textFill="#f3f3f3">
+      <Button fx:id="rulesButton" layoutX="933.0" layoutY="663.0" mnemonicParsing="false" onAction="#clickButtonRules" prefHeight="31.0" prefWidth="73.0" styleClass="exit-button" stylesheets="@../css/ConnectToServer.css" text="Rules" textFill="#f3f3f3">
          <font>
             <Font name="Verdana" size="18.0" />
          </font>
