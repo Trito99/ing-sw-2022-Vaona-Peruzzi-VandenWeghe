@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -15,27 +16,30 @@ import javafx.scene.layout.AnchorPane;
 
 public class ConnectToServerScene extends ObservableView implements GenericScene {
 
+    /**@FXML
+    private Label details;
+    @FXML
+    private Label ipAddressLabel;
+    @FXML
+    private Label portNumberLabel; */
+
     @FXML
     private AnchorPane mainPane;
     @FXML
-    private Label details;
+    private ImageView connectBackground;
     @FXML
     private TextField ipAddressField;
     @FXML
     private TextField portNumberField;
     @FXML
-    private Label ipAddressLabel;
-    @FXML
-    private Label portNumberLabel;
-    @FXML
     private Button connectButton;
     @FXML
-    private Button closeGui;
+    private Button exitButton;
 
     @FXML
     public void initialize(){
         connectButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickConnect);
-        //closeGui.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::closeGui);
+        exitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickExit);
     }
 
     @FXML
@@ -55,11 +59,13 @@ public class ConnectToServerScene extends ObservableView implements GenericScene
         loader.setLocation(getClass().getResource("/fxml/setup_game_scene"));
     }
 
+
     @FXML
-    private void closeGui(){
-        closeGui.setDisable(true);
+    private void clickExit(Event event){
+        exitButton.setDisable(true);
 
         notifyObserver(ObserverView :: updateDisconnect);
         System.exit(0);
     }
+
 }

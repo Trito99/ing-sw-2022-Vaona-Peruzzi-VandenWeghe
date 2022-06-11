@@ -40,7 +40,7 @@ public class NewGameScene extends ObservableView implements GenericScene {
     @FXML
     private void clickButton(Event event){
         buttonNext.setDisable(true);
-        GuiManager.changeRootPane(observers, event,"/fxml/new_connect_to_server_scene.fxml");
+        GuiManager.changeRootPane(observers, event,"/fxml/connect_to_server_scene.fxml");
     }
 
     @FXML

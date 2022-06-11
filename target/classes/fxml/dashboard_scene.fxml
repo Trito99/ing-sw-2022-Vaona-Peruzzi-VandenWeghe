@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.scene.DashboardScene">
+   <children>
+      <ImageView fx:id="backgroundImage" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Board_v1.png" />
+         </image>
+      </ImageView>
+      <Separator layoutX="454.0" layoutY="723.0" prefHeight="2.0" prefWidth="1245.0" />
+      <Separator layoutX="438.0" layoutY="19.0" orientation="VERTICAL" prefHeight="1039.0" prefWidth="5.0" />
+      <Separator layoutX="1730.0" layoutY="244.0" prefHeight="4.0" prefWidth="162.0" />
+      <Separator layoutX="1715.0" layoutY="22.0" orientation="VERTICAL" prefHeight="1036.0" prefWidth="4.0" />
+   </children>
+</AnchorPane>

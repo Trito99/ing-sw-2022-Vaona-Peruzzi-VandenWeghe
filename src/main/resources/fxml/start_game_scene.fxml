@@ -5,15 +5,16 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.scene.StartGameScene">
    <children>
-      <ImageView fx:id="bluBackground" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="bluBackground" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/BG.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="cloudBackground" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0">
+      <ImageView fx:id="cloudBackground" pickOnBounds="true" preserveRatio="true" y="147.0">
          <image>
             <Image url="@../images/Clouds.png" />
          </image>
@@ -23,16 +24,16 @@
             <Image url="@../images/Logo_Eriantys.png" />
          </image>
       </ImageView>
-      <Button fx:id="startButton" layoutX="933.0" layoutY="751.0" mnemonicParsing="false" onAction="#clickButtonStart" prefHeight="31.0" prefWidth="73.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" text="Start">
+      <Button fx:id="startButton" layoutX="960.0" layoutY="650.0" mnemonicParsing="false" onAction="#clickButtonStart" opacity="0.3" prefHeight="44.0" prefWidth="207.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" textFill="WHITE">
          <font>
-            <Font name="Verdana" size="18.0" />
+            <Font name="Helvetica" size="25.0" />
          </font>
       </Button>
-      <Button fx:id="rulesButton" layoutX="933.0" layoutY="663.0" mnemonicParsing="false" onAction="#clickButtonRules" prefHeight="31.0" prefWidth="73.0" styleClass="exit-button" stylesheets="@../css/ConnectToServer.css" text="Rules" textFill="#f3f3f3">
+      <Text fx:id="startText" fill="WHITE" layoutX="53.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="START" x="960.0" y="650.0" AnchorPane.bottomAnchor="419.1005859375" AnchorPane.leftAnchor="1013.0" AnchorPane.rightAnchor="907.0" AnchorPane.topAnchor="660.8994140625">
          <font>
-            <Font name="Verdana" size="18.0" />
+            <Font name="Helvetica" size="30.0" />
          </font>
-      </Button>
+      </Text>
    </children>
 
 

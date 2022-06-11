@@ -10,8 +10,9 @@
 }
 
 .connect-button{
-    -fx-background-color: #fcfcfc;
+    -fx-background-color: #f5f5f5;
     -fx-background-radius: 100;
+
 }
 
 .ipAddressTextFiel {
