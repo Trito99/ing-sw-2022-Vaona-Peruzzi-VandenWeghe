@@ -1,76 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="back" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="AnchorPane" stylesheets="@../css/ConnectToServer.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.scene.ConnectToServerScene">
+<AnchorPane fx:id="mainPane" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.scene.ConnectToServerScene">
    <children>
-      <BorderPane layoutX="101.0" layoutY="100.0" prefHeight="200.0" prefWidth="400.0" style="" styleClass="BorderPane" stylesheets="@../css/ConnectToServer.css">
-         <center>
-            <VBox prefHeight="103.0" prefWidth="400.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Pane prefHeight="58.0" prefWidth="300.0">
-                     <children>
-                        <Label fx:id="ipAddressLabel" layoutX="50.0" layoutY="30.0" text="Ip address:">
-                           <font>
-                              <Font name="Verdana" size="13.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="ipAddressTextField" alignment="CENTER" layoutX="150.0" layoutY="30.0" prefHeight="23.0" prefWidth="147.0" promptText="127.0.0.1" styleClass="ipAddressTextFiel" stylesheets="@../css/ConnectToServer.css">
-                           <font>
-                              <Font name="Verdana" size="12.0" />
-                           </font>
-                        </TextField>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="10.0" layoutY="10.0" prefHeight="47.0" prefWidth="400.0">
-                     <children>
-                        <Label fx:id="portNumberLabel" layoutX="50.0" layoutY="4.0" text="Port Number:">
-                           <font>
-                              <Font name="Verdana" size="13.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="portNumberTextField" alignment="CENTER" layoutX="150.0" prefHeight="23.0" prefWidth="147.0" promptText="4000" styleClass="portNumberTextFiel" stylesheets="@../css/ConnectToServer.css">
-                           <font>
-                              <Font name="Verdana" size="12.0" />
-                           </font>
-                        </TextField>
-                     </children>
-                  </Pane>
-               </children>
-            </VBox>
-         </center>
-         <top>
-            <Pane fx:id="serverPane" prefHeight="47.0" prefWidth="400.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label fx:id="serverLabel" layoutX="114.0" layoutY="30.0" prefHeight="25.0" prefWidth="159.0" text="Server details">
-                     <font>
-                        <Font name="Verdana Bold" size="20.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-         </top>
-         <bottom>
-            <Pane prefHeight="40.0" prefWidth="400.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button fx:id="connectButton" layoutX="198.0" layoutY="2.0" mnemonicParsing="false" onAction="#clickConnect" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" text="Connect" textFill="#2b2b2b">
-                     <font>
-                        <Font name="Verdana" size="12.0" />
-                     </font></Button>
-                  <Button fx:id="exitButton" cancelButton="true"  layoutX="155.0" layoutY="2.0" mnemonicParsing="false" onAction="#closeGui" styleClass="exit-button" stylesheets="@../css/ConnectToServer.css" text="Exit" textFill="#fcfcfc">
-                     <font>
-                        <Font name="Verdana" size="12.0" />
-                     </font></Button>
-               </children>
-            </Pane>
-         </bottom>
-      </BorderPane>
+      <ImageView fx:id="connectBackground" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/2.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="ipAddressField" layoutX="738.0" layoutY="427.0" prefHeight="50.0" prefWidth="444.0" promptText="127.0.0.1">
+         <font>
+            <Font name="Helvetica" size="23.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="portNumberField" layoutX="733.0" layoutY="574.0" prefHeight="54.0" prefWidth="448.0" promptText="4000">
+         <font>
+            <Font name="Helvetica" size="23.0" />
+         </font>
+      </TextField>
+      <Button fx:id="connectButton" layoutX="1047.0" layoutY="719.0" mnemonicParsing="false" opacity="0.0" prefHeight="47.0" prefWidth="176.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" />
+      <Button fx:id="exitButton" layoutX="700.0" layoutY="719.0" mnemonicParsing="false" opacity="0.0" prefHeight="46.0" prefWidth="128.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" />
    </children>
 </AnchorPane>
