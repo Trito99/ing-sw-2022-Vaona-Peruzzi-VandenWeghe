@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.GUI.scene;
 
 import it.polimi.ingsw.observer.ObservableView;
 import it.polimi.ingsw.observer.ObserverView;
+import it.polimi.ingsw.view.GUI.GuiManager;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,18 +55,25 @@ public class ConnectToServerScene extends ObservableView implements GenericScene
 
         notifyObserver(obs -> obs.updateConnect(address, chosenPort));
 
-        /** carica scena successiva */
+        /**
+        // carica scena successiva
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/fxml/setup_game_scene"));
+
+        // oppure
+        GuiManager.changeRootPane(observers, event,"/fxml/setup_game_scene");
+        */
     }
 
 
     @FXML
     private void clickExit(Event event){
         exitButton.setDisable(true);
+        GuiManager.changeRootPane(observers, event,"/fxml/start_game_scene");
 
+        /**exitButton.setDisable(true);
         notifyObserver(ObserverView :: updateDisconnect);
-        System.exit(0);
+        System.exit(0);*/
     }
 
 }
