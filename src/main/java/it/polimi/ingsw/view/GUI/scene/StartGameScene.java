@@ -16,8 +16,6 @@ public class StartGameScene extends ObservableView implements GenericScene{
     private AnchorPane rootPane;
     @FXML
     private Button startButton;
-    /**@FXML
-    private Button rulesButton;*/
     @FXML
     private ImageView bluBackground;
     @FXML

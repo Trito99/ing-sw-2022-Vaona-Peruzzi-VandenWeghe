@@ -30,7 +30,7 @@ public class GUI extends ObservableView implements View {
         ConnectToServerScene connectToServer = new ConnectToServerScene();
         connectToServer.addAllObservers(observers);
         Platform.runLater(() -> {
-            GuiManager.changeRootPane(observers, "/fxml/connect_to_server_scene");
+            GuiManager.changeRootPane(observers, "/fxml/setup_game_scene");
         });
     }
 
@@ -38,14 +38,14 @@ public class GUI extends ObservableView implements View {
     public void askLobby(Map<String, LobbyForPrint> lobbyMap) {
         SetupGameScene setupGame = new SetupGameScene();
         setupGame.addAllObservers(observers);
-        Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/setup_game_scene") );
+        Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/new_game_scene") );
     }
 
     @Override
     public void askPlayersNumberAndDifficulty() {
         NewGameScene pNandDifficulty = new NewGameScene();
         pNandDifficulty.addAllObservers(observers);
-        Platform.runLater(()-> GuiManager.changeRootPane(observers,"/fxml/new_game_scene") );
+        Platform.runLater(()-> GuiManager.changeRootPane(observers,"/fxml/waiting_game_scene") );
     }
 
     @Override
