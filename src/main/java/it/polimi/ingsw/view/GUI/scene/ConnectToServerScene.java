@@ -25,7 +25,7 @@ public class ConnectToServerScene extends ObservableView implements GenericScene
     private Label portNumberLabel; */
 
     @FXML
-    private AnchorPane mainPane;
+    private AnchorPane rootPane;
     @FXML
     private ImageView connectBackground;
     @FXML
