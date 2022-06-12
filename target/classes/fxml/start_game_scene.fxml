@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.scene.StartGameScene">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.scene.StartGameScene">
    <children>
       <ImageView fx:id="bluBackground" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -25,7 +25,7 @@
             <Image url="@../images/Logo_Eriantys.png" />
          </image>
       </ImageView>
-      <Button fx:id="startButton" layoutX="960.0" layoutY="650.0" mnemonicParsing="false" opacity="0.95" prefHeight="44.0" prefWidth="207.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" textFill="WHITE">
+      <Button fx:id="startButton" layoutX="960.0" layoutY="650.0" mnemonicParsing="false" opacity="0.4" prefHeight="44.0" prefWidth="207.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" textFill="WHITE">
          <font>
             <Font name="Helvetica" size="25.0" />
          </font>

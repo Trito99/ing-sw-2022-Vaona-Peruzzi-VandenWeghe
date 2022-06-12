@@ -43,7 +43,6 @@ public class ConnectToServerScene extends ObservableView implements GenericScene
         exitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickExit);
     }
 
-    @FXML
     private void clickConnect(Event event){
         ipAddressField.setDisable(true);
         portNumberField.setDisable(true);
@@ -65,8 +64,6 @@ public class ConnectToServerScene extends ObservableView implements GenericScene
         */
     }
 
-
-    @FXML
     private void clickExit(Event event){
         exitButton.setDisable(true);
         GuiManager.changeRootPane(observers, event,"/fxml/start_game_scene");
