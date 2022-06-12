@@ -39,7 +39,7 @@ public class StartGUI extends Application {
         stage.setTitle("Eriantys");
         //stage.getIcons().add("/images/Logo_Eriantys.png");
         stage.setResizable(true);
-        stage.setMaximized(true);
+        stage.setMaximized(false);
         stage.setFullScreen(false);
 
         stage.show();

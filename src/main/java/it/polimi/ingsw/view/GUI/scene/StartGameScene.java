@@ -35,7 +35,7 @@ public class StartGameScene extends ObservableView implements GenericScene{
     private void clickButtonStart(Event event){
         startButton.setDisable(true);
 
-        GuiManager.changeRootPane(observers, event,"/fxml/new_connect_to_server_scene");
+        GuiManager.changeRootPane(observers, event,"/fxml/connect_to_server_scene");
     }
 
     /** DA IMPLEMENTARE schermata rules

@@ -6,11 +6,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.scene.StartGameScene">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.scene.StartGameScene">
    <children>
-      <ImageView fx:id="bluBackground" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="bluBackground" fitHeight="1080.0" fitWidth="1920.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/BG.png" />
          </image>
@@ -25,7 +24,7 @@
             <Image url="@../images/Logo_Eriantys.png" />
          </image>
       </ImageView>
-      <Button fx:id="startButton" layoutX="960.0" layoutY="650.0" mnemonicParsing="false" opacity="0.95" prefHeight="44.0" prefWidth="207.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" textFill="WHITE">
+      <Button fx:id="startButton" layoutX="901.0" layoutY="614.0" mnemonicParsing="false" opacity="0.95" prefHeight="52.0" prefWidth="187.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" text="START" textFill="#050000">
          <font>
             <Font name="Helvetica" size="25.0" />
          </font>
@@ -33,11 +32,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Text fx:id="startText" fill="WHITE" layoutX="53.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="START" x="960.0" y="650.0" AnchorPane.bottomAnchor="419.1005859375" AnchorPane.leftAnchor="1013.0" AnchorPane.rightAnchor="907.0" AnchorPane.topAnchor="660.8994140625">
-         <font>
-            <Font name="Helvetica" size="30.0" />
-         </font>
-      </Text>
    </children>
 
 

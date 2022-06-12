@@ -26,6 +26,7 @@ public class GuiManager extends ObservableView {
 
         try {
             FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource(fxml + ".fxml"));
+            loader.setLocation(StartGUI.class.getResource(fxml + ".fxml"));
             Parent root = loader.load();
             controller = loader.getController();
             ((ObservableView) controller).addAllObservers(observerViewList);
