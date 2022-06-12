@@ -29,16 +29,17 @@ public class GUI extends ObservableView implements View {
     public void askConnect() {
         ConnectToServerScene connectToServer = new ConnectToServerScene();
         connectToServer.addAllObservers(observers);
-        /**Platform.runLater(() -> {
+        Platform.runLater(() -> {
             GuiManager.changeRootPane(observers, "/fxml/new_setup_game_scene");
-        });*/
+        });
     }
 
     @Override
     public void askLobby(Map<String, LobbyForPrint> lobbyMap) {
         SetupGameScene setupGame = new SetupGameScene();
         setupGame.addAllObservers(observers);
-        Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/new_game_scene") );
+        Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/new_setup_game_scene") );
+
     }
 
     @Override
