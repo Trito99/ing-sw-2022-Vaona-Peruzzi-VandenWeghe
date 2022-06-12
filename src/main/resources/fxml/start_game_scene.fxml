@@ -6,7 +6,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.scene.StartGameScene">
    <children>
@@ -25,7 +24,7 @@
             <Image url="@../images/Logo_Eriantys.png" />
          </image>
       </ImageView>
-      <Button fx:id="startButton" layoutX="960.0" layoutY="650.0" mnemonicParsing="false" opacity="0.4" prefHeight="44.0" prefWidth="207.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" textFill="WHITE">
+      <Button fx:id="startButton" layoutX="891.0" layoutY="605.0" mnemonicParsing="false" opacity="0.52" prefHeight="44.0" prefWidth="207.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" text="START" AnchorPane.bottomAnchor="423.5999999999999">
          <font>
             <Font name="Helvetica" size="25.0" />
          </font>
@@ -33,11 +32,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Text fx:id="startText" fill="WHITE" layoutX="53.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="START" x="960.0" y="650.0" AnchorPane.bottomAnchor="419.1005859375" AnchorPane.leftAnchor="1013.0" AnchorPane.rightAnchor="907.0" AnchorPane.topAnchor="660.8994140625">
-         <font>
-            <Font name="Helvetica" size="30.0" />
-         </font>
-      </Text>
    </children>
 
 

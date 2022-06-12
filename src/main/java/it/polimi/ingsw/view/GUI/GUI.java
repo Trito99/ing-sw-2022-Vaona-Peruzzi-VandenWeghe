@@ -29,9 +29,9 @@ public class GUI extends ObservableView implements View {
     public void askConnect() {
         ConnectToServerScene connectToServer = new ConnectToServerScene();
         connectToServer.addAllObservers(observers);
-        Platform.runLater(() -> {
-            GuiManager.changeRootPane(observers, "/fxml/setup_game_scene");
-        });
+        /**Platform.runLater(() -> {
+            GuiManager.changeRootPane(observers, "/fxml/new_setup_game_scene");
+        });*/
     }
 
     @Override
