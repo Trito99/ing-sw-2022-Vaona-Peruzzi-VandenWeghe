@@ -53,15 +53,6 @@ public class ConnectToServerScene extends ObservableView implements GenericScene
         connectButton.setDisable(true);
 
         notifyObserver(obs -> obs.updateConnect(address, chosenPort));
-
-        /**
-        // carica scena successiva
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/setup_game_scene"));
-
-        // oppure
-        GuiManager.changeRootPane(observers, event,"/fxml/setup_game_scene");
-        */
     }
 
     private void clickExit(Event event){
