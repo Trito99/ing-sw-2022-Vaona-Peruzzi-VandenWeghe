@@ -13,6 +13,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+import static java.lang.System.out;
+
 /** scena che gestisce la connessione al server */
 
 public class ConnectToServerScene extends ObservableView implements GenericScene {
@@ -44,15 +46,21 @@ public class ConnectToServerScene extends ObservableView implements GenericScene
     }
 
     private void clickConnect(Event event){
-        ipAddressField.setDisable(true);
-        portNumberField.setDisable(true);
 
-        String address = ipAddressField.getText();
-        Integer chosenPort = Integer.parseInt(portNumberField.getText());
+        try{
+            ipAddressField.setDisable(true);
+            portNumberField.setDisable(true);
+            String address = ipAddressField.getText();
+            Integer chosenPort = Integer.parseInt(portNumberField.getText());
 
-        connectButton.setDisable(true);
+            connectButton.setDisable(true);
 
-        notifyObserver(obs -> obs.updateConnect(address, chosenPort));
+            notifyObserver(obs -> obs.updateConnect(address, chosenPort));
+        }
+        catch (Exception e) {
+            notifyObserver(obs -> obs.updateConnect("1.0.0.0", 1));
+        }
+
     }
 
     private void clickExit(Event event){
