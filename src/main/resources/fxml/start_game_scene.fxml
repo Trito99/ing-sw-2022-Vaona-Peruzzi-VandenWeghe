@@ -24,7 +24,7 @@
             <Image url="@../images/Logo_Eriantys.png" />
          </image>
       </ImageView>
-      <Button fx:id="startButton" layoutX="891.0" layoutY="605.0" mnemonicParsing="false" opacity="0.52" prefHeight="44.0" prefWidth="207.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" text="START" AnchorPane.bottomAnchor="423.5999999999999">
+      <Button fx:id="startButton" layoutX="891.0" layoutY="605.0" mnemonicParsing="false" opacity="0.52" prefHeight="44.0" prefWidth="207.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" text="START">
          <font>
             <Font name="Helvetica" size="25.0" />
          </font>
