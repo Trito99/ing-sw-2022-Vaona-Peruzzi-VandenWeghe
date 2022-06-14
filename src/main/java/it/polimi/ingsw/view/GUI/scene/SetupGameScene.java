@@ -163,7 +163,6 @@ public class SetupGameScene extends ObservableView implements GenericScene {
             nextButton.setDisable(true);
             notifyObserver(obs -> obs.updateLobby(finalNickname, playerDate, finalGameId));
         }
-       /** GuiManager.changeRootPane(observers, event, "/fxml/new_game_scene"); */
     }
 
     private void clickBack(Event event){

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.GUI.scene;
 
+import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.observer.ObservableView;
 import it.polimi.ingsw.observer.ObserverView;
 import it.polimi.ingsw.view.GUI.GuiManager;
@@ -8,6 +9,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.input.MouseEvent;
+
+
+import java.util.Locale;
 
 public class NewGameScene extends ObservableView implements GenericScene {
     @FXML
@@ -40,7 +44,9 @@ public class NewGameScene extends ObservableView implements GenericScene {
     @FXML
     private void clickButton(Event event){
         buttonNext.setDisable(true);
-        GuiManager.changeRootPane(observers, event,"/fxml/connect_to_server_scene.fxml");
+        String g = (String) difficulty.getValue();
+        Difficulty difficulty1 = Difficulty.valueOf(g.toUpperCase(Locale.ROOT)+"MODE");
+        notifyObserver(obs -> obs.choosePlayersNumberAndDifficulty((Integer) numberOfPlayers.getValue(),difficulty1) );
     }
 
     @FXML
