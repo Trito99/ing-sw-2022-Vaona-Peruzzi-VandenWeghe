@@ -6,12 +6,11 @@ import it.polimi.ingsw.view.GUI.GuiManager;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+
 
 import static java.lang.System.out;
 
@@ -46,8 +45,7 @@ public class ConnectToServerScene extends ObservableView implements GenericScene
     }
 
     private void clickConnect(Event event){
-
-        try{
+        try {
             ipAddressField.setDisable(true);
             portNumberField.setDisable(true);
             String address = ipAddressField.getText();
@@ -56,11 +54,16 @@ public class ConnectToServerScene extends ObservableView implements GenericScene
             connectButton.setDisable(true);
 
             notifyObserver(obs -> obs.updateConnect(address, chosenPort));
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "WRONG INPUT", ButtonType.OK);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                ipAddressField.setDisable(false);
+                ipAddressField.clear();
+                portNumberField.setDisable(false);
+                portNumberField.clear();
+            }
         }
-        catch (Exception e) {
-            notifyObserver(obs -> obs.updateConnect("1.0.0.0", 1));
-        }
-
     }
 
     private void clickExit(Event event){
