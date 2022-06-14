@@ -48,16 +48,16 @@ public class SetupGameScene extends ObservableView implements GenericScene {
     private TableView<LobbyForPrint> lobbyList;
 
     @FXML
-    private TableColumn<LobbyForPrint, Integer> gameId = new TableColumn<>();
+    private TableColumn<LobbyForPrint, Integer> gameId = new TableColumn<>("ID");
 
     @FXML
-    private TableColumn<LobbyForPrint, Difficulty> difficulty = new TableColumn<>();
+    private TableColumn<LobbyForPrint, Difficulty> difficulty = new TableColumn<>("Difficulty");
 
     @FXML
-    private TableColumn<LobbyForPrint, GameMode> gameMode = new TableColumn<>();
+    private TableColumn<LobbyForPrint, GameMode> gameMode = new TableColumn<>("Game Mode");
 
     @FXML
-    private TableColumn<LobbyForPrint, Integer> currentPlayers = new TableColumn<>();
+    private TableColumn<LobbyForPrint, Integer> currentPlayers = new TableColumn<>("Current Players");
 
     @FXML
     public void initialize(){
@@ -89,6 +89,7 @@ public class SetupGameScene extends ObservableView implements GenericScene {
 
     /** gestisce il click sul pulsante */
     private void clickNext(Event event){
+        boolean name = false,birth = false,id = false;
         GregorianCalendar playerDate = new GregorianCalendar();
 
         nicknameField.setDisable(true);
@@ -99,8 +100,10 @@ public class SetupGameScene extends ObservableView implements GenericScene {
 
         /** non sono sicura se vada qui o nell'override della GUI */
         String nickname = null;
+        String gameId = null;
         try{
             nickname = nicknameField.getText();
+            name = true;
         }catch(Exception exception){
             Alert alert = new Alert(Alert.AlertType.ERROR, "NAME ERROR", ButtonType.OK);
             alert.showAndWait();
@@ -125,6 +128,8 @@ public class SetupGameScene extends ObservableView implements GenericScene {
                     yyyyField.setDisable(false);
                     yyyyField.clear();
                 }
+            }else{
+                birth = true;
             }
         }
         catch(IllegalArgumentException exception){
@@ -139,15 +144,28 @@ public class SetupGameScene extends ObservableView implements GenericScene {
                 ddField.clear();
             }
         }
-        String gameId = gameIdField.getText();
 
+        try{
+            gameId = gameIdField.getText();
+            id = true;
+        }catch(Exception exception){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "ID ERROR", ButtonType.OK);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                gameIdField.setDisable(false);
+                gameIdField.clear();
+            }
+        }
 
 
         nextButton.setDisable(true);
 
-        String finalNickname = nickname;
-        notifyObserver(obs -> obs.updateLobby(finalNickname, playerDate, gameId));
 
+        if (name && birth && id) {
+            String finalGameId = gameId;
+            String finalNickname = nickname;
+            notifyObserver(obs -> obs.updateLobby(finalNickname, playerDate, finalGameId));
+        }
        /** GuiManager.changeRootPane(observers, event, "/fxml/new_game_scene"); */
     }
 
