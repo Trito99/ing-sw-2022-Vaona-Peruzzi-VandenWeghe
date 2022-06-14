@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.scene.NewGameScene">
    <children>
       <AnchorPane fx:id="back" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="AnchorPane" stylesheets="@../css/ConnectToServer.css">
@@ -66,7 +65,7 @@
                <bottom>
                   <Pane prefHeight="40.0" prefWidth="400.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button fx:id="connectButton" layoutX="198.0" layoutY="2.0" mnemonicParsing="false" onAction="#clickButton" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" text="Next" textFill="#2b2b2b">
+                        <Button fx:id="buttonNext" layoutX="198.0" layoutY="2.0" mnemonicParsing="false" onAction="#clickButton" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" text="Next" textFill="#2b2b2b">
                            <font>
                               <Font name="Verdana" size="12.0" />
                            </font>
