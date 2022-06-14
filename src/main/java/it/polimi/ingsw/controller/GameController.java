@@ -41,6 +41,9 @@ public class GameController {
         roundIndex =0;
     }
 
+    /**
+     * Set up the initial state of the table of the match
+     */
     public void generateTable(){
         gameSession.getTable().generateBagInit();
         gameSession.getTable().generateIslandCards();
@@ -49,6 +52,12 @@ public class GameController {
         gameSession.getTable().addFinalStudents();
     }
 
+    /**Set up the information of the player added to the match
+     *
+     * @param nickname nick of the player added to the match
+     * @param playerDate date of the player added to the match
+     * @param index index for setting the PlayerNumber
+     */
     public void generatePlayer(String nickname,GregorianCalendar playerDate, int index){
         gameSession.addPlayer(new Player(null, PlayerNumber.values()[index]));
         gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname(nickname);
@@ -59,9 +68,13 @@ public class GameController {
         }
     }
 
-    /**
-     * @param nickname del Giocatore.
-     * @param gameId id della partita a cui il giocatore sta giocando.
+    /** ???
+     *
+     * @param nickname of the player added to the match.
+     * @param gameId id of the match where we want to add the player.
+     * @param playerDate of the player added to the match.
+     * @param virtualView
+     * @return  ???
      */
     public boolean newPlayer(String nickname, String gameId, GregorianCalendar playerDate, VirtualView virtualView) {
 
@@ -111,7 +124,7 @@ public class GameController {
     }
 
     /**
-     *  Giocatori (+ personalSchool, + DeckAssistant), Table(isole, motherEarth, nuvole, bag, cartePersonaggio on table)
+     * Set up the cards on table for the expert mode.
      */
     private void initializeExpertModeGame(){
         DeckCharacter characterDeck = new DeckCharacter();
@@ -119,6 +132,11 @@ public class GameController {
         gameSession.getTable().generateCharacterCardsOnTable(characterDeck.getCharacterCards());
     }
 
+    /** ????
+     *
+     * @param receivedMessage
+     * @throws InvalidParameterException
+     */
     public void getMessage(ClientMessage receivedMessage) throws InvalidParameterException {
         VirtualView virtualView = allVirtualView.get(receivedMessage.getNickname());
         switch (gameState) {
@@ -767,6 +785,9 @@ public class GameController {
 
     }
 
+    /**
+     * Manage if it is needed or not a "Do you want to play character card?" request
+     */
     private void allStudentsMoved() {
         if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces()) {
             if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE) && !cardPlayed) {
@@ -803,7 +824,9 @@ public class GameController {
         return gameSession;
     }
 
-    /** inizia il turno */
+    /**
+     * Manage the planning phases of the match
+     */
     public void planning(){
         if (roundIndex < maxPlayers) {
             showGame();
@@ -827,6 +850,9 @@ public class GameController {
         }
     }
 
+    /**
+     * Manage the action phases of the match
+     */
     public void action(){
         if (roundIndex < maxPlayers) {
             switch(actionState) {
@@ -876,6 +902,9 @@ public class GameController {
         }
     }
 
+    /**
+     * Prints the current situation of the match
+     */
     private void showGame(){
         for(String s : allVirtualView.keySet()){
             allVirtualView.get(s).showTable(gameSession.getTable(), gameSession.getDifficulty());
@@ -900,6 +929,9 @@ public class GameController {
         this.gameSession = gameSession;
     }
 
+    /**
+     *  ???
+     */
     private void endTurn(){
         turnController.nextPlayer(turnController.getNewPlayerOrderByName());
         roundIndex++;
@@ -917,6 +949,10 @@ public class GameController {
         action();
     }
 
+    /** Show the results of the match and disconnects the players from the game
+     *
+     * @param disconnectedNickname nick of the player who has disconnected from the match
+     */
     public void endGame(String disconnectedNickname){
         if(gameSession.getTable().playerIsWinning(gameSession) == null) {
             if (disconnectedNickname != null) {
@@ -969,19 +1005,21 @@ public class GameController {
      * METODI USATI PER CONNESSIONE CLIENT - SERVER
      * */
 
-     /** rimouove giocatore dal gioco e controlla se era l'active player---> inizia nuovo turno */
+    /**
+     * Disconnects all the players from the match
+     */
     public void disconnect(){
         for(VirtualView vv : allVirtualView.values()) {
             allVirtualView.remove(vv);
         }
     }
 
-    /** se il gioco non è cominciato ----> return false */
+    /** ??? */
     public boolean isGameStarted(){
         return (gameState != GameState.INIT && gameState!= GameState.END_GAME);
     }
 
-    /** giocatore attiivo in quel momento */
+    /** Returns the player that's moving */
     public String getActivePlayer(){
         return turnController.getActivePlayer();
     }
@@ -990,7 +1028,7 @@ public class GameController {
         return allVirtualView;
     }
 
-    /** invia un messaggio a ogni giocatore del gioco */
+    /** Send a message to all the players of the match */
     public void broadcastMessage(String message) {
         for (VirtualView vv : allVirtualView.values()) {
             vv.showMessage(message);

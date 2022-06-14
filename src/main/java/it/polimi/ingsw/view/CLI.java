@@ -79,7 +79,11 @@ public class CLI extends ObservableView implements View {
         }while(succeeded);
     }
 
-    /** legge stringhe da input */
+    /**
+     *
+     * @return the string read from input
+     * @throws ExecutionException
+     */
     public String readInput() throws ExecutionException {
         FutureTask<String> futureTask = new FutureTask<>(new ReadFromInput());
         Thread inputThread = new Thread(futureTask);
@@ -674,6 +678,11 @@ public class CLI extends ObservableView implements View {
         out.print("\n\n");
     }
 
+    /**
+     *
+     * @param student
+     * @return the Ansi color to use for the "show methods"
+     */
     private String getStudentAnsiColor(Student student) {
         switch (student.getsColour()) {
             case GREEN:
@@ -691,6 +700,11 @@ public class CLI extends ObservableView implements View {
         }
     }
 
+    /**
+     *
+     * @param tower
+     * @return the Ansi color to use for the "show methods"
+     */
         private String getTowerAnsiColor(Tower tower) {
             switch (tower.getTColour()){
                 case BLACK: return ANSI_BLACK;
