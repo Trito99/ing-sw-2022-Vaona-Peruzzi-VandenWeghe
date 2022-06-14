@@ -17,7 +17,7 @@ public class NewGameScene extends ObservableView implements GenericScene {
     @FXML
     private Button buttonNext;
     @FXML
-    private Button exit;
+    private Button exitButton;
 
     @FXML
     public void initialize(){

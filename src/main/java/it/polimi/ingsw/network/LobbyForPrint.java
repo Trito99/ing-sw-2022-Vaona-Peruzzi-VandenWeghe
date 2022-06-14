@@ -9,11 +9,11 @@ import java.io.Serializable;
 public class LobbyForPrint implements Serializable {
     private final Difficulty difficulty;
     private final GameMode gameMode;
-    private int currentPlayers;
+    private String currentPlayers;
     private String gameId;
 
 
-    public LobbyForPrint(String gameId, Difficulty difficulty, GameMode gameMode, int currentPlayers) {
+    public LobbyForPrint(String gameId, Difficulty difficulty, GameMode gameMode, String currentPlayers) {
         this.gameId = gameId;
         this.currentPlayers = currentPlayers;
         this.difficulty = difficulty;
@@ -21,7 +21,7 @@ public class LobbyForPrint implements Serializable {
     }
 
 
-    public int getCurrentPlayers() {
+    public String getCurrentPlayers() {
         return currentPlayers;
     }
 

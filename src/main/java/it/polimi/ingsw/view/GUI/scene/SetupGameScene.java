@@ -1,16 +1,25 @@
 package it.polimi.ingsw.view.GUI.scene;
 
+import it.polimi.ingsw.model.game.Difficulty;
+import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.network.LobbyForPrint;
+import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.observer.ObservableView;
 import it.polimi.ingsw.view.GUI.GuiManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.util.GregorianCalendar;
+import java.util.Map;
+
+import static java.lang.System.out;
 
 /** scena che chiede al giocatore a quale lobby connettersi, chiedendo username, data di nascita, gameId */
 
@@ -36,9 +45,46 @@ public class SetupGameScene extends ObservableView implements GenericScene {
     private TextField yyyyField;
 
     @FXML
+    private TableView<LobbyForPrint> lobbyList;
+
+    @FXML
+    private TableColumn<LobbyForPrint, Integer> gameId = new TableColumn<>();
+
+    @FXML
+    private TableColumn<LobbyForPrint, Difficulty> difficulty = new TableColumn<>();
+
+    @FXML
+    private TableColumn<LobbyForPrint, GameMode> gameMode = new TableColumn<>();
+
+    @FXML
+    private TableColumn<LobbyForPrint, Integer> currentPlayers = new TableColumn<>();
+
+    @FXML
     public void initialize(){
         nextButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickNext);
         backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickBack);
+    }
+
+    public void generateLobbyTable(Map<String, LobbyForPrint> lobbyMap){
+
+        gameId.setCellValueFactory(new PropertyValueFactory<>("gameId"));
+        difficulty.setCellValueFactory(new PropertyValueFactory<>("difficulty"));
+        gameMode.setCellValueFactory(new PropertyValueFactory<>("gameMode"));
+        currentPlayers.setCellValueFactory(new PropertyValueFactory<>("currentPlayers"));
+        if(lobbyList!=null) {
+            lobbyList.setItems(getLobbyList(lobbyMap));
+            lobbyList.getColumns().addAll(gameId, difficulty, gameMode, currentPlayers);
+        }
+    }
+
+    private ObservableList<LobbyForPrint> getLobbyList(Map<String, LobbyForPrint> lobbyMap){
+        ObservableList<LobbyForPrint> lobbyList = FXCollections.observableArrayList();
+        if(lobbyMap != null){
+            for(String lobbyId : lobbyMap.keySet()){
+                lobbyList.add(new LobbyForPrint(lobbyId,lobbyMap.get(lobbyId).getDifficulty(),lobbyMap.get(lobbyId).getGameMode(),lobbyMap.get(lobbyId).getCurrentPlayers()+"/"+String.valueOf(lobbyMap.get(lobbyId).getMaxPlayers())));
+                }
+        }
+        return lobbyList;
     }
 
     /** gestisce il click sul pulsante */
@@ -52,19 +98,55 @@ public class SetupGameScene extends ObservableView implements GenericScene {
         gameIdField.setDisable(true);
 
         /** non sono sicura se vada qui o nell'override della GUI */
-        String nickname = nicknameField.getText();
-        Integer day = Integer.parseInt(ddField.getText());
-        Integer month = Integer.parseInt(mmField.getText());
-        Integer year = Integer.parseInt(yyyyField.getText());
+        String nickname = null;
+        try{
+            nickname = nicknameField.getText();
+        }catch(Exception exception){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "NAME ERROR", ButtonType.OK);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                nicknameField.setDisable(false);
+                nicknameField.clear();
+            }
+        }
+
+        try {
+            Integer birthDay = Integer.parseInt(ddField.getText());
+            Integer birthMonth = Integer.parseInt(mmField.getText());
+            Integer birthYear = Integer.parseInt(yyyyField.getText());
+
+            playerDate.setLenient(false);
+            playerDate.set(birthYear,birthMonth -1,birthDay,0,0,0);
+            playerDate.getTime();
+            if(birthYear < 1900 || birthYear > 2021){
+                Alert alert = new Alert(Alert.AlertType.ERROR, "INVALID YEAR", ButtonType.OK);
+                alert.showAndWait();
+                if (alert.getResult() == ButtonType.OK) {
+                    yyyyField.setDisable(false);
+                    yyyyField.clear();
+                }
+            }
+        }
+        catch(IllegalArgumentException exception){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "INVALID DATE", ButtonType.OK);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                yyyyField.setDisable(false);
+                mmField.setDisable(false);
+                ddField.setDisable(false);
+                yyyyField.clear();
+                mmField.clear();
+                ddField.clear();
+            }
+        }
         String gameId = gameIdField.getText();
 
-        playerDate.setLenient(false);
-        playerDate.set(year,month -1,day,0,0,0);
-        playerDate.getTime();
+
 
         nextButton.setDisable(true);
 
-        notifyObserver(obs -> obs.updateLobby(nickname, playerDate, gameId));
+        String finalNickname = nickname;
+        notifyObserver(obs -> obs.updateLobby(finalNickname, playerDate, gameId));
 
        /** GuiManager.changeRootPane(observers, event, "/fxml/new_game_scene"); */
     }

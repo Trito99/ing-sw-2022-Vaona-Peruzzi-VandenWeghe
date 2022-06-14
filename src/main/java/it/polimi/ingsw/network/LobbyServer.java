@@ -31,7 +31,7 @@ public class LobbyServer {
     public Map<String, LobbyForPrint> getNewLobbyMap() {
         Map<String, LobbyForPrint> newLobbyMap = new HashMap<>();
         for(String lobbyId : lobbyMap.keySet()){
-            newLobbyMap.put(lobbyId, new LobbyForPrint(lobbyId,lobbyMap.get(lobbyId).getGameController().getGameSession().getDifficulty(),lobbyMap.get(lobbyId).getGameController().getGameSession().getGameMode(),lobbyMap.get(lobbyId).currentPlayers()));
+            newLobbyMap.put(lobbyId, new LobbyForPrint(lobbyId,lobbyMap.get(lobbyId).getGameController().getGameSession().getDifficulty(),lobbyMap.get(lobbyId).getGameController().getGameSession().getGameMode(),String.valueOf(lobbyMap.get(lobbyId).currentPlayers())));
         }
         return newLobbyMap;
     }
