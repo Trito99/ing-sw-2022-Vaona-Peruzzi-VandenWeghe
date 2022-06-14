@@ -80,7 +80,7 @@ public class Table implements Serializable {
         SColor pink = SColor.PINK;
         SColor blue = SColor.BLUE;
 
-        /**for (int s = 11; s < 131; s++) {
+        for (int s = 11; s < 131; s++) {
             if (s < 35)
                 bag.add(new Student(s, green));
             else if (s < 59)
@@ -91,8 +91,9 @@ public class Table implements Serializable {
                 bag.add(new Student(s, pink));
             else
                 bag.add(new Student(s, blue));
-        }*/
-        for (int s = 11; s < 71; s++) {
+         }
+
+        /**for (int s = 11; s < 71; s++) {
             if (s < 23)
                 bag.add(new Student(s, green));
             else if (s < 35)
@@ -103,7 +104,7 @@ public class Table implements Serializable {
                 bag.add(new Student(s, pink));
             else
                 bag.add(new Student(s, blue));
-        }
+        }*/
         Collections.shuffle(bag);
     }
 

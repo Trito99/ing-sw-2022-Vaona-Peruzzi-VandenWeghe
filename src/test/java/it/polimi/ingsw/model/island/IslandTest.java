@@ -248,20 +248,6 @@ public class IslandTest {
       }
    }
 
-   @Test
-   public void InfluenceOnIsland(){
-
-      for(int count = 0; count < 12; count++){
-         IslandCard island = new IslandCard(count);
-
-         players.get(0).setInfluenceOnIsland(6);
-         players.get(1).setInfluenceOnIsland(3);
-         Player winner = island.calculateInfluence(players, CardEffect.STANDARDMODE, players.get(0), null);
-         assertNotNull(winner);
-         assertEquals(players.get(0), winner);
-         assertEquals(6, winner.getInfluenceOnIsland());
-      }
-   }
 
    @Test
    public void XCardOnIsland(){
@@ -361,7 +347,7 @@ public class IslandTest {
                }
                countInfluence.add(s);
             }
-            table.getListOfIsland().get(i).calculateInfluence(game.getListOfPlayers(), CardEffect.STANDARDMODE, null, null);
+            table.getListOfIsland().get(i).calculateInfluence(game.getListOfPlayers(), CardEffect.STANDARDMODE, null, GameMode.values()[index]);
             int max = 0, n = 0;
             /** Checks if the influence calculated manually for each player is the same calculated by the function "calculateInfluence"
              *  and finds the maximum between them*/
@@ -379,9 +365,9 @@ public class IslandTest {
                }
             }
             if (n == 1)   /** Checks if the player selected by the function is the one with the most influence*/
-               assertEquals(playerWithMaxInfluence, table.getListOfIsland().get(i).calculateInfluence(game.getListOfPlayers(), CardEffect.STANDARDMODE, null, null));
+               assertEquals(playerWithMaxInfluence, table.getListOfIsland().get(i).calculateInfluence(game.getListOfPlayers(), CardEffect.STANDARDMODE, null, GameMode.values()[index]));
             else if (n > 1)  /** Checks if in case of a tie the function returns null */
-               assertNull(table.getListOfIsland().get(i).calculateInfluence(game.getListOfPlayers(), CardEffect.STANDARDMODE, null, null));
+               assertNull(table.getListOfIsland().get(i).calculateInfluence(game.getListOfPlayers(), CardEffect.STANDARDMODE, null, GameMode.values()[index]));
          }
       }
    }
