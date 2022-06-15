@@ -56,6 +56,7 @@ public class GuiManager extends ObservableView {
             GuiManager.activeController = controller;
             Parent root = loader.load();
 
+
             GuiManager.scene = scene;
             GuiManager.scene.setRoot(root);
         } catch (IOException exception) {

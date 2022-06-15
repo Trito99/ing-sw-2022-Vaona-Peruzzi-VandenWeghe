@@ -37,10 +37,10 @@ public class GUI extends ObservableView implements View {
     @Override
     public void askLobby(Map<String, LobbyForPrint> lobbyMap) {
         SetupGameScene setupGame = new SetupGameScene();
-        setupGame.generateLobbyTable(lobbyMap);
         setupGame.addAllObservers(observers);
+        setupGame.setLobbyMap(lobbyMap);
 
-        Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/setup_game_scene") );
+        Platform.runLater(() -> GuiManager.changeRootPane(setupGame, "/fxml/setup_game_scene") );
 
     }
 

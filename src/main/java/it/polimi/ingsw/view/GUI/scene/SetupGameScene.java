@@ -25,6 +25,8 @@ import static java.lang.System.out;
 
 public class SetupGameScene extends ObservableView implements GenericScene {
 
+    private Map<String, LobbyForPrint> lobbyMap = null;
+
     @FXML
     private AnchorPane mainPane;
     @FXML
@@ -48,33 +50,33 @@ public class SetupGameScene extends ObservableView implements GenericScene {
     private TableView<LobbyForPrint> lobbyList;
 
     @FXML
-    private TableColumn<LobbyForPrint, Integer> gameId = new TableColumn<>("ID");
+    private TableColumn<LobbyForPrint, Integer> gameId;
 
     @FXML
-    private TableColumn<LobbyForPrint, Difficulty> difficulty = new TableColumn<>("Difficulty");
+    private TableColumn<LobbyForPrint, Difficulty> difficulty;
 
     @FXML
-    private TableColumn<LobbyForPrint, GameMode> gameMode = new TableColumn<>("Game Mode");
+    private TableColumn<LobbyForPrint, GameMode> gameMode;
 
     @FXML
-    private TableColumn<LobbyForPrint, Integer> currentPlayers = new TableColumn<>("Current Players");
+    private TableColumn<LobbyForPrint, Integer> currentPlayers;
+
 
     @FXML
     public void initialize(){
         nextButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickNext);
         backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickBack);
+        generateLobbyTable(lobbyMap);
     }
 
-    public void generateLobbyTable(Map<String, LobbyForPrint> lobbyMap){
+    private void generateLobbyTable(Map<String, LobbyForPrint> lobbyMap){
 
         gameId.setCellValueFactory(new PropertyValueFactory<>("gameId"));
         difficulty.setCellValueFactory(new PropertyValueFactory<>("difficulty"));
         gameMode.setCellValueFactory(new PropertyValueFactory<>("gameMode"));
         currentPlayers.setCellValueFactory(new PropertyValueFactory<>("currentPlayers"));
-        if(lobbyList!=null) {
-            lobbyList.setItems(getLobbyList(lobbyMap));
-            lobbyList.getColumns().addAll(gameId, difficulty, gameMode, currentPlayers);
-        }
+        lobbyList.setItems(getLobbyList(lobbyMap));
+        //lobbyList.getColumns().addAll(gameId, difficulty, gameMode, currentPlayers);
     }
 
     private ObservableList<LobbyForPrint> getLobbyList(Map<String, LobbyForPrint> lobbyMap){
@@ -168,5 +170,9 @@ public class SetupGameScene extends ObservableView implements GenericScene {
     private void clickBack(Event event){
         nextButton.setDisable(true);
         GuiManager.changeRootPane(observers, event,"/fxml/connect_to_server");
+    }
+
+    public void setLobbyMap(Map<String, LobbyForPrint> lobbyMap) {
+        this.lobbyMap = lobbyMap;
     }
 }

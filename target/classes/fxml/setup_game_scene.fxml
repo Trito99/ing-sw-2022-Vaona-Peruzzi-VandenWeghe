@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.scene.SetupGameScene">
+<AnchorPane fx:id="mainPane" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="setupBackground" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -43,12 +43,12 @@
             <Font name="Helvetica" size="23.0" />
          </font>
       </TextField>
-      <TableView fx:id="lobbyList" layoutX="1032.0" layoutY="386.0" prefHeight="243.0" prefWidth="416.0">
+      <TableView fx:id="lobbyList" layoutX="1007.0" layoutY="386.0" prefHeight="324.0" prefWidth="467.0">
         <columns>
-          <TableColumn fx:id="gameId" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="difficulty" prefWidth="75.0" text="DIFFICULTY" />
-            <TableColumn fx:id="gameMode" prefWidth="116.80000305175781" text="GAME MODE" />
-            <TableColumn fx:id="currentPlayers" prefWidth="131.20001220703125" text="CURRENT PLAYERS" />
+          <TableColumn fx:id="gameId" editable="false" prefWidth="79.20001220703125" sortable="false" style="-fx-alignment: CENTER;" text="ID" />
+          <TableColumn fx:id="difficulty" editable="false" prefWidth="128.0" sortable="false" style="-fx-alignment: CENTER;" text="DIFFICULTY" />
+            <TableColumn fx:id="gameMode" editable="false" prefWidth="132.800048828125" sortable="false" style="-fx-alignment: CENTER;" text="GAME MODE" />
+            <TableColumn fx:id="currentPlayers" editable="false" prefWidth="124.79997558593749" sortable="false" style="-fx-alignment: CENTER;" text="CURRENT PLAYERS" />
         </columns>
       </TableView>
    </children>

@@ -38,4 +38,7 @@ public class LobbyForPrint implements Serializable {
         return gameMode;
     }
 
+    public String getGameId() {
+        return gameId;
+    }
 }
