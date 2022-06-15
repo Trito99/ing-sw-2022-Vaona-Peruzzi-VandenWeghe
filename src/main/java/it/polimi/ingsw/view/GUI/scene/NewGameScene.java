@@ -14,45 +14,39 @@ import javafx.scene.input.MouseEvent;
 import java.util.Locale;
 
 public class NewGameScene extends ObservableView implements GenericScene {
+
     @FXML
-    public ComboBox difficulty;
+    public Button nextButton;
     @FXML
-    public ComboBox numberOfPlayers;
+    public Button backButton;
     @FXML
-    private Button buttonNext;
+    public Button standardButton;
     @FXML
-    private Button exitButton;
+    public Button expertButton;
+    @FXML
+    public Button threePlayersButton;
+    @FXML
+    public Button coopButton;
+    @FXML
+    public Button twoPlayersButton;
 
     @FXML
     public void initialize(){
-        buttonNext.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickButton);
-        //exit.addEventHandler(MouseEvent.MOUSE_CLICKED, this::closeGui);
-
-        difficulty.getItems().add("standard");
-        difficulty.getItems().add("expert");
-
-        difficulty.setValue("standard");
-
-        numberOfPlayers.getItems().add("2");
-        numberOfPlayers.getItems().add("3");
-        numberOfPlayers.getItems().add("4");
-
-        numberOfPlayers.setValue("2");
+        nextButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickButton);
+        backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickBack);
     }
 
     /** gestisce il click sul pulsante */
-    @FXML
     private void clickButton(Event event){
-        buttonNext.setDisable(true);
-        String g = (String) difficulty.getValue();
-        Difficulty difficulty1 = Difficulty.valueOf(g.toUpperCase(Locale.ROOT)+"MODE");
-        notifyObserver(obs -> obs.choosePlayersNumberAndDifficulty((Integer) numberOfPlayers.getValue(),difficulty1) );
+        nextButton.setDisable(true);
+        //String g = (String) difficulty.getValue();
+        //Difficulty difficulty1 = Difficulty.valueOf(g.toUpperCase(Locale.ROOT)+"MODE");
+        //notifyObserver(obs -> obs.choosePlayersNumberAndDifficulty((Integer) numberOfPlayers.getValue(),difficulty1) );
     }
 
-    @FXML
-    private void closeGui(){
-        notifyObserver(ObserverView:: updateDisconnect);
-        System.exit(0);
+    private void clickBack(Event event){
+        nextButton.setDisable(true);
+        GuiManager.changeRootPane(observers, event,"/fxml/setup_game_scene");
     }
 
 
