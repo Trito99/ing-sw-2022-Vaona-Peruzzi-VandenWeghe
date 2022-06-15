@@ -32,12 +32,12 @@ public class NewGameScene extends ObservableView implements GenericScene {
 
     @FXML
     public void initialize(){
-        nextButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickButton);
+        nextButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickNext);
         backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickBack);
     }
 
     /** gestisce il click sul pulsante */
-    private void clickButton(Event event){
+    private void clickNext(Event event){
         nextButton.setDisable(true);
         //String g = (String) difficulty.getValue();
         //Difficulty difficulty1 = Difficulty.valueOf(g.toUpperCase(Locale.ROOT)+"MODE");
