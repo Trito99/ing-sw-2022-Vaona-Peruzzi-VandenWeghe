@@ -149,6 +149,7 @@ public class CLI extends ObservableView implements View {
                 if(lobbyMap != null){
                     out.print("\nLobby Id | Difficulty   | Game Mode  | Current Players\n");
                     for(String lobbyId : lobbyMap.keySet()){
+                        if (lobbyMap.get(lobbyId).getDifficulty()!=null)
                         out.println("    " + lobbyId + "    | " + lobbyMap.get(lobbyId).getDifficulty()+ " | " + lobbyMap.get(lobbyId).getGameMode() + " | " + lobbyMap.get(lobbyId).getCurrentPlayers() + "/" + lobbyMap.get(lobbyId).getMaxPlayers());
                     }
                 }

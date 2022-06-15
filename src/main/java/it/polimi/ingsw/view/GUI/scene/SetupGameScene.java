@@ -76,15 +76,15 @@ public class SetupGameScene extends ObservableView implements GenericScene {
         gameMode.setCellValueFactory(new PropertyValueFactory<>("gameMode"));
         currentPlayers.setCellValueFactory(new PropertyValueFactory<>("currentPlayers"));
         lobbyList.setItems(getLobbyList(lobbyMap));
-        //lobbyList.getColumns().addAll(gameId, difficulty, gameMode, currentPlayers);
     }
 
     private ObservableList<LobbyForPrint> getLobbyList(Map<String, LobbyForPrint> lobbyMap){
         ObservableList<LobbyForPrint> lobbyList = FXCollections.observableArrayList();
         if(lobbyMap != null){
             for(String lobbyId : lobbyMap.keySet()){
-                lobbyList.add(new LobbyForPrint(lobbyId,lobbyMap.get(lobbyId).getDifficulty(),lobbyMap.get(lobbyId).getGameMode(),lobbyMap.get(lobbyId).getCurrentPlayers()+"/"+String.valueOf(lobbyMap.get(lobbyId).getMaxPlayers())));
-                }
+                if (lobbyMap.get(lobbyId).getDifficulty()!=null)
+                    lobbyList.add(new LobbyForPrint(lobbyId,lobbyMap.get(lobbyId).getDifficulty(),lobbyMap.get(lobbyId).getGameMode(),lobbyMap.get(lobbyId).getCurrentPlayers()+"/"+String.valueOf(lobbyMap.get(lobbyId).getMaxPlayers())));
+            }
         }
         return lobbyList;
     }
