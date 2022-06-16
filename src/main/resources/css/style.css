@@ -17,7 +17,7 @@
 
 .digit-text{
     -fx-background-radius: 6;
-    -fx-background-color: white;
+    -fx-font-size: 24p;
 }
 
 .button{
@@ -33,12 +33,6 @@
 
 .button:hover {
     -fx-border-style: solid;
-    -fx-opacity: 0.15;
-    -fx-background-radius: 25;
-}
-
-.text-field:hover{
-    -fx-border-color: floralwhite;
     -fx-opacity: 0.15;
     -fx-background-radius: 25;
 }

@@ -48,7 +48,6 @@ public class ConnectToServerScene extends ObservableView implements GenericScene
         exitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickExit);
     }
 
-    @FXML
     private void clickConnect(Event event){
         try {
             ipAddressField.setDisable(true);
