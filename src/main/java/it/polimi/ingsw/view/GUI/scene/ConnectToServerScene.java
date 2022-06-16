@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 
 import static java.lang.System.out;
@@ -18,25 +19,28 @@ import static java.lang.System.out;
 
 public class ConnectToServerScene extends ObservableView implements GenericScene {
 
-    /**@FXML
-    private Label details;
-    @FXML
-    private Label ipAddressLabel;
-    @FXML
-    private Label portNumberLabel; */
-
-    @FXML
-    private AnchorPane rootPane;
     @FXML
     private ImageView connectBackground;
     @FXML
+    private Button connectButton;
+    @FXML
+    private Text connectText;
+    @FXML
+    private Button exitButton;
+    @FXML
+    private Text exitText;
+    @FXML
     private TextField ipAddressField;
+    @FXML
+    private Text ipText1;
     @FXML
     private TextField portNumberField;
     @FXML
-    private Button connectButton;
+    private Text portText;
     @FXML
-    private Button exitButton;
+    private AnchorPane rootPane;
+    @FXML
+    private Text titleText;
 
     @FXML
     public void initialize(){
@@ -44,6 +48,7 @@ public class ConnectToServerScene extends ObservableView implements GenericScene
         exitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickExit);
     }
 
+    @FXML
     private void clickConnect(Event event){
         try {
             ipAddressField.setDisable(true);

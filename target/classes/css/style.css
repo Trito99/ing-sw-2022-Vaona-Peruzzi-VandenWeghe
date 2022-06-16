@@ -3,7 +3,7 @@
 }
 
 .layout{
-    -fx-background-radius: 34;
+    -fx-background-radius: 50;
     -fx-background-color: white;
     -fx-opacity: 0.35;
 }
@@ -13,11 +13,6 @@
     -fx-color: white;
     -fx-font-weight: 100;
     -fx-text-fill: white;
-}
-
-.digit-text{
-    -fx-background-radius: 6;
-    -fx-background-color: white;
 }
 
 .button{
@@ -41,11 +36,6 @@
     -fx-border-color: floralwhite;
     -fx-opacity: 0.15;
     -fx-background-radius: 25;
-}
-
-.text-header{
-    -fx-font: Helvetica;
-    -fx-font-weight: 30;
 }
 
 .shadow-button{

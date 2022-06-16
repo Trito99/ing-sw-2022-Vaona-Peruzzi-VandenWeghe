@@ -14,37 +14,37 @@
             <Image url="@../images/4.png" />
          </image>
       </ImageView>
-      <Button fx:id="nextButton" layoutX="1100.0" layoutY="694.0" mnemonicParsing="false" opacity="0.0" prefHeight="47.0" prefWidth="128.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css">
+      <Button fx:id="nextButton" layoutX="1100.0" layoutY="694.0" mnemonicParsing="false" opacity="0.0" prefHeight="47.0" prefWidth="128.0" styleClass="connect-button" stylesheets="@../css/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="backButton" layoutX="694.0" layoutY="694.0" mnemonicParsing="false" opacity="0.0" prefHeight="47.0" prefWidth="128.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css">
+      <Button fx:id="backButton" layoutX="694.0" layoutY="694.0" mnemonicParsing="false" opacity="0.0" prefHeight="47.0" prefWidth="128.0" styleClass="connect-button" stylesheets="@../css/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="standardButton" layoutX="771.0" layoutY="564.0" mnemonicParsing="false" opacity="0.0" prefHeight="37.0" prefWidth="177.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css">
+      <Button fx:id="standardButton" layoutX="771.0" layoutY="564.0" mnemonicParsing="false" opacity="0.0" prefHeight="37.0" prefWidth="177.0" styleClass="connect-button" stylesheets="@../css/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="expertButton" layoutX="970.0" layoutY="564.0" mnemonicParsing="false" opacity="0.0" prefHeight="37.0" prefWidth="177.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css">
+      <Button fx:id="expertButton" layoutX="970.0" layoutY="564.0" mnemonicParsing="false" opacity="0.0" prefHeight="37.0" prefWidth="177.0" styleClass="connect-button" stylesheets="@../css/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="threePlayersButton" layoutX="895.0" layoutY="432.0" mnemonicParsing="false" opacity="0.0" prefHeight="29.0" prefWidth="133.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css">
+      <Button fx:id="threePlayersButton" layoutX="895.0" layoutY="432.0" mnemonicParsing="false" opacity="0.0" prefHeight="29.0" prefWidth="133.0" styleClass="connect-button" stylesheets="@../css/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="coopButton" layoutX="1052.0" layoutY="432.0" mnemonicParsing="false" opacity="0.0" prefHeight="29.0" prefWidth="133.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css">
+      <Button fx:id="coopButton" layoutX="1052.0" layoutY="432.0" mnemonicParsing="false" opacity="0.0" prefHeight="29.0" prefWidth="133.0" styleClass="connect-button" stylesheets="@../css/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="twoPlayersButton" layoutX="738.0" layoutY="434.0" mnemonicParsing="false" opacity="0.0" prefHeight="27.0" prefWidth="131.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css">
+      <Button fx:id="twoPlayersButton" layoutX="738.0" layoutY="434.0" mnemonicParsing="false" opacity="0.0" prefHeight="27.0" prefWidth="131.0" styleClass="connect-button" stylesheets="@../css/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
