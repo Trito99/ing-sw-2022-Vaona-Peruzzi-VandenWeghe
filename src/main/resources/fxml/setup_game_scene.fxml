@@ -43,7 +43,7 @@
             <Font size="25.0" />
          </font>
       </Text>
-      <Text fx:id="connectText" fill="WHITE" layoutX="1401.0" layoutY="867.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Connect">
+      <Text fx:id="connectText" fill="WHITE" layoutX="1421.0" layoutY="867.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Next">
          <font>
             <Font size="25.0" />
          </font>
