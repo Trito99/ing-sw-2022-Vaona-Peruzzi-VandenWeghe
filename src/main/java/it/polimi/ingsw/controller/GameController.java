@@ -545,6 +545,7 @@ public class GameController {
                                 again = true;
                                 virtualView.askId(false,characterCard,-1, null);
                             }
+                            card = false;
                         }else if (characterCard.getCardEffect().equals(CardEffect.ACROBAT) || characterCard.getCardEffect().equals(CardEffect.BARD)){
                             if(Choice.getIndex()%2==1) {
                                 int studentIdCard = -1, max;
@@ -648,6 +649,7 @@ public class GameController {
                                     }
                                 }
                             }
+                            card = false;
                         }
                         else if(characterCard.getCardEffect().equals(CardEffect.COURTESAN)){
                             for (Student student : characterCard.getStudentsOnCard()) {
