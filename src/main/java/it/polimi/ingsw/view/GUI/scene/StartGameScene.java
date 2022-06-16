@@ -22,8 +22,7 @@ public class StartGameScene extends ObservableView implements GenericScene{
     private ImageView cloudBackground;
     @FXML
     private ImageView logo;
-    @FXML
-    private Text startText;
+
 
     @FXML
     public void initialize(){
