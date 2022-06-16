@@ -1,0 +1,22 @@
+.transparent{
+    -fx-background-color: rgba(0, 0, 0, 0);
+}
+
+.radius-layout{
+    -fx-background-radius: 50;
+}
+.radius-button{
+    -fx-background-radius: 100;
+}
+
+.shadow-button{
+    -fx-effect: dropshadow(three-pass-box,rgba(0, 0, 0, 0.1) , 5.0, 0.0, 0.0, 5.0);
+}
+
+.selected{
+    -fx-background-color: #E4E4E4;
+}
+
+.shadowPane{
+    -fx-effect: dropshadow(three-pass-box,rgba(0, 0, 0, 0.1) , 30.0, 0.0, 0.0, 30.0);
+}

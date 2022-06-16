@@ -24,7 +24,7 @@
             <Font name="Helvetica" size="23.0" />
          </font>
       </TextField>
-      <Button fx:id="connectButton" layoutX="1047.0" layoutY="719.0" mnemonicParsing="false" opacity="0.0" prefHeight="47.0" prefWidth="176.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" />
-      <Button fx:id="exitButton" layoutX="700.0" layoutY="719.0" mnemonicParsing="false" opacity="0.0" prefHeight="46.0" prefWidth="128.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" />
+      <Button fx:id="connectButton" layoutX="1047.0" layoutY="719.0" mnemonicParsing="false" opacity="0.0" prefHeight="47.0" prefWidth="176.0" styleClass="connect-button" stylesheets="@../css/style.css" />
+      <Button fx:id="exitButton" layoutX="700.0" layoutY="719.0" mnemonicParsing="false" opacity="0.0" prefHeight="46.0" prefWidth="128.0" styleClass="connect-button" stylesheets="@../css/style.css" />
    </children>
 </AnchorPane>

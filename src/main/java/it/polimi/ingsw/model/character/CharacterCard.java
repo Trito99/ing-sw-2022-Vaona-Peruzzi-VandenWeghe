@@ -13,6 +13,7 @@ public class CharacterCard implements Serializable {
     private ArrayList<Student> studentsOnCard = new ArrayList<>();
     private final String description;
     private int xCardOnCard;
+    private String ImageSrc;
 
     public CharacterCard (int costCharacter, CardEffect cardEffect, String description){
         this.costCharacter = costCharacter;
@@ -51,4 +52,11 @@ public class CharacterCard implements Serializable {
         this.xCardOnCard = xCardOnCard;
     }
 
+    public String getImageSrc() {
+        return ImageSrc;
+    }
+
+    public void setImageSrc(String imageSrc) {
+        ImageSrc = imageSrc;
+    }
 }

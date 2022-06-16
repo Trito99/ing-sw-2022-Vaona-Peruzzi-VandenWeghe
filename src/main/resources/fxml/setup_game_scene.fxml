@@ -16,8 +16,8 @@
             <Image url="@../images/3.png" />
          </image>
       </ImageView>
-      <Button fx:id="nextButton" layoutX="1383.0" layoutY="835.0" mnemonicParsing="false" opacity="0.0" prefHeight="48.0" prefWidth="129.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" />
-      <Button fx:id="backButton" layoutX="413.0" layoutY="838.0" mnemonicParsing="false" opacity="0.0" prefHeight="49.0" prefWidth="130.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" />
+      <Button fx:id="nextButton" layoutX="1383.0" layoutY="835.0" mnemonicParsing="false" opacity="0.0" prefHeight="48.0" prefWidth="129.0" styleClass="connect-button" stylesheets="@../css/style.css" />
+      <Button fx:id="backButton" layoutX="413.0" layoutY="838.0" mnemonicParsing="false" opacity="0.0" prefHeight="49.0" prefWidth="130.0" styleClass="connect-button" stylesheets="@../css/style.css" />
       <TextField fx:id="nicknameField" layoutX="450.0" layoutY="386.0" prefHeight="50.0" prefWidth="376.0" promptText="Guest1234">
          <font>
             <Font name="Helvetica" size="23.0" />
