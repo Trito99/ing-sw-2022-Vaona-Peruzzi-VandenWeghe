@@ -8,7 +8,9 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 
 import java.util.Locale;
@@ -16,24 +18,38 @@ import java.util.Locale;
 public class NewGameScene extends ObservableView implements GenericScene {
 
     @FXML
-    public Button nextButton;
+    private ImageView backgroundImage;
     @FXML
-    public Button backButton;
+    private Button exitButton;
     @FXML
-    public Button standardButton;
+    private Button nextButton;
     @FXML
-    public Button expertButton;
+    private Button twoPlayersButton;
     @FXML
-    public Button threePlayersButton;
+    private Button threePlayersButton;
     @FXML
-    public Button coopButton;
+    private Button coopButton;
     @FXML
-    public Button twoPlayersButton;
+    private Button standardButton;
+    @FXML
+    private Button expertButton;
+    @FXML
+    private Text titleText;
+    @FXML
+    private Text playerText;
+    @FXML
+    private Text gameText;
+    @FXML
+    private Text exitText;
+    @FXML
+    private Text connectText;
+
+
 
     @FXML
     public void initialize(){
         nextButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickNext);
-        backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickBack);
+        exitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickExit);
     }
 
     /** gestisce il click sul pulsante */
@@ -44,7 +60,9 @@ public class NewGameScene extends ObservableView implements GenericScene {
         //notifyObserver(obs -> obs.choosePlayersNumberAndDifficulty((Integer) numberOfPlayers.getValue(),difficulty1) );
     }
 
-    private void clickBack(Event event){
+
+    /** DA IMPLEMENTARE la exit */
+    private void clickExit(Event event){
         nextButton.setDisable(true);
         GuiManager.changeRootPane(observers, event,"/fxml/setup_game_scene");
     }

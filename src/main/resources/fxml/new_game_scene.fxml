@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
@@ -17,12 +16,13 @@
             <Image url="@../images/BG_2_Clouds_Blur.png" />
          </image>
       </ImageView>
+      <Pane layoutX="691.0" layoutY="336.0" prefHeight="329.0" prefWidth="538.0" styleClass="layout" stylesheets="@../css/style.css" />
       <Button fx:id="nextButton" layoutX="1100.0" layoutY="694.0" mnemonicParsing="false" opacity="0.0" prefHeight="47.0" prefWidth="128.0" styleClass="connect-button" stylesheets="@../css/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="backButton" layoutX="694.0" layoutY="694.0" mnemonicParsing="false" opacity="0.0" prefHeight="47.0" prefWidth="128.0" styleClass="connect-button" stylesheets="@../css/style.css">
+      <Button fx:id="exitButton" layoutX="694.0" layoutY="694.0" mnemonicParsing="false" opacity="0.0" prefHeight="47.0" prefWidth="128.0" styleClass="connect-button" stylesheets="@../css/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -52,19 +52,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Pane layoutX="691.0" layoutY="336.0" prefHeight="329.0" prefWidth="538.0" styleClass="layout" stylesheets="@../css/style.css" />
-      <Button fx:id="nextButton1" layoutX="1100.0" layoutY="694.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="129.0" stylesheets="@../css/style.css">
-         <styleClass>
-            <String fx:value="shadow-button" />
-            <String fx:value="button" />
-         </styleClass>
-      </Button>
-      <Button fx:id="exitButton" layoutX="693.0" layoutY="694.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="130.0" stylesheets="@../css/style.css">
-         <styleClass>
-            <String fx:value="shadow-button" />
-            <String fx:value="button" />
-         </styleClass>
-      </Button>
       <Text fx:id="exitText" fill="WHITE" layoutX="738.0" layoutY="728.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Exit">
          <font>
             <Font size="25.0" />
@@ -80,12 +67,12 @@
             <Font name="Helvetica" size="36.0" />
          </font>
       </Text>
-      <Text fx:id="nicknameText" fill="WHITE" layoutX="892.0" layoutY="406.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="N° Players">
+      <Text fx:id="playerText" fill="WHITE" layoutX="892.0" layoutY="406.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="N° Players">
          <font>
             <Font name="Helvetica" size="30.0" />
          </font>
       </Text>
-      <Text fx:id="nicknameText1" fill="WHITE" layoutX="876.0" layoutY="542.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Game mode">
+      <Text fx:id="gameText" fill="WHITE" layoutX="876.0" layoutY="542.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Game mode">
          <font>
             <Font name="Helvetica" size="30.0" />
          </font>
@@ -100,20 +87,50 @@
             <Font size="25.0" />
          </font>
       </Text>
-      <Text fx:id="exitText12" fill="WHITE" layoutX="797.0" layoutY="457.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="2">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Text>
-      <Text fx:id="exitText121" fill="WHITE" layoutX="958.0" layoutY="457.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="3">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Text>
-      <Text fx:id="exitText1211" fill="WHITE" layoutX="1094.0" layoutY="457.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="coop">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Text>
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="786.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="806.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="935.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="955.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="975.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="1081.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="1101.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="1121.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="1141.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/user.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
