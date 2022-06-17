@@ -29,21 +29,25 @@ public class SetupGameScene extends ObservableView implements GenericScene {
     @FXML
     private Text bdayText;
     @FXML
-    private Text bdayText1;
-    @FXML
-    private Text bdayText11;
-    @FXML
     private Text connectText;
     @FXML
-    private Button exitButton;
-    @FXML
     private Text exitText;
-    @FXML
-    private TextField gameIdField;
     @FXML
     private Text gameText;
     @FXML
     private Text lobbyText;
+    @FXML
+    private Text nicknameText;
+    @FXML
+    private Text titleText;
+
+    @FXML
+    private Button nextButton;
+    @FXML
+    private Button exitButton;
+
+    @FXML
+    private TextField nicknameField;
     @FXML
     private TextField ddField;
     @FXML
@@ -51,13 +55,7 @@ public class SetupGameScene extends ObservableView implements GenericScene {
     @FXML
     private TextField yyyyField;
     @FXML
-    private Button nextButton;
-    @FXML
-    private TextField nicknameField;
-    @FXML
-    private Text nicknameText;
-    @FXML
-    private Text titleText;
+    private TextField gameIdField;
 
     @FXML
     private TableView<LobbyForPrint> lobbyList;
