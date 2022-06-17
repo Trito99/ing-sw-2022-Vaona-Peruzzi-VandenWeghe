@@ -1,0 +1,61 @@
+.transparent{
+    -fx-background-color: rgba(0, 0, 0, 0);
+}
+
+.layout{
+    -fx-background-radius: 50;
+    -fx-background-color: white;
+    -fx-opacity: 0.35;
+}
+
+.text-field{
+    -fx-font-family: Montserrat;
+    -fx-color: white;
+    -fx-font-weight: 100;
+    -fx-text-fill: white;
+}
+
+.button{
+    -fx-background-color: white;
+    -fx-opacity: 0.35;
+    -fx-background-radius: 25;
+}
+
+.button:pressed {
+    -fx-effect: dropshadow(gaussian, floralwhite, 20, 0.1, 0, 3);
+    -fx-background-radius: 25;
+}
+
+.button:hover {
+    -fx-border-style: solid;
+    -fx-opacity: 0.15;
+    -fx-background-radius: 25;
+}
+
+.text-field:hover{
+    -fx-border-color: floralwhite;
+    -fx-opacity: 0.15;
+    -fx-background-radius: 25;
+}
+
+.shadow-button{
+    -fx-effect: dropshadow(three-pass-box,rgba(0, 0, 0, 0.1) , 5.0, 0.0, 0.0, 5.0);
+    -fx-background-radius: 25;
+}
+
+.selected{
+    -fx-background-color: #E4E4E4;
+    -fx-background-radius: 25;
+}
+
+.shadowPane{
+    -fx-effect: dropshadow(three-pass-box,rgba(0, 0, 0, 0.1) , 30.0, 0.0, 0.0, 30.0);
+}
+
+.separator *.line{
+    -fx-background-color: #ada79f;
+    -fx-border-color: #ada79f;
+    -fx-border-style: solid;
+    -fx-border-radius: 45;
+    -fx-border-width: 1px;
+}
