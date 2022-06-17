@@ -17,41 +17,6 @@
          </image>
       </ImageView>
       <Pane layoutX="691.0" layoutY="336.0" prefHeight="329.0" prefWidth="538.0" styleClass="layout" stylesheets="@../css/style.css" />
-      <Button fx:id="nextButton" layoutX="1100.0" layoutY="694.0" mnemonicParsing="false" opacity="0.0" prefHeight="47.0" prefWidth="128.0" styleClass="connect-button" stylesheets="@../css/style.css">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="exitButton" layoutX="694.0" layoutY="694.0" mnemonicParsing="false" opacity="0.0" prefHeight="47.0" prefWidth="128.0" styleClass="connect-button" stylesheets="@../css/style.css">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="standardButton" layoutX="771.0" layoutY="564.0" mnemonicParsing="false" opacity="0.0" prefHeight="37.0" prefWidth="177.0" styleClass="connect-button" stylesheets="@../css/style.css">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="expertButton" layoutX="970.0" layoutY="564.0" mnemonicParsing="false" opacity="0.0" prefHeight="37.0" prefWidth="177.0" styleClass="connect-button" stylesheets="@../css/style.css">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="threePlayersButton" layoutX="895.0" layoutY="432.0" mnemonicParsing="false" opacity="0.0" prefHeight="29.0" prefWidth="133.0" styleClass="connect-button" stylesheets="@../css/style.css">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="coopButton" layoutX="1052.0" layoutY="432.0" mnemonicParsing="false" opacity="0.0" prefHeight="29.0" prefWidth="133.0" styleClass="connect-button" stylesheets="@../css/style.css">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="twoPlayersButton" layoutX="738.0" layoutY="434.0" mnemonicParsing="false" opacity="0.0" prefHeight="27.0" prefWidth="131.0" styleClass="connect-button" stylesheets="@../css/style.css">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
       <Text fx:id="exitText" fill="WHITE" layoutX="738.0" layoutY="728.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Exit">
          <font>
             <Font size="25.0" />
@@ -132,5 +97,40 @@
             <Image url="@../images/user.png" />
          </image>
       </ImageView>
+      <Button fx:id="nextButton" layoutX="1100.0" layoutY="694.0" mnemonicParsing="false" opacity="0.0" prefHeight="47.0" prefWidth="128.0" styleClass="connect-button" stylesheets="@../css/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="exitButton" layoutX="694.0" layoutY="694.0" mnemonicParsing="false" opacity="0.0" prefHeight="47.0" prefWidth="128.0" styleClass="connect-button" stylesheets="@../css/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="standardButton" layoutX="771.0" layoutY="564.0" mnemonicParsing="false" opacity="0.0" prefHeight="37.0" prefWidth="177.0" styleClass="connect-button" stylesheets="@../css/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="expertButton" layoutX="970.0" layoutY="564.0" mnemonicParsing="false" opacity="0.0" prefHeight="37.0" prefWidth="177.0" styleClass="connect-button" stylesheets="@../css/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="threePlayersButton" layoutX="895.0" layoutY="432.0" mnemonicParsing="false" opacity="0.0" prefHeight="29.0" prefWidth="133.0" styleClass="connect-button" stylesheets="@../css/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="coopButton" layoutX="1052.0" layoutY="432.0" mnemonicParsing="false" opacity="0.0" prefHeight="29.0" prefWidth="133.0" styleClass="connect-button" stylesheets="@../css/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="twoPlayersButton" layoutX="738.0" layoutY="434.0" mnemonicParsing="false" opacity="0.0" prefHeight="27.0" prefWidth="131.0" styleClass="connect-button" stylesheets="@../css/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

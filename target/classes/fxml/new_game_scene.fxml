@@ -5,13 +5,96 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.scene.NewGameScene">
    <children>
-      <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="backgroundImage" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/4.png" />
+            <Image url="@../images/BG_2_Clouds_Blur.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="691.0" layoutY="336.0" prefHeight="329.0" prefWidth="538.0" styleClass="layout" stylesheets="@../css/style.css" />
+      <Text fx:id="exitText" fill="WHITE" layoutX="738.0" layoutY="728.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Exit">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Text fx:id="connectText" fill="WHITE" layoutX="1138.0" layoutY="726.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Next">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Text fx:id="titleText" fill="WHITE" layoutX="850.0" layoutY="279.0" stroke="WHITE" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="1.2" text="Setup Players" textAlignment="CENTER">
+         <font>
+            <Font name="Helvetica" size="36.0" />
+         </font>
+      </Text>
+      <Text fx:id="playerText" fill="WHITE" layoutX="892.0" layoutY="406.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="N° Players">
+         <font>
+            <Font name="Helvetica" size="30.0" />
+         </font>
+      </Text>
+      <Text fx:id="gameText" fill="WHITE" layoutX="876.0" layoutY="542.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Game mode">
+         <font>
+            <Font name="Helvetica" size="30.0" />
+         </font>
+      </Text>
+      <Text fx:id="exitText1" fill="WHITE" layoutX="813.0" layoutY="590.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Standard">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Text fx:id="exitText11" fill="WHITE" layoutX="1025.0" layoutY="590.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Expert">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="786.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="806.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="935.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="955.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="975.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="1081.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="1101.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="1121.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="1141.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/user.png" />
          </image>
       </ImageView>
       <Button fx:id="nextButton" layoutX="1100.0" layoutY="694.0" mnemonicParsing="false" opacity="0.0" prefHeight="47.0" prefWidth="128.0" styleClass="connect-button" stylesheets="@../css/style.css">
@@ -19,7 +102,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="backButton" layoutX="694.0" layoutY="694.0" mnemonicParsing="false" opacity="0.0" prefHeight="47.0" prefWidth="128.0" styleClass="connect-button" stylesheets="@../css/style.css">
+      <Button fx:id="exitButton" layoutX="694.0" layoutY="694.0" mnemonicParsing="false" opacity="0.0" prefHeight="47.0" prefWidth="128.0" styleClass="connect-button" stylesheets="@../css/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

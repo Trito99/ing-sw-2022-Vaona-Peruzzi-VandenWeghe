@@ -25,6 +25,11 @@
             <Image url="@../images/Logo_Eriantys.png" />
          </image>
       </ImageView>
+      <Text fx:id="startText" fill="WHITE" layoutX="933.0" layoutY="735.0" strokeType="OUTSIDE" strokeWidth="0.0" text="START" textAlignment="CENTER">
+         <font>
+            <Font name="Helvetica" size="25.0" />
+         </font>
+      </Text>
       <Button fx:id="startButton" layoutX="872.0" layoutY="701.0" mnemonicParsing="false" onAction="#clickButtonStart" opacity="0.54" prefHeight="49.0" prefWidth="200.0" stylesheets="@../css/style.css">
          <font>
             <Font name="Helvetica" size="25.0" />
@@ -33,11 +38,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Text fx:id="startText" fill="WHITE" layoutX="933.0" layoutY="735.0" strokeType="OUTSIDE" strokeWidth="0.0" text="START" textAlignment="CENTER">
-         <font>
-            <Font name="Helvetica" size="25.0" />
-         </font>
-      </Text>
    </children>
 
 
