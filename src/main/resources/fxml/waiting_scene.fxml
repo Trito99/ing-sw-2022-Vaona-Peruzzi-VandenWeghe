@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.scene.WaitingScene">
    <children>
       <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/BG_2_Clouds Blur.png" />
+            <Image url="@../images/BG_2_Clouds_Blur.png" />
          </image>
       </ImageView>
-      <Pane layoutX="684.0" layoutY="352.0" opacity="0.27" prefHeight="250.0" prefWidth="600.0" style="-fx-background-color: white; -fx-background-radius: 45;" />
-      <Label layoutX="790.0" layoutY="430.0" text="Wait for other players to join the game...">
+      <Pane layoutX="684.0" layoutY="352.0" prefHeight="250.0" prefWidth="600.0" styleClass="layout" stylesheets="@../css/style.css">
+         <children>
+            <ProgressIndicator layoutX="279.0" layoutY="128.0" style="-fx-progress-color: #ada79f#ada79f;" />
+         </children></Pane>
+      <Label layoutX="785.0" layoutY="430.0" styleClass="text-field" stylesheets="@../css/style.css" text="Wait for other players to join the game...">
          <font>
-            <Font name="Helvetica" size="23.0" />
+            <Font name="Helvetica" size="25.0" />
          </font>
       </Label>
    </children>

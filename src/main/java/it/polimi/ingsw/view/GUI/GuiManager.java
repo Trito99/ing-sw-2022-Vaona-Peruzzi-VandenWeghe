@@ -2,7 +2,7 @@ package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.observer.ObservableView;
 import it.polimi.ingsw.observer.ObserverView;
-import it.polimi.ingsw.view.GUI.scene.BoardScene;
+import it.polimi.ingsw.view.GUI.scene.DashboardScene;
 import it.polimi.ingsw.view.GUI.scene.GenericScene;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +17,7 @@ public class GuiManager extends ObservableView {
     private static Scene scene;
     private static GenericScene activeController;
 
-    private static BoardScene mainController;
+    private static DashboardScene mainController;
     private static Scene mainScene;
     private static Parent mainRoot;
 
@@ -73,7 +73,7 @@ public class GuiManager extends ObservableView {
                 root = loader.load();
                 controller = loader.getController();
                 ((ObservableView) controller).addAllObservers(observerList);
-                mainController = (BoardScene) controller;
+                mainController = (DashboardScene) controller;
                 activeController = (GenericScene) controller;
                 scene.setRoot(root);
                 mainRoot = root;
@@ -110,7 +110,7 @@ public class GuiManager extends ObservableView {
         return scene;
     }
 
-    public static BoardScene getMainScene(){
+    public static DashboardScene getMainScene(){
         return mainController;
     }
 

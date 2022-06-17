@@ -16,24 +16,9 @@
             <Image url="@../images/3.png" />
          </image>
       </ImageView>
-      <Button fx:id="nextButton" layoutX="1383.0" layoutY="835.0" mnemonicParsing="false" opacity="0.0" prefHeight="48.0" prefWidth="129.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" />
-      <Button fx:id="backButton" layoutX="413.0" layoutY="838.0" mnemonicParsing="false" opacity="0.0" prefHeight="49.0" prefWidth="130.0" styleClass="connect-button" stylesheets="@../css/ConnectToServer.css" />
+      <Button fx:id="nextButton" layoutX="1383.0" layoutY="835.0" mnemonicParsing="false" opacity="0.0" prefHeight="48.0" prefWidth="129.0" styleClass="connect-button" stylesheets="@../css/style.css" />
+      <Button fx:id="backButton" layoutX="413.0" layoutY="838.0" mnemonicParsing="false" opacity="0.0" prefHeight="49.0" prefWidth="130.0" styleClass="connect-button" stylesheets="@../css/style.css" />
       <TextField fx:id="nicknameField" layoutX="450.0" layoutY="386.0" prefHeight="50.0" prefWidth="376.0" promptText="Guest1234">
-         <font>
-            <Font name="Helvetica" size="23.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="ddField" layoutX="451.0" layoutY="513.0" prefHeight="50.0" prefWidth="57.0" style="-fx-background-color: transparent;">
-         <font>
-            <Font name="Helvetica" size="23.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="mmField" layoutX="525.0" layoutY="514.0" prefHeight="48.0" prefWidth="78.0" style="-fx-background-color: transparent;">
-         <font>
-            <Font name="Helvetica" size="23.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="yyyyField" layoutX="619.0" layoutY="515.0" prefHeight="48.0" prefWidth="78.0" style="-fx-background-color: transparent;">
          <font>
             <Font name="Helvetica" size="23.0" />
          </font>
@@ -51,5 +36,21 @@
             <TableColumn fx:id="currentPlayers" editable="false" prefWidth="124.79997558593749" sortable="false" style="-fx-alignment: CENTER;" text="CURRENT PLAYERS" />
         </columns>
       </TableView>
+      <TextField layoutX="450.0" layoutY="511.0" prefHeight="58.0" prefWidth="250.0" />
+      <TextField fx:id="ddField" layoutX="450.0" layoutY="515.0" prefHeight="48.0" prefWidth="56.0" promptText="dd" style="-fx-background-color: white;">
+         <font>
+            <Font name="Helvetica" size="23.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="yyyyField" layoutX="621.0" layoutY="515.0" prefHeight="48.0" prefWidth="78.0" promptText="yyyy" style="-fx-background-color: white;">
+         <font>
+            <Font name="Helvetica" size="23.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="mmField" layoutX="536.0" layoutY="515.0" prefHeight="10.0" prefWidth="78.0" promptText="mm" style="-fx-background-color: white;">
+         <font>
+            <Font name="Helvetica" size="23.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

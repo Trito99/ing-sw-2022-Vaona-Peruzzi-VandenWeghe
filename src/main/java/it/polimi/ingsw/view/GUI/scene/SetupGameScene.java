@@ -3,7 +3,6 @@ package it.polimi.ingsw.view.GUI.scene;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.network.LobbyForPrint;
-import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.observer.ObservableView;
 import it.polimi.ingsw.view.GUI.GuiManager;
 import javafx.collections.FXCollections;
@@ -12,14 +11,12 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 import java.util.GregorianCalendar;
 import java.util.Map;
-
-import static java.lang.System.out;
 
 /** scena che chiede al giocatore a quale lobby connettersi, chiedendo username, data di nascita, gameId */
 
@@ -30,34 +27,46 @@ public class SetupGameScene extends ObservableView implements GenericScene {
     @FXML
     private AnchorPane mainPane;
     @FXML
-    private ImageView setupBackground;
+    private Text bdayText;
     @FXML
-    private Button nextButton;
+    private Text bdayText1;
     @FXML
-    private Button backButton;
+    private Text bdayText11;
     @FXML
-    private TextField nicknameField;
+    private Text connectText;
+    @FXML
+    private Button exitButton;
+    @FXML
+    private Text exitText;
     @FXML
     private TextField gameIdField;
+    @FXML
+    private Text gameText;
+    @FXML
+    private Text lobbyText;
     @FXML
     private TextField ddField;
     @FXML
     private TextField mmField;
     @FXML
     private TextField yyyyField;
+    @FXML
+    private Button nextButton;
+    @FXML
+    private TextField nicknameField;
+    @FXML
+    private Text nicknameText;
+    @FXML
+    private Text titleText;
 
     @FXML
     private TableView<LobbyForPrint> lobbyList;
-
     @FXML
     private TableColumn<LobbyForPrint, Integer> gameId;
-
     @FXML
     private TableColumn<LobbyForPrint, Difficulty> difficulty;
-
     @FXML
     private TableColumn<LobbyForPrint, GameMode> gameMode;
-
     @FXML
     private TableColumn<LobbyForPrint, Integer> currentPlayers;
 
@@ -65,7 +74,7 @@ public class SetupGameScene extends ObservableView implements GenericScene {
     @FXML
     public void initialize(){
         nextButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickNext);
-        backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickBack);
+        exitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickExit);
         generateLobbyTable(lobbyMap);
     }
 
@@ -167,7 +176,8 @@ public class SetupGameScene extends ObservableView implements GenericScene {
         }
     }
 
-    private void clickBack(Event event){
+    /** DA CAMBIARE in exit */
+    private void clickExit(Event event){
         nextButton.setDisable(true);
         GuiManager.changeRootPane(observers, event,"/fxml/connect_to_server");
     }

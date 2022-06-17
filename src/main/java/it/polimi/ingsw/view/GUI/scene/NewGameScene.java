@@ -18,7 +18,7 @@ public class NewGameScene extends ObservableView implements GenericScene {
     @FXML
     public Button nextButton;
     @FXML
-    public Button backButton;
+    public Button exitButton;
     @FXML
     public Button standardButton;
     @FXML
@@ -33,7 +33,7 @@ public class NewGameScene extends ObservableView implements GenericScene {
     @FXML
     public void initialize(){
         nextButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickNext);
-        backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickBack);
+        exitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickExit);
     }
 
     /** gestisce il click sul pulsante */
@@ -44,7 +44,9 @@ public class NewGameScene extends ObservableView implements GenericScene {
         //notifyObserver(obs -> obs.choosePlayersNumberAndDifficulty((Integer) numberOfPlayers.getValue(),difficulty1) );
     }
 
-    private void clickBack(Event event){
+
+    /** DA IMPLEMENTARE la exit */
+    private void clickExit(Event event){
         nextButton.setDisable(true);
         GuiManager.changeRootPane(observers, event,"/fxml/setup_game_scene");
     }

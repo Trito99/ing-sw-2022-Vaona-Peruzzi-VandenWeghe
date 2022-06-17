@@ -30,6 +30,7 @@ public class StartGameScene extends ObservableView implements GenericScene{
     }
 
     /** gestisce il click sul pulsante */
+    @FXML
     private void clickButtonStart(Event event){
         startButton.setDisable(true);
 
