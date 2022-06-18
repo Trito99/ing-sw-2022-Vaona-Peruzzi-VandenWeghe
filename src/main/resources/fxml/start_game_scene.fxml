@@ -30,7 +30,7 @@
             <Font name="Helvetica" size="25.0" />
          </font>
       </Text>
-      <Button fx:id="startButton" layoutX="872.0" layoutY="701.0" mnemonicParsing="false" onAction="#clickButtonStart" opacity="0.54" prefHeight="49.0" prefWidth="200.0" stylesheets="@../css/style.css">
+      <Button fx:id="startButton" layoutX="872.0" layoutY="701.0" mnemonicParsing="false" opacity="0.54" prefHeight="49.0" prefWidth="200.0" stylesheets="@../css/style.css">
          <font>
             <Font name="Helvetica" size="25.0" />
          </font>

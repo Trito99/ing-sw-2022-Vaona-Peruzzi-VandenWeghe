@@ -38,10 +38,7 @@
 }
 
 .text-header{
-    -fx-font: Helvetica;
-    -fx-font-size: 30;
-    -fx-font-weight: 30;
-
+    -fx-font-family: Helvetica;
 }
 
 .shadow-button{
