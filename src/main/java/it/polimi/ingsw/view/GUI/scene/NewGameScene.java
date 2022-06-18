@@ -55,16 +55,14 @@ public class NewGameScene extends ObservableView implements GenericScene {
     /** gestisce il click sul pulsante */
     private void clickNext(Event event){
         nextButton.setDisable(true);
-        //String g = (String) difficulty.getValue();
-        //Difficulty difficulty1 = Difficulty.valueOf(g.toUpperCase(Locale.ROOT)+"MODE");
-        //notifyObserver(obs -> obs.choosePlayersNumberAndDifficulty((Integer) numberOfPlayers.getValue(),difficulty1) );
     }
 
 
     /** DA IMPLEMENTARE la exit */
     private void clickExit(Event event){
-        nextButton.setDisable(true);
-        GuiManager.changeRootPane(observers, event,"/fxml/setup_game_scene");
+        exitButton.setDisable(true);
+        notifyObserver(ObserverView :: updateDisconnect);
+        System.exit(0);
     }
 
 

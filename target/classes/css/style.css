@@ -17,7 +17,7 @@
 
 .digit-text{
     -fx-background-radius: 6;
-    -fx-font-size: 24p;
+    -fx-font-size: 24;
 }
 
 .button{
@@ -38,8 +38,7 @@
 }
 
 .text-header{
-    -fx-font: Helvetica;
-    -fx-font-weight: 30;
+    -fx-font-family: Helvetica;
 }
 
 .shadow-button{
@@ -62,4 +61,9 @@
     -fx-border-style: solid;
     -fx-border-radius: 45;
     -fx-border-width: 1px;
+}
+
+.lobby-box{
+    -fx-background-color: white;
+    -fx-background-radius: 6;
 }
