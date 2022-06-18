@@ -45,7 +45,6 @@ public class NewGameScene extends ObservableView implements GenericScene {
     private Text connectText;
 
 
-
     @FXML
     public void initialize(){
         nextButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickNext);

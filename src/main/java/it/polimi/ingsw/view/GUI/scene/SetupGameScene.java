@@ -98,6 +98,7 @@ public class SetupGameScene extends ObservableView implements GenericScene {
     }
 
     /** gestisce il click sul pulsante */
+    @FXML
     private void clickNext(Event event){
         boolean name = false,birth = false,id = false;
         GregorianCalendar playerDate = new GregorianCalendar();
