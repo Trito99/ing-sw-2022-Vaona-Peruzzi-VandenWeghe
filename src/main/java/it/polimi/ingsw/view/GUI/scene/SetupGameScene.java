@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.network.LobbyForPrint;
 import it.polimi.ingsw.observer.ObservableView;
+import it.polimi.ingsw.observer.ObserverView;
 import it.polimi.ingsw.view.GUI.GuiManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -176,8 +177,9 @@ public class SetupGameScene extends ObservableView implements GenericScene {
 
     /** DA CAMBIARE in exit */
     private void clickExit(Event event){
-        nextButton.setDisable(true);
-        GuiManager.changeRootPane(observers, event,"/fxml/connect_to_server");
+        exitButton.setDisable(true);
+        notifyObserver(ObserverView:: updateDisconnect);
+        System.exit(0);
     }
 
     public void setLobbyMap(Map<String, LobbyForPrint> lobbyMap) {

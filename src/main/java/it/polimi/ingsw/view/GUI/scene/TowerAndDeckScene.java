@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.GUI.scene;
 
 import it.polimi.ingsw.observer.ObservableView;
+import it.polimi.ingsw.observer.ObserverView;
 import it.polimi.ingsw.view.GUI.GuiManager;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -70,7 +71,8 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
 
     private void clickExit(Event event){
         exitButton.setDisable(true);
-        GuiManager.changeRootPane(observers, event,"/fxml/setup_game_scene");
+        notifyObserver(ObserverView:: updateDisconnect);
+        System.exit(0);
     }
 
 }
