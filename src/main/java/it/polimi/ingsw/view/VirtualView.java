@@ -40,6 +40,11 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
+    public void showWaitingMessage(String message) {
+        clientHandler.sendMessage(new StringWaitingMessage(message));
+    }
+
+    @Override
     public void showWinMessage() {
         clientHandler.sendMessage(new WinMessage());
     }

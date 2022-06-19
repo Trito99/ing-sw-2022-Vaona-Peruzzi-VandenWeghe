@@ -17,6 +17,7 @@ public enum MessageType {
     //messaggi di connessione al server
     SUCCESSFUL_HOST,
     STRING_MESSAGE,
+    WAITING_MESSAGE,
     LOBBY_SERVER_REQUEST,
     LOBBY_SERVER_INFO,
 

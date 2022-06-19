@@ -166,6 +166,9 @@ public class ClientMessanger implements ObserverView, Observer {
             case STRING_MESSAGE:
                 queue.execute(() -> view.showMessage(((StringMessage) message).getMessage()));
                 break;
+            case WAITING_MESSAGE:
+                queue.execute(() -> view.showWaitingMessage(((StringWaitingMessage) message).getMessage()));
+                break;
             case LOSE:
                 LoseMessage lose = (LoseMessage) message;
                 queue.execute(() -> view.showLoseMessage(lose.getNickname()));

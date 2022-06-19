@@ -186,7 +186,7 @@ public class GameController {
                         gameSession.getPlayer(TCaDSelected.getNickname()).setDeckOfPlayer(new DeckAssistant(TCaDSelected.getAssistantDeckName()));
                         gameSession.getTowerColors().remove((TCaDSelected.getTowerColor()));
                         gameSession.getAssistantDeckNames().remove((TCaDSelected.getAssistantDeckName()));
-                        virtualView.showMessage(gameSession.getGameMode()+" Mode.You have "+gameSession.getPlayer(TCaDSelected.getNickname()).getTColor()+" towers! \nWaiting for other players...");
+                        virtualView.showWaitingMessage(gameSession.getGameMode()+" Mode.You have "+gameSession.getPlayer(TCaDSelected.getNickname()).getTColor()+" towers! \nWaiting for other players...");
                         if(gameSession.getPlayer(TCaDSelected.getNickname()).getPlayerNumber().equals(PlayerNumber.PLAYER4)) {
                             for (Player player : gameSession.getListOfPlayers()) {
                                 for (Player player2 : gameSession.getListOfPlayers()) {

@@ -25,6 +25,8 @@ public interface View {
     /** mostra un messaggio generico */
     void showMessage(String message);
 
+    void showWaitingMessage(String message);
+
     void showWinMessage();
 
     void showLoseMessage(String nickname);

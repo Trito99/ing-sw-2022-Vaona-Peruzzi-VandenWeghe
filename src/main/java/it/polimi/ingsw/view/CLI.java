@@ -264,6 +264,11 @@ public class CLI extends ObservableView implements View {
     }
 
     @Override
+    public void showWaitingMessage(String message){
+        out.println("\n" + message);
+    }
+
+    @Override
     public void showWinMessage() {
         out.print("\n****🎉 YOU WIN 🎉****");
         notifyObserver(ObserverView::updateDisconnect);
