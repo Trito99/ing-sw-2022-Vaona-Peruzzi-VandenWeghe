@@ -91,13 +91,17 @@ public class GUI extends ObservableView implements View {
     }
 
     @Override
-    public void showPersonalSchool(School school, String nickname, AssistantCard trash, Difficulty difficulty, int coins, GameMode gameMode, String teamMate) {
+    public void showWaitingMessage(String message) {
+        Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/waiting_scene") );
+    }
 
+    @Override
+    public void showPersonalSchool(School school, String nickname, AssistantCard trash, Difficulty difficulty, int coins, GameMode gameMode, String teamMate) {
     }
 
     @Override
     public void showTable(Table table, Difficulty difficulty) {
-
+        Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/dashboard_scene") );
     }
 
     @Override

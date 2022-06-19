@@ -20,6 +20,9 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
     private ArrayList<TColor> towerColors;
     private ArrayList<AssistantDeckName> assistantDeckNames;
 
+    private TColor colorChosen;
+
+    private AssistantDeckName deckChosen;
 
     @FXML
     private Pane blackShadowPane;
@@ -123,11 +126,19 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
         exitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickExit);
         initializeButtons();
         intializeTowerColorsAndAssistantDeck();
+        whiteTower.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickWhite);
+        blackTower.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickBlack);
+        grayTower.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickGrey);
+        wizard1Button.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickWizard1);
+        wizard2Button.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickWizard2);
+        wizard3Button.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickWizard3);
+        wizard4Button.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickWizard4);
     }
 
     /** gestisce il click sul pulsante */
     private void clickStart(Event event){
         startButton.setDisable(true);
+        notifyObserver(obs -> obs.chooseTowerColorAndDeck(colorChosen,deckChosen));
     }
 
     private void clickExit(Event event){
@@ -193,5 +204,41 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
         wizard2Button.setDisable(true);
         wizard3Button.setDisable(true);
         wizard4Button.setDisable(true);
+    }
+
+    private void clickWhite(Event event){
+        setColorChosen(TColor.WHITE);
+    }
+
+    private void clickBlack(Event event){
+        setColorChosen(TColor.BLACK);
+    }
+
+    private void clickGrey(Event event){
+        setColorChosen(TColor.GREY);
+    }
+
+    private void clickWizard1(Event event){
+        setDeckChosen(AssistantDeckName.WIZARD1);
+    }
+
+    private void clickWizard2(Event event){
+        setDeckChosen(AssistantDeckName.WIZARD2);
+    }
+
+    private void clickWizard3(Event event){
+        setDeckChosen(AssistantDeckName.WIZARD3);
+    }
+
+    private void clickWizard4(Event event){
+        setDeckChosen(AssistantDeckName.WIZARD4);
+    }
+
+    public void setColorChosen(TColor colorChosen) {
+        this.colorChosen = colorChosen;
+    }
+
+    public void setDeckChosen(AssistantDeckName deckChosen) {
+        this.deckChosen = deckChosen;
     }
 }
