@@ -58,7 +58,7 @@ public class Game {
     /** generates lists witch available tower colors and
      *
      */
-    public void generateTowerColorsAndAssistantDeckName(){
+    public void generateTowerColors(){
         int playerNumber = initializePlayerNumber(gameMode);
 
         if(gameMode.equals(GameMode.COOP)){
@@ -70,7 +70,7 @@ public class Game {
             for (int i = 0; i < playerNumber; i++)
                 towerColors.add(TColor.values()[i]);
         }
-        for (int i = 0; i < playerNumber; i++)
+        for (int i = 0; i < 4; i++)
             assistantDeckNames.add(AssistantDeckName.values()[i]);
     }
 
