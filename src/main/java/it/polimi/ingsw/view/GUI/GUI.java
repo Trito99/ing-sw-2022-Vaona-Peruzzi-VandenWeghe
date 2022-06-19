@@ -13,6 +13,7 @@ import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.network.LobbyForPrint;
 import it.polimi.ingsw.observer.ObservableView;
+import it.polimi.ingsw.observer.ObserverView;
 import it.polimi.ingsw.view.GUI.scene.*;
 import it.polimi.ingsw.view.View;
 import javafx.application.Platform;
@@ -20,6 +21,8 @@ import javafx.application.Platform;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Map;
+
+import static java.lang.System.out;
 
 public class GUI extends ObservableView implements View {
     private static ArrayList<String> playerList = new ArrayList<>();
@@ -53,7 +56,11 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void askTowerColorAndDeck(ArrayList<TColor> towerColors, ArrayList<AssistantDeckName> assistantDeckNames) {
-
+        TowerAndDeckScene towerAndDeckScene = new TowerAndDeckScene();
+        towerAndDeckScene.addAllObservers(observers);
+        towerAndDeckScene.setAssistantDeckNames(assistantDeckNames);
+        towerAndDeckScene.setTowerColors(towerColors);
+        Platform.runLater(() -> GuiManager.changeRootPane(towerAndDeckScene, "/fxml/tower_and_deck_scene") );
     }
 
     @Override
@@ -63,12 +70,24 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void showLogin(String nickname, String gameId, GregorianCalendar playerDate, boolean wasJoined) {
-        GUI.playerList.add(nickname);
+        if (wasJoined){
+            notifyObserver(obs -> obs.createNickname(nickname));
+            notifyObserver(obs -> obs.createPlayerDate(playerDate));
+            GUI.playerList.add(nickname);
+            showMessage("You joined the game as "+nickname);
+        }
+        else {
+            showMessage("Game is already full");
+            notifyObserver(ObserverView::askLobbyServerInfo);
+        }
     }
 
     @Override
     public void showMessage(String message) {
-
+        Platform.runLater(() -> MessageScene.display(null,null, message));
+        if (message.equals("Tie")){
+            notifyObserver(ObserverView::updateDisconnect);
+        }
     }
 
     @Override
@@ -102,7 +121,7 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void showErrorMessage(String message) {
-        Platform.runLater(() -> MessageScene.display("Error", message));
+        Platform.runLater(() -> MessageScene.display("Error","Error", message));
     }
 
     @Override
