@@ -22,6 +22,9 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
 
 
     @FXML
+    private Pane blackShadowPane;
+
+    @FXML
     private Text blackT;
 
     @FXML
@@ -43,6 +46,9 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
     private Button grayTower;
 
     @FXML
+    private Pane greyShadowPane;
+
+    @FXML
     private Text nicknameText;
 
     @FXML
@@ -53,6 +59,9 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
 
     @FXML
     private Text titleText;
+
+    @FXML
+    private Pane whiteShadowPane;
 
     @FXML
     private Text whiteT;
@@ -70,6 +79,9 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
     private Pane wizard1Pane;
 
     @FXML
+    private Pane wizard1ShadowPane;
+
+    @FXML
     private ImageView wizard2;
 
     @FXML
@@ -77,6 +89,9 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
 
     @FXML
     private Pane wizard2Pane;
+
+    @FXML
+    private Pane wizard2ShadowPane;
 
     @FXML
     private ImageView wizard3;
@@ -88,6 +103,9 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
     private Pane wizard3Pane;
 
     @FXML
+    private Pane wizard3ShadowPane;
+
+    @FXML
     private ImageView wizard4;
 
     @FXML
@@ -95,6 +113,9 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
 
     @FXML
     private Pane wizard4Pane;
+
+    @FXML
+    private Pane wizard4ShadowPane;
 
     @FXML
     public void initialize(){
@@ -130,42 +151,35 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
             switch(tcolor){
                 case WHITE:
                     whiteTower.setDisable(false);
-                    whiteTower.setVisible(true);
-                    whiteT.setVisible(true);
+                    whiteShadowPane.setVisible(false);
                     break;
                 case BLACK:
                     blackTower.setDisable(false);
-                    blackTower.setVisible(true);
-                    blackT.setVisible(true);
+                    blackShadowPane.setVisible(false);
                     break;
                 case GREY:
                     grayTower.setDisable(false);
-                    grayTower.setVisible(true);
-                    whiteT.setVisible(true);
+                    greyShadowPane.setVisible(false);
                     break;
             }
         }
         for(AssistantDeckName assistantDeckName : assistantDeckNames){
             switch (assistantDeckName){
                 case WIZARD1:
-                    wizard1.setVisible(true);
-                    wizard1Pane.setVisible(true);
                     wizard1Button.setDisable(false);
+                    wizard1ShadowPane.setVisible(false);
                     break;
                 case WIZARD2:
-                    wizard2.setVisible(true);
-                    wizard2Pane.setVisible(true);
                     wizard2Button.setDisable(false);
+                    wizard2ShadowPane.setVisible(false);
                     break;
                 case WIZARD3:
-                    wizard3.setVisible(true);
-                    wizard3Pane.setVisible(true);
                     wizard3Button.setDisable(false);
+                    wizard3ShadowPane.setVisible(false);
                     break;
                 case WIZARD4:
-                    wizard4.setVisible(true);
-                    wizard4Pane.setVisible(true);
                     wizard4Button.setDisable(false);
+                    wizard4ShadowPane.setVisible(false);
                     break;
             }
         }
@@ -175,20 +189,6 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
         whiteTower.setDisable(true);
         blackTower.setDisable(true);
         grayTower.setDisable(true);
-        whiteTower.setVisible(false);
-        blackTower.setVisible(false);
-        grayTower.setVisible(false);
-        whiteT.setVisible(false);
-        blackT.setVisible(false);
-        grayT.setVisible(false);
-        wizard1.setVisible(false);
-        wizard2.setVisible(false);
-        wizard3.setVisible(false);
-        wizard4.setVisible(false);
-        wizard1Pane.setVisible(false);
-        wizard2Pane.setVisible(false);
-        wizard3Pane.setVisible(false);
-        wizard4Pane.setVisible(false);
         wizard1Button.setDisable(true);
         wizard2Button.setDisable(true);
         wizard3Button.setDisable(true);
