@@ -73,10 +73,6 @@ public class ConnectToServerScene extends ObservableView implements GenericScene
     private void clickExit(Event event){
         exitButton.setDisable(true);
         GuiManager.changeRootPane(observers, event,"/fxml/start_game_scene");
-
-        /**exitButton.setDisable(true);
-        notifyObserver(ObserverView :: updateDisconnect);
-        System.exit(0);*/
     }
 
 }
