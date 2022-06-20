@@ -22,6 +22,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private VBox characterCardLayout;
 
     public void initialize(){
+        /**
         ArrayList<CharacterCard> characterCardsPlaying = new ArrayList<>((characterCardsPlaying()));
         try{
             for(int i = 0; i < characterCardsPlaying().size(); i++) {
@@ -36,7 +37,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
         } catch (IOException e) {
                 e.printStackTrace();
 
-        }
+        }*/
     }
 
     /** esempio inizializzazione carta personaggio -> da sistemare con */

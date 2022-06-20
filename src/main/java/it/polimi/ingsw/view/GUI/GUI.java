@@ -101,7 +101,7 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void showTable(Table table, Difficulty difficulty) {
-        Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/dashboard_scene") );
+        Platform.runLater(() -> GuiManager.changeRootMainScene(observers) );
     }
 
     @Override
