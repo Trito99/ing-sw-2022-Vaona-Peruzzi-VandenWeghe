@@ -392,7 +392,7 @@ public class CLI extends ObservableView implements View {
 
                 }
                 else if(color.equals(CardEffect.JUNKDEALER)){
-                    out.print("\nDo you want to remove the students of which color?");
+                    out.print("\nDo you want to remove the students of which color? ");
                 }
                 String colorChosen = readInput().toUpperCase(Locale.ROOT);
                 notifyObserver(obs -> obs.chooseColorToBlock(colorChosen));

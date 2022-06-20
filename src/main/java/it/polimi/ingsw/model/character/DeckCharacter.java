@@ -16,7 +16,7 @@ public class DeckCharacter {
 
     public void generateCharacterDeck(){
         characterCards.add(new CharacterCard(1, CardEffect.ABBOT, "Take one of the students on this card and move them on an island of your choice."));
-        characterCards.add(new CharacterCard(0, CardEffect.HOST,"During this round, you take the control of the professors even if you have the same number of students of others players."));
+        characterCards.add(new CharacterCard(2, CardEffect.HOST,"During this round, you take the control of the professors even if you have the same number of students of others players."));
         characterCards.add(new CharacterCard(3, CardEffect.HERALD,"Choose an Island and act like if Mother Nature lands on that island."));
         characterCards.add(new CharacterCard(1, CardEffect.BEARER, "You can move Mother Nature up to 2 more steps of your maximum."));
         characterCards.add(new CharacterCard(2, CardEffect.CURATOR, "Place a 'Forbidden Card' on an Island. A 'Forbidden card' blocks the function of Mother Nature when she lands on that Island."));
