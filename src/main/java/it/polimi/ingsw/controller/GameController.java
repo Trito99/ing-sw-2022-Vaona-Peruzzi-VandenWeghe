@@ -22,6 +22,8 @@ import java.security.InvalidParameterException;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
+import static java.lang.System.out;
+
 public class GameController {
     private Game gameSession;
     private int maxPlayers, roundIndex, studentId, movedStudents=0, acrobatIndex=0, round=1;
@@ -339,6 +341,7 @@ public class GameController {
                                 }else{
                                     virtualView.showMessage("⚠️Table already full. Select another student ⚠️");
                                     again = true;
+                                    virtualView.showMessage("ACTION PHASE");
                                     virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                                 }
 
@@ -348,11 +351,13 @@ public class GameController {
                         } else {
                             virtualView.showMessage("\n⚠️Wrong input  ⚠️");
                             again = true;
+                            virtualView.showMessage("ACTION PHASE");
                             virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                         }
                     }else{
                         virtualView.showMessage("\n⚠️Student selected is not available ⚠️");
                         again = true;
+                        virtualView.showMessage("ACTION PHASE");
                         virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                     }
                 }
@@ -872,6 +877,7 @@ public class GameController {
         if (roundIndex < maxPlayers) {
             switch(actionState) {
                 case STUDENT:
+                    allVirtualView.get(turnController.getActivePlayer()).showMessage("ACTION PHASE");
                     allVirtualView.get(turnController.getActivePlayer()).askPlaceAndStudentForMove(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                     break;
                 case CHARACTER:
