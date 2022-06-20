@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -37,7 +38,8 @@ public class StartGUI extends Application {
         stage.setScene(scene);
 
         stage.setTitle("Eriantys");
-        //stage.getIcons().add("/images/Logo_Eriantys.png");
+        Image icon = new Image(getClass().getResourceAsStream("/images/Logo_Eriantys.png"));
+        stage.getIcons().add(icon);
         stage.setResizable(true);
         stage.setMaximized(false);
         stage.setFullScreen(false);
