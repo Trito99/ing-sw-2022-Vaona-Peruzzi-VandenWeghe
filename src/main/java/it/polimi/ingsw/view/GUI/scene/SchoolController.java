@@ -1,11 +1,12 @@
 package it.polimi.ingsw.view.GUI.scene;
 
+import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.observer.ObservableView;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 
 public class SchoolController extends ObservableView implements GenericScene {
-
+    private School school;
     @FXML
     private Pane entrySchool;
     @FXML
@@ -24,5 +25,11 @@ public class SchoolController extends ObservableView implements GenericScene {
     private Pane towerZone;
 
 
+    public SchoolController(School school) {
+        this.school = school;
+    }
 
+    public void initialize(){
+
+    }
 }
