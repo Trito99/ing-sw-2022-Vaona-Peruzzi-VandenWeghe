@@ -4,6 +4,4 @@ package it.polimi.ingsw.view.GUI.scene;
 
 public interface GenericScene {
 
-    void initialize();
-
 }
