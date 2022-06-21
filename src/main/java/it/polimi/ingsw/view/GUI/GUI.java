@@ -98,6 +98,7 @@ public class GUI extends ObservableView implements View {
     @Override
     public void showPersonalSchool(School school, String nickname, AssistantCard trash, Difficulty difficulty, int coins, GameMode gameMode, String teamMate) {
         SchoolController schoolController = new SchoolController(school);
+        Platform.runLater(() -> GuiManager.changeRootPane(schoolController, "/fxml/school") );
     }
 
     @Override
