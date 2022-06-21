@@ -6,4 +6,8 @@ import it.polimi.ingsw.observer.ObservableView;
 
 public class WinnerScene extends ObservableView implements GenericScene {
 
+    @Override
+    public void initialize() {
+
+    }
 }
