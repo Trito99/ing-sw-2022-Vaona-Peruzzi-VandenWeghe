@@ -53,7 +53,7 @@
             <Font size="30.0" />
          </font>
       </Text>
-      <Text fx:id="grayT" fill="#979797" layoutX="1089.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="♜">
+      <Text fx:id="greyT" fill="#979797" layoutX="1089.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="♜">
          <font>
             <Font size="30.0" />
          </font>
@@ -61,7 +61,7 @@
       <Pane fx:id="whiteShadowPane" layoutX="723.0" layoutY="379.0" prefHeight="49.0" prefWidth="133.0" style="-fx-background-color: black;" styleClass="layout" stylesheets="@../css/style.css" />
       <Pane fx:id="blackShadowPane" layoutX="880.0" layoutY="379.0" prefHeight="49.0" prefWidth="133.0" style="-fx-background-color: black;" styleClass="layout" stylesheets="@../css/style.css" />
       <Pane fx:id="greyShadowPane" layoutX="1037.0" layoutY="379.0" prefHeight="49.0" prefWidth="133.0" style="-fx-background-color: black;" styleClass="layout" stylesheets="@../css/style.css" />
-      <Button fx:id="grayTower" layoutX="1037.0" layoutY="379.0" mnemonicParsing="false" opacity="0.0" prefHeight="49.0" prefWidth="133.0" styleClass="connect-button" stylesheets="@../css/style.css">
+      <Button fx:id="greyTower" layoutX="1037.0" layoutY="379.0" mnemonicParsing="false" opacity="0.0" prefHeight="49.0" prefWidth="133.0" styleClass="connect-button" stylesheets="@../css/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

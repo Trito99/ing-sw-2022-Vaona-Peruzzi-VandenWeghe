@@ -42,13 +42,13 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
     private Text exitText;
 
     @FXML
+    private Pane greyShadowPane;
+
+    @FXML
     private Text greyT;
 
     @FXML
     private Button greyTower;
-
-    @FXML
-    private Pane greyShadowPane;
 
     @FXML
     private Text nicknameText;
