@@ -42,10 +42,10 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
     private Text exitText;
 
     @FXML
-    private Text grayT;
+    private Text greyT;
 
     @FXML
-    private Button grayTower;
+    private Button greyTower;
 
     @FXML
     private Pane greyShadowPane;
@@ -127,7 +127,7 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
         initializeTowerColorsAndAssistantDeck();
         whiteTower.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickWhite);
         blackTower.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickBlack);
-        grayTower.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickGrey);
+        greyTower.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickGrey);
         wizard1Button.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickWizard1);
         wizard2Button.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickWizard2);
         wizard3Button.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickWizard3);
@@ -168,7 +168,7 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
                     blackShadowPane.setVisible(false);
                     break;
                 case GREY:
-                    grayTower.setDisable(false);
+                    greyTower.setDisable(false);
                     greyShadowPane.setVisible(false);
                     break;
             }
@@ -198,7 +198,7 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
     private void initializeButtons(){
         whiteTower.setDisable(true);
         blackTower.setDisable(true);
-        grayTower.setDisable(true);
+        greyTower.setDisable(true);
         wizard1Button.setDisable(true);
         wizard2Button.setDisable(true);
         wizard3Button.setDisable(true);
