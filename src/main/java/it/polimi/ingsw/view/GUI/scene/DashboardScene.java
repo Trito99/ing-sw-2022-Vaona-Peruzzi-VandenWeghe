@@ -3,8 +3,11 @@ package it.polimi.ingsw.view.GUI.scene;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.observer.ObservableView;
 import it.polimi.ingsw.view.GUI.CardsController.CharacterCardController;
+import it.polimi.ingsw.view.GUI.GuiManager;
+import it.polimi.ingsw.view.GUI.StartGUI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -17,6 +20,7 @@ import java.util.List;
 
 public class DashboardScene extends ObservableView implements GenericScene {
 
+    private SchoolController schoolController;
     @FXML
     private VBox characterCardLayout;
 
@@ -95,7 +99,15 @@ public class DashboardScene extends ObservableView implements GenericScene {
     @FXML
     private Pane turnInfoPane;
 
+    public void updateSchool(SchoolController controller) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource("/fxml/school.fxml"));
+        loader.setController(controller);
+        schoolPane = loader.load();
+    }
     public void initialize(){
+
+
         /**
         ArrayList<CharacterCard> characterCardsPlaying = new ArrayList<>((characterCardsPlaying()));
         try{
@@ -124,4 +136,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
         return cards;
     }
 
+    public void setSchoolController(SchoolController schoolController) {
+        this.schoolController = schoolController;
+    }
 }

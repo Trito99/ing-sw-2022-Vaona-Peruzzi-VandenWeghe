@@ -136,8 +136,10 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
 
     /** gestisce il click sul pulsante */
     private void clickStart(Event event){
-        startButton.setDisable(true);
-        notifyObserver(obs -> obs.chooseTowerColorAndDeck(colorChosen,deckChosen));
+        if((colorChosen != null )&&(deckChosen != null)) {
+            startButton.setDisable(true);
+            notifyObserver(obs -> obs.chooseTowerColorAndDeck(colorChosen, deckChosen));
+        }
     }
 
     private void clickExit(Event event){

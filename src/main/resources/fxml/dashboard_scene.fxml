@@ -10,14 +10,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.scene.DashboardScene">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.scene.DashboardScene">
    <children>
-      <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/BG.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/clouds_dashboard.png" />
          </image>
@@ -25,12 +25,11 @@
             <BoxBlur />
          </effect>
       </ImageView>
-      <Pane fx:id="sxPane" layoutX="20.0" layoutY="18.0" prefHeight="1039.0" prefWidth="279.0" styleClass="pane" stylesheets="@../css/dashboard_style.css">
+      <Pane fx:id="sxPane" layoutX="21.0" layoutY="20.0" prefHeight="672.0" prefWidth="166.0" styleClass="pane" stylesheets="@../css/dashboard_style.css">
          <effect>
             <BoxBlur />
          </effect>
       </Pane>
-      <Pane fx:id="schoolPane" layoutX="308.0" layoutY="800.0" prefHeight="264.0" prefWidth="638.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
       <Pane fx:id="schoolViewPane" layoutX="318.0" layoutY="824.0" prefHeight="216.0" prefWidth="611.0" styleClass="pane">
          <children>
             <ImageView fx:id="school" fitHeight="220.0" fitWidth="642.0" pickOnBounds="true" preserveRatio="true">
@@ -40,123 +39,124 @@
             </ImageView>
          </children>
       </Pane>
-      <VBox fx:id="characterCardLayout" layoutX="1673.0" layoutY="256.0" prefHeight="799.0" prefWidth="219.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="trashPane" layoutX="53.0" layoutY="330.0" prefHeight="325.0" prefWidth="212.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+      <VBox fx:id="characterCardLayout" layoutX="1091.0" layoutY="197.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="160.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="trashPane" layoutX="42.0" layoutY="453.0" prefHeight="172.0" prefWidth="115.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <children>
-            <ImageView fitHeight="278.0" fitWidth="187.0" layoutX="15.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="128.0" fitWidth="103.0" layoutX="15.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/assistantCards/assistant1.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="coinPane" layoutX="100.0" layoutY="100.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+      <Pane fx:id="coinPane" layoutX="64.0" layoutY="76.0" prefHeight="71.0" prefWidth="71.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <children>
-            <ImageView fx:id="coinImage" fitHeight="115.0" fitWidth="118.0" layoutX="2.0" layoutY="2.0" opacity="0.57" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="coinImage" fitHeight="71.0" fitWidth="71.0" opacity="0.57" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/coin.png" />
                </image>
             </ImageView>
-            <Text fill="#ffffffbd" layoutX="41.0" layoutY="84.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="3">
+            <Text fill="#ffffffbd" layoutX="17.0" layoutY="51.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="3" textAlignment="CENTER" wrappingWidth="36.6390380859375">
                <font>
-                  <Font name="Helvetica" size="65.0" />
+                  <Font size="39.0" />
                </font>
             </Text>
          </children>
       </Pane>
-      <Button fx:id="deckButton" layoutX="53.0" layoutY="790.0" mnemonicParsing="false" prefHeight="212.0" prefWidth="212.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+      <Button fx:id="deckButton" layoutX="42.0" layoutY="197.0" mnemonicParsing="false" prefHeight="149.0" prefWidth="115.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <graphic>
-            <ImageView fx:id="deckLogo" fitHeight="164.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="deckLogo" fitHeight="101.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/icon_deck.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Pane fx:id="turnInfoPane" layoutX="326.0" layoutY="22.0" prefHeight="52.0" prefWidth="262.0" styleClass="pane" stylesheets="@../css/dashboard_style.css">
+      <Pane fx:id="turnInfoPane" layoutX="219.0" layoutY="24.0" prefHeight="52.0" prefWidth="262.0" styleClass="pane" stylesheets="@../css/dashboard_style.css">
          <effect>
             <BoxBlur />
          </effect>
       </Pane>
-      <Button fx:id="otherSchoolButton" layoutX="1673.0" layoutY="24.0" mnemonicParsing="false" prefHeight="206.0" prefWidth="219.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="islandPane" layoutX="371.0" layoutY="63.0" prefWidth="1246.0">
+      <Text fill="#000000bc" layoutX="248.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="player(1) ">
+         <font>
+            <Font name="Helvetica" size="25.0" />
+         </font>
+      </Text>
+      <Button fx:id="otherSchoolButton" layoutX="1091.0" layoutY="37.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="160.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="islandPane" layoutX="341.0" layoutY="33.0" prefHeight="401.0" prefWidth="722.0">
          <children>
-            <ImageView fx:id="island10" fitHeight="175.0" fitWidth="203.0" layoutX="142.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island10" fitHeight="69.0" fitWidth="71.0" layoutX="95.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="island11" fitHeight="175.0" fitWidth="203.0" layoutX="338.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island11" fitHeight="69.0" fitWidth="71.0" layoutX="325.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="island6" fitHeight="175.0" fitWidth="203.0" layoutX="440.0" layoutY="519.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island6" fitHeight="69.0" fitWidth="71.0" layoutX="325.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="island3" fitHeight="175.0" fitWidth="203.0" layoutX="980.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island3" fitHeight="69.0" fitWidth="71.0" layoutX="637.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="island0" fitHeight="175.0" fitWidth="206.0" layoutX="531.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island2" fitHeight="69.0" fitWidth="71.0" layoutX="559.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island3.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="island2" fitHeight="175.0" fitWidth="206.0" layoutX="907.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island5" fitHeight="69.0" fitWidth="71.0" layoutX="441.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island3.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="island5" fitHeight="175.0" fitWidth="206.0" layoutX="638.0" layoutY="508.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island8" fitHeight="69.0" fitWidth="71.0" layoutX="95.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island3.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="island8" fitHeight="175.0" fitWidth="206.0" layoutX="46.0" layoutY="390.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island1" fitHeight="69.0" fitWidth="71.0" layoutX="441.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/islands/island2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="island7" fitHeight="69.0" fitWidth="71.0" layoutX="214.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/islands/island2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="island9" fitHeight="69.0" fitWidth="71.0" layoutX="14.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/islands/island2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="island0" fitHeight="69.0" fitWidth="71.0" layoutX="214.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island3.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="island1" fitHeight="175.0" fitWidth="206.0" layoutX="743.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island4" fitHeight="69.0" fitWidth="71.0" layoutX="559.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island2.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="island4" fitHeight="175.0" fitWidth="206.0" layoutX="838.0" layoutY="443.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/islands/island2.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="island7" fitHeight="175.0" fitWidth="206.0" layoutX="241.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/islands/island2.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="island9" fitHeight="175.0" fitWidth="206.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/islands/island2.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="motherEarth" fitHeight="65.0" fitWidth="44.0" layoutX="899.0" layoutY="429.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="motherEarth" fitHeight="33.0" fitWidth="18.0" layoutX="570.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/MotherEarth.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Text fill="#000000bc" layoutX="358.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="player(1) ">
-         <font>
-            <Font name="Helvetica" size="25.0" />
-         </font>
-      </Text>
       <Text fill="#e3cfe5bd" layoutX="1699.0" layoutY="118.0" stroke="#e3cfe5bd" strokeLineCap="ROUND" strokeWidth="0.8" text="view other's school" textAlignment="CENTER" wrappingWidth="174.59583827980828">
          <font>
             <Font name="Helvetica" size="30.0" />
          </font>
       </Text>
+      <Pane fx:id="schoolPane" layoutX="368.0" layoutY="475.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="216.0" prefWidth="609.12" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
    </children>
 </AnchorPane>

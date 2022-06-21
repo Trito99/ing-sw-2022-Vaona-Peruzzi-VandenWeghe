@@ -12,98 +12,98 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainPane" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="mainPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="1080.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/BG_2_Clouds_Blur.png" />
          </image>
       </ImageView>
-      <Pane layoutX="413.0" layoutY="298.0" prefHeight="512.0" prefWidth="1095.0" styleClass="layout" stylesheets="@../css/style.css" />
-      <TableView fx:id="lobbyList" layoutX="1007.0" layoutY="386.0" prefHeight="324.0" prefWidth="467.0" styleClass="lobby-box" stylesheets="@../css/style.css">
+      <Pane layoutX="146.0" layoutY="144.0" prefHeight="462.0" prefWidth="987.0" styleClass="layout" stylesheets="@../css/style.css" />
+      <TableView fx:id="lobbyList" layoutX="647.0" layoutY="213.0" prefHeight="362.0" prefWidth="438.0" styleClass="lobby-box" stylesheets="@../css/style.css">
         <columns>
           <TableColumn fx:id="gameId" editable="false" prefWidth="75.0540771484375" sortable="false" style="-fx-alignment: CENTER; -fx-font-family: Helvetica; -fx-background-color: #f5f5f5; -fx-border-color: #e5e4e2;" text="ID" />
           <TableColumn fx:id="difficulty" editable="false" prefWidth="117.4459228515625" sortable="false" style="-fx-alignment: CENTER; -fx-font-family: Helvetica; -fx-background-color: #f5f5f5; -fx-border-color: #e5e4e2;" text="DIFFICULTY" />
             <TableColumn fx:id="gameMode" editable="false" prefWidth="126.4730224609375" sortable="false" style="-fx-alignment: CENTER; -fx-font-family: Helvetica; -fx-background-color: #f2f3f4; -fx-border-color: #e5e4e2;" text="GAME MODE" />
-            <TableColumn fx:id="currentPlayers" editable="false" prefWidth="150.0269775390625" sortable="false" style="-fx-alignment: CENTER; -fx-font-family: Helvetica; -fx-background-color: #f5f5f5; -fx-border-color: #e5e4e2;" text="CURRENT PLAYERS" />
+            <TableColumn fx:id="currentPlayers" editable="false" prefWidth="117.60001220703123" sortable="false" style="-fx-alignment: CENTER; -fx-font-family: Helvetica; -fx-background-color: #f5f5f5; -fx-border-color: #e5e4e2;" text="CURRENT PLAYERS" />
         </columns>
       </TableView>
-      <Text fx:id="exitText" fill="WHITE" layoutX="458.0" layoutY="872.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Exit">
+      <Text fx:id="exitText" fill="WHITE" layoutX="192.0" layoutY="677.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Exit">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
-      <Text fx:id="connectText" fill="WHITE" layoutX="1421.0" layoutY="867.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Next">
+      <Text fx:id="connectText" fill="WHITE" layoutX="1042.0" layoutY="677.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Next">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
-      <Text fx:id="titleText" fill="WHITE" layoutX="864.0" layoutY="239.0" stroke="WHITE" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="1.2" text="Setup Game" textAlignment="CENTER">
+      <Text fx:id="titleText" fill="WHITE" layoutX="543.0" layoutY="96.0" stroke="WHITE" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="1.2" text="Setup Game" textAlignment="CENTER">
          <font>
             <Font name="Helvetica" size="36.0" />
          </font>
       </Text>
-      <TextField fx:id="gameIdField" layoutX="450.0" layoutY="707.0" prefHeight="51.0" prefWidth="375.0" promptText="1" style="-fx-background-radius: 6;">
+      <TextField fx:id="gameIdField" layoutX="196.0" layoutY="523.0" prefHeight="51.0" prefWidth="375.0" promptText="1" style="-fx-background-radius: 6;">
          <font>
             <Font name="Helvetica" size="24.0" />
          </font>
       </TextField>
-      <Text fx:id="gameText" fill="WHITE" layoutX="450.0" layoutY="689.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Game ID">
+      <Text fx:id="gameText" fill="WHITE" layoutX="196.0" layoutY="505.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Game ID">
          <font>
             <Font name="Helvetica" size="30.0" />
          </font>
       </Text>
-      <Text fx:id="bdayText" fill="WHITE" layoutX="450.0" layoutY="497.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Birthday">
+      <Text fx:id="bdayText" fill="WHITE" layoutX="199.0" layoutY="332.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Birthday">
          <font>
             <Font name="Helvetica" size="30.0" />
          </font>
       </Text>
-      <TextField fx:id="nicknameField" layoutX="450.0" layoutY="385.0" prefHeight="51.0" prefWidth="375.0" promptText="Guest1234" style="-fx-background-radius: 6;">
+      <TextField fx:id="nicknameField" layoutX="196.0" layoutY="213.0" prefHeight="51.0" prefWidth="375.0" promptText="Guest1234" style="-fx-background-radius: 6;">
          <font>
             <Font name="Helvetica" size="24.0" />
          </font>
       </TextField>
-      <Text fx:id="nicknameText" fill="WHITE" layoutX="449.0" layoutY="367.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Nickname">
+      <Text fx:id="nicknameText" fill="WHITE" layoutX="199.0" layoutY="190.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Nickname">
          <font>
             <Font name="Helvetica" size="30.0" />
          </font>
       </Text>
-      <TextField fx:id="ddField" alignment="CENTER" layoutX="450.0" layoutY="513.0" prefHeight="51.0" prefWidth="59.0" promptText="dd" style="-fx-background-radius: 6;">
+      <TextField fx:id="ddField" alignment="CENTER" layoutX="196.0" layoutY="349.0" prefHeight="51.0" prefWidth="59.0" promptText="dd" style="-fx-background-radius: 6;">
          <font>
             <Font name="Helvetica" size="24.0" />
          </font>
       </TextField>
-      <Text fx:id="bdayText1" fill="WHITE" layoutX="517.0" layoutY="550.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="/">
+      <Text fx:id="bdayText1" fill="WHITE" layoutX="265.0" layoutY="386.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="/">
          <font>
             <Font name="Helvetica" size="30.0" />
          </font>
       </Text>
-      <TextField fx:id="mmField" alignment="CENTER" layoutX="535.0" layoutY="513.0" prefHeight="51.0" prefWidth="70.0" promptText="mm" style="-fx-background-radius: 6;">
+      <TextField fx:id="mmField" alignment="CENTER" layoutX="288.0" layoutY="350.0" prefHeight="51.0" prefWidth="70.0" promptText="mm" style="-fx-background-radius: 6;">
          <font>
             <Font name="Helvetica" size="24.0" />
          </font>
       </TextField>
-      <Text fx:id="bdayText11" fill="WHITE" layoutX="612.0" layoutY="552.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="/">
+      <Text fx:id="bdayText11" fill="WHITE" layoutX="372.0" layoutY="386.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="/">
          <font>
             <Font name="Helvetica" size="30.0" />
          </font>
       </Text>
-      <TextField fx:id="yyyyField" alignment="CENTER" layoutX="632.0" layoutY="513.0" prefHeight="51.0" prefWidth="91.0" promptText="yyyy" style="-fx-background-radius: 6;">
+      <TextField fx:id="yyyyField" alignment="CENTER" layoutX="391.0" layoutY="350.0" prefHeight="51.0" prefWidth="91.0" promptText="yyyy" style="-fx-background-radius: 6;">
          <font>
             <Font name="Helvetica" size="24.0" />
          </font>
       </TextField>
-      <Text fx:id="lobbyText" fill="WHITE" layoutX="1012.0" layoutY="367.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Lobbys available">
+      <Text fx:id="lobbyText" fill="WHITE" layoutX="647.0" layoutY="189.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Lobbys available">
          <font>
             <Font name="Helvetica" size="30.0" />
          </font>
       </Text>
-      <Button fx:id="exitButton" layoutX="413.0" layoutY="838.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="130.0" stylesheets="@../css/style.css">
+      <Button fx:id="exitButton" layoutX="146.0" layoutY="642.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="130.0" stylesheets="@../css/style.css">
          <styleClass>
             <String fx:value="button" />
             <String fx:value="shadow-button" />
          </styleClass></Button>
-      <Button fx:id="nextButton" layoutX="1383.0" layoutY="835.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="129.0" stylesheets="@../css/style.css">
+      <Button fx:id="nextButton" layoutX="1003.0" layoutY="643.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="129.0" stylesheets="@../css/style.css">
          <styleClass>
             <String fx:value="shadow-button" />
             <String fx:value="button" />

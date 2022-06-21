@@ -8,29 +8,29 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.scene.StartGameScene">
+<AnchorPane fx:id="rootPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.scene.StartGameScene">
    <children>
-      <ImageView fx:id="bluBackground" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="bluBackground" fitHeight="720.0" fitWidth="1366.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="493.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../images/BG.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="cloudBackground" pickOnBounds="true" preserveRatio="true" y="147.0">
+      <ImageView fx:id="cloudBackground" fitHeight="666.0" fitWidth="1280.0" layoutY="-49.0" pickOnBounds="true" preserveRatio="true" y="147.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="98.0">
          <image>
             <Image url="@../images/Clouds.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="logo" fitHeight="304.0" fitWidth="1054.0" layoutX="437.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="437.0">
+      <ImageView fx:id="logo" fitHeight="150.0" fitWidth="599.0" layoutX="373.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="403.0" AnchorPane.leftAnchor="373.0" AnchorPane.rightAnchor="391.313720703125" AnchorPane.topAnchor="167.0">
          <image>
             <Image url="@../images/Logo_Eriantys.png" />
          </image>
       </ImageView>
-      <Text fx:id="startText" fill="WHITE" layoutX="933.0" layoutY="735.0" strokeType="OUTSIDE" strokeWidth="0.0" text="START" textAlignment="CENTER">
+      <Text fx:id="startText" fill="WHITE" layoutX="596.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="START" textAlignment="CENTER" AnchorPane.bottomAnchor="336.7255859375" AnchorPane.leftAnchor="596.0" AnchorPane.rightAnchor="613.443359375" AnchorPane.topAnchor="349.6744140625">
          <font>
             <Font name="Helvetica" size="25.0" />
          </font>
       </Text>
-      <Button fx:id="startButton" layoutX="872.0" layoutY="701.0" mnemonicParsing="false" opacity="0.54" prefHeight="49.0" prefWidth="200.0" stylesheets="@../css/style.css">
+      <Button fx:id="startButton" layoutX="531.0" layoutY="341.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" opacity="0.54" prefHeight="49.0" prefWidth="200.0" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="327.0" AnchorPane.leftAnchor="531.0" AnchorPane.rightAnchor="549.0" AnchorPane.topAnchor="341.0">
          <font>
             <Font name="Helvetica" size="25.0" />
          </font>
