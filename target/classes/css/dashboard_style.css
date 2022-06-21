@@ -1,0 +1,37 @@
+.pane{
+    -fx-background-radius: 6;
+    -fx-background-color: white;
+    -fx-opacity: 0.25;
+}
+
+.buttonPane{
+    -fx-background-radius: 25;
+    -fx-background-color: #ffb200;
+    -fx-opacity: 0.45;
+}
+
+.buttonSchool{
+    -fx-background-color: #ffd24d;
+    -fx-opacity: 1;
+    -fx-background-radius: 25;
+}
+
+.separator *.line{
+    -fx-background-color: #ada79f;
+    -fx-border-color: #ada79f;
+    -fx-border-style: solid;
+    -fx-border-radius: 45;
+    -fx-border-width: 1px;
+}
+
+
+.button:pressed {
+    -fx-effect: dropshadow(gaussian, floralwhite, 20, 0.1, 0, 3);
+    -fx-background-radius: 25;
+}
+
+.button:hover {
+    -fx-border-style: solid;
+    -fx-opacity: 0.15;
+    -fx-background-radius: 25;
+}
