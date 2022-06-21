@@ -45,7 +45,7 @@
          <children>
             <ImageView fitHeight="278.0" fitWidth="187.0" layoutX="15.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/assistantDeck/assistantCard_back_3.png" />
+                  <Image url="@../images/assistantCards/assistant1.png" />
                </image>
             </ImageView>
          </children>
