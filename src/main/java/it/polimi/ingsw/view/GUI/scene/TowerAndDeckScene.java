@@ -4,7 +4,6 @@ import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.observer.ObservableView;
 import it.polimi.ingsw.observer.ObserverView;
-import it.polimi.ingsw.view.GUI.GuiManager;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -125,7 +124,7 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
         startButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickStart);
         exitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickExit);
         initializeButtons();
-        intializeTowerColorsAndAssistantDeck();
+        initializeTowerColorsAndAssistantDeck();
         whiteTower.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickWhite);
         blackTower.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickBlack);
         grayTower.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickGrey);
@@ -156,7 +155,7 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
         this.assistantDeckNames = assistantDeckNames;
     }
 
-    private void intializeTowerColorsAndAssistantDeck(){
+    private void initializeTowerColorsAndAssistantDeck(){
         initializeButtons();
         for(TColor tcolor : towerColors){
             switch(tcolor){

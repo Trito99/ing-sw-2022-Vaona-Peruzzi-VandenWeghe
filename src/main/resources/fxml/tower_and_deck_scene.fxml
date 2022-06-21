@@ -33,12 +33,12 @@
             <Font name="Helvetica" size="36.0" />
          </font>
       </Text>
-      <Text fx:id="nicknameText" fill="WHITE" layoutX="862.0" layoutY="351.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Tower color">
+      <Text fx:id="nicknameText" fill="WHITE" layoutX="738.0" layoutY="349.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Choose the color of your Tower">
          <font>
             <Font name="Helvetica" size="30.0" />
          </font>
       </Text>
-      <Text fx:id="nicknameText1" fill="WHITE" layoutX="845.0" layoutY="506.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Deck assistant">
+      <Text fx:id="nicknameText1" fill="WHITE" layoutX="778.0" layoutY="502.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Select your assistant deck">
          <font>
             <Font name="Helvetica" size="30.0" />
          </font>
