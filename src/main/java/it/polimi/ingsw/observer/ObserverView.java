@@ -46,7 +46,7 @@ public interface ObserverView {
     void chooseId(int id, boolean choice, int index, boolean none);
 
 
-    void chooseMotherEarthSteps(int steps, int maxSteps);
+    void chooseMotherEarthSteps(int steps, int maxSteps, String string);
 
 
     void chooseCharacterCard(String characterNickname, boolean choice);

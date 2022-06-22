@@ -85,8 +85,8 @@ public class ClientMessanger implements ObserverView, Observer {
         client.sendMessage(new IdChosen(nickname, id, choice, index, none));
     }
 
-    public void chooseMotherEarthSteps(int steps, int maxSteps) {
-        client.sendMessage(new MotherEarthStepsChosen(nickname, steps, maxSteps));
+    public void chooseMotherEarthSteps(int steps, int maxSteps, String string) {
+        client.sendMessage(new MotherEarthStepsChosen(nickname, steps, maxSteps, string));
     }
 
 

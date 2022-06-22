@@ -417,8 +417,12 @@ public class CLI extends ObservableView implements View {
                 out.print("\nChoose how many steps do you want to move MotherEarth: (max " + maxSteps + ")\n");
                 printIslandCards(table, difficulty);
 
-                int steps = Integer.parseInt(readInput());
-                notifyObserver(obs -> obs.chooseMotherEarthSteps(steps,maxSteps));
+                String stepsString = readInput().toUpperCase(Locale.ROOT);
+                if(stepsString.equals("CHARACTER CARD"))
+                    notifyObserver(obs -> obs.chooseMotherEarthSteps(-1,maxSteps,stepsString));
+                else{
+                    notifyObserver(obs -> obs.chooseMotherEarthSteps(Integer.parseInt(stepsString),maxSteps,null));
+                }
             } catch (Exception e) {
                 out.println(WRONG_INPUT);
                 ye=true;

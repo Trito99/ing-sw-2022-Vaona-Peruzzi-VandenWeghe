@@ -391,22 +391,10 @@ public class GameController {
                                 virtualView.askCharacterCardToPlay(true, -1, null);
                             else{
                                 virtualView.showMessage("\n⚠️You don't have enough coins for any card ⚠️");
-                                if(movedStudents!=-1)
-                                    setActionState(ActionState.STUDENT);
-                                else {
-                                    setActionState(ActionState.MOTHERNATURE);
-                                    movedStudents++;
-                                }
                                 setActionState(savedActionState);
                                 action();
                             }
                         }else if (CardSelected.getCardNickname().equals("NO")){
-                            if(movedStudents!=-1)
-                                setActionState(ActionState.STUDENT);
-                            else {
-                                setActionState(ActionState.MOTHERNATURE);
-                                movedStudents++;
-                            }
                             setActionState(savedActionState);
                             action();
                         }else{
@@ -423,12 +411,7 @@ public class GameController {
 
                         if (CardSelected.getCardNickname().equals("NONE")){
                             changeIdea = true;
-                            if(movedStudents!=-1)
-                                setActionState(ActionState.STUDENT);
-                            else {
-                                setActionState(ActionState.MOTHERNATURE);
-                                movedStudents++;
-                            }
+                            setActionState(savedActionState);
                             action();
                         }
                         else if (CardSelected.getCardNickname().equals("BARD")){
@@ -499,12 +482,6 @@ public class GameController {
                                     gameSession.playCharacterCard(characterCard.getCardEffect(), CardSelected.getNickname(), -1,-1 , -1, null);
                                     characterCard.setCoinOnCard(true);
                                     cardPlayed=true;
-                                    if(movedStudents!=-1)
-                                        setActionState(ActionState.STUDENT);
-                                    else {
-                                        setActionState(ActionState.MOTHERNATURE);
-                                        movedStudents++;
-                                    }
                                     setActionState(savedActionState);
                                     action();
                                     break;
@@ -546,12 +523,7 @@ public class GameController {
                             } else {
                                 gameSession.playCharacterCard(characterCard.getCardEffect(),Choice.getNickname(),studentId,Choice.getId(), -1, null);
                                 cardPlayed=true;
-                                if(movedStudents!=-1)
-                                    setActionState(ActionState.STUDENT);
-                                else {
-                                    setActionState(ActionState.MOTHERNATURE);
-                                    movedStudents++;
-                                }
+                                setActionState(savedActionState);
                                 card = false;
                             }
                             allStudentsMoved();
@@ -643,12 +615,7 @@ public class GameController {
                                     acrobatIndex = 0;
                                     card = false;
                                     cardPlayed=true;
-                                    if(movedStudents!=-1)
-                                        setActionState(ActionState.STUDENT);
-                                    else {
-                                        setActionState(ActionState.MOTHERNATURE);
-                                        movedStudents++;
-                                    }
+                                    setActionState(savedActionState);
                                     action();
                                 }
                             }
@@ -668,12 +635,7 @@ public class GameController {
                                     if (Choice.getId() == -2 && Choice.getNone()) {
                                         acrobatIndex = 0;
                                         cardPlayed=true;
-                                        if(movedStudents!=-1)
-                                            setActionState(ActionState.STUDENT);
-                                        else {
-                                            setActionState(ActionState.MOTHERNATURE);
-                                            movedStudents++;
-                                        }
+                                        setActionState(savedActionState);
                                         action();
                                     }else{
                                         virtualView.showMessage("\n⚠️Student selected is not available ⚠️");
@@ -697,12 +659,7 @@ public class GameController {
                                 virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore(), gameSession.getGameMode(), gameSession.getPlayer(getActivePlayer()).getTeamMate());
                                 card = false;
                                 cardPlayed=true;
-                                if(movedStudents!=-1)
-                                    setActionState(ActionState.STUDENT);
-                                else {
-                                    setActionState(ActionState.MOTHERNATURE);
-                                    movedStudents++;
-                                }
+                                setActionState(savedActionState);
                                 action();
 
                             }else {
@@ -728,12 +685,7 @@ public class GameController {
                         again=false;
                         gameSession.playCharacterCard(characterCard.getCardEffect(), getActivePlayer(), -1,-1,-1, colorChosen);
                         cardPlayed=true;
-                        if(movedStudents!=-1)
-                            setActionState(ActionState.STUDENT);
-                        else {
-                            setActionState(ActionState.MOTHERNATURE);
-                            movedStudents++;
-                        }
+                        setActionState(savedActionState);
                         action();
                     }
                     else if(exists && characterCard.getCardEffect().equals(CardEffect.JUNKDEALER)){
@@ -775,35 +727,37 @@ public class GameController {
                 }
                 if(receivedMessage.getMessageType() == MessageType.STEP_MOTHER_EARTH_CHOSEN){
                     MotherEarthStepsChosen step = (MotherEarthStepsChosen) receivedMessage;
+                    if(step.getString()!=null) {
+                        if (step.getString().equals("CHARACTER CARD")) {
+                            savedActionState = getActionState();
+                            setActionState(ActionState.CHARACTER);
+                            action();
+                        }
+                    }
+                    else{
+                        if (step.getSteps() > step.getMaxSteps()) {
+                            virtualView.showMessage("\n⚠️Steps selected more than maximum available ⚠️");
+                            again = true;
+                            if (characterCard != null && characterCard.getCardEffect().isBearerPlayed()) {
+                                allVirtualView.get(getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(getActivePlayer()).getTrash().getStepMotherEarth() + 2, gameSession.getTable(), gameSession.getDifficulty());
+                            } else
+                                allVirtualView.get(getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(getActivePlayer()).getTrash().getStepMotherEarth(), gameSession.getTable(), gameSession.getDifficulty());
+                        } else {
+                            again = false;
+                            int steps = step.getSteps();
+                            gameSession.getTable().moveMotherEarth(steps);
+                            if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE) && characterCard != null) {
+                                if (!characterCard.getCardEffect().equals(CardEffect.HERALD))
+                                    gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), characterCard.getCardEffect(), gameSession.getPlayer(getActivePlayer()), gameSession.getGameMode(), gameSession.getTeams());
+                                else
+                                    gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE, gameSession.getPlayer(getActivePlayer()), gameSession.getGameMode(), gameSession.getTeams());
 
-                    /*if(step.equals("CHARACTER CARD")){
-                        savedActionState = getActionState();
-                        setActionState(ActionState.CHARACTER);
-                        action();
-                    } */
-
-                    if(step.getSteps()>step.getMaxSteps()) {
-                        virtualView.showMessage("\n⚠️Steps selected more than maximum available ⚠️");
-                        again=true;
-                        if(characterCard!=null && characterCard.getCardEffect().isBearerPlayed()){
-                            allVirtualView.get(getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(getActivePlayer()).getTrash().getStepMotherEarth()+2, gameSession.getTable(), gameSession.getDifficulty());
-                        }else
-                            allVirtualView.get(getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(getActivePlayer()).getTrash().getStepMotherEarth(), gameSession.getTable(), gameSession.getDifficulty());
-                    }else{
-                        again=false;
-                        int steps = step.getSteps();
-                        gameSession.getTable().moveMotherEarth(steps);
-                        if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE) && characterCard!=null) {
-                            if(!characterCard.getCardEffect().equals(CardEffect.HERALD))
-                                gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), characterCard.getCardEffect(), gameSession.getPlayer(getActivePlayer()),gameSession.getGameMode(), gameSession.getTeams());
-                            else
-                                gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE, gameSession.getPlayer(getActivePlayer()),gameSession.getGameMode(), gameSession.getTeams());
-
-                        }else
-                            gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE, gameSession.getPlayer(getActivePlayer()),gameSession.getGameMode(), gameSession.getTeams());
-                        gameSession.getTable().joinIsland(gameSession.getTable().getListOfIsland());
-                        setActionState(ActionState.CLOUDCARD);
-                        action();
+                            } else
+                                gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE, gameSession.getPlayer(getActivePlayer()), gameSession.getGameMode(), gameSession.getTeams());
+                            gameSession.getTable().joinIsland(gameSession.getTable().getListOfIsland());
+                            setActionState(ActionState.CLOUDCARD);
+                            action();
+                        }
                     }
                 }
                 if(receivedMessage.getMessageType() == MessageType.CLOUD_CHOSEN){
