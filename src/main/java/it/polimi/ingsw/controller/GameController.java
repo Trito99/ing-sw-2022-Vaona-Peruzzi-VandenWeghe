@@ -22,8 +22,6 @@ import java.security.InvalidParameterException;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
-import static java.lang.System.out;
-
 public class GameController {
     private Game gameSession;
     private int maxPlayers, roundIndex, studentId, movedStudents=0, acrobatIndex=0, round=1;
@@ -34,6 +32,7 @@ public class GameController {
     private ActionState actionState;
     private CharacterCard characterCard;
 
+    private ActionState savedActionState;
 
 
     public GameController(){
@@ -303,6 +302,13 @@ public class GameController {
                             studentColor = student.getsColour();
                         }
                     }
+
+                    if(Choice.getPlace().equals("CHARACTER CARD")){
+                        savedActionState = getActionState();
+                        setActionState(ActionState.CHARACTER);
+                        action();
+                    }
+
                     if(present){
                         if (Choice.getPlace().equals("SCHOOL") || (Choice.getPlace().equals(("ISLAND")))) {
                             again = false;
@@ -354,7 +360,7 @@ public class GameController {
                             virtualView.showMessage("ACTION PHASE");
                             virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().getEntry());
                         }
-                    }else{
+                    }else if(!present && !Choice.getPlace().equals("CHARACTER CARD")){
                         virtualView.showMessage("\n⚠️Student selected is not available ⚠️");
                         again = true;
                         virtualView.showMessage("ACTION PHASE");
@@ -385,6 +391,7 @@ public class GameController {
                                     setActionState(ActionState.MOTHERNATURE);
                                     movedStudents++;
                                 }
+                                setActionState(savedActionState);
                                 action();
                             }
                         }else if (CardSelected.getCardNickname().equals("NO")){
@@ -394,6 +401,7 @@ public class GameController {
                                 setActionState(ActionState.MOTHERNATURE);
                                 movedStudents++;
                             }
+                            setActionState(savedActionState);
                             action();
                         }else{
                             virtualView.showMessage("\n⚠️Wrong input  ⚠️");
@@ -491,6 +499,7 @@ public class GameController {
                                         setActionState(ActionState.MOTHERNATURE);
                                         movedStudents++;
                                     }
+                                    setActionState(savedActionState);
                                     action();
                                     break;
 
@@ -523,7 +532,6 @@ public class GameController {
                                 break;
                             }
                         }
-
                         if (present) {
                             again = false;
                             if(!card) {
@@ -761,6 +769,13 @@ public class GameController {
                 }
                 if(receivedMessage.getMessageType() == MessageType.STEP_MOTHER_EARTH_CHOSEN){
                     MotherEarthStepsChosen step = (MotherEarthStepsChosen) receivedMessage;
+
+                    /*if(step.equals("CHARACTER CARD")){
+                        savedActionState = getActionState();
+                        setActionState(ActionState.CHARACTER);
+                        action();
+                    } */
+
                     if(step.getSteps()>step.getMaxSteps()) {
                         virtualView.showMessage("\n⚠️Steps selected more than maximum available ⚠️");
                         again=true;
@@ -794,6 +809,11 @@ public class GameController {
                                 present = true;
                         }
                     }
+                    /*if(Cloud.getId().equals("CHARACTER CARD")){
+                        savedMessage = receivedMessage;
+                        setActionState(ActionState.CHARACTER);
+                        action();
+                    } */
                     if(present) {
                         again=false;
                         gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().moveStudentFromCloudToEntry(gameSession.getTable().getCloudNumber().get(Cloud.getId() - 1));
@@ -823,17 +843,9 @@ public class GameController {
      */
     private void allStudentsMoved() {
         if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces()) {
-            if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE) && !cardPlayed) {
-                movedStudents = -1;
-                setActionState(ActionState.CHARACTER);
-            }
-            else {
-                movedStudents = 0;
-                setActionState(ActionState.MOTHERNATURE);
-            }
+            movedStudents = 0;
+            setActionState(ActionState.MOTHERNATURE);
         }
-        if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE) && !cardPlayed)
-            setActionState(ActionState.CHARACTER);
         action();
     }
 
@@ -874,7 +886,7 @@ public class GameController {
                 turnController.setPlayingPlayer(turnController.getNewPlayerOrderByName().get(0));
                 this.setGameState(GameState.ACTION);
                 if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE))
-                    this.setActionState(ActionState.CHARACTER);
+                    this.setActionState(ActionState.STUDENT);
                 else
                     setActionState(ActionState.STUDENT);
                 showGame();
@@ -975,10 +987,9 @@ public class GameController {
                 gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(turnController.getActivePlayer()), characterCard.getCardEffect()); //rimette a false
                 characterCard.getCardEffect().setBearerPlayed(false);
             }
-            this.setActionState(ActionState.CHARACTER);
         }
-        else
-            setActionState(ActionState.STUDENT);
+
+        setActionState(ActionState.STUDENT);
         showGame();
         action();
     }

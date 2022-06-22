@@ -455,11 +455,14 @@ public class CLI extends ObservableView implements View {
                 out.print("\nWhich student of your entry do you want to move? (id)");
                 printEntry(entry);
                 out.print("\n");
-
-                int id = Integer.parseInt(readInput());
-                out.print("\nWhere do you want to move the student? (Island,School)\n");
-                String place = readInput().toUpperCase(Locale.ROOT);
-                notifyObserver(obs -> obs.choosePlaceAndStudentForMove(place, id));
+                String IDstring = readInput().toUpperCase(Locale.ROOT);
+                    if(IDstring.equals("CHARACTER CARD"))
+                        notifyObserver(obs -> obs.choosePlaceAndStudentForMove(IDstring, -1));
+                   else{
+                        out.print("\nWhere do you want to move the student? (Island,School)\n");
+                        String place = readInput().toUpperCase(Locale.ROOT);
+                        notifyObserver(obs -> obs.choosePlaceAndStudentForMove(place, Integer.parseInt(IDstring)));
+                   }
             } catch (Exception e) {
                 ye=true;
                 out.println(WRONG_INPUT);
