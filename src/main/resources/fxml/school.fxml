@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="216.0" prefWidth="609.12" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
-   <ImageView fx:id="schoolBackground" fitHeight="216.0" fitWidth="609.12" layoutX="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="-643.0" AnchorPane.topAnchor="0.0">
+   <ImageView fx:id="schoolBackground" fitHeight="216.0" fitWidth="840.0" layoutX="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-225.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="-240.0" AnchorPane.topAnchor="0.0">
       <Image url="@../images/school.png" />
       <viewport>
          <Rectangle2D />
@@ -341,7 +341,7 @@
          </ImageView>
       </children>
    </Pane>
-   <Pane layoutX="438.0" layoutY="10.0" prefHeight="190.0" prefWidth="44.0">
+   <Pane fx:id="profPane" layoutX="438.0" layoutY="10.0" prefHeight="190.0" prefWidth="44.0">
       <children>
          <ImageView fx:id="pink_prof" fitHeight="20.0" fitWidth="31.0" layoutX="11.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
             <image>

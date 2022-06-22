@@ -157,6 +157,7 @@
             <Font size="23.0" />
          </font>
       </Text>
-      <Pane fx:id="schoolPane" layoutX="368.0" layoutY="475.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="216.0" prefWidth="609.12" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="schoolPane1" layoutX="351.0" layoutY="457.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="254.0" prefWidth="646.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="schoolPane" layoutX="368.0" layoutY="475.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="216.0" prefWidth="609.12" style="-fx-background-color: transparent;" />
    </children>
 </AnchorPane>
