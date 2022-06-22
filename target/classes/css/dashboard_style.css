@@ -1,5 +1,5 @@
 .pane{
-    -fx-background-radius: 25;
+    -fx-background-radius: 20;
     -fx-background-color: #e3cfe5;
     -fx-opacity: 0.43;
 }
@@ -7,7 +7,7 @@
 .buttonLayout{
     -fx-background-color: #e3cfe5;
     -fx-opacity: 0.83;
-    -fx-background-radius: 25;
+    -fx-background-radius: 20;
     -fx-border-color: #ffffff;
     -fx-border-width: 3px;
     -fx-border-radius: 25;
@@ -17,11 +17,11 @@
 .buttonSchool{
     -fx-background-color: #ffd24d;
     -fx-opacity: 1;
-    -fx-background-radius: 25;
+    -fx-background-radius: 20;
 }
 
 buttonTrans{
-    -fx-border-radius: 25;
+    -fx-border-radius: 20;
     -fx-background-color: transparent;
     -fx-background-radius: 25;
 }
@@ -43,4 +43,10 @@ buttonTrans{
     -fx-border-style: solid;
     -fx-opacity: 0.15;
     -fx-background-radius: 25;
+}
+
+.shadowPane{
+    -fx-background-radius: 20;
+    -fx-background-color: black;
+    -fx-opacity: 0.45;
 }
