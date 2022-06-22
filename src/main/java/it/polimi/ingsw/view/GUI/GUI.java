@@ -18,6 +18,7 @@ import it.polimi.ingsw.view.GUI.scene.*;
 import it.polimi.ingsw.view.View;
 import javafx.application.Platform;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Map;
@@ -27,6 +28,10 @@ import static java.lang.System.out;
 public class GUI extends ObservableView implements View {
     private static ArrayList<String> playerList = new ArrayList<>();
 
+    private ArrayList<SchoolController> schools = new ArrayList<>();
+
+    private Table table;
+    private boolean gameStarted = false;
 
     @Override
     public void askConnect() {
@@ -97,13 +102,31 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void showPersonalSchool(School school, String nickname, AssistantCard trash, Difficulty difficulty, int coins, GameMode gameMode, String teamMate) {
-        SchoolController schoolController = new SchoolController(school);
-        Platform.runLater(() -> GuiManager.changeRootPane(schoolController, "/fxml/school") );
+            SchoolController schoolController = new SchoolController(school);
+            schools.add(schoolController);
+            if(nickname.equals("Your "))
+                showTable(table,difficulty);
+
     }
 
     @Override
     public void showTable(Table table, Difficulty difficulty) {
-        Platform.runLater(() -> GuiManager.changeRootMainScene(observers) );
+        this.table = table;
+        if (!gameStarted) {
+            Platform.runLater(() -> GuiManager.changeRootMainScene(observers));
+            Platform.runLater(() -> GuiManager.getMainScene());
+            gameStarted = true;
+        }else{
+            Platform.runLater(() -> {
+                try {
+                    GuiManager.getMainScene().updateSchool(schools.get(schools.size()-1));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            Platform.runLater(() -> GuiManager.changeRootMainScene(observers));
+        }
+        schools.clear();
     }
 
     @Override
