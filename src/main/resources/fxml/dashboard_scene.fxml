@@ -25,11 +25,7 @@
             <BoxBlur />
          </effect>
       </ImageView>
-      <Pane fx:id="sxPane" layoutX="21.0" layoutY="20.0" prefHeight="672.0" prefWidth="166.0" styleClass="pane" stylesheets="@../css/dashboard_style.css">
-         <effect>
-            <BoxBlur />
-         </effect>
-      </Pane>
+      <Pane fx:id="sxPane" layoutX="14.0" layoutY="17.0" prefHeight="672.0" prefWidth="173.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
       <Pane fx:id="schoolViewPane" layoutX="318.0" layoutY="824.0" prefHeight="216.0" prefWidth="611.0" styleClass="pane">
          <children>
             <ImageView fx:id="school" fitHeight="220.0" fitWidth="642.0" pickOnBounds="true" preserveRatio="true">
@@ -40,16 +36,16 @@
          </children>
       </Pane>
       <VBox fx:id="characterCardLayout" layoutX="1091.0" layoutY="197.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="160.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="trashPane" layoutX="42.0" layoutY="453.0" prefHeight="172.0" prefWidth="115.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+      <Pane fx:id="trashPane" layoutX="37.0" layoutY="210.0" prefHeight="189.0" prefWidth="132.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <children>
-            <ImageView fitHeight="128.0" fitWidth="103.0" layoutX="15.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="152.0" fitWidth="116.0" layoutX="14.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/assistantCards/assistant1.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="coinPane" layoutX="64.0" layoutY="76.0" prefHeight="71.0" prefWidth="71.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+      <Pane fx:id="coinPane" layoutX="64.0" layoutY="66.0" prefHeight="71.0" prefWidth="71.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <children>
             <ImageView fx:id="coinImage" fitHeight="71.0" fitWidth="71.0" opacity="0.57" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -63,7 +59,7 @@
             </Text>
          </children>
       </Pane>
-      <Button fx:id="deckButton" layoutX="42.0" layoutY="197.0" mnemonicParsing="false" prefHeight="149.0" prefWidth="115.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+      <Button fx:id="deckButton" layoutX="34.0" layoutY="509.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="134.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <graphic>
             <ImageView fx:id="deckLogo" fitHeight="101.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -72,17 +68,13 @@
             </ImageView>
          </graphic>
       </Button>
-      <Pane fx:id="turnInfoPane" layoutX="219.0" layoutY="24.0" prefHeight="52.0" prefWidth="262.0" styleClass="pane" stylesheets="@../css/dashboard_style.css">
-         <effect>
-            <BoxBlur />
-         </effect>
-      </Pane>
-      <Text fill="#000000bc" layoutX="248.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="player(1) ">
+      <Pane fx:id="turnInfoPane" layoutX="202.0" layoutY="24.0" prefHeight="53.0" prefWidth="193.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Text fill="#000000bc" layoutX="231.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="player(1) ">
          <font>
             <Font name="Helvetica" size="25.0" />
          </font>
       </Text>
-      <Button fx:id="otherSchoolButton" layoutX="1091.0" layoutY="37.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="160.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Button fx:id="otherSchoolButton" layoutX="1091.0" layoutY="37.0" mnemonicParsing="false" prefHeight="136.0" prefWidth="160.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
       <Pane fx:id="islandPane" layoutX="341.0" layoutY="33.0" prefHeight="401.0" prefWidth="722.0">
          <children>
             <ImageView fx:id="island10" fitHeight="69.0" fitWidth="71.0" layoutX="95.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
@@ -152,11 +144,11 @@
             </ImageView>
          </children>
       </Pane>
-      <Text fill="#e3cfe5bd" layoutX="1097.0" layoutY="95.0" stroke="#e3cfe5bd" strokeLineCap="ROUND" strokeWidth="0.8" text="view other's school" textAlignment="CENTER" wrappingWidth="148.99586269387078">
+      <Text fill="#e3cfe5bd" layoutX="1097.0" layoutY="100.0" stroke="#e3cfe5bd" strokeLineCap="ROUND" strokeWidth="0.8" text="view other's school" textAlignment="CENTER" wrappingWidth="148.99586269387078">
          <font>
             <Font size="23.0" />
          </font>
       </Text>
-      <Pane fx:id="schoolPane" layoutX="368.0" layoutY="475.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="216.0" prefWidth="609.12" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="schoolPane" layoutX="349.0" layoutY="475.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="216.0" prefWidth="609.12" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
    </children>
 </AnchorPane>
