@@ -1,18 +1,28 @@
 .pane{
-    -fx-background-radius: 6;
-    -fx-background-color: white;
-    -fx-opacity: 0.25;
+    -fx-background-radius: 25;
+    -fx-background-color: #e3cfe5;
+    -fx-opacity: 0.43;
 }
 
-.buttonPane{
+.buttonLayout{
+    -fx-background-color: #e3cfe5;
+    -fx-opacity: 0.83;
     -fx-background-radius: 25;
-    -fx-background-color: #ffb200;
-    -fx-opacity: 0.45;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 3px;
+    -fx-border-radius: 25;
+    -fx-border-style: solid;
 }
 
 .buttonSchool{
     -fx-background-color: #ffd24d;
     -fx-opacity: 1;
+    -fx-background-radius: 25;
+}
+
+buttonTrans{
+    -fx-border-radius: 25;
+    -fx-background-color: transparent;
     -fx-background-radius: 25;
 }
 
@@ -23,7 +33,6 @@
     -fx-border-radius: 45;
     -fx-border-width: 1px;
 }
-
 
 .button:pressed {
     -fx-effect: dropshadow(gaussian, floralwhite, 20, 0.1, 0, 3);
