@@ -2,17 +2,18 @@ package it.polimi.ingsw.view.GUI.scene;
 
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
+import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.observer.ObservableView;
-import it.polimi.ingsw.view.GUI.CardsController.CharacterCardController;
 import it.polimi.ingsw.view.GUI.GuiManager;
 import it.polimi.ingsw.view.GUI.StartGUI;
+import it.polimi.ingsw.view.View;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -20,10 +21,15 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class DashboardScene extends ObservableView implements GenericScene {
 
-    private SchoolController schoolController;
+    private Map<String,SchoolController> schoolControllers;
+
+    private GameMode gameMode;
+    private Difficulty difficulty;
+
     @FXML
     private VBox characterCardLayout;
 
@@ -109,8 +115,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private Pane turnInfoPane;
 
 
-    public void updateSchool(SchoolController controller) throws IOException {
-
+    public void updatePersonalSchool(SchoolController controller) throws IOException {
         FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource("/fxml/school.fxml"));
         loader.setController(controller);
         AnchorPane personalSchool = loader.load();
@@ -118,6 +123,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     }
 
     public void initializeDifficulty(Difficulty difficulty, int coinsOnTable){
+        this.difficulty = difficulty;
         if(difficulty.equals(Difficulty.STANDARDMODE)){
             coinPane.setVisible(false);
             coinPane.setDisable(true);
@@ -127,8 +133,16 @@ public class DashboardScene extends ObservableView implements GenericScene {
             coinText.setText(String.valueOf(coinsOnTable));
         }
     }
-    public void initialize(){
 
+    @FXML
+    public void initialize(){
+        otherSchoolButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            try {
+                otherSchoolClicked(event);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         /**
         ArrayList<CharacterCard> characterCardsPlaying = new ArrayList<>((characterCardsPlaying()));
@@ -148,6 +162,40 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }*/
     }
 
+    private void otherSchoolClicked(Event event) throws IOException {
+        otherSchoolButton.setDisable(true);
+
+        switch(gameMode){
+            case TWOPLAYERS:
+                ViewOtherSchoolScene1 scene1 = new ViewOtherSchoolScene1();
+                scene1.updatePersonalSchool(schoolControllers);
+                GuiManager.setScene("/fxml/view_other_school_1_scene",scene1);
+                break;
+            case THREEPLAYERS:
+                ViewOtherSchoolScene2 scene2 = new ViewOtherSchoolScene2();
+                //scene2.updatePersonalSchool(schoolControllers);
+                //GuiManager.setScene("/fxml/view_other_school_2_scene");
+                break;
+            case COOP:
+                ViewOtherSchoolScene3 scene3 = new ViewOtherSchoolScene3();
+                scene3.updatePersonalSchool(schoolControllers);
+                GuiManager.setScene("/fxml/view_other_school_3_scene",scene3);
+                break;
+        }
+    }
+
+    public void updateOtherSchool(SchoolController controller, GameMode gameMode, String nickname){
+        this.gameMode = gameMode;
+        if(schoolControllers.containsKey(nickname)){
+            schoolControllers.remove(nickname);
+            schoolControllers.put(nickname,controller);
+        }else{
+            schoolControllers.put(nickname,controller);
+        }
+
+    }
+
+
     /** esempio inizializzazione carta personaggio -> da sistemare con */
     private List<CharacterCard> characterCardsPlaying(){
         List<CharacterCard> cards = new ArrayList<>();
@@ -158,7 +206,4 @@ public class DashboardScene extends ObservableView implements GenericScene {
         return cards;
     }
 
-    public void setSchoolController(SchoolController schoolController) {
-        this.schoolController = schoolController;
-    }
 }

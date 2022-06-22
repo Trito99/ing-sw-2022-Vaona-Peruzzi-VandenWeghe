@@ -23,8 +23,6 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Map;
 
-import static java.lang.System.out;
-
 public class GUI extends ObservableView implements View {
     private static ArrayList<String> playerList = new ArrayList<>();
 
@@ -106,13 +104,15 @@ public class GUI extends ObservableView implements View {
         if(nickname.equals("Your "))
             Platform.runLater(() -> {
                 try {
-                    GuiManager.getMainScene().updateSchool(schoolController);
+                    GuiManager.getMainScene().updatePersonalSchool(schoolController);
                     //Platform.runLater(() -> GuiManager.getMainScene().initializeDifficulty(difficulty));
                     Platform.runLater(() -> GuiManager.changeRootMainScene(observers));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             });
+        else
+            GuiManager.getMainScene().updateOtherSchool(schoolController, gameMode,nickname);
 
 
     }
