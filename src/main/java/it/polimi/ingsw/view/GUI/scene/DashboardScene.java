@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -93,6 +94,9 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private Pane schoolPane;
 
     @FXML
+    private Pane schoolPane1;
+
+    @FXML
     private Pane schoolViewPane;
 
     @FXML
@@ -109,7 +113,8 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
         FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource("/fxml/school.fxml"));
         loader.setController(controller);
-        schoolPane = loader.load();
+        AnchorPane personalSchool = loader.load();
+        schoolPane.getChildren().setAll(personalSchool);
     }
 
     public void initializeDifficulty(Difficulty difficulty, int coinsOnTable){

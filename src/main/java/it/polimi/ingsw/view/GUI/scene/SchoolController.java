@@ -1,13 +1,18 @@
 package it.polimi.ingsw.view.GUI.scene;
 
+import it.polimi.ingsw.model.school.Prof;
 import it.polimi.ingsw.model.school.School;
+import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.observer.ObservableView;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
+import javax.imageio.ImageIO;
+import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -159,10 +164,16 @@ public class SchoolController extends ObservableView implements GenericScene {
     private Pane pink_table;
 
     @FXML
+    private Pane profPane;
+
+    @FXML
     private ImageView red_1;
 
     @FXML
     private ImageView red_10;
+
+    @FXML
+    private ImageView red_101;
 
     @FXML
     private ImageView red_2;
@@ -193,6 +204,9 @@ public class SchoolController extends ObservableView implements GenericScene {
 
     @FXML
     private Pane red_table;
+
+    @FXML
+    private ImageView schoolBackground;
 
     @FXML
     private Pane towerZone;
@@ -244,6 +258,13 @@ public class SchoolController extends ObservableView implements GenericScene {
     }
 
     private void updateSchool(){
+        updateEntry();
+        updateHall();
+        updateProf();
+        updateTowerZone();
+    }
+
+    private void updateEntry(){
         for(Student student : school.getEntry()){
             entry.getChildren().get(school.getEntry().indexOf(student)).setVisible(true);
             entry.getChildren().get(school.getEntry().indexOf(student)).setDisable(false);
@@ -266,12 +287,97 @@ public class SchoolController extends ObservableView implements GenericScene {
             }
             entryMap.put((ImageView) entry.getChildren().get(school.getEntry().indexOf(student)),student.getIdStudent());
         }
+    }
+
+    private void updateHall() {
+        for(Student student : school.getGTable()){
+            green_table.getChildren().get(school.getGTable().indexOf(student)).setVisible(true);
+            green_table.getChildren().get(school.getGTable().indexOf(student)).setDisable(false);
+            //entryMap.put((ImageView) entry.getChildren().get(school.getEntry().indexOf(student)),student.getIdStudent());
+        }
+        for(Student student : school.getRTable()){
+            red_table.getChildren().get(school.getRTable().indexOf(student)).setVisible(true);
+            red_table.getChildren().get(school.getRTable().indexOf(student)).setDisable(false);
+            //entryMap.put((ImageView) entry.getChildren().get(school.getEntry().indexOf(student)),student.getIdStudent());
+        }
+        for(Student student : school.getYTable()){
+            yellow_table.getChildren().get(school.getYTable().indexOf(student)).setVisible(true);
+            yellow_table.getChildren().get(school.getYTable().indexOf(student)).setDisable(false);
+            //entryMap.put((ImageView) entry.getChildren().get(school.getEntry().indexOf(student)),student.getIdStudent());
+        }
+        for(Student student : school.getPTable()){
+            pink_table.getChildren().get(school.getPTable().indexOf(student)).setVisible(true);
+            pink_table.getChildren().get(school.getPTable().indexOf(student)).setDisable(false);
+            //entryMap.put((ImageView) entry.getChildren().get(school.getEntry().indexOf(student)),student.getIdStudent());
+        }
+        for(Student student : school.getBTable()){
+            blue_table.getChildren().get(school.getBTable().indexOf(student)).setVisible(true);
+            blue_table.getChildren().get(school.getBTable().indexOf(student)).setDisable(false);
+            //entryMap.put((ImageView) entry.getChildren().get(school.getEntry().indexOf(student)),student.getIdStudent());
+        }
 
     }
+
+    private void updateProf() {
+        for (Prof prof : school.getProfOfPlayer()){
+            if(prof.getIsInHall()){
+                switch(prof.getSColour()){
+                    case GREEN:
+                        green_prof.setVisible(true);
+                        break;
+                    case RED:
+                        red_prof.setVisible(true);
+                        break;
+                    case YELLOW:
+                        yellow_prof.setVisible(true);
+                        break;
+                    case PINK:
+                        pink_prof.setVisible(true);
+                        break;
+                    case BLUE:
+                        blue_prof.setVisible(true);
+                        break;
+                }
+            }
+        }
+    }
+
+    private void updateTowerZone() {
+        for(Tower tower : school.getTowers()){
+            towerZone.getChildren().get(school.getTowers().indexOf(tower)).setDisable(false);
+            switch (tower.getTColour()){
+                case WHITE:
+                    ((ImageView) towerZone.getChildren().get(school.getTowers().indexOf(tower))).setImage(new Image("/images/towers/Twhite.png"));
+                    break;
+                case BLACK:
+                    ((ImageView) towerZone.getChildren().get(school.getTowers().indexOf(tower))).setImage(new Image("/images/towers/Tblack.png"));
+                    break;
+                case GREY:
+                    ((ImageView) towerZone.getChildren().get(school.getTowers().indexOf(tower))).setImage(new Image("/images/towers/Tgrey.png"));
+                    break;
+            }
+        }
+    }
+
 
     private void hide(){
         for(Node node : entry.getChildren()){
             node.setVisible(false);
+            node.setDisable(true);
+        }
+        for(Node table : hall.getChildren()) {
+            if (table instanceof Pane) {
+                for (Node student : ((Pane) table).getChildren()) {
+                    student.setVisible(false);
+                    student.setDisable(true);
+                }
+            }
+        }
+        for(Node prof : profPane.getChildren()) {
+            prof.setVisible(false);
+            prof.setDisable(true);
+        }
+        for(Node node : towerZone.getChildren()){
             node.setDisable(true);
         }
     }
