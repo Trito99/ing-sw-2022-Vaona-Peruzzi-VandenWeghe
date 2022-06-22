@@ -363,7 +363,7 @@ public class GameController {
                 }
                 if(receivedMessage.getMessageType() == MessageType.CHARACTER_CARD_PLAYED){
                     CharacterCardPlayed CardSelected = (CharacterCardPlayed) receivedMessage;
-                    boolean exists = false, enough = true, playable = false, changeIdea = false;
+                    boolean exists = false, enough = true, playable = false, changeIdea = false, cantPlay = false;
                     if(!CardSelected.getChoice()){
                         if(CardSelected.getCardNickname().equals("YES")) {
                             for(CharacterCard characterCard : gameSession.getTable().getCharacterCardsOnTable()){
@@ -417,6 +417,15 @@ public class GameController {
                             }
                             action();
                         }
+                        else if (CardSelected.getCardNickname().equals("BARD")){
+                            cantPlay = true;
+                            for(SColor s : SColor.values()){
+                                if (gameSession.getPlayer(turnController.getActivePlayer()).getPersonalSchool().numberOfStudentsInHall(s) != 0){
+                                    cantPlay = false;
+                                    break;
+                                }
+                            }
+                        }
                         boolean empty = false;
                         if (exists) {
                             if (characterCard.getCoinOnCard()) {
@@ -449,7 +458,7 @@ public class GameController {
 
                             }
                         }
-                        if (exists && enough && !empty) {
+                        if (exists && enough && !empty && !cantPlay) {
                             again = false;
                             switch(characterCard.getCardEffect()){
                                 case ABBOT:
@@ -488,12 +497,17 @@ public class GameController {
                             }
                         } else {
                             again = true;
-                            if (exists && !empty)
+                            if (exists && !empty && !cantPlay)
                                 virtualView.showMessage("\n⚠️You don't have enough coins for this card ⚠️");
                             else if (!exists && !changeIdea)
                                 virtualView.showMessage("\n⚠️Effect not present. Try again ⚠️");
                             else if (empty )
                                 virtualView.showMessage("\n⚠️Card selected is empty ⚠️");
+                            else if(cantPlay) {
+                                characterCard.setCoinOnCard(false);
+                                gameSession.getPlayer(getActivePlayer()).setCoinScore(gameSession.getPlayer(getActivePlayer()).getCoinScore() + 1);
+                                virtualView.showMessage("\n⚠️You can't play bard effect if you don't have any students in hall. Choose another effect ⚠️");
+                            }
                             if (!changeIdea)
                             virtualView.askCharacterCardToPlay(true, -1, null);
                         }
@@ -528,7 +542,7 @@ public class GameController {
                             }
                             allStudentsMoved();
                         } else {
-                            virtualView.showMessage("\n⚠️Island selected doesn't exist. ⚠️");
+                            virtualView.showMessage("⚠️Island selected doesn't exist. Select another island ⚠️");
                             again = true;
                             virtualView.askId(true, characterCard,-1, null);
                         }
