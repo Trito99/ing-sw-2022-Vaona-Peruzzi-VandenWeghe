@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.GUI.scene;
 
 import it.polimi.ingsw.model.character.CharacterCard;
+import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.observer.ObservableView;
 import it.polimi.ingsw.view.GUI.CardsController.CharacterCardController;
 import it.polimi.ingsw.view.GUI.GuiManager;
@@ -13,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,6 +31,9 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     @FXML
     private Pane coinPane;
+
+    @FXML
+    private Text coinText;
 
     @FXML
     private Button deckButton;
@@ -99,11 +104,23 @@ public class DashboardScene extends ObservableView implements GenericScene {
     @FXML
     private Pane turnInfoPane;
 
+
     public void updateSchool(SchoolController controller) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource("/fxml/school.fxml"));
         loader.setController(controller);
         schoolPane = loader.load();
+    }
+
+    public void initializeDifficulty(Difficulty difficulty, int coinsOnTable){
+        if(difficulty.equals(Difficulty.STANDARDMODE)){
+            coinPane.setVisible(false);
+            coinPane.setDisable(true);
+            coinImage.setVisible(false);
+            coinImage.setDisable(true);
+        }else{
+            coinText.setText(String.valueOf(coinsOnTable));
+        }
     }
     public void initialize(){
 

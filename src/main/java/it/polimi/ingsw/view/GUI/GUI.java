@@ -102,10 +102,18 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void showPersonalSchool(School school, String nickname, AssistantCard trash, Difficulty difficulty, int coins, GameMode gameMode, String teamMate) {
-            SchoolController schoolController = new SchoolController(school);
-            schools.add(schoolController);
-            if(nickname.equals("Your "))
-                showTable(table,difficulty);
+        SchoolController schoolController = new SchoolController(school);
+        if(nickname.equals("Your "))
+            Platform.runLater(() -> {
+                try {
+                    GuiManager.getMainScene().updateSchool(schoolController);
+                    //Platform.runLater(() -> GuiManager.getMainScene().initializeDifficulty(difficulty));
+                    Platform.runLater(() -> GuiManager.changeRootMainScene(observers));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
 
     }
 
@@ -114,19 +122,12 @@ public class GUI extends ObservableView implements View {
         this.table = table;
         if (!gameStarted) {
             Platform.runLater(() -> GuiManager.changeRootMainScene(observers));
-            Platform.runLater(() -> GuiManager.getMainScene());
+            Platform.runLater(() -> GuiManager.getMainScene().initializeDifficulty(difficulty,table.getCoinsOnTable()));
             gameStarted = true;
         }else{
-            Platform.runLater(() -> {
-                try {
-                    GuiManager.getMainScene().updateSchool(schools.get(schools.size()-1));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
+            Platform.runLater(() -> GuiManager.getMainScene());
             Platform.runLater(() -> GuiManager.changeRootMainScene(observers));
         }
-        schools.clear();
     }
 
     @Override
