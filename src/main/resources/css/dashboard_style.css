@@ -44,3 +44,9 @@ buttonTrans{
     -fx-opacity: 0.15;
     -fx-background-radius: 25;
 }
+
+.shadowPane{
+    -fx-background-radius: 25;
+    -fx-background-color: black;
+    -fx-opacity: 0.45;
+}

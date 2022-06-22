@@ -129,5 +129,15 @@
             <Font size="25.0" />
          </font>
       </Text>
+      <Pane fx:id="card1ShadowPane" layoutX="160.0" layoutY="84.0" prefHeight="229.0" prefWidth="159.0" styleClass="shadowPane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="card2ShadowPane" layoutX="360.0" layoutY="84.0" prefHeight="229.0" prefWidth="159.0" styleClass="shadowPane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="card3ShadowPane" layoutX="560.0" layoutY="84.0" prefHeight="229.0" prefWidth="159.0" styleClass="shadowPane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="card4ShadowPane" layoutX="760.0" layoutY="84.0" prefHeight="229.0" prefWidth="159.0" styleClass="shadowPane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="card5ShadowPane" layoutX="960.0" layoutY="84.0" prefHeight="229.0" prefWidth="159.0" styleClass="shadowPane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="card6ShadowPane" layoutX="160.0" layoutY="341.0" prefHeight="229.0" prefWidth="159.0" styleClass="shadowPane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="card7ShadowPane" layoutX="360.0" layoutY="341.0" prefHeight="229.0" prefWidth="159.0" styleClass="shadowPane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="card8ShadowPane" layoutX="560.0" layoutY="341.0" prefHeight="229.0" prefWidth="159.0" styleClass="shadowPane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="card9ShadowPane" layoutX="760.0" layoutY="341.0" prefHeight="229.0" prefWidth="159.0" styleClass="shadowPane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="card10ShadowPane" layoutX="960.0" layoutY="341.0" prefHeight="229.0" prefWidth="159.0" styleClass="shadowPane" stylesheets="@../css/dashboard_style.css" />
    </children>
 </AnchorPane>
