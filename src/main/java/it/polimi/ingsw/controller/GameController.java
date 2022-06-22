@@ -304,9 +304,15 @@ public class GameController {
                     }
 
                     if(Choice.getPlace().equals("CHARACTER CARD")){
-                        savedActionState = getActionState();
-                        setActionState(ActionState.CHARACTER);
-                        action();
+                        if(gameSession.getDifficulty().equals(Difficulty.STANDARDMODE)) {
+                            virtualView.showMessage("⚠️You are playing the standard mode, you can't use character cards! ⚠️");
+                            virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getEntry());
+                        }
+                        else {
+                            savedActionState = getActionState();
+                            setActionState(ActionState.CHARACTER);
+                            action();
+                        }
                     }
 
                     if(present){
@@ -999,11 +1005,12 @@ public class GameController {
      * @param disconnectedNickname nick of the player who has disconnected from the match
      */
     public void endGame(String disconnectedNickname){
+        broadcastMessage("The Match is finished. ");
         if(gameSession.getTable().playerIsWinning(gameSession) == null) {
             if (disconnectedNickname != null) {
                 broadcastMessage(disconnectedNickname + " has disconnceted!");
             }
-            broadcastMessage("Tie");
+            broadcastMessage("**** TIE ****");
         }
         else {
             if(gameSession.getGameMode()==GameMode.COOP){
@@ -1066,7 +1073,7 @@ public class GameController {
 
     /** Returns the player that's moving */
     public String getActivePlayer(){
-        return getActivePlayer();
+        return turnController.getActivePlayer();
     }
 
     public HashMap<String, VirtualView> getAllVirtualView() {

@@ -26,23 +26,9 @@
             <BoxBlur />
          </effect>
       </ImageView>
-      <ImageView fitHeight="754.0" fitWidth="1283.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../Downloads/Schermate/Schermata-di-gioco-06.png" />
-         </image>
-      </ImageView>
       <Pane fx:id="sxPane" layoutX="17.0" layoutY="13.0" prefHeight="695.0" prefWidth="182.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="schoolViewPane" layoutX="318.0" layoutY="824.0" prefHeight="216.0" prefWidth="611.0" styleClass="pane">
-         <children>
-            <ImageView fx:id="school" fitHeight="220.0" fitWidth="642.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/school.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-      <VBox fx:id="characterCardLayout" layoutX="1124.0" layoutY="165.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="541.0" prefWidth="140.0" style="-fx-background-radius: 10;" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="trashPane" layoutX="37.0" layoutY="211.0" prefHeight="215.0" prefWidth="145.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+      <VBox fx:id="characterCardLayout" layoutX="1117.0" layoutY="165.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="148.0" style="-fx-background-radius: 10;" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="trashPane" layoutX="37.0" layoutY="233.0" prefHeight="215.0" prefWidth="145.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <children>
             <ImageView fitHeight="180.0" fitWidth="125.0" layoutX="12.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -51,7 +37,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="coinPane" layoutX="67.0" layoutY="66.0" prefHeight="76.0" prefWidth="76.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+      <Pane fx:id="coinPane" layoutX="71.0" layoutY="78.0" prefHeight="76.0" prefWidth="76.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <children>
             <ImageView fx:id="coinImage" fitHeight="70.0" fitWidth="70.0" layoutX="4.0" layoutY="3.0" opacity="0.57" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -61,14 +47,14 @@
                   <Point3D />
                </rotationAxis>
             </ImageView>
-            <Text fx:id="coinText" fill="#ffffffbd" layoutX="18.0" layoutY="51.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="3" textAlignment="CENTER" wrappingWidth="36.6390380859375">
+            <Text fx:id="coinText" fill="#ffffffbd" layoutX="21.0" layoutY="53.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="3" textAlignment="CENTER" wrappingWidth="36.6390380859375">
                <font>
                   <Font size="39.0" />
                </font>
             </Text>
          </children>
       </Pane>
-      <Button fx:id="deckButton" layoutX="40.0" layoutY="529.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="134.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+      <Button fx:id="deckButton" layoutX="40.0" layoutY="546.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="134.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <graphic>
             <ImageView fx:id="deckLogo" fitHeight="101.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -84,78 +70,182 @@
          </font>
       </Text>
       <Button fx:id="otherSchoolButton" layoutX="1135.0" layoutY="16.0" mnemonicParsing="false" prefHeight="124.0" prefWidth="130.0" style="-fx-background-radius: 10;" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="islandPane" layoutX="258.0" layoutY="25.0" prefHeight="486.0" prefWidth="821.0">
+      <Pane fx:id="islandPane" layoutX="258.0" layoutY="39.0" prefHeight="491.0" prefWidth="829.0">
          <children>
-            <ImageView fx:id="island10" fitHeight="69.0" fitWidth="71.0" layoutX="95.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island10" fitHeight="124.0" fitWidth="137.0" layoutX="110.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="island11" fitHeight="69.0" fitWidth="71.0" layoutX="325.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island11" fitHeight="122.0" fitWidth="135.0" layoutX="244.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="island6" fitHeight="69.0" fitWidth="71.0" layoutX="325.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island6" fitHeight="124.0" fitWidth="137.0" layoutX="310.0" layoutY="360.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="island3" fitHeight="69.0" fitWidth="71.0" layoutX="637.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island3" fitHeight="122.0" fitWidth="137.0" layoutX="681.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="island2" fitHeight="69.0" fitWidth="71.0" layoutX="559.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island2" fitHeight="124.0" fitWidth="137.0" layoutX="630.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island3.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="island5" fitHeight="69.0" fitWidth="71.0" layoutX="441.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island5" fitHeight="124.0" fitWidth="137.0" layoutX="447.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island3.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="island8" fitHeight="69.0" fitWidth="71.0" layoutX="95.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island8" fitHeight="124.0" fitWidth="137.0" layoutX="47.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island3.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="island1" fitHeight="69.0" fitWidth="71.0" layoutX="441.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island1" fitHeight="124.0" fitWidth="137.0" layoutX="519.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island2.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="island7" fitHeight="69.0" fitWidth="71.0" layoutX="214.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island7" fitHeight="122.0" fitWidth="137.0" layoutX="171.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island2.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="island9" fitHeight="69.0" fitWidth="71.0" layoutX="14.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island9" fitHeight="122.0" fitWidth="137.0" layoutX="14.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island2.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="island0" fitHeight="69.0" fitWidth="71.0" layoutX="214.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island0" fitHeight="124.0" fitWidth="137.0" layoutX="377.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island3.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="island4" fitHeight="69.0" fitWidth="71.0" layoutX="559.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island4" fitHeight="122.0" fitWidth="134.0" layoutX="587.0" layoutY="319.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island2.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="motherEarth" fitHeight="33.0" fitWidth="18.0" layoutX="570.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="motherEarth" fitHeight="45.0" fitWidth="27.0" layoutX="658.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/MotherEarth.png" />
                </image>
             </ImageView>
+            <Pane fx:id="cloudPane" layoutX="259.0" layoutY="156.0" prefHeight="180.0" prefWidth="282.0">
+               <children>
+                  <ImageView fx:id="cloud4" fitHeight="108.0" fitWidth="84.0" layoutX="43.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" rotate="136.0">
+                     <image>
+                        <Image url="@../images/clouds/cloudgeneric.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cloud3" fitHeight="108.0" fitWidth="84.0" layoutX="111.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" rotate="34.0">
+                     <image>
+                        <Image url="@../images/clouds/cloudgeneric.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cloud1" fitHeight="108.0" fitWidth="84.0" layoutX="123.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" rotate="226.0">
+                     <image>
+                        <Image url="@../images/clouds/cloudgeneric.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cloud2" fitHeight="108.0" fitWidth="84.0" layoutX="191.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true" rotate="14.0">
+                     <image>
+                        <Image url="@../images/clouds/cloudgeneric.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="158.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/students/Bstudent.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="173.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/students/Bstudent.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="144.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/students/Bstudent.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="159.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/students/Bstudent.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="224.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/students/Bstudent.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="239.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/students/Bstudent.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="210.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/students/Bstudent.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="225.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/students/Bstudent.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="144.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/students/Bstudent.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="159.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/students/Bstudent.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="130.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/students/Bstudent.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="145.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/students/Bstudent.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="75.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/students/Bstudent.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="93.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/students/Bstudent.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="61.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/students/Bstudent.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="76.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/students/Bstudent.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
          </children>
       </Pane>
-      <Text fill="#e3cfe5bd" layoutX="1130.0" layoutY="74.0" stroke="#e3cfe5bd" strokeLineCap="ROUND" strokeWidth="0.8" text="view other's school" textAlignment="CENTER" wrappingWidth="142.59356236163643">
+      <Text fill="#ffffffbd" layoutX="1129.0" layoutY="75.0" stroke="#e3cfe5bd" strokeLineCap="ROUND" strokeWidth="0.8" text="view other's school" textAlignment="CENTER" wrappingWidth="142.59356236163643">
          <font>
-            <Font size="21.0" />
+            <Font name="Helvetica" size="21.0" />
          </font>
       </Text>
       <Pane fx:id="schoolPane1" layoutX="204.0" layoutY="535.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="176.0" prefWidth="446.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
