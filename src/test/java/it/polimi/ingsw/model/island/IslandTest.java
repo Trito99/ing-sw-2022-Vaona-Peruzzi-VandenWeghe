@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
+import it.polimi.ingsw.model.player.Team;
 import it.polimi.ingsw.model.school.Prof;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;
@@ -371,6 +372,138 @@ public class IslandTest {
          }
       }
    }
+
+   /**@RepeatedTest(100)
+   public void CalculateInfluenceCoopTest(){
+      Random rn = new Random();
+      int r;
+      Game game= new Game();
+      table.getBag().clear();
+      table.getListOfIsland().clear();
+      table.generateIslandCards();
+      table.generateMotherEarth();
+      table.generateBagInit();
+      table.extractStudentsInit();
+      table.addFinalStudents();
+      game.getListOfPlayers().clear();
+      game.setGameMode(GameMode.COOP);
+
+      Player p1 = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
+      p1.generateSchool(table, GameMode.COOP);
+      p1.setNickname("federico");
+      p1.setTeamMate("tristan");
+      p1.setTeamLeader(true);
+      game.getListOfPlayers().add(p1);
+
+      Player p2 = new Player(TColor.WHITE, PlayerNumber.PLAYER2);
+      p2.generateSchool(table, GameMode.COOP);
+      p2.getPersonalSchool().getTowers().clear();
+      p2.setNickname("tristan");
+      p2.setTeamMate("federico");
+      p2.setTeamLeader(false);
+      game.getListOfPlayers().add(p2);
+
+      Player p3 = new Player(TColor.BLACK, PlayerNumber.PLAYER3);
+      p3.generateSchool(table, GameMode.COOP);
+      p3.setNickname("chiara");
+      p3.setTeamMate("filippo");
+      p3.setTeamLeader(true);
+      game.getListOfPlayers().add(p3);
+
+      Player p4 = new Player(TColor.BLACK, PlayerNumber.PLAYER4);
+      p4.generateSchool(table, GameMode.COOP);
+      p4.getPersonalSchool().getTowers().clear();
+      p4.setNickname("filippo");
+      p4.setTeamMate("chiara");
+      p4.setTeamLeader(false);
+      game.getListOfPlayers().add(p4);
+
+      Team team1 = new Team(p1, p2, TColor.WHITE);
+      Team team2 = new Team(p2, p3, TColor.BLACK);
+      game.getTeams().add(team1);
+      game.getTeams().add(team2);
+
+      /** Students are positioned randomly in the different Tables
+      for(int i=0; i<4; i++) {
+         for (int s = 1; s < 6; s++) {
+            r = rn.nextInt(4) + 1;
+            switch (s) {
+               case 1:
+                  for (int t = 1; t < r; t++) {
+                     game.getListOfPlayers().get(i).getPersonalSchool().getGTable().add(table.getBag().get(0));
+                     table.getBag().remove(0);
+                  }
+                  break;
+               case 2:
+                  for (int t = 1; t < r; t++) {
+                     game.getListOfPlayers().get(i).getPersonalSchool().getRTable().add(table.getBag().get(0));
+                     table.getBag().remove(0);
+                  }
+                  break;
+               case 3:
+                  for (int t = 1; t < r; t++) {
+                     game.getListOfPlayers().get(i).getPersonalSchool().getYTable().add(table.getBag().get(0));
+                     table.getBag().remove(0);
+                  }
+                  break;
+               case 4:
+                  for (int t = 1; t < r; t++) {
+                     game.getListOfPlayers().get(i).getPersonalSchool().getPTable().add(table.getBag().get(0));
+                     table.getBag().remove(0);
+                  }
+                  break;
+               case 5:
+                  for (int t = 1; t < r; t++) {
+                     game.getListOfPlayers().get(i).getPersonalSchool().getBTable().add(table.getBag().get(0));
+                     table.getBag().remove(0);
+                  }
+                  break;
+            }
+         }
+      }
+         for (int i = 0; i < 4; i++) {    /** Positions the Professors according to the rules
+            game.getListOfPlayers().get(i).getPersonalSchool().winProf(game.getListOfPlayers(), game.getListOfPlayers().get(i), CardEffect.STANDARDMODE);
+         }
+         for (int i = 0; i < 12; i++) {  /** Moves random number of students on Islands.
+            r = rn.nextInt(4) + 1;
+            for (int n = 0; n < r; n++) {
+               table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
+               table.getBag().remove(0);
+            }
+            ArrayList<Integer> countInfluence = new ArrayList<>();
+            for(Team team : game.getTeams()) {
+               for (Player player : team.getTeam()) {      /** Calculates manually the influence for each player on that particular island.
+                  int s = 0;
+                  for (Prof prof : player.getPersonalSchool().getProfOfPlayer()) {
+                     if (prof.getIsInHall()) {
+                        for (Student student : table.getListOfIsland().get(i).getStudentOnIsland()) {
+                           if (student.getsColour() == prof.getSColour())
+                              s++;
+                        }
+                     }
+                  }
+                  countInfluence.add(s);
+               }
+            }
+            int team1Influence = countInfluence.get(0) + countInfluence.get(1);
+            int team2Influence = countInfluence.get(2) + countInfluence.get(3);
+            table.getListOfIsland().get(i).calculateInfluenceCoop(game.getListOfPlayers(), CardEffect.STANDARDMODE, null, game.getTeams(), GameMode.COOP);
+
+            /** Checks if the influence calculated manually for each player is the same calculated by the function "calculateInfluence"
+               and finds the maximum between them
+            assertEquals(team1Influence, p1.getInfluenceOnIsland() + p2.getInfluenceOnIsland());
+            assertEquals(team2Influence, p3.getInfluenceOnIsland() + p4.getInfluenceOnIsland());
+
+            if(team1Influence > team2Influence)
+               assertEquals(team1.getTeamLeader(), table.getListOfIsland().get(i).calculateInfluenceCoop(game.getListOfPlayers(), CardEffect.STANDARDMODE, null, game.getTeams(), GameMode.COOP));
+            else if(team2Influence > team1Influence)
+               assertEquals(team2.getTeamLeader(), table.getListOfIsland().get(i).calculateInfluenceCoop(game.getListOfPlayers(), CardEffect.STANDARDMODE, null, game.getTeams(), GameMode.COOP));
+            else
+               assertEquals(null, table.getListOfIsland().get(i).calculateInfluenceCoop(game.getListOfPlayers(), CardEffect.STANDARDMODE, null, game.getTeams(), GameMode.COOP));
+
+         }
+      }
+*/
 
 
 

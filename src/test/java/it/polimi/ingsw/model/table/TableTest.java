@@ -348,7 +348,7 @@ public class TableTest{
 
         /**  Checks if joinIsland functions in the case of the merge of 2 Islands (the one in question and the next one). The next Island has a tower with different color on even positions  */
         for (int p3 = 0; p3 < table.getListOfIsland().size(); p3++) {
-            table.moveMotherEarth(13+p3-table.getPosMotherEarth());
+            table.moveMotherEarth(13 + p3 - table.getPosMotherEarth());
 
             if (p3 == 0) {
                 table.getListOfIsland().get(11).setTowerOnIsland(player2.getPersonalSchool().getTowers().get(0));
@@ -488,7 +488,6 @@ public class TableTest{
                     }
                 }
             }
-
 
             for (int i = 0; i < count.length; i++) {
                 if (max == count[i] && p == 0)
