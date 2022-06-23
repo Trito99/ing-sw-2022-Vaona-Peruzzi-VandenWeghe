@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="259.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane fx:id="Pane" layoutX="28.0" layoutY="37.0" prefHeight="226.0" prefWidth="1118.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="Pane_2players" layoutX="28.0" layoutY="37.0" prefHeight="226.0" prefWidth="1118.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
       <ImageView fx:id="blueBackground" fitHeight="1080.0" fitWidth="1920.0" layoutX="-219.0" layoutY="-180.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/BG.png" />
@@ -22,14 +22,14 @@
             <Font size="25.0" />
          </font>
       </Text>
-      <Pane fx:id="player1" layoutX="28.0" layoutY="111.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="262.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Text fx:id="player1Text" fill="WHITE" layoutX="56.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="206.4000114440919">
+      <Pane fx:id="player1_2players" layoutX="28.0" layoutY="111.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="262.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Text fx:id="player1Text" fill="WHITE" layoutX="56.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="206.4000114440919">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Pane fx:id="schoolPane1" layoutX="349.0" layoutY="52.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="167.0" prefWidth="442.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="schoolPane" layoutX="358.0" layoutY="62.0" prefHeight="150.0" prefWidth="421.0" />
+      <Pane fx:id="schoolPane1_2players" layoutX="349.0" layoutY="52.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="167.0" prefWidth="442.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="schoolPane11" layoutX="358.0" layoutY="62.0" prefHeight="150.0" prefWidth="421.0" />
       <Button fx:id="exitButton" layoutX="882.0" layoutY="169.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="49.0" prefWidth="130.0" stylesheets="@../css/style.css">
          <styleClass>
             <String fx:value="button" />

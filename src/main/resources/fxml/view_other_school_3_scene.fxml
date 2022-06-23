@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.scene.ViewOtherSchoolScene3">
    <children>
-      <Pane fx:id="Pane" layoutX="52.0" layoutY="41.0" prefHeight="635.0" prefWidth="1175.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="Pane_4players" layoutX="52.0" layoutY="41.0" prefHeight="635.0" prefWidth="1175.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
       <ImageView fx:id="blueBackground" fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/BG.png" />
@@ -28,14 +28,29 @@
             <Font size="25.0" />
          </font>
       </Text>
-      <Pane fx:id="schoolPane1" layoutX="373.0" layoutY="55.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="196.0" prefWidth="589.12" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="schoolPane2" layoutX="373.0" layoutY="261.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="196.0" prefWidth="589.12" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="schoolPane3" layoutX="373.0" layoutY="466.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="196.0" prefWidth="589.12" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="player1" layoutX="97.0" layoutY="120.0" prefHeight="52.0" prefWidth="262.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="player2" layoutX="96.0" layoutY="530.0" prefHeight="52.0" prefWidth="262.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="player3" layoutX="96.0" layoutY="329.0" prefHeight="52.0" prefWidth="262.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="schoolPane11" layoutX="383.0" layoutY="66.0" prefHeight="175.0" prefWidth="571.0" />
-      <Pane fx:id="schoolPane22" layoutX="383.0" layoutY="272.0" prefHeight="175.0" prefWidth="571.0" />
+      <Pane fx:id="schoolPane1_4players" layoutX="373.0" layoutY="55.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="196.0" prefWidth="589.12" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="schoolPane2_4players" layoutX="373.0" layoutY="261.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="196.0" prefWidth="589.12" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="schoolPane3_4players" layoutX="373.0" layoutY="466.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="196.0" prefWidth="589.12" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="player1_4players" layoutX="84.0" layoutY="128.0" prefHeight="52.0" prefWidth="262.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="player3_4players" layoutX="96.0" layoutY="539.0" prefHeight="52.0" prefWidth="262.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="player2_4players" layoutX="96.0" layoutY="333.0" prefHeight="52.0" prefWidth="262.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="schoolPane31" layoutX="383.0" layoutY="66.0" prefHeight="175.0" prefWidth="571.0" />
+      <Pane fx:id="schoolPane32" layoutX="383.0" layoutY="272.0" prefHeight="175.0" prefWidth="571.0" />
       <Pane fx:id="schoolPane33" layoutX="383.0" layoutY="477.0" prefHeight="175.0" prefWidth="571.0" />
+      <Text fx:id="player1Text4players" fill="WHITE" layoutX="112.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text 1" textAlignment="CENTER" wrappingWidth="206.4000114440919">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="player2Text4players" fill="WHITE" layoutX="124.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text 2" textAlignment="CENTER" wrappingWidth="206.4000114440919">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="player3Text4players" fill="WHITE" layoutX="124.0" layoutY="573.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text 3" textAlignment="CENTER" wrappingWidth="206.4000114440919">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

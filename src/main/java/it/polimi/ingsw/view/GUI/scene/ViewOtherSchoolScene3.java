@@ -15,10 +15,10 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.util.Map;
 
-public class ViewOtherSchoolScene3 extends ObservableView implements GenericScene {
+public class ViewOtherSchoolScene3 extends ObservableView implements GenericScene{
 
     @FXML
-    private Pane Pane;
+    private Pane Pane_4players;
 
     @FXML
     private ImageView blueBackground;
@@ -30,31 +30,40 @@ public class ViewOtherSchoolScene3 extends ObservableView implements GenericScen
     private Text exitText;
 
     @FXML
-    private Pane player1;
+    private Text player1Text4players;
 
     @FXML
-    private Pane player2;
+    private Pane player1_4players;
 
     @FXML
-    private Pane player3;
+    private Text player2Text4players;
 
     @FXML
-    private Pane schoolPane1;
+    private Pane player2_4players;
 
     @FXML
-    private Pane schoolPane11;
+    private Text player3Text4players;
 
     @FXML
-    private Pane schoolPane2;
+    private Pane player3_4players;
 
     @FXML
-    private Pane schoolPane22;
+    private Pane schoolPane1_4players;
 
     @FXML
-    private Pane schoolPane3;
+    private Pane schoolPane2_4players;
+
+    @FXML
+    private Pane schoolPane31;
+
+    @FXML
+    private Pane schoolPane32;
 
     @FXML
     private Pane schoolPane33;
+
+    @FXML
+    private Pane schoolPane3_4players;
 
     @FXML
     public void initialize(){
@@ -70,13 +79,16 @@ public class ViewOtherSchoolScene3 extends ObservableView implements GenericScen
         FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource("/fxml/school.fxml"));
         loader.setController(map.get(map.keySet().toArray()[0]));
         AnchorPane School1 = loader.load();
-        schoolPane11.getChildren().setAll(School1);
+        schoolPane31.getChildren().setAll(School1);
+        player1Text4players.setText(((String) map.keySet().toArray()[0]).substring(0,((String) map.keySet().toArray()[0]).length()-3));
         loader.setController(map.get(map.keySet().toArray()[1]));
         AnchorPane School2 = loader.load();
-        schoolPane22.getChildren().setAll(School2);
+        schoolPane32.getChildren().setAll(School2);
+        player2Text4players.setText(((String) map.keySet().toArray()[1]).substring(1,((String) map.keySet().toArray()[1]).length()- 2));
         loader.setController(map.get(map.keySet().toArray()[2]));
         AnchorPane School3 = loader.load();
         schoolPane33.getChildren().setAll(School3);
+        player3Text4players.setText(((String) map.keySet().toArray()[2]).substring(2,((String) map.keySet().toArray()[2]).length()- 1));
     }
 
 }

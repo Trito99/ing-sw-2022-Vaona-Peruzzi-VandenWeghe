@@ -15,10 +15,10 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.util.Map;
 
-public class ViewOtherSchoolScene2 extends ObservableView implements GenericScene {
+public class ViewOtherSchoolScene2 extends ObservableView implements GenericScene{
 
     @FXML
-    private Pane Pane;
+    private Pane Pane_3players;
 
     @FXML
     private ImageView blueBackground;
@@ -30,16 +30,28 @@ public class ViewOtherSchoolScene2 extends ObservableView implements GenericScen
     private Text exitText;
 
     @FXML
-    private Pane player1;
+    private Text player1Text3players;
 
     @FXML
-    private Pane player3;
+    private Pane player1_3players;
 
     @FXML
-    private Pane schoolPane1;
+    private Text player2Text3players;
 
     @FXML
-    private Pane schoolPane2;
+    private Pane player3_3players;
+
+    @FXML
+    private Pane schoolPane1_3players;
+
+    @FXML
+    private Pane schoolPane21;
+
+    @FXML
+    private Pane schoolPane22;
+
+    @FXML
+    private Pane schoolPane2_3players;
 
     @FXML
     public void initialize(){
@@ -50,6 +62,16 @@ public class ViewOtherSchoolScene2 extends ObservableView implements GenericScen
         exitButton.setDisable(true);
 
     }
-
+    public void updatePersonalSchool(Map<String, SchoolController> map) throws IOException {
+        FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource("/fxml/school.fxml"));
+        loader.setController(map.get(map.keySet().toArray()[0]));
+        AnchorPane School1 = loader.load();
+        schoolPane21.getChildren().setAll(School1);
+        player1Text3players.setText(((String) map.keySet().toArray()[0]).substring(0,((String) map.keySet().toArray()[0]).length()-3));
+        loader.setController(map.get(map.keySet().toArray()[1]));
+        AnchorPane School2 = loader.load();
+        schoolPane22.getChildren().setAll(School2);
+        player1Text3players.setText(((String) map.keySet().toArray()[1]).substring(1,((String) map.keySet().toArray()[1]).length()- 2));
+    }
 
 }
