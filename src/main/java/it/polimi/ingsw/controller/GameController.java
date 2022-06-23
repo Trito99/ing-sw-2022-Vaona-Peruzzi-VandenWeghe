@@ -28,10 +28,9 @@ public class GameController {
     private TurnController turnController;
     private GameState gameState;
     private HashMap<String, VirtualView> allVirtualView;
-    boolean again = false, lastRound = false, card = false, cardPlayed = false;
+    boolean again = false, lastRound = false, card = false, cardPlayed = false, characterCardAlreadyPlayed = false;
     private ActionState actionState;
     private CharacterCard characterCard;
-
     private ActionState savedActionState;
 
 
@@ -308,6 +307,10 @@ public class GameController {
                             virtualView.showMessage("⚠️You are playing the standard mode, you can't use character cards! ⚠️");
                             virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getEntry());
                         }
+                        else if(characterCardAlreadyPlayed){
+                            virtualView.showMessage("⚠️You can't activate 2 effects in a round! ⚠️");
+                            virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getEntry());
+                        }
                         else {
                             savedActionState = getActionState();
                             setActionState(ActionState.CHARACTER);
@@ -487,6 +490,7 @@ public class GameController {
                                     break;
 
                             }
+                            characterCardAlreadyPlayed = true;
                         } else {
                             again = true;
                             if (exists && !empty && !cantPlay)
@@ -729,9 +733,19 @@ public class GameController {
                     MotherEarthStepsChosen step = (MotherEarthStepsChosen) receivedMessage;
                     if(step.getString()!=null) {
                         if (step.getString().equals("CHARACTER CARD")) {
-                            savedActionState = getActionState();
-                            setActionState(ActionState.CHARACTER);
-                            action();
+                            if(gameSession.getDifficulty().equals(Difficulty.STANDARDMODE)) {
+                                virtualView.showMessage("⚠️You are playing the standard mode, you can't use character cards! ⚠️");
+                                virtualView.askMotherEarthSteps(gameSession.getPlayer(getActivePlayer()).getTrash().getStepMotherEarth(), gameSession.getTable(), gameSession.getDifficulty());
+                            }
+                            else if(characterCardAlreadyPlayed){
+                                virtualView.showMessage("⚠️You can't activate 2 effects in a round! ⚠️");
+                                virtualView.askMotherEarthSteps(gameSession.getPlayer(getActivePlayer()).getTrash().getStepMotherEarth(), gameSession.getTable(), gameSession.getDifficulty());
+                            }
+                            else {
+                                savedActionState = getActionState();
+                                setActionState(ActionState.CHARACTER);
+                                action();
+                            }
                         }
                     }
                     else{
@@ -942,11 +956,11 @@ public class GameController {
         turnController.nextPlayer(turnController.getNewPlayerOrderByName());
         roundIndex++;
         if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)) {
-            if (characterCard != null) {
-                characterCard.getCardEffect().setHostPlayed(false);
-                gameSession.getPlayer(getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(getActivePlayer()), characterCard.getCardEffect()); //rimette a false
-                characterCard.getCardEffect().setBearerPlayed(false);
-            }
+            for(CharacterCard c : gameSession.getTable().getCharacterCardsOnTable())
+                c.getCardEffect().setAllFalse();
+            gameSession.getPlayer(getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(getActivePlayer()), characterCard.getCardEffect()); //rimette a false
+
+            characterCardAlreadyPlayed = false;
         }
 
         setActionState(ActionState.STUDENT);

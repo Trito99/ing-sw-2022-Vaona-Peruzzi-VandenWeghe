@@ -145,8 +145,17 @@ public class IslandCard implements Serializable {
         int maxInfluence = 0;
         Player playerWithInfluence = null;
 
-        if(studentOnIsland.isEmpty())
+        if(studentOnIsland.isEmpty() && !cardEffectPlayed.isKnightPlayed())
             return null;
+        else if(studentOnIsland.isEmpty() && cardEffectPlayed.isKnightPlayed()){
+            for(Player player : listOfPlayers){
+                if(player.equals(activePlayer)){
+                    player.setInfluenceOnIsland(2);
+                    return player;
+                }
+
+            }
+        }
 
         /** calculate influence on island for all the players */
         for(Player p : listOfPlayers){
@@ -181,13 +190,14 @@ public class IslandCard implements Serializable {
                         break;
                 }
 
-                /** Knight effect */
-                if(cardEffectPlayed.isKnightPlayed() && p.equals(activePlayer)) {
-                    p.setInfluenceOnIsland(countTot + 2);
-                }
-                else
-                    p.setInfluenceOnIsland(countTot);
             }
+
+            /** Knight effect */
+            if(cardEffectPlayed.isKnightPlayed() && p.equals(activePlayer)) {
+                p.setInfluenceOnIsland(countTot + 2);
+            }
+            else
+                p.setInfluenceOnIsland(countTot);
 
             /** CENTAUR EFFECT */
             if(towerIsOnIsland) {
