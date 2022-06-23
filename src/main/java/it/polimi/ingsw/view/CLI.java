@@ -419,10 +419,10 @@ public class CLI extends ObservableView implements View {
 
                 String stepsString = readInput().toUpperCase(Locale.ROOT);
                 if(stepsString.equals("CHARACTER CARD"))
-                    notifyObserver(obs -> obs.chooseMotherEarthSteps(-1,maxSteps,stepsString));
-                else{
-                    notifyObserver(obs -> obs.chooseMotherEarthSteps(Integer.parseInt(stepsString),maxSteps,null));
-                }
+                    notifyObserver(obs -> obs.chooseMotherEarthSteps(-1, maxSteps, stepsString));
+                else
+                    notifyObserver(obs -> obs.chooseMotherEarthSteps(Integer.parseInt(stepsString), maxSteps,""));
+
             } catch (Exception e) {
                 out.println(WRONG_INPUT);
                 ye=true;
@@ -441,8 +441,11 @@ public class CLI extends ObservableView implements View {
                 printClouds(table.getCloudNumber());
                 out.print("\n");
 
-                int id = Integer.parseInt(readInput());
-                notifyObserver(obs -> obs.chooseCloudCard(id));
+                String idString = readInput().toUpperCase(Locale.ROOT);
+                if(idString.equals("CHARACTER CARD"))
+                    notifyObserver(obs -> obs.chooseCloudCard(-1, idString));
+                else
+                    notifyObserver(obs -> obs.chooseCloudCard(Integer.parseInt(idString), ""));
             } catch (Exception e) {
                 ye=true;
                 out.println(WRONG_INPUT);

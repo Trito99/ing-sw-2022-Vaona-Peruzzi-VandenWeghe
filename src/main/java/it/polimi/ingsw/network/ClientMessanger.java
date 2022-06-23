@@ -73,12 +73,12 @@ public class ClientMessanger implements ObserverView, Observer {
         client.sendMessage(new AssistantCardPlayed(nickname, cardNickname));
     }
 
-    public void chooseCloudCard(int id){
-        client.sendMessage(new CloudChosen(nickname,id));
+    public void chooseCloudCard(int id, String string){
+        client.sendMessage(new CloudChosen(nickname, id, string));
     }
 
-    public void choosePlaceAndStudentForMove(String place,int id){
-        client.sendMessage(new PlaceAndStudentForMoveChosen(nickname,place,id));
+    public void choosePlaceAndStudentForMove(String place, int id){
+        client.sendMessage(new PlaceAndStudentForMoveChosen(nickname, place, id));
     }
 
     public void chooseId(int id, boolean choice,int index, boolean none){

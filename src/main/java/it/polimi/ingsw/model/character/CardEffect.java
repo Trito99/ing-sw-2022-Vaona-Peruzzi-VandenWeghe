@@ -45,6 +45,13 @@ public enum CardEffect {
         this.bearerPlayed = bearerPlayed;
     }
 
+    public void setAllFalse(){
+        hostPlayed = false;
+        knightPlayed = false;
+        centaurPlayed = false;
+        bearerPlayed = false;
+    }
+
 }
 
 

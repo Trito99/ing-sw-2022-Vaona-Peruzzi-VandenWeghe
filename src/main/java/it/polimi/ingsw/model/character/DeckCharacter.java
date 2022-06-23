@@ -22,7 +22,7 @@ public class DeckCharacter {
         characterCards.add(new CharacterCard(2, CardEffect.CURATOR, "Place a 'Forbidden Card' on an Island. A 'Forbidden card' blocks the function of Mother Nature when she lands on that Island."));
         characterCards.add(new CharacterCard(3, CardEffect.CENTAUR, "During this round, Towers aren't considered in influence."));
         characterCards.add(new CharacterCard(1, CardEffect.ACROBAT, "You can choose up to 3 students on this card and switch them with the students of your Entry."));
-        characterCards.add(new CharacterCard(2, CardEffect.KNIGHT, "During this round, you have 2 more influence points."));
+        characterCards.add(new CharacterCard(0, CardEffect.KNIGHT, "During this round, you have 2 more influence points."));
         characterCards.add(new CharacterCard(3, CardEffect.HERBALIST, "Choose a color. During this round, the students of that color aren't considered in the calculate of influence."));
         characterCards.add(new CharacterCard(1, CardEffect.BARD,"You can switch up to 2 students between your Hall and your Entry"));
         characterCards.add(new CharacterCard(2, CardEffect.COURTESAN,"Choose 1 student from this card and place it in the Hall"));
