@@ -105,7 +105,6 @@ public class GUI extends ObservableView implements View {
             Platform.runLater(() -> {
                 try {
                     GuiManager.getMainScene().updatePersonalSchool(schoolController);
-                    //Platform.runLater(() -> GuiManager.getMainScene().initializeDifficulty(difficulty));
                     Platform.runLater(() -> GuiManager.changeRootMainScene(observers));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -132,7 +131,7 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void showDeckAssistant(DeckAssistant deckAssistant) {
-
+        Platform.runLater(()->GuiManager.getMainScene().updateAssistantCardDeck(deckAssistant));
     }
 
     @Override

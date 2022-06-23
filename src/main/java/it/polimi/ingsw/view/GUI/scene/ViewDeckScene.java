@@ -3,6 +3,7 @@ package it.polimi.ingsw.view.GUI.scene;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
+import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.observer.ObservableView;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -17,7 +18,6 @@ import java.util.ArrayList;
 public class ViewDeckScene  extends ObservableView implements GenericScene  {
 
     private ArrayList<AssistantCard> cardsInHand;
-    private DeckAssistant deck;
     private String cardChosen;
 
     @FXML
@@ -97,6 +97,10 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
     @FXML
     private Text exitText;
 
+    public ViewDeckScene(DeckAssistant deckAssistant) {
+        this.cardsInHand = deckAssistant.getCardsInHand();
+    }
+
     @FXML
     public void initialize(){
         playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickPlay);
@@ -128,11 +132,6 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
         exitButton.setDisable(true);
         /** da fare */
     }
-
-    public void setAssistantCard(ArrayList<AssistantCard> cardsInHand) {
-        this.cardsInHand = cardsInHand;
-    }
-
     private void initializeButtons(){
         card1.setDisable(true);
         card2.setDisable(true);

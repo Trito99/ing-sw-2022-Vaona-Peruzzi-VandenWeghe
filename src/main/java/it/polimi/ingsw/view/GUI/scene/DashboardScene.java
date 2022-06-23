@@ -1,12 +1,12 @@
 package it.polimi.ingsw.view.GUI.scene;
 
+import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.observer.ObservableView;
 import it.polimi.ingsw.view.GUI.GuiManager;
 import it.polimi.ingsw.view.GUI.StartGUI;
-import it.polimi.ingsw.view.View;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,8 +28,11 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     private Map<String,SchoolController> schoolControllers = new HashMap<>();
 
+    private DeckAssistant deckAssistant;
+
     private GameMode gameMode;
     private Difficulty difficulty;
+
 
     @FXML
     private VBox characterCardLayout1;
@@ -156,6 +159,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
                 throw new RuntimeException(e);
             }
         });
+        deckButton.addEventHandler(MouseEvent.MOUSE_CLICKED,this::deckButtonClicked);
 
         /**
         ArrayList<CharacterCard> characterCardsPlaying = new ArrayList<>((characterCardsPlaying()));
@@ -204,6 +208,15 @@ public class DashboardScene extends ObservableView implements GenericScene {
             schoolControllers.put(nickname,controller);
         }
 
+    }
+
+    public void deckButtonClicked(Event event){
+        ViewDeckScene viewDeckScene = new ViewDeckScene(deckAssistant);
+        GuiManager.newStagePane(viewDeckScene, "/fxml/view_deck_scene");
+    }
+
+    public void updateAssistantCardDeck(DeckAssistant deckAssistant){
+        this.deckAssistant = deckAssistant;
     }
 
 
