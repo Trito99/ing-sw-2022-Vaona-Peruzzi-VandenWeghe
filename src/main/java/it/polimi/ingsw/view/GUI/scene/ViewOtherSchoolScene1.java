@@ -45,13 +45,8 @@ public class ViewOtherSchoolScene1 extends ObservableView implements GenericScen
 
     @FXML
     public void initialize(){
-        exitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickExit);
     }
 
-    private void clickExit(Event event){
-        exitButton.setDisable(true);
-        GuiManager.closeStage(this);
-    }
 
     public void updatePersonalSchool(Map<String, SchoolController> map) throws IOException {
         FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource("/fxml/school.fxml"));

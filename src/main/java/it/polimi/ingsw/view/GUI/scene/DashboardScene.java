@@ -184,13 +184,13 @@ public class DashboardScene extends ObservableView implements GenericScene {
                 break;
             case THREEPLAYERS:
                 ViewOtherSchoolScene2 scene2 = new ViewOtherSchoolScene2();
-                //scene2.updatePersonalSchool(schoolControllers);
-                //GuiManager.setScene("/fxml/view_other_school_2_scene");
+                GuiManager.newStagePane(scene2,"/fxml/view_other_school_2_scene");
+                scene2.updatePersonalSchool(schoolControllers);
                 break;
             case COOP:
                 ViewOtherSchoolScene3 scene3 = new ViewOtherSchoolScene3();
+                GuiManager.newStagePane(scene3, "/fxml/view_other_school_3_scene");
                 scene3.updatePersonalSchool(schoolControllers);
-                //GuiManager.setScene("/fxml/view_other_school_3_scene",scene3);
                 break;
         }
     }
