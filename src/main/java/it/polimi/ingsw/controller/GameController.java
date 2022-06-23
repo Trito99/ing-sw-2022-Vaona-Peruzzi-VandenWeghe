@@ -731,23 +731,23 @@ public class GameController {
                 }
                 if(receivedMessage.getMessageType() == MessageType.STEP_MOTHER_EARTH_CHOSEN){
                     MotherEarthStepsChosen step = (MotherEarthStepsChosen) receivedMessage;
-                    if(step.getString()!=null) {
-                        if (step.getString().equals("CHARACTER CARD")) {
-                            if(gameSession.getDifficulty().equals(Difficulty.STANDARDMODE)) {
-                                virtualView.showMessage("⚠️You are playing the standard mode, you can't use character cards! ⚠️");
-                                virtualView.askMotherEarthSteps(gameSession.getPlayer(getActivePlayer()).getTrash().getStepMotherEarth(), gameSession.getTable(), gameSession.getDifficulty());
-                            }
-                            else if(characterCardAlreadyPlayed){
-                                virtualView.showMessage("⚠️You can't activate 2 effects in a round! ⚠️");
-                                virtualView.askMotherEarthSteps(gameSession.getPlayer(getActivePlayer()).getTrash().getStepMotherEarth(), gameSession.getTable(), gameSession.getDifficulty());
-                            }
-                            else {
-                                savedActionState = getActionState();
-                                setActionState(ActionState.CHARACTER);
-                                action();
-                            }
+
+                    if (step.getString().equals("CHARACTER CARD")) {
+                        if(gameSession.getDifficulty().equals(Difficulty.STANDARDMODE)) {
+                            virtualView.showMessage("⚠️You are playing the standard mode, you can't use character cards! ⚠️");
+                            virtualView.askMotherEarthSteps(gameSession.getPlayer(getActivePlayer()).getTrash().getStepMotherEarth(), gameSession.getTable(), gameSession.getDifficulty());
+                        }
+                        else if(characterCardAlreadyPlayed){
+                            virtualView.showMessage("⚠️You can't activate 2 effects in a round! ⚠️");
+                            virtualView.askMotherEarthSteps(gameSession.getPlayer(getActivePlayer()).getTrash().getStepMotherEarth(), gameSession.getTable(), gameSession.getDifficulty());
+                        }
+                        else {
+                            savedActionState = getActionState();
+                            setActionState(ActionState.CHARACTER);
+                            action();
                         }
                     }
+
                     else{
                         if (step.getSteps() > step.getMaxSteps()) {
                             virtualView.showMessage("\n⚠️Steps selected more than maximum available ⚠️");
@@ -776,26 +776,39 @@ public class GameController {
                 }
                 if(receivedMessage.getMessageType() == MessageType.CLOUD_CHOSEN){
                     CloudChosen Cloud = (CloudChosen) receivedMessage;
-                    boolean present =false;
-                    for(CloudCard cloud : gameSession.getTable().getCloudNumber()){
-                        if(Cloud.getId()==cloud.getIdCloud()) {
-                            if (!cloud.getStudentOnCloud().isEmpty())
-                                present = true;
+
+                    if (Cloud.getString().equals("CHARACTER CARD")) {
+                        if(gameSession.getDifficulty().equals(Difficulty.STANDARDMODE)) {
+                            virtualView.showMessage("⚠️You are playing the standard mode, you can't use character cards! ⚠️");
+                            virtualView.askCloud(gameSession.getTable());
+                        }
+                        else if(characterCardAlreadyPlayed){
+                            virtualView.showMessage("⚠️You can't activate 2 effects in a round! ⚠️");
+                            virtualView.askCloud(gameSession.getTable());
+                        }
+                        else {
+                            savedActionState = getActionState();
+                            setActionState(ActionState.CHARACTER);
+                            action();
                         }
                     }
-                    /*if(Cloud.getId().equals("CHARACTER CARD")){
-                        savedMessage = receivedMessage;
-                        setActionState(ActionState.CHARACTER);
-                        action();
-                    } */
-                    if(present) {
-                        again=false;
-                        gameSession.getPlayer(getActivePlayer()).getPersonalSchool().moveStudentFromCloudToEntry(gameSession.getTable().getCloudNumber().get(Cloud.getId() - 1));
-                        turnFinished = true;
-                    }else{
-                        virtualView.showMessage("\n⚠️Cloud is empty or doesn't exist ⚠️");
-                        again=true;
-                        virtualView.askCloud(gameSession.getTable());
+                    else {
+                        boolean present = false;
+                        for (CloudCard cloud : gameSession.getTable().getCloudNumber()) {
+                            if (Cloud.getId() == cloud.getIdCloud()) {
+                                if (!cloud.getStudentOnCloud().isEmpty())
+                                    present = true;
+                            }
+                        }
+                        if (present) {
+                            again = false;
+                            gameSession.getPlayer(getActivePlayer()).getPersonalSchool().moveStudentFromCloudToEntry(gameSession.getTable().getCloudNumber().get(Cloud.getId() - 1));
+                            turnFinished = true;
+                        } else {
+                            virtualView.showMessage("\n⚠️Cloud is empty or doesn't exist ⚠️");
+                            again = true;
+                            virtualView.askCloud(gameSession.getTable());
+                        }
                     }
                 }
 
