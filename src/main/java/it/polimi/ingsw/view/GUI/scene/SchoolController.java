@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import javax.imageio.ImageIO;
@@ -182,9 +183,6 @@ public class SchoolController extends ObservableView implements GenericScene {
     private ImageView red_3;
 
     @FXML
-    private ImageView red_4;
-
-    @FXML
     private ImageView red_5;
 
     @FXML
@@ -204,6 +202,9 @@ public class SchoolController extends ObservableView implements GenericScene {
 
     @FXML
     private Pane red_table;
+
+    @FXML
+    private AnchorPane rootPane;
 
     @FXML
     private ImageView schoolBackground;

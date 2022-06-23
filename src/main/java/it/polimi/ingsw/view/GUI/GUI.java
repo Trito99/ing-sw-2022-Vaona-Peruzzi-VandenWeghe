@@ -112,7 +112,7 @@ public class GUI extends ObservableView implements View {
                 }
             });
         else
-            Platform.runLater(() ->GuiManager.getMainScene().updateOtherSchool(schoolController, gameMode,nickname));
+            Platform.runLater(() ->GuiManager.getMainScene().updateOtherSchool(schoolController, gameMode, nickname));
 
 
     }

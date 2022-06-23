@@ -9,12 +9,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GuiManager extends ObservableView {
     private static Scene scene;
+
+    private static Map<GenericScene, Stage> newStages = new HashMap<>();
     private static GenericScene activeController;
 
     private static DashboardScene mainController;
@@ -64,9 +74,28 @@ public class GuiManager extends ObservableView {
         }
     }
 
+    public static void newStagePane(GenericScene controller, String fxml) {
+        try {
+            Stage stage = new Stage();
+            newStages.put(controller,stage);
+            FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource(fxml + ".fxml"));
+            loader.setController(controller);
+            Parent root = loader.load();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public static void closeStage(GenericScene controller){
+        newStages.get(controller).close();
+        newStages.remove(controller);
+    }
+
     public static <T> void changeRootMainScene(List<ObserverView> observerList) {
         T controller;
-        if(mainController==null){
+                if(mainController==null){
             FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource("/fxml/dashboard_scene.fxml"));
             Parent root;
             try {
@@ -95,9 +124,8 @@ public class GuiManager extends ObservableView {
         return changeRootPane(observerList, newScene, fxml);
     }
 
-    public static void setScene(String fxml, GenericScene controller){
+    public static void setScene(String fxml){
         FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource(fxml + ".fxml"));
-        loader.setController(controller);
         Parent root = null;
         try {
             root = loader.load();

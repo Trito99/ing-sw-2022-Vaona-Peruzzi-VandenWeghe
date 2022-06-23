@@ -20,18 +20,34 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class DashboardScene extends ObservableView implements GenericScene {
 
-    private Map<String,SchoolController> schoolControllers;
+    private Map<String,SchoolController> schoolControllers = new HashMap<>();
 
     private GameMode gameMode;
     private Difficulty difficulty;
 
     @FXML
-    private VBox characterCardLayout;
+    private VBox characterCardLayout1;
+
+    @FXML
+    private ImageView cloud1;
+
+    @FXML
+    private ImageView cloud2;
+
+    @FXML
+    private ImageView cloud3;
+
+    @FXML
+    private ImageView cloud4;
+
+    @FXML
+    private Pane cloudPane;
 
     @FXML
     private ImageView coinImage;
@@ -94,16 +110,13 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private Button otherSchoolButton;
 
     @FXML
-    private ImageView school;
-
-    @FXML
     private Pane schoolPane;
 
     @FXML
     private Pane schoolPane1;
 
     @FXML
-    private Pane schoolViewPane;
+    private Pane schoolPane11;
 
     @FXML
     private Pane sxPane;
@@ -163,13 +176,11 @@ public class DashboardScene extends ObservableView implements GenericScene {
     }
 
     private void otherSchoolClicked(Event event) throws IOException {
-        otherSchoolButton.setDisable(true);
-
         switch(gameMode){
             case TWOPLAYERS:
                 ViewOtherSchoolScene1 scene1 = new ViewOtherSchoolScene1();
+                GuiManager.newStagePane(scene1,"/fxml/view_other_school_1_scene");
                 scene1.updatePersonalSchool(schoolControllers);
-                GuiManager.setScene("/fxml/view_other_school_1_scene",scene1);
                 break;
             case THREEPLAYERS:
                 ViewOtherSchoolScene2 scene2 = new ViewOtherSchoolScene2();
@@ -179,7 +190,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
             case COOP:
                 ViewOtherSchoolScene3 scene3 = new ViewOtherSchoolScene3();
                 scene3.updatePersonalSchool(schoolControllers);
-                GuiManager.setScene("/fxml/view_other_school_3_scene",scene3);
+                //GuiManager.setScene("/fxml/view_other_school_3_scene",scene3);
                 break;
         }
     }

@@ -9,27 +9,32 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="1174.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="259.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane fx:id="Pane" layoutX="28.0" layoutY="37.0" prefHeight="226.0" prefWidth="1118.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <ImageView fx:id="blueBackground" fitHeight="786.0" fitWidth="1483.0" layoutX="-219.0" layoutY="-180.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="blueBackground" fitHeight="1080.0" fitWidth="1920.0" layoutX="-219.0" layoutY="-180.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/BG.png" />
          </image>
       </ImageView>
-      <Text fx:id="exitText" fill="WHITE" layoutX="1036.0" layoutY="233.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Exit">
+      <Text fx:id="exitText" fill="WHITE" layoutX="928.0" layoutY="203.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Exit">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
-      <Button fx:id="exitButton" layoutX="990.0" layoutY="198.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="49.0" prefWidth="130.0" stylesheets="@../css/style.css">
+      <Pane fx:id="player1" layoutX="28.0" layoutY="111.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="262.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Text fx:id="player1Text" fill="WHITE" layoutX="56.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="206.4000114440919">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Pane fx:id="schoolPane1" layoutX="349.0" layoutY="52.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="167.0" prefWidth="442.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="schoolPane" layoutX="358.0" layoutY="62.0" prefHeight="150.0" prefWidth="421.0" />
+      <Button fx:id="exitButton" layoutX="882.0" layoutY="169.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="49.0" prefWidth="130.0" stylesheets="@../css/style.css">
          <styleClass>
             <String fx:value="button" />
             <String fx:value="shadow-button" />
          </styleClass>
       </Button>
-      <Pane fx:id="player1" layoutX="28.0" layoutY="124.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="262.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="schoolPane1" layoutX="349.0" layoutY="52.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="196.0" prefWidth="589.12" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="schoolPane" layoutX="358.0" layoutY="62.0" prefHeight="175.0" prefWidth="571.0" />
    </children>
 </AnchorPane>

@@ -6,8 +6,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="150.0" prefWidth="421.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
-   <ImageView fx:id="schoolBackground" fitHeight="150.0" fitWidth="414.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="0.0">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="150.0" prefWidth="421.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <ImageView fx:id="schoolBackground" fitHeight="150.0" fitWidth="414.0" layoutX="4.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="0.0">
       <Image url="@../images/school.png" />
       <viewport>
          <Rectangle2D />
@@ -287,7 +287,7 @@
          </Pane>
       </children>
    </Pane>
-   <Pane fx:id="entry" layoutX="8.0" layoutY="5.0" prefHeight="138.0" prefWidth="66.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="347.0" AnchorPane.topAnchor="5.0">
+   <Pane fx:id="entry" layoutX="8.0" layoutY="5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="138.0" prefWidth="66.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="347.0" AnchorPane.topAnchor="5.0">
       <children>
          <ImageView fx:id="blue_entry_1" fitHeight="20.0" fitWidth="17.0" layoutX="41.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -336,7 +336,7 @@
          </ImageView>
       </children>
    </Pane>
-   <Pane fx:id="profPane" layoutX="296.0" layoutY="5.0" prefHeight="140.0" prefWidth="33.0">
+   <Pane fx:id="profPane" layoutX="296.0" layoutY="5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="33.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="296.0" AnchorPane.rightAnchor="91.4" AnchorPane.topAnchor="5.0">
       <children>
          <ImageView fx:id="pink_prof" fitHeight="20.0" fitWidth="20.0" layoutX="8.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -364,7 +364,7 @@
             </image>
          </ImageView>
       </children></Pane>
-   <Pane fx:id="towerZone" layoutX="337.0" layoutY="5.0" prefHeight="137.0" prefWidth="74.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="337.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+   <Pane fx:id="towerZone" layoutX="337.0" layoutY="5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="137.0" prefWidth="74.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="337.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
       <children>
          <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="8.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
             <image>
