@@ -24,80 +24,105 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
 
     @FXML
     private Pane Pane;
+
     @FXML
     private ImageView blueBackground;
 
     @FXML
     private Button card1;
-    @FXML
-    private Button card2;
-    @FXML
-    private Button card3;
-    @FXML
-    private Button card4;
-    @FXML
-    private Button card5;
-    @FXML
-    private Button card6;
-    @FXML
-    private Button card7;
-    @FXML
-    private Button card8;
-    @FXML
-    private Button card9;
+
     @FXML
     private Button card10;
 
     @FXML
-    private Pane card1ShadowPane;
-    @FXML
-    private Pane card2ShadowPane;
-    @FXML
-    private Pane card3ShadowPane;
-    @FXML
-    private Pane card4ShadowPane;
-    @FXML
-    private Pane card5ShadowPane;
-    @FXML
-    private Pane card6ShadowPane;
-    @FXML
-    private Pane card7ShadowPane;
-    @FXML
-    private Pane card8ShadowPane;
-    @FXML
-    private Pane card9ShadowPane;
-    @FXML
     private Pane card10ShadowPane;
 
     @FXML
+    private Pane card1ShadowPane;
+
+    @FXML
+    private Button card2;
+
+    @FXML
+    private Pane card2ShadowPane;
+
+    @FXML
+    private Button card3;
+
+    @FXML
+    private Pane card3ShadowPane;
+
+    @FXML
+    private Button card4;
+
+    @FXML
+    private Pane card4ShadowPane;
+
+    @FXML
+    private Button card5;
+
+    @FXML
+    private Pane card5ShadowPane;
+
+    @FXML
+    private Button card6;
+
+    @FXML
+    private Pane card6ShadowPane;
+
+    @FXML
+    private Button card7;
+
+    @FXML
+    private Pane card7ShadowPane;
+
+    @FXML
+    private Button card8;
+
+    @FXML
+    private Pane card8ShadowPane;
+
+    @FXML
+    private Button card9;
+
+    @FXML
+    private Pane card9ShadowPane;
+
+    @FXML
     private ImageView imageCard1;
-    @FXML
-    private ImageView imageCard2;
-    @FXML
-    private ImageView imageCard3;
-    @FXML
-    private ImageView imageCard4;
-    @FXML
-    private ImageView imageCard5;
-    @FXML
-    private ImageView imageCard6;
-    @FXML
-    private ImageView imageCard7;
-    @FXML
-    private ImageView imageCard8;
-    @FXML
-    private ImageView imageCard9;
+
     @FXML
     private ImageView imageCard10;
 
     @FXML
+    private ImageView imageCard2;
+
+    @FXML
+    private ImageView imageCard3;
+
+    @FXML
+    private ImageView imageCard4;
+
+    @FXML
+    private ImageView imageCard5;
+
+    @FXML
+    private ImageView imageCard6;
+
+    @FXML
+    private ImageView imageCard7;
+
+    @FXML
+    private ImageView imageCard8;
+
+    @FXML
+    private ImageView imageCard9;
+
+    @FXML
     private Button playButton;
+
     @FXML
     private Text playText;
-    @FXML
-    private Button exitButton;
-    @FXML
-    private Text exitText;
 
     public ViewDeckScene(DeckAssistant deckAssistant) {
         this.deckAssistant = deckAssistant;
@@ -106,7 +131,6 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
     @FXML
     public void initialize(){
         playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickPlay);
-        exitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickExit);
         initializeButtons();
         initializeCardsInHand();
         card1.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickCard1);
@@ -135,10 +159,6 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
         }
     }
 
-    private void clickExit(Event event){
-        exitButton.setDisable(true);
-        /** da fare */
-    }
     private void initializeButtons(){
         playButton.setDisable(true);
         playButton.setVisible(false);

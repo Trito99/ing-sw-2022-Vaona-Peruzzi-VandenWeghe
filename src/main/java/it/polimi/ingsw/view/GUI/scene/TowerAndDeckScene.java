@@ -23,73 +23,97 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
 
     @FXML
     private Pane blackShadowPane;
+
     @FXML
     private Text blackT;
+
     @FXML
     private Button blackTower;
+
     @FXML
     private Text connectText;
-    @FXML
-    private Button exitButton;
-    @FXML
-    private Text exitText;
+
     @FXML
     private Pane greyShadowPane;
+
     @FXML
     private Text greyT;
+
     @FXML
     private Button greyTower;
+
     @FXML
     private Text nicknameText;
+
     @FXML
     private Text nicknameText1;
+
     @FXML
     private Button startButton;
+
     @FXML
     private Text titleText;
+
     @FXML
     private Pane whiteShadowPane;
+
     @FXML
     private Text whiteT;
+
     @FXML
     private Button whiteTower;
+
     @FXML
     private ImageView wizard1;
+
     @FXML
     private Button wizard1Button;
+
     @FXML
     private Pane wizard1Pane;
+
     @FXML
     private Pane wizard1ShadowPane;
+
     @FXML
     private ImageView wizard2;
+
     @FXML
     private Button wizard2Button;
+
     @FXML
     private Pane wizard2Pane;
+
     @FXML
     private Pane wizard2ShadowPane;
+
     @FXML
     private ImageView wizard3;
+
     @FXML
     private Button wizard3Button;
+
     @FXML
     private Pane wizard3Pane;
+
     @FXML
     private Pane wizard3ShadowPane;
+
     @FXML
     private ImageView wizard4;
+
     @FXML
     private Button wizard4Button;
+
     @FXML
     private Pane wizard4Pane;
+
     @FXML
     private Pane wizard4ShadowPane;
 
     @FXML
     public void initialize(){
         startButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickStart);
-        exitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickExit);
         initializeButtons();
         initializeTowerColorsAndAssistantDeck();
         whiteTower.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickWhite);
@@ -108,13 +132,6 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
             notifyObserver(obs -> obs.chooseTowerColorAndDeck(colorChosen, deckChosen));
         }
     }
-
-    private void clickExit(Event event){
-        exitButton.setDisable(true);
-        notifyObserver(ObserverView:: updateDisconnect);
-        System.exit(0);
-    }
-
 
     public void setTowerColors(ArrayList<TColor> towerColors) {
         this.towerColors = towerColors;

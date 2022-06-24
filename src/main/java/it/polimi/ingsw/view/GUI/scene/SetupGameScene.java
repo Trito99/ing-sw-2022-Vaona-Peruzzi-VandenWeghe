@@ -32,8 +32,6 @@ public class SetupGameScene extends ObservableView implements GenericScene {
     @FXML
     private Text connectText;
     @FXML
-    private Text exitText;
-    @FXML
     private Text gameText;
     @FXML
     private Text lobbyText;
@@ -44,8 +42,6 @@ public class SetupGameScene extends ObservableView implements GenericScene {
 
     @FXML
     private Button nextButton;
-    @FXML
-    private Button exitButton;
 
     @FXML
     private TextField nicknameField;
@@ -73,7 +69,6 @@ public class SetupGameScene extends ObservableView implements GenericScene {
     @FXML
     public void initialize(){
         nextButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickNext);
-        exitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickExit);
         generateLobbyTable(lobbyMap);
     }
 
@@ -174,13 +169,6 @@ public class SetupGameScene extends ObservableView implements GenericScene {
             nextButton.setDisable(true);
             notifyObserver(obs -> obs.updateLobby(finalNickname, playerDate, finalGameId));
         }
-    }
-
-    /** DA CAMBIARE in exit */
-    private void clickExit(Event event){
-        exitButton.setDisable(true);
-        notifyObserver(ObserverView:: updateDisconnect);
-        System.exit(0);
     }
 
     public void setLobbyMap(Map<String, LobbyForPrint> lobbyMap) {

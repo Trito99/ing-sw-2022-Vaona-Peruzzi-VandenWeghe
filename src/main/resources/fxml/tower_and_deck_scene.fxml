@@ -18,11 +18,6 @@
          </image>
       </ImageView>
       <Pane layoutX="175.0" layoutY="104.0" prefHeight="500.0" prefWidth="899.0" styleClass="layout" stylesheets="@../css/style.css" />
-      <Text fx:id="exitText" fill="WHITE" layoutX="221.0" layoutY="663.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Exit">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Text>
       <Text fx:id="connectText" fill="WHITE" layoutX="983.0" layoutY="663.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Start">
          <font>
             <Font size="25.0" />
@@ -75,12 +70,6 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
-      </Button>
-      <Button fx:id="exitButton" layoutX="175.0" layoutY="628.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="130.0" stylesheets="@../css/style.css">
-         <styleClass>
-            <String fx:value="button" />
-            <String fx:value="shadow-button" />
-         </styleClass>
       </Button>
       <Button fx:id="startButton" layoutX="944.0" layoutY="629.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="129.0" stylesheets="@../css/style.css">
          <styleClass>

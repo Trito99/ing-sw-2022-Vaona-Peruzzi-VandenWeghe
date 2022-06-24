@@ -25,39 +25,55 @@ public class NewGameScene extends ObservableView implements GenericScene {
 
     @FXML
     private ImageView backgroundImage;
-    @FXML
-    private Button exitButton;
-    @FXML
-    private Button nextButton;
-    @FXML
-    private Button twoPlayersButton;
-    @FXML
-    private Button threePlayersButton;
-    @FXML
-    private Button coopButton;
-    @FXML
-    private Button standardButton;
-    @FXML
-    private Button expertButton;
-    @FXML
-    private Text titleText;
-    @FXML
-    private Text playerText;
-    @FXML
-    private Text gameText;
-    @FXML
-    private Text exitText;
+
     @FXML
     private Text connectText;
 
     @FXML
+    private Button coopButton;
+
+    @FXML
+    private Text exitText1;
+
+    @FXML
+    private Text exitText11;
+
+    @FXML
+    private Button expertButton;
+
+    @FXML
     private Pane expertShadowPane;
+
     @FXML
     private Pane fourShadowPane;
+
+    @FXML
+    private Text gameText;
+
+    @FXML
+    private Button nextButton;
+
+    @FXML
+    private Text playerText;
+
+    @FXML
+    private Button standardButton;
+
     @FXML
     private Pane standardShadowPane;
+
+    @FXML
+    private Button threePlayersButton;
+
     @FXML
     private Pane threeShadowPane;
+
+    @FXML
+    private Text titleText;
+
+    @FXML
+    private Button twoPlayersButton;
+
     @FXML
     private Pane twoShadowPane;
 
@@ -65,7 +81,6 @@ public class NewGameScene extends ObservableView implements GenericScene {
     @FXML
     public void initialize(){
         nextButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickNext);
-        exitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickExit);
         twoPlayersButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickTwoPlayersButton);
         threePlayersButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickThreePlayersButton);
         coopButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickCoopButton);
@@ -131,16 +146,8 @@ public class NewGameScene extends ObservableView implements GenericScene {
         notifyObserver(obs -> obs.choosePlayersNumberAndDifficulty(playerNumber,difficulty));
     }
 
-    /** DA IMPLEMENTARE la exit */
-    private void clickExit(Event event){
-        notifyObserver(ObserverView :: updateDisconnect);
-        disableButtons();
-        System.exit(0);
-    }
-
     private void disableButtons(){
         nextButton.setDisable(true);
-        exitButton.setDisable(true);
         twoPlayersButton.setDisable(true);
         threePlayersButton.setDisable(true);
         coopButton.setDisable(true);

@@ -20,32 +20,33 @@ import static java.lang.System.out;
 public class ConnectToServerScene extends ObservableView implements GenericScene {
 
     @FXML
-    private ImageView connectBackground;
-    @FXML
     private Button connectButton;
+
     @FXML
     private Text connectText;
-    @FXML
-    private Button exitButton;
-    @FXML
-    private Text exitText;
+
     @FXML
     private TextField ipAddressField;
+
     @FXML
     private Text ipText1;
+
     @FXML
     private TextField portNumberField;
+
     @FXML
     private Text portText;
+
     @FXML
     private AnchorPane rootPane;
+
     @FXML
     private Text titleText;
+
 
     @FXML
     public void initialize(){
         connectButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickConnect);
-        exitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickExit);
     }
 
     private void clickConnect(Event event){
@@ -68,11 +69,6 @@ public class ConnectToServerScene extends ObservableView implements GenericScene
                 portNumberField.clear();
             }
         }
-    }
-
-    private void clickExit(Event event){
-        exitButton.setDisable(true);
-        GuiManager.changeRootPane(observers, event,"/fxml/start_game_scene");
     }
 
 }

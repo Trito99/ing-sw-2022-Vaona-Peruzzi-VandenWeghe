@@ -107,12 +107,6 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="exitButton" layoutX="99.0" layoutY="606.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="130.0" stylesheets="@../css/style.css">
-         <styleClass>
-            <String fx:value="button" />
-            <String fx:value="shadow-button" />
-         </styleClass>
-      </Button>
       <Text fx:id="playText" fill="WHITE" layoutX="1090.0" layoutY="641.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Play">
          <font>
             <Font size="25.0" />
@@ -124,11 +118,6 @@
             <String fx:value="button" />
          </styleClass>
       </Button>
-      <Text fx:id="exitText" fill="WHITE" layoutX="145.0" layoutY="640.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Exit">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Text>
       <Pane fx:id="card1ShadowPane" layoutX="160.0" layoutY="84.0" prefHeight="229.0" prefWidth="159.0" styleClass="shadowPane" stylesheets="@../css/dashboard_style.css" />
       <Pane fx:id="card2ShadowPane" layoutX="360.0" layoutY="84.0" prefHeight="229.0" prefWidth="159.0" styleClass="shadowPane" stylesheets="@../css/dashboard_style.css" />
       <Pane fx:id="card3ShadowPane" layoutX="560.0" layoutY="84.0" prefHeight="229.0" prefWidth="159.0" styleClass="shadowPane" stylesheets="@../css/dashboard_style.css" />
