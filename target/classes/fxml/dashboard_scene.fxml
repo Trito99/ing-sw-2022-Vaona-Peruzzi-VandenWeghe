@@ -27,14 +27,7 @@
             <BoxBlur />
          </effect>
       </ImageView>
-      <Pane fx:id="sxPane" layoutX="17.0" layoutY="13.0" prefHeight="695.0" prefWidth="182.0" styleClass="pane" stylesheets="@../css/dashboard_style.css">
-         <children>
-            <Text fx:id="textCoinsOnTable" fill="#000000bd" layoutX="23.0" layoutY="36.0" stroke="#000000bd" strokeLineCap="ROUND" strokeWidth="0.2" text="Coins on Table">
-               <font>
-                  <Font name="Helvetica" size="20.0" />
-               </font>
-            </Text>
-         </children></Pane>
+      <Pane fx:id="sxPane" layoutX="17.0" layoutY="13.0" prefHeight="695.0" prefWidth="182.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
       <Pane fx:id="trashPanePersonalSchool" layoutX="37.0" layoutY="233.0" prefHeight="215.0" prefWidth="145.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <children>
             <ImageView fx:id="ImageTrashPersonal" fitHeight="180.0" fitWidth="125.0" layoutX="12.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
@@ -44,6 +37,7 @@
             </ImageView>
          </children>
       </Pane>
+      <Pane fx:id="PaneCoinScore" layoutX="210.0" layoutY="17.0" prefHeight="32.0" prefWidth="172.0" style="-fx-background-radius: 10;" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
       <Pane fx:id="coinPaneTable" layoutX="58.0" layoutY="68.0" prefHeight="86.0" prefWidth="89.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <children>
             <ImageView fx:id="coinImageTable" fitHeight="78.0" fitWidth="82.0" layoutX="6.0" layoutY="4.0" opacity="0.57" pickOnBounds="true" preserveRatio="true">
@@ -54,19 +48,22 @@
                   <Point3D />
                </rotationAxis>
             </ImageView>
-            <Text fx:id="coinTextTable" fill="#ffffffbd" layoutX="22.0" layoutY="57.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="12" textAlignment="CENTER" wrappingWidth="45.6390380859375">
-               <font>
-                  <Font size="39.0" />
-               </font>
-            </Text>
          </children>
       </Pane>
-      <Pane fx:id="PaneCoinScore" layoutX="210.0" layoutY="17.0" prefHeight="32.0" prefWidth="172.0" style="-fx-background-radius: 10;" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Text fx:id="TextCoinscore" fill="#000000bd" layoutX="222.0" layoutY="38.0" stroke="#000000bd" strokeLineCap="ROUND" strokeWidth="0.2" text="Your coins score">
+      <Text fx:id="textCoinsOnTable" fill="#000000bd" layoutX="222.0" layoutY="38.0" stroke="#000000bd" strokeLineCap="ROUND" strokeWidth="0.2" text="Coins on table">
          <font>
             <Font name="Helvetica" size="20.0" />
          </font>
       </Text>
+      <Pane fx:id="coinPanePersonal" layoutX="238.0" layoutY="60.0" prefHeight="66.0" prefWidth="66.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+         <children>
+            <ImageView fx:id="coinImagePersonal" fitHeight="56.0" fitWidth="60.0" layoutX="5.0" layoutY="5.0" opacity="0.57" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/coin.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
       <Pane fx:id="islandPane" layoutX="258.0" layoutY="39.0" prefHeight="491.0" prefWidth="829.0">
          <children>
             <ImageView fx:id="island10" fitHeight="124.0" fitWidth="137.0" layoutX="110.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
@@ -258,22 +255,23 @@
             <ImageView fx:id="deckLogo" fitHeight="180.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
-      <Pane fx:id="coinPanePersonal" layoutX="238.0" layoutY="60.0" prefHeight="66.0" prefWidth="66.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
-         <children>
-            <ImageView fx:id="coinImagePersonal" fitHeight="56.0" fitWidth="60.0" layoutX="5.0" layoutY="5.0" opacity="0.57" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/coin.png" />
-               </image>
-            </ImageView>
-            <Text fx:id="coinTextPersonal" fill="#ffffffbd" layoutX="10.0" layoutY="43.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="2.0" text="0" textAlignment="CENTER" wrappingWidth="45.6390380859375">
-               <font>
-                  <Font size="27.0" />
-               </font>
-            </Text>
-         </children>
-      </Pane>
+      <Text fx:id="coinTextTable" fill="#ffffffbd" layoutX="247.0" layoutY="103.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="2.0" text="0" textAlignment="CENTER" wrappingWidth="45.6390380859375">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Text>
       <Pane fx:id="PaneTeamMate" layoutX="673.0" layoutY="664.0" prefHeight="32.0" prefWidth="172.0" style="-fx-background-radius: 10;" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
       <Text fx:id="TextTeamMate" fill="#000000bd" layoutX="685.0" layoutY="685.0" stroke="#000000bd" strokeLineCap="ROUND" strokeWidth="0.2" text="teamMate">
+         <font>
+            <Font name="Helvetica" size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="coinTextPersonal" fill="#ffffffbd" layoutX="77.0" layoutY="123.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="12" textAlignment="CENTER" wrappingWidth="45.6390380859375">
+         <font>
+            <Font size="39.0" />
+         </font>
+      </Text>
+      <Text fx:id="TextCoinscore" fill="#000000bd" layoutX="37.0" layoutY="47.0" stroke="#000000bd" strokeLineCap="ROUND" strokeWidth="0.2" text="Your coin score">
          <font>
             <Font name="Helvetica" size="20.0" />
          </font>
