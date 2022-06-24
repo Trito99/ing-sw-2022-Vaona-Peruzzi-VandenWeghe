@@ -68,16 +68,16 @@ public class GameController {
         }
     }
 
-    /** ???
+    /** Adds a player to the list of players of the match and initialize his dashboard and the match.
      *
      * @param nickname of the player added to the match.
      * @param gameId id of the match where we want to add the player.
      * @param playerDate of the player added to the match.
-     * @param virtualView
+     * @param virtualView virtualview of the player added.
      * @return  ???
      */
     public boolean newPlayer(String nickname, String gameId, GregorianCalendar playerDate, VirtualView virtualView) {
-
+        /** If the player added is the first of the match, ask him to choose the gamemode and the difficulty of the match and set up the table */
         if(allVirtualView.isEmpty()){
             generateTable();
             allVirtualView.put(nickname, virtualView);
@@ -132,7 +132,7 @@ public class GameController {
         gameSession.getTable().generateCharacterCardsOnTable(characterDeck.getCharacterCards());
     }
 
-    /** ????
+    /** receive the messages of choice from the client
      *
      * @param receivedMessage
      * @throws InvalidParameterException
@@ -140,6 +140,7 @@ public class GameController {
     public void getMessage(ClientMessage receivedMessage) throws InvalidParameterException {
         VirtualView virtualView = allVirtualView.get(receivedMessage.getNickname());
         switch (gameState) {
+            /** Phase of set up of the match */
             case INIT:
                 if(receivedMessage.getMessageType() == MessageType.PLAYERS_NUMBER_AND_DIFFICULTY_CHOSEN){
                     PlayersNumberAndDifficulty PNaDSelected = (PlayersNumberAndDifficulty) receivedMessage;
@@ -169,6 +170,7 @@ public class GameController {
                     virtualView.askTowerColorAndDeck(gameSession.getTowerColors(),gameSession.getAssistantDeckNames());
                 }
                 if(receivedMessage.getMessageType() == MessageType.TOWER_COLOR_AND_DECK_CHOSEN){
+                    /** Boolean to manage the error of choice that the client could make*/
                     boolean colorPresent = false, deckPresent = false;
                     TowerColorAndDeckChosen TCaDSelected = (TowerColorAndDeckChosen) receivedMessage;
                     for (TColor color : gameSession.getTowerColors()){
@@ -179,6 +181,7 @@ public class GameController {
                         if (assistantDeckName.toString().equals(TCaDSelected.getAssistantDeckName().toString()))
                             deckPresent = true;
                     }
+                    /** */
                     if(colorPresent && deckPresent) {
                         again = false;
                         gameSession.getPlayer(TCaDSelected.getNickname()).setTColor(TCaDSelected.getTowerColor());
@@ -187,6 +190,7 @@ public class GameController {
                         gameSession.getTowerColors().remove((TCaDSelected.getTowerColor()));
                         gameSession.getAssistantDeckNames().remove((TCaDSelected.getAssistantDeckName()));
                         virtualView.showWaitingMessage(gameSession.getGameMode()+" Mode.You have "+gameSession.getPlayer(TCaDSelected.getNickname()).getTColor()+" towers! \nWaiting for other players...");
+                        /** If it's coop Mode, set up the teams and the teamMates */
                         if(gameSession.getPlayer(TCaDSelected.getNickname()).getPlayerNumber().equals(PlayerNumber.PLAYER4)) {
                             for (Player player : gameSession.getListOfPlayers()) {
                                 for (Player player2 : gameSession.getListOfPlayers()) {
@@ -221,11 +225,13 @@ public class GameController {
 
                             }
                         }
-                    }else {
+                    }
+                    else {
                         virtualView.showMessage("\n⚠️Tower Color or Assistant Deck isn't available ⚠️");
                         virtualView.askTowerColorAndDeck(gameSession.getTowerColors(), gameSession.getAssistantDeckNames());
                         again = true;
                     }
+
                     if(allVirtualView.size() == maxPlayers){
                         boolean chosenColor = true;
                         for(Player player : gameSession.getListOfPlayers()){
@@ -244,10 +250,12 @@ public class GameController {
                     }
                 }
                 break;
+
             case PLANNING:
                 if(receivedMessage.getMessageType() == MessageType.ASSISTANTCARD_PLAYED){
                     AssistantCardPlayed CardSelected = (AssistantCardPlayed) receivedMessage;
                     int indexOfCurrentPlayer=gameSession.getListOfPlayers().indexOf(gameSession.getPlayer(receivedMessage.getNickname()));
+                    /** Boolean to manage the error of choice that the client could make */
                     boolean present = false, exists = false;
                     for(AssistantCard assistantCard : gameSession.getPlayer(getActivePlayer()).getDeckOfPlayer().getCardsInHand()){
                         if (assistantCard.getAssistantName().equals(CardSelected.getCardNickname())) {
@@ -268,6 +276,7 @@ public class GameController {
                     }
                     if (exists) {
                         if (!present) {
+                            /** if the card selected exists and wasn't already chosen, play it */
                             again = false;
                             gameSession.playAssistantCard(CardSelected.getCardNickname(), receivedMessage.getNickname());
                         } else {
@@ -281,6 +290,7 @@ public class GameController {
                         again = true;
                     }
                 }
+                /** If the card selected is correct, go to the next player */
                 if(!again) {
                     turnController.nextPlayer(turnController.getPlayerOrderByName());
                     roundIndex++;
@@ -291,6 +301,7 @@ public class GameController {
                 boolean turnFinished = false;
                 if(receivedMessage.getMessageType() == MessageType.PLACE_AND_STUDENT_FOR_MOVE_CHOSEN){
                     PlaceAndStudentForMoveChosen Choice = (PlaceAndStudentForMoveChosen) receivedMessage;
+                    /** Boolean to manage the error of choice that the client could make */
                     boolean present = false, full = false;
                     SColor studentColor = null;
 
@@ -369,7 +380,8 @@ public class GameController {
                             virtualView.showMessage("ACTION PHASE");
                             virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getEntry());
                         }
-                    }else if(!present && !Choice.getPlace().equals("CHARACTER CARD")){
+                    }
+                    else if(!Choice.getPlace().equals("CHARACTER CARD")){
                         virtualView.showMessage("\n⚠️Student selected is not available ⚠️");
                         again = true;
                         virtualView.showMessage("ACTION PHASE");
@@ -511,8 +523,8 @@ public class GameController {
                 }
                 if(receivedMessage.getMessageType() == MessageType.ID_CHOSEN){
                     IdChosen Choice = (IdChosen) receivedMessage;
+                    boolean present = false;
                     if(Choice.getChoice()) {
-                        boolean present = false;
                         for (IslandCard island : gameSession.getTable().getListOfIsland()) {
                             if (island.getIdIsland() == Choice.getId()) {
                                 present = true;
@@ -537,7 +549,6 @@ public class GameController {
                             virtualView.askId(true, characterCard,-1, null);
                         }
                     }else{
-                        boolean present = false;
                         if(!characterCard.getCardEffect().equals(CardEffect.ACROBAT) && !characterCard.getCardEffect().equals(CardEffect.COURTESAN) && !characterCard.getCardEffect().equals(CardEffect.BARD)){
                             for (Student student : characterCard.getStudentsOnCard()) {
                                 if (student.getIdStudent() == Choice.getId()) {
