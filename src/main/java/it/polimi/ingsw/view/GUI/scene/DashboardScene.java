@@ -33,6 +33,8 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private GameMode gameMode;
     private Difficulty difficulty;
 
+    private boolean planning = false;
+
 
     @FXML
     private VBox characterCardLayout1;
@@ -212,6 +214,10 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     private void deckButtonClicked(Event event){
         GuiManager.newStagePane(assistantDeck, "/fxml/view_deck_scene");
+        if(planning) {
+            assistantDeck.activatePlayButton();
+            assistantDeck.addAllObservers(observers);
+        }
     }
 
     public void updateAssistantCardDeck(ViewDeckScene viewDeckScene){
@@ -245,5 +251,9 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     public ViewDeckScene getAssistantDeck(){
         return assistantDeck;
+    }
+
+    public void setPlanning(boolean planning){
+        this.planning = planning;
     }
 }

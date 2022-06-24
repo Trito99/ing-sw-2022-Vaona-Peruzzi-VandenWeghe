@@ -77,7 +77,7 @@ public class GuiManager extends ObservableView {
     public static void newStagePane(GenericScene controller, String fxml) {
         try {
             Stage stage = new Stage();
-            //newStages.put(controller,stage);
+            newStages.put(controller,stage);
             FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource(fxml + ".fxml"));
             loader.setController(controller);
             Parent root = loader.load();

@@ -159,7 +159,8 @@ public class GUI extends ObservableView implements View {
         Platform.runLater(() -> {
             GuiManager.newStagePane(GuiManager.getMainScene().getAssistantDeck(), "/fxml/view_deck_scene");
             GuiManager.getMainScene().getAssistantDeck().activatePlayButton();
-            GuiManager.getMainScene().getAssistantDeck().addAllObservers(observers);});
+            GuiManager.getMainScene().getAssistantDeck().addAllObservers(observers);
+            GuiManager.getMainScene().setPlanning(true);});
     }
 
     @Override
