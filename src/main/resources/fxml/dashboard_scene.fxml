@@ -28,18 +28,18 @@
          </effect>
       </ImageView>
       <Pane fx:id="sxPane" layoutX="17.0" layoutY="13.0" prefHeight="695.0" prefWidth="182.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="trashPane" layoutX="37.0" layoutY="233.0" prefHeight="215.0" prefWidth="145.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+      <Pane fx:id="trashPanePersonalSchool" layoutX="37.0" layoutY="233.0" prefHeight="215.0" prefWidth="145.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <children>
-            <ImageView fitHeight="180.0" fitWidth="125.0" layoutX="12.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ImageTrashPersonal" fitHeight="180.0" fitWidth="125.0" layoutX="12.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/assistantCards/assistant1.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="coinPane" layoutX="71.0" layoutY="78.0" prefHeight="76.0" prefWidth="76.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+      <Pane fx:id="coinPanePersonal" layoutX="71.0" layoutY="78.0" prefHeight="76.0" prefWidth="76.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <children>
-            <ImageView fx:id="coinImage" fitHeight="70.0" fitWidth="70.0" layoutX="4.0" layoutY="3.0" opacity="0.57" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="coinImagePersonal" fitHeight="70.0" fitWidth="70.0" layoutX="4.0" layoutY="3.0" opacity="0.57" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/coin.png" />
                </image>
@@ -47,7 +47,7 @@
                   <Point3D />
                </rotationAxis>
             </ImageView>
-            <Text fx:id="coinText" fill="#ffffffbd" layoutX="21.0" layoutY="53.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="3" textAlignment="CENTER" wrappingWidth="36.6390380859375">
+            <Text fx:id="coinTextPersonal" fill="#ffffffbd" layoutX="21.0" layoutY="53.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="3" textAlignment="CENTER" wrappingWidth="36.6390380859375">
                <font>
                   <Font size="39.0" />
                </font>

@@ -18,16 +18,34 @@ import java.util.Map;
 public class ViewOtherSchoolScene2 extends ObservableView implements GenericScene{
 
     @FXML
+    private ImageView ImageTrash1_3Players;
+
+    @FXML
+    private ImageView ImageTrash2_3Players;
+
+    @FXML
     private Pane Pane_3players;
 
     @FXML
     private ImageView blueBackground;
 
     @FXML
-    private Button exitButton;
+    private ImageView coinImage1_3Players;
 
     @FXML
-    private Text exitText;
+    private ImageView coinImage2_3Players;
+
+    @FXML
+    private Pane coinPane1_3Players;
+
+    @FXML
+    private Pane coinPane2_3Players;
+
+    @FXML
+    private Text coinText1_3players;
+
+    @FXML
+    private Text coinText2_3players;
 
     @FXML
     private Text player1Text3players;
@@ -52,6 +70,12 @@ public class ViewOtherSchoolScene2 extends ObservableView implements GenericScen
 
     @FXML
     private Pane schoolPane2_3players;
+
+    @FXML
+    private Pane trashPane1_3Players;
+
+    @FXML
+    private Pane trashPane2_3Players;
 
     @FXML
     public void initialize(){

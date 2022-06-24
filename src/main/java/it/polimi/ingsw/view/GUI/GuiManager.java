@@ -89,11 +89,11 @@ public class GuiManager extends ObservableView {
     }
 
     public static void closeStage(GenericScene controller){
+        newStages.get(controller).close();
         for(GenericScene genericScene : newStages.keySet()){
             if(!(newStages.get(genericScene).isShowing()))
                 newStages.remove(genericScene);
         }
-        newStages.get(controller).close();
     }
 
 

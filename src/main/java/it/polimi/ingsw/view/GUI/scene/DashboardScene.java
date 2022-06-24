@@ -37,6 +37,9 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
 
     @FXML
+    private ImageView ImageTrashPersonal;
+
+    @FXML
     private VBox characterCardLayout1;
 
     @FXML
@@ -55,13 +58,13 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private Pane cloudPane;
 
     @FXML
-    private ImageView coinImage;
+    private ImageView coinImagePersonal;
 
     @FXML
-    private Pane coinPane;
+    private Pane coinPanePersonal;
 
     @FXML
-    private Text coinText;
+    private Text coinTextPersonal;
 
     @FXML
     private Button deckButton;
@@ -127,7 +130,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private Pane sxPane;
 
     @FXML
-    private Pane trashPane;
+    private Pane trashPanePersonalSchool;
 
     @FXML
     private Pane turnInfoPane;
@@ -143,12 +146,12 @@ public class DashboardScene extends ObservableView implements GenericScene {
     public void initializeDifficulty(Difficulty difficulty, int coinsOnTable){
         this.difficulty = difficulty;
         if(difficulty.equals(Difficulty.STANDARDMODE)){
-            coinPane.setVisible(false);
-            coinPane.setDisable(true);
-            coinImage.setVisible(false);
-            coinImage.setDisable(true);
+            coinPanePersonal.setVisible(false);
+            coinPanePersonal.setDisable(true);
+            coinImagePersonal.setVisible(false);
+            coinImagePersonal.setDisable(true);
         }else{
-            coinText.setText(String.valueOf(coinsOnTable));
+            coinTextPersonal.setText(String.valueOf(coinsOnTable));
         }
     }
 

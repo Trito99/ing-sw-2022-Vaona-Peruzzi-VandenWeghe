@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Point3D?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,28 +17,106 @@
          </image>
       </ImageView>
       <Pane fx:id="player1_4players" layoutX="84.0" layoutY="128.0" prefHeight="52.0" prefWidth="262.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="player3_4players" layoutX="83.0" layoutY="539.0" prefHeight="52.0" prefWidth="262.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="player2_4players" layoutX="84.0" layoutY="334.0" prefHeight="52.0" prefWidth="262.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="schoolPane3_4players" layoutX="372.0" layoutY="479.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="167.0" prefWidth="442.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="schoolPane2_4players" layoutX="372.0" layoutY="273.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="167.0" prefWidth="442.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="player3_4players" layoutX="83.0" layoutY="577.0" prefHeight="52.0" prefWidth="262.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="player2_4players" layoutX="83.0" layoutY="354.0" prefHeight="52.0" prefWidth="262.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="schoolPane3_4players" layoutX="371.0" layoutY="519.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="167.0" prefWidth="442.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="schoolPane2_4players" layoutX="371.0" layoutY="293.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="167.0" prefWidth="442.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
       <Pane fx:id="schoolPane1_4players" layoutX="372.0" layoutY="68.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="167.0" prefWidth="442.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
       <Pane fx:id="schoolPane31" layoutX="382.0" layoutY="79.0" prefHeight="150.0" prefWidth="421.0" />
-      <Pane fx:id="schoolPane32" layoutX="383.0" layoutY="281.0" prefHeight="150.0" prefWidth="421.0" />
-      <Pane fx:id="schoolPane33" layoutX="383.0" layoutY="490.0" prefHeight="150.0" prefWidth="421.0" />
+      <Pane fx:id="schoolPane32" layoutX="382.0" layoutY="301.0" prefHeight="150.0" prefWidth="421.0" />
+      <Pane fx:id="schoolPane33" layoutX="382.0" layoutY="530.0" prefHeight="150.0" prefWidth="421.0" />
       <Text fx:id="player1Text4players" fill="WHITE" layoutX="112.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text 1" textAlignment="CENTER" wrappingWidth="206.4000114440919">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="player2Text4players" fill="WHITE" layoutX="111.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text 2" textAlignment="CENTER" wrappingWidth="206.4000114440919">
+      <Text fx:id="player2Text4players" fill="WHITE" layoutX="110.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text 2" textAlignment="CENTER" wrappingWidth="206.4000114440919">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="player3Text4players" fill="WHITE" layoutX="111.0" layoutY="573.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text 3" textAlignment="CENTER" wrappingWidth="206.4000114440919">
+      <Text fx:id="player3Text4players" fill="WHITE" layoutX="111.0" layoutY="611.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text 3" textAlignment="CENTER" wrappingWidth="206.4000114440919">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
+      <Pane fx:id="trashPane1_4Players" layoutX="865.0" layoutY="29.0" prefHeight="215.0" prefWidth="145.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+         <children>
+            <ImageView fx:id="ImageTrash1_4Players" fitHeight="180.0" fitWidth="125.0" layoutX="12.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/assistantCards/assistant1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane fx:id="coinPane1_4Players" layoutX="1055.0" layoutY="109.0" prefHeight="76.0" prefWidth="76.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+         <children>
+            <ImageView fx:id="coinImage1_4Players" fitHeight="70.0" fitWidth="70.0" layoutX="4.0" layoutY="3.0" opacity="0.57" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/coin.png" />
+               </image>
+               <rotationAxis>
+                  <Point3D />
+               </rotationAxis>
+            </ImageView>
+            <Text fx:id="coinText1_4players" fill="#ffffffbd" layoutX="21.0" layoutY="53.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="1" textAlignment="CENTER" wrappingWidth="36.6390380859375">
+               <font>
+                  <Font size="39.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="trashPane2_4Players" layoutX="865.0" layoutY="262.0" prefHeight="215.0" prefWidth="145.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+         <children>
+            <ImageView fx:id="ImageTrash2_4Players" fitHeight="180.0" fitWidth="125.0" layoutX="12.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/assistantCards/assistant1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane fx:id="coinPane2_4Players" layoutX="1055.0" layoutY="339.0" prefHeight="76.0" prefWidth="76.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+         <children>
+            <ImageView fx:id="coinImage2_4Players" fitHeight="70.0" fitWidth="70.0" layoutX="4.0" layoutY="3.0" opacity="0.57" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/coin.png" />
+               </image>
+               <rotationAxis>
+                  <Point3D />
+               </rotationAxis>
+            </ImageView>
+            <Text fx:id="coinText2_4players" fill="#ffffffbd" layoutX="21.0" layoutY="53.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="1" textAlignment="CENTER" wrappingWidth="36.6390380859375">
+               <font>
+                  <Font size="39.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="trashPane3_4Players" layoutX="865.0" layoutY="495.0" prefHeight="215.0" prefWidth="145.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+         <children>
+            <ImageView fx:id="ImageTrash3_4Players" fitHeight="180.0" fitWidth="125.0" layoutX="12.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/assistantCards/assistant1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane fx:id="coinPane3_4Players" layoutX="1055.0" layoutY="563.0" prefHeight="76.0" prefWidth="76.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+         <children>
+            <ImageView fx:id="coinImage3_4Players" fitHeight="70.0" fitWidth="70.0" layoutX="4.0" layoutY="3.0" opacity="0.57" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/coin.png" />
+               </image>
+               <rotationAxis>
+                  <Point3D />
+               </rotationAxis>
+            </ImageView>
+            <Text fx:id="coinText3_4players" fill="#ffffffbd" layoutX="21.0" layoutY="53.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="1" textAlignment="CENTER" wrappingWidth="36.6390380859375">
+               <font>
+                  <Font size="39.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
