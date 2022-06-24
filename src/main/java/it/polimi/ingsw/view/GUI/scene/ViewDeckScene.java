@@ -194,68 +194,68 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
 
     private void clickCard1(Event event){
         initializeCardsInHand();
-        card1ShadowPane.setStyle("-fx-background-color: white");
+        card1ShadowPane.setStyle("-fx-background-color: blue");
         card1ShadowPane.setVisible(true);
         setCardChosen("lion");
     }
 
     private void clickCard2(Event event){
         initializeCardsInHand();
-        card2ShadowPane.setStyle("-fx-background-color: white");
+        card2ShadowPane.setStyle("-fx-background-color: blue");
         card2ShadowPane.setVisible(true);
         setCardChosen("ostrich");
     }
 
     private void clickCard3(Event event){
         initializeCardsInHand();
-        card3ShadowPane.setStyle("-fx-background-color: white");
+        card3ShadowPane.setStyle("-fx-background-color: blue");
         card3ShadowPane.setVisible(true);
         setCardChosen("cat");
     }
 
     private void clickCard4(Event event){
         initializeCardsInHand();
-        card4ShadowPane.setStyle("-fx-background-color: white");
+        card4ShadowPane.setStyle("-fx-background-color: blue");
         card4ShadowPane.setVisible(true);
         setCardChosen("falcon");
     }
 
     private void clickCard5(Event event){
         initializeCardsInHand();
-        card5ShadowPane.setStyle("-fx-background-color: white");
+        card5ShadowPane.setStyle("-fx-background-color: blue");
         card5ShadowPane.setVisible(true);
         setCardChosen("fox");
     }
 
     private void clickCard6(Event event){
         initializeCardsInHand();
-        card6ShadowPane.setStyle("-fx-background-color: white");
+        card6ShadowPane.setStyle("-fx-background-color: blue");
         card6ShadowPane.setVisible(true);
         setCardChosen("lizard");
     }
 
     private void clickCard7(Event event){
         initializeCardsInHand();
-        card7ShadowPane.setStyle("-fx-background-color: white");
+        card7ShadowPane.setStyle("-fx-background-color: blue");
         card7ShadowPane.setVisible(true);
         setCardChosen("octopus");
     }
 
     private void clickCard8(Event event){
         initializeCardsInHand();
-        card8ShadowPane.setStyle("-fx-background-color: white");
+        card8ShadowPane.setStyle("-fx-background-color: blue");
         card8ShadowPane.setVisible(true);
         setCardChosen("dog");
     }
     private void clickCard9(Event event){
         initializeCardsInHand();
-        card9ShadowPane.setStyle("-fx-background-color: white");
+        card9ShadowPane.setStyle("-fx-background-color: blue");
         card9ShadowPane.setVisible(true);
         setCardChosen("elephant");
     }
     private void clickCard10(Event event){
         initializeCardsInHand();
-        card9ShadowPane.setStyle("-fx-background-color: white");
+        card9ShadowPane.setStyle("-fx-background-color: blue");
         card9ShadowPane.setVisible(true);
         setCardChosen("turtle");
     }
