@@ -28,11 +28,6 @@
             <TableColumn fx:id="currentPlayers" editable="false" prefWidth="117.60001220703123" sortable="false" style="-fx-alignment: CENTER; -fx-font-family: Helvetica; -fx-background-color: #f5f5f5; -fx-border-color: #e5e4e2;" text="CURRENT PLAYERS" />
         </columns>
       </TableView>
-      <Text fx:id="exitText" fill="WHITE" layoutX="192.0" layoutY="677.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Exit">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Text>
       <Text fx:id="connectText" fill="WHITE" layoutX="1042.0" layoutY="677.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Next">
          <font>
             <Font size="25.0" />
@@ -98,11 +93,6 @@
             <Font name="Helvetica" size="30.0" />
          </font>
       </Text>
-      <Button fx:id="exitButton" layoutX="146.0" layoutY="642.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="130.0" stylesheets="@../css/style.css">
-         <styleClass>
-            <String fx:value="button" />
-            <String fx:value="shadow-button" />
-         </styleClass></Button>
       <Button fx:id="nextButton" layoutX="1003.0" layoutY="643.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="129.0" stylesheets="@../css/style.css">
          <styleClass>
             <String fx:value="shadow-button" />
