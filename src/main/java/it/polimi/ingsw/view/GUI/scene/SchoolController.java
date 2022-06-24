@@ -1,5 +1,7 @@
 package it.polimi.ingsw.view.GUI.scene;
 
+import it.polimi.ingsw.model.assistant.AssistantCard;
+import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.school.Prof;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.Tower;
@@ -22,6 +24,10 @@ import java.util.Set;
 
 public class SchoolController extends ObservableView implements GenericScene {
     private School school;
+
+    private int coins;
+    private AssistantCard trash;
+    private Difficulty difficulty;
     private Map<ImageView,Integer> entryMap = new HashMap<>();
     @FXML
     private ImageView blue_1;
@@ -249,8 +255,11 @@ public class SchoolController extends ObservableView implements GenericScene {
     private Pane yellow_table;
 
 
-    public SchoolController(School school) {
+    public SchoolController(School school, AssistantCard trash, Difficulty difficulty, int coins) {
         this.school = school;
+        this.trash = trash;
+        this.difficulty = difficulty;
+        this.coins = coins;
     }
 
     public void initialize(){
@@ -360,7 +369,6 @@ public class SchoolController extends ObservableView implements GenericScene {
         }
     }
 
-
     private void hide(){
         for(Node node : entry.getChildren()){
             node.setVisible(false);
@@ -381,5 +389,17 @@ public class SchoolController extends ObservableView implements GenericScene {
         for(Node node : towerZone.getChildren()){
             node.setDisable(true);
         }
+    }
+
+    public int getCoins() {
+        return coins;
+    }
+
+    public AssistantCard getTrash() {
+        return trash;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
     }
 }

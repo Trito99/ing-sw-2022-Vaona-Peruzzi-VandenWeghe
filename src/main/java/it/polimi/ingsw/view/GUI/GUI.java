@@ -100,7 +100,7 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void showPersonalSchool(School school, String nickname, AssistantCard trash, Difficulty difficulty, int coins, GameMode gameMode, String teamMate) {
-        SchoolController schoolController = new SchoolController(school);
+        SchoolController schoolController = new SchoolController(school,trash, difficulty, coins);
         if(nickname.equals("Your "))
             Platform.runLater(() -> {
                 try {

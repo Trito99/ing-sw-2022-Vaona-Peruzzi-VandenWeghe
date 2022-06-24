@@ -28,12 +28,28 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     private Map<String,SchoolController> schoolControllers = new HashMap<>();
 
+    private static Map<String, String> assistantCardMap;
+    static {
+        assistantCardMap = new HashMap<>();
+        assistantCardMap.put("lion", "/images/assistantCards/assistant1.png");
+        assistantCardMap.put("ostrich", "/images/assistantCards/assistant2.png");
+        assistantCardMap.put("cat", "/images/assistantCards/assistant3.png");
+        assistantCardMap.put("falcon", "/images/assistantCards/assistant4.png");
+        assistantCardMap.put("fox", "/images/assistantCards/assistant5.png");
+        assistantCardMap.put("lizard", "/images/assistantCards/assistant6.png");
+        assistantCardMap.put("octopus", "/images/assistantCards/assistant7.png");
+        assistantCardMap.put("dog", "/images/assistantCards/assistant8.png");
+        assistantCardMap.put("elephant", "/images/assistantCards/assistant9.png");
+        assistantCardMap.put("turtle", "/images/assistantCards/assistant10.png");
+    }
+
     private ViewDeckScene assistantDeck;
 
     private GameMode gameMode;
     private Difficulty difficulty;
 
     private boolean planning = false;
+
 
 
     @FXML
@@ -162,6 +178,13 @@ public class DashboardScene extends ObservableView implements GenericScene {
         loader.setController(controller);
         AnchorPane personalSchool = loader.load();
         schoolPane.getChildren().setAll(personalSchool);
+        if(controller.getTrash()!=null) {
+            ImageTrashPersonal.setVisible(true);
+            ImageTrashPersonal.setImage(new Image(assistantCardMap.get(controller.getTrash().getAssistantName())));
+        }else
+            ImageTrashPersonal.setVisible(false);
+        if(difficulty.equals(Difficulty.EXPERTMODE))
+            coinTextPersonal.setText(String.valueOf(controller.getCoins()));
         if(!gameMode.equals(GameMode.COOP)){
             PaneTeamMate.setVisible(false);
             PaneTeamMate.setDisable(true);
@@ -192,10 +215,9 @@ public class DashboardScene extends ObservableView implements GenericScene {
             PaneCoinScore.setVisible(false);
             coinTextPersonal.setVisible(false);
             coinTextPersonal.setDisable(true);
+            ImageTrashPersonal.setVisible(false);
         }else{
             coinTextTable.setText(String.valueOf(coinsOnTable));
-            coinTextPersonal.setText(String.valueOf(1));
-
         }
     }
 
@@ -301,5 +323,9 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     public void setPlanning(boolean planning){
         this.planning = planning;
+    }
+
+    public Map<String,String> getAssistantCardMap(){
+        return assistantCardMap;
     }
 }
