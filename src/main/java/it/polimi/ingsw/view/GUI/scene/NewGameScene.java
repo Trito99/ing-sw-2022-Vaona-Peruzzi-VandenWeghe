@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 
@@ -49,6 +50,17 @@ public class NewGameScene extends ObservableView implements GenericScene {
     @FXML
     private Text connectText;
 
+    @FXML
+    private Pane expertShadowPane;
+    @FXML
+    private Pane fourShadowPane;
+    @FXML
+    private Pane standardShadowPane;
+    @FXML
+    private Pane threeShadowPane;
+    @FXML
+    private Pane twoShadowPane;
+
 
     @FXML
     public void initialize(){
@@ -59,25 +71,49 @@ public class NewGameScene extends ObservableView implements GenericScene {
         coopButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickCoopButton);
         standardButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickStandardButton);
         expertButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickExpertButton);
+
+        twoShadowPane.setVisible(false);
+        threeShadowPane.setVisible(false);
+        fourShadowPane.setVisible(false);
+        standardShadowPane.setVisible(false);
+        expertButton.setVisible(false);
     }
 
     private void clickTwoPlayersButton(Event event){
+        fourShadowPane.setVisible(false);
+        threeShadowPane.setVisible(false);
+        twoShadowPane.setStyle("-fx-background-color: green");
+        twoShadowPane.setVisible(true);
         setPlayerNumber(2);
     }
 
     private void clickThreePlayersButton(Event event){
+        twoShadowPane.setVisible(false);
+        fourShadowPane.setVisible(false);
+        threeShadowPane.setStyle("-fx-background-color: green");
+        threeShadowPane.setVisible(true);
         setPlayerNumber(3);
     }
 
     private void clickCoopButton(Event event){
+        twoShadowPane.setVisible(false);
+        threeShadowPane.setVisible(false);
+        fourShadowPane.setStyle("-fx-background-color: green");
+        fourShadowPane.setVisible(true);
         setPlayerNumber(4);
     }
 
     private void clickStandardButton(Event event){
+        expertShadowPane.setVisible(false);
+        standardShadowPane.setStyle("-fx-background-color: green");
+        standardShadowPane.setVisible(true);
         setDifficulty(Difficulty.STANDARDMODE);
     }
 
     private void clickExpertButton(Event event){
+        standardShadowPane.setVisible(false);
+        expertShadowPane.setStyle("-fx-background-color: green");
+        expertShadowPane.setVisible(true);
         setDifficulty(Difficulty.EXPERTMODE);
     }
 
