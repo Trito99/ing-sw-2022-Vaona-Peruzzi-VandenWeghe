@@ -128,6 +128,7 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
             playButton.setVisible(false);
             notifyObserver(obs -> obs.chooseAssistantCard(cardChosen));
             GuiManager.getMainScene().setPlanning(false);
+            GuiManager.closeStage(this);
         }else {
             playButton.setDisable(false);
             playButton.setVisible(true);

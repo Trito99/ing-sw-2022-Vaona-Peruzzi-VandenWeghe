@@ -113,17 +113,17 @@
             <String fx:value="shadow-button" />
          </styleClass>
       </Button>
+      <Text fx:id="playText" fill="WHITE" layoutX="1090.0" layoutY="641.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Play">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
       <Button fx:id="playButton" layoutX="1051.0" layoutY="607.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="129.0" stylesheets="@../css/style.css">
          <styleClass>
             <String fx:value="shadow-button" />
             <String fx:value="button" />
          </styleClass>
       </Button>
-      <Text fx:id="playText" fill="WHITE" layoutX="1090.0" layoutY="641.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Play">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Text>
       <Text fx:id="exitText" fill="WHITE" layoutX="145.0" layoutY="640.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Exit">
          <font>
             <Font size="25.0" />

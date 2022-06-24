@@ -216,7 +216,6 @@ public class DashboardScene extends ObservableView implements GenericScene {
         GuiManager.newStagePane(assistantDeck, "/fxml/view_deck_scene");
         if(planning) {
             assistantDeck.activatePlayButton();
-            assistantDeck.addAllObservers(observers);
         }
     }
 

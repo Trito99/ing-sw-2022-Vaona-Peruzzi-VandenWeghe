@@ -88,6 +88,14 @@ public class GuiManager extends ObservableView {
         }
     }
 
+    public static void closeStage(GenericScene controller){
+        for(GenericScene genericScene : newStages.keySet()){
+            if(!(newStages.get(genericScene).isShowing()))
+                newStages.remove(genericScene);
+        }
+        newStages.get(controller).close();
+    }
+
 
     public static <T> void changeRootMainScene(List<ObserverView> observerList) {
         T controller;
