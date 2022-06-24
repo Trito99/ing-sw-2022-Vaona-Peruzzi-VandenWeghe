@@ -27,7 +27,14 @@
             <BoxBlur />
          </effect>
       </ImageView>
-      <Pane fx:id="sxPane" layoutX="17.0" layoutY="13.0" prefHeight="695.0" prefWidth="182.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="sxPane" layoutX="17.0" layoutY="13.0" prefHeight="695.0" prefWidth="182.0" styleClass="pane" stylesheets="@../css/dashboard_style.css">
+         <children>
+            <Text fx:id="textCoinsOnTable" fill="#000000bd" layoutX="23.0" layoutY="36.0" stroke="#000000bd" strokeLineCap="ROUND" strokeWidth="0.2" text="Coins on Table">
+               <font>
+                  <Font name="Helvetica" size="20.0" />
+               </font>
+            </Text>
+         </children></Pane>
       <Pane fx:id="trashPanePersonalSchool" layoutX="37.0" layoutY="233.0" prefHeight="215.0" prefWidth="145.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <children>
             <ImageView fx:id="ImageTrashPersonal" fitHeight="180.0" fitWidth="125.0" layoutX="12.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
@@ -37,9 +44,9 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="coinPanePersonal" layoutX="71.0" layoutY="78.0" prefHeight="76.0" prefWidth="76.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+      <Pane fx:id="coinPaneTable" layoutX="58.0" layoutY="68.0" prefHeight="86.0" prefWidth="89.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <children>
-            <ImageView fx:id="coinImagePersonal" fitHeight="70.0" fitWidth="70.0" layoutX="4.0" layoutY="3.0" opacity="0.57" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="coinImageTable" fitHeight="78.0" fitWidth="82.0" layoutX="6.0" layoutY="4.0" opacity="0.57" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/coin.png" />
                </image>
@@ -47,15 +54,15 @@
                   <Point3D />
                </rotationAxis>
             </ImageView>
-            <Text fx:id="coinTextPersonal" fill="#ffffffbd" layoutX="21.0" layoutY="53.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="3" textAlignment="CENTER" wrappingWidth="36.6390380859375">
+            <Text fx:id="coinTextTable" fill="#ffffffbd" layoutX="22.0" layoutY="57.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="12" textAlignment="CENTER" wrappingWidth="45.6390380859375">
                <font>
                   <Font size="39.0" />
                </font>
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="turnInfoPane" layoutX="210.0" layoutY="17.0" prefHeight="32.0" prefWidth="160.0" style="-fx-background-radius: 10;" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Text fill="#000000bd" layoutX="222.0" layoutY="38.0" stroke="#000000bd" strokeLineCap="ROUND" strokeWidth="0.2" text="player(1) ">
+      <Pane fx:id="PaneCoinScore" layoutX="210.0" layoutY="17.0" prefHeight="32.0" prefWidth="172.0" style="-fx-background-radius: 10;" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Text fx:id="TextCoinscore" fill="#000000bd" layoutX="222.0" layoutY="38.0" stroke="#000000bd" strokeLineCap="ROUND" strokeWidth="0.2" text="Your coins score">
          <font>
             <Font name="Helvetica" size="20.0" />
          </font>
@@ -251,5 +258,25 @@
             <ImageView fx:id="deckLogo" fitHeight="180.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
+      <Pane fx:id="coinPanePersonal" layoutX="238.0" layoutY="60.0" prefHeight="66.0" prefWidth="66.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+         <children>
+            <ImageView fx:id="coinImagePersonal" fitHeight="56.0" fitWidth="60.0" layoutX="5.0" layoutY="5.0" opacity="0.57" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/coin.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="coinTextPersonal" fill="#ffffffbd" layoutX="10.0" layoutY="43.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="2.0" text="0" textAlignment="CENTER" wrappingWidth="45.6390380859375">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="PaneTeamMate" layoutX="673.0" layoutY="664.0" prefHeight="32.0" prefWidth="172.0" style="-fx-background-radius: 10;" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Text fx:id="TextTeamMate" fill="#000000bd" layoutX="685.0" layoutY="685.0" stroke="#000000bd" strokeLineCap="ROUND" strokeWidth="0.2" text="teamMate">
+         <font>
+            <Font name="Helvetica" size="20.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

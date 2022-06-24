@@ -104,7 +104,7 @@ public class GUI extends ObservableView implements View {
         if(nickname.equals("Your "))
             Platform.runLater(() -> {
                 try {
-                    GuiManager.getMainScene().updatePersonalSchool(schoolController);
+                    GuiManager.getMainScene().updatePersonalSchool(schoolController, gameMode, teamMate);
                     Platform.runLater(() -> GuiManager.changeRootMainScene(observers));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -121,7 +121,7 @@ public class GUI extends ObservableView implements View {
         this.table = table;
         if (!gameStarted) {
             Platform.runLater(() -> GuiManager.changeRootMainScene(observers));
-            Platform.runLater(() -> GuiManager.getMainScene().initializeDifficulty(difficulty,table.getCoinsOnTable()));
+            Platform.runLater(() -> GuiManager.getMainScene().initializeDifficulty(difficulty, table.getCoinsOnTable()));
             gameStarted = true;
         }else{
             Platform.runLater(() -> GuiManager.getMainScene());

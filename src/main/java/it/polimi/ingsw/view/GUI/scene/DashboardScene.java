@@ -40,6 +40,18 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private ImageView ImageTrashPersonal;
 
     @FXML
+    private Pane PaneCoinScore;
+
+    @FXML
+    private Pane PaneTeamMate;
+
+    @FXML
+    private Text TextCoinscore;
+
+    @FXML
+    private Text TextTeamMate;
+
+    @FXML
     private VBox characterCardLayout1;
 
     @FXML
@@ -61,10 +73,19 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private ImageView coinImagePersonal;
 
     @FXML
+    private ImageView coinImageTable;
+
+    @FXML
     private Pane coinPanePersonal;
 
     @FXML
+    private Pane coinPaneTable;
+
+    @FXML
     private Text coinTextPersonal;
+
+    @FXML
+    private Text coinTextTable;
 
     @FXML
     private Button deckButton;
@@ -130,28 +151,51 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private Pane sxPane;
 
     @FXML
-    private Pane trashPanePersonalSchool;
+    private Text textCoinsOnTable;
 
     @FXML
-    private Pane turnInfoPane;
+    private Pane trashPanePersonalSchool;
 
 
-    public void updatePersonalSchool(SchoolController controller) throws IOException {
+    public void updatePersonalSchool(SchoolController controller, GameMode gameMode, String teamMate) throws IOException {
         FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource("/fxml/school.fxml"));
         loader.setController(controller);
         AnchorPane personalSchool = loader.load();
         schoolPane.getChildren().setAll(personalSchool);
+        if(!gameMode.equals(GameMode.COOP)){
+            PaneTeamMate.setVisible(false);
+            PaneTeamMate.setDisable(true);
+            TextTeamMate.setDisable(true);
+            TextTeamMate.setVisible(false);
+        }
+        else
+            TextTeamMate.setText("TeamMate: " + teamMate);
+
     }
 
     public void initializeDifficulty(Difficulty difficulty, int coinsOnTable){
         this.difficulty = difficulty;
         if(difficulty.equals(Difficulty.STANDARDMODE)){
+            coinPaneTable.setVisible(false);
+            coinPaneTable.setDisable(true);
+            coinImageTable.setVisible(false);
+            coinImageTable.setDisable(true);
             coinPanePersonal.setVisible(false);
             coinPanePersonal.setDisable(true);
             coinImagePersonal.setVisible(false);
             coinImagePersonal.setDisable(true);
+            textCoinsOnTable.setDisable(true);
+            textCoinsOnTable.setVisible(false);
+            TextCoinscore.setVisible(false);
+            TextCoinscore.setDisable(true);
+            PaneCoinScore.setDisable(true);
+            PaneCoinScore.setVisible(false);
+            coinTextPersonal.setVisible(false);
+            coinTextPersonal.setDisable(true);
         }else{
-            coinTextPersonal.setText(String.valueOf(coinsOnTable));
+            coinTextTable.setText(String.valueOf(coinsOnTable));
+            coinTextPersonal.setText(String.valueOf(1));
+
         }
     }
 

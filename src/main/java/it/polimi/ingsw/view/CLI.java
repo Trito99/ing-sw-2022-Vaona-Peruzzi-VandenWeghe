@@ -300,9 +300,6 @@ public class CLI extends ObservableView implements View {
     @Override
     public void showTable(Table table, Difficulty difficulty) {
 
-
-
-
         out.print("\n**** TABLE ****");
         printIslandCards(table, difficulty);
         out.println("\n----------------------------------------------");
