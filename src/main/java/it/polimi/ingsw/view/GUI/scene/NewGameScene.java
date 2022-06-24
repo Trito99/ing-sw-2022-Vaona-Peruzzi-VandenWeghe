@@ -76,7 +76,7 @@ public class NewGameScene extends ObservableView implements GenericScene {
         threeShadowPane.setVisible(false);
         fourShadowPane.setVisible(false);
         standardShadowPane.setVisible(false);
-        expertButton.setVisible(false);
+        expertShadowPane.setVisible(false);
     }
 
     private void clickTwoPlayersButton(Event event){
