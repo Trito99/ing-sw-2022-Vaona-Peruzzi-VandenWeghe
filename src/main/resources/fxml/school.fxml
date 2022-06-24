@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -298,6 +299,9 @@
             <image>
                <Image url="@../images/students/Bstudent.png" />
             </image>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
          </ImageView>
          <ImageView fx:id="blue_entry_3" fitHeight="20.0" fitWidth="17.0" layoutX="41.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -328,6 +332,9 @@
             <image>
                <Image url="@../images/students/Bstudent.png" />
             </image>
+            <cursor>
+               <Cursor fx:constant="DEFAULT" />
+            </cursor>
          </ImageView>
          <ImageView fx:id="blue_entry_9" fitHeight="20.0" fitWidth="17.0" layoutX="41.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
             <image>

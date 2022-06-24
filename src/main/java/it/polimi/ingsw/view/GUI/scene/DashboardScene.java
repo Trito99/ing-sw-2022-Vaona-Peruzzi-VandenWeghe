@@ -28,6 +28,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     private Map<String,SchoolController> schoolControllers = new HashMap<>();
 
+    private SchoolController personalSchoolController;
     private static Map<String, String> assistantCardMap;
     static {
         assistantCardMap = new HashMap<>();
@@ -49,6 +50,8 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private Difficulty difficulty;
 
     private boolean planning = false;
+
+    private boolean actionStudent = false;
 
 
 
@@ -174,6 +177,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
 
     public void updatePersonalSchool(SchoolController controller, GameMode gameMode, String teamMate) throws IOException {
+        personalSchoolController = controller;
         FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource("/fxml/school.fxml"));
         loader.setController(controller);
         AnchorPane personalSchool = loader.load();
@@ -193,7 +197,6 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }
         else
             TextTeamMate.setText("TeamMate: " + teamMate);
-
     }
 
     public void initializeDifficulty(Difficulty difficulty, int coinsOnTable){

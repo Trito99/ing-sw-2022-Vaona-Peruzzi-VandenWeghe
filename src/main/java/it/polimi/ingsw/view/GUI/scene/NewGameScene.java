@@ -19,7 +19,7 @@ import java.util.Locale;
 
 public class NewGameScene extends ObservableView implements GenericScene {
 
-    private int playerNumber;
+    private int playerNumber = 0;
     private Difficulty difficulty;
 
 
@@ -97,7 +97,7 @@ public class NewGameScene extends ObservableView implements GenericScene {
     private void clickTwoPlayersButton(Event event){
         fourShadowPane.setVisible(false);
         threeShadowPane.setVisible(false);
-        twoShadowPane.setStyle("-fx-background-color: green");
+        twoShadowPane.setStyle("-fx-background-color: red");
         twoShadowPane.setVisible(true);
         setPlayerNumber(2);
     }
@@ -105,7 +105,7 @@ public class NewGameScene extends ObservableView implements GenericScene {
     private void clickThreePlayersButton(Event event){
         twoShadowPane.setVisible(false);
         fourShadowPane.setVisible(false);
-        threeShadowPane.setStyle("-fx-background-color: green");
+        threeShadowPane.setStyle("-fx-background-color: red");
         threeShadowPane.setVisible(true);
         setPlayerNumber(3);
     }
@@ -113,21 +113,21 @@ public class NewGameScene extends ObservableView implements GenericScene {
     private void clickCoopButton(Event event){
         twoShadowPane.setVisible(false);
         threeShadowPane.setVisible(false);
-        fourShadowPane.setStyle("-fx-background-color: green");
+        fourShadowPane.setStyle("-fx-background-color: red");
         fourShadowPane.setVisible(true);
         setPlayerNumber(4);
     }
 
     private void clickStandardButton(Event event){
         expertShadowPane.setVisible(false);
-        standardShadowPane.setStyle("-fx-background-color: green");
+        standardShadowPane.setStyle("-fx-background-color: red");
         standardShadowPane.setVisible(true);
         setDifficulty(Difficulty.STANDARDMODE);
     }
 
     private void clickExpertButton(Event event){
         standardShadowPane.setVisible(false);
-        expertShadowPane.setStyle("-fx-background-color: green");
+        expertShadowPane.setStyle("-fx-background-color: red");
         expertShadowPane.setVisible(true);
         setDifficulty(Difficulty.EXPERTMODE);
     }
@@ -142,8 +142,10 @@ public class NewGameScene extends ObservableView implements GenericScene {
 
     /** gestisce il click sul pulsante */
     private void clickNext(Event event){
-        disableButtons();
-        notifyObserver(obs -> obs.choosePlayersNumberAndDifficulty(playerNumber,difficulty));
+        if(playerNumber!=0 && difficulty!=null) {
+            disableButtons();
+            notifyObserver(obs -> obs.choosePlayersNumberAndDifficulty(playerNumber, difficulty));
+        }
     }
 
     private void disableButtons(){

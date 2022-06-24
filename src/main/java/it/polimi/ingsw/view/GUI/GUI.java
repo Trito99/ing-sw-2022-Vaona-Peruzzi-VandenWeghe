@@ -157,9 +157,10 @@ public class GUI extends ObservableView implements View {
     @Override
     public void askAssistantCardToPlay() {
         Platform.runLater(() -> {
-            showMessage("Choose an Assistant Card");
             GuiManager.getMainScene().getAssistantDeck().activatePlayButton();
             GuiManager.getMainScene().setPlanning(true);});
+        showMessage("Choose an Assistant Card");
+
     }
 
     @Override

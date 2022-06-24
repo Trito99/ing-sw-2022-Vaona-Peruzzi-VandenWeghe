@@ -142,22 +142,11 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
     }
 
     private void initializeTowerColorsAndAssistantDeck(){
-        for(TColor tcolor : towerColors){
-            switch(tcolor){
-                case WHITE:
-                    whiteTower.setDisable(false);
-                    whiteShadowPane.setVisible(false);
-                    break;
-                case BLACK:
-                    blackTower.setDisable(false);
-                    blackShadowPane.setVisible(false);
-                    break;
-                case GREY:
-                    greyTower.setDisable(false);
-                    greyShadowPane.setVisible(false);
-                    break;
-            }
-        }
+        initializeTowerColors();
+        initializeAssistantDeck();
+    }
+
+    private void initializeAssistantDeck(){
         for(AssistantDeckName assistantDeckName : assistantDeckNames){
             switch (assistantDeckName){
                 case WIZARD1:
@@ -180,6 +169,25 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
         }
     }
 
+    private void initializeTowerColors() {
+        for (TColor tcolor : towerColors) {
+            switch (tcolor) {
+                case WHITE:
+                    whiteTower.setDisable(false);
+                    whiteShadowPane.setVisible(false);
+                    break;
+                case BLACK:
+                    blackTower.setDisable(false);
+                    blackShadowPane.setVisible(false);
+                    break;
+                case GREY:
+                    greyTower.setDisable(false);
+                    greyShadowPane.setVisible(false);
+                    break;
+            }
+        }
+    }
+
     private void initializeButtons(){
         whiteTower.setDisable(true);
         blackTower.setDisable(true);
@@ -191,50 +199,50 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
     }
 
     private void clickWhite(Event event){
-        initializeTowerColorsAndAssistantDeck();
-        whiteShadowPane.setStyle("-fx-background-color: green");
+        initializeTowerColors();
+        whiteShadowPane.setStyle("-fx-background-color: red");
         whiteShadowPane.setVisible(true);
         setColorChosen(TColor.WHITE);
     }
 
     private void clickBlack(Event event){
-        initializeTowerColorsAndAssistantDeck();
-        blackShadowPane.setStyle("-fx-background-color: blue");
+        initializeTowerColors();
+        blackShadowPane.setStyle("-fx-background-color: red");
         blackShadowPane.setVisible(true);
         setColorChosen(TColor.BLACK);
     }
 
     private void clickGrey(Event event){
-        initializeTowerColorsAndAssistantDeck();
-        greyShadowPane.setStyle("-fx-background-color: green");
+        initializeTowerColors();
+        greyShadowPane.setStyle("-fx-background-color: red");
         greyShadowPane.setVisible(true);
         setColorChosen(TColor.GREY);
     }
 
     private void clickWizard1(Event event){
-        initializeTowerColorsAndAssistantDeck();
-        wizard1ShadowPane.setStyle("-fx-background-color: green");
+        initializeAssistantDeck();
+        wizard1ShadowPane.setStyle("-fx-background-color: red");
         wizard1ShadowPane.setVisible(true);
         setDeckChosen(AssistantDeckName.WIZARD1);
     }
 
     private void clickWizard2(Event event){
-        initializeTowerColorsAndAssistantDeck();
-        wizard2ShadowPane.setStyle("-fx-background-color: green");
+        initializeAssistantDeck();
+        wizard2ShadowPane.setStyle("-fx-background-color: red");
         wizard2ShadowPane.setVisible(true);
         setDeckChosen(AssistantDeckName.WIZARD2);
     }
 
     private void clickWizard3(Event event){
-        initializeTowerColorsAndAssistantDeck();
-        wizard3ShadowPane.setStyle("-fx-background-color: green");
+        initializeAssistantDeck();
+        wizard3ShadowPane.setStyle("-fx-background-color: red");
         wizard3ShadowPane.setVisible(true);
         setDeckChosen(AssistantDeckName.WIZARD3);
     }
 
     private void clickWizard4(Event event){
-        initializeTowerColorsAndAssistantDeck();
-        wizard4ShadowPane.setStyle("-fx-background-color: green");
+        initializeAssistantDeck();
+        wizard4ShadowPane.setStyle("-fx-background-color: red");
         wizard4ShadowPane.setVisible(true);
         setDeckChosen(AssistantDeckName.WIZARD4);
     }
