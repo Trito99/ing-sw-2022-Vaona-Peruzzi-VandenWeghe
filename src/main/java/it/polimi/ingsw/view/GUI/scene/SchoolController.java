@@ -398,4 +398,8 @@ public class SchoolController extends ObservableView implements GenericScene {
     public AssistantCard getTrash() {
         return trash;
     }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
 }

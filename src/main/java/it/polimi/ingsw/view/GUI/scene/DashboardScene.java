@@ -178,8 +178,11 @@ public class DashboardScene extends ObservableView implements GenericScene {
         loader.setController(controller);
         AnchorPane personalSchool = loader.load();
         schoolPane.getChildren().setAll(personalSchool);
-        if(controller.getTrash()!=null)
+        if(controller.getTrash()!=null) {
+            ImageTrashPersonal.setVisible(true);
             ImageTrashPersonal.setImage(new Image(assistantCardMap.get(controller.getTrash().getAssistantName())));
+        }else
+            ImageTrashPersonal.setVisible(false);
         if(difficulty.equals(Difficulty.EXPERTMODE))
             coinTextPersonal.setText(String.valueOf(controller.getCoins()));
         if(!gameMode.equals(GameMode.COOP)){
@@ -320,5 +323,9 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     public void setPlanning(boolean planning){
         this.planning = planning;
+    }
+
+    public Map<String,String> getAssistantCardMap(){
+        return assistantCardMap;
     }
 }
