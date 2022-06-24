@@ -132,5 +132,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Pane fx:id="threeShadowPane" layoutX="573.0" layoutY="256.0" prefHeight="27.0" prefWidth="131.0" styleClass="button" stylesheets="@../css/style.css" />
+      <Pane fx:id="fourShadowPane" layoutX="735.0" layoutY="256.0" prefHeight="27.0" prefWidth="131.0" styleClass="button" stylesheets="@../css/style.css" />
+      <Pane fx:id="twoShadowPane" layoutX="417.0" layoutY="256.0" prefHeight="27.0" prefWidth="131.0" styleClass="button" stylesheets="@../css/style.css" />
+      <Pane fx:id="standardShadowPane" layoutX="431.0" layoutY="392.0" prefHeight="37.0" prefWidth="176.0" styleClass="button" stylesheets="@../css/style.css" />
+      <Pane fx:id="expertShadowPane" layoutX="659.0" layoutY="392.0" prefHeight="37.0" prefWidth="176.0" styleClass="button" stylesheets="@../css/style.css" />
    </children>
 </AnchorPane>
