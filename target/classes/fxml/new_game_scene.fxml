@@ -122,7 +122,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="expertButton" layoutX="658.0" layoutY="392.0" mnemonicParsing="false" opacity="0.0" prefHeight="37.0" prefWidth="177.0" styleClass="connect-button" stylesheets="@../css/style.css">
+      <Button fx:id="expertButton" layoutX="658.0" layoutY="392.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="177.0" styleClass="connect-button" stylesheets="@../css/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

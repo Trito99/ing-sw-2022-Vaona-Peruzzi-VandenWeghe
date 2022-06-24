@@ -402,4 +402,8 @@ public class SchoolController extends ObservableView implements GenericScene {
     public Difficulty getDifficulty() {
         return difficulty;
     }
+
+    public Map<ImageView,Integer> getEntryMap(){
+        return entryMap;
+    }
 }
