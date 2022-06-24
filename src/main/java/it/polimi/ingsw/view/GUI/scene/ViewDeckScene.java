@@ -121,10 +121,13 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
 
     @FXML
     private void clickPlay(Event event) {
-        playButton.setDisable(true);
         if(cardChosen != null){
             playButton.setDisable(true);
+            playButton.setVisible(false);
             notifyObserver(obs -> obs.chooseAssistantCard(cardChosen));
+        }else {
+            playButton.setDisable(false);
+            playButton.setVisible(true);
         }
     }
 
@@ -133,6 +136,8 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
         /** da fare */
     }
     private void initializeButtons(){
+        playButton.setDisable(true);
+        playButton.setVisible(false);
         card1.setDisable(true);
         card2.setDisable(true);
         card3.setDisable(true);
@@ -221,8 +226,13 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
         setCardChosen("turtle");
     }
 
-    public void setCardChosen(String cardChosen){
+    private void setCardChosen(String cardChosen){
         this.cardChosen = cardChosen;
+    }
+
+    public void activatePlayButton(){
+        playButton.setDisable(false);
+        playButton.setVisible(true);
     }
 
 }

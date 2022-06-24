@@ -131,7 +131,8 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void showDeckAssistant(DeckAssistant deckAssistant) {
-        Platform.runLater(()->GuiManager.getMainScene().updateAssistantCardDeck(deckAssistant));
+        ViewDeckScene viewDeckScene = new ViewDeckScene(deckAssistant);
+        Platform.runLater(()->GuiManager.getMainScene().updateAssistantCardDeck(viewDeckScene));
     }
 
     @Override
@@ -155,7 +156,8 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void askAssistantCardToPlay() {
-
+        Platform.runLater(() -> GuiManager.getMainScene().getAssistantDeck().activatePlayButton());
+        GuiManager.newStagePane(GuiManager.getMainScene().getAssistantDeck(), "/fxml/view_deck_scene");
     }
 
     @Override

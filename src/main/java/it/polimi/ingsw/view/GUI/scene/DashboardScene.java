@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view.GUI.scene;
 
-import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.GameMode;
@@ -28,7 +27,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     private Map<String,SchoolController> schoolControllers = new HashMap<>();
 
-    private DeckAssistant deckAssistant;
+    private ViewDeckScene assistantDeck;
 
     private GameMode gameMode;
     private Difficulty difficulty;
@@ -210,13 +209,12 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     }
 
-    public void deckButtonClicked(Event event){
-        ViewDeckScene viewDeckScene = new ViewDeckScene(deckAssistant);
-        GuiManager.newStagePane(viewDeckScene, "/fxml/view_deck_scene");
+    private void deckButtonClicked(Event event){
+        GuiManager.newStagePane(assistantDeck, "/fxml/view_deck_scene");
     }
 
-    public void updateAssistantCardDeck(DeckAssistant deckAssistant){
-        this.deckAssistant = deckAssistant;
+    public void updateAssistantCardDeck(ViewDeckScene viewDeckScene){
+        this.assistantDeck = viewDeckScene;
     }
 
 
@@ -230,4 +228,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
         return cards;
     }
 
+    public ViewDeckScene getAssistantDeck(){
+        return assistantDeck;
+    }
 }
