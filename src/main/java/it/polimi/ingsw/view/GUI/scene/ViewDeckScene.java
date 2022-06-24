@@ -255,8 +255,8 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
     }
     private void clickCard10(Event event){
         initializeCardsInHand();
-        card9ShadowPane.setStyle("-fx-background-color: blue");
-        card9ShadowPane.setVisible(true);
+        card10ShadowPane.setStyle("-fx-background-color: blue");
+        card10ShadowPane.setVisible(true);
         setCardChosen("turtle");
     }
 

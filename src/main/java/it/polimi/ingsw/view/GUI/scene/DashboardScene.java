@@ -201,6 +201,8 @@ public class DashboardScene extends ObservableView implements GenericScene {
         if(difficulty.equals(Difficulty.STANDARDMODE)){
             coinPaneTable.setVisible(false);
             coinPaneTable.setDisable(true);
+            coinTextTable.setVisible(false);
+            coinTextTable.setDisable(true);
             coinImageTable.setVisible(false);
             coinImageTable.setDisable(true);
             coinPanePersonal.setVisible(false);
