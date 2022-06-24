@@ -139,6 +139,7 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
     private void initializeButtons(){
         playButton.setDisable(true);
         playButton.setVisible(false);
+        playText.setVisible(false);
         card1.setDisable(true);
         card2.setDisable(true);
         card3.setDisable(true);
@@ -238,6 +239,7 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
     public void activatePlayButton(){
         playButton.setDisable(false);
         playButton.setVisible(true);
+        playText.setVisible(true);
     }
 
 }

@@ -158,7 +158,8 @@ public class GUI extends ObservableView implements View {
     public void askAssistantCardToPlay() {
         Platform.runLater(() -> {
             GuiManager.newStagePane(GuiManager.getMainScene().getAssistantDeck(), "/fxml/view_deck_scene");
-            GuiManager.getMainScene().getAssistantDeck().activatePlayButton();});
+            GuiManager.getMainScene().getAssistantDeck().activatePlayButton();
+            GuiManager.getMainScene().getAssistantDeck().addAllObservers(observers);});
     }
 
     @Override

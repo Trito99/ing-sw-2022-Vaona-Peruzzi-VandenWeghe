@@ -54,15 +54,6 @@
             </Text>
          </children>
       </Pane>
-      <Button fx:id="deckButton" layoutX="40.0" layoutY="546.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="134.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
-         <graphic>
-            <ImageView fx:id="deckLogo" fitHeight="101.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/icon_deck.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
       <Pane fx:id="turnInfoPane" layoutX="210.0" layoutY="17.0" prefHeight="32.0" prefWidth="160.0" style="-fx-background-radius: 10;" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
       <Text fill="#000000bd" layoutX="222.0" layoutY="38.0" stroke="#000000bd" strokeLineCap="ROUND" strokeWidth="0.2" text="player(1) ">
          <font>
@@ -255,5 +246,10 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
+      <Button fx:id="deckButton" layoutX="37.0" layoutY="495.0" mnemonicParsing="false" prefHeight="215.0" prefWidth="145.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+         <graphic>
+            <ImageView fx:id="deckLogo" fitHeight="180.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>
