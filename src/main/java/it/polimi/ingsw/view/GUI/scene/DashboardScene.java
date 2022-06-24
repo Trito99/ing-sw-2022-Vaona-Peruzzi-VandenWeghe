@@ -10,6 +10,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -215,6 +216,20 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     public void updateAssistantCardDeck(ViewDeckScene viewDeckScene){
         this.assistantDeck = viewDeckScene;
+        switch(viewDeckScene.getDeckAssistant().getDeckName()){
+            case WIZARD1:
+                deckLogo.setImage((new Image("/images/assistantDeck/assistantCard_back_1_png")));
+                break;
+            case WIZARD2:
+                deckLogo.setImage((new Image("/images/assistantDeck/assistantCard_back_2_png")));
+                break;
+            case WIZARD3:
+                deckLogo.setImage((new Image("/images/assistantDeck/assistantCard_back_3_png")));
+                break;
+            case WIZARD4:
+                deckLogo.setImage((new Image("/images/assistantDeck/assistantCard_back_4_png")));
+                break;
+        }
     }
 
 

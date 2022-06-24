@@ -17,7 +17,8 @@ import java.util.ArrayList;
 
 public class ViewDeckScene  extends ObservableView implements GenericScene  {
 
-    private ArrayList<AssistantCard> cardsInHand;
+    private DeckAssistant deckAssistant;
+
     private String cardChosen;
 
     @FXML
@@ -98,7 +99,7 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
     private Text exitText;
 
     public ViewDeckScene(DeckAssistant deckAssistant) {
-        this.cardsInHand = deckAssistant.getCardsInHand();
+        this.deckAssistant = deckAssistant;
     }
 
     @FXML
@@ -152,7 +153,7 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
 
     private void initializeCardsInHand(){
         initializeButtons();
-        for(AssistantCard card : cardsInHand){
+        for(AssistantCard card : deckAssistant.getCardsInHand()){
             switch(card.getAssistantName()){
                 case "lion":
                     card1.setDisable(false);
@@ -228,6 +229,10 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
 
     private void setCardChosen(String cardChosen){
         this.cardChosen = cardChosen;
+    }
+
+    public DeckAssistant getDeckAssistant(){
+        return deckAssistant;
     }
 
     public void activatePlayButton(){
