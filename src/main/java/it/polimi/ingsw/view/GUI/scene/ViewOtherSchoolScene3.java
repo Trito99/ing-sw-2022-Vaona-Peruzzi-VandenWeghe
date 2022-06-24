@@ -1,11 +1,14 @@
 package it.polimi.ingsw.view.GUI.scene;
 
+import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.observer.ObservableView;
+import it.polimi.ingsw.view.GUI.GuiManager;
 import it.polimi.ingsw.view.GUI.StartGUI;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -111,21 +114,70 @@ public class ViewOtherSchoolScene3 extends ObservableView implements GenericScen
 
 
     public void updatePersonalSchool(Map<String, SchoolController> map) throws IOException {
+        /** Player 1 */
         FXMLLoader loader1 = new FXMLLoader(StartGUI.class.getResource("/fxml/school.fxml"));
         loader1.setController(map.get(map.keySet().toArray()[0]));
         AnchorPane School1 = loader1.load();
         schoolPane31.getChildren().setAll(School1);
-        player1Text4players.setText(((String) map.keySet().toArray()[0]).substring(0,((String) map.keySet().toArray()[0]).length()-2));
+        if(map.get(map.keySet().toArray()[0]).getDifficulty().equals(Difficulty.EXPERTMODE))
+            coinText1_4players.setText(String.valueOf(map.get(map.keySet().toArray()[0]).getCoins()));
+        else {
+            coinText1_4players.setVisible(false);
+            coinImage1_4Players.setVisible(false);
+            coinPane1_4Players.setVisible(false);
+        }
+
+        if(map.get(map.keySet().toArray()[0]).getTrash()!=null) {
+            ImageTrash1_4Players.setVisible(true);
+            ImageTrash1_4Players.setImage(new Image(GuiManager.getMainScene().getAssistantCardMap().get(map.get(map.keySet().toArray()[0]).getTrash().getAssistantName())));
+        }
+        else
+            ImageTrash1_4Players.setVisible(false);
+        player1Text4players.setText(((String) map.keySet().toArray()[0]).substring(0,((String) map.keySet().toArray()[0]).length()-3));
+
+        /**Player 2 */
         FXMLLoader loader2 = new FXMLLoader(StartGUI.class.getResource("/fxml/school.fxml"));
         loader2.setController(map.get(map.keySet().toArray()[1]));
         AnchorPane School2 = loader2.load();
         schoolPane32.getChildren().setAll(School2);
-        player2Text4players.setText(((String) map.keySet().toArray()[1]).substring(0,((String) map.keySet().toArray()[1]).length()- 3));
+
+        if(map.get(map.keySet().toArray()[1]).getDifficulty().equals(Difficulty.EXPERTMODE))
+            coinText2_4players.setText(String.valueOf(map.get(map.keySet().toArray()[1]).getCoins()));
+        else {
+            coinText2_4players.setVisible(false);
+            coinImage2_4Players.setVisible(false);
+            coinPane2_4Players.setVisible(false);
+        }
+
+        if(map.get(map.keySet().toArray()[1]).getTrash()!=null) {
+            ImageTrash2_4Players.setVisible(true);
+            ImageTrash2_4Players.setImage(new Image(GuiManager.getMainScene().getAssistantCardMap().get(map.get(map.keySet().toArray()[1]).getTrash().getAssistantName())));
+        }
+        else
+            ImageTrash2_4Players.setVisible(false);
+        player2Text4players.setText(((String) map.keySet().toArray()[1]).substring(0,((String) map.keySet().toArray()[1]).length()-3));
+
+        /** Player 3 */
         FXMLLoader loader3 = new FXMLLoader(StartGUI.class.getResource("/fxml/school.fxml"));
         loader3.setController(map.get(map.keySet().toArray()[2]));
         AnchorPane School3 = loader3.load();
         schoolPane33.getChildren().setAll(School3);
-        player3Text4players.setText(((String) map.keySet().toArray()[2]).substring(0,((String) map.keySet().toArray()[2]).length()- 3));
+
+        if(map.get(map.keySet().toArray()[2]).getDifficulty().equals(Difficulty.EXPERTMODE))
+            coinText3_4players.setText(String.valueOf(map.get(map.keySet().toArray()[2]).getCoins()));
+        else {
+            coinText3_4players.setVisible(false);
+            coinImage3_4Players.setVisible(false);
+            coinPane3_4Players.setVisible(false);
+        }
+
+        if(map.get(map.keySet().toArray()[2]).getTrash()!=null) {
+            ImageTrash3_4Players.setVisible(true);
+            ImageTrash3_4Players.setImage(new Image(GuiManager.getMainScene().getAssistantCardMap().get(map.get(map.keySet().toArray()[2]).getTrash().getAssistantName())));
+        }
+        else
+            ImageTrash3_4Players.setVisible(false);
+        player3Text4players.setText(((String) map.keySet().toArray()[2]).substring(0,((String) map.keySet().toArray()[2]).length()-3));
     }
 
 }

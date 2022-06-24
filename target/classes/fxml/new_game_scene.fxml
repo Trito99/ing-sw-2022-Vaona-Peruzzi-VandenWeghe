@@ -17,11 +17,6 @@
             <Image url="@../images/BG_2_Clouds_Blur.png" />
          </image>
       </ImageView>
-      <Text fx:id="exitText" fill="WHITE" layoutX="243.0" layoutY="581.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Exit">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Text>
       <Text fx:id="connectText" fill="WHITE" layoutX="1026.0" layoutY="581.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Next">
          <font>
             <Font size="25.0" />
@@ -102,11 +97,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="exitButton" layoutX="198.0" layoutY="547.0" mnemonicParsing="false" opacity="0.0" prefHeight="47.0" prefWidth="128.0" styleClass="connect-button" stylesheets="@../css/style.css">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
       <Button fx:id="standardButton" layoutX="431.0" layoutY="392.0" mnemonicParsing="false" opacity="0.0" prefHeight="37.0" prefWidth="177.0" styleClass="connect-button" stylesheets="@../css/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -122,7 +112,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="expertButton" layoutX="658.0" layoutY="392.0" mnemonicParsing="false" opacity="0.0" prefHeight="37.0" prefWidth="177.0" styleClass="connect-button" stylesheets="@../css/style.css">
+      <Button fx:id="expertButton" layoutX="658.0" layoutY="392.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="177.0" styleClass="connect-button" stylesheets="@../css/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

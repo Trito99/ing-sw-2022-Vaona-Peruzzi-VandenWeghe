@@ -39,11 +39,6 @@
             <Font name="Helvetica" size="30.0" />
          </font>
       </Text>
-      <Text fx:id="exitText" fill="WHITE" layoutX="170.0" layoutY="614.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Exit">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Text>
       <Text fx:id="connectText" fill="WHITE" layoutX="1068.0" layoutY="615.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Connect">
          <font>
             <Font size="25.0" />
@@ -62,13 +57,5 @@
             <String fx:value="button" />
             <String fx:value="shadow-button" />
          </styleClass></Button>
-      <Button fx:id="exitButton" alignment="CENTER" layoutX="125.0" layoutY="582.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="46.0" prefWidth="128.0" stylesheets="@../css/style.css">
-         <styleClass>
-            <String fx:value="button" />
-            <String fx:value="shadow-button" />
-         </styleClass>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
    </children>
 </AnchorPane>

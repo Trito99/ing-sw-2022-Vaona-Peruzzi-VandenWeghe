@@ -64,17 +64,19 @@ public class ViewOtherSchoolScene1 extends ObservableView implements GenericScen
         loader.setController(map.get(map.keySet().toArray()[0]));
         AnchorPane School1 = loader.load();
         schoolPane11.getChildren().setAll(School1);
-        if(map.get(map.keySet().toArray()[0]).getDifficulty().equals(Difficulty.EXPERTMODE)){
+        if(map.get(map.keySet().toArray()[0]).getDifficulty().equals(Difficulty.EXPERTMODE))
             coinText1_2players.setText(String.valueOf(map.get(map.keySet().toArray()[0]).getCoins()));
-        }else{
+        else {
             coinText1_2players.setVisible(false);
             coinImage1_2Players.setVisible(false);
             coinPane1_2Players.setVisible(false);
         }
+
         if(map.get(map.keySet().toArray()[0]).getTrash()!=null) {
             ImageTrash1_2Players.setVisible(true);
             ImageTrash1_2Players.setImage(new Image(GuiManager.getMainScene().getAssistantCardMap().get(map.get(map.keySet().toArray()[0]).getTrash().getAssistantName())));
-        }else
+        }
+        else
             ImageTrash1_2Players.setVisible(false);
         player1Text.setText(((String) map.keySet().toArray()[0]).substring(0,((String) map.keySet().toArray()[0]).length()-3));
 
