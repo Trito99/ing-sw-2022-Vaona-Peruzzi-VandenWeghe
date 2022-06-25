@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.observer.ObservableView;
 import it.polimi.ingsw.view.GUI.CardsController.CharacterCardController;
 import it.polimi.ingsw.view.GUI.GuiManager;
@@ -48,23 +49,6 @@ public class DashboardScene extends ObservableView implements GenericScene {
         assistantCardMap.put("dog", "/images/assistantCards/assistant8.png");
         assistantCardMap.put("elephant", "/images/assistantCards/assistant9.png");
         assistantCardMap.put("turtle", "/images/assistantCards/assistant10.png");
-    }
-
-    private static Map<CardEffect, String> characterCardMap;
-    static {
-        characterCardMap = new HashMap<>();
-        characterCardMap.put(CardEffect.ABBOT, "/images/characterCards/abbot.png");
-        characterCardMap.put(CardEffect.HOST, "/images/characterCards/host.png");
-        characterCardMap.put(CardEffect.HERALD, "/images/characterCards/herald.png");
-        characterCardMap.put(CardEffect.BEARER, "/images/characterCards/bearer.png");
-        characterCardMap.put(CardEffect.CURATOR, "/images/characterCards/curator.png");
-        characterCardMap.put(CardEffect.CENTAUR, "/images/characterCards/centaur.png");;
-        characterCardMap.put(CardEffect.ACROBAT, "/images/characterCards/acrobat.png");
-        characterCardMap.put(CardEffect.KNIGHT, "/images/characterCards/knight.png");
-        characterCardMap.put(CardEffect.HERBALIST, "/images/characterCards/herbalist.png");
-        characterCardMap.put(CardEffect.BARD, "/images/characterCards/bard.png");
-        characterCardMap.put(CardEffect.COURTESAN, "/images/characterCards/courtesan.png");
-        characterCardMap.put(CardEffect.JUNKDEALER, "/images/characterCards/junkdealer.png");
     }
 
 
@@ -212,7 +196,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
             TextTeamMate.setText("TeamMate: " + teamMate);
     }
 
-    public void initializeDifficulty(Difficulty difficulty, int coinsOnTable){
+    public void initializeDifficulty(Difficulty difficulty, Table table){
         this.difficulty = difficulty;
         if(difficulty.equals(Difficulty.STANDARDMODE)){
             coinPaneTable.setVisible(false);
@@ -234,17 +218,15 @@ public class DashboardScene extends ObservableView implements GenericScene {
             coinTextPersonal.setVisible(false);
             coinTextPersonal.setDisable(true);
             ImageTrashPersonal.setVisible(false);
+            characterCardLayout.setVisible(false);
         }else{
-            coinTextTable.setText(String.valueOf(coinsOnTable));
-        }
-        /** -- Character Cards in VBox -- */
-        if(difficulty.equals(Difficulty.STANDARDMODE)){
-            ArrayList<CharacterCard> characterCardsPlaying = new ArrayList<>((characterCardsPlaying()));
+            coinTextTable.setText(String.valueOf(table.getCoinsOnTable()));
+            ArrayList<CharacterCard> characterCardsPlaying = table.getCharacterCardsOnTable();
             try{
                 for(int i = 0; i < 3; i++) {
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(getClass().getResource("/fxml/characterCard.fxml"));
-                    ImageView characterCardImage = loader.load();
+                    AnchorPane characterCardImage = loader.load();
 
                     CharacterCardController characterCardController = loader.getController();
                     characterCardController.setData(characterCardsPlaying.get(i));
@@ -253,10 +235,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
                 characterCardLayout.setVisible(true);
             } catch (IOException e) {
                 e.printStackTrace();
-
             }
-        } else{
-            characterCardLayout.setVisible(false);
         }
     }
 
@@ -327,18 +306,6 @@ public class DashboardScene extends ObservableView implements GenericScene {
                 deckLogo.setImage((new Image("/images/assistantDeck/assistantCard_back_4.png")));
                 break;
         }
-    }
-
-
-    /** esempio inizializzazione carta personaggio -> da sistemare con */
-    private List<CharacterCard> characterCardsPlaying(){
-        List<CharacterCard> cards = new ArrayList<>();
-
-        CharacterCard characterCard = null /**= new CharacterCard() */ ;
-        characterCard.setImageSrc("/images/characterCards/abbot.jpg");
-
-        /** per le tre carte */
-        return cards;
     }
 
 

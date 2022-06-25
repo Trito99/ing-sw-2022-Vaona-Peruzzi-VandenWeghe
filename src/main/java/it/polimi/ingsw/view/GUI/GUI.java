@@ -121,7 +121,7 @@ public class GUI extends ObservableView implements View {
         this.table = table;
         if (!gameStarted) {
             Platform.runLater(() -> GuiManager.changeRootMainScene(observers));
-            Platform.runLater(() -> GuiManager.getMainScene().initializeDifficulty(difficulty, table.getCoinsOnTable()));
+            Platform.runLater(() -> GuiManager.getMainScene().initializeDifficulty(difficulty, table));
             gameStarted = true;
         }else{
             Platform.runLater(() -> GuiManager.getMainScene());

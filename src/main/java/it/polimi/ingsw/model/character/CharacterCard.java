@@ -15,7 +15,7 @@ public class CharacterCard implements Serializable {
     private int xCardOnCard;
     private String ImageSrc;
 
-    public CharacterCard (int costCharacter, CardEffect cardEffect, String description){
+    public CharacterCard(int costCharacter, CardEffect cardEffect, String description) {
         this.costCharacter = costCharacter;
         this.cardEffect = cardEffect;
         this.coinOnCard = false;
@@ -39,11 +39,14 @@ public class CharacterCard implements Serializable {
         this.coinOnCard = coinOnCard;
     }
 
-    public String getDescription() { return description; }
+    public String getDescription() {
+        return description;
+    }
 
     public ArrayList<Student> getStudentsOnCard() {
         return studentsOnCard;
     }
+
     public int getXCardOnCard() {
         return xCardOnCard;
     }
@@ -52,11 +55,4 @@ public class CharacterCard implements Serializable {
         this.xCardOnCard = xCardOnCard;
     }
 
-    public String getImageSrc() {
-        return ImageSrc;
-    }
-
-    public void setImageSrc(String imageSrc) {
-        ImageSrc = imageSrc;
-    }
 }

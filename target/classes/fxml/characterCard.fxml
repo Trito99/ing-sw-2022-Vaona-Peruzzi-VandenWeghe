@@ -3,9 +3,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="125.0" prefWidth="180.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.CardsController.CharacterCardController">
    <children>
-      <ImageView fitHeight="125.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cardImage" fitHeight="125.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
