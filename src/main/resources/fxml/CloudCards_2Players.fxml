@@ -3,7 +3,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.layout.Pane?>
 
 <AnchorPane prefHeight="180.0" prefWidth="282.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -12,40 +12,44 @@
             <Image url="@../images/clouds/cloudgeneric.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="stud1_c1_2Players" fitHeight="17.0" fitWidth="17.0" layoutX="82.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/students/Bstudent.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="stud2_c1_2Players" fitHeight="17.0" fitWidth="17.0" layoutX="82.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/students/Bstudent.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="stud3_c1_2Players" fitHeight="17.0" fitWidth="17.0" layoutX="59.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/students/Bstudent.png" />
-         </image>
-      </ImageView>
       <ImageView fx:id="cloud2_2Players" fitHeight="108.0" fitWidth="84.0" layoutX="168.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/clouds/cloudgeneric.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="stud1_c2_2Players" fitHeight="17.0" fitWidth="17.0" layoutX="194.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/students/Bstudent.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="stud2_c2_2Players" fitHeight="17.0" fitWidth="17.0" layoutX="219.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/students/Bstudent.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="stud3_c2_2Players" fitHeight="17.0" fitWidth="17.0" layoutX="194.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/students/Bstudent.png" />
-         </image>
-      </ImageView>
+      <Pane fx:id="StudentsPane" layoutX="18.0" layoutY="42.0" prefHeight="97.0" prefWidth="252.0">
+         <children>
+            <ImageView fx:id="stud1_c1_2Players" fitHeight="17.0" fitWidth="17.0" layoutX="61.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/students/Bstudent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="stud2_c1_2Players" fitHeight="17.0" fitWidth="17.0" layoutX="61.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/students/Bstudent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="stud3_c1_2Players" fitHeight="17.0" fitWidth="17.0" layoutX="38.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/students/Bstudent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="stud1_c2_2Players" fitHeight="17.0" fitWidth="17.0" layoutX="176.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/students/Bstudent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="stud2_c2_2Players" fitHeight="17.0" fitWidth="17.0" layoutX="201.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/students/Bstudent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="stud3_c2_2Players" fitHeight="17.0" fitWidth="17.0" layoutX="176.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/students/Bstudent.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
