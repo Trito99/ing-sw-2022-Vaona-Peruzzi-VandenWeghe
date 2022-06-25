@@ -5,6 +5,6 @@
 
 <AnchorPane prefHeight="174.0" prefWidth="130.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.CardsController.CharacterCardController">
    <children>
-      <ImageView fx:id="cardImage" fitHeight="165.0" fitWidth="220.0" layoutX="20.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cardImage" fitHeight="165.0" fitWidth="220.0" layoutX="10.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

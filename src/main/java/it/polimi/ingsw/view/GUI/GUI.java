@@ -117,6 +117,12 @@ public class GUI extends ObservableView implements View {
     }
 
     @Override
+    public void showListOfIsland(Table table, Difficulty difficulty) {
+       // GuiManager.getMainScene().updateListOfIslands();
+       // Platform.runLater(() -> GuiManager.changeRootMainScene(observers));
+    }
+
+    @Override
     public void showTable(Table table, Difficulty difficulty) {
         this.table = table;
         if (!gameStarted) {

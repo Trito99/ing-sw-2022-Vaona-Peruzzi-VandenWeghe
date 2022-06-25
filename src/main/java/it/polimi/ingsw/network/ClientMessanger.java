@@ -118,6 +118,10 @@ public class ClientMessanger implements ObserverView, Observer {
                 ShowTable table = (ShowTable) message;
                 queue.execute(() -> view.showTable(table.getTable(),table.getDifficulty()));
                 break;
+            case SHOW_LIST_OF_ISLANDS:
+                ShowListOfIslands showListOfIslands = (ShowListOfIslands) message;
+                queue.execute(() -> view.showListOfIsland(showListOfIslands.getTable(), showListOfIslands.getDifficulty()));
+                break;
             case SHOW_PERSONAL_SCHOOL:
                 ShowPersonalSchool player = (ShowPersonalSchool) message;
                 queue.execute(() -> view.showPersonalSchool(player.getSchool(), player.getNickname(),player.getTrash(), player.getDifficulty(), player.getCoins(), player.getGameMode(), player.getTeamMate()));

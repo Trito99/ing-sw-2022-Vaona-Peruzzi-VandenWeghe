@@ -33,6 +33,7 @@ public enum MessageType {
     SHOW_TABLE,
     SHOW_PERSONAL_SCHOOL,
     SHOW_ASSISTANT_DECK,
+    SHOW_LIST_OF_ISLANDS,
 
     //azioni
     PLAY_CHARACTER_CARD,

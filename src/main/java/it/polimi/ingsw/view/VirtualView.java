@@ -65,6 +65,11 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
+    public void showListOfIsland(Table table, Difficulty difficulty) {
+        clientHandler.sendMessage(new ShowListOfIslands(table, difficulty));
+    }
+
+    @Override
     public void showTable(Table table, Difficulty difficulty) {
         clientHandler.sendMessage(new ShowTable(table, difficulty));
     }

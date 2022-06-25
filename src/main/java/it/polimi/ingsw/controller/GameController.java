@@ -535,6 +535,7 @@ public class GameController {
                             again = false;
                             if(!card) {
                                 gameSession.moveStudentFromListToIsland(gameSession.getTable().getListOfIsland().get(Choice.getId() - 1), studentId, gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getEntry());
+                                virtualView.showListOfIsland(gameSession.getTable(),gameSession.getDifficulty());
                                 movedStudents++;
                             } else {
                                 gameSession.playCharacterCard(characterCard.getCardEffect(),Choice.getNickname(),studentId,Choice.getId(), -1, null);

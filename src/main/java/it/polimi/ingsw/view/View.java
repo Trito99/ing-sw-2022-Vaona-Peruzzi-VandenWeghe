@@ -32,6 +32,7 @@ public interface View {
     void showLoseMessage(String nickname);
 
     void showPersonalSchool(School school, String nickname, AssistantCard trash, Difficulty difficulty, int coins, GameMode gameMode, String teamMate);
+    void showListOfIsland(Table table, Difficulty difficulty);
 
     void showTable(Table table, Difficulty difficulty);
 
