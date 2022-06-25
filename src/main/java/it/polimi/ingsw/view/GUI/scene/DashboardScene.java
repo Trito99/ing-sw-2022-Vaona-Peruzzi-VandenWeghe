@@ -22,6 +22,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -61,6 +62,42 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private boolean actionStudent = false;
 
 
+
+    @FXML
+    private Rectangle Bridge10_11;
+
+    @FXML
+    private Rectangle Bridge11_12;
+
+    @FXML
+    private Rectangle Bridge12_1;
+
+    @FXML
+    private Rectangle Bridge1_2;
+
+    @FXML
+    private Rectangle Bridge2_3;
+
+    @FXML
+    private Rectangle Bridge3_4;
+
+    @FXML
+    private Rectangle Bridge4_5;
+
+    @FXML
+    private Rectangle Bridge5_6;
+
+    @FXML
+    private Rectangle Bridge6_7;
+
+    @FXML
+    private Rectangle Bridge7_8;
+
+    @FXML
+    private Rectangle Bridge8_9;
+
+    @FXML
+    private Rectangle Bridge9_10;
 
     @FXML
     private ImageView ImageTrashPersonal;
