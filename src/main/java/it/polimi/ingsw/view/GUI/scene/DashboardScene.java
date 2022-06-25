@@ -69,6 +69,42 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private Pane PaneCoinScore;
 
     @FXML
+    private Pane PaneIsland1;
+
+    @FXML
+    private Pane PaneIsland10;
+
+    @FXML
+    private Pane PaneIsland11;
+
+    @FXML
+    private Pane PaneIsland12;
+
+    @FXML
+    private Pane PaneIsland2;
+
+    @FXML
+    private Pane PaneIsland3;
+
+    @FXML
+    private Pane PaneIsland4;
+
+    @FXML
+    private Pane PaneIsland5;
+
+    @FXML
+    private Pane PaneIsland6;
+
+    @FXML
+    private Pane PaneIsland7;
+
+    @FXML
+    private Pane PaneIsland8;
+
+    @FXML
+    private Pane PaneIsland9;
+
+    @FXML
     private Pane PaneTeamMate;
 
     @FXML
@@ -160,6 +196,9 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     @FXML
     private Pane schoolPane11;
+
+    @FXML
+    private Pane schoolPane12;
 
     @FXML
     private Pane sxPane;
