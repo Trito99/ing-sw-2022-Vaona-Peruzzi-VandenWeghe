@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view.GUI.scene;
 
-import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.GameMode;
@@ -28,13 +27,13 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class DashboardScene extends ObservableView implements GenericScene {
 
     private Map<String,SchoolController> schoolControllers = new HashMap<>();
 
+    private CloudCards cloudController;
     private SchoolController personalSchoolController;
     private static Map<String, String> assistantCardMap;
     static {
@@ -196,8 +195,31 @@ public class DashboardScene extends ObservableView implements GenericScene {
             TextTeamMate.setText("TeamMate: " + teamMate);
     }
 
-    public void initializeDifficulty(Difficulty difficulty, Table table){
+    public void initializeTable(Difficulty difficulty, Table table) throws IOException {
         this.difficulty = difficulty;
+        switch(table.getCloudNumber().size()){
+            case 2:
+                FXMLLoader loader2 = new FXMLLoader(StartGUI.class.getResource("/fxml/cloudCards_2Players.fxml"));
+                cloudController = new CloudCards(table.getCloudNumber());
+                loader2.setController(cloudController);
+                AnchorPane clouds2 = loader2.load();
+                cloudPane.getChildren().addAll(clouds2);
+                break;
+            case 3:
+                FXMLLoader loader3 = new FXMLLoader(StartGUI.class.getResource("/fxml/cloudCards_3Players.fxml"));
+                cloudController = new CloudCards(table.getCloudNumber());
+                loader3.setController(cloudController);
+                AnchorPane clouds3 = loader3.load();
+                cloudPane.getChildren().addAll(clouds3);
+                break;
+            case 4:
+                FXMLLoader loader4 = new FXMLLoader(StartGUI.class.getResource("/fxml/cloudCards_4Players.fxml"));
+                cloudController = new CloudCards(table.getCloudNumber());
+                loader4.setController(cloudController);
+                AnchorPane clouds4 = loader4.load();
+                cloudPane.getChildren().addAll(clouds4);
+                break;
+        }
         if(difficulty.equals(Difficulty.STANDARDMODE)){
             coinPaneTable.setVisible(false);
             coinPaneTable.setDisable(true);
