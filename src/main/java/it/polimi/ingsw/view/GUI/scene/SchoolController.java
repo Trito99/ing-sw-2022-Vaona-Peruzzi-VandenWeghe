@@ -287,7 +287,6 @@ public class SchoolController extends ObservableView implements GenericScene {
     private void updateEntry(){
         for(Student student : school.getEntry()){
             entry.getChildren().get(school.getEntry().indexOf(student)).setVisible(true);
-            //entry.getChildren().get(school.getEntry().indexOf(student)).setDisable(false);
             switch(student.getsColour()){
                 case GREEN:
                     ((ImageView) entry.getChildren().get(school.getEntry().indexOf(student))).setImage(green_1.getImage());
@@ -416,6 +415,12 @@ public class SchoolController extends ObservableView implements GenericScene {
     public void abilitateEntry(){
         for(Student student : school.getEntry()) {
             entry.getChildren().get(school.getEntry().indexOf(student)).setDisable(false);
+        }
+    }
+
+    public void disabilitateEntry(){
+        for(Student student : school.getEntry()) {
+            entry.getChildren().get(school.getEntry().indexOf(student)).setDisable(true);
         }
     }
 
