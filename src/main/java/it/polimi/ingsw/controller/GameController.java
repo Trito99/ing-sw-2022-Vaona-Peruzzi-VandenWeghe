@@ -980,10 +980,11 @@ public class GameController {
         turnController.nextPlayer(turnController.getNewPlayerOrderByName());
         roundIndex++;
         if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)) {
-            for(CharacterCard c : gameSession.getTable().getCharacterCardsOnTable())
-                c.getCardEffect().setAllFalse();
-            gameSession.getPlayer(getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(getActivePlayer()), characterCard.getCardEffect()); //rimette a false
-
+            if(characterCard!= null) {
+                for (CharacterCard c : gameSession.getTable().getCharacterCardsOnTable())
+                    c.getCardEffect().setAllFalse();
+                gameSession.getPlayer(getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(getActivePlayer()), characterCard.getCardEffect()); //rimette a false
+            }
             characterCardAlreadyPlayed = false;
         }
 
