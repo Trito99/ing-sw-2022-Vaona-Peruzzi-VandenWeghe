@@ -306,6 +306,56 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     public void initializeTable(Difficulty difficulty, Table table) throws IOException {
         this.difficulty = difficulty;
+
+        PaneIsland1.setVisible(false);
+        PaneIsland1.setDisable(true);
+        PaneIsland2.setVisible(false);
+        PaneIsland2.setDisable(true);
+        PaneIsland3.setVisible(false);
+        PaneIsland3.setDisable(true);
+        PaneIsland4.setVisible(false);
+        PaneIsland4.setDisable(true);
+        PaneIsland5.setVisible(false);
+        PaneIsland5.setDisable(true);
+        PaneIsland6.setVisible(false);
+        PaneIsland6.setDisable(true);
+        PaneIsland7.setVisible(false);
+        PaneIsland7.setDisable(true);
+        PaneIsland8.setVisible(false);
+        PaneIsland8.setDisable(true);
+        PaneIsland9.setVisible(false);
+        PaneIsland9.setDisable(true);
+        PaneIsland10.setVisible(false);
+        PaneIsland10.setDisable(true);
+        PaneIsland11.setVisible(false);
+        PaneIsland11.setDisable(true);
+        PaneIsland12.setVisible(false);
+        PaneIsland12.setDisable(true);
+        Bridge1_2.setVisible(false);
+        Bridge1_2.setDisable(true);
+        Bridge2_3.setVisible(false);
+        Bridge2_3.setDisable(true);
+        Bridge3_4.setVisible(false);
+        Bridge3_4.setDisable(true);
+        Bridge4_5.setVisible(false);
+        Bridge4_5.setDisable(true);
+        Bridge5_6.setVisible(false);
+        Bridge5_6.setDisable(true);
+        Bridge6_7.setVisible(false);
+        Bridge6_7.setDisable(true);
+        Bridge7_8.setVisible(false);
+        Bridge7_8.setDisable(true);
+        Bridge8_9.setVisible(false);
+        Bridge8_9.setDisable(true);
+        Bridge9_10.setVisible(false);
+        Bridge9_10.setDisable(true);
+        Bridge10_11.setVisible(false);
+        Bridge10_11.setDisable(true);
+        Bridge11_12.setVisible(false);
+        Bridge11_12.setDisable(true);
+        Bridge12_1.setVisible(false);
+        Bridge12_1.setDisable(true);
+
         switch(table.getCloudNumber().size()){
             case 2:
                 FXMLLoader loader2 = new FXMLLoader(StartGUI.class.getResource("/fxml/cloudCards_2Players.fxml"));
