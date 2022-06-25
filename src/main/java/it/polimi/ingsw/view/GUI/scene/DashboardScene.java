@@ -9,12 +9,16 @@ import it.polimi.ingsw.view.GUI.CardsController.CharacterCardController;
 import it.polimi.ingsw.view.GUI.GuiManager;
 import it.polimi.ingsw.view.GUI.StartGUI;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -233,19 +237,6 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }else{
             coinTextTable.setText(String.valueOf(coinsOnTable));
         }
-    }
-
-    @FXML
-    public void initialize(){
-        otherSchoolButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            try {
-                otherSchoolClicked(event);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        deckButton.addEventHandler(MouseEvent.MOUSE_CLICKED,this::deckButtonClicked);
-
         /** -- Character Cards in VBox -- */
         if(difficulty.equals(Difficulty.STANDARDMODE)){
             ArrayList<CharacterCard> characterCardsPlaying = new ArrayList<>((characterCardsPlaying()));
@@ -267,9 +258,19 @@ public class DashboardScene extends ObservableView implements GenericScene {
         } else{
             characterCardLayout.setVisible(false);
         }
+    }
 
-
-
+    @FXML
+    public void initialize(){
+        addDragOver();
+        otherSchoolButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            try {
+                otherSchoolClicked(event);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        deckButton.addEventHandler(MouseEvent.MOUSE_CLICKED,this::deckButtonClicked);
     }
 
     private void otherSchoolClicked(Event event) throws IOException {
@@ -355,5 +356,51 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     public SchoolController getPersonalSchoolController() {
         return personalSchoolController;
+    }
+
+    private void addDragOver(){
+        island0.setOnDragOver(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                if (event.getGestureSource() != island0 &&
+                        event.getDragboard().hasImage()) {
+                    event.acceptTransferModes(TransferMode.MOVE);
+                }
+
+                event.consume();
+            }
+        });
+
+        island0.setOnDragEntered(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                if (event.getGestureSource() != island0 &&
+                        event.getDragboard().hasString()) {
+                    island0.setVisible(false);
+                }
+
+                event.consume();
+            }
+        });
+
+        island0.setOnDragExited(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                island0.setVisible(true);
+
+                event.consume();
+            }
+        });
+
+        island0.setOnDragDropped(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                Dragboard db = event.getDragboard();
+                boolean success = false;
+                if (db.hasImage()) {
+                    personalSchoolController.setPlaceSelected("ISLAND");
+                    success = true;
+                }
+                event.setDropCompleted(success);
+
+                event.consume();
+            }
+        });
     }
 }
