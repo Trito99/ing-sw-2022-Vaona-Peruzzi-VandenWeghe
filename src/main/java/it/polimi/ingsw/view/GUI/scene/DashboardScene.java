@@ -183,7 +183,40 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private Pane islandPane;
 
     @FXML
-    private ImageView motherEarth;
+    private ImageView motherEarth1;
+
+    @FXML
+    private ImageView motherEarth10;
+
+    @FXML
+    private ImageView motherEarth11;
+
+    @FXML
+    private ImageView motherEarth12;
+
+    @FXML
+    private ImageView motherEarth2;
+
+    @FXML
+    private ImageView motherEarth3;
+
+    @FXML
+    private ImageView motherEarth4;
+
+    @FXML
+    private ImageView motherEarth5;
+
+    @FXML
+    private ImageView motherEarth6;
+
+    @FXML
+    private ImageView motherEarth7;
+
+    @FXML
+    private ImageView motherEarth8;
+
+    @FXML
+    private ImageView motherEarth9;
 
     @FXML
     private Button otherSchoolButton;
