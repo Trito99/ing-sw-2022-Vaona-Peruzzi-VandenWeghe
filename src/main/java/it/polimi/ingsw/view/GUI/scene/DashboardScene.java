@@ -333,4 +333,8 @@ public class DashboardScene extends ObservableView implements GenericScene {
     public Map<String,String> getAssistantCardMap(){
         return assistantCardMap;
     }
+
+    public SchoolController getPersonalSchoolController() {
+        return personalSchoolController;
+    }
 }

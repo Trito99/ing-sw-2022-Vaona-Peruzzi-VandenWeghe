@@ -157,7 +157,8 @@ public class GUI extends ObservableView implements View {
     @Override
     public void askAssistantCardToPlay() {
         Platform.runLater(() -> {
-            GuiManager.getMainScene().setPlanning(true);});
+            GuiManager.getMainScene().setPlanning(true);
+            GuiManager.getMainScene().getAssistantDeck().addAllObservers(observers);});
         showMessage("Choose an Assistant Card");
 
     }
@@ -174,7 +175,11 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void askPlaceAndStudentForMove(ArrayList<Student> entry) {
+        Platform.runLater(() -> {
+            GuiManager.getMainScene().getPersonalSchoolController().abilitateEntry();
+            GuiManager.getMainScene().getPersonalSchoolController().addAllObservers(observers);});
         showMessage("Move 3 students");
+
     }
 
     @Override

@@ -7,10 +7,13 @@ import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.observer.ObservableView;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -25,6 +28,11 @@ import java.util.Set;
 public class SchoolController extends ObservableView implements GenericScene {
     private School school;
 
+    private boolean dragDone = false;
+
+    private int studentSelected;
+
+    private String placeSelected;
     private int coins;
     private AssistantCard trash;
     private Difficulty difficulty;
@@ -265,6 +273,8 @@ public class SchoolController extends ObservableView implements GenericScene {
     public void initialize(){
         hide();
         updateSchool();
+        addDragDetected();
+        addDragOver();
     }
 
     private void updateSchool(){
@@ -277,7 +287,7 @@ public class SchoolController extends ObservableView implements GenericScene {
     private void updateEntry(){
         for(Student student : school.getEntry()){
             entry.getChildren().get(school.getEntry().indexOf(student)).setVisible(true);
-            entry.getChildren().get(school.getEntry().indexOf(student)).setDisable(false);
+            //entry.getChildren().get(school.getEntry().indexOf(student)).setDisable(false);
             switch(student.getsColour()){
                 case GREEN:
                     ((ImageView) entry.getChildren().get(school.getEntry().indexOf(student))).setImage(green_1.getImage());
@@ -302,27 +312,27 @@ public class SchoolController extends ObservableView implements GenericScene {
     private void updateHall() {
         for(Student student : school.getGTable()){
             green_table.getChildren().get(school.getGTable().indexOf(student)).setVisible(true);
-            green_table.getChildren().get(school.getGTable().indexOf(student)).setDisable(false);
+            //green_table.getChildren().get(school.getGTable().indexOf(student)).setDisable(false);
             //entryMap.put((ImageView) entry.getChildren().get(school.getEntry().indexOf(student)),student.getIdStudent());
         }
         for(Student student : school.getRTable()){
             red_table.getChildren().get(school.getRTable().indexOf(student)).setVisible(true);
-            red_table.getChildren().get(school.getRTable().indexOf(student)).setDisable(false);
+            //red_table.getChildren().get(school.getRTable().indexOf(student)).setDisable(false);
             //entryMap.put((ImageView) entry.getChildren().get(school.getEntry().indexOf(student)),student.getIdStudent());
         }
         for(Student student : school.getYTable()){
             yellow_table.getChildren().get(school.getYTable().indexOf(student)).setVisible(true);
-            yellow_table.getChildren().get(school.getYTable().indexOf(student)).setDisable(false);
+            //yellow_table.getChildren().get(school.getYTable().indexOf(student)).setDisable(false);
             //entryMap.put((ImageView) entry.getChildren().get(school.getEntry().indexOf(student)),student.getIdStudent());
         }
         for(Student student : school.getPTable()){
             pink_table.getChildren().get(school.getPTable().indexOf(student)).setVisible(true);
-            pink_table.getChildren().get(school.getPTable().indexOf(student)).setDisable(false);
+            //pink_table.getChildren().get(school.getPTable().indexOf(student)).setDisable(false);
             //entryMap.put((ImageView) entry.getChildren().get(school.getEntry().indexOf(student)),student.getIdStudent());
         }
         for(Student student : school.getBTable()){
             blue_table.getChildren().get(school.getBTable().indexOf(student)).setVisible(true);
-            blue_table.getChildren().get(school.getBTable().indexOf(student)).setDisable(false);
+            //blue_table.getChildren().get(school.getBTable().indexOf(student)).setDisable(false);
             //entryMap.put((ImageView) entry.getChildren().get(school.getEntry().indexOf(student)),student.getIdStudent());
         }
 
@@ -354,7 +364,7 @@ public class SchoolController extends ObservableView implements GenericScene {
 
     private void updateTowerZone() {
         for(Tower tower : school.getTowers()){
-            towerZone.getChildren().get(school.getTowers().indexOf(tower)).setDisable(false);
+            //towerZone.getChildren().get(school.getTowers().indexOf(tower)).setDisable(false);
             switch (tower.getTColour()){
                 case WHITE:
                     ((ImageView) towerZone.getChildren().get(school.getTowers().indexOf(tower))).setImage(new Image("/images/towers/Twhite.png"));
@@ -403,7 +413,106 @@ public class SchoolController extends ObservableView implements GenericScene {
         return difficulty;
     }
 
+    public void abilitateEntry(){
+        for(Student student : school.getEntry()) {
+            entry.getChildren().get(school.getEntry().indexOf(student)).setDisable(false);
+        }
+    }
+
+
+
     public Map<ImageView,Integer> getEntryMap(){
         return entryMap;
     }
+
+    public int getStudentSelected() {
+        return studentSelected;
+    }
+
+    public void setStudentSelected(int studentSelected) {
+        this.studentSelected = studentSelected;
+    }
+
+    public String getPlaceSelected() {
+        return placeSelected;
+    }
+
+    public void setPlaceSelected(String placeSelected) {
+        this.placeSelected = placeSelected;
+    }
+
+    private void addDragDetected() {
+        for(Student student : school.getEntry()) {
+            Node studentNode = entry.getChildren().get(school.getEntry().indexOf(student));
+            studentNode.setOnDragDetected(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    Dragboard db =  studentNode.startDragAndDrop(TransferMode.ANY);
+                    ClipboardContent content = new ClipboardContent();
+                    content.putImage(((ImageView) studentNode).getImage());
+                    db.setContent(content);
+                    studentSelected = entryMap.get((ImageView) studentNode);
+
+                    mouseEvent.consume();
+                }
+            });
+
+            studentNode.setOnDragDone(new EventHandler<DragEvent>() {
+                public void handle(DragEvent event) {
+                    if (event.getTransferMode() == TransferMode.MOVE) {
+                    }
+                    notifyObserver(obs -> obs.choosePlaceAndStudentForMove(placeSelected,studentSelected));
+                    event.consume();
+                }
+            });
+        }
+    }
+
+    private void addDragOver(){
+        hall.setOnDragOver(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                if (event.getGestureSource() != hall &&
+                        event.getDragboard().hasImage()) {
+                    event.acceptTransferModes(TransferMode.MOVE);
+                }
+
+                event.consume();
+            }
+        });
+
+        hall.setOnDragEntered(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                if (event.getGestureSource() != hall &&
+                        event.getDragboard().hasString()) {
+                    hall.setVisible(false);
+                }
+
+                event.consume();
+            }
+        });
+
+        hall.setOnDragExited(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                hall.setVisible(true);
+
+                event.consume();
+            }
+        });
+
+        hall.setOnDragDropped(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                Dragboard db = event.getDragboard();
+                boolean success = false;
+                if (db.hasImage()) {
+                    setPlaceSelected("SCHOOL");
+                    success = true;
+                }
+                event.setDropCompleted(success);
+
+                event.consume();
+            }
+        });
+    }
+
+
 }
