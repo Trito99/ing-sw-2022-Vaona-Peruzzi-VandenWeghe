@@ -24,103 +24,70 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
 
     @FXML
     private Pane Pane;
-
     @FXML
     private ImageView blueBackground;
-
     @FXML
     private Button card1;
-
     @FXML
     private Button card10;
-
     @FXML
     private Pane card10ShadowPane;
-
     @FXML
     private Pane card1ShadowPane;
-
     @FXML
     private Button card2;
-
     @FXML
     private Pane card2ShadowPane;
-
     @FXML
     private Button card3;
-
     @FXML
     private Pane card3ShadowPane;
-
     @FXML
     private Button card4;
-
     @FXML
     private Pane card4ShadowPane;
-
     @FXML
     private Button card5;
-
     @FXML
     private Pane card5ShadowPane;
-
     @FXML
     private Button card6;
-
     @FXML
     private Pane card6ShadowPane;
-
     @FXML
     private Button card7;
-
     @FXML
     private Pane card7ShadowPane;
-
     @FXML
     private Button card8;
-
     @FXML
     private Pane card8ShadowPane;
-
     @FXML
     private Button card9;
-
     @FXML
     private Pane card9ShadowPane;
-
     @FXML
     private ImageView imageCard1;
-
     @FXML
     private ImageView imageCard10;
-
     @FXML
     private ImageView imageCard2;
-
     @FXML
     private ImageView imageCard3;
-
     @FXML
     private ImageView imageCard4;
-
     @FXML
     private ImageView imageCard5;
-
     @FXML
     private ImageView imageCard6;
-
     @FXML
     private ImageView imageCard7;
-
     @FXML
     private ImageView imageCard8;
-
     @FXML
     private ImageView imageCard9;
-
     @FXML
     private Button playButton;
-
     @FXML
     private Text playText;
 
@@ -267,12 +234,14 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
         card8ShadowPane.setVisible(true);
         setCardChosen("dog");
     }
+
     private void clickCard9(Event event){
         initializeCardsInHand();
         card9ShadowPane.setStyle("-fx-background-color: blue");
         card9ShadowPane.setVisible(true);
         setCardChosen("elephant");
     }
+
     private void clickCard10(Event event){
         initializeCardsInHand();
         card10ShadowPane.setStyle("-fx-background-color: blue");

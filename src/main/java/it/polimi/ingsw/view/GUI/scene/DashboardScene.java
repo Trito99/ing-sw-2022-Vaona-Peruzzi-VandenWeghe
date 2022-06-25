@@ -1,9 +1,11 @@
 package it.polimi.ingsw.view.GUI.scene;
 
+import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.observer.ObservableView;
+import it.polimi.ingsw.view.GUI.CardsController.CharacterCardController;
 import it.polimi.ingsw.view.GUI.GuiManager;
 import it.polimi.ingsw.view.GUI.StartGUI;
 import javafx.event.Event;
@@ -44,6 +46,24 @@ public class DashboardScene extends ObservableView implements GenericScene {
         assistantCardMap.put("turtle", "/images/assistantCards/assistant10.png");
     }
 
+    private static Map<CardEffect, String> characterCardMap;
+    static {
+        characterCardMap = new HashMap<>();
+        characterCardMap.put(CardEffect.ABBOT, "/images/characterCards/abbot.png");
+        characterCardMap.put(CardEffect.HOST, "/images/characterCards/host.png");
+        characterCardMap.put(CardEffect.HERALD, "/images/characterCards/herald.png");
+        characterCardMap.put(CardEffect.BEARER, "/images/characterCards/bearer.png");
+        characterCardMap.put(CardEffect.CURATOR, "/images/characterCards/curator.png");
+        characterCardMap.put(CardEffect.CENTAUR, "/images/characterCards/centaur.png");;
+        characterCardMap.put(CardEffect.ACROBAT, "/images/characterCards/acrobat.png");
+        characterCardMap.put(CardEffect.KNIGHT, "/images/characterCards/knight.png");
+        characterCardMap.put(CardEffect.HERBALIST, "/images/characterCards/herbalist.png");
+        characterCardMap.put(CardEffect.BARD, "/images/characterCards/bard.png");
+        characterCardMap.put(CardEffect.COURTESAN, "/images/characterCards/courtesan.png");
+        characterCardMap.put(CardEffect.JUNKDEALER, "/images/characterCards/junkdealer.png");
+    }
+
+
     private ViewDeckScene assistantDeck;
 
     private GameMode gameMode;
@@ -71,7 +91,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private Text TextTeamMate;
 
     @FXML
-    private VBox characterCardLayout1;
+    private VBox characterCardLayout;
 
     @FXML
     private ImageView cloud1;
@@ -237,22 +257,30 @@ public class DashboardScene extends ObservableView implements GenericScene {
         });
         deckButton.addEventHandler(MouseEvent.MOUSE_CLICKED,this::deckButtonClicked);
 
-        /**
-        ArrayList<CharacterCard> characterCardsPlaying = new ArrayList<>((characterCardsPlaying()));
-        try{
-            for(int i = 0; i < characterCardsPlaying().size(); i++) {
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/fxml/characterCard.fxml"));
-                ImageView characterCardImage = loader.load();
+        /** -- Character Cards in VBox -- */
+        if(difficulty.equals(Difficulty.STANDARDMODE)){
+            ArrayList<CharacterCard> characterCardsPlaying = new ArrayList<>((characterCardsPlaying()));
+            try{
+                for(int i = 0; i < 3; i++) {
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("/fxml/characterCard.fxml"));
+                    ImageView characterCardImage = loader.load();
 
-                CharacterCardController characterCardController = loader.getController();
-                characterCardController.setData(characterCardsPlaying.get(i));
-                characterCardLayout.getChildren().add(characterCardImage);
+                    CharacterCardController characterCardController = loader.getController();
+                    characterCardController.setData(characterCardsPlaying.get(i));
+                    characterCardLayout.getChildren().add(characterCardImage);
                 }
-        } catch (IOException e) {
+                characterCardLayout.setVisible(true);
+            } catch (IOException e) {
                 e.printStackTrace();
 
-        }*/
+            }
+        } else{
+            characterCardLayout.setVisible(false);
+        }
+
+
+
     }
 
     private void otherSchoolClicked(Event event) throws IOException {
@@ -315,12 +343,14 @@ public class DashboardScene extends ObservableView implements GenericScene {
     /** esempio inizializzazione carta personaggio -> da sistemare con */
     private List<CharacterCard> characterCardsPlaying(){
         List<CharacterCard> cards = new ArrayList<>();
+
         CharacterCard characterCard = null /**= new CharacterCard() */ ;
-        characterCard.setImageSrc("/images/characterCards/characterCard_front.jpg");
+        characterCard.setImageSrc("/images/characterCards/abbot.jpg");
 
         /** per le tre carte */
         return cards;
     }
+
 
     public ViewDeckScene getAssistantDeck(){
         return assistantDeck;
