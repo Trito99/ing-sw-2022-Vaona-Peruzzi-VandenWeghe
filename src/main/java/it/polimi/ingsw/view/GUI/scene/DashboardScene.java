@@ -94,18 +94,6 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private VBox characterCardLayout;
 
     @FXML
-    private ImageView cloud1;
-
-    @FXML
-    private ImageView cloud2;
-
-    @FXML
-    private ImageView cloud3;
-
-    @FXML
-    private ImageView cloud4;
-
-    @FXML
     private Pane cloudPane;
 
     @FXML
@@ -194,6 +182,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     @FXML
     private Pane trashPanePersonalSchool;
+
 
 
     public void updatePersonalSchool(SchoolController controller, GameMode gameMode, String teamMate) throws IOException {
