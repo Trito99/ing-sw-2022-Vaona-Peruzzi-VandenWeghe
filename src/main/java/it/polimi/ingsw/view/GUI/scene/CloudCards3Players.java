@@ -2,8 +2,12 @@ package it.polimi.ingsw.view.GUI.scene;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 public class CloudCards3Players {
+
+    @FXML
+    private Pane StudentsPane;
 
     @FXML
     private ImageView cloud1_3Players;

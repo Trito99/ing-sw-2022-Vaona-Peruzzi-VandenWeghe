@@ -3,7 +3,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.layout.Pane?>
 
 <AnchorPane prefHeight="180.0" prefWidth="282.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -12,39 +12,9 @@
             <Image url="@../images/clouds/cloudgeneric.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="stud1_c1_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="107.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/students/Bstudent.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="stud2_c1_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="107.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/students/Bstudent.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="stud3_c1_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="84.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/students/Bstudent.png" />
-         </image>
-      </ImageView>
       <ImageView fx:id="cloud2_4Players" fitHeight="108.0" fitWidth="84.0" layoutX="193.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/clouds/cloudgeneric.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="stud1_c2_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="219.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/students/Bstudent.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="stud2_c2_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="244.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/students/Bstudent.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="stud3_c2_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="219.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/students/Bstudent.png" />
          </image>
       </ImageView>
       <ImageView fx:id="cloud4_4Players" fitHeight="108.0" fitWidth="84.0" layoutX="14.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
@@ -52,40 +22,74 @@
             <Image url="@../images/clouds/cloudgeneric.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="stud2_c4_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="58.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/students/Bstudent.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="stud3_c4_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="58.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/students/Bstudent.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="stud1_c4_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="35.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/students/Bstudent.png" />
-         </image>
-      </ImageView>
       <ImageView fx:id="cloud3_4Players" fitHeight="108.0" fitWidth="84.0" layoutX="135.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/clouds/cloudgeneric.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="stud1_c3_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="161.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/students/Bstudent.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="stud2_c3_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="186.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/students/Bstudent.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="stud3_c3_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="161.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/students/Bstudent.png" />
-         </image>
-      </ImageView>
+      <Pane fx:id="StudentsPane" layoutX="7.0" layoutY="8.0" prefHeight="167.0" prefWidth="268.0">
+         <children>
+            <ImageView fx:id="stud1_c1_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="98.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/students/Bstudent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="stud2_c1_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="98.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/students/Bstudent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="stud3_c1_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="75.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/students/Bstudent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="stud1_c2_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="210.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/students/Bstudent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="stud2_c2_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="235.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/students/Bstudent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="stud3_c2_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="210.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/students/Bstudent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="stud2_c4_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="49.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/students/Bstudent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="stud3_c4_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="49.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/students/Bstudent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="stud1_c4_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="26.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/students/Bstudent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="stud1_c3_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="152.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/students/Bstudent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="stud2_c3_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="177.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/students/Bstudent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="stud3_c3_4Players" fitHeight="17.0" fitWidth="17.0" layoutX="152.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/students/Bstudent.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

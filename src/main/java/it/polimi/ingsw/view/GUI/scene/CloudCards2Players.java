@@ -1,17 +1,13 @@
 package it.polimi.ingsw.view.GUI.scene;
 
 import it.polimi.ingsw.model.cloud.CloudCard;
-import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.student.Student;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class CloudCards2Players {
 
