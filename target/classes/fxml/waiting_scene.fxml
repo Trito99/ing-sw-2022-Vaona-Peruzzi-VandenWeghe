@@ -12,7 +12,7 @@
    <children>
       <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/BG_2_Clouds_Blur.png" />
+            <Image url="@../images/BG_Clouds_Blur.png" />
          </image>
       </ImageView>
       <Label layoutX="400.0" layoutY="208.0" styleClass="text-field" stylesheets="@../css/style.css" text="Waiting for other players to join the game...">
@@ -22,7 +22,7 @@
       </Label>
       <Pane layoutX="340.0" layoutY="159.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="600.0" styleClass="layout" stylesheets="@../css/style.css">
          <children>
-            <ProgressIndicator layoutX="279.0" layoutY="128.0" style="-fx-progress-color: #ada79f#ada79f;" />
+            <ProgressIndicator layoutX="270.0" layoutY="128.0" style="-fx-progress-color: #ada79f#ada79f;" />
          </children></Pane>
    </children>
 </AnchorPane>
