@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.character.CharacterCard;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -29,8 +30,18 @@ public class CharacterCardController {
         characterCardMap.put(CardEffect.JUNKDEALER, "/images/characterCards/junkdealer.jpg");
     }
 
-   @FXML
-   private ImageView cardImage;
+    @FXML
+    private Pane PaneCharacterCard;
+
+    @FXML
+    private Pane PaneCoinOnCard;
+
+    @FXML
+    private ImageView cardImage;
+
+    @FXML
+    private ImageView coinImagePersonal;
+
 
     public void setData(CharacterCard card){
         cardImage.setImage(new Image(characterCardMap.get(card.getCardEffect())));
