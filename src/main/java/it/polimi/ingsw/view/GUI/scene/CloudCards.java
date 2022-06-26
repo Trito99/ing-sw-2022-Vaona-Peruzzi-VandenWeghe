@@ -44,15 +44,15 @@ public class CloudCards {
 
     public CloudCards(ArrayList<CloudCard> cloudCards){
         this.cloudCards = cloudCards;
-
     }
 
     public void initialize(){
         hide();
-        updateStudents();
+        updateStudents(cloudCards);
     }
 
-    public void updateStudents(){
+    public void updateStudents(ArrayList<CloudCard> cloudCards){
+        this.cloudCards = cloudCards;
         ArrayList<Student> allStudents = new ArrayList<>();
         for(CloudCard c : cloudCards) {
             for (Student s : c.getStudentOnCloud()) {
@@ -88,5 +88,4 @@ public class CloudCards {
             node.setDisable(true);
         }
     }
-
 }

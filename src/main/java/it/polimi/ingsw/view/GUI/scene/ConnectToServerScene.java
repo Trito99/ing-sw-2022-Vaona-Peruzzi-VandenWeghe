@@ -13,11 +13,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 
+import java.awt.event.KeyEvent;
+
 import static java.lang.System.out;
 
 /** scena che gestisce la connessione al server */
 
-public class ConnectToServerScene extends ObservableView implements GenericScene {
+public class ConnectToServerScene extends ObservableView implements GenericScene{
 
     @FXML
     private Button connectButton;

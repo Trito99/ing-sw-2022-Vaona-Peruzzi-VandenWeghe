@@ -1,8 +1,10 @@
 package it.polimi.ingsw.view.GUI.scene;
 
+import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.model.character.CharacterCard;
-import it.polimi.ingsw.model.game.Difficulty;
-import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.game.*;
+import it.polimi.ingsw.model.island.IslandCard;
+import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.observer.ObservableView;
 import it.polimi.ingsw.view.GUI.CardsController.CharacterCardController;
@@ -12,6 +14,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -55,6 +58,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private ViewDeckScene assistantDeck;
 
     private GameMode gameMode;
+    private GameController gameController;
     private Difficulty difficulty;
 
     private boolean planning = false;
@@ -343,54 +347,9 @@ public class DashboardScene extends ObservableView implements GenericScene {
     public void initializeTable(Difficulty difficulty, Table table) throws IOException {
         this.difficulty = difficulty;
 
-        PaneIsland1.setVisible(false);
-        PaneIsland1.setDisable(true);
-        PaneIsland2.setVisible(false);
-        PaneIsland2.setDisable(true);
-        PaneIsland3.setVisible(false);
-        PaneIsland3.setDisable(true);
-        PaneIsland4.setVisible(false);
-        PaneIsland4.setDisable(true);
-        PaneIsland5.setVisible(false);
-        PaneIsland5.setDisable(true);
-        PaneIsland6.setVisible(false);
-        PaneIsland6.setDisable(true);
-        PaneIsland7.setVisible(false);
-        PaneIsland7.setDisable(true);
-        PaneIsland8.setVisible(false);
-        PaneIsland8.setDisable(true);
-        PaneIsland9.setVisible(false);
-        PaneIsland9.setDisable(true);
-        PaneIsland10.setVisible(false);
-        PaneIsland10.setDisable(true);
-        PaneIsland11.setVisible(false);
-        PaneIsland11.setDisable(true);
-        PaneIsland12.setVisible(false);
-        PaneIsland12.setDisable(true);
-        Bridge1_2.setVisible(false);
-        Bridge1_2.setDisable(true);
-        Bridge2_3.setVisible(false);
-        Bridge2_3.setDisable(true);
-        Bridge3_4.setVisible(false);
-        Bridge3_4.setDisable(true);
-        Bridge4_5.setVisible(false);
-        Bridge4_5.setDisable(true);
-        Bridge5_6.setVisible(false);
-        Bridge5_6.setDisable(true);
-        Bridge6_7.setVisible(false);
-        Bridge6_7.setDisable(true);
-        Bridge7_8.setVisible(false);
-        Bridge7_8.setDisable(true);
-        Bridge8_9.setVisible(false);
-        Bridge8_9.setDisable(true);
-        Bridge9_10.setVisible(false);
-        Bridge9_10.setDisable(true);
-        Bridge10_11.setVisible(false);
-        Bridge10_11.setDisable(true);
-        Bridge11_12.setVisible(false);
-        Bridge11_12.setDisable(true);
-        Bridge12_1.setVisible(false);
-        Bridge12_1.setDisable(true);
+        hide(table);
+
+        updateIslands(table.getListOfIsland());
 
         switch(table.getCloudNumber().size()){
             case 2:
@@ -459,6 +418,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     @FXML
     public void initialize(){
         addDragOver();
+
         otherSchoolButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             try {
                 otherSchoolClicked(event);
@@ -525,6 +485,38 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }
     }
 
+    public void updateIslands(ArrayList<IslandCard> listOfIslands) {
+        for(IslandCard islandCard : listOfIslands){
+            //soluzione temporanea (da getsire con vero id)
+            Pane island = (Pane) islandPane.getChildren().get(13+listOfIslands.indexOf(islandCard));
+            for(Student student : islandCard.getStudentOnIsland()){
+                if (island.getChildren().indexOf(island.getChildren().get(islandCard.getStudentOnIsland().indexOf(student)))!=(island.getChildren().size()-1)) {
+                    island.getChildren().get(islandCard.getStudentOnIsland().indexOf(student)).setVisible(true);
+                    switch (student.getsColour()) {
+                        case GREEN:
+                            ((ImageView) island.getChildren().get(islandCard.getStudentOnIsland().indexOf(student))).setImage(new Image("/images/students/Gstudent.png"));
+                            break;
+                        case RED:
+                            ((ImageView) island.getChildren().get(islandCard.getStudentOnIsland().indexOf(student))).setImage(new Image("/images/students/Rstudent.png"));
+                            break;
+                        case YELLOW:
+                            ((ImageView) island.getChildren().get(islandCard.getStudentOnIsland().indexOf(student))).setImage(new Image("/images/students/Ystudent.png"));
+                            break;
+                        case PINK:
+                            ((ImageView) island.getChildren().get(islandCard.getStudentOnIsland().indexOf(student))).setImage(new Image("/images/students/Pstudent.png"));
+                            break;
+                        case BLUE:
+                            ((ImageView) island.getChildren().get(islandCard.getStudentOnIsland().indexOf(student))).setImage(new Image("/images/students/Bstudent.png"));
+                            break;
+                    }
+                }
+            }
+            if(islandCard.getMotherEarthOnIsland()){
+                island.getChildren().get(island.getChildren().size()-1).setVisible(true);
+            }
+        }
+    }
+
 
     public ViewDeckScene getAssistantDeck(){
         return assistantDeck;
@@ -540,6 +532,45 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     public SchoolController getPersonalSchoolController() {
         return personalSchoolController;
+    }
+
+    public CloudCards getCloudController() {
+        return cloudController;
+    }
+
+    public void hide(Table table){
+        for(IslandCard islandCard : table.getListOfIsland()) {
+            // soluzione temporanea (da getsire con vero id)
+            Pane island = (Pane) islandPane.getChildren().get(13 + table.getListOfIsland().indexOf(islandCard));
+            for (Node node : island.getChildren()) {
+                node.setVisible(false);
+                node.setDisable(true);
+            }
+        }
+        Bridge1_2.setVisible(false);
+        Bridge1_2.setDisable(true);
+        Bridge2_3.setVisible(false);
+        Bridge2_3.setDisable(true);
+        Bridge3_4.setVisible(false);
+        Bridge3_4.setDisable(true);
+        Bridge4_5.setVisible(false);
+        Bridge4_5.setDisable(true);
+        Bridge5_6.setVisible(false);
+        Bridge5_6.setDisable(true);
+        Bridge6_7.setVisible(false);
+        Bridge6_7.setDisable(true);
+        Bridge7_8.setVisible(false);
+        Bridge7_8.setDisable(true);
+        Bridge8_9.setVisible(false);
+        Bridge8_9.setDisable(true);
+        Bridge9_10.setVisible(false);
+        Bridge9_10.setDisable(true);
+        Bridge10_11.setVisible(false);
+        Bridge10_11.setDisable(true);
+        Bridge11_12.setVisible(false);
+        Bridge11_12.setDisable(true);
+        Bridge12_1.setVisible(false);
+        Bridge12_1.setDisable(true);
     }
 
     private void addDragOver(){
