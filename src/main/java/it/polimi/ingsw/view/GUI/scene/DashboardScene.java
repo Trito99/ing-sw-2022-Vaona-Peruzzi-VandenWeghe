@@ -277,6 +277,42 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private Text textCoinsOnTable;
 
     @FXML
+    private ImageView tower1;
+
+    @FXML
+    private ImageView tower10;
+
+    @FXML
+    private ImageView tower11;
+
+    @FXML
+    private ImageView tower12;
+
+    @FXML
+    private ImageView tower2;
+
+    @FXML
+    private ImageView tower3;
+
+    @FXML
+    private ImageView tower4;
+
+    @FXML
+    private ImageView tower5;
+
+    @FXML
+    private ImageView tower6;
+
+    @FXML
+    private ImageView tower7;
+
+    @FXML
+    private ImageView tower8;
+
+    @FXML
+    private ImageView tower9;
+
+    @FXML
     private Pane trashPanePersonalSchool;
 
 
