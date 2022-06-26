@@ -415,6 +415,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
                     CharacterCardController characterCardController = loader.getController();
                     characterCardController.setData(characterCardsPlaying.get(i));
                     characterCardLayout.getChildren().add(characterCardImage);
+
                 }
                 characterCardLayout.setVisible(true);
             } catch (IOException e) {

@@ -2,6 +2,9 @@ package it.polimi.ingsw.view.GUI.CardsController;
 
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
+import it.polimi.ingsw.model.student.Student;
+import it.polimi.ingsw.observer.ObservableView;
+import it.polimi.ingsw.view.GUI.scene.GenericScene;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
@@ -32,18 +35,80 @@ public class CharacterCardController {
 
     @FXML
     private Pane PaneCharacterCard;
-
     @FXML
     private Pane PaneCoinOnCard;
-
     @FXML
     private ImageView cardImage;
-
     @FXML
     private ImageView coinImagePersonal;
 
+    @FXML
+    private Pane studentPane;
+    @FXML
+    private Pane xCardPane;
+
+    @FXML
+    private ImageView stud1;
+    @FXML
+    private ImageView stud2;
+    @FXML
+    private ImageView stud3;
+    @FXML
+    private ImageView stud4;
+    @FXML
+    private ImageView stud5;
+    @FXML
+    private ImageView stud6;
+
+    @FXML
+    private ImageView xCard1;
+    @FXML
+    private ImageView xCard2;
+    @FXML
+    private ImageView xCard3;
+    @FXML
+    private ImageView xCard4;
+
+
+    public void initialize() {
+        if(characterCardMap.containsValue(CardEffect.ABBOT)) abilitateStudentPane();
+        if(characterCardMap.containsValue(CardEffect.ACROBAT)) abilitateStudentPane();
+        if(characterCardMap.containsValue(CardEffect.BARD)) disableAll();
+        if(characterCardMap.containsValue(CardEffect.BEARER)) disableAll();
+        if(characterCardMap.containsValue(CardEffect.CENTAUR)) disableAll();
+        if(characterCardMap.containsValue(CardEffect.COURTESAN)) abilitateStudentPane();
+        if(characterCardMap.containsValue(CardEffect.CURATOR)) abilitateXCardPane();
+        if(characterCardMap.containsValue(CardEffect.HERALD)) disableAll();
+        if(characterCardMap.containsValue(CardEffect.HERBALIST)) abilitateStudentPane();
+        if(characterCardMap.containsValue(CardEffect.HOST)) disableAll();
+        if(characterCardMap.containsValue(CardEffect.JUNKDEALER)) disableAll();
+        if(characterCardMap.containsValue(CardEffect.KNIGHT)) disableAll();
+    }
 
     public void setData(CharacterCard card){
         cardImage.setImage(new Image(characterCardMap.get(card.getCardEffect())));
     }
+
+
+    public void abilitateStudentPane(){
+        xCardPane.setVisible(false);
+        xCardPane.setDisable(true);
+        studentPane.setVisible(true);
+        studentPane.setDisable(false);
+    }
+
+    public void abilitateXCardPane(){
+            studentPane.setVisible(false);
+            studentPane.setDisable(true);
+            xCardPane.setVisible(true);
+            xCardPane.setDisable(false);
+    }
+
+    public void disableAll(){
+        studentPane.setVisible(false);
+        studentPane.setDisable(true);
+        xCardPane.setVisible(false);
+        xCardPane.setDisable(true);
+    }
+
 }
