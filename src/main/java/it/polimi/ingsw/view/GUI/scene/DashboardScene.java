@@ -414,6 +414,49 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
                     CharacterCardController characterCardController = loader.getController();
                     characterCardController.setData(characterCardsPlaying.get(i));
+
+                        switch (characterCardsPlaying.get(i).getCardEffect()){
+                            case STANDARDMODE:
+                                characterCardController.disableAll();
+                                break;
+                            case ABBOT:
+                                characterCardController.abilitateStudentPane();
+                                break;
+                            case HOST:
+                                characterCardController.disableAll();
+                                break;
+                            case HERALD:
+                                characterCardController.disableAll();
+                                break;
+                            case BEARER:
+                                characterCardController.disableAll();
+                                break;
+                            case CURATOR:
+                                characterCardController.abilitateXCardPane();
+                                break;
+                            case CENTAUR:
+                                characterCardController.disableAll();
+                                break;
+                            case ACROBAT:
+                                characterCardController.abilitateStudentPane();
+                                break;
+                            case KNIGHT:
+                                characterCardController.disableAll();
+                                break;
+                            case HERBALIST:
+                                characterCardController.abilitateStudentPane();
+                                break;
+                            case BARD:
+                                characterCardController.disableAll();
+                                break;
+                            case COURTESAN:
+                                characterCardController.abilitateStudentPane();
+                                break;
+                            case JUNKDEALER:
+                                characterCardController.disableAll();
+                                break;
+                    }
+
                     characterCardLayout.getChildren().add(characterCardImage);
 
                 }

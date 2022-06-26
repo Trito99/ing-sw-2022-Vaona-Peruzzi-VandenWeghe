@@ -71,18 +71,6 @@ public class CharacterCardController {
 
 
     public void initialize() {
-        if(characterCardMap.containsValue(CardEffect.ABBOT)) abilitateStudentPane();
-        if(characterCardMap.containsValue(CardEffect.ACROBAT)) abilitateStudentPane();
-        if(characterCardMap.containsValue(CardEffect.BARD)) disableAll();
-        if(characterCardMap.containsValue(CardEffect.BEARER)) disableAll();
-        if(characterCardMap.containsValue(CardEffect.CENTAUR)) disableAll();
-        if(characterCardMap.containsValue(CardEffect.COURTESAN)) abilitateStudentPane();
-        if(characterCardMap.containsValue(CardEffect.CURATOR)) abilitateXCardPane();
-        if(characterCardMap.containsValue(CardEffect.HERALD)) disableAll();
-        if(characterCardMap.containsValue(CardEffect.HERBALIST)) abilitateStudentPane();
-        if(characterCardMap.containsValue(CardEffect.HOST)) disableAll();
-        if(characterCardMap.containsValue(CardEffect.JUNKDEALER)) disableAll();
-        if(characterCardMap.containsValue(CardEffect.KNIGHT)) disableAll();
     }
 
     public void setData(CharacterCard card){
