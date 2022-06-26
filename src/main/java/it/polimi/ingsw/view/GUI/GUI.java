@@ -189,7 +189,7 @@ public class GUI extends ObservableView implements View {
     @Override
     public void askPlaceAndStudentForMove(ArrayList<Student> entry) {
         Platform.runLater(() -> {
-            GuiManager.getMainScene().getPersonalSchoolController().abilitateEntry();
+            GuiManager.getMainScene().getPersonalSchoolController().disabilitateEntry(false);
             GuiManager.getMainScene().getPersonalSchoolController().addAllObservers(observers);});
         showMessage("Move 3 students");
 
@@ -197,7 +197,9 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void askMotherEarthSteps(int maxSteps, Table table, Difficulty difficulty) {
-
+        Platform.runLater(() ->
+            {GuiManager.getMainScene().getPersonalSchoolController().disabilitateEntry(true);
+            GuiManager.getMainScene().disabilitateMother(table,maxSteps,false);});
     }
 
     @Override
@@ -214,7 +216,7 @@ public class GUI extends ObservableView implements View {
                 if (characterCard.getCardEffect().equals(CardEffect.CURATOR))
                     System.out.print("\nCURATOR EFFECT\nIn which island do you want to place the forbidden card? (id)\n");
             } else
-                notifyObserver(obs -> obs.chooseId(GuiManager.getMainScene().getIslandId(),choice, indexAcrobat, false));
+                notifyObserver(obs -> obs.chooseId(GuiManager.getMainScene().getStudentDestinantionIslandId(),choice, indexAcrobat, false));
         }
     }
 }

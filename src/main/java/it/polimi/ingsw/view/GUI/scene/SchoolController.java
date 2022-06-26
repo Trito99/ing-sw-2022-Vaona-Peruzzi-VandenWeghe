@@ -412,15 +412,9 @@ public class SchoolController extends ObservableView implements GenericScene {
         return difficulty;
     }
 
-    public void abilitateEntry(){
+    public void disabilitateEntry(boolean disabilitate){
         for(Student student : school.getEntry()) {
-            entry.getChildren().get(school.getEntry().indexOf(student)).setDisable(false);
-        }
-    }
-
-    public void disabilitateEntry(){
-        for(Student student : school.getEntry()) {
-            entry.getChildren().get(school.getEntry().indexOf(student)).setDisable(true);
+            entry.getChildren().get(school.getEntry().indexOf(student)).setDisable(disabilitate);
         }
     }
 
@@ -448,7 +442,7 @@ public class SchoolController extends ObservableView implements GenericScene {
 
     private void addDragDetected() {
         for(Student student : school.getEntry()) {
-            Node studentNode = entry.getChildren().get(school.getEntry().indexOf(student));
+            ImageView studentNode = (ImageView) entry.getChildren().get(school.getEntry().indexOf(student));
             studentNode.setOnDragDetected(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {

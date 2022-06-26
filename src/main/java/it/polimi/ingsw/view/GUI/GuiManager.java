@@ -99,7 +99,7 @@ public class GuiManager extends ObservableView {
 
     public static <T> void changeRootMainScene(List<ObserverView> observerList) {
         T controller;
-                if(mainController==null){
+        if(mainController==null){
             FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource("/fxml/dashboard_scene.fxml"));
             Parent root;
             try {

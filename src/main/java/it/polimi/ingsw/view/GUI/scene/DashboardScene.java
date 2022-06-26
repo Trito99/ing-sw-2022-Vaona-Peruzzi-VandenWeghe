@@ -18,10 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
+import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -39,6 +36,8 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     private CloudCards cloudController;
     private SchoolController personalSchoolController;
+
+    private Image temp = null;
     private static Map<String, String> assistantCardMap;
     static {
         assistantCardMap = new HashMap<>();
@@ -67,7 +66,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     private Map<Pane, ArrayList<Integer>> islandMap = new HashMap<>();
 
-    private int islandId;
+    private int studentDestinantionIslandId, motherDestinationIslandId, islandMother, maxSteps;
 
 
     @FXML
@@ -594,6 +593,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
                     ((Pane) islandPane.getChildren().get(24+i)).getChildren().get(((Pane) islandPane.getChildren().get(24+i)).getChildren().size()-1).setVisible(false);
                 }
                 island.getChildren().get(island.getChildren().size()-1).setVisible(true);
+                islandMother=islandCard.getImmutableIdIsland();
             }
             if(islandCard.towerIsOnIsland()){
                 island.getChildren().get(island.getChildren().size()-2).setVisible(true);
@@ -633,25 +633,50 @@ public class DashboardScene extends ObservableView implements GenericScene {
         return cloudController;
     }
 
-    public void setIslandId(int island) {
+    public void setIslandId(int destinationIsland) {
         boolean present = false;
         for(IslandCard islandCard : table.getListOfIsland()){
-            if(islandCard.getImmutableIdIsland()==island)
+            if(islandCard.getImmutableIdIsland()==destinationIsland)
                 present = true;
         }
         if (present)
-            this.islandId = island;
+            this.studentDestinantionIslandId = destinationIsland;
         else{
             for (IslandCard islandCard : table.getListOfIsland()) {
                 for(int i : islandCard.getListOfMinorIslands())
-                    if (i == island)
-                        this.islandId = islandCard.getImmutableIdIsland();
+                    if (i == destinationIsland)
+                        this.studentDestinantionIslandId = islandCard.getImmutableIdIsland();
             }
         }
     }
 
-    public int getIslandId() {
-        return islandId;
+    public void setMotherId(int destinationIsland) {
+        boolean present = false;
+        for(IslandCard islandCard : table.getListOfIsland()){
+            if(islandCard.getImmutableIdIsland()==destinationIsland)
+                present = true;
+        }
+        if (present)
+            this.motherDestinationIslandId = destinationIsland;
+        else{
+            for (IslandCard islandCard : table.getListOfIsland()) {
+                for(int i : islandCard.getListOfMinorIslands())
+                    if (i == destinationIsland)
+                        this.motherDestinationIslandId = islandCard.getImmutableIdIsland();
+            }
+        }
+    }
+
+    public int getStudentDestinantionIslandId(){
+        return studentDestinantionIslandId;
+    }
+
+    public int getMotherDestinationIslandId(){
+        return motherDestinationIslandId;
+    }
+
+    public int getIslandMother(){
+        return islandMother;
     }
 
     public void hide(Table table){
@@ -688,6 +713,19 @@ public class DashboardScene extends ObservableView implements GenericScene {
         Bridge12_1.setDisable(true);
     }
 
+    public void disabilitateMother(Table table,int maxSteps,boolean disabilitate) {
+        this.table = table;
+        this.maxSteps = maxSteps;
+        for (IslandCard islandCard : table.getListOfIsland()) {
+            Pane island = (Pane) islandPane.getChildren().get(24 + islandCard.getImmutableIdIsland());
+            if (islandCard.getMotherEarthOnIsland()) {
+                island.getChildren().get(island.getChildren().size() - 1).setDisable(disabilitate);
+            }
+        }
+    }
+
+
+
     private void addDragOver(){
         Pane island = null;
         for(int i=1;i<13;i++) {
@@ -708,8 +746,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
             island.setOnDragEntered(new EventHandler<DragEvent>() {
                 public void handle(DragEvent event) {
                     if (event.getGestureSource() != finalIsland1 &&
-                            event.getDragboard().hasString()) {
-                        finalIsland1.setVisible(false);
+                            event.getDragboard().hasImage()) {
                     }
 
                     event.consume();
@@ -718,8 +755,6 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
             island.setOnDragExited(new EventHandler<DragEvent>() {
                 public void handle(DragEvent event) {
-                    island1.setVisible(true);
-
                     event.consume();
                 }
             });
@@ -729,10 +764,15 @@ public class DashboardScene extends ObservableView implements GenericScene {
                 public void handle(DragEvent event) {
                     Dragboard db = event.getDragboard();
                     boolean success = false;
-                    if (db.hasImage()) {
-                        personalSchoolController.setPlaceSelected("ISLAND");
-                        setIslandId(finalId);
-                        success = true;
+                    if(db.hasImage()) {
+                        if (equalsMother(event.getGestureSource())){
+                            setMotherId(finalId);
+                            success = true;
+                        } else {
+                            personalSchoolController.setPlaceSelected("ISLAND");
+                            setIslandId(finalId);
+                            success = true;
+                        }
                     }
                     event.setDropCompleted(success);
 
@@ -740,5 +780,36 @@ public class DashboardScene extends ObservableView implements GenericScene {
                 }
             });
         }
+        for (int i=1;i<13;i++) {
+            Pane islandP = (Pane) islandPane.getChildren().get(24+i);
+            Node motherNature = islandP.getChildren().get(islandP.getChildren().size()-1);
+            motherNature.setOnDragDetected(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    Dragboard db =  motherNature.startDragAndDrop(TransferMode.ANY);
+                    ClipboardContent content = new ClipboardContent();
+                    content.putImage(((ImageView) motherNature).getImage());
+                    db.setContent(content);
+                    mouseEvent.consume();
+                }
+            });
+
+            motherNature.setOnDragDone(new EventHandler<DragEvent>() {
+                public void handle(DragEvent event) {
+                    if (event.getTransferMode() == TransferMode.MOVE) {
+                    }
+                    int steps = (motherDestinationIslandId-islandMother);
+                    if(steps > 0)
+                        notifyObserver(obs -> obs.chooseMotherEarthSteps(steps,maxSteps,""));
+                    event.consume();
+                }
+            });
+        }
+    }
+
+    private boolean equalsMother(Object o){
+        return (o.equals(motherEarth1) || o.equals(motherEarth2) || o.equals(motherEarth3) || o.equals(motherEarth4) ||
+                o.equals(motherEarth5) || o.equals(motherEarth6) || o.equals(motherEarth7)|| o.equals(motherEarth8) ||
+                o.equals(motherEarth9)|| o.equals(motherEarth10)|| o.equals(motherEarth11) || o.equals(motherEarth12));
     }
 }

@@ -782,6 +782,8 @@ public class GameController {
                             } else
                                 gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE, gameSession.getPlayer(getActivePlayer()), gameSession.getGameMode(), gameSession.getTeams());
                             gameSession.getTable().joinIsland(gameSession.getTable().getListOfIsland());
+                            virtualView.showListOfIsland(gameSession.getTable(),gameSession.getDifficulty());
+                            virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore(), gameSession.getGameMode(), gameSession.getPlayer(getActivePlayer()).getTeamMate());
                             setActionState(ActionState.CLOUDCARD);
                             action();
                         }
