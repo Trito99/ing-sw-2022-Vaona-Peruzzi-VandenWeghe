@@ -56,7 +56,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
 
     private ViewDeckScene assistantDeck;
-
+    private  Table table;
     private GameMode gameMode;
     private GameController gameController;
     private Difficulty difficulty;
@@ -66,6 +66,8 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private boolean actionStudent = false;
 
     private Map<Pane, ArrayList<Integer>> islandMap = new HashMap<>();
+
+    private int islandId;
 
 
     @FXML
@@ -322,6 +324,12 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
 
 
+    public void updateTable(Table table){
+        this.table = table;
+        cloudController.updateStudents(table.getCloudNumber());
+        updateIslands(table.getListOfIsland());
+    }
+
     public void updatePersonalSchool(SchoolController controller, GameMode gameMode, String teamMate) throws IOException {
         personalSchoolController = controller;
         FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource("/fxml/school.fxml"));
@@ -537,6 +545,20 @@ public class DashboardScene extends ObservableView implements GenericScene {
                                 studentsOnIsland.remove(student);
                         }
                     }
+                    if(islandCard.towerIsOnIsland()){
+                        temp.getChildren().get(island.getChildren().size()-2).setVisible(true);
+                        switch(islandCard.getTowerOnIsland().getTColour()){
+                            case WHITE:
+                                ((ImageView) temp.getChildren().get(temp.getChildren().size()-2)).setImage(new Image("/images/towers/Twhite.png"));
+                                break;
+                            case BLACK:
+                                ((ImageView) temp.getChildren().get(temp.getChildren().size()-2)).setImage(new Image("/images/towers/Tblack.png"));
+                                break;
+                            case GREY:
+                                ((ImageView) temp.getChildren().get(temp.getChildren().size()-2)).setImage(new Image("/images/towers/Tgrey.png"));
+                                break;
+                        }
+                    }
                 }
             }
             for(Student student : studentsOnIsland){
@@ -568,6 +590,9 @@ public class DashboardScene extends ObservableView implements GenericScene {
                 }
             }
             if(islandCard.getMotherEarthOnIsland()){
+                for(int i=1;i<13;i++){
+                    ((Pane) islandPane.getChildren().get(24+i)).getChildren().get(((Pane) islandPane.getChildren().get(24+i)).getChildren().size()-1).setVisible(false);
+                }
                 island.getChildren().get(island.getChildren().size()-1).setVisible(true);
             }
             if(islandCard.towerIsOnIsland()){
@@ -608,6 +633,27 @@ public class DashboardScene extends ObservableView implements GenericScene {
         return cloudController;
     }
 
+    public void setIslandId(int island) {
+        boolean present = false;
+        for(IslandCard islandCard : table.getListOfIsland()){
+            if(islandCard.getImmutableIdIsland()==island)
+                present = true;
+        }
+        if (present)
+            this.islandId = island;
+        else{
+            for (IslandCard islandCard : table.getListOfIsland()) {
+                for(int i : islandCard.getListOfMinorIslands())
+                    if (i == island)
+                        this.islandId = islandCard.getImmutableIdIsland();
+            }
+        }
+    }
+
+    public int getIslandId() {
+        return islandId;
+    }
+
     public void hide(Table table){
         for(IslandCard islandCard : table.getListOfIsland()) {
             Pane island = (Pane) islandPane.getChildren().get(24 + islandCard.getImmutableIdIsland());
@@ -643,48 +689,56 @@ public class DashboardScene extends ObservableView implements GenericScene {
     }
 
     private void addDragOver(){
-        island1.setOnDragOver(new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
-                if (event.getGestureSource() != island1 &&
-                        event.getDragboard().hasImage()) {
-                    event.acceptTransferModes(TransferMode.MOVE);
+        Pane island = null;
+        for(int i=1;i<13;i++) {
+            island = ((Pane) islandPane.getChildren().get(24 + i));
+            Pane finalIsland = island;
+            island.setOnDragOver(new EventHandler<DragEvent>() {
+                public void handle(DragEvent event) {
+                    if (event.getGestureSource() != finalIsland &&
+                            event.getDragboard().hasImage()) {
+                        event.acceptTransferModes(TransferMode.MOVE);
+                    }
+
+                    event.consume();
                 }
+            });
 
-                event.consume();
-            }
-        });
+            Pane finalIsland1 = island;
+            island.setOnDragEntered(new EventHandler<DragEvent>() {
+                public void handle(DragEvent event) {
+                    if (event.getGestureSource() != finalIsland1 &&
+                            event.getDragboard().hasString()) {
+                        finalIsland1.setVisible(false);
+                    }
 
-        island1.setOnDragEntered(new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
-                if (event.getGestureSource() != island1 &&
-                        event.getDragboard().hasString()) {
-                    island1.setVisible(false);
+                    event.consume();
                 }
+            });
 
-                event.consume();
-            }
-        });
+            island.setOnDragExited(new EventHandler<DragEvent>() {
+                public void handle(DragEvent event) {
+                    island1.setVisible(true);
 
-        island1.setOnDragExited(new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
-                island1.setVisible(true);
-
-                event.consume();
-            }
-        });
-
-        island1.setOnDragDropped(new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
-                Dragboard db = event.getDragboard();
-                boolean success = false;
-                if (db.hasImage()) {
-                    personalSchoolController.setPlaceSelected("ISLAND");
-                    success = true;
+                    event.consume();
                 }
-                event.setDropCompleted(success);
+            });
 
-                event.consume();
-            }
-        });
+            int finalId = i;
+            island.setOnDragDropped(new EventHandler<DragEvent>() {
+                public void handle(DragEvent event) {
+                    Dragboard db = event.getDragboard();
+                    boolean success = false;
+                    if (db.hasImage()) {
+                        personalSchoolController.setPlaceSelected("ISLAND");
+                        setIslandId(finalId);
+                        success = true;
+                    }
+                    event.setDropCompleted(success);
+
+                    event.consume();
+                }
+            });
+        }
     }
 }

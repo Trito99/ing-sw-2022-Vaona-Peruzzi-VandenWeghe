@@ -519,5 +519,4 @@ public class SchoolController extends ObservableView implements GenericScene {
         });
     }
 
-
 }

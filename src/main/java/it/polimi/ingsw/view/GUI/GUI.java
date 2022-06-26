@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Map;
 
+import static java.lang.System.out;
+
 public class GUI extends ObservableView implements View {
     private static ArrayList<String> playerList = new ArrayList<>();
 
@@ -118,8 +120,7 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void showListOfIsland(Table table, Difficulty difficulty) {
-       // GuiManager.getMainScene().updateListOfIslands();
-       // Platform.runLater(() -> GuiManager.changeRootMainScene(observers));
+       Platform.runLater(() -> GuiManager.getMainScene().updateIslands(table.getListOfIsland()));
     }
 
     @Override
@@ -136,8 +137,7 @@ public class GUI extends ObservableView implements View {
             });
             gameStarted = true;
         }else{
-            Platform.runLater(() -> GuiManager.getMainScene().getCloudController().updateStudents(table.getCloudNumber()));
-            Platform.runLater(() -> GuiManager.getMainScene().updateIslands(table.getListOfIsland()));
+            Platform.runLater(() -> GuiManager.getMainScene().updateTable(table));
             Platform.runLater(() -> GuiManager.changeRootMainScene(observers));
         }
     }
@@ -207,6 +207,14 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void askId(boolean choice, CharacterCard characterCard, int indexAcrobat, School school) {
-
+        if (choice) {
+            if (characterCard != null) {
+                if (characterCard.getCardEffect().equals(CardEffect.HERALD))
+                    System.out.print("\nHERALD EFFECT\nIn which island do you want to calculate influence? (id)\n");
+                if (characterCard.getCardEffect().equals(CardEffect.CURATOR))
+                    System.out.print("\nCURATOR EFFECT\nIn which island do you want to place the forbidden card? (id)\n");
+            } else
+                notifyObserver(obs -> obs.chooseId(GuiManager.getMainScene().getIslandId(),choice, indexAcrobat, false));
+        }
     }
 }
