@@ -136,7 +136,8 @@ public class GUI extends ObservableView implements View {
             });
             gameStarted = true;
         }else{
-            Platform.runLater(() -> GuiManager.getMainScene());
+            Platform.runLater(() -> GuiManager.getMainScene().getCloudController().updateStudents(table.getCloudNumber()));
+            Platform.runLater(() -> GuiManager.getMainScene().updateIslands(table.getListOfIsland()));
             Platform.runLater(() -> GuiManager.changeRootMainScene(observers));
         }
     }
