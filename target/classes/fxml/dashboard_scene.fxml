@@ -417,11 +417,6 @@
                </children></Pane>
             <Pane fx:id="PaneIsland4" layoutX="586.0" layoutY="321.0" prefHeight="118.0" prefWidth="130.0">
                <children>
-                  <ImageView fx:id="motherEarth4" fitHeight="32.0" fitWidth="25.0" layoutX="93.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/MotherEarth.png" />
-                     </image>
-                  </ImageView>
                   <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="38.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/students/Bstudent.png" />
@@ -492,14 +487,19 @@
                         <Image url="@../images/students/Bstudent.png" />
                      </image>
                   </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="34.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/students/Bstudent.png" />
+                     </image>
+                  </ImageView>
                   <ImageView fx:id="tower4" fitHeight="35.0" fitWidth="30.0" layoutX="58.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/towers/Tschool.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="34.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="motherEarth4" fitHeight="32.0" fitWidth="25.0" layoutX="93.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/students/Bstudent.png" />
+                        <Image url="@../images/MotherEarth.png" />
                      </image>
                   </ImageView>
                </children></Pane>
