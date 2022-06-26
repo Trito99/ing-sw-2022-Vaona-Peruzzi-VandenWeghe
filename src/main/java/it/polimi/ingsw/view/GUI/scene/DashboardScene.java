@@ -1,8 +1,8 @@
 package it.polimi.ingsw.view.GUI.scene;
 
+import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.model.character.CharacterCard;
-import it.polimi.ingsw.model.game.Difficulty;
-import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.game.*;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
@@ -58,12 +58,14 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private ViewDeckScene assistantDeck;
 
     private GameMode gameMode;
+    private GameController gameController;
     private Difficulty difficulty;
 
     private boolean planning = false;
 
     private boolean actionStudent = false;
 
+    private Map<Pane, ArrayList<Integer>> islandMap = new HashMap<>();
 
 
     @FXML
@@ -184,9 +186,6 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private ImageView deckLogo;
 
     @FXML
-    private ImageView island0;
-
-    @FXML
     private ImageView island1;
 
     @FXML
@@ -194,6 +193,9 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     @FXML
     private ImageView island11;
+
+    @FXML
+    private ImageView island12;
 
     @FXML
     private ImageView island2;
@@ -417,6 +419,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     @FXML
     public void initialize(){
         addDragOver();
+
         otherSchoolButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             try {
                 otherSchoolClicked(event);
@@ -485,11 +488,66 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     public void updateIslands(ArrayList<IslandCard> listOfIslands) {
         for(IslandCard islandCard : listOfIslands){
-            //soluzione temporanea (da getsire con vero id)
-            Pane island = (Pane) islandPane.getChildren().get(13+listOfIslands.indexOf(islandCard));
-            for(Student student : islandCard.getStudentOnIsland()){
-                if (island.getChildren().indexOf(island.getChildren().get(islandCard.getStudentOnIsland().indexOf(student)))!=(island.getChildren().size()-1)) {
-                    island.getChildren().get(islandCard.getStudentOnIsland().indexOf(student)).setVisible(true);
+            ArrayList<Student> studentsOnIsland = (ArrayList<Student>) islandCard.getStudentOnIsland().clone();
+            Pane island = (Pane) islandPane.getChildren().get(12+islandCard.getImmutableIdIsland());
+            for(int islandId : islandCard.getListOfMinorIslands()){
+                if(islandId!=islandCard.getImmutableIdIsland()){
+                    Pane temp = new Pane();
+                    switch(islandId){
+                        case 1:
+                            temp = PaneIsland1;
+                            break;
+                        case 2:
+                            temp = PaneIsland2;
+                            break;
+                        case 3:
+                            temp = PaneIsland3;
+                            break;
+                        case 4:
+                            temp = PaneIsland4;
+                            break;
+                        case 5:
+                            temp = PaneIsland5;
+                            break;
+                        case 6:
+                            temp = PaneIsland6;
+                            break;
+                        case 7:
+                            temp = PaneIsland7;
+                            break;
+                        case 8:
+                            temp = PaneIsland8;
+                            break;
+                        case 9:
+                            temp = PaneIsland9;
+                            break;
+                        case 10:
+                            temp = PaneIsland10;
+                            break;
+                        case 11:
+                            temp = PaneIsland11;
+                            break;
+                        case 12:
+                            temp = PaneIsland12;
+                            break;
+                    }
+                    for(int i : islandMap.get(temp)){
+                        for(Student student : studentsOnIsland){
+                            if(student.getIdStudent()==i)
+                                studentsOnIsland.remove(student);
+                        }
+                    }
+                }
+            }
+            for(Student student : studentsOnIsland){
+                if (island.getChildren().indexOf(island.getChildren().get(studentsOnIsland.indexOf(student)))!=(island.getChildren().size()-1) && island.getChildren().indexOf(island.getChildren().get(studentsOnIsland.indexOf(student)))!=(island.getChildren().size()-2)) {
+                    island.getChildren().get(studentsOnIsland.indexOf(student)).setVisible(true);
+                    if(!(islandMap.containsKey(island))) {
+                        islandMap.put(island, new ArrayList<>());
+                        islandMap.get(island).add(student.getIdStudent());
+                    }else{
+                        islandMap.get(island).add(student.getIdStudent());
+                    }
                     switch (student.getsColour()) {
                         case GREEN:
                             ((ImageView) island.getChildren().get(islandCard.getStudentOnIsland().indexOf(student))).setImage(new Image("/images/students/Gstudent.png"));
@@ -511,6 +569,20 @@ public class DashboardScene extends ObservableView implements GenericScene {
             }
             if(islandCard.getMotherEarthOnIsland()){
                 island.getChildren().get(island.getChildren().size()-1).setVisible(true);
+            }
+            if(islandCard.towerIsOnIsland()){
+                island.getChildren().get(island.getChildren().size()-2).setVisible(true);
+                switch(islandCard.getTowerOnIsland().getTColour()){
+                    case WHITE:
+                        ((ImageView) island.getChildren().get(island.getChildren().size()-2)).setImage(new Image("/images/towers/Twhite.png"));
+                        break;
+                    case BLACK:
+                        ((ImageView) island.getChildren().get(island.getChildren().size()-2)).setImage(new Image("/images/towers/Tblack.png"));
+                        break;
+                    case GREY:
+                        ((ImageView) island.getChildren().get(island.getChildren().size()-2)).setImage(new Image("/images/towers/Tgrey.png"));
+                        break;
+                }
             }
         }
     }
@@ -538,8 +610,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     public void hide(Table table){
         for(IslandCard islandCard : table.getListOfIsland()) {
-            // soluzione temporanea (da getsire con vero id)
-            Pane island = (Pane) islandPane.getChildren().get(13 + table.getListOfIsland().indexOf(islandCard));
+            Pane island = (Pane) islandPane.getChildren().get(12 + islandCard.getImmutableIdIsland());
             for (Node node : island.getChildren()) {
                 node.setVisible(false);
                 node.setDisable(true);
@@ -572,9 +643,9 @@ public class DashboardScene extends ObservableView implements GenericScene {
     }
 
     private void addDragOver(){
-        island0.setOnDragOver(new EventHandler<DragEvent>() {
+        island1.setOnDragOver(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                if (event.getGestureSource() != island0 &&
+                if (event.getGestureSource() != island1 &&
                         event.getDragboard().hasImage()) {
                     event.acceptTransferModes(TransferMode.MOVE);
                 }
@@ -583,26 +654,26 @@ public class DashboardScene extends ObservableView implements GenericScene {
             }
         });
 
-        island0.setOnDragEntered(new EventHandler<DragEvent>() {
+        island1.setOnDragEntered(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                if (event.getGestureSource() != island0 &&
+                if (event.getGestureSource() != island1 &&
                         event.getDragboard().hasString()) {
-                    island0.setVisible(false);
+                    island1.setVisible(false);
                 }
 
                 event.consume();
             }
         });
 
-        island0.setOnDragExited(new EventHandler<DragEvent>() {
+        island1.setOnDragExited(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                island0.setVisible(true);
+                island1.setVisible(true);
 
                 event.consume();
             }
         });
 
-        island0.setOnDragDropped(new EventHandler<DragEvent>() {
+        island1.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
                 Dragboard db = event.getDragboard();
                 boolean success = false;

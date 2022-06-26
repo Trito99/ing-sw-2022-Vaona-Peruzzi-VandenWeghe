@@ -20,17 +20,17 @@
             <Image url="@../images/Clouds.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="logo" fitHeight="150.0" fitWidth="599.0" layoutX="373.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="403.0" AnchorPane.leftAnchor="373.0" AnchorPane.rightAnchor="391.313720703125" AnchorPane.topAnchor="167.0">
+      <ImageView fx:id="logo" fitHeight="215.0" fitWidth="757.0" layoutX="290.0" layoutY="228.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Logo_Eriantys.png" />
          </image>
       </ImageView>
-      <Text fx:id="startText" fill="WHITE" layoutX="596.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="START" textAlignment="CENTER" AnchorPane.bottomAnchor="336.7255859375" AnchorPane.leftAnchor="596.0" AnchorPane.rightAnchor="613.443359375" AnchorPane.topAnchor="349.6744140625">
-         <font>
-            <Font name="Helvetica" size="25.0" />
-         </font>
-      </Text>
-      <Button fx:id="startButton" layoutX="531.0" layoutY="341.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" opacity="0.54" prefHeight="49.0" prefWidth="200.0" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="327.0" AnchorPane.leftAnchor="531.0" AnchorPane.rightAnchor="549.0" AnchorPane.topAnchor="341.0">
+      <ImageView fitHeight="92.0" fitWidth="65.0" layoutX="49.0" layoutY="604.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Logo_CranioCrations.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="startButton" layoutX="557.0" layoutY="418.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" opacity="0.54" prefHeight="49.0" prefWidth="200.0" stylesheets="@../css/style.css">
          <font>
             <Font name="Helvetica" size="25.0" />
          </font>
@@ -38,6 +38,11 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Text fx:id="startText" fill="WHITE" layoutX="619.0" layoutY="453.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.6" text="START" textAlignment="CENTER">
+         <font>
+            <Font name="Helvetica" size="25.0" />
+         </font>
+      </Text>
    </children>
 
 
