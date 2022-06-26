@@ -67,51 +67,6 @@
       </Pane>
       <Pane fx:id="islandPane" layoutX="258.0" layoutY="39.0" prefHeight="491.0" prefWidth="829.0">
          <children>
-            <ImageView fx:id="island1" fitHeight="124.0" fitWidth="137.0" layoutX="519.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/islands/island2.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="island2" fitHeight="124.0" fitWidth="137.0" layoutX="630.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/islands/island3.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="island3" fitHeight="122.0" fitWidth="137.0" layoutX="681.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/islands/island1.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="island4" fitHeight="122.0" fitWidth="134.0" layoutX="587.0" layoutY="319.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/islands/island2.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="island5" fitHeight="124.0" fitWidth="137.0" layoutX="447.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/islands/island3.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="island6" fitHeight="124.0" fitWidth="137.0" layoutX="310.0" layoutY="360.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/islands/island1.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="island7" fitHeight="122.0" fitWidth="137.0" layoutX="171.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/islands/island2.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="island8" fitHeight="124.0" fitWidth="137.0" layoutX="47.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/islands/island3.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="island9" fitHeight="122.0" fitWidth="137.0" layoutX="14.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/islands/island2.png" />
-               </image>
-            </ImageView>
             <ImageView fx:id="island10" fitHeight="124.0" fitWidth="137.0" layoutX="110.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island1.png" />
@@ -122,9 +77,54 @@
                   <Image url="@../images/islands/island1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="island12" fitHeight="124.0" fitWidth="137.0" layoutX="377.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="island6" fitHeight="124.0" fitWidth="137.0" layoutX="310.0" layoutY="360.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/islands/island1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="island3" fitHeight="122.0" fitWidth="137.0" layoutX="681.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/islands/island1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="island2" fitHeight="124.0" fitWidth="137.0" layoutX="630.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/islands/island3.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="island5" fitHeight="124.0" fitWidth="137.0" layoutX="447.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/islands/island3.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="island8" fitHeight="124.0" fitWidth="137.0" layoutX="47.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/islands/island3.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="island1" fitHeight="124.0" fitWidth="137.0" layoutX="519.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/islands/island2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="island7" fitHeight="122.0" fitWidth="137.0" layoutX="171.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/islands/island2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="island9" fitHeight="122.0" fitWidth="137.0" layoutX="14.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/islands/island2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="island0" fitHeight="124.0" fitWidth="137.0" layoutX="377.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/islands/island3.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="island4" fitHeight="122.0" fitWidth="134.0" layoutX="587.0" layoutY="319.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/islands/island2.png" />
                </image>
             </ImageView>
             <Pane fx:id="cloudPane" layoutX="259.0" layoutY="156.0" prefHeight="180.0" prefWidth="282.0" />
@@ -314,6 +314,7 @@
                         <Image url="@../images/MotherEarth.png" />
                      </image>
                   </ImageView>
+                  <Rectangle fx:id="Bridge2_3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="56.0" layoutX="100.0" layoutY="79.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
                </children></Pane>
             <Pane fx:id="PaneIsland3" layoutX="681.0" layoutY="211.0" prefHeight="122.0" prefWidth="130.0">
                <children>
@@ -402,8 +403,7 @@
                         <Image url="@../images/MotherEarth.png" />
                      </image>
                   </ImageView>
-               </children>
-            </Pane>
+               </children></Pane>
             <Pane fx:id="PaneIsland4" layoutX="586.0" layoutY="321.0" prefHeight="118.0" prefWidth="130.0">
                <children>
                   <ImageView fx:id="motherEarth4" fitHeight="32.0" fitWidth="25.0" layoutX="93.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
@@ -845,6 +845,7 @@
                         <Image url="@../images/MotherEarth.png" />
                      </image>
                   </ImageView>
+                  <Rectangle fx:id="Bridge7_8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="33.0" layoutX="116.0" layoutY="86.0" rotate="300.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
                </children>
             </Pane>
             <Pane fx:id="PaneIsland9" layoutX="13.0" layoutY="145.0" prefHeight="122.0" prefWidth="130.0">
@@ -1208,13 +1209,6 @@
             <Rectangle fx:id="Bridge6_7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="52.0" layoutX="288.0" layoutY="405.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
             <Rectangle fx:id="Bridge5_6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="52.0" layoutX="437.0" layoutY="405.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
             <Rectangle fx:id="Bridge4_5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="31.0" layoutX="575.0" layoutY="375.0" rotate="50.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
-            <Rectangle fx:id="Bridge3_4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" layoutX="676.0" layoutY="300.0" rotate="46.4" stroke="BLACK" strokeType="INSIDE" width="17.0" />
-            <Rectangle fx:id="Bridge1_2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="36.0" layoutX="638.0" layoutY="86.0" rotate="126.8" stroke="BLACK" strokeType="INSIDE" width="17.0" />
-            <Rectangle fx:id="Bridge12_1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="501.0" layoutY="70.0" rotate="-65.9" stroke="BLACK" strokeType="INSIDE" width="17.0" />
-            <Rectangle fx:id="Bridge11_12" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="371.0" layoutY="44.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
-            <Rectangle fx:id="Bridge10_11" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" layoutX="235.0" layoutY="62.0" rotate="65.6" stroke="BLACK" strokeType="INSIDE" width="17.0" />
-            <Rectangle fx:id="Bridge7_8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="33.0" layoutX="160.0" layoutY="360.0" rotate="300.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
-            <Rectangle fx:id="Bridge2_3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="56.0" layoutX="745.0" layoutY="171.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
          </children>
       </Pane>
       <Pane fx:id="schoolPane1" layoutX="204.0" layoutY="535.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="176.0" prefWidth="446.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
@@ -1257,5 +1251,10 @@
             <Font name="Helvetica" size="20.0" />
          </font>
       </Text>
+      <Rectangle fx:id="Bridge3_4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" layoutX="929.0" layoutY="339.0" rotate="40.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
+      <Rectangle fx:id="Bridge1_2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="36.0" layoutX="903.0" layoutY="115.0" rotate="-58.2" stroke="BLACK" strokeType="INSIDE" width="17.0" />
+      <Rectangle fx:id="Bridge12_1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="773.0" layoutY="55.0" rotate="-90.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
+      <Rectangle fx:id="Bridge11_12" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="622.0" layoutY="55.0" rotate="-90.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
+      <Rectangle fx:id="Bridge10_11" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="487.0" layoutY="98.0" rotate="50.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
    </children>
 </AnchorPane>

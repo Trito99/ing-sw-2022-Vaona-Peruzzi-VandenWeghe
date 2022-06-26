@@ -1,8 +1,8 @@
 package it.polimi.ingsw.view.GUI.scene;
 
+import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.model.character.CharacterCard;
-import it.polimi.ingsw.model.game.Difficulty;
-import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.game.*;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
@@ -58,6 +58,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private ViewDeckScene assistantDeck;
 
     private GameMode gameMode;
+    private GameController gameController;
     private Difficulty difficulty;
 
     private boolean planning = false;
@@ -418,6 +419,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     @FXML
     public void initialize(){
         addDragOver();
+
         otherSchoolButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             try {
                 otherSchoolClicked(event);

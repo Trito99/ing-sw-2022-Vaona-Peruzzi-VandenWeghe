@@ -16,7 +16,7 @@
    <children>
       <ImageView fitHeight="1080.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/BG_2_Clouds_Blur.png" />
+            <Image url="@../images/BG_Clouds_Blur.png" />
          </image>
       </ImageView>
       <Pane layoutX="146.0" layoutY="144.0" prefHeight="462.0" prefWidth="987.0" styleClass="layout" stylesheets="@../css/style.css" />
@@ -38,7 +38,7 @@
             <Font name="Helvetica" size="36.0" />
          </font>
       </Text>
-      <TextField fx:id="gameIdField" layoutX="196.0" layoutY="523.0" prefHeight="51.0" prefWidth="375.0" promptText="1" style="-fx-background-radius: 6;">
+      <TextField fx:id="gameIdField" layoutX="196.0" layoutY="523.0" prefHeight="51.0" prefWidth="375.0" promptText="1" style="-fx-background-radius: 6;" text="1">
          <font>
             <Font name="Helvetica" size="24.0" />
          </font>
@@ -53,7 +53,7 @@
             <Font name="Helvetica" size="30.0" />
          </font>
       </Text>
-      <TextField fx:id="nicknameField" layoutX="196.0" layoutY="213.0" prefHeight="51.0" prefWidth="375.0" promptText="Guest1234" style="-fx-background-radius: 6;">
+      <TextField fx:id="nicknameField" layoutX="196.0" layoutY="213.0" prefHeight="51.0" prefWidth="375.0" promptText="Guest1234" style="-fx-background-radius: 6;" text="guest">
          <font>
             <Font name="Helvetica" size="24.0" />
          </font>
@@ -63,7 +63,7 @@
             <Font name="Helvetica" size="30.0" />
          </font>
       </Text>
-      <TextField fx:id="ddField" alignment="CENTER" layoutX="196.0" layoutY="349.0" prefHeight="51.0" prefWidth="59.0" promptText="dd" style="-fx-background-radius: 6;">
+      <TextField fx:id="ddField" alignment="CENTER" layoutX="196.0" layoutY="349.0" prefHeight="51.0" prefWidth="59.0" promptText="dd" style="-fx-background-radius: 6;" text="01">
          <font>
             <Font name="Helvetica" size="24.0" />
          </font>
@@ -73,7 +73,7 @@
             <Font name="Helvetica" size="30.0" />
          </font>
       </Text>
-      <TextField fx:id="mmField" alignment="CENTER" layoutX="288.0" layoutY="350.0" prefHeight="51.0" prefWidth="70.0" promptText="mm" style="-fx-background-radius: 6;">
+      <TextField fx:id="mmField" alignment="CENTER" layoutX="288.0" layoutY="350.0" prefHeight="51.0" prefWidth="70.0" promptText="mm" style="-fx-background-radius: 6;" text="01">
          <font>
             <Font name="Helvetica" size="24.0" />
          </font>
@@ -83,7 +83,7 @@
             <Font name="Helvetica" size="30.0" />
          </font>
       </Text>
-      <TextField fx:id="yyyyField" alignment="CENTER" layoutX="391.0" layoutY="350.0" prefHeight="51.0" prefWidth="91.0" promptText="yyyy" style="-fx-background-radius: 6;">
+      <TextField fx:id="yyyyField" alignment="CENTER" layoutX="391.0" layoutY="350.0" prefHeight="51.0" prefWidth="91.0" promptText="yyyy" style="-fx-background-radius: 6;" text="1999">
          <font>
             <Font name="Helvetica" size="24.0" />
          </font>
