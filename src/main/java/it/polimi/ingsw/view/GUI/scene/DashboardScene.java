@@ -186,6 +186,9 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private ImageView deckLogo;
 
     @FXML
+    private ImageView island0;
+
+    @FXML
     private ImageView island1;
 
     @FXML
@@ -193,9 +196,6 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     @FXML
     private ImageView island11;
-
-    @FXML
-    private ImageView island12;
 
     @FXML
     private ImageView island2;
@@ -489,7 +489,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     public void updateIslands(ArrayList<IslandCard> listOfIslands) {
         for(IslandCard islandCard : listOfIslands){
             ArrayList<Student> studentsOnIsland = (ArrayList<Student>) islandCard.getStudentOnIsland().clone();
-            Pane island = (Pane) islandPane.getChildren().get(12+islandCard.getImmutableIdIsland());
+            Pane island = (Pane) islandPane.getChildren().get(24+islandCard.getImmutableIdIsland());
             for(int islandId : islandCard.getListOfMinorIslands()){
                 if(islandId!=islandCard.getImmutableIdIsland()){
                     Pane temp = new Pane();
@@ -610,7 +610,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     public void hide(Table table){
         for(IslandCard islandCard : table.getListOfIsland()) {
-            Pane island = (Pane) islandPane.getChildren().get(12 + islandCard.getImmutableIdIsland());
+            Pane island = (Pane) islandPane.getChildren().get(24 + islandCard.getImmutableIdIsland());
             for (Node node : island.getChildren()) {
                 node.setVisible(false);
                 node.setDisable(true);
