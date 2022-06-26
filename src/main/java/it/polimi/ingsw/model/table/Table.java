@@ -253,7 +253,7 @@ public class Table implements Serializable {
      *
      * @param listOfIsland list of the islands of the match
      */
-    public void joinIsland(ArrayList<IslandCard> listOfIsland) {      //valuto se due isole mergiano, in caso le unisco
+    public void joinIsland(ArrayList<IslandCard> listOfIsland) {
 
         int i = posMotherEarth - 1;
         if (listOfIsland.get(i).towerIsOnIsland()) {
@@ -270,7 +270,7 @@ public class Table implements Serializable {
                 if (!listOfIsland.get(s).towerIsOnIsland() && listOfIsland.get(i + 1).towerIsOnIsland()) {
                     MergeNoTower(listOfIsland, i,i+1);
                 } else if (!listOfIsland.get(i + 1).towerIsOnIsland() && listOfIsland.get(s).towerIsOnIsland()) {
-                    MergeNoTower(listOfIsland, i, s);// 3 isole caso i= size
+                    MergeNoTower(listOfIsland, i, s);
                 } else if (listOfIsland.get(s).towerIsOnIsland() && listOfIsland.get(i+1).towerIsOnIsland()) {
                     MergeTower(listOfIsland,i,i+1,s);
                 }
@@ -297,6 +297,7 @@ public class Table implements Serializable {
             for (Student student : listOfIsland.get(ii).getStudentOnIsland())
                 listOfIsland.get(i).getStudentOnIsland().add(student);
             listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + listOfIsland.get(ii).getMergedIsland());
+            listOfIsland.get(i).getListOfMinorIslands().add(listOfIsland.get(ii).getImmutableIdIsland());
             listOfIsland.remove(ii);
         }
     }
@@ -307,12 +308,14 @@ public class Table implements Serializable {
             for (Student student : listOfIsland.get(ii).getStudentOnIsland())
                 listOfIsland.get(i).getStudentOnIsland().add(student);
             listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + listOfIsland.get(ii).getMergedIsland());
+            listOfIsland.get(i).getListOfMinorIslands().add(listOfIsland.get(ii).getImmutableIdIsland());
             listOfIsland.remove(ii);
         }else if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(iii).getTowerOnIsland().getTColour()) &&
                 listOfIsland.get(i).getTowerOnIsland().getTColour() != listOfIsland.get(ii).getTowerOnIsland().getTColour()) {
             for (Student student : listOfIsland.get(iii).getStudentOnIsland())
                 listOfIsland.get(i).getStudentOnIsland().add(student);
             listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + listOfIsland.get(iii).getMergedIsland());
+            listOfIsland.get(i).getListOfMinorIslands().add(listOfIsland.get(iii).getImmutableIdIsland());
             listOfIsland.remove(iii);
         }else if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(iii).getTowerOnIsland().getTColour()) &&
                 listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(ii).getTowerOnIsland().getTColour())) {
@@ -321,6 +324,8 @@ public class Table implements Serializable {
             for (Student student : listOfIsland.get(ii).getStudentOnIsland())
                 listOfIsland.get(i).getStudentOnIsland().add(student);
             listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + listOfIsland.get(ii).getMergedIsland() + listOfIsland.get(iii).getMergedIsland());
+            listOfIsland.get(i).getListOfMinorIslands().add(listOfIsland.get(ii).getImmutableIdIsland());
+            listOfIsland.get(i).getListOfMinorIslands().add(listOfIsland.get(iii).getImmutableIdIsland());
             if(i==0){
                 listOfIsland.remove(listOfIsland.size()-1);
                 listOfIsland.remove(ii);
@@ -331,7 +336,6 @@ public class Table implements Serializable {
                 listOfIsland.remove(iii);
                 listOfIsland.remove(i);
             }
-
         }
     }
 

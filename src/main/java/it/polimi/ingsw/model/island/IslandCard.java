@@ -15,20 +15,27 @@ import java.util.ArrayList;
 public class IslandCard implements Serializable {
 
     private int idIsland;
+
+    private int immutableIdIsland;
     private ArrayList<Student> studentOnIsland ;
     private boolean towerIsOnIsland;
     private Tower towerOnIsland;
     private int mergedIsland; // = quante isole sono unite
     private boolean MotherEarthOnIsland = false;
+
+    private ArrayList<Integer> listOfMinorIslands;
     private boolean xCardOnIsland = false;
     private int xCardCounter = 0;
 
     public IslandCard(int idIsland) {
         this.idIsland = idIsland;
+        this.immutableIdIsland = idIsland;
         studentOnIsland = new ArrayList<>();
         towerIsOnIsland = false;
         towerOnIsland = null;
         mergedIsland = 1;
+        listOfMinorIslands = new ArrayList<>();
+        listOfMinorIslands.add(idIsland);
     }
 
     public boolean getMotherEarthOnIsland(){ return MotherEarthOnIsland;}
@@ -308,4 +315,10 @@ public class IslandCard implements Serializable {
         this.xCardOnIsland = xCardOnIsland;
     }
 
+    public ArrayList<Integer> getListOfMinorIslands() {
+        return listOfMinorIslands;
+    }
+    public int getImmutableIdIsland() {
+        return immutableIdIsland;
+    }
 }
