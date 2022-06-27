@@ -17,7 +17,7 @@
          </image>
       </ImageView>
       <Pane layoutX="379.0" layoutY="151.0" prefHeight="329.0" prefWidth="538.0" styleClass="layout" stylesheets="@../css/style.css" />
-      <Text fx:id="connectText" fill="WHITE" layoutX="1026.0" layoutY="581.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Next">
+      <Text fx:id="connectText" fill="WHITE" layoutX="822.0" layoutY="540.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Next">
          <font>
             <Font size="25.0" />
          </font>
@@ -32,7 +32,7 @@
             <Font name="Helvetica" size="30.0" />
          </font>
       </Text>
-      <Text fx:id="gameText" fill="WHITE" layoutX="559.0" layoutY="348.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Game mode">
+      <Text fx:id="gameText" fill="WHITE" layoutX="559.0" layoutY="353.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Game mode">
          <font>
             <Font name="Helvetica" size="30.0" />
          </font>
@@ -47,85 +47,85 @@
             <Font size="25.0" />
          </font>
       </Text>
-      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="462.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="462.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/user.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="483.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="483.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/user.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="613.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="613.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/user.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="632.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="632.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/user.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="652.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="652.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/user.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="763.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="763.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/user.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="783.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="783.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/user.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="802.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="802.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/user.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="823.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="823.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/user.png" />
          </image>
       </ImageView>
-      <Button fx:id="nextButton" layoutX="988.0" layoutY="547.0" mnemonicParsing="false" opacity="0.0" prefHeight="47.0" prefWidth="128.0" styleClass="connect-button" stylesheets="@../css/style.css">
+      <Button fx:id="nextButton" layoutX="782.0" layoutY="506.0" mnemonicParsing="false" opacity="0.0" prefHeight="47.0" prefWidth="128.0" styleClass="connect-button" stylesheets="@../css/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="standardButton" layoutX="431.0" layoutY="392.0" mnemonicParsing="false" opacity="0.0" prefHeight="37.0" prefWidth="177.0" styleClass="connect-button" stylesheets="@../css/style.css">
+      <Button fx:id="standardButton" layoutX="431.0" layoutY="392.0" mnemonicParsing="false" opacity="0.0" prefHeight="37.0" prefWidth="177.0" styleClass="buttonOutline" stylesheets="@../css/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="coopButton" layoutX="735.0" layoutY="255.0" mnemonicParsing="false" opacity="0.0" prefHeight="29.0" prefWidth="133.0" styleClass="connect-button" stylesheets="@../css/style.css">
+      <Button fx:id="coopButton" layoutX="734.0" layoutY="240.0" mnemonicParsing="false" opacity="0.0" prefHeight="27.0" prefWidth="131.0" styleClass="buttonOutline" stylesheets="@../css/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="threePlayersButton" layoutX="573.0" layoutY="255.0" mnemonicParsing="false" opacity="0.0" prefHeight="29.0" prefWidth="133.0" styleClass="connect-button" stylesheets="@../css/style.css">
+      <Button fx:id="threePlayersButton" layoutX="575.0" layoutY="240.0" mnemonicParsing="false" opacity="0.0" prefHeight="27.0" prefWidth="131.0" styleClass="buttonOutline" stylesheets="@../css/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="expertButton" layoutX="658.0" layoutY="392.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="177.0" styleClass="connect-button" stylesheets="@../css/style.css">
+      <Button fx:id="expertButton" layoutX="658.0" layoutY="392.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="177.0" styleClass="buttonOutline" stylesheets="@../css/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="twoPlayersButton" layoutX="417.0" layoutY="256.0" mnemonicParsing="false" opacity="0.0" prefHeight="27.0" prefWidth="131.0" styleClass="connect-button" stylesheets="@../css/style.css">
+      <Button fx:id="twoPlayersButton" layoutX="417.0" layoutY="240.0" mnemonicParsing="false" opacity="0.0" prefHeight="27.0" prefWidth="131.0" styleClass="buttonOutline" stylesheets="@../css/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Pane fx:id="threeShadowPane" layoutX="573.0" layoutY="256.0" prefHeight="27.0" prefWidth="131.0" styleClass="button" stylesheets="@../css/style.css" />
-      <Pane fx:id="fourShadowPane" layoutX="735.0" layoutY="256.0" prefHeight="27.0" prefWidth="131.0" styleClass="button" stylesheets="@../css/style.css" />
-      <Pane fx:id="twoShadowPane" layoutX="417.0" layoutY="256.0" prefHeight="27.0" prefWidth="131.0" styleClass="button" stylesheets="@../css/style.css" />
-      <Pane fx:id="standardShadowPane" layoutX="431.0" layoutY="392.0" prefHeight="37.0" prefWidth="176.0" styleClass="button" stylesheets="@../css/style.css" />
-      <Pane fx:id="expertShadowPane" layoutX="659.0" layoutY="392.0" prefHeight="37.0" prefWidth="176.0" styleClass="button" stylesheets="@../css/style.css" />
+      <Pane fx:id="threeShadowPane" layoutX="575.0" layoutY="241.0" prefHeight="31.0" prefWidth="131.0" styleClass="button" stylesheets="@../css/style.css" />
+      <Pane fx:id="fourShadowPane" layoutX="734.0" layoutY="241.0" prefHeight="31.0" prefWidth="131.0" styleClass="button" stylesheets="@../css/style.css" />
+      <Pane fx:id="twoShadowPane" layoutX="417.0" layoutY="241.0" prefHeight="31.0" prefWidth="131.0" styleClass="button" stylesheets="@../css/style.css" />
+      <Pane fx:id="standardShadowPane" layoutX="431.0" layoutY="392.0" prefHeight="36.0" prefWidth="177.0" styleClass="button" stylesheets="@../css/style.css" />
+      <Pane fx:id="expertShadowPane" layoutX="658.0" layoutY="392.0" prefHeight="36.0" prefWidth="177.0" styleClass="button" stylesheets="@../css/style.css" />
    </children>
 </AnchorPane>
