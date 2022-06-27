@@ -798,7 +798,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }
     }
 
-    public int getStudentDestinantionIslandId(){
+    public int getStudentDestinationIslandId(){
         return studentDestinantionIslandId;
     }
 
@@ -848,13 +848,13 @@ public class DashboardScene extends ObservableView implements GenericScene {
         Bridge12_1.setDisable(true);
     }
 
-    public void disabilitateMother(Table table,int maxSteps,boolean disabilitate) {
+    public void disabilityMother(Table table, int maxSteps, boolean disability) {
         this.table = table;
         this.maxSteps = maxSteps;
         for (IslandCard islandCard : table.getListOfIsland()) {
             Pane island = (Pane) islandPane.getChildren().get(24 + islandCard.getImmutableIdIsland());
             if (islandCard.getMotherEarthOnIsland()) {
-                island.getChildren().get(island.getChildren().size() - 1).setDisable(disabilitate);
+                island.getChildren().get(island.getChildren().size() - 1).setDisable(disability);
             }
         }
     }

@@ -328,15 +328,15 @@ public class CLI extends ObservableView implements View {
 
     @Override
     public void showErrorMessage(String message) {
-
     }
 
     @Override
     public void askAction() {
-
     }
 
-
+    @Override
+    public void showCoin(int coins) {
+    }
 
     @Override
     public void askAssistantCardToPlay() {

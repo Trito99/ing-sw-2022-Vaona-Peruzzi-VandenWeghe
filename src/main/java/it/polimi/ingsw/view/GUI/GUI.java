@@ -23,8 +23,6 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Map;
 
-import static java.lang.System.out;
-
 public class GUI extends ObservableView implements View {
     private static ArrayList<String> playerList = new ArrayList<>();
 
@@ -168,6 +166,11 @@ public class GUI extends ObservableView implements View {
     }
 
     @Override
+    public void showCoin(int coins) {
+
+    }
+
+    @Override
     public void askAssistantCardToPlay() {
         Platform.runLater(() -> {
             GuiManager.getMainScene().setPlanning(true);
@@ -198,14 +201,14 @@ public class GUI extends ObservableView implements View {
     public void askMotherEarthSteps(int maxSteps, Table table, Difficulty difficulty) {
         Platform.runLater(() ->
             {GuiManager.getMainScene().getPersonalSchoolController().disabilitateEntry(true);
-            GuiManager.getMainScene().disabilitateMother(table,maxSteps,false);});
+            GuiManager.getMainScene().disabilityMother(table,maxSteps,false);});
         showMessage("Move MotherEarth");
     }
 
     @Override
     public void askCloud(Table table) {
         Platform.runLater(() ->
-            {GuiManager.getMainScene().disabilitateMother(table,GuiManager.getMainScene().getMaxSteps(),true);
+            {GuiManager.getMainScene().disabilityMother(table,GuiManager.getMainScene().getMaxSteps(),true);
             GuiManager.getMainScene().getCloudController().disabilitateCloud(false);});
         showMessage("Choose a Cloud");
     }
@@ -219,7 +222,7 @@ public class GUI extends ObservableView implements View {
                 if (characterCard.getCardEffect().equals(CardEffect.CURATOR))
                     System.out.print("\nCURATOR EFFECT\nIn which island do you want to place the forbidden card?\n");
             } else
-                notifyObserver(obs -> obs.chooseId(GuiManager.getMainScene().getStudentDestinantionIslandId(),choice, indexAcrobat, false));
+                notifyObserver(obs -> obs.chooseId(GuiManager.getMainScene().getStudentDestinationIslandId(),choice, indexAcrobat, false));
         }
     }
 }

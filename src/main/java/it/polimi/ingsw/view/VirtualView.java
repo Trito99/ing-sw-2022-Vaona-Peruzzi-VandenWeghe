@@ -60,6 +60,11 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
+    public void showCoin(int coins) {
+        clientHandler.sendMessage(new ShowCoin(coins));
+    }
+
+    @Override
     public void showPersonalSchool(School school, String nickname, AssistantCard trash, Difficulty difficulty, int coins, GameMode gameMode, String teamMate) {
         clientHandler.sendMessage(new ShowPersonalSchool(school, nickname, trash, difficulty, coins, gameMode, teamMate));
     }

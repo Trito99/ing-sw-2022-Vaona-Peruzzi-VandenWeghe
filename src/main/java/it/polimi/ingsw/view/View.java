@@ -40,6 +40,7 @@ public interface View {
 
     void showErrorMessage(String message);
 
+    void showCoin(int coins);
 
     /** azioni di gioco */
 
