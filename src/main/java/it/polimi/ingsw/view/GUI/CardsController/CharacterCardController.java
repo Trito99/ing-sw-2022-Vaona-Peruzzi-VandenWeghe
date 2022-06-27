@@ -36,7 +36,7 @@ public class CharacterCardController {
     @FXML
     private Pane PaneCharacterCard;
     @FXML
-    private Pane PaneCoinOnCard;
+    private Pane coinPane;
     @FXML
     private ImageView cardImage;
     @FXML
@@ -69,6 +69,12 @@ public class CharacterCardController {
     @FXML
     private ImageView xCard4;
 
+    @FXML
+    private Pane longPane;
+
+    @FXML
+    private Pane shortPane;
+
 
     public void initialize() {
     }
@@ -77,8 +83,11 @@ public class CharacterCardController {
         cardImage.setImage(new Image(characterCardMap.get(card.getCardEffect())));
     }
 
-
     public void abilitateStudentPane(){
+        longPane.setVisible(true);
+        shortPane.setVisible(false);
+
+        coinPane.setVisible(false);
         xCardPane.setVisible(false);
         xCardPane.setDisable(true);
         studentPane.setVisible(true);
@@ -86,13 +95,21 @@ public class CharacterCardController {
     }
 
     public void abilitateXCardPane(){
-            studentPane.setVisible(false);
-            studentPane.setDisable(true);
-            xCardPane.setVisible(true);
-            xCardPane.setDisable(false);
+        longPane.setVisible(true);
+        shortPane.setVisible(false);
+
+        coinPane.setVisible(false);
+        studentPane.setVisible(false);
+        studentPane.setDisable(true);
+        xCardPane.setVisible(true);
+        xCardPane.setDisable(false);
     }
 
     public void disableAll(){
+        longPane.setVisible(false);
+        shortPane.setVisible(true);
+
+        coinPane.setVisible(false);
         studentPane.setVisible(false);
         studentPane.setDisable(true);
         xCardPane.setVisible(false);
