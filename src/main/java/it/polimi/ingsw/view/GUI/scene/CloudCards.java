@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
@@ -16,6 +18,9 @@ public class CloudCards {
 
     @FXML
     private Pane StudentsPane;
+
+    @FXML
+    private AnchorPane anchorPane;
 
     @FXML
     private ImageView cloud1_2Players;
@@ -49,6 +54,18 @@ public class CloudCards {
     public void initialize(){
         hide();
         updateStudents(cloudCards);
+        addEventHandler(cloudCards);
+
+    }
+
+    private void addEventHandler(ArrayList<CloudCard> cloudCards) {
+        for(int i=0;i<cloudCards.size();i++){
+            //anchorPane.getChildren().get(i).addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickCloud);
+        }
+    }
+
+    private void clickCloud(){
+
     }
 
     public void updateStudents(ArrayList<CloudCard> cloudCards){
