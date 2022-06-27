@@ -69,6 +69,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private int studentDestinantionIslandId, motherDestinationIslandId, islandMother, maxSteps;
 
 
+
     @FXML
     private Rectangle Bridge10_11;
 
@@ -256,10 +257,10 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private Button deckButton;
 
     @FXML
-    private ImageView backDeck;
+    private ImageView deckLogo;
 
     @FXML
-    private ImageView deckLogo;
+    private ImageView deckLogo2;
 
     @FXML
     private ImageView island0;
@@ -598,16 +599,16 @@ public class DashboardScene extends ObservableView implements GenericScene {
         this.assistantDeck = viewDeckScene;
         switch(viewDeckScene.getDeckAssistant().getDeckName()){
             case WIZARD1:
-                backDeck.setImage((new Image("/images/assistantDeck/assistantCard_back_1.png")));
+                deckLogo.setImage((new Image("/images/assistantDeck/assistantCard_back_1.png")));
                 break;
             case WIZARD2:
-                backDeck.setImage((new Image("/images/assistantDeck/assistantCard_back_2.png")));
+                deckLogo.setImage((new Image("/images/assistantDeck/assistantCard_back_2.png")));
                 break;
             case WIZARD3:
-                backDeck.setImage((new Image("/images/assistantDeck/assistantCard_back_3.png")));
+                deckLogo.setImage((new Image("/images/assistantDeck/assistantCard_back_3.png")));
                 break;
             case WIZARD4:
-                backDeck.setImage((new Image("/images/assistantDeck/assistantCard_back_4.png")));
+                deckLogo.setImage((new Image("/images/assistantDeck/assistantCard_back_4.png")));
                 break;
         }
     }
