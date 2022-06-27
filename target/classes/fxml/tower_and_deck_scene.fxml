@@ -77,26 +77,6 @@
       <Pane fx:id="whiteShadowPane" layoutX="391.0" layoutY="193.0" prefHeight="49.0" prefWidth="133.0" style="-fx-background-color: #303030#303030;" styleClass="layout" stylesheets="@../css/style.css" />
       <Pane fx:id="greyShadowPane" layoutX="723.0" layoutY="193.0" prefHeight="49.0" prefWidth="133.0" style="-fx-background-color: #303030#303030;" styleClass="layout" stylesheets="@../css/style.css" />
       <Pane fx:id="blackShadowPane" layoutX="559.0" layoutY="193.0" prefHeight="49.0" prefWidth="133.0" style="-fx-background-color: #303030#303030;" styleClass="layout" stylesheets="@../css/style.css" />
-      <Button fx:id="wizard1Button" layoutX="203.0" layoutY="328.0" mnemonicParsing="false" opacity="0.0" prefHeight="250.0" prefWidth="187.0" styleClass="buttonOutline" stylesheets="@../css/style.css">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="wizard3Button" layoutX="641.0" layoutY="327.0" mnemonicParsing="false" opacity="0.0" prefHeight="250.0" prefWidth="187.0" styleClass="buttonOutline" stylesheets="@../css/style.css">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="wizard2Button" layoutX="423.0" layoutY="327.0" mnemonicParsing="false" opacity="0.0" prefHeight="250.0" prefWidth="187.0" styleClass="buttonOutline" stylesheets="@../css/style.css">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="wizard4Button" layoutX="857.0" layoutY="327.0" mnemonicParsing="false" opacity="0.0" prefHeight="250.0" prefWidth="187.0" style="-fx-background-color: transparent;" styleClass="buttonOutline" stylesheets="@../css/style.css">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
       <ImageView fx:id="wizard2" fitHeight="220.0" fitWidth="160.0" layoutX="446.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true" style="-fx-radius: 100;">
          <image>
             <Image url="@../images/assistantDeck/assistantCard_back_2.png" />
@@ -117,6 +97,26 @@
             <Image url="@../images/assistantDeck/assistantCard_back_1.png" />
          </image>
       </ImageView>
+      <Button fx:id="wizard3Button" layoutX="641.0" layoutY="327.0" mnemonicParsing="false" opacity="0.0" prefHeight="250.0" prefWidth="187.0" styleClass="buttonOutline" stylesheets="@../css/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="wizard4Button" layoutX="857.0" layoutY="327.0" mnemonicParsing="false" opacity="0.0" prefHeight="250.0" prefWidth="187.0" style="-fx-background-color: transparent;" styleClass="buttonOutline" stylesheets="@../css/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="wizard2Button" layoutX="423.0" layoutY="327.0" mnemonicParsing="false" opacity="0.0" prefHeight="250.0" prefWidth="187.0" styleClass="buttonOutline" stylesheets="@../css/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="wizard1Button" layoutX="203.0" layoutY="328.0" mnemonicParsing="false" opacity="0.0" prefHeight="250.0" prefWidth="187.0" styleClass="buttonOutline" stylesheets="@../css/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
       <Pane fx:id="wizard1ShadowPane" layoutX="203.0" layoutY="328.0" prefHeight="251.0" prefWidth="187.0" style="-fx-background-color: #303030#303030;" styleClass="layout" stylesheets="@../css/style.css" />
       <Pane fx:id="wizard2ShadowPane" layoutX="423.0" layoutY="327.0" prefHeight="251.0" prefWidth="187.0" style="-fx-background-color: #303030#303030;" styleClass="layout" stylesheets="@../css/style.css" />
       <Pane fx:id="wizard3ShadowPane" layoutX="641.0" layoutY="327.0" prefHeight="251.0" prefWidth="187.0" style="-fx-background-color: #303030#303030;" styleClass="layout" stylesheets="@../css/style.css" />
