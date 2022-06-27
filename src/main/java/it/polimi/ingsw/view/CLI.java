@@ -344,7 +344,7 @@ public class CLI extends ObservableView implements View {
         do {
             try {
                 ye=false;
-                out.print("\nChoose an Assistant Card from your Deck (name): ");
+                out.print("\nPLANNING PHASE\nChoose an Assistant Card from your Deck (name): ");
                 String nickname = readInput();
                 notifyObserver(obs -> obs.chooseAssistantCard(nickname));
             } catch (Exception e) {
@@ -461,7 +461,7 @@ public class CLI extends ObservableView implements View {
         do {
             try {
                 ye=false;
-                out.print("\nWhich student of your entry do you want to move? (id)");
+                out.print("\nACTION PHASE\nWhich student of your entry do you want to move? (id)");
                 printEntry(entry);
                 out.print("\n");
                 String IDstring = readInput().toUpperCase(Locale.ROOT);
