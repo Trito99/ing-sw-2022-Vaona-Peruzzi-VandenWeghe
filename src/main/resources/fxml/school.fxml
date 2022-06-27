@@ -363,9 +363,6 @@
             </cursor>
          </ImageView>
       </children>
-      <cursor>
-         <Cursor fx:constant="HAND" />
-      </cursor>
    </Pane>
    <Pane fx:id="profPane" layoutX="296.0" layoutY="5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="33.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="296.0" AnchorPane.rightAnchor="91.4" AnchorPane.topAnchor="5.0">
       <children>
