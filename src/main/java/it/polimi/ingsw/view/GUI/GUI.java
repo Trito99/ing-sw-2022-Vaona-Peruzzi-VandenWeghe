@@ -200,6 +200,7 @@ public class GUI extends ObservableView implements View {
         Platform.runLater(() ->
             {GuiManager.getMainScene().getPersonalSchoolController().disabilitateEntry(true);
             GuiManager.getMainScene().disabilitateMother(table,maxSteps,false);});
+        showMessage("Move MotherEarth");
     }
 
     @Override

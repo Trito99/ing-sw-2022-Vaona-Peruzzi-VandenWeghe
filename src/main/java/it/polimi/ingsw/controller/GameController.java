@@ -367,24 +367,21 @@ public class GameController {
                                 }else{
                                     virtualView.showMessage("⚠️Table already full. Select another student ⚠️");
                                     again = true;
-                                    virtualView.showMessage("ACTION PHASE");
                                     virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getEntry());
                                 }
-
                             } else if (Choice.getPlace().equals("ISLAND")) {
                                 virtualView.askId(true,null,-1, null);
                             }
                         } else {
                             virtualView.showMessage("\n⚠️Wrong input  ⚠️");
                             again = true;
-                            virtualView.showMessage("ACTION PHASE");
+
                             virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getEntry());
                         }
                     }
                     else if(!Choice.getPlace().equals("CHARACTER CARD")){
                         virtualView.showMessage("\n⚠️Student selected is not available ⚠️");
                         again = true;
-                        virtualView.showMessage("ACTION PHASE");
                         virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getEntry());
                     }
                 }
