@@ -26,6 +26,15 @@
     -fx-background-radius: 25;
 }
 
+.buttonOutline{
+    -fx-background-color: transparent;
+    -fx-background-radius: 25;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 3px;
+    -fx-border-radius: 25;
+    -fx-border-style: solid;
+}
+
 .button:pressed {
     -fx-effect: dropshadow(gaussian, floralwhite, 20, 0.1, 0, 3);
     -fx-background-radius: 25;
