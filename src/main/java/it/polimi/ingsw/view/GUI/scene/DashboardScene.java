@@ -256,6 +256,9 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private Button deckButton;
 
     @FXML
+    private ImageView backDeck;
+
+    @FXML
     private ImageView deckLogo;
 
     @FXML
@@ -595,16 +598,16 @@ public class DashboardScene extends ObservableView implements GenericScene {
         this.assistantDeck = viewDeckScene;
         switch(viewDeckScene.getDeckAssistant().getDeckName()){
             case WIZARD1:
-                deckLogo.setImage((new Image("/images/assistantDeck/assistantCard_back_1.png")));
+                backDeck.setImage((new Image("/images/assistantDeck/assistantCard_back_1.png")));
                 break;
             case WIZARD2:
-                deckLogo.setImage((new Image("/images/assistantDeck/assistantCard_back_2.png")));
+                backDeck.setImage((new Image("/images/assistantDeck/assistantCard_back_2.png")));
                 break;
             case WIZARD3:
-                deckLogo.setImage((new Image("/images/assistantDeck/assistantCard_back_3.png")));
+                backDeck.setImage((new Image("/images/assistantDeck/assistantCard_back_3.png")));
                 break;
             case WIZARD4:
-                deckLogo.setImage((new Image("/images/assistantDeck/assistantCard_back_4.png")));
+                backDeck.setImage((new Image("/images/assistantDeck/assistantCard_back_4.png")));
                 break;
         }
     }

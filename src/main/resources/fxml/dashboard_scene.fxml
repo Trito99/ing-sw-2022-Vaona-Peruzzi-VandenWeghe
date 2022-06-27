@@ -36,7 +36,7 @@
                   <Image url="@../images/icon_deck.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ImageTrashPersonal" fitHeight="180.0" fitWidth="125.0" layoutX="12.0" layoutY="16.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ImageTrashPersonal" fitHeight="180.0" fitWidth="125.0" layoutX="10.0" layoutY="16.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/assistantCards/assistant1.png" />
                </image>
@@ -1255,174 +1255,6 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="PaneXcard2" layoutX="738.0" layoutY="81.0" prefHeight="62.0" prefWidth="78.0">
-               <children>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="18.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/Divieto.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="NumberOfXcard2" fill="#ffffffbd" layoutX="46.0" layoutY="38.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="1" textAlignment="CENTER" wrappingWidth="22.755556106567383">
-                     <font>
-                        <Font size="29.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane fx:id="PaneXcard3" layoutX="760.0" layoutY="200.0" prefHeight="62.0" prefWidth="78.0">
-               <children>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="18.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/Divieto.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="NumberOfXcard3" fill="#ffffffbd" layoutX="46.0" layoutY="38.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="1" textAlignment="CENTER" wrappingWidth="22.755556106567383">
-                     <font>
-                        <Font size="29.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane fx:id="PaneXcard4" layoutX="642.0" layoutY="430.0" prefHeight="62.0" prefWidth="78.0">
-               <children>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="18.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/Divieto.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="NumberOfXcard31" fill="#ffffffbd" layoutX="46.0" layoutY="38.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="1" textAlignment="CENTER" wrappingWidth="22.755556106567383">
-                     <font>
-                        <Font size="29.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane fx:id="PaneXcard5" layoutX="493.0" layoutY="455.0" prefHeight="62.0" prefWidth="78.0">
-               <children>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="18.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/Divieto.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="NumberOfXcard4" fill="#ffffffbd" layoutX="46.0" layoutY="38.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="1" textAlignment="CENTER" wrappingWidth="22.755556106567383">
-                     <font>
-                        <Font size="29.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane fx:id="PaneXcard7" layoutX="155.0" layoutY="435.0" prefHeight="62.0" prefWidth="78.0">
-               <children>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="18.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/Divieto.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="NumberOfXcard6" fill="#ffffffbd" layoutX="46.0" layoutY="38.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="1" textAlignment="CENTER" wrappingWidth="22.755556106567383">
-                     <font>
-                        <Font size="29.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane fx:id="PaneXcard8" layoutX="33.0" layoutY="389.0" prefHeight="62.0" prefWidth="78.0">
-               <children>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="18.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/Divieto.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="NumberOfXcard7" fill="#ffffffbd" layoutX="46.0" layoutY="38.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="1" textAlignment="CENTER" wrappingWidth="22.755556106567383">
-                     <font>
-                        <Font size="29.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane fx:id="PaneXcard9" layoutX="-56.0" layoutY="182.0" prefHeight="62.0" prefWidth="78.0">
-               <children>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="18.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/Divieto.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="NumberOfXcard8" fill="#ffffffbd" layoutX="46.0" layoutY="38.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="1" textAlignment="CENTER" wrappingWidth="22.755556106567383">
-                     <font>
-                        <Font size="29.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane fx:id="PaneXcard10" layoutX="116.0" layoutY="4.0" prefHeight="62.0" prefWidth="78.0">
-               <children>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="18.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/Divieto.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="NumberOfXcard12" fill="#ffffffbd" layoutX="46.0" layoutY="38.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="1" textAlignment="CENTER" wrappingWidth="22.755556106567383">
-                     <font>
-                        <Font size="29.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane fx:id="PaneXcard6" layoutX="334.0" layoutY="455.0" prefHeight="62.0" prefWidth="78.0">
-               <children>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="18.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/Divieto.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="NumberOfXcard5" fill="#ffffffbd" layoutX="46.0" layoutY="38.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="1" textAlignment="CENTER" wrappingWidth="22.755556106567383">
-                     <font>
-                        <Font size="29.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane fx:id="PaneXcard1" layoutX="569.0" layoutY="-26.0" prefHeight="62.0" prefWidth="78.0">
-               <children>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="18.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/Divieto.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="NumberOfXcard1" fill="#ffffffbd" layoutX="46.0" layoutY="38.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="1" textAlignment="CENTER" wrappingWidth="22.755556106567383">
-                     <font>
-                        <Font size="29.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane fx:id="PaneXcard12" layoutX="410.0" layoutY="-45.0" prefHeight="62.0" prefWidth="78.0">
-               <children>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="18.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/Divieto.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="NumberOfXcard" fill="#ffffffbd" layoutX="46.0" layoutY="38.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="1" textAlignment="CENTER" wrappingWidth="22.755556106567383">
-                     <font>
-                        <Font size="29.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane fx:id="PaneXcard11" layoutX="244.0" layoutY="-40.0" prefHeight="62.0" prefWidth="78.0">
-               <children>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="18.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/Divieto.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="NumberOfXcard11" fill="#ffffffbd" layoutX="46.0" layoutY="38.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="1" textAlignment="CENTER" wrappingWidth="22.755556106567383">
-                     <font>
-                        <Font size="29.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
          </children>
       </Pane>
       <Pane fx:id="schoolPane1" layoutX="204.0" layoutY="535.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="176.0" prefWidth="446.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
@@ -1441,7 +1273,7 @@
          </cursor></Button>
       <Button fx:id="deckButton" layoutX="37.0" layoutY="478.0" mnemonicParsing="false" prefHeight="215.0" prefWidth="145.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <graphic>
-            <ImageView fx:id="deckLogo2" fitHeight="180.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="backDeck" fitHeight="180.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
       <Text fx:id="coinTextTable" fill="#ffffffbd" layoutX="247.0" layoutY="103.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="2.0" text="0" textAlignment="CENTER" wrappingWidth="45.6390380859375">
