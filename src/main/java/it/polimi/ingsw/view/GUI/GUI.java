@@ -172,7 +172,7 @@ public class GUI extends ObservableView implements View {
         Platform.runLater(() -> {
             GuiManager.getMainScene().setPlanning(true);
             GuiManager.getMainScene().getAssistantDeck().addAllObservers(observers);});
-        showMessage("Choose an Assistant Card");
+        showMessage("PLANNING PHASE\nChoose an Assistant Card");
 
     }
 
@@ -191,7 +191,7 @@ public class GUI extends ObservableView implements View {
         Platform.runLater(() -> {
             GuiManager.getMainScene().getPersonalSchoolController().disabilitateEntry(false);
             GuiManager.getMainScene().getPersonalSchoolController().addAllObservers(observers);});
-        showMessage("Move a student from your entry ");
+        showMessage("ACTION PHASE\nMove a student from your entry ");
 
     }
 
@@ -200,6 +200,7 @@ public class GUI extends ObservableView implements View {
         Platform.runLater(() ->
             {GuiManager.getMainScene().getPersonalSchoolController().disabilitateEntry(true);
             GuiManager.getMainScene().disabilitateMother(table,maxSteps,false);});
+        showMessage("Move MotherEarth");
     }
 
     @Override
