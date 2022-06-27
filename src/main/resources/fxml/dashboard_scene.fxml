@@ -36,7 +36,7 @@
                   <Image url="@../images/icon_deck.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ImageTrashPersonal" fitHeight="180.0" fitWidth="125.0" layoutX="10.0" layoutY="16.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ImageTrashPersonal" fitHeight="180.0" fitWidth="125.0" layoutX="10.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/assistantCards/assistant1.png" />
                </image>
