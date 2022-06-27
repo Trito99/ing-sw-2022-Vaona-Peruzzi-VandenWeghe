@@ -28,7 +28,7 @@
             <TableColumn fx:id="currentPlayers" editable="false" prefWidth="117.60001220703123" sortable="false" style="-fx-alignment: CENTER; -fx-font-family: Helvetica; -fx-background-color: #f5f5f5; -fx-border-color: #e5e4e2;" text="CURRENT PLAYERS" />
         </columns>
       </TableView>
-      <Text fx:id="connectText" fill="WHITE" layoutX="1042.0" layoutY="677.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Next">
+      <Text fx:id="connectText" fill="WHITE" layoutX="1042.0" layoutY="660.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Next">
          <font>
             <Font size="25.0" />
          </font>
@@ -93,7 +93,7 @@
             <Font name="Helvetica" size="30.0" />
          </font>
       </Text>
-      <Button fx:id="nextButton" layoutX="1003.0" layoutY="643.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="129.0" stylesheets="@../css/style.css">
+      <Button fx:id="nextButton" layoutX="1002.0" layoutY="626.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="129.0" stylesheets="@../css/style.css">
          <styleClass>
             <String fx:value="shadow-button" />
             <String fx:value="button" />
