@@ -20,9 +20,9 @@
       <Pane fx:id="Pane" layoutX="52.0" layoutY="41.0" prefHeight="635.0" prefWidth="1175.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
       <Button fx:id="card1" layoutX="160.0" layoutY="84.0" mnemonicParsing="false" prefHeight="227.0" prefWidth="159.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <graphic>
-            <ImageView fx:id="imageCard1" fitHeight="193.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imageCard6" fitHeight="193.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/assistantCards/assistant1.png" />
+                  <Image url="@../images/assistantCards/assistant6.png" />
                </image>
             </ImageView>
          </graphic>
