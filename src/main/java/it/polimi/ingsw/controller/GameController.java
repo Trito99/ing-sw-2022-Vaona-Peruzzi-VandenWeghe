@@ -901,7 +901,6 @@ public class GameController {
         if (roundIndex < maxPlayers) {
             switch(actionState) {
                 case STUDENT:
-                    allVirtualView.get(getActivePlayer()).showMessage("ACTION PHASE");
                     allVirtualView.get(getActivePlayer()).askPlaceAndStudentForMove(gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getEntry());
                     break;
                 case CHARACTER:

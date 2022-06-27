@@ -172,7 +172,7 @@ public class GUI extends ObservableView implements View {
         Platform.runLater(() -> {
             GuiManager.getMainScene().setPlanning(true);
             GuiManager.getMainScene().getAssistantDeck().addAllObservers(observers);});
-        showMessage("Choose an Assistant Card");
+        showMessage("PLANNING PHASE\nChoose an Assistant Card");
 
     }
 
@@ -207,6 +207,7 @@ public class GUI extends ObservableView implements View {
         Platform.runLater(() ->
             {GuiManager.getMainScene().disabilitateMother(table,GuiManager.getMainScene().getMaxSteps(),true);
             GuiManager.getMainScene().getCloudController().disabilitateCloud(false);});
+        showMessage("Choose a Cloud");
     }
 
     @Override
@@ -214,9 +215,9 @@ public class GUI extends ObservableView implements View {
         if (choice) {
             if (characterCard != null) {
                 if (characterCard.getCardEffect().equals(CardEffect.HERALD))
-                    System.out.print("\nHERALD EFFECT\nIn which island do you want to calculate influence? (id)\n");
+                    System.out.print("\nHERALD EFFECT\nIn which island do you want to calculate influence?\n");
                 if (characterCard.getCardEffect().equals(CardEffect.CURATOR))
-                    System.out.print("\nCURATOR EFFECT\nIn which island do you want to place the forbidden card? (id)\n");
+                    System.out.print("\nCURATOR EFFECT\nIn which island do you want to place the forbidden card?\n");
             } else
                 notifyObserver(obs -> obs.chooseId(GuiManager.getMainScene().getStudentDestinantionIslandId(),choice, indexAcrobat, false));
         }
