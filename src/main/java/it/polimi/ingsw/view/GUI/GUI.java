@@ -191,7 +191,7 @@ public class GUI extends ObservableView implements View {
         Platform.runLater(() -> {
             GuiManager.getMainScene().getPersonalSchoolController().disabilitateEntry(false);
             GuiManager.getMainScene().getPersonalSchoolController().addAllObservers(observers);});
-        showMessage("Move 3 students");
+        showMessage("Move a student from your entry ");
 
     }
 
