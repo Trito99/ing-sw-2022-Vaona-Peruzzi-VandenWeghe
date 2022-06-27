@@ -407,6 +407,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     public void updatePersonalSchool(SchoolController controller, GameMode gameMode, String teamMate) throws IOException {
         personalSchoolController = controller;
+        personalSchoolController.addAllObservers(observers);
         FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource("/fxml/school.fxml"));
         loader.setController(controller);
         AnchorPane personalSchool = loader.load();
@@ -438,24 +439,30 @@ public class DashboardScene extends ObservableView implements GenericScene {
         switch(table.getCloudNumber().size()){
             case 2:
                 FXMLLoader loader2 = new FXMLLoader(StartGUI.class.getResource("/fxml/cloudCards_2Players.fxml"));
-                cloudController = new CloudCards(table.getCloudNumber());
+                cloudController = new CloudCards();
+                cloudController.setCloudCard(table.getCloudNumber());
                 loader2.setController(cloudController);
                 AnchorPane clouds2 = loader2.load();
                 cloudPane.getChildren().addAll(clouds2);
+                cloudController.addAllObservers(observers);
                 break;
             case 3:
                 FXMLLoader loader3 = new FXMLLoader(StartGUI.class.getResource("/fxml/cloudCards_3Players.fxml"));
-                cloudController = new CloudCards(table.getCloudNumber());
+                cloudController = new CloudCards();
+                cloudController.setCloudCard(table.getCloudNumber());
                 loader3.setController(cloudController);
                 AnchorPane clouds3 = loader3.load();
                 cloudPane.getChildren().addAll(clouds3);
+                cloudController.addAllObservers(observers);
                 break;
             case 4:
                 FXMLLoader loader4 = new FXMLLoader(StartGUI.class.getResource("/fxml/cloudCards_4Players.fxml"));
-                cloudController = new CloudCards(table.getCloudNumber());
+                cloudController = new CloudCards();
+                cloudController.setCloudCard(table.getCloudNumber());
                 loader4.setController(cloudController);
                 AnchorPane clouds4 = loader4.load();
                 cloudPane.getChildren().addAll(clouds4);
+                cloudController.addAllObservers(observers);
                 break;
         }
         if(difficulty.equals(Difficulty.STANDARDMODE)){
@@ -800,6 +807,10 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     public int getIslandMother(){
         return islandMother;
+    }
+
+    public int getMaxSteps(){
+        return maxSteps;
     }
 
     public void hide(Table table){

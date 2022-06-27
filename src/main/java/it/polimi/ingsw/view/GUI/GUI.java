@@ -188,9 +188,8 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void askPlaceAndStudentForMove(ArrayList<Student> entry) {
-        Platform.runLater(() -> {
-            GuiManager.getMainScene().getPersonalSchoolController().disabilitateEntry(false);
-            GuiManager.getMainScene().getPersonalSchoolController().addAllObservers(observers);});
+        Platform.runLater(() ->
+            GuiManager.getMainScene().getPersonalSchoolController().disabilitateEntry(false));
         showMessage("Move a student from your entry ");
 
     }
@@ -204,7 +203,9 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void askCloud(Table table) {
-
+        Platform.runLater(() ->
+            {GuiManager.getMainScene().disabilitateMother(table,GuiManager.getMainScene().getMaxSteps(),true);
+            GuiManager.getMainScene().getCloudController().disabilitateCloud(false);});
     }
 
     @Override

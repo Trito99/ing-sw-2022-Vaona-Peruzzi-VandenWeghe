@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,11 +12,17 @@
          <image>
             <Image url="@../images/clouds/cloud4.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="cloud2_2Players" fitHeight="90.0" fitWidth="92.0" layoutX="148.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/clouds/cloud2.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
       </ImageView>
       <Pane fx:id="StudentsPane" layoutX="18.0" layoutY="42.0" prefHeight="97.0" prefWidth="252.0">
          <children>
@@ -51,5 +58,13 @@
             </ImageView>
          </children>
       </Pane>
+      <Pane layoutX="57.0" layoutY="49.0" prefHeight="90.0" prefWidth="92.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+      <Pane layoutX="148.0" layoutY="49.0" prefHeight="90.0" prefWidth="92.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
    </children>
 </AnchorPane>
