@@ -394,17 +394,22 @@
       </children></Pane>
    <Pane fx:id="towerZone" layoutX="337.0" layoutY="5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="137.0" prefWidth="74.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="337.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
       <children>
-         <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="8.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../images/towers/Tschool.png" />
-            </image>
-         </ImageView>
-         <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="35.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="8.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../images/towers/Tschool.png" />
             </image>
          </ImageView>
          <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="35.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../images/towers/Tschool.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="8.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../images/towers/Tschool.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="35.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../images/towers/Tschool.png" />
             </image>
@@ -419,17 +424,12 @@
                <Image url="@../images/towers/Tschool.png" />
             </image>
          </ImageView>
-         <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="35.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="8.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../images/towers/Tschool.png" />
             </image>
          </ImageView>
-         <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="8.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../images/towers/Tschool.png" />
-            </image>
-         </ImageView>
-         <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="8.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="35.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../images/towers/Tschool.png" />
             </image>
