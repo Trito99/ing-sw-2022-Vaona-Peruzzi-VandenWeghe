@@ -30,6 +30,11 @@
             <Image url="@../images/Logo_CranioCrations.png" />
          </image>
       </ImageView>
+      <Text fx:id="startText" fill="WHITE" layoutX="619.0" layoutY="453.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.6" text="START" textAlignment="CENTER">
+         <font>
+            <Font name="Helvetica" size="25.0" />
+         </font>
+      </Text>
       <Button fx:id="startButton" layoutX="557.0" layoutY="418.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" opacity="0.54" prefHeight="49.0" prefWidth="200.0" stylesheets="@../css/style.css">
          <font>
             <Font name="Helvetica" size="25.0" />
@@ -38,11 +43,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Text fx:id="startText" fill="WHITE" layoutX="619.0" layoutY="453.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.6" text="START" textAlignment="CENTER">
-         <font>
-            <Font name="Helvetica" size="25.0" />
-         </font>
-      </Text>
    </children>
 
 

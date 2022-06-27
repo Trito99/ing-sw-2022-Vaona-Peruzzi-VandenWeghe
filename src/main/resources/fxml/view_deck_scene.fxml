@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -17,6 +18,18 @@
          </image>
       </ImageView>
       <Pane fx:id="Pane" layoutX="52.0" layoutY="41.0" prefHeight="635.0" prefWidth="1175.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Button fx:id="card1" layoutX="160.0" layoutY="84.0" mnemonicParsing="false" prefHeight="227.0" prefWidth="159.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+         <graphic>
+            <ImageView fx:id="imageCard1" fitHeight="193.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/assistantCards/assistant1.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
       <Button fx:id="card2" layoutX="360.0" layoutY="84.0" mnemonicParsing="false" prefHeight="227.0" prefWidth="159.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <graphic>
             <ImageView fx:id="imageCard2" fitHeight="193.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
@@ -25,6 +38,9 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="card3" layoutX="560.0" layoutY="84.0" mnemonicParsing="false" prefHeight="227.0" prefWidth="159.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <graphic>
@@ -34,6 +50,9 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="card4" layoutX="760.0" layoutY="84.0" mnemonicParsing="false" prefHeight="227.0" prefWidth="159.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <graphic>
@@ -43,6 +62,9 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="card5" layoutX="960.0" layoutY="84.0" mnemonicParsing="false" prefHeight="227.0" prefWidth="159.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <graphic>
@@ -52,51 +74,9 @@
                </image>
             </ImageView>
          </graphic>
-      </Button>
-      <Button fx:id="card1" layoutX="160.0" layoutY="84.0" mnemonicParsing="false" prefHeight="227.0" prefWidth="159.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
-         <graphic>
-            <ImageView fx:id="imageCard1" fitHeight="193.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/assistantCards/assistant1.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="card7" layoutX="360.0" layoutY="341.0" mnemonicParsing="false" prefHeight="227.0" prefWidth="159.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
-         <graphic>
-            <ImageView fx:id="imageCard7" fitHeight="193.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/assistantCards/assistant7.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="card8" layoutX="560.0" layoutY="341.0" mnemonicParsing="false" prefHeight="227.0" prefWidth="159.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
-         <graphic>
-            <ImageView fx:id="imageCard8" fitHeight="193.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/assistantCards/assistant8.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="card9" layoutX="760.0" layoutY="341.0" mnemonicParsing="false" prefHeight="227.0" prefWidth="159.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
-         <graphic>
-            <ImageView fx:id="imageCard9" fitHeight="193.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/assistantCards/assistant9.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="card10" layoutX="960.0" layoutY="341.0" mnemonicParsing="false" prefHeight="227.0" prefWidth="159.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
-         <graphic>
-            <ImageView fx:id="imageCard10" fitHeight="193.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/assistantCards/assistant10.png" />
-               </image>
-            </ImageView>
-         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="card6" layoutX="160.0" layoutY="341.0" mnemonicParsing="false" prefHeight="227.0" prefWidth="159.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <graphic>
@@ -106,6 +86,57 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="card7" layoutX="360.0" layoutY="341.0" mnemonicParsing="false" prefHeight="227.0" prefWidth="159.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+         <graphic>
+            <ImageView fx:id="imageCard7" fitHeight="193.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/assistantCards/assistant7.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="card8" layoutX="560.0" layoutY="341.0" mnemonicParsing="false" prefHeight="227.0" prefWidth="159.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+         <graphic>
+            <ImageView fx:id="imageCard8" fitHeight="193.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/assistantCards/assistant8.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="card9" layoutX="760.0" layoutY="341.0" mnemonicParsing="false" prefHeight="227.0" prefWidth="159.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+         <graphic>
+            <ImageView fx:id="imageCard9" fitHeight="193.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/assistantCards/assistant9.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="card10" layoutX="960.0" layoutY="341.0" mnemonicParsing="false" prefHeight="227.0" prefWidth="159.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+         <graphic>
+            <ImageView fx:id="imageCard10" fitHeight="193.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/assistantCards/assistant10.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Text fx:id="playText" fill="WHITE" layoutX="1090.0" layoutY="641.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.5" text="Play">
          <font>
@@ -117,6 +148,9 @@
             <String fx:value="shadow-button" />
             <String fx:value="button" />
          </styleClass>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Pane fx:id="card1ShadowPane" layoutX="160.0" layoutY="84.0" prefHeight="229.0" prefWidth="159.0" styleClass="shadowPane" stylesheets="@../css/dashboard_style.css" />
       <Pane fx:id="card2ShadowPane" layoutX="360.0" layoutY="84.0" prefHeight="229.0" prefWidth="159.0" styleClass="shadowPane" stylesheets="@../css/dashboard_style.css" />

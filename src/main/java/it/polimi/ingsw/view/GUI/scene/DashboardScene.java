@@ -596,6 +596,8 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }
     }
 
+
+
     public void updateAssistantCardDeck(ViewDeckScene viewDeckScene){
         this.assistantDeck = viewDeckScene;
         switch(viewDeckScene.getDeckAssistant().getDeckName()){
