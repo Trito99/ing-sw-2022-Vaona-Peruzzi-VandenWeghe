@@ -260,7 +260,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private ImageView deckLogo;
 
     @FXML
-    private ImageView deckLogo2;
+    private ImageView trashLogo;
 
     @FXML
     private ImageView island0;
@@ -412,6 +412,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
         AnchorPane personalSchool = loader.load();
         schoolPane.getChildren().setAll(personalSchool);
         if(controller.getTrash()!=null) {
+            trashLogo.setVisible(false);
             ImageTrashPersonal.setVisible(true);
             ImageTrashPersonal.setImage(new Image(assistantCardMap.get(controller.getTrash().getAssistantName())));
         }else
@@ -477,7 +478,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
             PaneCoinScore.setVisible(false);
             coinTextPersonal.setVisible(false);
             coinTextPersonal.setDisable(true);
-            ImageTrashPersonal.setVisible(false);
+            ImageTrashPersonal.setVisible(false); /***/
             characterCardLayout.setVisible(false);
             characterPane.setVisible(false);
         }else{
