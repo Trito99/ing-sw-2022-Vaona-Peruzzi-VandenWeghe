@@ -83,7 +83,6 @@ public class CharacterCardController {
         cardImage.setImage(new Image(characterCardMap.get(card.getCardEffect())));
     }
 
-
     public void abilitateStudentPane(){
         longPane.setVisible(true);
         shortPane.setVisible(false);
