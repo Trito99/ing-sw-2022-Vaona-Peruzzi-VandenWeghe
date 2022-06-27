@@ -31,7 +31,7 @@
       <Pane fx:id="sxPane" layoutX="17.0" layoutY="13.0" prefHeight="695.0" prefWidth="182.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
       <Pane fx:id="trashPanePersonalSchool" layoutX="37.0" layoutY="229.0" prefHeight="215.0" prefWidth="145.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <children>
-            <ImageView fx:id="deckLogo" fitHeight="105.0" fitWidth="109.0" layoutX="18.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="trashLogo" fitHeight="105.0" fitWidth="109.0" layoutX="18.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/icon_deck.png" />
                </image>
@@ -1273,7 +1273,7 @@
          </cursor></Button>
       <Button fx:id="deckButton" layoutX="37.0" layoutY="478.0" mnemonicParsing="false" prefHeight="215.0" prefWidth="145.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <graphic>
-            <ImageView fx:id="backDeck" fitHeight="180.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="deckLogo" fitHeight="180.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
       <Text fx:id="coinTextTable" fill="#ffffffbd" layoutX="247.0" layoutY="103.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="2.0" text="0" textAlignment="CENTER" wrappingWidth="45.6390380859375">
