@@ -3,9 +3,10 @@
 }
 
 .layout{
-    -fx-background-radius: 34;
+    -fx-background-radius: 25;
     -fx-background-color: white;
     -fx-opacity: 0.35;
+    -fx-border-color: transparent;
 }
 
 .text-field{
@@ -24,6 +25,15 @@
     -fx-background-color: white;
     -fx-opacity: 0.35;
     -fx-background-radius: 25;
+}
+
+.buttonOutline{
+    -fx-background-color: transparent;
+    -fx-background-radius: 25;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 3px;
+    -fx-border-radius: 25;
+    -fx-border-style: solid;
 }
 
 .button:pressed {

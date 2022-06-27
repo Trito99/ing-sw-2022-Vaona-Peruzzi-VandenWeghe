@@ -97,7 +97,7 @@ public class NewGameScene extends ObservableView implements GenericScene {
     private void clickTwoPlayersButton(Event event){
         fourShadowPane.setVisible(false);
         threeShadowPane.setVisible(false);
-        twoShadowPane.setStyle("-fx-background-color: red");
+        twoShadowPane.setStyle("-fx-background-color: white");
         twoShadowPane.setVisible(true);
         setPlayerNumber(2);
     }
@@ -105,7 +105,7 @@ public class NewGameScene extends ObservableView implements GenericScene {
     private void clickThreePlayersButton(Event event){
         twoShadowPane.setVisible(false);
         fourShadowPane.setVisible(false);
-        threeShadowPane.setStyle("-fx-background-color: red");
+        threeShadowPane.setStyle("-fx-background-color: white");
         threeShadowPane.setVisible(true);
         setPlayerNumber(3);
     }
@@ -113,21 +113,21 @@ public class NewGameScene extends ObservableView implements GenericScene {
     private void clickCoopButton(Event event){
         twoShadowPane.setVisible(false);
         threeShadowPane.setVisible(false);
-        fourShadowPane.setStyle("-fx-background-color: red");
+        fourShadowPane.setStyle("-fx-background-color: white");
         fourShadowPane.setVisible(true);
         setPlayerNumber(4);
     }
 
     private void clickStandardButton(Event event){
         expertShadowPane.setVisible(false);
-        standardShadowPane.setStyle("-fx-background-color: red");
+        standardShadowPane.setStyle("-fx-background-color: white");
         standardShadowPane.setVisible(true);
         setDifficulty(Difficulty.STANDARDMODE);
     }
 
     private void clickExpertButton(Event event){
         standardShadowPane.setVisible(false);
-        expertShadowPane.setStyle("-fx-background-color: red");
+        expertShadowPane.setStyle("-fx-background-color: white");
         expertShadowPane.setVisible(true);
         setDifficulty(Difficulty.EXPERTMODE);
     }

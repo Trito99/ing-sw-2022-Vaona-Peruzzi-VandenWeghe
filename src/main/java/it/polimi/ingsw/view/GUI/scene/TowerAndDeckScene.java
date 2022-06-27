@@ -200,49 +200,49 @@ public class TowerAndDeckScene extends ObservableView implements GenericScene {
 
     private void clickWhite(Event event){
         initializeTowerColors();
-        whiteShadowPane.setStyle("-fx-background-color: red");
+        whiteShadowPane.setStyle("-fx-background-color: white");
         whiteShadowPane.setVisible(true);
         setColorChosen(TColor.WHITE);
     }
 
     private void clickBlack(Event event){
         initializeTowerColors();
-        blackShadowPane.setStyle("-fx-background-color: red");
+        blackShadowPane.setStyle("-fx-background-color: white");
         blackShadowPane.setVisible(true);
         setColorChosen(TColor.BLACK);
     }
 
     private void clickGrey(Event event){
         initializeTowerColors();
-        greyShadowPane.setStyle("-fx-background-color: red");
+        greyShadowPane.setStyle("-fx-background-color: white");
         greyShadowPane.setVisible(true);
         setColorChosen(TColor.GREY);
     }
 
     private void clickWizard1(Event event){
         initializeAssistantDeck();
-        wizard1ShadowPane.setStyle("-fx-background-color: red");
+        wizard1ShadowPane.setStyle("-fx-background-color: white");
         wizard1ShadowPane.setVisible(true);
         setDeckChosen(AssistantDeckName.WIZARD1);
     }
 
     private void clickWizard2(Event event){
         initializeAssistantDeck();
-        wizard2ShadowPane.setStyle("-fx-background-color: red");
+        wizard2ShadowPane.setStyle("-fx-background-color: white");
         wizard2ShadowPane.setVisible(true);
         setDeckChosen(AssistantDeckName.WIZARD2);
     }
 
     private void clickWizard3(Event event){
         initializeAssistantDeck();
-        wizard3ShadowPane.setStyle("-fx-background-color: red");
+        wizard3ShadowPane.setStyle("-fx-background-color: white");
         wizard3ShadowPane.setVisible(true);
         setDeckChosen(AssistantDeckName.WIZARD3);
     }
 
     private void clickWizard4(Event event){
         initializeAssistantDeck();
-        wizard4ShadowPane.setStyle("-fx-background-color: red");
+        wizard4ShadowPane.setStyle("-fx-background-color: white");
         wizard4ShadowPane.setVisible(true);
         setDeckChosen(AssistantDeckName.WIZARD4);
     }
