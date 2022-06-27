@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.GUI.scene;
 
 import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.student.Student;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 public class CloudCards {
 
     private ArrayList<CloudCard> cloudCards;
+
+    private CloudCard cloudSelected;
 
     @FXML
     private Pane StudentsPane;
@@ -60,12 +63,16 @@ public class CloudCards {
 
     private void addEventHandler(ArrayList<CloudCard> cloudCards) {
         for(int i=0;i<cloudCards.size();i++){
-            //anchorPane.getChildren().get(i).addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickCloud);
+            anchorPane.getChildren().get(i).addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickCloud);
         }
     }
 
-    private void clickCloud(){
-
+    private void clickCloud(Event event){
+        for(int i=0;i<cloudCards.size();i++){
+            if(event.getSource().equals(anchorPane.getChildren().get(i))){
+                cloudSelected = cloudCards.get(i);
+            }
+        }
     }
 
     public void updateStudents(ArrayList<CloudCard> cloudCards){
