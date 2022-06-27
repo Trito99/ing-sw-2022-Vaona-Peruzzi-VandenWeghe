@@ -109,6 +109,42 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private ImageView ImageTrashPersonal;
 
     @FXML
+    private Text NumberOfXcard;
+
+    @FXML
+    private Text NumberOfXcard1;
+
+    @FXML
+    private Text NumberOfXcard11;
+
+    @FXML
+    private Text NumberOfXcard12;
+
+    @FXML
+    private Text NumberOfXcard2;
+
+    @FXML
+    private Text NumberOfXcard3;
+
+    @FXML
+    private Text NumberOfXcard31;
+
+    @FXML
+    private Text NumberOfXcard4;
+
+    @FXML
+    private Text NumberOfXcard5;
+
+    @FXML
+    private Text NumberOfXcard6;
+
+    @FXML
+    private Text NumberOfXcard7;
+
+    @FXML
+    private Text NumberOfXcard8;
+
+    @FXML
     private Pane PaneCoinScore;
 
     @FXML
@@ -149,6 +185,42 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     @FXML
     private Pane PaneTeamMate;
+
+    @FXML
+    private Pane PaneXcard1;
+
+    @FXML
+    private Pane PaneXcard10;
+
+    @FXML
+    private Pane PaneXcard11;
+
+    @FXML
+    private Pane PaneXcard12;
+
+    @FXML
+    private Pane PaneXcard2;
+
+    @FXML
+    private Pane PaneXcard3;
+
+    @FXML
+    private Pane PaneXcard4;
+
+    @FXML
+    private Pane PaneXcard5;
+
+    @FXML
+    private Pane PaneXcard6;
+
+    @FXML
+    private Pane PaneXcard7;
+
+    @FXML
+    private Pane PaneXcard8;
+
+    @FXML
+    private Pane PaneXcard9;
 
     @FXML
     private Text TextCoinscore;
