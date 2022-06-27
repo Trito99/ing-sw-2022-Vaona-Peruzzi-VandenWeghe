@@ -29,9 +29,14 @@
          </effect>
       </ImageView>
       <Pane fx:id="sxPane" layoutX="17.0" layoutY="13.0" prefHeight="695.0" prefWidth="182.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="trashPanePersonalSchool" layoutX="37.0" layoutY="233.0" prefHeight="215.0" prefWidth="145.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+      <Pane fx:id="trashPanePersonalSchool" layoutX="37.0" layoutY="229.0" prefHeight="215.0" prefWidth="145.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <children>
-            <ImageView fx:id="ImageTrashPersonal" fitHeight="180.0" fitWidth="125.0" layoutX="12.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="trashLogo" fitHeight="105.0" fitWidth="109.0" layoutX="18.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/icon_deck.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="ImageTrashPersonal" fitHeight="180.0" fitWidth="125.0" layoutX="10.0" layoutY="16.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/assistantCards/assistant1.png" />
                </image>
@@ -39,7 +44,7 @@
          </children>
       </Pane>
       <Pane fx:id="PaneCoinScore" layoutX="210.0" layoutY="17.0" prefHeight="32.0" prefWidth="172.0" style="-fx-background-radius: 10;" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="coinPaneTable" layoutX="58.0" layoutY="68.0" prefHeight="86.0" prefWidth="89.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+      <Pane fx:id="coinPaneTable" layoutX="61.0" layoutY="65.0" prefHeight="86.0" prefWidth="89.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <children>
             <ImageView fx:id="coinImageTable" fitHeight="78.0" fitWidth="82.0" layoutX="6.0" layoutY="4.0" opacity="0.57" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -51,9 +56,9 @@
             </ImageView>
          </children>
       </Pane>
-      <Text fx:id="textCoinsOnTable" fill="#000000bd" layoutX="222.0" layoutY="38.0" stroke="#000000bd" strokeLineCap="ROUND" strokeWidth="0.2" text="Coins on table">
+      <Text fx:id="textCoinsOnTable" fill="#ffffffbd" layoutX="221.0" layoutY="41.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.6" text="Coins on table">
          <font>
-            <Font name="Helvetica" size="20.0" />
+            <Font name="Helvetica" size="22.0" />
          </font>
       </Text>
       <Pane fx:id="coinPanePersonal" layoutX="238.0" layoutY="60.0" prefHeight="66.0" prefWidth="66.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
@@ -1266,7 +1271,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="deckButton" layoutX="37.0" layoutY="495.0" mnemonicParsing="false" prefHeight="215.0" prefWidth="145.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
+      <Button fx:id="deckButton" layoutX="37.0" layoutY="478.0" mnemonicParsing="false" prefHeight="215.0" prefWidth="145.0" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <graphic>
             <ImageView fx:id="deckLogo" fitHeight="180.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
@@ -1277,19 +1282,19 @@
          </font>
       </Text>
       <Pane fx:id="PaneTeamMate" layoutX="673.0" layoutY="664.0" prefHeight="32.0" prefWidth="172.0" style="-fx-background-radius: 10;" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Text fx:id="TextTeamMate" fill="#000000bd" layoutX="685.0" layoutY="685.0" stroke="#000000bd" strokeLineCap="ROUND" strokeWidth="0.2" text="teamMate">
+      <Text fx:id="TextTeamMate" fill="#ffffffbd" layoutX="685.0" layoutY="688.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.3" text="teamMate">
          <font>
-            <Font name="Helvetica" size="20.0" />
+            <Font name="Helvetica" size="22.0" />
          </font>
       </Text>
-      <Text fx:id="coinTextPersonal" fill="#ffffffbd" layoutX="77.0" layoutY="123.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="12" textAlignment="CENTER" wrappingWidth="45.6390380859375">
+      <Text fx:id="coinTextPersonal" fill="#ffffffbd" layoutX="82.0" layoutY="121.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="12" textAlignment="CENTER" wrappingWidth="45.6390380859375">
          <font>
             <Font name="Helvetica" size="39.0" />
          </font>
       </Text>
-      <Text fx:id="TextCoinscore" fill="#000000bd" layoutX="37.0" layoutY="47.0" stroke="#000000bd" strokeLineCap="ROUND" strokeWidth="0.2" text="Your coin score">
+      <Text fx:id="TextCoinscore" fill="#ffffffbd" layoutX="33.0" layoutY="47.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.3" text="Your coin score">
          <font>
-            <Font name="Helvetica" size="20.0" />
+            <Font name="Helvetica" size="22.0" />
          </font>
       </Text>
    </children>
