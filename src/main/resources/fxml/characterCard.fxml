@@ -5,31 +5,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="174.0" prefWidth="130.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.CardsController.CharacterCardController">
+<AnchorPane prefHeight="190.0" prefWidth="130.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.CardsController.CharacterCardController">
    <children>
-      <ImageView fx:id="cardImage" fitHeight="166.0" fitWidth="145.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" />
-      <Pane layoutX="10.0" layoutY="2.0" prefHeight="165.0" prefWidth="51.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="PaneCharacterCard" layoutY="-1.0" prefHeight="188.0" prefWidth="230.0">
+      <ImageView fx:id="cardImage" fitHeight="166.0" fitWidth="145.0" layoutX="75.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
+      <Pane fx:id="longPane" layoutX="10.0" layoutY="5.0" prefHeight="165.0" prefWidth="48.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="shortPane" layoutX="10.0" layoutY="5.0" prefHeight="45.0" prefWidth="48.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="coinPane" layoutX="19.0" layoutY="11.0" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
          <children>
-            <Pane fx:id="PaneCoinOnCard" layoutX="22.0" layoutY="9.0" prefHeight="26.0" prefWidth="28.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
-               <children>
-                  <ImageView fx:id="coinImagePersonal" fitHeight="22.0" fitWidth="22.0" layoutX="3.0" layoutY="2.0" opacity="0.57" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/coin.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Pane>
-         </children>
-      </Pane>
-      <Pane fx:id="studentPane" layoutX="19.0" layoutY="37.0" prefHeight="123.0" prefWidth="31.0">
-         <children>
-            <ImageView fx:id="stud1" fitHeight="17.0" fitWidth="17.0" layoutX="8.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="coinImagePersonal" fitHeight="27.0" fitWidth="27.0" layoutX="2.5" layoutY="2.5" opacity="0.57" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/students/Bstudent.png" />
+                  <Image url="@../images/coin.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="stud4" fitHeight="17.0" fitWidth="17.0" layoutX="8.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+         </children>
+      </Pane>
+      <Pane fx:id="studentPane" layoutX="19.0" layoutY="43.0" prefHeight="123.0" prefWidth="31.0">
+         <children>
+            <ImageView fx:id="stud1" fitHeight="17.0" fitWidth="17.0" layoutX="8.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/students/Bstudent.png" />
                </image>
@@ -39,12 +31,17 @@
                   <Image url="@../images/students/Bstudent.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="stud5" fitHeight="17.0" fitWidth="17.0" layoutX="8.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="stud3" fitHeight="17.0" fitWidth="17.0" layoutX="8.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/students/Bstudent.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="stud3" fitHeight="17.0" fitWidth="17.0" layoutX="8.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="stud4" fitHeight="17.0" fitWidth="17.0" layoutX="8.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/students/Bstudent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="stud5" fitHeight="17.0" fitWidth="17.0" layoutX="8.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/students/Bstudent.png" />
                </image>
@@ -56,24 +53,24 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane layoutX="10.0" layoutY="37.0" prefHeight="123.0" prefWidth="50.0" fx:id="xCardPane">
+      <Pane layoutX="10.0" layoutY="43.0" prefHeight="123.0" prefWidth="50.0" fx:id="xCardPane">
          <children>
-            <ImageView fitHeight="28.0" fitWidth="30.0" layoutX="14.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" fx:id="xCard1">
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="15.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" fx:id="xCard1">
                <image>
                   <Image url="@../images/Divieto.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="28.0" fitWidth="30.0" layoutX="14.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" fx:id="xCard2">
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="15.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" fx:id="xCard2">
                <image>
                   <Image url="@../images/Divieto.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="28.0" fitWidth="30.0" layoutX="14.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" fx:id="xCard3">
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="15.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" fx:id="xCard3">
                <image>
                   <Image url="@../images/Divieto.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="28.0" fitWidth="30.0" layoutX="14.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" fx:id="xCard4">
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="15.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" fx:id="xCard4">
                <image>
                   <Image url="@../images/Divieto.png" />
                </image>
