@@ -43,6 +43,9 @@
             <String fx:value="shadow-button" />
             <String fx:value="button" />
          </styleClass>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Text fx:id="blackT" layoutX="611.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="♜">
          <font>

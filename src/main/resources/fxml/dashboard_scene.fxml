@@ -1259,7 +1259,7 @@
       </Pane>
       <Pane fx:id="schoolPane1" layoutX="204.0" layoutY="535.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="176.0" prefWidth="446.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
       <Pane fx:id="schoolPane" layoutX="215.0" layoutY="546.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="421.0" style="-fx-background-color: transparent;" />
-      <Pane fx:id="schoolPane12" layoutX="1145.0" layoutY="153.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="126.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="characterPane" layoutX="1145.0" layoutY="153.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="126.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
       <VBox fx:id="characterCardLayout" layoutX="1078.0" layoutY="164.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="182.0" style="-fx-background-color: transparent;" styleClass="pane" />
       <Pane fx:id="schoolPane11" layoutX="1145.0" layoutY="16.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="126.0" prefWidth="126.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
       <Text fill="#ffffffbd" layoutX="1141.0" layoutY="76.0" stroke="#e3cfe5bd" strokeLineCap="ROUND" strokeWidth="0.8" text="view other's school" textAlignment="CENTER" wrappingWidth="142.59356236163643">

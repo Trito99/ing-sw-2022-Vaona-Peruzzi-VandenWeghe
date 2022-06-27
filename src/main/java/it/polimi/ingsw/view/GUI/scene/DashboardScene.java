@@ -350,7 +350,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private Pane schoolPane11;
 
     @FXML
-    private Pane schoolPane12;
+    private Pane characterPane;
 
     @FXML
     private Pane sxPane;
@@ -479,6 +479,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
             coinTextPersonal.setDisable(true);
             ImageTrashPersonal.setVisible(false);
             characterCardLayout.setVisible(false);
+            characterPane.setVisible(false);
         }else{
             coinTextTable.setText(String.valueOf(table.getCoinsOnTable()));
             ArrayList<CharacterCard> characterCardsPlaying = table.getCharacterCardsOnTable();
@@ -932,4 +933,5 @@ public class DashboardScene extends ObservableView implements GenericScene {
                 o.equals(motherEarth5) || o.equals(motherEarth6) || o.equals(motherEarth7)|| o.equals(motherEarth8) ||
                 o.equals(motherEarth9)|| o.equals(motherEarth10)|| o.equals(motherEarth11) || o.equals(motherEarth12));
     }
+
 }
