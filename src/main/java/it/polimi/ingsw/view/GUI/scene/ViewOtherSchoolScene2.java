@@ -4,13 +4,10 @@ import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.observer.ObservableView;
 import it.polimi.ingsw.view.GUI.GuiManager;
 import it.polimi.ingsw.view.GUI.StartGUI;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -92,7 +89,7 @@ public class ViewOtherSchoolScene2 extends ObservableView implements GenericScen
         AnchorPane School1 = loader1.load();
         schoolPane21.getChildren().setAll(School1);
         if(map.get(map.keySet().toArray()[0]).getDifficulty().equals(Difficulty.EXPERTMODE))
-            coinText1_3players.setText(String.valueOf(map.get(map.keySet().toArray()[0]).getCoins()));
+            coinText1_3players.setText(String.valueOf(map.get(map.keySet().toArray()[0]).getCoinsOfPlayer()));
         else {
             coinText1_3players.setVisible(false);
             coinImage1_3Players.setVisible(false);
@@ -114,7 +111,7 @@ public class ViewOtherSchoolScene2 extends ObservableView implements GenericScen
         schoolPane22.getChildren().setAll(School2);
 
         if(map.get(map.keySet().toArray()[1]).getDifficulty().equals(Difficulty.EXPERTMODE))
-            coinText2_3players.setText(String.valueOf(map.get(map.keySet().toArray()[1]).getCoins()));
+            coinText2_3players.setText(String.valueOf(map.get(map.keySet().toArray()[1]).getCoinsOfPlayer()));
         else {
             coinText2_3players.setVisible(false);
             coinImage2_3Players.setVisible(false);

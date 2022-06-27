@@ -4,13 +4,10 @@ import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.observer.ObservableView;
 import it.polimi.ingsw.view.GUI.GuiManager;
 import it.polimi.ingsw.view.GUI.StartGUI;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.layout.Pane;
@@ -120,7 +117,7 @@ public class ViewOtherSchoolScene3 extends ObservableView implements GenericScen
         AnchorPane School1 = loader1.load();
         schoolPane31.getChildren().setAll(School1);
         if(map.get(map.keySet().toArray()[0]).getDifficulty().equals(Difficulty.EXPERTMODE))
-            coinText1_4players.setText(String.valueOf(map.get(map.keySet().toArray()[0]).getCoins()));
+            coinText1_4players.setText(String.valueOf(map.get(map.keySet().toArray()[0]).getCoinsOfPlayer()));
         else {
             coinText1_4players.setVisible(false);
             coinImage1_4Players.setVisible(false);
@@ -142,7 +139,7 @@ public class ViewOtherSchoolScene3 extends ObservableView implements GenericScen
         schoolPane32.getChildren().setAll(School2);
 
         if(map.get(map.keySet().toArray()[1]).getDifficulty().equals(Difficulty.EXPERTMODE))
-            coinText2_4players.setText(String.valueOf(map.get(map.keySet().toArray()[1]).getCoins()));
+            coinText2_4players.setText(String.valueOf(map.get(map.keySet().toArray()[1]).getCoinsOfPlayer()));
         else {
             coinText2_4players.setVisible(false);
             coinImage2_4Players.setVisible(false);
@@ -164,7 +161,7 @@ public class ViewOtherSchoolScene3 extends ObservableView implements GenericScen
         schoolPane33.getChildren().setAll(School3);
 
         if(map.get(map.keySet().toArray()[2]).getDifficulty().equals(Difficulty.EXPERTMODE))
-            coinText3_4players.setText(String.valueOf(map.get(map.keySet().toArray()[2]).getCoins()));
+            coinText3_4players.setText(String.valueOf(map.get(map.keySet().toArray()[2]).getCoinsOfPlayer()));
         else {
             coinText3_4players.setVisible(false);
             coinImage3_4Players.setVisible(false);

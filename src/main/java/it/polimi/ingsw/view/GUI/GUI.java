@@ -167,7 +167,8 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void showCoin(int coins) {
-
+        Platform.runLater(() -> GuiManager.getMainScene().updateTable(table));
+        Platform.runLater(() -> GuiManager.changeRootMainScene(observers));
     }
 
     @Override

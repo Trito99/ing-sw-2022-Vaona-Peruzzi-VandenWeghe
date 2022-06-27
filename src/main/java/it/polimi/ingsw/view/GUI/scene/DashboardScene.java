@@ -66,7 +66,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     private Map<Pane, ArrayList<Integer>> islandMap = new HashMap<>();
 
-    private int studentDestinantionIslandId, motherDestinationIslandId, islandMother, maxSteps;
+    private int studentDestinationIslandId, motherDestinationIslandId, islandMother, maxSteps;
 
 
 
@@ -401,6 +401,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     public void updateTable(Table table){
         this.table = table;
+        coinTextTable.setText(String.valueOf(table.getCoinsOnTable()));
         cloudController.updateStudents(table.getCloudNumber());
         updateIslands(table.getListOfIsland());
     }
@@ -419,7 +420,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }else
             ImageTrashPersonal.setVisible(false);
         if(difficulty.equals(Difficulty.EXPERTMODE))
-            coinTextPersonal.setText(String.valueOf(controller.getCoins()));
+            coinTextPersonal.setText(String.valueOf(controller.getCoinsOfPlayer()));
         if(!gameMode.equals(GameMode.COOP)){
             PaneTeamMate.setVisible(false);
             PaneTeamMate.setDisable(true);
@@ -771,12 +772,12 @@ public class DashboardScene extends ObservableView implements GenericScene {
                 present = true;
         }
         if (present)
-            this.studentDestinantionIslandId = destinationIsland;
+            this.studentDestinationIslandId = destinationIsland;
         else{
             for (IslandCard islandCard : table.getListOfIsland()) {
                 for(int i : islandCard.getListOfMinorIslands())
                     if (i == destinationIsland)
-                        this.studentDestinantionIslandId = islandCard.getImmutableIdIsland();
+                        this.studentDestinationIslandId = islandCard.getImmutableIdIsland();
             }
         }
     }
@@ -799,7 +800,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     }
 
     public int getStudentDestinationIslandId(){
-        return studentDestinantionIslandId;
+        return studentDestinationIslandId;
     }
 
     public int getMotherDestinationIslandId(){

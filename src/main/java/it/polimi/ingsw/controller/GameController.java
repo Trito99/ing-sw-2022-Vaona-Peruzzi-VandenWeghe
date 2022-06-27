@@ -329,6 +329,7 @@ public class GameController {
                         }
                     }
 
+                    /** the student selected is available */
                     if(present){
                         if (Choice.getPlace().equals("SCHOOL") || (Choice.getPlace().equals(("ISLAND")))) {
                             again = false;

@@ -7,7 +7,6 @@ import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.observer.ObservableView;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -17,12 +16,8 @@ import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 
 public class SchoolController extends ObservableView implements GenericScene {
@@ -33,7 +28,7 @@ public class SchoolController extends ObservableView implements GenericScene {
     private int studentSelected;
 
     private String placeSelected;
-    private int coins;
+    private int coinsOfPlayer;
     private AssistantCard trash;
     private Difficulty difficulty;
     private Map<ImageView,Integer> entryMap = new HashMap<>();
@@ -263,11 +258,12 @@ public class SchoolController extends ObservableView implements GenericScene {
     private Pane yellow_table;
 
 
-    public SchoolController(School school, AssistantCard trash, Difficulty difficulty, int coins) {
+    public SchoolController(School school, AssistantCard trash, Difficulty difficulty, int coinsOfPlayer) {
         this.school = school;
         this.trash = trash;
         this.difficulty = difficulty;
-        this.coins = coins;
+        this.coinsOfPlayer = coinsOfPlayer;
+
     }
 
     public void initialize(){
@@ -400,8 +396,8 @@ public class SchoolController extends ObservableView implements GenericScene {
         }
     }
 
-    public int getCoins() {
-        return coins;
+    public int getCoinsOfPlayer() {
+        return coinsOfPlayer;
     }
 
     public AssistantCard getTrash() {
