@@ -334,6 +334,7 @@ public class GameController {
                         if (Choice.getPlace().equals("SCHOOL") || (Choice.getPlace().equals(("ISLAND")))) {
                             again = false;
                             if (Choice.getPlace().equals("SCHOOL")) {
+                                /** Verify that the table of the color selected isn't already full */
                                 switch(studentColor){
                                     case GREEN:
                                         if(gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getGTable().size()==10)
@@ -389,10 +390,12 @@ public class GameController {
                 }
                 if(receivedMessage.getMessageType() == MessageType.CHARACTER_CARD_PLAYED){
                     CharacterCardPlayed CardSelected = (CharacterCardPlayed) receivedMessage;
+                    /** Boolean to manage the error of choice that the client could make */
                     boolean exists = false, enough = true, playable = false, changeIdea = false, cantPlay = false;
                     if(!CardSelected.getChoice()){
                         if(CardSelected.getCardNickname().equals("YES")) {
                             for(CharacterCard characterCard : gameSession.getTable().getCharacterCardsOnTable()){
+                                /**Checks if the player can buy any character card */
                                 if(characterCard.getCoinOnCard()) {
                                     if ((characterCard.getCostCharacter() + 1) <= gameSession.getPlayer(CardSelected.getNickname()).getCoinScore())
                                         playable = true;
@@ -416,18 +419,20 @@ public class GameController {
                             virtualView.askCharacterCardToPlay(false, gameSession.getPlayer(getActivePlayer()).getCoinScore(), gameSession.getTable().getCharacterCardsOnTable());
                         }
                     }else {
+                        /** Checks if the card selected exists */
                         for (CharacterCard cc : gameSession.getTable().getCharacterCardsOnTable()) {
                             if (cc.getCardEffect().toString().equals(CardSelected.getCardNickname())) {
                                 exists = true;
                                 characterCard = cc;
                             }
                         }
-
+                        /** client change idea and don't want to buy a card */
                         if (CardSelected.getCardNickname().equals("NONE")){
                             changeIdea = true;
                             setActionState(savedActionState);
                             action();
                         }
+                        /** if the card selected is bard check if the player has any students in the hall */
                         else if (CardSelected.getCardNickname().equals("BARD")){
                             cantPlay = true;
                             for(SColor s : SColor.values()){
@@ -439,6 +444,7 @@ public class GameController {
                         }
                         boolean empty = false;
                         if (exists) {
+                            /** decrease the money of the player */
                             if (characterCard.getCoinOnCard()) {
                                 if (gameSession.getPlayer(CardSelected.getNickname()).getCoinScore() >= characterCard.getCostCharacter() + 1) {
                                     gameSession.decreaseCoinScore(CardSelected.getNickname(), characterCard.getCostCharacter() + 1);
@@ -471,6 +477,7 @@ public class GameController {
                         }
                         if (exists && enough && !empty && !cantPlay) {
                             again = false;
+                            /** Play the card selected */
                             switch(characterCard.getCardEffect()){
                                 case ABBOT:
                                 case ACROBAT:
@@ -525,6 +532,7 @@ public class GameController {
                     IdChosen Choice = (IdChosen) receivedMessage;
                     boolean present = false;
                     if(Choice.getChoice()) {
+                        /** Verify that the island selected is available */
                         for (IslandCard island : gameSession.getTable().getListOfIsland()) {
                             if (island.getIdIsland() == Choice.getId()) {
                                 present = true;
@@ -533,6 +541,7 @@ public class GameController {
                         }
                         if (present) {
                             again = false;
+                            /** If it's not activated an effect, move the student to the island selected  */
                             if(!card) {
                                 gameSession.moveStudentFromListToIsland(gameSession.getTable().getListOfIsland().get(Choice.getId() - 1), studentId, gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getEntry());
                                 virtualView.showListOfIsland(gameSession.getTable(),gameSession.getDifficulty());
@@ -571,6 +580,7 @@ public class GameController {
                         }else if (characterCard.getCardEffect().equals(CardEffect.ACROBAT) || characterCard.getCardEffect().equals(CardEffect.BARD)){
                             if(Choice.getIndex()%2==1) {
                                 int studentIdCard = -1, max;
+                                /** Acrobat effect */
                                 if(characterCard.getCardEffect().equals(CardEffect.ACROBAT)) {
                                     max = 6;
                                     for (Student student : characterCard.getStudentsOnCard()) {
@@ -581,6 +591,7 @@ public class GameController {
                                         }
                                     }
                                 }else{
+                                    /** Bard effect */
                                     max = 4;
                                     for (Student student : gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getGTable()) {
                                         if (student.getIdStudent() == Choice.getId() && gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getGTable().indexOf(student) == (gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getGTable().size()-1)) {
@@ -665,6 +676,7 @@ public class GameController {
                             }
                         }
                         else if(characterCard.getCardEffect().equals(CardEffect.COURTESAN)){
+                            /** Courtesan effect */
                             for (Student student : characterCard.getStudentsOnCard()) {
                                 if (student.getIdStudent() == Choice.getId()) {
                                     present = true;
@@ -694,13 +706,14 @@ public class GameController {
                     ColorBlocked blockColor = (ColorBlocked) receivedMessage;
                     boolean exists=false;
                     SColor colorChosen = null;
+                    /** checks if the color selected exists */
                     for (SColor color : SColor.values()) {
                         if (color.toString().equals(blockColor.getColor())) {
                             exists = true;
                             colorChosen = color;
                         }
                     }
-
+                    /** Herbalist effect */
                     if(exists && characterCard.getCardEffect().equals(CardEffect.HERBALIST)){
                         again=false;
                         gameSession.playCharacterCard(characterCard.getCardEffect(), getActivePlayer(), -1,-1,-1, colorChosen);
@@ -709,12 +722,14 @@ public class GameController {
                         setActionState(savedActionState);
                         action();
                     }
+                    /** Junk dealer effect */
                     else if(exists && characterCard.getCardEffect().equals(CardEffect.JUNKDEALER)){
                         again=false;
                         gameSession.playCharacterCard(CardEffect.JUNKDEALER, getActivePlayer(), -1,-1,-1, colorChosen);
                         virtualView.showCoin(gameSession.getTable().getCoinsOnTable());
                         gameSession.getPlayer(getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(getActivePlayer()), characterCard.getCardEffect());
 
+                        /** show all school updated */
                         for(String s : allVirtualView.keySet()) {
                             for (Player p : gameSession.getListOfPlayers()) {
                                 if (!p.getNickname().equals(s))
@@ -726,7 +741,6 @@ public class GameController {
                                 }
                             }
                         }
-
 
                         for (VirtualView vv : allVirtualView.values()) {
                             if (vv!=virtualView)
@@ -784,8 +798,11 @@ public class GameController {
                                 else
                                     gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE, gameSession.getPlayer(getActivePlayer()), gameSession.getGameMode(), gameSession.getTeams());
 
-                            } else
+                            }
+                            else
                                 gameSession.getTable().getListOfIsland().get(gameSession.getTable().getPosMotherEarth() - 1).buildTowerOnIsland(gameSession.getListOfPlayers(), CardEffect.STANDARDMODE, gameSession.getPlayer(getActivePlayer()), gameSession.getGameMode(), gameSession.getTeams());
+
+                            /** Join Islands after the movement */
                             gameSession.getTable().joinIsland(gameSession.getTable().getListOfIsland());
                             virtualView.showListOfIsland(gameSession.getTable(),gameSession.getDifficulty());
                             virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore(), gameSession.getGameMode(), gameSession.getPlayer(getActivePlayer()).getTeamMate());
@@ -831,7 +848,7 @@ public class GameController {
                         }
                     }
                 }
-
+        /** end of round */
                 if(!again && turnFinished) {
                     endTurn();
                 }
@@ -846,7 +863,7 @@ public class GameController {
     }
 
     /**
-     * Manage if it is needed or not a "Do you want to play character card?" request
+     * If the player has finished to move the students from the entry, send him at the phase of movement of Mother Earth
      */
     private void allStudentsMoved() {
         if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces()) {
@@ -884,6 +901,7 @@ public class GameController {
             showGame();
             allVirtualView.get(getActivePlayer()).askAssistantCardToPlay();
         }
+        /** At the end of the planning phase of the last player, set up the new playing order for the action phase */
         if (roundIndex == maxPlayers) {
             if(gameSession.gameIsFinished(getActivePlayer()))
                 endGame(null);
@@ -934,7 +952,8 @@ public class GameController {
                     break;
             }
         }
-        if (roundIndex == maxPlayers) {
+        /** set up the new round */
+        else if (roundIndex == maxPlayers) {
             turnController.setPlayingPlayer(turnController.getNewPlayerOrderByName().get(0));
             roundIndex = 0;
             round++;
@@ -982,7 +1001,7 @@ public class GameController {
     }
 
     /**
-     *  ???
+     *  manage the end of turn of a player (action phase)
      */
     private void endTurn(){
         turnController.nextPlayer(turnController.getNewPlayerOrderByName());
@@ -1003,7 +1022,7 @@ public class GameController {
 
     /** Show the results of the match and disconnects the players from the game
      *
-     * @param disconnectedNickname nick of the player who has disconnected from the match
+     * @param disconnectedNickname nick of the player who has disconnected from the match (null if no one disconnects during the match)
      */
     public void endGame(String disconnectedNickname){
         broadcastMessage("The Match is finished. ");
@@ -1067,12 +1086,17 @@ public class GameController {
         }
     }
 
-    /** ??? */
+    /**
+     *
+     * @return true if the game is started
+     */
     public boolean isGameStarted(){
         return (gameState != GameState.INIT && gameState!= GameState.END_GAME);
     }
 
-    /** Returns the player that's moving */
+    /**
+     * Returns the player that's moving
+     */
     public String getActivePlayer(){
         return turnController.getActivePlayer();
     }
