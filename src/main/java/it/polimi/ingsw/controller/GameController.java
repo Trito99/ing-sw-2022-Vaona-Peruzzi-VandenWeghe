@@ -282,6 +282,7 @@ public class GameController {
                             /** if the card selected exists and wasn't already chosen, play it */
                             again = false;
                             gameSession.playAssistantCard(CardSelected.getCardNickname(), receivedMessage.getNickname());
+                            virtualView.showDeckAssistant(gameSession.getPlayer(getActivePlayer()).getDeckOfPlayer());
                         } else {
                             virtualView.showMessage("\n⚠️Card already played by another player. Try again ⚠️");
                             virtualView.askAssistantCardToPlay();
@@ -633,6 +634,12 @@ public class GameController {
                                     gameSession.playCharacterCard(characterCard.getCardEffect(), Choice.getNickname(), studentIdCard, -1, studentId, null);
                                     virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore(), gameSession.getGameMode(), gameSession.getPlayer(getActivePlayer()).getTeamMate());
                                     virtualView.showCoin(gameSession.getTable().getCoinsOnTable());
+                                    for(String s : allVirtualView.keySet()) {
+                                        for (Player p : gameSession.getListOfPlayers()) {
+                                            if(s!=turnController.getActivePlayer())
+                                                allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname() + "'s ", p.getTrash(), gameSession.getDifficulty(), p.getCoinScore(), gameSession.getGameMode(), p.getTeamMate());
+                                        }
+                                    }
                                     if (acrobatIndex<max)
                                         virtualView.askId(false, characterCard, acrobatIndex, gameSession.getPlayer(getActivePlayer()).getPersonalSchool());
                                 }else{

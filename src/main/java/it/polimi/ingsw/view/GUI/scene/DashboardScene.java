@@ -934,9 +934,27 @@ public class DashboardScene extends ObservableView implements GenericScene {
                 public void handle(DragEvent event) {
                     if (event.getTransferMode() == TransferMode.MOVE) {
                     }
+                    ArrayList<Integer> possibleIslands = new ArrayList<>();
+                    if((islandMother+maxSteps)>12){
+                        for(int i=1; i<(islandMother+maxSteps-11);i++){
+                            possibleIslands.add(i);
+                        }
+                    }
                     int steps = (motherDestinationIslandId-islandMother);
-                    if(steps > 0)
-                        notifyObserver(obs -> obs.chooseMotherEarthSteps(steps,maxSteps,""));
+                    if(steps<0){
+                        for(int i=0;i<possibleIslands.size();i++){
+                            if(possibleIslands.get(i)==motherDestinationIslandId) {
+                                steps = 12 - islandMother + motherDestinationIslandId;
+                                int finalSteps = steps;
+                                notifyObserver(obs -> obs.chooseMotherEarthSteps(finalSteps,maxSteps,""));
+                            }
+                        }
+
+                    }
+                    else if(steps > 0) {
+                        int finalSteps1 = steps;
+                        notifyObserver(obs -> obs.chooseMotherEarthSteps(finalSteps1,maxSteps,""));
+                    }
                     event.consume();
                 }
             });
