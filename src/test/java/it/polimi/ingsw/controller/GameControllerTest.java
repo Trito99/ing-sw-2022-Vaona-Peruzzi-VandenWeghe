@@ -1,7 +1,6 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.message.GeneralMessage;
-import it.polimi.ingsw.message.PlayersNumberAndDifficulty;
+import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
@@ -68,6 +67,10 @@ public class GameControllerTest {
         table.addFinalStudents();
         table.generateIslandCards();
         table.generateMotherEarth();
+
+        Player player = new Player(null,PlayerNumber.PLAYER1);
+        player.setNickname("Gino");
+        allVirtualView.put(player.getNickname(), singleView);
     }
 
     @Test
@@ -274,7 +277,13 @@ public class GameControllerTest {
         //assertEquals(Difficulty.EXPERTMODE, gc.getGameSession().getDifficulty());
 
     }
+    /** @Test
+    void towerColorAndDeckChosen(){
+        ClientMessage  message = new TowerColorAndDeckChosen("Gino", TColor.WHITE, AssistantDeckName.WIZARD3);
+        gc.getMessage(message);
+        assertEquals(TColor.WHITE, gameSession.getPlayer("Gino").getTColor());
+        assertEquals(AssistantDeckName.WIZARD3, gameSession.getPlayer("Gino").getDeckOfPlayer().getDeckName());
 
-
+    } */
 
 }
