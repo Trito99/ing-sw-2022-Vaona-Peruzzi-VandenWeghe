@@ -508,9 +508,12 @@ public class CLI extends ObservableView implements View {
                 String stepsString = readInput().toUpperCase(Locale.ROOT);
                 if(stepsString.equals("CHARACTER CARD"))
                     notifyObserver(obs -> obs.chooseMotherEarthSteps(-1, maxSteps, stepsString));
-                else
-                    notifyObserver(obs -> obs.chooseMotherEarthSteps(Integer.parseInt(stepsString), maxSteps,""));
-
+                else{
+                    if (Integer.parseInt(stepsString)>0)
+                        notifyObserver(obs -> obs.chooseMotherEarthSteps(Integer.parseInt(stepsString), maxSteps,""));
+                    else
+                        ye = true;
+                }
             } catch (Exception e) {
                 out.println(WRONG_INPUT);
                 ye=true;
