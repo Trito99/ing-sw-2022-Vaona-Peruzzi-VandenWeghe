@@ -25,6 +25,9 @@ import java.util.concurrent.FutureTask;
 
 import static java.lang.System.out;
 
+/**
+ * Implements the CLI (command line interface)
+ */
 public class CLI extends ObservableView implements View {
     private final List<String> commandList;
     private static final String WRONG_INPUT = "⚠️Wrong input, Type again  ⚠️";

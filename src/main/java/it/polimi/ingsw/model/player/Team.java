@@ -4,6 +4,10 @@ import it.polimi.ingsw.model.school.TColor;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the Team consisting of two players
+ * This class is used only in COOP mode (GameMode with 4 players)
+ */
 public class Team {
     private ArrayList<Player> team = new ArrayList<>(2);
     private TColor teamColor;
@@ -27,7 +31,7 @@ public class Team {
     }
 
     /**
-     *
+     * Returns the player of the team that has the towers
      * @return the player of the team that has the towers
      */
     public Player getTeamLeader(){

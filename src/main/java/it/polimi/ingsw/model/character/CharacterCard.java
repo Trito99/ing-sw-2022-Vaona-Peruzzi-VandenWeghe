@@ -5,16 +5,23 @@ import it.polimi.ingsw.model.student.Student;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Represents the Character Card
+ */
 public class CharacterCard implements Serializable {
-
     private int costCharacter;
     private final CardEffect cardEffect;
     private boolean coinOnCard;
     private ArrayList<Student> studentsOnCard = new ArrayList<>();
     private final String description;
     private int xCardOnCard;
-    private String ImageSrc;
 
+    /**
+     * Default constructor
+     * @param costCharacter number of coin necessary to activate a certain Character Card
+     * @param cardEffect type of effect activated by the card
+     * @param description of the effect of a certain Character Card
+     */
     public CharacterCard(int costCharacter, CardEffect cardEffect, String description) {
         this.costCharacter = costCharacter;
         this.cardEffect = cardEffect;

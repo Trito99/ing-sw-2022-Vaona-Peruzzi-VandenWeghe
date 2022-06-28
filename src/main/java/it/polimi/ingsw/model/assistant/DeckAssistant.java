@@ -3,6 +3,9 @@ package it.polimi.ingsw.model.assistant;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Implements the Assistant Deck composed of the 10 Assistant cards
+ */
 public class DeckAssistant implements Serializable {
 
     private ArrayList<AssistantCard> cardsInHand;
@@ -18,7 +21,7 @@ public class DeckAssistant implements Serializable {
     }
 
     /**
-     * creates the cards of the deck
+     * Creates the 10 Assistant cards of the deck
      */
     public void generateAssistantDeck(){
         cardsInHand.add(new AssistantCard("lion", 1, 1));

@@ -22,6 +22,12 @@ import java.security.InvalidParameterException;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
+/**
+ * Manages the game evolution
+ * Reads messages from the clients
+ * Sends messages to the Virtual Views
+ */
+
 public class GameController {
     private Game gameSession;
     private int maxPlayers, roundIndex, studentId, movedStudents=0, acrobatIndex=0, round=1;
@@ -45,7 +51,7 @@ public class GameController {
     }
 
     /**
-     * Set up the initial state of the table of the match
+     * Sets up the initial state of the table of the match
      */
     public void generateTable(){
         gameSession.getTable().generateBagInit();
@@ -55,8 +61,8 @@ public class GameController {
         gameSession.getTable().addFinalStudents();
     }
 
-    /**Set up the information of the player added to the match
-     *
+    /**
+     * Sets up the information of the player added to the match
      * @param nickname nick of the player added to the match
      * @param playerDate date of the player added to the match
      * @param index index for setting the PlayerNumber
@@ -76,8 +82,8 @@ public class GameController {
      * @param nickname of the player added to the match
      * @param gameId id of the match where we want to add the player
      * @param playerDate of the player added to the match
-     * @param virtualView virtualview of the player added
-     * @return if the player joined the game
+     * @param virtualView virtual view of the player added
+     * @return if the player joined successfully the game
      */
     public boolean newPlayer(String nickname, String gameId, GregorianCalendar playerDate, VirtualView virtualView) {
         /** If the player added is the first of the match, ask him to choose the gamemode and the difficulty of the match and set up the table */
@@ -127,7 +133,7 @@ public class GameController {
     }
 
     /**
-     * Set up the cards on table for the expert mode.
+     * Sets up the cards on table for the expert mode
      */
     private void initializeExpertModeGame(){
         DeckCharacter characterDeck = new DeckCharacter();
@@ -135,8 +141,8 @@ public class GameController {
         gameSession.getTable().generateCharacterCardsOnTable(characterDeck.getCharacterCards());
     }
 
-    /** receive the messages of choice from the client
-     *
+    /**
+     * Receives messages of choice from the client
      * @param receivedMessage
      * @throws InvalidParameterException
      */
@@ -883,24 +889,52 @@ public class GameController {
         action();
     }
 
-    public void setGameState(GameState gameState){
-        this.gameState = gameState;
-    }
-
+    /**
+     * Sets the new action state
+     * @param actionState updated
+     */
     public void setActionState(ActionState actionState){
         this.actionState = actionState;
     }
 
+    /**
+     * Returns the action state
+     * @return current action state
+     */
     public ActionState getActionState() {
         return actionState;
     }
 
+    /**
+     * Returns the game state
+     * @return current game state
+     */
     public GameState getGameState() {
         return gameState;
     }
 
+    /**
+     * Sets the new Game State
+     * @param gameState updated
+     */
+    public void setGameState(GameState gameState){
+        this.gameState = gameState;
+    }
+
+    /**
+     * Returns the Game object
+     * @return Game object
+     */
     public Game getGameSession() {
         return gameSession;
+    }
+
+    /**
+     * Sets the new Game object
+     * @param gameSession updated
+     */
+    public void setGameSession(Game gameSession) {
+        this.gameSession = gameSession;
     }
 
     /**
@@ -1006,12 +1040,8 @@ public class GameController {
         }
     }
 
-    public void setGameSession(Game gameSession) {
-        this.gameSession = gameSession;
-    }
-
     /**
-     *  manage the end of turn of a player (action phase)
+     *  Manage the end of turn of a player (action phase)
      */
     private void endTurn(){
         turnController.nextPlayer(turnController.getNewPlayerOrderByName());
@@ -1031,7 +1061,7 @@ public class GameController {
     }
 
     /**
-     * Show the results of the match and disconnects the players from the game
+     * Shows the results of the match and disconnects the players from the game
      * @param disconnectedNickname nick of the player who has disconnected from the match (null if no one disconnects during the match)
      */
     public void endGame(String disconnectedNickname){
@@ -1087,7 +1117,6 @@ public class GameController {
      * METHODS USED FOR CLIENT-SERVER CONNECTION
      */
 
-
     /**
      * Disconnects all the players from the match
      */
@@ -1119,7 +1148,7 @@ public class GameController {
     }
 
     /**
-     * Send a message to all the players of the match
+     * Sends a message to all the players of the match
      */
     public void broadcastMessage(String message) {
         for (VirtualView vv : allVirtualView.values()) {
