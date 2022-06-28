@@ -5,27 +5,38 @@ import it.polimi.ingsw.message.GeneralMessage;
 import java.util.ArrayList;
 import java.util.List;
 
-/** classe Observable */
+/**
+ * Default Observable class
+ * */
 
 public class Observable {
 
     private final List<Observer> observerList = new ArrayList<>();
 
-    /** aggiungi observer */
+    /**
+     * Adds an observer
+     * @param observer the observer to be added in the list.
+     */
     public void add(Observer observer) {
         observerList.add(observer);
     }
 
-    /** rimuovi observer */
-    public void remove(Observer observer) {
-        observerList.remove(observer);
-    }
-
-    /** notifica tutti gli observers passandogli un messaggio */
+    /**
+     * Notifies all the observer with a message
+     * @param message notifed to the observers
+     */
     protected void notifyObserver(GeneralMessage message) {
         for (Observer observer : observerList) {
             observer.update(message);
         }
+    }
+
+    /**
+     * Removes an observer
+     * @param observer to remove
+     */
+    public void remove(Observer observer) {
+        observerList.remove(observer);
     }
 
 }
