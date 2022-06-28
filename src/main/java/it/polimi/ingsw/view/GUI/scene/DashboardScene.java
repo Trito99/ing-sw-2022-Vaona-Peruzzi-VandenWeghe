@@ -750,23 +750,24 @@ public class DashboardScene extends ObservableView implements GenericScene {
                         islandMap.put(island, new ArrayList<>());
                         islandMap.get(island).add(student.getIdStudent());
                     }else{
-                        islandMap.get(island).add(student.getIdStudent());
+                        if(!islandMap.get(island).contains(student.getIdStudent()));
+                            islandMap.get(island).add(student.getIdStudent());
                     }
                     switch (student.getsColour()) {
                         case GREEN:
-                            ((ImageView) island.getChildren().get(islandCard.getStudentOnIsland().indexOf(student))).setImage(new Image("/images/students/Gstudent.png"));
+                            ((ImageView) island.getChildren().get(studentsOnIsland.indexOf(student))).setImage(new Image("/images/students/Gstudent.png"));
                             break;
                         case RED:
-                            ((ImageView) island.getChildren().get(islandCard.getStudentOnIsland().indexOf(student))).setImage(new Image("/images/students/Rstudent.png"));
+                            ((ImageView) island.getChildren().get(studentsOnIsland.indexOf(student))).setImage(new Image("/images/students/Rstudent.png"));
                             break;
                         case YELLOW:
-                            ((ImageView) island.getChildren().get(islandCard.getStudentOnIsland().indexOf(student))).setImage(new Image("/images/students/Ystudent.png"));
+                            ((ImageView) island.getChildren().get(studentsOnIsland.indexOf(student))).setImage(new Image("/images/students/Ystudent.png"));
                             break;
                         case PINK:
-                            ((ImageView) island.getChildren().get(islandCard.getStudentOnIsland().indexOf(student))).setImage(new Image("/images/students/Pstudent.png"));
+                            ((ImageView) island.getChildren().get(studentsOnIsland.indexOf(student))).setImage(new Image("/images/students/Pstudent.png"));
                             break;
                         case BLUE:
-                            ((ImageView) island.getChildren().get(islandCard.getStudentOnIsland().indexOf(student))).setImage(new Image("/images/students/Bstudent.png"));
+                            ((ImageView) island.getChildren().get(studentsOnIsland.indexOf(student))).setImage(new Image("/images/students/Bstudent.png"));
                             break;
                     }
                 }
@@ -837,16 +838,16 @@ public class DashboardScene extends ObservableView implements GenericScene {
     public void setMotherId(int destinationIsland) {
         boolean present = false;
         for(IslandCard islandCard : table.getListOfIsland()){
-            if(islandCard.getImmutableIdIsland()==destinationIsland)
+            if(islandCard.getImmutableIdIsland()==destinationIsland) {
                 present = true;
+                this.motherDestinationIslandId = islandCard.getIdIsland();
+            }
         }
-        if (present)
-            this.motherDestinationIslandId = destinationIsland;
-        else{
+        if (!present)
             for (IslandCard islandCard : table.getListOfIsland()) {
-                for(int i : islandCard.getListOfMinorIslands())
+                for(int i : islandCard.getListOfMinorIslands()){
                     if (i == destinationIsland)
-                        this.motherDestinationIslandId = islandCard.getImmutableIdIsland();
+                        this.motherDestinationIslandId = islandCard.getIdIsland();
             }
         }
     }
