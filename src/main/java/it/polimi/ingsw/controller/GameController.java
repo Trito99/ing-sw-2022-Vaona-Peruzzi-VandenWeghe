@@ -550,6 +550,7 @@ public class GameController {
                                 gameSession.moveStudentFromListToIsland(gameSession.getTable().getListOfIsland().get(Choice.getId() - 1), studentId, gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getEntry());
                                 virtualView.showListOfIsland(gameSession.getTable(),gameSession.getDifficulty());
                                 virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore(), gameSession.getGameMode(), gameSession.getPlayer(getActivePlayer()).getTeamMate());
+                                virtualView.showCoin(gameSession.getTable().getCoinsOnTable());
                                 movedStudents++;
                             } else {
                                 gameSession.playCharacterCard(characterCard.getCardEffect(),Choice.getNickname(),studentId,Choice.getId(), -1, null);
