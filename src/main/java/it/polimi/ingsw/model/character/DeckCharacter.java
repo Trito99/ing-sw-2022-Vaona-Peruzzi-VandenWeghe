@@ -2,6 +2,9 @@ package it.polimi.ingsw.model.character;
 
 import java.util.ArrayList;
 
+/**
+ * Implements the Character Deck composed of the 12 Character cards
+ */
 public class DeckCharacter {
 
     private ArrayList<CharacterCard> characterCards;

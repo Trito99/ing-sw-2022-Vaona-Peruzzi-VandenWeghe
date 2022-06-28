@@ -75,6 +75,7 @@ public class CloudCards extends ObservableView implements GenericScene {
             if(event.getSource().equals(anchorPane.getChildren().get(anchorPane.getChildren().size()-i))){
                 cloudSelected = cloudCards.get(cloudCards.size()-i);
                 notifyObserver(obs -> obs.chooseCloudCard(cloudSelected.getIdCloud(), ""));
+                disabilitateCloud(true);
             }
         }
     }

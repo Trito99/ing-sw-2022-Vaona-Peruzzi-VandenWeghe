@@ -1,19 +1,22 @@
 package it.polimi.ingsw.model.character;
 
+/**
+ * Enumeration which identifies the effect of a certain Character Card
+ */
 public enum CardEffect {
     STANDARDMODE,
-    ABBOT, //ABATE
-    HOST, //OSTE
-    HERALD, //ARALDO
-    BEARER, //LATORE
-    CURATOR, //CURATRICE
-    CENTAUR, //CENTAURO
-    ACROBAT, //SALTIMBANCO
-    KNIGHT, //CAVALIERE
-    HERBALIST, //ERBORISTA
-    BARD, //BARDO
-    COURTESAN, //CORTIGIANA,
-    JUNKDEALER; //RIGATTIERE
+    ABBOT,
+    HOST,
+    HERALD,
+    BEARER,
+    CURATOR,
+    CENTAUR,
+    ACROBAT,
+    KNIGHT,
+    HERBALIST,
+    BARD,
+    COURTESAN,
+    JUNKDEALER;
 
 
     private boolean hostPlayed;
@@ -46,7 +49,7 @@ public enum CardEffect {
     }
 
     /**
-     * reset the boolean values
+     * Resets the boolean values
      */
     public void setAllFalse(){
         hostPlayed = false;

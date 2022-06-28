@@ -6,6 +6,9 @@ import java.util.*;
 
 import static java.util.Comparator.*;
 
+/**
+ * Manage the flow of the turns during the match
+ */
 public class TurnController {
     private HashMap<String, Boolean> activePlayer;
     private String playingPlayer;

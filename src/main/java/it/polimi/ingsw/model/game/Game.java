@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.game;
 
-
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.character.CardEffect;
@@ -16,6 +15,9 @@ import it.polimi.ingsw.model.table.Table;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Connects the game components
+ */
 public class Game {
     private GameMode gameMode;
     private ArrayList<Player> listOfPlayers;
@@ -25,6 +27,9 @@ public class Game {
     private ArrayList<TColor> towerColors = new ArrayList<>();
     private ArrayList<AssistantDeckName> assistantDeckNames = new ArrayList<>();
 
+    /**
+     * Default constructor
+     */
     public Game() {
         this.gameMode = null;
         this.listOfPlayers = new ArrayList<>();
@@ -51,7 +56,7 @@ public class Game {
 
 
     /**
-     * adds the possible tower's colors at the match and the assistants deck
+     * Adds the possible tower's colors at the match and the assistants deck
      */
     public void generateTowerColorsAndAssistant(){
         int playerNumber = initializePlayerNumber(gameMode);
@@ -70,7 +75,7 @@ public class Game {
     }
 
     /**
-     *
+     * Returns the number of players of a certain match
      * @param gameMode of the maatch
      * @return the number of players of the match
      */
@@ -91,9 +96,9 @@ public class Game {
     }
 
     /**
-     *
+     * Returns the Player from the list of players with the nickname selected
      * @param nickname the nickname selected
-     * @return Returns the Player from the list of players with the nickname selected
+     * @return player from the list of players with the nickname selected
      */
     public Player getPlayer(String nickname){
         int indexPlayer = getPlayerListByNickname().indexOf(nickname);
@@ -101,8 +106,8 @@ public class Game {
     }
 
     /**
-     *
-     * @return Returns an array with the nicknames of the players of the match
+     * Returns an array with the nicknames of the players of the match
+     * @return a list with the nicknames of the players of the match
      */
     public ArrayList<String> getPlayerListByNickname() {
         ArrayList<String> playerList = new ArrayList<>();
@@ -113,8 +118,8 @@ public class Game {
     }
 
 
-    /**Adds a player at the list of players of the game.
-     *
+    /**
+     * Adds a player in players' list of the game
      * @param player to add
      */
     public void addPlayer(Player player) {
@@ -146,9 +151,9 @@ public class Game {
     }
 
     /**
-     *
+     * Returns if the game is finished or not
      * @param nickname  of the player that's playing his turn.
-     * @return Return true if the game is finished. Otherwise, return false
+     * @return true if the game is finished. Otherwise, return false
      */
     public boolean gameIsFinished(String nickname) {
         Player activePlayer = getPlayer(nickname);

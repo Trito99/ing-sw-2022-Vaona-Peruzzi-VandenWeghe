@@ -13,10 +13,9 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 /**
- * This class represents the player and contains all his information.
+ * Represents the player and contains all his information
  */
 public class Player implements Serializable {
-
     private String nickname;
     private GregorianCalendar playerDate;
     private final PlayerNumber playerNumber;
@@ -29,6 +28,11 @@ public class Player implements Serializable {
     private String teamMate;
     private boolean teamLeader;
 
+    /**
+     * Default constructor
+     * @param tColor tower's color from enumeration
+     * @param playerNumber player's number from enumeration
+     */
     public Player(TColor tColor, PlayerNumber playerNumber) {
         nickname = "";
         playerDate = null;
@@ -42,8 +46,8 @@ public class Player implements Serializable {
         teamLeader = false;
     }
 
-    /** creates the player's school
-     *
+    /**
+     * Creates the player's school
      * @param table of the match
      * @param gameMode of the match
      */
@@ -77,9 +81,9 @@ public class Player implements Serializable {
     }
 
     /**
-     *
+     * Returns the Assistant Card from the list of assistant card with the name selected
      * @param assistantCard name of the assistant card
-     * @return Returns the assistant card from the list of assistant card with the name selected
+     * @return Assistant Card selected
      */
     public AssistantCard getAssistantCard(String assistantCard){
         int indexPlayer = getAssistantCardByNickname().indexOf(assistantCard);
@@ -87,8 +91,8 @@ public class Player implements Serializable {
     }
 
     /**
-     *
-     * @return Returns an array with the names of the assistant cards in hand
+     * Returns an array with the names of the assistant cards by the nickname associated to each card
+     * @return an array with the names of the assistant cards in hand
      */
     public ArrayList<String> getAssistantCardByNickname() {
         ArrayList<String> assistantCardList = new ArrayList<>();

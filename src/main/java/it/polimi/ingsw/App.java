@@ -6,7 +6,7 @@ import it.polimi.ingsw.network.StartServer;
 import java.util.Scanner;
 
 /**
- * Hello world!
+ * Used to start the client or the server
  */
 public class App {
     private static Selection choice = null;

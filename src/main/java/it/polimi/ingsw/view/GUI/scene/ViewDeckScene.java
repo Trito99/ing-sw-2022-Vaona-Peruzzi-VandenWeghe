@@ -148,33 +148,44 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
                 case "lion":
                     card1.setDisable(false);
                     card1ShadowPane.setVisible(false);
+                    break;
                 case "ostrich":
                     card2.setDisable(false);
                     card2ShadowPane.setVisible(false);
+                    break;
                 case "cat":
                     card3.setDisable(false);
                     card3ShadowPane.setVisible(false);
+                    break;
                 case "falcon":
                     card4.setDisable(false);
                     card4ShadowPane.setVisible(false);
+                    break;
                 case "fox":
                     card5.setDisable(false);
                     card5ShadowPane.setVisible(false);
+                    break;
                 case "lizard":
                     card6.setDisable(false);
                     card6ShadowPane.setVisible(false);
+                    break;
                 case "octopus":
                     card7.setDisable(false);
                     card7ShadowPane.setVisible(false);
+                    break;
                 case "dog":
                     card8.setDisable(false);
                     card8ShadowPane.setVisible(false);
+                    break;
                 case "elephant":
                     card9.setDisable(false);
                     card9ShadowPane.setVisible(false);
+                    break;
                 case "turtle":
                     card10.setDisable(false);
                     card10ShadowPane.setVisible(false);
+                    break;
+
             }
         }
     }
