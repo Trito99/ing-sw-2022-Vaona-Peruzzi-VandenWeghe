@@ -634,46 +634,94 @@ public class DashboardScene extends ObservableView implements GenericScene {
                     Pane temp = new Pane();
                     switch(islandId){
                         case 1:
+                            if(islandCard.getListOfMinorIslands().contains(2) || islandCard.getImmutableIdIsland()==2)
+                                Bridge1_2.setVisible(true);
+                            if(islandCard.getListOfMinorIslands().contains(12) || islandCard.getImmutableIdIsland()==12)
+                                Bridge12_1.setVisible(true);
                             temp = PaneIsland1;
                             break;
                         case 2:
+                            if(islandCard.getListOfMinorIslands().contains(1) || islandCard.getImmutableIdIsland()==1)
+                                Bridge1_2.setVisible(true);
+                            if(islandCard.getListOfMinorIslands().contains(3) || islandCard.getImmutableIdIsland()==3)
+                                Bridge2_3.setVisible(true);
                             temp = PaneIsland2;
                             break;
                         case 3:
+                            if(islandCard.getListOfMinorIslands().contains(2) || islandCard.getImmutableIdIsland()==2)
+                                Bridge2_3.setVisible(true);
+                            if(islandCard.getListOfMinorIslands().contains(4) || islandCard.getImmutableIdIsland()==4)
+                                Bridge3_4.setVisible(true);
                             temp = PaneIsland3;
                             break;
                         case 4:
+                            if(islandCard.getListOfMinorIslands().contains(3) || islandCard.getImmutableIdIsland()==3)
+                                Bridge3_4.setVisible(true);
+                            if(islandCard.getListOfMinorIslands().contains(5) || islandCard.getImmutableIdIsland()==5)
+                                Bridge4_5.setVisible(true);
                             temp = PaneIsland4;
                             break;
                         case 5:
+                            if(islandCard.getListOfMinorIslands().contains(4) || islandCard.getImmutableIdIsland()==4)
+                                Bridge4_5.setVisible(true);
+                            if(islandCard.getListOfMinorIslands().contains(6) || islandCard.getImmutableIdIsland()==6)
+                                Bridge5_6.setVisible(true);
                             temp = PaneIsland5;
                             break;
                         case 6:
+                            if(islandCard.getListOfMinorIslands().contains(5) || islandCard.getImmutableIdIsland()==5)
+                                Bridge5_6.setVisible(true);
+                            if(islandCard.getListOfMinorIslands().contains(7) || islandCard.getImmutableIdIsland()==7)
+                                Bridge6_7.setVisible(true);
                             temp = PaneIsland6;
                             break;
                         case 7:
+                            if(islandCard.getListOfMinorIslands().contains(6) || islandCard.getImmutableIdIsland()==6)
+                                Bridge6_7.setVisible(true);
+                            if(islandCard.getListOfMinorIslands().contains(8) || islandCard.getImmutableIdIsland()==8)
+                                Bridge7_8.setVisible(true);
                             temp = PaneIsland7;
                             break;
                         case 8:
+                            if(islandCard.getListOfMinorIslands().contains(7) || islandCard.getImmutableIdIsland()==7)
+                                Bridge7_8.setVisible(true);
+                            if(islandCard.getListOfMinorIslands().contains(9) || islandCard.getImmutableIdIsland()==9)
+                                Bridge8_9.setVisible(true);
                             temp = PaneIsland8;
                             break;
                         case 9:
+                            if(islandCard.getListOfMinorIslands().contains(8) || islandCard.getImmutableIdIsland()==8)
+                                Bridge8_9.setVisible(true);
+                            if(islandCard.getListOfMinorIslands().contains(10) || islandCard.getImmutableIdIsland()==10)
+                                Bridge9_10.setVisible(true);
                             temp = PaneIsland9;
                             break;
                         case 10:
+                            if(islandCard.getListOfMinorIslands().contains(9) || islandCard.getImmutableIdIsland()==9)
+                                Bridge9_10.setVisible(true);
+                            if(islandCard.getListOfMinorIslands().contains(11) || islandCard.getImmutableIdIsland()==11)
+                                Bridge10_11.setVisible(true);
                             temp = PaneIsland10;
                             break;
                         case 11:
+                            if(islandCard.getListOfMinorIslands().contains(10) || islandCard.getImmutableIdIsland()==10)
+                                Bridge10_11.setVisible(true);
+                            if(islandCard.getListOfMinorIslands().contains(12) || islandCard.getImmutableIdIsland()==12)
+                                Bridge11_12.setVisible(true);
                             temp = PaneIsland11;
                             break;
                         case 12:
+                            if(islandCard.getListOfMinorIslands().contains(11) || islandCard.getImmutableIdIsland()==11)
+                                Bridge11_12.setVisible(true);
+                            if(islandCard.getListOfMinorIslands().contains(1) || islandCard.getImmutableIdIsland()==1)
+                                Bridge12_1.setVisible(true);
                             temp = PaneIsland12;
                             break;
                     }
                     for(int i : islandMap.get(temp)){
-                        for(Student student : studentsOnIsland){
-                            if(student.getIdStudent()==i)
-                                studentsOnIsland.remove(student);
+                        for(int pos  = 0; pos<studentsOnIsland.size() ;pos++){
+                            if(studentsOnIsland.get(pos).getIdStudent()==i)
+                                studentsOnIsland.remove(studentsOnIsland.get(pos));
                         }
                     }
                     if(islandCard.towerIsOnIsland()){
@@ -775,9 +823,10 @@ public class DashboardScene extends ObservableView implements GenericScene {
             this.studentDestinationIslandId = destinationIsland;
         else{
             for (IslandCard islandCard : table.getListOfIsland()) {
-                for(int i : islandCard.getListOfMinorIslands())
+                for(int i : islandCard.getListOfMinorIslands()) {
                     if (i == destinationIsland)
-                        this.studentDestinationIslandId = islandCard.getImmutableIdIsland();
+                        this.studentDestinationIslandId = islandCard.getIdIsland();
+                }
             }
         }
     }
