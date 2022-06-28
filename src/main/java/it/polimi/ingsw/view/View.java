@@ -17,67 +17,163 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Map;
 
-/** la classe rappresenta la View generica che poi sarà implementata da CLI e GUI*/
+/**
+ * Represents the generic View implemented by CLI and GUI
+ */
 public interface View {
 
+    /**
+     * Shows if the login was successful
+     * @param nickname of the player
+     * @param gameId chosen by the player
+     * @param playerDate of the player
+     * @param gameNotFull false if the game selected is already full
+     */
     void showLogin(String nickname, String gameId, GregorianCalendar playerDate, boolean gameNotFull);
 
-    /** mostra un messaggio generico */
+    /**
+     * Shows a generic message
+     * @param message to be shown
+     */
     void showMessage(String message);
 
+    /**
+     * Shows a waiting message
+     * @param message to be shown
+     */
     void showWaitingMessage(String message);
 
+    /**
+     * Shows Winning message and disconnects the player
+     */
     void showWinMessage();
 
+    /**
+     * Shows Losing message and disconnects the player
+     * @param nickname of the player that won the match
+     */
     void showLoseMessage(String nickname);
 
+    /**
+     * Shows the updated School of the player
+     * @param school of the player
+     * @param nickname of the player
+     * @param trash card of the player
+     * @param difficulty of the match
+     * @param coins coinScore of the player
+     * @param gameMode of the match
+     * @param teamMate of the player (if coop mode)
+     */
     void showPersonalSchool(School school, String nickname, AssistantCard trash, Difficulty difficulty, int coins, GameMode gameMode, String teamMate);
+
+    /**
+     * Shows the updated list of islands
+     * @param table of the match
+     * @param difficulty of the match
+     */
     void showListOfIsland(Table table, Difficulty difficulty);
 
+    /**
+     * Shows the updated table of the match
+     * @param table of the match
+     * @param difficulty mode of the match
+     */
     void showTable(Table table, Difficulty difficulty);
 
+    /**
+     * Shows the updated cards in hand of the player
+     * @param deckAssistant of the player
+     */
     void showDeckAssistant(DeckAssistant deckAssistant);
 
+    /**
+     * Shows the player an error message
+     * @param message to be shown
+     */
     void showErrorMessage(String message);
 
+    /**
+     * Shows coins on table
+     * @param coins on table
+     */
     void showCoin(int coins);
 
-    /** azioni di gioco */
-
-    /** chiede al giocatore quale sarà la sua prossima azione */
+    /**
+     * Asks the player his next action.
+     */
     void askAction();
 
-    /** chiede al giocatore di connettersi al server fornendo indirizzo ip e porta */
-    void askConnect();
+    /**
+     * Asks the ip address and the server port for the connection to the server
+     */
+     void askConnect();
 
-    /** chiede al giocatore di connettersi al gioco fornendo username e game id
-     * @param lobbyMap*/
+    /**
+     * Asks the player's info and the game id that the player wants to join (or create)
+     * @param lobbyMap map for print the information of the lobby
+     */
     void askLobby(Map<String, LobbyForPrint> lobbyMap);
 
-    /** chiede numero di giocatori e la difficoltà del nuovo gioco */
+    /**
+     * Asks at the player who creates the lobby the difficulty and the gameMode
+     */
     void askPlayersNumberAndDifficulty();
 
+    /**
+     * Asks at the player to select deck and towers
+     * @param towerColors array with the colors of the towers
+     * @param assistantDeckNames array with the string's name of decks
+     */
     void askTowerColorAndDeck(ArrayList<TColor> towerColors, ArrayList<AssistantDeckName> assistantDeckNames);
 
-    /** chiede al giocatore quale carta assistente vuole giocare */
+    /**
+     * Asks the player which Assistant Card wants to play
+     */
     void askAssistantCardToPlay();
 
-    /** chiede al giocatore quale carta personaggio vuole giocare
-     * @param choice
-     * @param list*/
+    /**
+     * Asks at the player which Character Card wants to play
+     * @param choice false if the player hasn't already decided if he wants to activate a character card,
+     *               true if the player wants to play a certain character card
+     * @param coins of player
+     * @param list of Character Cards on table
+     */
     void askCharacterCardToPlay(boolean choice, int coins, ArrayList<CharacterCard> list);
 
-    void askColorToBlock(CardEffect cardEffect);
+    /**
+     * Handles the effect of the Herbalist Card and Junkdealer Card
+     * Asks the player which color wants to select
+     * @param color color of the students to block in the influence calculation or to remove from the entry
+     */
+    void askColorToBlock(CardEffect color);
 
-    /** chiede al giocatore quanti passi far fare a madre natura
-     * @param maxSteps*/
+    /**
+     * Asks the player how many steps wants to move Mother Earth
+     * @param maxSteps max steps the player can choose
+     * @param table of the match
+     * @param difficulty of the match
+     */
     void askMotherEarthSteps(int maxSteps, Table table, Difficulty difficulty);
 
-    /** chiede al giocatore di scegliere una tessera nuvola */
+    /**
+     * Asks the player which cloud wants to choose
+     * @param table of the match
+     */
     void askCloud(Table table);
 
+    /**
+     * Asks the player which students and where wants to move
+     * @param entry of the player's school
+     */
     void askPlaceAndStudentForMove(ArrayList<Student> entry);
 
+    /**
+     * Asks the player which student wants to select
+     * @param choice true for herald and curator effect, otherwise false
+     * @param characterCard played in the round
+     * @param indexAcrobat index for the acrobat effect
+     * @param school of current player
+     */
     void askId(boolean choice, CharacterCard characterCard, int indexAcrobat, School school);
 
 }

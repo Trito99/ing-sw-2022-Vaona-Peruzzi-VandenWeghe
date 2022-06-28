@@ -21,10 +21,17 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Map;
 
+/**
+ * Hides the network implementation from the controller
+ * The controller calls methods from this class instead of calling methods from the view
+ */
 public class VirtualView implements View, Observer {
     private final ClientHandlerInterface clientHandler;
 
-    /** @param clientHandler il clientHandler a cui la view invia messaggi */
+    /**
+     * VirtualView constructor
+     * @param clientHandler the view will sends messages to
+     */
     public VirtualView(ClientHandlerInterface clientHandler) {
         this.clientHandler = clientHandler;
     }
@@ -86,12 +93,10 @@ public class VirtualView implements View, Observer {
 
     @Override
     public void askAction() {
-
     }
 
     @Override
     public void askConnect() {
-
     }
 
     @Override
@@ -144,9 +149,11 @@ public class VirtualView implements View, Observer {
     }
 
 
-
-    /** riceve un messaggio aggiornato dal model e lo invia tramite il network al client  */
-    @Override
+    /**
+     * Receives an update message from the model, then sends the message over the network to the client
+     * @param message the updated message sent
+     */
+     @Override
     public void update(GeneralMessage message) {
         clientHandler.sendMessage(message);
     }

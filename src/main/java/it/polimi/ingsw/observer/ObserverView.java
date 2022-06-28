@@ -17,7 +17,7 @@ public interface ObserverView {
     void updateLobby(String nickname, GregorianCalendar playerDate, String gameID);
 
     /**
-     * Tries to connect the client (new player) to a server socket
+     * Tries to connect a client (new player) to a server socket
      */
     void updateConnect(String address, int port);
 
@@ -32,7 +32,7 @@ public interface ObserverView {
     void updateDisconnect();
 
     /**
-     * Creates player's nickname
+     * Sets the player's nickname
      */
     void createNickname(String nickname);
 

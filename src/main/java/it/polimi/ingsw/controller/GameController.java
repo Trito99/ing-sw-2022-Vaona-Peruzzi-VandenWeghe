@@ -71,12 +71,12 @@ public class GameController {
         }
     }
 
-    /** Adds a player to the list of players of the match and initialize his dashboard and the match.
-     *
-     * @param nickname of the player added to the match.
-     * @param gameId id of the match where we want to add the player.
-     * @param playerDate of the player added to the match.
-     * @param virtualView virtualview of the player added.
+    /**
+     * Adds a player to the list of players of the match and initialize his dashboard and the match
+     * @param nickname of the player added to the match
+     * @param gameId id of the match where we want to add the player
+     * @param playerDate of the player added to the match
+     * @param virtualView virtualview of the player added
      * @return if the player joined the game
      */
     public boolean newPlayer(String nickname, String gameId, GregorianCalendar playerDate, VirtualView virtualView) {

@@ -64,7 +64,7 @@ public class CLI extends ObservableView implements View {
     }
 
     /**
-     * Asks the parameter for the connection to the server
+     * Asks the ip address and the server port for the connection to the server
      */
     @Override
     public void askConnect() {
@@ -377,7 +377,7 @@ public class CLI extends ObservableView implements View {
 
     /**
      * Prints the updated cards in hand of the player
-     * @param deckAssistant deck
+     * @param deckAssistant of the player
      */
     @Override
     public void showDeckAssistant(DeckAssistant deckAssistant) {
@@ -387,10 +387,17 @@ public class CLI extends ObservableView implements View {
         }
     }
 
+    /**
+     * Prints the player an error message
+     * @param message to be shown
+     */
     @Override
     public void showErrorMessage(String message) {
     }
 
+    /**
+     * Asks the player his next action.
+     */
     @Override
     public void askAction() {
     }
@@ -404,7 +411,7 @@ public class CLI extends ObservableView implements View {
     }
 
     /**
-     * Asks at the player which Assistant Card wants to play
+     * Asks the player which Assistant Card wants to play
      */
     @Override
     public void askAssistantCardToPlay() {
@@ -573,7 +580,7 @@ public class CLI extends ObservableView implements View {
     }
 
     /**
-     * Asks the player which students wants to select
+     * Asks the player which student want to select
      * @param choice true for herald and curator effect, otherwise false
      * @param characterCard played in the round
      * @param indexAcrobat index for the acrobat effect

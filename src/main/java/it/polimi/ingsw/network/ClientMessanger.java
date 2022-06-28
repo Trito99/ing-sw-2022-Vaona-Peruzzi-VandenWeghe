@@ -13,26 +13,28 @@ import java.util.GregorianCalendar;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Gets inputs from the View and notifies the view with a certain message
+ */
 public class ClientMessanger implements ObserverView, Observer {
     private String nickname;
     private final View view;
     private final ExecutorService queue;
     private ClientSocket client;
 
-
     /**
-     * default constructor
-     * @param view
+     * Default constructor
+     * @param view to interact with
      */
     public ClientMessanger(View view){
         this.view = view;
         queue = Executors.newSingleThreadExecutor();
     }
 
-    /** try to connect a client to the socket
-     *
-     * @param address ip
-     * @param port
+    /**
+     * Tries to connect a client  (new player) to a certain server socket
+     * @param address ip to connect to
+     * @param port to connect to
      */
     public void updateConnect(String address, int port){
         try {
@@ -46,127 +48,126 @@ public class ClientMessanger implements ObserverView, Observer {
     }
 
     /**
-     * ask for the info of the lobby server
+     * Tries to log the infos of the lobby server
      */
     public void askLobbyServerInfo(){
         client.sendMessage(new LobbyServerRequest());
     }
 
-    /** setter of nickname
-     *
-     * @param nickname
+    /**
+     * Sets the player's nickname
+     * @param nickname of the player
      */
     public void createNickname(String nickname) {
         this.nickname = nickname;
     }
 
-    @Override
-    public void createPlayerDate(GregorianCalendar playerDate) {
-    }
-
-    /** communicate the gamemode and the difficulty selected
-     *
-     * @param playersNumber numbers of players
-     * @param difficulty of the match
+    /**
+     * Sends the game mode and the difficulty mode chosen by the player
+     * @param playersNumber numbers of players of the match
+     * @param difficulty mode of the match
      */
     public void choosePlayersNumberAndDifficulty(int playersNumber, Difficulty difficulty) {
         client.sendMessage(new PlayersNumberAndDifficulty(nickname, playersNumber,difficulty));
     }
 
-    /** communicate the tower and the assistant deck selected
-     *
-     * @param towerColorChosen
-     * @param assistantDeckChosen
+    /**
+     * Sends the tower's color and the Assistant Deck chosen by the player
+     * @param towerColorChosen by the player
+     * @param assistantDeckChosen by the player
      */
     public void chooseTowerColorAndDeck(TColor towerColorChosen, AssistantDeckName assistantDeckChosen) {
         client.sendMessage(new TowerColorAndDeckChosen(nickname, towerColorChosen, assistantDeckChosen));
     }
 
-    /** communicate the character card selected
-     *
-     * @param cardNickname
-     * @param choice
+    /**
+     * Sends the Character Card chosen by the player
+     * @param cardNickname name of the Character Card chosen
+     * @param choice set true when the card is activated
      */
     public void chooseCharacterCard(String cardNickname, boolean choice){
         client.sendMessage(new CharacterCardPlayed(nickname, cardNickname, choice));
     }
 
-    /** communicate the color selected
-     *
-     * @param color
+    /**
+     * Handles the effect of the Herbalist Card and Junkdealer Card
+     * Sends the color selected by the player
+     * @param color of the students to block in the influence calculation or to remove from the entry
      */
     @Override
     public void chooseColorToBlock(String color) {
         client.sendMessage(new ColorBlocked(nickname, color));
     }
 
-    /** communicate the assistant card selected
-     *
-     * @param cardNickname
+    /**
+     * Sends the Assistant Card selected chosen by the player
+     * @param cardNickname string associated to a certain Assistant Card
      */
     public void chooseAssistantCard(String cardNickname){
         client.sendMessage(new AssistantCardPlayed(nickname, cardNickname));
     }
 
-    /** communicate the cloud card selected
-     *
-     * @param id
-     * @param string
+    /**
+     * Send the Cloud Card chosen by the player
+     * @param id of the cloud card parsed
+     * @param string of a character card (can be null)
      */
     public void chooseCloudCard(int id, String string){
         client.sendMessage(new CloudChosen(nickname, id, string));
     }
 
-    /** communicate the student and the place selected
-     *
-     * @param place
-     * @param id
+    /**
+     * Sends the new position of a student chosen by the player during the Action phase
+     * @param place where the player wants to move the student
+     * @param id of the student to move
      */
     public void choosePlaceAndStudentForMove(String place, int id){
         client.sendMessage(new PlaceAndStudentForMoveChosen(nickname, place, id));
     }
 
-    /** communicate the id selected
-     *
-     * @param id
-     * @param choice
-     * @param index
-     * @param none
+    /**
+     * Sends a Character Card's effect which involves moving a certain student
+     * @param id of the student to move
+     * @param choice true for herald and curator effect, otherwise false
+     * @param index for the effect of the Acrobat Card
+     * @param none boolean used to finish the effect for the Acrobat Card (it can lasts up to 3 times)
      */
     public void chooseId(int id, boolean choice,int index, boolean none){
         client.sendMessage(new IdChosen(nickname, id, choice, index, none));
     }
 
-    /** communicate the steps selected
-     *
-     * @param steps
-     * @param maxSteps
-     * @param string
+    /**
+     * Sends the new position of Mother Earth chosen by the player
+     * @param steps of Mother Earth chosen
+     * @param maxSteps maximum number of steps in accord to the value of the last assistant card chosen by the player
+     * @param string of a character card (can be null)
      */
     public void chooseMotherEarthSteps(int steps, int maxSteps, String string) {
         client.sendMessage(new MotherEarthStepsChosen(nickname, steps, maxSteps, string));
     }
 
-
     /**
-     * try to log a player in a certain lobby
+     * Tries to log a player in a certain lobby
      */
-
     public void updateLobby(String nickname, GregorianCalendar playerDate, String lobby){
         this.nickname = nickname;
         client.sendMessage(new LoginRequest(nickname, lobby, playerDate));
     }
 
     /**
-     * disconnect a client
+     * Disconnects a client
      */
     public void updateDisconnect(){
         client.disconnect();
     }
 
+    @Override
+    public void createPlayerDate(GregorianCalendar playerDate) {
+    }
+
     /**
-     *
-     * @param message
+     * Notifies the view when a message is received
+     * @param message specific message received
      */
     @Override
     public void update(GeneralMessage message) {
