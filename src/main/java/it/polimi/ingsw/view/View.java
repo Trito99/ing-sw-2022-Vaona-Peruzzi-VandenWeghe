@@ -20,7 +20,7 @@ import java.util.Map;
 /** la classe rappresenta la View generica che poi sarà implementata da CLI e GUI*/
 public interface View {
 
-    void showLogin(String nickname, String gameId, GregorianCalendar playerDate, boolean wasJoined);
+    void showLogin(String nickname, String gameId, GregorianCalendar playerDate, boolean gameNotFull);
 
     /** mostra un messaggio generico */
     void showMessage(String message);

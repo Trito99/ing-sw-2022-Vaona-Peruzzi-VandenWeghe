@@ -30,8 +30,8 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void showLogin(String username, String gameId, GregorianCalendar playerDate, boolean wasJoined) {
-        clientHandler.sendMessage(new LoginResult(username, gameId, playerDate, wasJoined));
+    public void showLogin(String username, String gameId, GregorianCalendar playerDate, boolean gameNotFull) {
+        clientHandler.sendMessage(new LoginResult(username, gameId, playerDate, gameNotFull));
     }
 
     @Override

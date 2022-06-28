@@ -45,6 +45,9 @@ public class CLI extends ObservableView implements View {
         }*/
     }
 
+    /**
+     * Start the cli
+     */
     public void start(){
         out.println(ANSI_BLUE + "\n" +
                 "    __      ______          _                   _                      __   \n" +
@@ -60,6 +63,9 @@ public class CLI extends ObservableView implements View {
         askConnect();
     }
 
+    /**
+     * Asks the parameter for the connection to the server
+     */
     @Override
     public void askConnect() {
         boolean succeeded;
@@ -100,6 +106,10 @@ public class CLI extends ObservableView implements View {
         return input;
     }
 
+    /**
+     * asks the player info and the game id that want to join (or create)
+     * @param lobbyMap map for print the information of the lobby
+     */
     @Override
     public void askLobby(Map<String, LobbyForPrint> lobbyMap){
         boolean ye;
@@ -166,7 +176,9 @@ public class CLI extends ObservableView implements View {
     }
 
 
-
+    /**
+     * asks at the player who creates the lobby the difficulty and the gameMode
+     */
     @Override
     public void askPlayersNumberAndDifficulty() {
         int playersNumber;
@@ -200,6 +212,11 @@ public class CLI extends ObservableView implements View {
         notifyObserver(obs -> obs.choosePlayersNumberAndDifficulty(finalPlayersNumber,finalDifficulty));
     }
 
+    /**
+     * asks at the player to select deck and towers
+     * @param towerColors array with the colors of the towers
+     * @param assistantDeckNames array with the string's name of decks
+     */
     @Override
     public void askTowerColorAndDeck(ArrayList<TColor> towerColors, ArrayList<AssistantDeckName> assistantDeckNames){
         TColor towerColorChosen = null;
@@ -242,19 +259,30 @@ public class CLI extends ObservableView implements View {
     }
 
 
+    /** Print if the login was successful
+     *
+     * @param nickname of the player
+     * @param gameId chosen by the player
+     * @param playerDate of the player
+     * @param gameNotFull false if the game selected is already full
+     */
     @Override
-    public void showLogin(String nickname, String gameId, GregorianCalendar playerDate, boolean wasJoined) {
-        if (wasJoined){
+    public void showLogin(String nickname, String gameId, GregorianCalendar playerDate, boolean gameNotFull) {
+        if (gameNotFull){
             notifyObserver(obs -> obs.createNickname(nickname));
             notifyObserver(obs -> obs.createPlayerDate(playerDate));
             out.println("\nYou joined the game "+gameId+ " as "+ nickname);
         }
         else {
-            out.println("\nGame "+gameId+ " is already full.");
+            out.println("\nGame "+ gameId + " is already full.");
             notifyObserver(ObserverView::askLobbyServerInfo);
         }
     }
 
+    /**
+     *
+     * @param message to print
+     */
     @Override
     public void showMessage(String message) {
         out.println("\n" + message);
@@ -263,17 +291,28 @@ public class CLI extends ObservableView implements View {
         }
     }
 
+    /**
+     *
+     * @param message
+     */
     @Override
-    public void showWaitingMessage(String message){
+    public void showWaitingMessage(String message){              /** ???? Perchè non usiamo showMessage?*/
         out.println("\n" + message);
     }
 
+    /**
+     * Print Winning message and disconnect the player
+     */
     @Override
     public void showWinMessage() {
         out.print("\n****🎉 YOU WIN 🎉****");
         notifyObserver(ObserverView::updateDisconnect);
     }
 
+    /**Print Losing message and disconnect the player
+     *
+     * @param nickname of the player that wins the match
+     */
     @Override
     public void showLoseMessage(String nickname) {
         out.print("\n****😞 YOU LOSE 😞****");
@@ -281,7 +320,16 @@ public class CLI extends ObservableView implements View {
         notifyObserver(ObserverView::updateDisconnect);
     }
 
-
+    /**Prints the updated School of the player
+     *
+     * @param school school of player
+     * @param nickname of the player
+     * @param trash card of the player
+     * @param difficulty of the match
+     * @param coins coinScore of the player
+     * @param gameMode of the match
+     * @param teamMate of the player (if coop mode)
+     */
     @Override
     public void showPersonalSchool(School school, String nickname, AssistantCard trash, Difficulty difficulty,int coins, GameMode gameMode, String teamMate) {
 
@@ -297,11 +345,22 @@ public class CLI extends ObservableView implements View {
         out.println("\n----------------------------------------------");
     }
 
+    /** Prints the updated list of islands
+     *
+     * @param table of the match
+     * @param difficulty of the match
+     */
     public void showListOfIsland(Table table, Difficulty difficulty){
         out.print("\n**** ISLANDS ****");
         printIslandCards(table, difficulty);
         out.print("\n----------------------------------------------");
     }
+
+    /** Prints the updated table of the match
+     *
+     * @param table of the match
+     * @param difficulty of the match
+     */
     @Override
     public void showTable(Table table, Difficulty difficulty) {
 
@@ -318,6 +377,10 @@ public class CLI extends ObservableView implements View {
         out.println("\n----------------------------------------------");
     }
 
+    /** Prints the updated cards in hand of the player
+     *
+     * @param deckAssistant deck
+     */
     @Override
     public void showDeckAssistant(DeckAssistant deckAssistant) {
         out.print("\n****Your Cards in hand **** ");
@@ -327,17 +390,24 @@ public class CLI extends ObservableView implements View {
     }
 
     @Override
-    public void showErrorMessage(String message) {
+    public void showErrorMessage(String message) {      /** ???? */
     }
 
     @Override
-    public void askAction() {
+    public void askAction() {                            /** ???? */
     }
 
+    /**show coins on table
+     *
+     * @param coins on table
+     */
     @Override
     public void showCoin(int coins) {
     }
 
+    /**
+     * asks at the player which assistant card wants to play
+     */
     @Override
     public void askAssistantCardToPlay() {
         boolean ye;
@@ -354,6 +424,12 @@ public class CLI extends ObservableView implements View {
         } while (ye);
     }
 
+    /** asks at the player which character card wants to play
+     *
+     * @param choice false if the player hasn't already decided if he wants to activate a character card, true if the player wants to play a character card.
+     * @param coins of player
+     * @param list of character cards on table
+     */
     @Override
     public void askCharacterCardToPlay(boolean choice, int coins, ArrayList<CharacterCard> list) {
         boolean ye;
@@ -384,6 +460,10 @@ public class CLI extends ObservableView implements View {
         }while (ye);
     }
 
+    /**
+     * asks at the player which color wants to select
+     * @param color
+     */
     public void askColorToBlock(CardEffect color){
         boolean ye;
         do{
@@ -409,6 +489,12 @@ public class CLI extends ObservableView implements View {
         }while (ye);
     }
 
+    /** asks at the player how many steps want to move motherEarth
+     *
+     * @param maxSteps max steps the player can choose
+     * @param table of the match
+     * @param difficulty of the match
+     */
     @Override
     public void askMotherEarthSteps(int maxSteps, Table table, Difficulty difficulty) {
         boolean ye;
@@ -433,6 +519,10 @@ public class CLI extends ObservableView implements View {
 
     }
 
+    /** asks at the player which cloud wants
+     *
+     * @param table
+     */
     @Override
     public void askCloud(Table table) {
         boolean ye;
@@ -455,6 +545,10 @@ public class CLI extends ObservableView implements View {
         }while (ye);
     }
 
+    /** asks at the player which students and where want to move
+     *
+     * @param entry of the player's school
+     */
     @Override
     public void askPlaceAndStudentForMove(ArrayList<Student> entry) {
         boolean ye;
@@ -478,6 +572,14 @@ public class CLI extends ObservableView implements View {
             }
         }while(ye);
     }
+
+    /** asks at the player which students the id to select
+     *
+     * @param choice true for herald and curator effect, otherwise false
+     * @param characterCard played in the round
+     * @param indexAcrobat index for the acrobat effect
+     * @param school of current player
+     */
     @Override
     public void askId(boolean choice, CharacterCard characterCard, int indexAcrobat, School school) {
         boolean ye;
@@ -552,6 +654,10 @@ public class CLI extends ObservableView implements View {
         }while (ye);
     }
 
+    /** Print the school's hall
+     *
+     * @param school of player
+     */
     private void printHall(School school) {
         out.print(ANSI_GREEN +"\n\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.GREEN)+ ANSI_GREEN + " Green Table: " + ANSI_RESET);
         for(Student s : school.getGTable()){
@@ -579,6 +685,10 @@ public class CLI extends ObservableView implements View {
         }
     }
 
+    /** Print the school's towerZone
+     *
+     * @param towers of the school
+     */
     private void printTowers(ArrayList<Tower> towers){
         out.print("\n\nTowers: ");
         for(Tower t : towers){
@@ -587,6 +697,10 @@ public class CLI extends ObservableView implements View {
         out.print("(" + towers.size() + " towers remained)");
     }
 
+    /** Print the school's entry
+     *
+     * @param entry of the school
+     */
     private void printEntry(ArrayList<Student> entry){
         out.print("\nEntry: ");
         for(Student s : entry){
@@ -594,18 +708,31 @@ public class CLI extends ObservableView implements View {
         }
     }
 
+    /** Print the trash card of the player
+     *
+     * @param trash card
+     */
     private void printTrash(AssistantCard trash){
         out.print("\n\nTrash Card: ");
         if (trash!=null)
             out.print(trash.getAssistantName() +" (TurnValue: "+ trash.getTurnValue() + ", StepME: " + trash.getStepMotherEarth()+")");
     }
 
+    /** Print the player's coinScore
+     *
+     * @param difficulty of the match
+     * @param coins of player
+     */
     private void printCoinScore(Difficulty difficulty, int coins){
         if(difficulty.equals(Difficulty.EXPERTMODE)){
             out.print("\nCoins: "+coins);
         }
     }
 
+    /** Print the cloud cards
+     *
+     * @param cloudCards of match
+     */
     private void printClouds(ArrayList<CloudCard> cloudCards){
         int i=1;
 
@@ -623,6 +750,10 @@ public class CLI extends ObservableView implements View {
         }
     }
 
+    /** Print the character cards on table
+     *
+     * @param table of the match
+     */
     private void printCharacterCards(Table table) {
         out.print("\nCoins on table: " + table.getCoinsOnTable() + "\n");
         out.print("\n**** CHARACTER CARDS ****");
@@ -652,6 +783,10 @@ public class CLI extends ObservableView implements View {
         }
     }
 
+    /** Print the students on the character card
+     *
+     * @param characterCard
+     */
     private void printStudentsOnCard(CharacterCard characterCard){
         out.print(characterCard.getCardEffect().toString() + ": ");
         for (Student s : characterCard.getStudentsOnCard()) {
@@ -659,6 +794,11 @@ public class CLI extends ObservableView implements View {
         }
     }
 
+    /** Print the list of island of the match
+     *
+     * @param table of the match
+     * @param difficulty of the match
+     */
     private void printIslandCards(Table table, Difficulty difficulty){
         boolean forbidden = false;
 
@@ -696,9 +836,9 @@ public class CLI extends ObservableView implements View {
         out.print("\n\n");
     }
 
-    /**
+    /** return the correct string color
      *
-     * @param student
+     * @param student to color
      * @return the Ansi color to use for the "show methods"
      */
     private String getStudentAnsiColor(Student student) {
@@ -718,9 +858,9 @@ public class CLI extends ObservableView implements View {
         }
     }
 
-    /**
+    /** return the correct string color
      *
-     * @param tower
+     * @param tower to color
      * @return the Ansi color to use for the "show methods"
      */
         private String getTowerAnsiColor(Tower tower) {
