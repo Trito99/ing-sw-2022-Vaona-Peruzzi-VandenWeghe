@@ -819,12 +819,12 @@ public class DashboardScene extends ObservableView implements GenericScene {
     public void setIslandId(int destinationIsland) {
         boolean present = false;
         for(IslandCard islandCard : table.getListOfIsland()){
-            if(islandCard.getImmutableIdIsland()==destinationIsland)
+            if(islandCard.getImmutableIdIsland()==destinationIsland) {
                 present = true;
+                this.studentDestinationIslandId = islandCard.getIdIsland();
+            }
         }
-        if (present)
-            this.studentDestinationIslandId = destinationIsland;
-        else{
+        if (!present){
             for (IslandCard islandCard : table.getListOfIsland()) {
                 for(int i : islandCard.getListOfMinorIslands()) {
                     if (i == destinationIsland)
