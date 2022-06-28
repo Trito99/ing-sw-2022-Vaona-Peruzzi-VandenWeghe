@@ -24,17 +24,17 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="cloud4_4Players" fitHeight="90.0" fitWidth="92.0" layoutX="18.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="cloud3_4Players" fitHeight="90.0" fitWidth="92.0" layoutX="131.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/clouds/cloud4.png" />
+            <Image url="@../images/clouds/cloud3.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="cloud3_4Players" fitHeight="90.0" fitWidth="92.0" layoutX="131.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="cloud4_4Players" fitHeight="90.0" fitWidth="92.0" layoutX="18.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/clouds/cloud3.png" />
+            <Image url="@../images/clouds/cloud4.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -103,6 +103,26 @@
                </image>
             </ImageView>
          </children>
+      </Pane>
+      <Pane layoutX="62.0" layoutY="6.0" prefHeight="83.0" prefWidth="90.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <Pane layoutX="175.0" layoutY="5.0" prefHeight="83.0" prefWidth="92.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <Pane layoutX="130.0" layoutY="86.0" prefHeight="83.0" prefWidth="92.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <Pane layoutX="17.0" layoutY="88.0" prefHeight="83.0" prefWidth="92.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Pane>
    </children>
 </AnchorPane>
