@@ -45,6 +45,9 @@ public enum CardEffect {
         this.bearerPlayed = bearerPlayed;
     }
 
+    /**
+     * reset the boolean values
+     */
     public void setAllFalse(){
         hostPlayed = false;
         knightPlayed = false;

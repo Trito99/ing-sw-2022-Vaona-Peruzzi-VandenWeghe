@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Game {
-
-    //private int gameId;   servirebbe per partite multiple
     private GameMode gameMode;
     private ArrayList<Player> listOfPlayers;
     private Difficulty difficulty;
@@ -27,9 +25,6 @@ public class Game {
     private ArrayList<TColor> towerColors = new ArrayList<>();
     private ArrayList<AssistantDeckName> assistantDeckNames = new ArrayList<>();
 
-    /**
-     * Default constructor.
-     */
     public Game() {
         this.gameMode = null;
         this.listOfPlayers = new ArrayList<>();
@@ -55,10 +50,10 @@ public class Game {
     }
 
 
-    /** generates lists witch available tower colors and
-     *
+    /**
+     * adds the possible tower's colors at the match and the assistants deck
      */
-    public void generateTowerColors(){
+    public void generateTowerColorsAndAssistant(){
         int playerNumber = initializePlayerNumber(gameMode);
 
         if(gameMode.equals(GameMode.COOP)){
@@ -74,6 +69,11 @@ public class Game {
             assistantDeckNames.add(AssistantDeckName.values()[i]);
     }
 
+    /**
+     *
+     * @param gameMode of the maatch
+     * @return the number of players of the match
+     */
     public static int initializePlayerNumber(GameMode gameMode) {
         int playerNumber = 0;
         switch(gameMode){
@@ -113,9 +113,9 @@ public class Game {
     }
 
 
-    /**
+    /**Adds a player at the list of players of the game.
      *
-     * @param player Adds a player at the list of players of the game.
+     * @param player to add
      */
     public void addPlayer(Player player) {
         if(listOfPlayers.size()<4){
@@ -147,14 +147,14 @@ public class Game {
 
     /**
      *
-     * @param nickname is the nickname of the player that is playing his turn.
+     * @param nickname  of the player that's playing his turn.
      * @return Return true if the game is finished. Otherwise, return false
      */
     public boolean gameIsFinished(String nickname) {
         Player activePlayer = getPlayer(nickname);
-        Player teamLeader1 = null;      /** The team leader 1 is the player of the playing team that has the towers */
-        Player teamLeader2 = null;      /** The team leader 2 is the player of the not playing team that has the towers */
-        if(gameMode!=GameMode.COOP) {
+        Player teamLeader1 = null;      /** The team leader 1 is the player of the playing team that has the towers (if coop mode) */
+        Player teamLeader2 = null;      /** The team leader 2 is the player of the not playing team that has the towers (if coop mode) */
+        if(gameMode != GameMode.COOP) {
             boolean empty = false;
             for (Player player : listOfPlayers){
                 if (player.getPersonalSchool().getTowers().isEmpty())
@@ -190,7 +190,7 @@ public class Game {
         activePlayer.setCoinScore(activePlayer.getCoinScore() - decreaseValue);
     }
 
-    /**
+    /** Play the assistant cards selected
      *
      * @param assistantName  is the assistant card chosen by the Player
      * @param nickname nickname of the player that chooses the assistant card to play
@@ -262,7 +262,7 @@ public class Game {
         }
     }
 
-    /**
+    /** Play the character card selected
      *
      * @param cardEffect the effect selected
      * @param nickname the player that plays the card

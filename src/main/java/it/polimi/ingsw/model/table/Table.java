@@ -93,22 +93,13 @@ public class Table implements Serializable {
                 bag.add(new Student(s, blue));
          }
 
-        /**for (int s = 11; s < 71; s++) {
-            if (s < 23)
-                bag.add(new Student(s, green));
-            else if (s < 35)
-                bag.add(new Student(s, red));
-            else if (s < 47)
-                bag.add(new Student(s, yellow));
-            else if (s < 59)
-                bag.add(new Student(s, pink));
-            else
-                bag.add(new Student(s, blue));
-        }*/
         Collections.shuffle(bag);
     }
 
-    public void extractStudentOnCloud() {   //estrae dal sacchetto 3/4 studenti
+    /**
+     * extracts 3 or 4 students from the bag
+     */
+    public void extractStudentOnCloud() {
         for (CloudCard cloudCard : cloudNumber) {
             for (int i = 0; i < cloudCard.getNumberOfSpaces(); i++) {
                 cloudCard.getStudentOnCloud().add(bag.get(i));
@@ -121,6 +112,10 @@ public class Table implements Serializable {
         return bag;
     }
 
+    /** initialize the clouds depending on the game mode
+     *
+     * @param gm gamemode of the match
+     */
     public void generateCloudNumber(GameMode gm) {
         int x;
         int maxNumberOfStudents;
@@ -140,12 +135,18 @@ public class Table implements Serializable {
         }
     }
 
+    /**
+     * creates the islands for the match
+     */
     public void generateIslandCards() {
         for (int s = 1; s < 13; s++) {
             listOfIsland.add(new IslandCard(s));
         }
     }
 
+    /**
+     * creates mother Earth in a random position
+     */
     public void generateMotherEarth() {
         Random rn = new Random();
         int n = rn.nextInt(12) + 1;
@@ -153,6 +154,10 @@ public class Table implements Serializable {
         posMotherEarth = n;
     }
 
+    /** choose 3 random character cards for the match and initialize them
+     *
+     * @param characterCards list of all the character card
+     */
     public void generateCharacterCardsOnTable(ArrayList<CharacterCard> characterCards){
         Collections.shuffle(characterCards);
 
@@ -184,14 +189,18 @@ public class Table implements Serializable {
         }
     }
 
-    public void moveMotherEarth(int n) {
+    /** move mother earth
+     *
+     * @param steps to do
+     */
+    public void moveMotherEarth(int steps) {
         listOfIsland.get(posMotherEarth - 1).setMotherEarthOnIsland(false);
-        if ((posMotherEarth + n) > listOfIsland.size()) {
-            listOfIsland.get(posMotherEarth + n - listOfIsland.size() - 1).setMotherEarthOnIsland(true);
-            posMotherEarth = posMotherEarth + n - listOfIsland.size();
+        if ((posMotherEarth + steps) > listOfIsland.size()) {
+            listOfIsland.get(posMotherEarth + steps - listOfIsland.size() - 1).setMotherEarthOnIsland(true);
+            posMotherEarth = posMotherEarth + steps - listOfIsland.size();
         } else {
-            listOfIsland.get(posMotherEarth + n - 1).setMotherEarthOnIsland(true);
-            posMotherEarth = posMotherEarth + n;
+            listOfIsland.get(posMotherEarth + steps - 1).setMotherEarthOnIsland(true);
+            posMotherEarth = posMotherEarth + steps;
         }
     }
 
@@ -339,7 +348,11 @@ public class Table implements Serializable {
         }
     }
 
-
+    /**
+     *
+     * @param game
+     * @return the player that's winning
+     */
     public Player playerIsWinning(Game game) {  //calcola influenza torri sul tavolo e restituisce quello con più influenza
         ArrayList<Team> teams = game.getTeams();
         int countGrey = 0;
@@ -500,6 +513,11 @@ public class Table implements Serializable {
         return null;
     }
 
+    /**
+     *
+     * @param game
+     * @return the winner player
+     */
     private Player returnWinner(Game game) {
         Player winner = null;
         Player alsoWinner = null;

@@ -20,21 +20,16 @@ public class Player implements Serializable {
     private String nickname;
     private GregorianCalendar playerDate;
     private final PlayerNumber playerNumber;
-    private TurnState turnState;
     private School personalSchool;
     private DeckAssistant deckOfPlayer;
-    private AssistantCard trash;          //= Ultima carta nella pila degli scarti
+    private AssistantCard trash;
     private int coinScore;
     private TColor tColor;
     private int influenceOnIsland;
     private String teamMate;
     private boolean teamLeader;
 
-
-    /**
-     * Default constructor.
-     */
-    public Player(TColor tColor, PlayerNumber playerNumber) {   //+ nickname e data
+    public Player(TColor tColor, PlayerNumber playerNumber) {
         nickname = "";
         playerDate = null;
         this.playerNumber = playerNumber;
@@ -47,6 +42,11 @@ public class Player implements Serializable {
         teamLeader = false;
     }
 
+    /** creates the player's school
+     *
+     * @param table of the match
+     * @param gameMode of the match
+     */
     public void generateSchool(Table table, GameMode gameMode) {
         int i = 0, t = 0;
         switch (gameMode) {
@@ -73,7 +73,6 @@ public class Player implements Serializable {
         personalSchool.getProfOfPlayer().add(new Prof(SColor.YELLOW));
         personalSchool.getProfOfPlayer().add(new Prof(SColor.PINK));
         personalSchool.getProfOfPlayer().add(new Prof(SColor.BLUE));
-
 
     }
 
@@ -121,14 +120,6 @@ public class Player implements Serializable {
 
     public PlayerNumber getPlayerNumber() {
         return playerNumber;
-    }
-
-    public TurnState getTurnState() {
-        return turnState;
-    }
-
-    public void setTurnState(TurnState turnState) {
-        this.turnState = turnState;
     }
 
     public AssistantCard getTrash() {

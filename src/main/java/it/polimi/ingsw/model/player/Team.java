@@ -26,6 +26,10 @@ public class Team {
         this.teamColor = teamColor;
     }
 
+    /**
+     *
+     * @return the player of the team that has the towers
+     */
     public Player getTeamLeader(){
         Player teamLeader = null;
         for(Player player : team){

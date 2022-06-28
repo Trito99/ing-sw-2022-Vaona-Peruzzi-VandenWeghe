@@ -166,7 +166,7 @@ public class GameController {
                             break;
                     }
                     gameSession.getTable().generateCloudNumber(gameSession.getGameMode());
-                    gameSession.generateTowerColors();
+                    gameSession.generateTowerColorsAndAssistant();
                     virtualView.askTowerColorAndDeck(gameSession.getTowerColors(),gameSession.getAssistantDeckNames());
                 }
                 if(receivedMessage.getMessageType() == MessageType.TOWER_COLOR_AND_DECK_CHOSEN){

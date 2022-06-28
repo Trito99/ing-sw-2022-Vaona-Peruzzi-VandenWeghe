@@ -17,6 +17,9 @@ public class DeckAssistant implements Serializable {
         return cardsInHand;
     }
 
+    /**
+     * creates the cards of the deck
+     */
     public void generateAssistantDeck(){
         cardsInHand.add(new AssistantCard("lion", 1, 1));
         cardsInHand.add(new AssistantCard("ostrich", 1, 2));

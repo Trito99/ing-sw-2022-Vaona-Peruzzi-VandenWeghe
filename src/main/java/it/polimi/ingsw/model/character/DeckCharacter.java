@@ -14,6 +14,9 @@ public class DeckCharacter {
         return (ArrayList<CharacterCard>) characterCards.clone();
     }
 
+    /**
+     * creates the cards of the deck
+     */
     public void generateCharacterDeck(){
         characterCards.add(new CharacterCard(1, CardEffect.ABBOT, "Take one of the students on this card and move them on an island of your choice."));
         characterCards.add(new CharacterCard(2, CardEffect.HOST,"During this round, you take the control of the professors even if you have the same number of students of others players."));

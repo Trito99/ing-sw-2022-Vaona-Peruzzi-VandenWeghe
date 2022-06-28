@@ -134,20 +134,6 @@ public class PlayerTest {
     }
 
    @Test
-   public void turnStateOfPlayerTest(){
-       Player player = new Player(TColor.BLACK, PlayerNumber.PLAYER1);
-       player.setTurnState(TurnState.PLANNING);
-       assertNotNull(player.getTurnState());
-       assertEquals(TurnState.PLANNING, player.getTurnState());
-       player.setTurnState(TurnState.ACTION);
-       assertNotNull(player.getTurnState());
-       assertEquals(TurnState.ACTION, player.getTurnState());
-       player.setTurnState(TurnState.NOTYOURTURN);
-       assertNotNull(player.getTurnState());
-       assertEquals(TurnState.NOTYOURTURN, player.getTurnState());
-   }
-
-   @Test
    public void deckOfPlayerTest(){
        Player player = new Player(TColor.BLACK, PlayerNumber.PLAYER1);
        DeckAssistant deckOfPlayer = new DeckAssistant(AssistantDeckName.WIZARD1);
