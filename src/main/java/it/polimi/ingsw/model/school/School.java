@@ -244,12 +244,11 @@ public class School implements Serializable {
      * @return true if there is the prof of color "color" in the school, otherwise return false
      */
     public boolean getProfInHall(SColor color){
-        boolean x=false;
         for(Prof p : profOfPlayer) {
             if (p.getSColour().equals(color))
                 return p.getIsInHall();
         }
-        return x;
+        return false;
     }
 
     public ArrayList<Tower> getTowers() {

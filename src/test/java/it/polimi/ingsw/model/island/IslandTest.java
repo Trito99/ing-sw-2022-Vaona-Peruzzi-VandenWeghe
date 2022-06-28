@@ -586,8 +586,9 @@ public class IslandTest {
             table.moveMotherEarth(1);
          }
 
+         /** ??? */
          for (IslandCard islandCard: table.getListOfIsland()){
-            //table.joinIsland(table.getListOfIsland());
+            table.joinIsland(table.getListOfIsland());
          }
 
 
@@ -612,13 +613,13 @@ public class IslandTest {
          for(int i=0;i<game.getListOfPlayers().size();i++)
             showPersonalSchool(game.getListOfPlayers().get(i).getPersonalSchool(),game.getListOfPlayers().get(i).getPlayerNumber().toString(),null);
 
-
-         /**table.moveMotherEarth(13-table.getPosMotherEarth());
+   /** ????*/
+         table.moveMotherEarth(13-table.getPosMotherEarth());
          for (IslandCard islandCard: table.getListOfIsland()){
             int size=0;
             Player prev=null;
-            if(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE) !=null && islandCard.towerIsOnIsland()){
-               if(!(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE).getTColor().equals(islandCard.getTowerOnIsland().getTColour()))) {
+            if(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE, game.getListOfPlayers().get(0), game.getGameMode()) !=null && islandCard.towerIsOnIsland()){
+               if(!(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE, game.getListOfPlayers().get(0), game.getGameMode()).getTColor().equals(islandCard.getTowerOnIsland().getTColour()))) {
                   System.out.println(12345678);
                   for (Player player : game.getListOfPlayers()) {
                      if (islandCard.towerIsOnIsland()) {
@@ -630,9 +631,9 @@ public class IslandTest {
                         }
                      }
                   }
-                  islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE);
+                  islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE,game.getListOfPlayers().get(0), game.getGameMode(), game.getTeams());
                   assertEquals(size+1,prev.getPersonalSchool().getTowers().size());
-               }else if (islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE).getTColor().equals(islandCard.getTowerOnIsland().getTColour())){
+               }else if (islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE, game.getListOfPlayers().get(0), game.getGameMode()).getTColor().equals(islandCard.getTowerOnIsland().getTColour())){
                   for (Player player : game.getListOfPlayers()) {
                      if (islandCard.towerIsOnIsland()) {
                         if (player.getTColor() == islandCard.getTowerOnIsland().getTColour()){
@@ -641,16 +642,16 @@ public class IslandTest {
                         }
                      }
                   }
-                  islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE);
+                  islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE,game.getListOfPlayers().get(0), game.getGameMode(), game.getTeams());
                   assertEquals(size,prev.getPersonalSchool().getTowers().size());
                }
             }else
-               islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE);
+               islandCard.buildTowerOnIsland(game.getListOfPlayers(),CardEffect.STANDARDMODE,game.getListOfPlayers().get(0), game.getGameMode(), game.getTeams());
 
-            if(islandCard.towerIsOnIsland() && islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE)!=null)
-               assertEquals(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE).getTColor(),islandCard.getTowerOnIsland().getTColour());
+            if(islandCard.towerIsOnIsland() && islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE, game.getListOfPlayers().get(0), game.getGameMode())!=null)
+               assertEquals(islandCard.calculateInfluence(game.getListOfPlayers(),CardEffect.STANDARDMODE, game.getListOfPlayers().get(0), game.getGameMode()).getTColor(),islandCard.getTowerOnIsland().getTColour());
             table.moveMotherEarth(1);
-         }*/
+         }
       }
    }
 
