@@ -401,9 +401,12 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     public void updateTable(Table table){
         this.table = table;
-        coinTextTable.setText(String.valueOf(table.getCoinsOnTable()));
         cloudController.updateStudents(table.getCloudNumber());
         updateIslands(table.getListOfIsland());
+    }
+
+    public void updateCoinOnTable(int coins){
+        coinTextTable.setText(String.valueOf(coins));
     }
 
     public void updatePersonalSchool(SchoolController controller, GameMode gameMode, String teamMate) throws IOException {
