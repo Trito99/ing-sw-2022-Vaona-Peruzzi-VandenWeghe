@@ -5,10 +5,15 @@ import it.polimi.ingsw.message.GeneralMessage;
 
 public interface ClientHandlerInterface {
 
-    /** invia messaggio al client */
+    /** send a message to the client
+     *
+     * @param message
+     */
     void sendMessage(GeneralMessage message);
 
-    /** disconnette la socket dal server */
+    /**
+     * disconnect the socket from the server
+     */
     void disconnect();
 
 }

@@ -20,13 +20,20 @@ public class ClientMessanger implements ObserverView, Observer {
     private ClientSocket client;
 
 
-    /** costruttore di default */
+    /**
+     * default constructor
+     * @param view
+     */
     public ClientMessanger(View view){
         this.view = view;
         queue = Executors.newSingleThreadExecutor();
     }
 
-    /** prova a connettere un client alla socket */
+    /** try to connect a client to the socket
+     *
+     * @param address ip
+     * @param port
+     */
     public void updateConnect(String address, int port){
         try {
             client = new ClientSocket(address, port);
@@ -38,11 +45,17 @@ public class ClientMessanger implements ObserverView, Observer {
         }
     }
 
+    /**
+     * ask for the info of the lobby server
+     */
     public void askLobbyServerInfo(){
         client.sendMessage(new LobbyServerRequest());
     }
 
-    /** crea/aggiorna il nickname se un giocatore era già presente con lo stesso nome*/
+    /** setter of nickname
+     *
+     * @param nickname
+     */
     public void createNickname(String nickname) {
         this.nickname = nickname;
     }
@@ -51,55 +64,110 @@ public class ClientMessanger implements ObserverView, Observer {
     public void createPlayerDate(GregorianCalendar playerDate) {
     }
 
-    /** comunica il numero di giocatori del gioco in corso */
+    /** communicate the gamemode and the difficulty selected
+     *
+     * @param playersNumber numbers of players
+     * @param difficulty of the match
+     */
     public void choosePlayersNumberAndDifficulty(int playersNumber, Difficulty difficulty) {
         client.sendMessage(new PlayersNumberAndDifficulty(nickname, playersNumber,difficulty));
     }
 
+    /** communicate the tower and the assistant deck selected
+     *
+     * @param towerColorChosen
+     * @param assistantDeckChosen
+     */
     public void chooseTowerColorAndDeck(TColor towerColorChosen, AssistantDeckName assistantDeckChosen) {
         client.sendMessage(new TowerColorAndDeckChosen(nickname, towerColorChosen, assistantDeckChosen));
     }
 
+    /** communicate the character card selected
+     *
+     * @param cardNickname
+     * @param choice
+     */
     public void chooseCharacterCard(String cardNickname, boolean choice){
         client.sendMessage(new CharacterCardPlayed(nickname, cardNickname, choice));
     }
 
+    /** communicate the color selected
+     *
+     * @param color
+     */
     @Override
     public void chooseColorToBlock(String color) {
         client.sendMessage(new ColorBlocked(nickname, color));
     }
 
+    /** communicate the assistant card selected
+     *
+     * @param cardNickname
+     */
     public void chooseAssistantCard(String cardNickname){
         client.sendMessage(new AssistantCardPlayed(nickname, cardNickname));
     }
 
+    /** communicate the cloud card selected
+     *
+     * @param id
+     * @param string
+     */
     public void chooseCloudCard(int id, String string){
         client.sendMessage(new CloudChosen(nickname, id, string));
     }
 
+    /** communicate the student and the place selected
+     *
+     * @param place
+     * @param id
+     */
     public void choosePlaceAndStudentForMove(String place, int id){
         client.sendMessage(new PlaceAndStudentForMoveChosen(nickname, place, id));
     }
 
+    /** communicate the id selected
+     *
+     * @param id
+     * @param choice
+     * @param index
+     * @param none
+     */
     public void chooseId(int id, boolean choice,int index, boolean none){
         client.sendMessage(new IdChosen(nickname, id, choice, index, none));
     }
 
+    /** communicate the steps selected
+     *
+     * @param steps
+     * @param maxSteps
+     * @param string
+     */
     public void chooseMotherEarthSteps(int steps, int maxSteps, String string) {
         client.sendMessage(new MotherEarthStepsChosen(nickname, steps, maxSteps, string));
     }
 
 
-    /** cerca di loggare un giocatore ad una data lobby */
+    /**
+     * try to log a player in a certain lobby
+     */
+
     public void updateLobby(String nickname, GregorianCalendar playerDate, String lobby){
         this.nickname = nickname;
         client.sendMessage(new LoginRequest(nickname, lobby, playerDate));
     }
 
+    /**
+     * disconnect a client
+     */
     public void updateDisconnect(){
         client.disconnect();
     }
 
+    /**
+     *
+     * @param message
+     */
     @Override
     public void update(GeneralMessage message) {
         switch (message.getMessageType()) {

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.message;
 
 public enum MessageType {
-    //messaggi del gioco
+    /** messages of the game */
     LOGIN,
     LOGIN_RESULT,
     PLAYERS_NUMBER_AND_DIFFICULTY_CHOSEN,
@@ -14,29 +14,21 @@ public enum MessageType {
     ID_CHOSEN,
     TOWER_COLOR_AND_DECK_CHOSEN,
 
-    //messaggi di connessione al server
+    /** messagges of connection with the server */
     SUCCESSFUL_HOST,
     STRING_MESSAGE,
     WAITING_MESSAGE,
     LOBBY_SERVER_REQUEST,
     LOBBY_SERVER_INFO,
 
-    //messaggi del turno
-    END,
-
-    //setup
-
-    //richiesta di azioni es. tutte le show
-    ASK_PLAYER,
-    SHOW_PLAYER,
-    SHOW_PLAYER_INFLUENCE,
+    /** Action request */
     SHOW_TABLE,
     SHOW_PERSONAL_SCHOOL,
     SHOW_ASSISTANT_DECK,
     SHOW_LIST_OF_ISLANDS,
     SHOW_COIN,
 
-    //azioni
+    /** Action */
     PLAY_CHARACTER_CARD,
     PLAY_ASSISTANT_CARD,
     CHOOSE_CLOUD_CARD,
@@ -46,13 +38,7 @@ public enum MessageType {
     CHOOSE_COLOR_TO_BLOCK,
     CHOOSE_TOWER_COLOR_AND_DECK,
 
-
-    //messaggi intermediari
-    WIN_PROF,
-    WIN_TOWER,
-
-    //altri
-    OTHER_PLAYER_TURN,
+    /** others */
     ERROR,
     WIN,
     LOSE

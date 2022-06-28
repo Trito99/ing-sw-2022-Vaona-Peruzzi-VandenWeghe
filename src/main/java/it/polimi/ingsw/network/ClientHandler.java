@@ -19,8 +19,8 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
     private final Object lockSendMessage;
     private final Object lockHandleMessage;
 
-    /** costruttore di default */
-    /**
+    /** Default constructor
+     *
      * @param client la socket client a cui vengono inviati i messaggi
      * @param lobbyServer la lobby server di default
      */
@@ -39,7 +39,9 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
         }
     }
 
-    /** disconnete la socket dal server */
+    /**
+     * disconnect the socket from the server
+     */
     public void disconnect() {
         try {
             if (!client.isClosed()) {
@@ -53,7 +55,10 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
         lobbyServer.leaveLobby(gameId);
     }
 
-    /** invia messaggio al client */
+    /** send a message to the client
+     *
+     * @param message
+     */
     public void sendMessage(GeneralMessage message) {
         try{
             synchronized (lockSendMessage) {
@@ -73,7 +78,9 @@ public class ClientHandler implements ClientHandlerInterface, Runnable {
 
     }
 
-    /** gestisce messaggio inviato dal client */
+    /**
+     * handles message sent by the client
+     */
     private void handleMessage() {
         String nickname = null;
         try {

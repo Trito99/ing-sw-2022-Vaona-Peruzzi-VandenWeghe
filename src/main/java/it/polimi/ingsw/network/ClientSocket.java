@@ -32,7 +32,10 @@ public class ClientSocket extends Observable {
         }
     }
 
-    /** invia un messaggio al server */
+    /** send a message to the server
+     *
+     * @param message
+     */
     public void sendMessage(ClientMessage message) {
         try {
             output.writeObject(message);
@@ -43,7 +46,9 @@ public class ClientSocket extends Observable {
     }
 
 
-    /** ascolta messaggi dal server */
+    /**
+     * listen messages from the server
+     */
     public void listen() {
         queue.execute(() ->
         {
@@ -60,7 +65,9 @@ public class ClientSocket extends Observable {
     }
 
 
-    /** disconnette il client dal server */
+    /**
+     * disconnect client from the server
+     */
     public void disconnect(){
         if (!client.isClosed()) {
             queue.shutdownNow();

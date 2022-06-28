@@ -22,7 +22,12 @@ public class Lobby implements Serializable {
         this.gameId = gameId;
     }
 
-    /** aggiungo nuovo giocatore alla Lobby */
+    /** add a new player to the lobby
+     *
+     * @param nickname of new player
+     * @param playerDate
+     * @param clientHandler
+     */
     public void addPlayer(String nickname, GregorianCalendar playerDate, ClientHandler clientHandler){
         VirtualView virtualView = new VirtualView(clientHandler);
 
@@ -35,6 +40,7 @@ public class Lobby implements Serializable {
                 System.out.println(n);
             }
             else{
+                /** case name with the same nickname */
                 while (clientHandlerMap.containsValue(n)) {
                     n = nickname + "(" + i + ")";
                     i++;
@@ -53,23 +59,36 @@ public class Lobby implements Serializable {
     }
 
 
-    /** controlla se il gioco è inattivo o in corso ----> return se il gioco è già cominciato */
+    /**
+     *
+     * @return true if the game is started
+     */
     public boolean isGameStarted(){
         return gameController.isGameStarted();
     }
 
-    /** return numero di giocatori connessi */
+    /**
+     *
+     * @return number of player connected
+     */
     public int currentPlayers(){
         return clientHandlerMap.size();
     }
 
 
+    /** remove a client handler from the map
+     *
+     * @param clientHandler
+     */
     public void remove(ClientHandler clientHandler){
         clientHandlerMap.remove(clientHandler);
     }
 
 
-    /** passa messaggio al GameController*/
+    /** send the message to the gameController
+     *
+     * @param clientMessage
+     */
     public void getMessage(ClientMessage clientMessage){
         gameController.getMessage(clientMessage);
 
