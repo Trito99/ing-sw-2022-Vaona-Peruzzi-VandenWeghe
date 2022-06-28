@@ -187,6 +187,7 @@ public class TableTest{
 
         assertNotNull(table.getCharacterCardsOnTable().get(0));
         assertNotNull(table.getCharacterCardsOnTable().get(2));
+        assertNotNull(table.getCharacterCard(table.getCharacterCardsOnTable().get(0).getCardEffect()));
         for (CharacterCard card : table.getCharacterCardsOnTable()) {
             cardsOnTable++;
             assertNotNull(card);

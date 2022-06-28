@@ -15,6 +15,11 @@ public class TurnController {
     private ArrayList<String> newPlayerOrderByName;
     private ArrayList<Player> newPlayerOrder;
 
+
+    /**
+     * TurnController constructor
+     * @param gameController associeted to a turnController
+     */
     public TurnController(GameController gameController){
         playingPlayer = YoungestPlayer(gameController.getGameSession().getListOfPlayers()).getNickname();
         playerOrder = new ArrayList<>();
@@ -30,8 +35,8 @@ public class TurnController {
         }
     }
 
-    /** (At the first round, in the planning phase, the youngest player moves first.)
-     *
+    /**
+     * Identifies the youngest player whom, in the first round, moves first (planning phase)
      * @param listOfPlayers list of the players of the match
      * @return the youngest player of the match.
      */
@@ -47,8 +52,8 @@ public class TurnController {
     }
 
 
-    /** changes the active player
-     *
+    /**
+     * Changes the active player
      * @param playerOrderByName list of the nickname of the players
      */
     public void nextPlayer(ArrayList<String> playerOrderByName){
@@ -60,8 +65,9 @@ public class TurnController {
         playingPlayer = playerOrderByName.get(player);
     }
 
-    /** in the Action phase, the player turns are in ascendant order of their turnValue (value played with the assistant card).
-     *
+    /**
+     * In Action phase, the player turns are in ascendant order of their turnValue (value played with the assistant card)
+     * This function change the order of the players for each turn
      */
     public void changeOrder(){
         ArrayList<Player>  NewPlayerOrder = (ArrayList<Player>) playerOrder.clone();
@@ -72,10 +78,28 @@ public class TurnController {
         newPlayerOrder = NewPlayerOrder;
     }
 
+    /**
+     * @return active player's nickname
+     */
     public String getActivePlayer() {
         return playingPlayer;
     }
+
+    /**
+     * @return a list with player's nicknames when the turn starts (before having played an assistant card)
+     */
     public ArrayList<String> getPlayerOrderByName() {return playerOrderByName;}
+
+    /**
+     * @return a list with player's nicknames with the new order (after having played an assistant card)
+     */
     public ArrayList<String> getNewPlayerOrderByName() {return newPlayerOrderByName;}
-    public void setPlayingPlayer(String nickname){ this.playingPlayer=nickname; }
+
+    /**
+     * Sets the nickname of the player who's going to play
+     * @param nickname of the player who's next to play
+     */
+    public void setPlayingPlayer(String nickname){
+        this.playingPlayer = nickname; }
+
 }

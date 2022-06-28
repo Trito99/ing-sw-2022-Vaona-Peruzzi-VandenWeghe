@@ -81,6 +81,17 @@ public class PlayerTest {
         assertEquals(17, player.getPlayerDate().get(DAY_OF_MONTH));
         assertEquals(PlayerNumber.PLAYER1, player.getPlayerNumber());
 
+        Player player2 = new Player(TColor.WHITE, PlayerNumber.PLAYER2);
+        player2.setNickname("player2");
+        player.setTeamLeader(true);
+        player2.setTeamLeader(false);
+        player.setTeamMate(player2.getNickname());
+        player2.setTeamMate(player.getNickname());
+
+        assertEquals(true, player.isTeamLeader());
+        assertEquals(false, player2.isTeamLeader());
+        assertEquals("player2", player.getTeamMate());
+
    }
 
    @Test

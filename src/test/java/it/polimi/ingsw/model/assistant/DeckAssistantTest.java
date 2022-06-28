@@ -26,6 +26,9 @@ public class DeckAssistantTest {
         assertEquals(10, countCard);  /**Checks if are generated 10 cards and with the correct values */
         assertEquals(30, countStepMotherEarth);
         assertEquals(55, countTurnValue);
+        assertEquals(AssistantDeckName.WIZARD1, deckAssistant.getDeckName());
+        deckAssistant.setName(AssistantDeckName.WIZARD2);
+        assertEquals(AssistantDeckName.WIZARD2, deckAssistant.getDeckName());
 
     }
 

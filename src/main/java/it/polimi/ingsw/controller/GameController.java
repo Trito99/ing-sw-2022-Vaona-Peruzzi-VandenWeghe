@@ -34,6 +34,9 @@ public class GameController {
     private ActionState savedActionState;
 
 
+    /**
+     * GameController constructor
+     */
     public GameController(){
         this.allVirtualView = new HashMap<>();
         gameSession = new Game();
@@ -74,7 +77,7 @@ public class GameController {
      * @param gameId id of the match where we want to add the player.
      * @param playerDate of the player added to the match.
      * @param virtualView virtualview of the player added.
-     * @return  ???
+     * @return if the player joined the game
      */
     public boolean newPlayer(String nickname, String gameId, GregorianCalendar playerDate, VirtualView virtualView) {
         /** If the player added is the first of the match, ask him to choose the gamemode and the difficulty of the match and set up the table */
@@ -1027,8 +1030,8 @@ public class GameController {
         action();
     }
 
-    /** Show the results of the match and disconnects the players from the game
-     *
+    /**
+     * Show the results of the match and disconnects the players from the game
      * @param disconnectedNickname nick of the player who has disconnected from the match (null if no one disconnects during the match)
      */
     public void endGame(String disconnectedNickname){
@@ -1081,8 +1084,9 @@ public class GameController {
 
 
     /**
-     * METODI USATI PER CONNESSIONE CLIENT - SERVER
-     * */
+     * METHODS USED FOR CLIENT-SERVER CONNECTION
+     */
+
 
     /**
      * Disconnects all the players from the match
@@ -1094,7 +1098,6 @@ public class GameController {
     }
 
     /**
-     *
      * @return true if the game is started
      */
     public boolean isGameStarted(){
@@ -1102,17 +1105,22 @@ public class GameController {
     }
 
     /**
-     * Returns the player that's moving
+     * @return the player (nickname) that's moving
      */
     public String getActivePlayer(){
         return turnController.getActivePlayer();
     }
 
+    /**
+     * @return allVirtualView
+     */
     public HashMap<String, VirtualView> getAllVirtualView() {
         return allVirtualView;
     }
 
-    /** Send a message to all the players of the match */
+    /**
+     * Send a message to all the players of the match
+     */
     public void broadcastMessage(String message) {
         for (VirtualView vv : allVirtualView.values()) {
             vv.showMessage(message);

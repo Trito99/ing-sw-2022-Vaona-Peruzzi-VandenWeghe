@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.DeckCharacter;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
+import it.polimi.ingsw.model.player.Team;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.SColor;
@@ -33,15 +34,15 @@ class GameTest {
 
     @Test
     void gameIsFinished() {
-        Player player = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
-        player.setNickname("Gino");
-        game.addPlayer(player);
+        Player player1 = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
+        player1.setNickname("Gino");
+        game.addPlayer(player1);
         Table table = new Table();
-        DeckAssistant deckAssistant = new DeckAssistant(AssistantDeckName.WIZARD1);
+        DeckAssistant deckAssistant1 = new DeckAssistant(AssistantDeckName.WIZARD1);
         table.generateIslandCards();
 
         game.setTable(table);
-        game.getPlayer("Gino").setDeckOfPlayer(deckAssistant);
+        game.getPlayer("Gino").setDeckOfPlayer(deckAssistant1);
         game.getPlayer("Gino").getDeckOfPlayer().getCardsInHand().clear();
 
         game.getTable().getBag().add(new Student(0, SColor.GREEN));
@@ -67,6 +68,65 @@ class GameTest {
 
         game.getPlayer("Gino").getPersonalSchool().addTower(TColor.WHITE);
 
+        DeckAssistant deckAssistant2 = new DeckAssistant(AssistantDeckName.WIZARD2);
+        DeckAssistant deckAssistant3 = new DeckAssistant(AssistantDeckName.WIZARD3);
+        DeckAssistant deckAssistant4 = new DeckAssistant(AssistantDeckName.WIZARD4);
+
+        player1.setTeamMate("Pino");
+        player1.setTeamLeader(true);
+        Player player2 = new Player(TColor.WHITE, PlayerNumber.PLAYER2);
+        player2.setNickname("Pino");
+        player2.setTeamMate("Gino");
+        player2.setTeamLeader(false);
+        Team team1 = new Team(player1, player2, TColor.WHITE);
+
+
+        Player player3 = new Player(TColor.BLACK, PlayerNumber.PLAYER3);
+        player3.setNickname("Albano");
+        player3.setTeamMate("Romina");
+        player3.setTeamLeader(true);
+
+        Player player4 = new Player(TColor.BLACK, PlayerNumber.PLAYER4);
+        player4.setNickname("Romina");
+        player4.setTeamMate("Albano");
+        player4.setTeamLeader(false);
+        Team team2 = new Team(player3,player4,TColor.BLACK);
+
+        game.addPlayer(player2);
+        game.addPlayer(player3);
+        game.addPlayer(player4);
+        game.getTeams().add(team1);
+        game.getTeams().add(team2);
+        game.setGameMode(GameMode.COOP);
+
+        game.getPlayer("Pino").setDeckOfPlayer(deckAssistant2);
+        game.getPlayer("Pino").getDeckOfPlayer().getCardsInHand().clear();
+        game.getPlayer("Albano").setDeckOfPlayer(deckAssistant3);
+        game.getPlayer("Albano").getDeckOfPlayer().getCardsInHand().clear();
+        game.getPlayer("Romina").setDeckOfPlayer(deckAssistant4);
+        game.getPlayer("Romina").getDeckOfPlayer().getCardsInHand().clear();
+
+        game.getPlayer("Pino").getDeckOfPlayer().getCardsInHand().add(new AssistantCard("Cat",3,4));
+        game.getPlayer("Albano").getDeckOfPlayer().getCardsInHand().add(new AssistantCard("Turtle",3,4));
+        game.getPlayer("Romina").getDeckOfPlayer().getCardsInHand().add(new AssistantCard("Octopus",3,4));
+
+        game.getPlayer("Albano").getPersonalSchool().addTower(TColor.BLACK);
+
+        assertEquals(false, game.gameIsFinished(player1.getNickname()));
+
+        game.playAssistantCard("lion", "Gino");
+        for(AssistantCard a : player1.getDeckOfPlayer().getCardsInHand())
+            System.out.println("Gino: " + a.getAssistantName());
+        for(AssistantCard a : player2.getDeckOfPlayer().getCardsInHand())
+            System.out.println("Pino: " + a.getAssistantName());
+        for(AssistantCard a : player3.getDeckOfPlayer().getCardsInHand())
+            System.out.println("Albano: " + a.getAssistantName());
+        for(AssistantCard a : player4.getDeckOfPlayer().getCardsInHand())
+            System.out.println("Romina: " + a.getAssistantName());
+
+        assertEquals(true, game.gameIsFinished(player1.getNickname()));
+
+
         /** MANCA CONTROLLO BAG VUOTA E 3 GRUPPI DI ISOLE */
     }
 
@@ -78,10 +138,10 @@ class GameTest {
         game.addPlayer(player);
         DeckAssistant deckAssistant = new DeckAssistant(AssistantDeckName.WIZARD1);
         game.getPlayer("Gino").setDeckOfPlayer(deckAssistant);
-
         game.playAssistantCard("lion", "Gino");
         assertEquals("lion", player.getTrash().getAssistantName());
         assertEquals(9,player.getDeckOfPlayer().getCardsInHand().size());
+        assertNotEquals("lion", player.getDeckOfPlayer().getCardsInHand().get(0).getAssistantName());
     }
 
     @Test
