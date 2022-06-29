@@ -1,6 +1,6 @@
 # Software Engineering Project 2022 
 
-#
+
 ![alt text](src/main/resources/images/Logo_Eriantys.png)
 #
 
