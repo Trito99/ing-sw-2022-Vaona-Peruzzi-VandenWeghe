@@ -375,11 +375,9 @@ public class GameController {
                                     }else
                                         gameSession.getPlayer(getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(getActivePlayer()), CardEffect.STANDARDMODE);
                                     virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore(), gameSession.getGameMode(), gameSession.getPlayer(getActivePlayer()).getTeamMate());
-                                    for(String s : allVirtualView.keySet()) {
-                                        for (Player p : gameSession.getListOfPlayers()) {
-                                            if(s!=turnController.getActivePlayer())
-                                                allVirtualView.get(s).showPersonalSchool(p.getPersonalSchool(), p.getNickname() + "'s ", p.getTrash(), gameSession.getDifficulty(), p.getCoinScore(), gameSession.getGameMode(), p.getTeamMate());
-                                        }
+                                    for (Player p : gameSession.getListOfPlayers()) {
+                                        if(p.getNickname()!=turnController.getActivePlayer())
+                                            virtualView.showPersonalSchool(p.getPersonalSchool(), p.getNickname() + "'s ", p.getTrash(), gameSession.getDifficulty(), p.getCoinScore(), gameSession.getGameMode(), p.getTeamMate());
                                     }
                                     movedStudents++;
                                     allStudentsMoved();

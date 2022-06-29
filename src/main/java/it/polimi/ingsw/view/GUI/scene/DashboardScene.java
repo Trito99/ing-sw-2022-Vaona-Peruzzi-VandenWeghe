@@ -933,7 +933,6 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    CloudCards.disabilitateStudentsAndXCards();
                     Dragboard db =  motherNature.startDragAndDrop(TransferMode.ANY);
                     ClipboardContent content = new ClipboardContent();
                     content.putImage(((ImageView) motherNature).getImage());
@@ -1017,5 +1016,25 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     public void setCardSelected(CharacterCard cardSelected) {
         this.cardSelected = cardSelected;
+    }
+
+    public Table getTable(){
+        return table;
+    }
+
+    void disabilitateStudentsAndXCards() {
+        if (cardSelected!=null) {
+            switch (cardSelected.getCardEffect()) {
+                case ABBOT:
+                case ACROBAT:
+                case HERBALIST:
+                case COURTESAN:
+                    characterCardControllerMap.get(cardSelected).disableStudents(true);
+                    break;
+                case CURATOR:
+                    characterCardControllerMap.get(cardSelected).disableeXCards(true);
+                    break;
+            }
+        }
     }
 }

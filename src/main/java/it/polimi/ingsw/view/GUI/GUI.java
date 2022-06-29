@@ -161,6 +161,7 @@ public class GUI extends ObservableView implements View {
      */
     @Override
     public void showListOfIsland(Table table, Difficulty difficulty) {
+        this.table = table;
        Platform.runLater(() -> GuiManager.getMainScene().updateIslands(table.getListOfIsland()));
     }
 

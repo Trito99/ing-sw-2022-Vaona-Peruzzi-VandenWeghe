@@ -400,7 +400,6 @@ public class SchoolController extends ObservableView implements GenericScene {
             studentNode.setOnDragDetected(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    CloudCards.disabilitateStudentsAndXCards();
                     Dragboard db =  studentNode.startDragAndDrop(TransferMode.ANY);
                     ClipboardContent content = new ClipboardContent();
                     content.putImage(((ImageView) studentNode).getImage());

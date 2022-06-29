@@ -93,11 +93,13 @@ public class CharacterCardController extends ObservableView implements GenericSc
     public void clickCard(Event event){
         GuiManager.getMainScene().setCardSelected(this.card);
         if(GuiManager.getMainScene().isActionStudent()){
-
+            GuiManager.getMainScene().getPersonalSchoolController().disableEntry(true);
             notifyObserver(obs -> obs.choosePlaceAndStudentForMove("CHARACTER CARD", -1));
         }else if(GuiManager.getMainScene().isActionMother()){
+            GuiManager.getMainScene().disabilityMother(GuiManager.getMainScene().getTable(),GuiManager.getMainScene().getMaxSteps(),true);
             notifyObserver(obs -> obs.chooseMotherEarthSteps(-1, -1, "CHARACTER CARD"));
         }else if(GuiManager.getMainScene().isActionCloud()){
+            GuiManager.getMainScene().getCloudController().disabilitateCloud(true);
             notifyObserver(obs -> obs.chooseCloudCard(-1, "CHARACTER CARD"));
         }
     }

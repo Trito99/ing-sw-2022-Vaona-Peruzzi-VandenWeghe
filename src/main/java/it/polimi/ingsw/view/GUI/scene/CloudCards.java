@@ -70,29 +70,12 @@ public class CloudCards extends ObservableView implements GenericScene {
      * Handles the click on a Cloud Card
      */
     private void clickCloud(Event event){
-        disabilitateStudentsAndXCards();
         for(int i=cloudCards.size();i>0;i--){
             if(event.getSource().equals(anchorPane.getChildren().get(anchorPane.getChildren().size()-i))){
                 cloudSelected = cloudCards.get(cloudCards.size()-i);
                 notifyObserver(obs -> obs.chooseCloudCard(cloudSelected.getIdCloud(), ""));
                 disabilitateCloud(true);
                 GuiManager.getMainScene().setActionCloud(false);
-            }
-        }
-    }
-
-    static void disabilitateStudentsAndXCards() {
-        if (GuiManager.getMainScene().getCardSelected()!=null) {
-            switch (GuiManager.getMainScene().getCardSelected().getCardEffect()) {
-                case ABBOT:
-                case ACROBAT:
-                case HERBALIST:
-                case COURTESAN:
-                    GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected()).disableStudents(true);
-                    break;
-                case CURATOR:
-                    GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected()).disableeXCards(true);
-                    break;
             }
         }
     }
