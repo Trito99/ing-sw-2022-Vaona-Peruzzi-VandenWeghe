@@ -185,7 +185,23 @@ public class GUI extends ObservableView implements View {
 
     @Override
     public void askCharacterCardToPlay(boolean choice, int coins, ArrayList<CharacterCard> list) {
+        if(!choice) {
+            notifyObserver(obs -> obs.chooseCharacterCard("YES",choice));
+        }else{
+            notifyObserver(obs -> obs.chooseCharacterCard(GuiManager.getMainScene().getCardSelected().getCardEffect().toString(),choice));
+            switch(GuiManager.getMainScene().getCardSelected().getCardEffect()){
+                case ABBOT:
+                case ACROBAT:
+                case HERBALIST:
+                case COURTESAN:
+                    GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected()).disableStudents(false);
+                    break;
+                case CURATOR:
+                    GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected()).disableeXCards(false);
+                    break;
+            }
 
+        }
     }
 
     @Override
@@ -196,7 +212,8 @@ public class GUI extends ObservableView implements View {
     @Override
     public void askPlaceAndStudentForMove(ArrayList<Student> entry) {
         Platform.runLater(() ->
-            GuiManager.getMainScene().getPersonalSchoolController().disableEntry(false));
+            {GuiManager.getMainScene().getPersonalSchoolController().disableEntry(false);
+            GuiManager.getMainScene().setActionStudent(true);});
         showMessage("ACTION PHASE\nMove a student from your entry ");
 
     }
@@ -205,7 +222,9 @@ public class GUI extends ObservableView implements View {
     public void askMotherEarthSteps(int maxSteps, Table table, Difficulty difficulty) {
         Platform.runLater(() ->
             {GuiManager.getMainScene().getPersonalSchoolController().disableEntry(true);
-            GuiManager.getMainScene().disabilityMother(table,maxSteps,false);});
+            GuiManager.getMainScene().setActionStudent(false);
+            GuiManager.getMainScene().disabilityMother(table,maxSteps,false);
+            GuiManager.getMainScene().setActionMother(true);});
         showMessage("Move MotherEarth");
     }
 
@@ -213,7 +232,9 @@ public class GUI extends ObservableView implements View {
     public void askCloud(Table table) {
         Platform.runLater(() ->
             {GuiManager.getMainScene().disabilityMother(table,GuiManager.getMainScene().getMaxSteps(),true);
-            GuiManager.getMainScene().getCloudController().disabilitateCloud(false);});
+            GuiManager.getMainScene().setActionMother(false);
+            GuiManager.getMainScene().getCloudController().disabilitateCloud(false);
+            GuiManager.getMainScene().setActionCloud(true);});
         showMessage("Choose a Cloud");
     }
 

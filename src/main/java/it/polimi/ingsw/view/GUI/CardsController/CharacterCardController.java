@@ -3,16 +3,21 @@ package it.polimi.ingsw.view.GUI.CardsController;
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.student.Student;
+import it.polimi.ingsw.observer.ObservableView;
+import it.polimi.ingsw.view.GUI.GuiManager;
+import it.polimi.ingsw.view.GUI.scene.GenericScene;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CharacterCardController {
+public class CharacterCardController extends ObservableView implements GenericScene {
 
     private static Map<CardEffect, String> characterCardMap;
     static {
@@ -30,6 +35,8 @@ public class CharacterCardController {
         characterCardMap.put(CardEffect.COURTESAN, "/images/characterCards/courtesan.jpg");
         characterCardMap.put(CardEffect.JUNKDEALER, "/images/characterCards/junkdealer.jpg");
     }
+
+    private CharacterCard card;
 
     @FXML
     private Pane PaneCharacterCard;
@@ -78,10 +85,24 @@ public class CharacterCardController {
     }
 
     public void setData(CharacterCard card){
+        this.card = card;
         cardImage.setImage(new Image(characterCardMap.get(card.getCardEffect())));
+        cardImage.addEventHandler(MouseEvent.MOUSE_CLICKED,this::clickCard);
     }
 
-    public void activateStudentPane(ArrayList<Student> studentsOnCard){
+    public void clickCard(Event event){
+        GuiManager.getMainScene().setCardSelected(this.card);
+        if(GuiManager.getMainScene().isActionStudent()){
+
+            notifyObserver(obs -> obs.choosePlaceAndStudentForMove("CHARACTER CARD", -1));
+        }else if(GuiManager.getMainScene().isActionMother()){
+            notifyObserver(obs -> obs.chooseMotherEarthSteps(-1, -1, "CHARACTER CARD"));
+        }else if(GuiManager.getMainScene().isActionCloud()){
+            notifyObserver(obs -> obs.chooseCloudCard(-1, "CHARACTER CARD"));
+        }
+    }
+
+    public void visibleStudentPane(ArrayList<Student> studentsOnCard){
         longPane.setVisible(true);
         shortPane.setVisible(false);
 
@@ -111,7 +132,7 @@ public class CharacterCardController {
         }
     }
 
-    public void activateXCardPane(int XCardsOnCard){
+    public void visibleXCardPane(int XCardsOnCard){
         longPane.setVisible(true);
         shortPane.setVisible(false);
 
@@ -122,11 +143,10 @@ public class CharacterCardController {
         xCardPane.setDisable(false);
         for(int i=0;i<XCardsOnCard;i++){
             xCardPane.getChildren().get(i).setVisible(true);
-            xCardPane.getChildren().get(i).setDisable(false);
         }
     }
 
-    public void disableAll(){
+    public void hideAll(){
         longPane.setVisible(false);
         shortPane.setVisible(true);
 
@@ -145,4 +165,21 @@ public class CharacterCardController {
         }
     }
 
+    public void disableStudents(boolean disable){
+        for(int i=0;i<studentPane.getChildren().size();i++){
+            if (studentPane.getChildren().get(i).isVisible())
+                studentPane.getChildren().get(i).setDisable(disable);
+        }
+    }
+
+    public void disableeXCards(boolean disable){
+        for(int i=0;i<xCardPane.getChildren().size();i++){
+            if (xCardPane.getChildren().get(i).isVisible())
+                xCardPane.getChildren().get(i).setDisable(disable);
+        }
+    }
+
+    public CharacterCard getCard() {
+        return card;
+    }
 }

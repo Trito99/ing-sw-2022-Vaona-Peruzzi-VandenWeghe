@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.observer.ObservableView;
+import it.polimi.ingsw.view.GUI.GuiManager;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -377,6 +378,7 @@ public class SchoolController extends ObservableView implements GenericScene {
             studentNode.setOnDragDetected(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
+                    CloudCards.disabilitateStudentsAndXCards();
                     Dragboard db =  studentNode.startDragAndDrop(TransferMode.ANY);
                     ClipboardContent content = new ClipboardContent();
                     content.putImage(((ImageView) studentNode).getImage());

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view.GUI.scene;
 
-import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.*;
 import it.polimi.ingsw.model.island.IslandCard;
@@ -34,9 +33,13 @@ import java.util.Map;
  * This Scene Controller is used to manage the main scene of the game
  */
 public class DashboardScene extends ObservableView implements GenericScene {
-    private Map<String,SchoolController> schoolControllers = new HashMap<>();
+    private Map<String,SchoolController> schoolControllersMap = new HashMap<>();
     private CloudCards cloudController;
     private SchoolController personalSchoolController;
+
+    private CharacterCard cardSelected = null;
+
+    private Map<CharacterCard,CharacterCardController> characterCardControllerMap = new HashMap<>();
     private Image temp = null;
     private static Map<String, String> assistantCardMap;
     static {
@@ -56,8 +59,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private  Table table;
     private GameMode gameMode;
     private Difficulty difficulty;
-    private boolean planning = false;
-    private boolean actionStudent = false;
+    private boolean planning = false, actionStudent = false, actionMother = false, actionCloud = false;
     private Map<Pane, ArrayList<Integer>> islandMap = new HashMap<>();
     private int studentDestinationIslandId, motherDestinationIslandId, islandMother, maxSteps;
 
@@ -390,53 +392,53 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
                     CharacterCardController characterCardController = loader.getController();
                     characterCardController.setData(characterCardsPlaying.get(i));
+                    characterCardController.addAllObservers(observers);
 
-                        switch (characterCardsPlaying.get(i).getCardEffect()){
-                            case STANDARDMODE:
-                                characterCardController.disableAll();
-                                break;
-                            case ABBOT:
-                                characterCardController.activateStudentPane(characterCardsPlaying.get(i).getStudentsOnCard());
-                                break;
-                            case HOST:
-                                characterCardController.disableAll();
-                                break;
-                            case HERALD:
-                                characterCardController.disableAll();
-                                break;
-                            case BEARER:
-                                characterCardController.disableAll();
-                                break;
-                            case CURATOR:
-                                characterCardController.activateXCardPane(characterCardsPlaying.get(i).getXCardOnCard());
-                                break;
-                            case CENTAUR:
-                                characterCardController.disableAll();
-                                break;
-                            case ACROBAT:
-                                characterCardController.activateStudentPane(characterCardsPlaying.get(i).getStudentsOnCard());
-                                break;
-                            case KNIGHT:
-                                characterCardController.disableAll();
-                                break;
-                            case HERBALIST:
-                                characterCardController.activateStudentPane(characterCardsPlaying.get(i).getStudentsOnCard());
-                                break;
-                            case BARD:
-                                characterCardController.disableAll();
-                                break;
-                            case COURTESAN:
-                                characterCardController.activateStudentPane(characterCardsPlaying.get(i).getStudentsOnCard());
-                                break;
-                            case JUNKDEALER:
-                                characterCardController.disableAll();
-                                break;
+                    switch (characterCardsPlaying.get(i).getCardEffect()) {
+                        case STANDARDMODE:
+                            characterCardController.hideAll();
+                            break;
+                        case ABBOT:
+                            characterCardController.visibleStudentPane(characterCardsPlaying.get(i).getStudentsOnCard());
+                            break;
+                        case HOST:
+                            characterCardController.hideAll();
+                            break;
+                        case HERALD:
+                            characterCardController.hideAll();
+                            break;
+                        case BEARER:
+                            characterCardController.hideAll();
+                            break;
+                        case CURATOR:
+                            characterCardController.visibleXCardPane(characterCardsPlaying.get(i).getXCardOnCard());
+                            break;
+                        case CENTAUR:
+                            characterCardController.hideAll();
+                            break;
+                        case ACROBAT:
+                            characterCardController.visibleStudentPane(characterCardsPlaying.get(i).getStudentsOnCard());
+                            break;
+                        case KNIGHT:
+                            characterCardController.hideAll();
+                            break;
+                        case HERBALIST:
+                            characterCardController.visibleStudentPane(characterCardsPlaying.get(i).getStudentsOnCard());
+                            break;
+                        case BARD:
+                            characterCardController.hideAll();
+                            break;
+                        case COURTESAN:
+                            characterCardController.visibleStudentPane(characterCardsPlaying.get(i).getStudentsOnCard());
+                            break;
+                        case JUNKDEALER:
+                            characterCardController.hideAll();
+                            break;
                     }
-
                     characterCardLayout.getChildren().add(characterCardImage);
-
+                    characterCardControllerMap.put(characterCardsPlaying.get(i), characterCardController);
+                    characterCardLayout.setVisible(true);
                 }
-                characterCardLayout.setVisible(true);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -462,28 +464,28 @@ public class DashboardScene extends ObservableView implements GenericScene {
             case TWOPLAYERS:
                 ViewOtherSchoolScene1 scene1 = new ViewOtherSchoolScene1();
                 GuiManager.newStagePane(scene1,"/fxml/view_other_school_1_scene");
-                scene1.updatePersonalSchool(schoolControllers);
+                scene1.updatePersonalSchool(schoolControllersMap);
                 break;
             case THREEPLAYERS:
                 ViewOtherSchoolScene2 scene2 = new ViewOtherSchoolScene2();
                 GuiManager.newStagePane(scene2,"/fxml/view_other_school_2_scene");
-                scene2.updatePersonalSchool(schoolControllers);
+                scene2.updatePersonalSchool(schoolControllersMap);
                 break;
             case COOP:
                 ViewOtherSchoolScene3 scene3 = new ViewOtherSchoolScene3();
                 GuiManager.newStagePane(scene3, "/fxml/view_other_school_3_scene");
-                scene3.updatePersonalSchool(schoolControllers);
+                scene3.updatePersonalSchool(schoolControllersMap);
                 break;
         }
     }
 
     public void updateOtherSchool(SchoolController controller, GameMode gameMode, String nickname){
         this.gameMode = gameMode;
-        if(schoolControllers.containsKey(nickname)){
-            schoolControllers.remove(nickname);
-            schoolControllers.put(nickname,controller);
+        if(schoolControllersMap.containsKey(nickname)){
+            schoolControllersMap.remove(nickname);
+            schoolControllersMap.put(nickname,controller);
         }else{
-            schoolControllers.put(nickname,controller);
+            schoolControllersMap.put(nickname,controller);
         }
 
     }
@@ -689,6 +691,10 @@ public class DashboardScene extends ObservableView implements GenericScene {
         this.planning = planning;
     }
 
+    public boolean isPlanning(){
+        return planning;
+    }
+
     public Map<String,String> getAssistantCardMap(){
         return assistantCardMap;
     }
@@ -746,6 +752,10 @@ public class DashboardScene extends ObservableView implements GenericScene {
         return islandMother;
     }
 
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
     public int getMaxSteps(){
         return maxSteps;
     }
@@ -795,7 +805,9 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }
     }
 
-
+    public Map<CharacterCard, CharacterCardController> getCharacterCardControllerMap() {
+        return characterCardControllerMap;
+    }
 
     private void addDragOver(){
         Pane island = null;
@@ -857,6 +869,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
             motherNature.setOnDragDetected(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
+                    CloudCards.disabilitateStudentsAndXCards();
                     Dragboard db =  motherNature.startDragAndDrop(TransferMode.ANY);
                     ClipboardContent content = new ClipboardContent();
                     content.putImage(((ImageView) motherNature).getImage());
@@ -902,4 +915,35 @@ public class DashboardScene extends ObservableView implements GenericScene {
                 o.equals(motherEarth9)|| o.equals(motherEarth10)|| o.equals(motherEarth11) || o.equals(motherEarth12));
     }
 
+    public boolean isActionStudent() {
+        return actionStudent;
+    }
+
+    public void setActionStudent(boolean actionStudent) {
+        this.actionStudent = actionStudent;
+    }
+
+    public boolean isActionMother() {
+        return actionMother;
+    }
+
+    public void setActionMother(boolean actionMother) {
+        this.actionMother = actionMother;
+    }
+
+    public boolean isActionCloud() {
+        return actionCloud;
+    }
+
+    public void setActionCloud(boolean actionCloud) {
+        this.actionCloud = actionCloud;
+    }
+
+    public CharacterCard getCardSelected() {
+        return cardSelected;
+    }
+
+    public void setCardSelected(CharacterCard cardSelected) {
+        this.cardSelected = cardSelected;
+    }
 }
