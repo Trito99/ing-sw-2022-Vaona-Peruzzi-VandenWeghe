@@ -11,30 +11,35 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/** implementa le connessioni tra client e server, lato client */
-
+/**
+ * Implements the connection between client and server, seen from the client
+ */
 public class ClientSocket extends Observable {
     private Socket client;
     private ObjectOutputStream output;
     private ObjectInputStream input;
     private ExecutorService queue;
 
-    /** default constructor */
+    /**
+     * Default constructor
+     * @param address ip address to connect to
+     * @param port port number to connect to
+     * @throws IOException if the connection isn't successful
+     */
     public ClientSocket(String address, int port) throws IOException {
         try {
             this.client = new Socket(address, port);
             output = new ObjectOutputStream(client.getOutputStream());
             input = new ObjectInputStream(client.getInputStream());
             this.queue = Executors.newSingleThreadExecutor();
-
         } catch (Exception exception) {
             throw new IOException();
         }
     }
 
-    /** send a message to the server
-     *
-     * @param message
+    /**
+     * Sends a message to the server
+     * @param message sent
      */
     public void sendMessage(ClientMessage message) {
         try {
@@ -45,9 +50,8 @@ public class ClientSocket extends Observable {
         }
     }
 
-
     /**
-     * listen messages from the server
+     * Listens messages from the server
      */
     public void listen() {
         queue.execute(() ->
@@ -64,9 +68,8 @@ public class ClientSocket extends Observable {
         });
     }
 
-
     /**
-     * disconnect client from the server
+     * Disconnects a client from the server
      */
     public void disconnect(){
         if (!client.isClosed()) {

@@ -14,7 +14,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * Gets inputs from the View and notifies the view with a certain message
+ * Gets inputs from the View and notifies the view and sends them as messages
+ * Also notifies the View that a certain message has arrived
  */
 public class ClientMessanger implements ObserverView, Observer {
     private String nickname;
@@ -32,7 +33,7 @@ public class ClientMessanger implements ObserverView, Observer {
     }
 
     /**
-     * Tries to connect a client  (new player) to a certain server socket
+     * Tries to connect a client (new player) to a certain server socket
      * @param address ip to connect to
      * @param port to connect to
      */

@@ -2,19 +2,22 @@ package it.polimi.ingsw.network;
 
 import java.util.*;
 
-/** classe che tiene traccia di tutti i giochi in corso contemporaneamente */
-
+/**
+ * Allows multiple games to be played at the same time
+ */
 public class LobbyServer {
     public Map<String, Lobby> lobbyMap;
 
-    /** default constructor */
+    /**
+     * Default constructor
+     */
     public LobbyServer() {
         lobbyMap = Collections.synchronizedMap(new HashMap<>());
     }
 
     /**
-     *
-     * @param idLobby
+     * Gets the Lobby associated to a certain game id
+     * @param idLobby the id of a specific lobby
      * @return the lobby associated with the idLobby
      */
     public Lobby getLobby(String idLobby){
@@ -23,18 +26,21 @@ public class LobbyServer {
         return lobbyMap.get(idLobby);
     }
 
-    /** remove a player from the lobby
-     *
-     * @param idLobby
+    /**
+     * Removes a player from the lobby
+     * @param idLobby the id of a specific lobby
      */
     public void leaveLobby(String idLobby) {
         Lobby lobby = lobbyMap.get(idLobby);
         if(lobby!=null) {
-            if (lobby.currentPlayers() == 0)
-                lobbyMap.remove(idLobby);
+            if (lobby.currentPlayers() == 0) lobbyMap.remove(idLobby);
         }
     }
 
+    /**
+     * Creates a different new Lobby
+     * @return the new lobby
+     */
     public Map<String, LobbyForPrint> getNewLobbyMap() {
         Map<String, LobbyForPrint> newLobbyMap = new HashMap<>();
         for(String lobbyId : lobbyMap.keySet()){

@@ -7,26 +7,29 @@ import it.polimi.ingsw.view.VirtualView;
 import java.io.Serializable;
 import java.util.*;
 
-/** la classe tiene traccia di tutti i clients connessi al server che stanno giocando allo stesso gioco */
-
+/**
+ * Keeps track all the clients connected to a certain lobby, playing in the same match
+ */
 public class Lobby implements Serializable {
-
     private Map<ClientHandler, String> clientHandlerMap;
     private GameController gameController;
     private String gameId;
 
-    /** costruttore di default */
+    /**
+     * Default constructor
+     * @param gameId id of the match
+     */
     public Lobby(String gameId) {
         clientHandlerMap = Collections.synchronizedMap(new HashMap<>());
         gameController = new GameController();
         this.gameId = gameId;
     }
 
-    /** add a new player to the lobby
-     *
-     * @param nickname of new player
-     * @param playerDate
-     * @param clientHandler
+    /**
+     * Adds a new player to the lobby
+     * @param nickname of the new player
+     * @param playerDate birthday date of the player
+     * @param clientHandler of the player
      */
     public void addPlayer(String nickname, GregorianCalendar playerDate, ClientHandler clientHandler){
         VirtualView virtualView = new VirtualView(clientHandler);
@@ -40,12 +43,11 @@ public class Lobby implements Serializable {
                 System.out.println(n);
             }
             else{
-                /** case name with the same nickname */
+                /** case of players with the same nickname */
                 while (clientHandlerMap.containsValue(n)) {
                     n = nickname + "(" + i + ")";
                     i++;
                 }
-
                 clientHandlerMap.put(clientHandler, n);
             }
 
@@ -58,9 +60,8 @@ public class Lobby implements Serializable {
         }
     }
 
-
     /**
-     *
+     * Checks if the Game is started
      * @return true if the game is started
      */
     public boolean isGameStarted(){
@@ -68,26 +69,25 @@ public class Lobby implements Serializable {
     }
 
     /**
-     *
-     * @return number of player connected
+     * Checks the current number of players connected
+     * @return number of players connected
      */
     public int currentPlayers(){
         return clientHandlerMap.size();
     }
 
-
-    /** remove a client handler from the map
-     *
-     * @param clientHandler
+    /**
+     * Removes a player from the lobby
+     * @param clientHandler associated to a certain player
      */
     public void remove(ClientHandler clientHandler){
         clientHandlerMap.remove(clientHandler);
     }
 
 
-    /** send the message to the gameController
-     *
-     * @param clientMessage
+    /**
+     * Sends messages to the Game Controller
+     * @param clientMessage message sent from the Client to the Game Controller
      */
     public void getMessage(ClientMessage clientMessage){
         gameController.getMessage(clientMessage);
@@ -97,5 +97,4 @@ public class Lobby implements Serializable {
     public GameController getGameController() {
         return gameController;
     }
-
 }
