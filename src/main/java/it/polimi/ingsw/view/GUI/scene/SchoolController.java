@@ -199,7 +199,7 @@ public class SchoolController extends ObservableView implements GenericScene {
     }
 
     /**
-     * Initialize school
+     * Initialize player's school
      */
     public void initialize(){
         hide();
@@ -208,6 +208,9 @@ public class SchoolController extends ObservableView implements GenericScene {
         addDragOver();
     }
 
+    /**
+     * Updates school's situation
+     */
     private void updateSchool(){
         updateEntry();
         updateHall();
@@ -215,6 +218,9 @@ public class SchoolController extends ObservableView implements GenericScene {
         updateTowerZone();
     }
 
+    /**
+     * Updates school's entry
+     */
     private void updateEntry(){
         for(Student student : school.getEntry()){
             entry.getChildren().get(school.getEntry().indexOf(student)).setVisible(true);
@@ -239,6 +245,9 @@ public class SchoolController extends ObservableView implements GenericScene {
         }
     }
 
+    /**
+     * Updates school's hall
+     */
     private void updateHall() {
         for(Student student : school.getGTable()){
             green_table.getChildren().get(school.getGTable().indexOf(student)).setVisible(true);
@@ -268,6 +277,9 @@ public class SchoolController extends ObservableView implements GenericScene {
 
     }
 
+    /**
+     * Updates Professor's hall
+     */
     private void updateProf() {
         for (Prof prof : school.getProfOfPlayer()){
             if(prof.getIsInHall()){
@@ -292,6 +304,9 @@ public class SchoolController extends ObservableView implements GenericScene {
         }
     }
 
+    /**
+     * Updates school's Tower Zone
+     */
     private void updateTowerZone() {
         for(Tower tower : school.getTowers()){
             //towerZone.getChildren().get(school.getTowers().indexOf(tower)).setDisable(false);
@@ -309,6 +324,9 @@ public class SchoolController extends ObservableView implements GenericScene {
         }
     }
 
+    /**
+     * Hides panes not used yet
+     */
     private void hide(){
         for(Node node : entry.getChildren()){
             node.setVisible(false);
@@ -343,13 +361,14 @@ public class SchoolController extends ObservableView implements GenericScene {
         return difficulty;
     }
 
+    /**
+     * Disables moves in school's entry
+     */
     public void disableEntry(boolean disable){
         for(Student student : school.getEntry()) {
             entry.getChildren().get(school.getEntry().indexOf(student)).setDisable(disable);
         }
     }
-
-
 
     public Map<ImageView,Integer> getEntryMap(){
         return entryMap;
@@ -371,6 +390,9 @@ public class SchoolController extends ObservableView implements GenericScene {
         this.placeSelected = placeSelected;
     }
 
+    /**
+     * Enables drag and drop of students
+     */
     private void addDragDetected() {
         for(Student student : school.getEntry()) {
             ImageView studentNode = (ImageView) entry.getChildren().get(school.getEntry().indexOf(student));
@@ -398,6 +420,9 @@ public class SchoolController extends ObservableView implements GenericScene {
         }
     }
 
+    /**
+     * Enables drag over of students
+     */
     private void addDragOver(){
         hall.setOnDragOver(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {

@@ -22,37 +22,34 @@ import static java.lang.System.out;
  */
 
 public class ConnectToServerScene extends ObservableView implements GenericScene{
-
     @FXML
     private Button connectButton;
-
     @FXML
     private Text connectText;
-
     @FXML
     private TextField ipAddressField;
-
     @FXML
     private Text ipText1;
-
     @FXML
     private TextField portNumberField;
-
     @FXML
     private Text portText;
-
     @FXML
     private AnchorPane rootPane;
-
     @FXML
     private Text titleText;
 
-
+    /**
+     * Initialize buttons present in the Scene
+     */
     @FXML
     public void initialize(){
         connectButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickConnect);
     }
 
+    /**
+     * Handles the click on the Connect button
+     */
     private void clickConnect(Event event){
         try {
             ipAddressField.setDisable(true);
