@@ -406,7 +406,7 @@ public class CLI extends ObservableView implements View {
     }
 
     /**
-     * Show coins on table
+     * Shows coins on table
      * @param coins on table
      */
     @Override

@@ -15,72 +15,62 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * This Scene Controller is used to show and update other players' school and trash card
+ * Used in Three Players Mode
+ */
 public class ViewOtherSchoolScene2 extends ObservableView implements GenericScene{
-
     @FXML
     private ImageView ImageTrash1_3Players;
-
     @FXML
     private ImageView ImageTrash2_3Players;
-
     @FXML
     private Pane Pane_3players;
-
     @FXML
     private ImageView blueBackground;
-
     @FXML
     private ImageView coinImage1_3Players;
-
     @FXML
     private ImageView coinImage2_3Players;
-
     @FXML
     private Pane coinPane1_3Players;
-
     @FXML
     private Pane coinPane2_3Players;
-
     @FXML
     private Text coinText1_3players;
-
     @FXML
     private Text coinText2_3players;
-
     @FXML
     private Text player1Text3players;
-
     @FXML
     private Pane player1_3players;
-
     @FXML
     private Text player2Text3players;
-
     @FXML
     private Pane player3_3players;
-
     @FXML
     private Pane schoolPane1_3players;
-
     @FXML
     private Pane schoolPane21;
-
     @FXML
     private Pane schoolPane22;
-
     @FXML
     private Pane schoolPane2_3players;
-
     @FXML
     private Pane trashPane1_3Players;
-
     @FXML
     private Pane trashPane2_3Players;
 
+    /**
+     * Initialize player's school
+     */
     @FXML
     public void initialize(){
     }
 
+    /**
+     * Updates player's school and trash card
+     */
     public void updatePersonalSchool(Map<String, SchoolController> map) throws IOException {
 
         /** Player 1 */
@@ -104,7 +94,7 @@ public class ViewOtherSchoolScene2 extends ObservableView implements GenericScen
             ImageTrash1_3Players.setVisible(false);
         player1Text3players.setText(((String) map.keySet().toArray()[0]).substring(0,((String) map.keySet().toArray()[0]).length()-3));
 
-        /**Player 2 */
+        /** Player 2 */
         FXMLLoader loader2 = new FXMLLoader(StartGUI.class.getResource("/fxml/school.fxml"));
         loader2.setController(map.get(map.keySet().toArray()[1]));
         AnchorPane School2 = loader2.load();

@@ -93,19 +93,14 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private Text NumberOfXcard;
     @FXML
     private Text NumberOfXcard1;
-
     @FXML
     private Text NumberOfXcard11;
-
     @FXML
     private Text NumberOfXcard12;
-
     @FXML
     private Text NumberOfXcard2;
-
     @FXML
     private Text NumberOfXcard3;
-
     @FXML
     private Text NumberOfXcard31;
     @FXML
@@ -287,17 +282,31 @@ public class DashboardScene extends ObservableView implements GenericScene {
     @FXML
     private Pane trashPanePersonalSchool;
 
-
+    /**
+     * Updates Table including the islands
+     * @param table of the match
+     */
     public void updateTable(Table table){
         this.table = table;
         cloudController.updateStudents(table.getCloudNumber());
         updateIslands(table.getListOfIsland());
     }
 
+    /**
+     * Updates value of coins on table and shows it
+     * @param coins on table
+     */
     public void updateCoinOnTable(int coins){
         coinTextTable.setText(String.valueOf(coins));
     }
 
+    /**
+     * Updates player's personal school
+     * @param controller of player's school
+     * @param gameMode game mode of the mach
+     * @param teamMate name of the other team's player
+     * @throws IOException
+     */
     public void updatePersonalSchool(SchoolController controller, GameMode gameMode, String teamMate) throws IOException {
         personalSchoolController = controller;
         personalSchoolController.addAllObservers(observers);
@@ -323,11 +332,16 @@ public class DashboardScene extends ObservableView implements GenericScene {
             TextTeamMate.setText("TeamMate: " + teamMate);
     }
 
+    /**
+     * Initialize Table of the match
+     * Places Cloud cards and Character cards (if Expert Mode)
+     * @param difficulty mode of the match
+     * @param table of the match
+     * @throws IOException
+     */
     public void initializeTable(Difficulty difficulty, Table table) throws IOException {
         this.difficulty = difficulty;
-
         hide(table);
-
         updateIslands(table.getListOfIsland());
 
         switch(table.getCloudNumber().size()){
@@ -445,6 +459,9 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }
     }
 
+    /**
+     * Initialize buttons present in the Scene and enables student's drag over
+     */
     @FXML
     public void initialize(){
         addDragOver();
@@ -459,6 +476,11 @@ public class DashboardScene extends ObservableView implements GenericScene {
         deckButton.addEventHandler(MouseEvent.MOUSE_CLICKED,this::deckButtonClicked);
     }
 
+    /**
+     * Handles the click on the "View other's school" button
+     * @param event opens a new scene showing other players' schools
+     * @throws IOException
+     */
     private void otherSchoolClicked(Event event) throws IOException {
         switch(gameMode){
             case TWOPLAYERS:
@@ -479,6 +501,12 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }
     }
 
+    /**
+     * Updates other players' schools
+     * @param controller school controller of each school
+     * @param gameMode game mode of the match
+     * @param nickname of the player
+     */
     public void updateOtherSchool(SchoolController controller, GameMode gameMode, String nickname){
         this.gameMode = gameMode;
         if(schoolControllersMap.containsKey(nickname)){
@@ -490,6 +518,10 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     }
 
+    /**
+     * Handles the click on the Assistant Deck button
+     * @param event opens a new scene showing player's personal Assistant Deck allowing the player to play a certain Assistant Card
+     */
     private void deckButtonClicked(Event event){
         GuiManager.newStagePane(assistantDeck, "/fxml/view_deck_scene");
         if(planning) {
@@ -497,6 +529,10 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }
     }
 
+    /**
+     * Updates the Assistant Deck Image for each player
+     * @param viewDeckScene deck of each player
+     */
     public void updateAssistantCardDeck(ViewDeckScene viewDeckScene){
         this.assistantDeck = viewDeckScene;
         switch(viewDeckScene.getDeckAssistant().getDeckName()){
@@ -515,6 +551,10 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }
     }
 
+    /**
+     * Returns the new list of islands when two or more islands merge
+     * @param listOfIslands list of the islands after one or more merges
+     */
     public void updateIslands(ArrayList<IslandCard> listOfIslands) {
         for(IslandCard islandCard : listOfIslands){
             ArrayList<Student> studentsOnIsland = (ArrayList<Student>) islandCard.getStudentOnIsland().clone();
@@ -707,10 +747,14 @@ public class DashboardScene extends ObservableView implements GenericScene {
         return cloudController;
     }
 
+    /**
+     * Returns the new student position on a certain island
+     * @param destinationIsland id island where will be placed the student
+     */
     public void setIslandId(int destinationIsland) {
         boolean present = false;
         for(IslandCard islandCard : table.getListOfIsland()){
-            if(islandCard.getImmutableIdIsland()==destinationIsland) {
+            if(islandCard.getImmutableIdIsland() == destinationIsland) {
                 present = true;
                 this.studentDestinationIslandId = islandCard.getIdIsland();
             }
@@ -724,6 +768,11 @@ public class DashboardScene extends ObservableView implements GenericScene {
             }
         }
     }
+
+    /**
+     * Returns the new Mother Earth position on a certain island
+     * @param destinationIsland id island where will be placed Mother Earth
+     */
     public void setMotherId(int destinationIsland) {
         boolean present = false;
         for(IslandCard islandCard : table.getListOfIsland()){
@@ -752,14 +801,18 @@ public class DashboardScene extends ObservableView implements GenericScene {
         return islandMother;
     }
 
-    public Difficulty getDifficulty() {
-        return difficulty;
-    }
-
+    /**
+     * Return the maximum number of steps Mother Earth can do
+     * @return number of steps of Mother Earth
+     */
     public int getMaxSteps(){
         return maxSteps;
     }
 
+    /**
+     * Hides panes not used yet
+     * @param table of the match
+     */
     public void hide(Table table){
         for(IslandCard islandCard : table.getListOfIsland()) {
             Pane island = (Pane) islandPane.getChildren().get(24 + islandCard.getImmutableIdIsland());
@@ -794,6 +847,12 @@ public class DashboardScene extends ObservableView implements GenericScene {
         Bridge12_1.setDisable(true);
     }
 
+    /**
+     * Disables moving Mother Earth
+     * @param table of the match
+     * @param maxSteps Mother earth can do according to the last Assistant Card played by the player
+     * @param disability set true when done Mother Earth is on an invalid position
+     */
     public void disabilityMother(Table table, int maxSteps, boolean disability) {
         this.table = table;
         this.maxSteps = maxSteps;
@@ -809,6 +868,10 @@ public class DashboardScene extends ObservableView implements GenericScene {
         return characterCardControllerMap;
     }
 
+    /**
+     * Enables drag over of students on island
+     * Enables drag over of Mother Earth on island
+     */
     private void addDragOver(){
         Pane island = null;
         for(int i=1;i<13;i++) {
@@ -867,6 +930,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
             Pane islandP = (Pane) islandPane.getChildren().get(24+i);
             Node motherNature = islandP.getChildren().get(islandP.getChildren().size()-1);
             motherNature.setOnDragDetected(new EventHandler<MouseEvent>() {
+
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     CloudCards.disabilitateStudentsAndXCards();
@@ -878,6 +942,9 @@ public class DashboardScene extends ObservableView implements GenericScene {
                 }
             });
 
+            /**
+             * Handles drag over of Mother Earth
+             */
             motherNature.setOnDragDone(new EventHandler<DragEvent>() {
                 public void handle(DragEvent event) {
                     if (event.getTransferMode() == TransferMode.MOVE) {
@@ -909,6 +976,11 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }
     }
 
+    /**
+     * Handles Mother Earth's new position
+     * @param o object referring Mother Earth's pawn
+     * @return Mother Earth's new position
+     */
     private boolean equalsMother(Object o){
         return (o.equals(motherEarth1) || o.equals(motherEarth2) || o.equals(motherEarth3) || o.equals(motherEarth4) ||
                 o.equals(motherEarth5) || o.equals(motherEarth6) || o.equals(motherEarth7)|| o.equals(motherEarth8) ||

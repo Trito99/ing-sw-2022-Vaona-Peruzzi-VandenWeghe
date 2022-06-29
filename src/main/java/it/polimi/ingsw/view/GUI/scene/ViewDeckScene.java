@@ -16,10 +16,12 @@ import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
+/**
+ * This Scene Controller is used to update player's Assistant Deck and play a specific Assistant card
+ */
+
 public class ViewDeckScene  extends ObservableView implements GenericScene  {
-
     private DeckAssistant deckAssistant;
-
     private String cardChosen;
 
     @FXML
@@ -91,10 +93,17 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
     @FXML
     private Text playText;
 
+    /**
+     * Default constructor
+     * @param deckAssistant player's Deck Assistant
+     */
     public ViewDeckScene(DeckAssistant deckAssistant) {
         this.deckAssistant = deckAssistant;
     }
 
+    /**
+     * Initialize player's Deck Assistant and buttons present in the Scene
+     */
     @FXML
     public void initialize(){
         playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickPlay);
@@ -112,6 +121,9 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
         card10.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickCard10);
     }
 
+    /**
+     * Handles the click on the Play button
+     */
     @FXML
     private void clickPlay(Event event) {
         if(cardChosen != null){
@@ -126,6 +138,9 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
         }
     }
 
+    /**
+     * Initialize buttons present in the Scene
+     */
     private void initializeButtons(){
         playButton.setDisable(true);
         playButton.setVisible(false);
@@ -142,6 +157,9 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
         card10.setDisable(true);
     }
 
+    /**
+     * Initialize Assistant cards present in the Scene
+     */
     private void initializeCardsInHand(){
         for(AssistantCard card : deckAssistant.getCardsInHand()){
             switch(card.getAssistantName()){
@@ -190,6 +208,9 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
         }
     }
 
+    /**
+     * Handles the click on Assistant Card 'Lion'
+     */
     private void clickCard1(Event event){
         initializeCardsInHand();
         card1ShadowPane.setStyle("-fx-background-color: green");
@@ -197,6 +218,9 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
         setCardChosen("lion");
     }
 
+    /**
+     * Handles the click on Assistant Card 'Ostrich'
+     */
     private void clickCard2(Event event){
         initializeCardsInHand();
         card2ShadowPane.setStyle("-fx-background-color: green");
@@ -204,6 +228,9 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
         setCardChosen("ostrich");
     }
 
+    /**
+     * Handles the click on Assistant Card 'Cat'
+     */
     private void clickCard3(Event event){
         initializeCardsInHand();
         card3ShadowPane.setStyle("-fx-background-color: green");
@@ -211,6 +238,9 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
         setCardChosen("cat");
     }
 
+    /**
+     * Handles the click on Assistant Card 'Falcon'
+     */
     private void clickCard4(Event event){
         initializeCardsInHand();
         card4ShadowPane.setStyle("-fx-background-color: green");
@@ -218,6 +248,9 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
         setCardChosen("falcon");
     }
 
+    /**
+     * Handles the click on Assistant Card 'Fox'
+     */
     private void clickCard5(Event event){
         initializeCardsInHand();
         card5ShadowPane.setStyle("-fx-background-color: green");
@@ -225,6 +258,9 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
         setCardChosen("fox");
     }
 
+    /**
+     * Handles the click on Assistant Card 'Lizard'
+     */
     private void clickCard6(Event event){
         initializeCardsInHand();
         card6ShadowPane.setStyle("-fx-background-color: green");
@@ -232,6 +268,9 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
         setCardChosen("lizard");
     }
 
+    /**
+     * Handles the click on Assistant Card 'Octopus'
+     */
     private void clickCard7(Event event){
         initializeCardsInHand();
         card7ShadowPane.setStyle("-fx-background-color: green");
@@ -239,6 +278,9 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
         setCardChosen("octopus");
     }
 
+    /**
+     * Handles the click on Assistant Card 'Dog'
+     */
     private void clickCard8(Event event){
         initializeCardsInHand();
         card8ShadowPane.setStyle("-fx-background-color: green");
@@ -246,6 +288,9 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
         setCardChosen("dog");
     }
 
+    /**
+     * Handles the click on Assistant Card 'Elephant'
+     */
     private void clickCard9(Event event){
         initializeCardsInHand();
         card9ShadowPane.setStyle("-fx-background-color: green");
@@ -253,6 +298,9 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
         setCardChosen("elephant");
     }
 
+    /**
+     * Handles the click on Assistant Card 'Turtle'
+     */
     private void clickCard10(Event event){
         initializeCardsInHand();
         card10ShadowPane.setStyle("-fx-background-color: green");
@@ -268,6 +316,9 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
         return deckAssistant;
     }
 
+    /**
+     * Enables click on Play button
+     */
     public void activatePlayButton(){
         playButton.setDisable(false);
         playButton.setVisible(true);
