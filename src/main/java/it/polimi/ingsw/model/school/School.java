@@ -9,6 +9,10 @@ import it.polimi.ingsw.model.student.Student;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Represents School's board
+ * Composed by entry, student's hall, professor's hall and tower zone
+ */
 public class School implements Serializable {
 
     private ArrayList<Student> entry;
@@ -20,6 +24,9 @@ public class School implements Serializable {
     private ArrayList<Tower> towerZone;
     private ArrayList<Prof> profOfPlayer;
 
+    /**
+     * Default constructor
+     */
     public School() {
         entry = new ArrayList<>();
         GTable = new ArrayList<>();
@@ -33,15 +40,6 @@ public class School implements Serializable {
 
     public ArrayList<Student> getEntry() {
         return entry;
-    }
-
-    /**
-     *
-     * @param cloudCard cloudCard chosen
-     */
-    public void moveStudentFromCloudToEntry(CloudCard cloudCard){
-        entry.addAll(cloudCard.getStudentOnCloud());
-        cloudCard.getStudentOnCloud().clear();
     }
 
     public ArrayList<Prof> getProfOfPlayer(){
@@ -69,9 +67,18 @@ public class School implements Serializable {
     }
 
     /**
-     *
-     * @param color color of the table where we want to count the students
-     * @return the number of students in the table selected
+     * Moves the students from the Cloud Card selected to the entry of the player's personal school
+     * @param cloudCard chosen by the player
+     */
+    public void moveStudentFromCloudToEntry(CloudCard cloudCard){
+        entry.addAll(cloudCard.getStudentOnCloud());
+        cloudCard.getStudentOnCloud().clear();
+    }
+
+    /**
+     * Returns the number of students in the hall of each student's color
+     * @param color of the hall where we want to count the students
+     * @return the number of students in the hall selected
      */
     public int numberOfStudentsInHall(SColor color){
         switch(color){
@@ -89,9 +96,9 @@ public class School implements Serializable {
         return 0;
     }
 
-    /** Assign professors at the players with the most students in their table
-     *
-     * @param players players of the match
+    /**
+     * Assigns professors to the player with the highest number of students in the hall of a certain student's color
+     * @param players of the match
      * @param playerTurn player that is playing
      * @param cardEffectPlayed card effect played in the turn
      */
@@ -239,8 +246,8 @@ public class School implements Serializable {
     }
 
     /**
-     *
-     * @param color color of the prof
+     * Verifies if the player wins a Professor or not
+     * @param color of the Professor
      * @return true if there is the prof of color "color" in the school, otherwise return false
      */
     public boolean getProfInHall(SColor color){
@@ -260,14 +267,14 @@ public class School implements Serializable {
     }
 
     /**
-     * remove the last tower from the towerZone of the school
+     * Removes the last tower from the towerZone of the school
      */
     public void removeTower() {
         towerZone.remove(towerZone.size() - 1);
     }
 
     /**
-     *
+     * Counts the number of Professors in a certain school
      * @return the number of prof currently in the school
      */
     public int numberOfProf(){

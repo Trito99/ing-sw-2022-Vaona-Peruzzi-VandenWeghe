@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.player;
 
 /**
- * Represents all possible player's number
+ * Enumeration which identifies all possible player's number
  */
 public enum PlayerNumber {
     PLAYER1,

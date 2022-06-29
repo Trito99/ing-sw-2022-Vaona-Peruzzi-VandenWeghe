@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+/**
+ * Represents the Table where are placed all the components of the game
+ */
 public class Table implements Serializable {
 
     private ArrayList<CloudCard> cloudNumber = new ArrayList<>() ;
@@ -27,7 +30,7 @@ public class Table implements Serializable {
     private ArrayList<Student> bag = new ArrayList<>();
 
     /**
-     * generate the initial bag with the 10 students, each 2 of a different color, and shuffle them.
+     * Generates the initial bag with the 10 students, each 2 of a different color, and shufflea them
      */
     public void generateBagInit() {
         SColor green = SColor.GREEN;
@@ -52,7 +55,7 @@ public class Table implements Serializable {
     }
 
     /**
-     * Places the initial 10 students in the islands
+     * Places the initial 10 students on the islands
      */
     public void extractStudentsInit(){
         for(int i=0;i<listOfIsland.size();i++){
@@ -71,7 +74,7 @@ public class Table implements Serializable {
     }
 
     /**
-     * Adds in the bag the remaining 120 students and shuffle them.
+     * Adds in the bag the remaining 120 students and shuffles them
      */
     public void addFinalStudents() {
         SColor green = SColor.GREEN;
@@ -97,7 +100,7 @@ public class Table implements Serializable {
     }
 
     /**
-     * extracts 3 or 4 students from the bag
+     * Extracts 3 or 4 students from the bag
      */
     public void extractStudentOnCloud() {
         for (CloudCard cloudCard : cloudNumber) {
@@ -112,9 +115,9 @@ public class Table implements Serializable {
         return bag;
     }
 
-    /** initialize the clouds depending on the game mode
-     *
-     * @param gm gamemode of the match
+    /**
+     * Initializes the clouds depending on the game mode
+     * @param gm Game Mode of the match
      */
     public void generateCloudNumber(GameMode gm) {
         int x;
@@ -136,7 +139,7 @@ public class Table implements Serializable {
     }
 
     /**
-     * creates the islands for the match
+     * Creates the islands for a certain match
      */
     public void generateIslandCards() {
         for (int s = 1; s < 13; s++) {
@@ -145,7 +148,7 @@ public class Table implements Serializable {
     }
 
     /**
-     * creates mother Earth in a random position
+     * Creates Mother Earth pawn in a random position
      */
     public void generateMotherEarth() {
         Random rn = new Random();
@@ -154,8 +157,9 @@ public class Table implements Serializable {
         posMotherEarth = n;
     }
 
-    /** choose 3 random character cards for the match and initialize them
-     *
+    /**
+     * Chooses 3 random Character Cards for the match and initialize them
+     * Used only in Expert Mode
      * @param characterCards list of all the character card
      */
     public void generateCharacterCardsOnTable(ArrayList<CharacterCard> characterCards){
@@ -189,9 +193,9 @@ public class Table implements Serializable {
         }
     }
 
-    /** move mother earth
-     *
-     * @param steps to do
+    /**
+     * Moves Mother Earth pawn
+     * @param steps to do chosen by the player
      */
     public void moveMotherEarth(int steps) {
         listOfIsland.get(posMotherEarth - 1).setMotherEarthOnIsland(false);
@@ -205,9 +209,9 @@ public class Table implements Serializable {
     }
 
     /**
-     *
-     * @param cardEffect the effect selected
-     * @return Returns the character card from the list of character cards on the table with the effect selected
+     * Returns the character card from the list of character cards on the table with the chosen effect
+     * @param cardEffect card's chosen effect
+     * @return the character card with the chosen effect
      */
     public CharacterCard getCharacterCard(CardEffect cardEffect){
         int indexCharacter = getCharacterCardByEffect().indexOf(cardEffect);
@@ -215,8 +219,8 @@ public class Table implements Serializable {
     }
 
     /**
-     *
-     * @return Returns an array with the effects of the character card of the match
+     * Returns a list with the effects of the Character cards of the match
+     * @return an array with the effects of the character cards
      */
     public ArrayList<CardEffect> getCharacterCardByEffect() {
         ArrayList<CardEffect> cardEffectList = new ArrayList<>();
@@ -246,10 +250,19 @@ public class Table implements Serializable {
         this.coinsOnTable = coinsOnTable;
     }
 
+    /**
+     * Increases the number of coins on table when a player buys a certain Character Card
+     * @param coinsValue the amount of coins the player pays
+     */
     public void increaseCoinsOnTable(int coinsValue){
         setCoinsOnTable(getCoinsOnTable() + coinsValue);
     }
 
+    /**
+     * Decreases the number of coins on table when the game is initialized and gives them to each player
+     * Decreases the number of coins on table when a player moves up to 3 students in each student's hall
+     * @param coinsValue the amount of coins removed from the table
+     */
     public void decreaseCoinsOnTable(int coinsValue){
         setCoinsOnTable(getCoinsOnTable() - coinsValue);
     }
@@ -258,9 +271,9 @@ public class Table implements Serializable {
         return characterCardsOnTable;
     }
 
-    /** Evaluate if 2 or more islands needs to merge
-     *
-     * @param listOfIsland list of the islands of the match
+    /**
+     * Evaluates if 2 or more islands needs to merge
+     * @param listOfIsland current list of islands on the table
      */
     public void joinIsland(ArrayList<IslandCard> listOfIsland) {
 
@@ -301,16 +314,31 @@ public class Table implements Serializable {
         }
     }
 
+    /**
+     * Handles the merge of two islands when they have the same tower's color and updates the list of islands on the table
+     * Called from function JoinIsland when just one island got a tower
+     * @param listOfIsland current list of islands on the table
+     * @param i first island id
+     * @param ii second island id
+     */
     private void MergeNoTower(ArrayList<IslandCard> listOfIsland, int i, int ii) {
         if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(ii).getTowerOnIsland().getTColour())) {
             for (Student student : listOfIsland.get(ii).getStudentOnIsland())
                 listOfIsland.get(i).getStudentOnIsland().add(student);
-            listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + listOfIsland.get(ii).getMergedIsland());
-            listOfIsland.get(i).getListOfMinorIslands().add(listOfIsland.get(ii).getImmutableIdIsland());
-            listOfIsland.remove(ii);
+                listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + listOfIsland.get(ii).getMergedIsland());
+                listOfIsland.get(i).getListOfMinorIslands().add(listOfIsland.get(ii).getImmutableIdIsland());
+                listOfIsland.remove(ii);
         }
     }
 
+    /**
+     * Handles the merge of two or more islands and updates the list of islands on the table
+     * Called from function JoinIsland when both islands got a tower
+     * @param listOfIsland current list of islands on the table
+     * @param i first island id
+     * @param ii second island id
+     * @param iii third island id
+     */
     private void MergeTower(ArrayList<IslandCard> listOfIsland, int i, int ii, int iii){
         if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(ii).getTowerOnIsland().getTColour()) &&
                 listOfIsland.get(i).getTowerOnIsland().getTColour() != listOfIsland.get(iii).getTowerOnIsland().getTColour()) {
@@ -349,11 +377,11 @@ public class Table implements Serializable {
     }
 
     /**
-     *
-     * @param game
-     * @return the player that's winning
+     * Calculates the tower's influence on tha table and return the player that's winning
+     * @param game object
+     * @return player with the highest influence
      */
-    public Player playerIsWinning(Game game) {  //calcola influenza torri sul tavolo e restituisce quello con più influenza
+    public Player playerIsWinning(Game game) {
         ArrayList<Team> teams = game.getTeams();
         int countGrey = 0;
         int countWhite = 0;
@@ -514,9 +542,9 @@ public class Table implements Serializable {
     }
 
     /**
-     *
-     * @param game
-     * @return the winner player
+     * Returns the player who won the match
+     * @param game object
+     * @return the winning player
      */
     private Player returnWinner(Game game) {
         Player winner = null;

@@ -12,10 +12,12 @@ import it.polimi.ingsw.model.student.Student;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Represents the Island Card
+ */
+
 public class IslandCard implements Serializable {
-
     private int idIsland;
-
     private int immutableIdIsland;
     private ArrayList<Student> studentOnIsland ;
     private boolean towerIsOnIsland;
@@ -27,6 +29,10 @@ public class IslandCard implements Serializable {
     private boolean xCardOnIsland = false;
     private int xCardCounter = 0;
 
+    /**
+     * default constructor
+     * @param idIsland id of a specific island, used to identify itself
+     */
     public IslandCard(int idIsland) {
         this.idIsland = idIsland;
         this.immutableIdIsland = idIsland;
@@ -73,7 +79,8 @@ public class IslandCard implements Serializable {
     }
 
     /**
-     *
+     * Builds tower when a player has the influence on the island where is placed Mother Earth
+     * Also handles Curator's effect (character card)
      * @param listOfPlayer list of player of the match
      * @param cardEffectPlayed effect played in this turn
      * @param activePlayer player that is playing his turn
@@ -118,8 +125,8 @@ public class IslandCard implements Serializable {
             MotherEarthOnIsland=false;
     }
 
-    /** Check if the tower present has to change color or not
-     *
+    /**
+     * Checks if the tower present has to change color or not
      * @param listOfPlayers list of player of the match
      * @param playerBuilder the player that has influence and has to place a tower
      */
@@ -143,11 +150,12 @@ public class IslandCard implements Serializable {
     }
 
     /**
-     *
+     * Returns the player with the maximum influence on a certain island
      * @param listOfPlayers list of player of the match
      * @param cardEffectPlayed effect played in this turn
      * @param activePlayer player that is playing his turn
-     * @return the player with the influence on the island, return null if no one has influence or there is a draw.
+     * @return the player with the influence on the island,
+     *         null if no one has influence or there is a draw.
      */
     public Player calculateInfluence(ArrayList<Player> listOfPlayers, CardEffect cardEffectPlayed, Player activePlayer, GameMode gameMode){   //Restituisce il Player che ha influenza sull'isola
         int i ;
@@ -202,7 +210,7 @@ public class IslandCard implements Serializable {
 
             }
 
-            /** Knight effect */
+            /** KNIGHT EFFECT */
             if(cardEffectPlayed.isKnightPlayed() && p.equals(activePlayer)) {
                 p.setInfluenceOnIsland(countTot + 2);
             }
@@ -211,7 +219,8 @@ public class IslandCard implements Serializable {
 
             /** CENTAUR EFFECT */
             if(towerIsOnIsland) {
-                if (p.getTColor().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isCentaurPlayed()) {/** Adds influence of the towers if centaur effect isn't activated */
+                if (p.getTColor().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isCentaurPlayed()) {
+                    /** Adds influence of the towers if centaur effect isn't activated */
                     countTot += mergedIsland;
                     p.setInfluenceOnIsland(countTot);
                 }
@@ -255,7 +264,7 @@ public class IslandCard implements Serializable {
     }
 
     /**
-     *
+     * Returns the player with the maximum influence on the island in COOP mode (4 players mode)
      * @param listOfPlayers list of player of the match
      * @param cardEffectPlayed effect played in this turn
      * @param activePlayer player that is playing his turn

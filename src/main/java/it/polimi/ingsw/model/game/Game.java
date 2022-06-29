@@ -186,7 +186,7 @@ public class Game {
     }
 
     /**
-     *
+     * Decrease a player's coin score
      * @param nickname nickname of the player
      * @param decreaseValue number of coins to remove at the player
      */
@@ -195,8 +195,8 @@ public class Game {
         activePlayer.setCoinScore(activePlayer.getCoinScore() - decreaseValue);
     }
 
-    /** Play the assistant cards selected
-     *
+    /**
+     * Plays the Assistant Card selected
      * @param assistantName  is the assistant card chosen by the Player
      * @param nickname nickname of the player that chooses the assistant card to play
      */
@@ -211,7 +211,7 @@ public class Game {
     }
 
     /**
-     *
+     * Moves a student from player's school's entry to a certain island
      * @param islandCard the island where the student has to be moved
      * @param id id of the student to move
      * @param list list of students where there is the id selected (entry, character card ecc...)
@@ -227,7 +227,7 @@ public class Game {
     }
 
     /**
-     *
+     * Moves a student from player's school's entry to its specific hall
      * @param playerMoving player that select the student to move in the school
      * @param id id of the student selected
      * @param list list of students where there is the id selected (entry, character card ecc...)
@@ -267,8 +267,8 @@ public class Game {
         }
     }
 
-    /** Play the character card selected
-     *
+    /**
+     * Plays the Character Card selected
      * @param cardEffect the effect selected
      * @param nickname the player that plays the card
      * @param idS id of the student
@@ -459,8 +459,8 @@ public class Game {
         Collections.shuffle(table.getBag());
     }
 
-    /** If in expert mode, when you move a student in the third, sixth or ninth space of the hall you get a coin
-     *
+    /**
+     * If in expert mode, when you move a student in the third, sixth or ninth space of the hall you get a coin
      * @param activePlayer player that moves the student
      * @param tableColor table where the player want to move the student
      */

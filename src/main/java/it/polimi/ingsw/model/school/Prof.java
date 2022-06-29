@@ -4,11 +4,18 @@ import it.polimi.ingsw.model.student.SColor;
 
 import java.io.Serializable;
 
-public class Prof implements Serializable {
+/**
+ * Represents the pawn Professor
+ */
 
+public class Prof implements Serializable {
     private final SColor sColor;
     private boolean isInHall = false;
 
+    /**
+     * Default constructor
+     * @param sColor2 professor's color (relating to each student's color)
+     */
     public Prof(SColor sColor2){
         sColor = sColor2;
     }
