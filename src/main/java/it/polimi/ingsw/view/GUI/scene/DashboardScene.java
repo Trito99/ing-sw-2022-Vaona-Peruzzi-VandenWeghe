@@ -750,7 +750,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
                         islandMap.put(island, new ArrayList<>());
                         islandMap.get(island).add(student.getIdStudent());
                     }else{
-                        if(!islandMap.get(island).contains(student.getIdStudent()));
+                        if(!(islandMap.get(island).contains(student.getIdStudent())));
                             islandMap.get(island).add(student.getIdStudent());
                     }
                     switch (student.getsColour()) {
@@ -777,7 +777,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
                     ((Pane) islandPane.getChildren().get(24+i)).getChildren().get(((Pane) islandPane.getChildren().get(24+i)).getChildren().size()-1).setVisible(false);
                 }
                 island.getChildren().get(island.getChildren().size()-1).setVisible(true);
-                islandMother=islandCard.getImmutableIdIsland();
+                islandMother=islandCard.getIdIsland();
             }
             if(islandCard.towerIsOnIsland()){
                 island.getChildren().get(island.getChildren().size()-2).setVisible(true);
