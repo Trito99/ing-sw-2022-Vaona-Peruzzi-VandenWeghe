@@ -509,7 +509,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
                                 characterCardController.disableAll();
                                 break;
                             case ABBOT:
-                                characterCardController.abilitateStudentPane();
+                                characterCardController.activateStudentPane();
                                 break;
                             case HOST:
                                 characterCardController.disableAll();
@@ -521,25 +521,25 @@ public class DashboardScene extends ObservableView implements GenericScene {
                                 characterCardController.disableAll();
                                 break;
                             case CURATOR:
-                                characterCardController.abilitateXCardPane();
+                                characterCardController.activateXCardPane();
                                 break;
                             case CENTAUR:
                                 characterCardController.disableAll();
                                 break;
                             case ACROBAT:
-                                characterCardController.abilitateStudentPane();
+                                characterCardController.activateStudentPane();
                                 break;
                             case KNIGHT:
                                 characterCardController.disableAll();
                                 break;
                             case HERBALIST:
-                                characterCardController.abilitateStudentPane();
+                                characterCardController.activateStudentPane();
                                 break;
                             case BARD:
                                 characterCardController.disableAll();
                                 break;
                             case COURTESAN:
-                                characterCardController.abilitateStudentPane();
+                                characterCardController.activateStudentPane();
                                 break;
                             case JUNKDEALER:
                                 characterCardController.disableAll();

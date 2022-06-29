@@ -2,15 +2,11 @@ package it.polimi.ingsw.view.GUI.CardsController;
 
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
-import it.polimi.ingsw.model.student.Student;
-import it.polimi.ingsw.observer.ObservableView;
-import it.polimi.ingsw.view.GUI.scene.GenericScene;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -83,7 +79,7 @@ public class CharacterCardController {
         cardImage.setImage(new Image(characterCardMap.get(card.getCardEffect())));
     }
 
-    public void abilitateStudentPane(){
+    public void activateStudentPane(){
         longPane.setVisible(true);
         shortPane.setVisible(false);
 
@@ -94,7 +90,7 @@ public class CharacterCardController {
         studentPane.setDisable(false);
     }
 
-    public void abilitateXCardPane(){
+    public void activateXCardPane(){
         longPane.setVisible(true);
         shortPane.setVisible(false);
 

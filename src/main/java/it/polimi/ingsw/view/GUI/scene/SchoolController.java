@@ -408,9 +408,9 @@ public class SchoolController extends ObservableView implements GenericScene {
         return difficulty;
     }
 
-    public void disabilitateEntry(boolean disabilitate){
+    public void disableEntry(boolean disable){
         for(Student student : school.getEntry()) {
-            entry.getChildren().get(school.getEntry().indexOf(student)).setDisable(disabilitate);
+            entry.getChildren().get(school.getEntry().indexOf(student)).setDisable(disable);
         }
     }
 

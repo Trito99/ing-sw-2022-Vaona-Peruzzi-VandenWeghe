@@ -192,7 +192,7 @@ public class GUI extends ObservableView implements View {
     @Override
     public void askPlaceAndStudentForMove(ArrayList<Student> entry) {
         Platform.runLater(() ->
-            GuiManager.getMainScene().getPersonalSchoolController().disabilitateEntry(false));
+            GuiManager.getMainScene().getPersonalSchoolController().disableEntry(false));
         showMessage("ACTION PHASE\nMove a student from your entry ");
 
     }
@@ -200,7 +200,7 @@ public class GUI extends ObservableView implements View {
     @Override
     public void askMotherEarthSteps(int maxSteps, Table table, Difficulty difficulty) {
         Platform.runLater(() ->
-            {GuiManager.getMainScene().getPersonalSchoolController().disabilitateEntry(true);
+            {GuiManager.getMainScene().getPersonalSchoolController().disableEntry(true);
             GuiManager.getMainScene().disabilityMother(table,maxSteps,false);});
         showMessage("Move MotherEarth");
     }
