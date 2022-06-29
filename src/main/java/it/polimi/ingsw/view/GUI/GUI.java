@@ -21,7 +21,10 @@ import javafx.application.Platform;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.Map;
+
+import static java.lang.System.out;
 
 /**
  * Implements the GUI (graphical user interface)
@@ -230,12 +233,13 @@ public class GUI extends ObservableView implements View {
     }
 
     /**
-     * Shows coins on table
+     * Shows coins and character cards on table
      * @param coins on table
+     * @param characterCardsOnTable on table
      */
     @Override
-    public void showCoin(int coins) {
-        Platform.runLater(() -> GuiManager.getMainScene().updateCoinOnTable(coins));
+    public void showCoinAndCharacterCards(int coins, ArrayList<CharacterCard> characterCardsOnTable) {
+        Platform.runLater(() -> GuiManager.getMainScene().updateCoinOnTableAndCharacterCards(coins,characterCardsOnTable));
     }
 
     /**
@@ -262,18 +266,20 @@ public class GUI extends ObservableView implements View {
         if(!choice) {
             notifyObserver(obs -> obs.chooseCharacterCard("YES",choice));
         }else{
-            notifyObserver(obs -> obs.chooseCharacterCard(GuiManager.getMainScene().getCardSelected().getCardEffect().toString(),choice));
             switch(GuiManager.getMainScene().getCardSelected().getCardEffect()){
                 case ABBOT:
                 case ACROBAT:
-                case HERBALIST:
                 case COURTESAN:
-                    GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected()).disableStudents(false);
+                    GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(false);
                     break;
                 case CURATOR:
-                    GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected()).disableeXCards(false);
+                    GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableeXCards(false);
+                    break;
+                case HERBALIST:
+                case BARD:
                     break;
                 default:
+                    notifyObserver(obs -> obs.chooseCharacterCard(GuiManager.getMainScene().getCardSelected().getCardEffect().toString(),choice));
                     if(GuiManager.getMainScene().isActionStudent()){
                         GuiManager.getMainScene().getPersonalSchoolController().disableEntry(false);
                     }else if(GuiManager.getMainScene().isActionMother()){
@@ -356,6 +362,27 @@ public class GUI extends ObservableView implements View {
                     System.out.print("\nCURATOR EFFECT\nIn which island do you want to place the forbidden card?\n");
             } else
                 notifyObserver(obs -> obs.chooseId(GuiManager.getMainScene().getStudentDestinationIslandId(),choice, indexAcrobat, false));
+        }else{
+            if (characterCard.getCardEffect().equals(CardEffect.ACROBAT)) {
+                if(indexAcrobat %2==1) {
+
+                }else {
+
+                }
+            }
+            else if (characterCard.getCardEffect().equals(CardEffect.BARD)) {
+                if (indexAcrobat % 2 == 1) {
+
+                } else {
+
+                }
+            }
+            else if (characterCard.getCardEffect().equals(CardEffect.COURTESAN)){
+
+            }
+            else {
+                notifyObserver(obs -> obs.chooseId(GuiManager.getMainScene().getCharacterCardControllerMap().get(CardEffect.ABBOT).getStudentSelected(), choice, indexAcrobat, true));
+            }
         }
     }
 }

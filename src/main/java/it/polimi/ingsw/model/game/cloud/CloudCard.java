@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model.cloud;
+package it.polimi.ingsw.model.game.cloud;
 
 import it.polimi.ingsw.model.student.Student;
 

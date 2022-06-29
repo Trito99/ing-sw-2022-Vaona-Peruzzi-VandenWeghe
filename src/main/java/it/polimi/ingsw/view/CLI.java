@@ -5,7 +5,7 @@ import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
-import it.polimi.ingsw.model.cloud.CloudCard;
+import it.polimi.ingsw.model.game.cloud.CloudCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.island.IslandCard;
@@ -379,7 +379,7 @@ public class CLI extends ObservableView implements View {
     }
 
     /**
-     * Prints the updated cards in hand of the player
+     * Prints the updated cards in hasnd of the player
      * @param deckAssistant of the player
      */
     @Override
@@ -406,11 +406,12 @@ public class CLI extends ObservableView implements View {
     }
 
     /**
-     * Shows coins on table
+     * Shows coins and character cards on table
      * @param coins on table
+     * @param characterCardsOnTable on table
      */
     @Override
-    public void showCoin(int coins) {
+    public void showCoinAndCharacterCards(int coins, ArrayList<CharacterCard> characterCardsOnTable) {
     }
 
     /**
@@ -644,7 +645,7 @@ public class CLI extends ObservableView implements View {
                         out.println();
                     }
                     else {
-                        out.print("\nWhich student do you want to move? (id)\n");
+                        out.print("\nABBOT EFFECT\nWhich student do you want to move? (id)\n");
                         printStudentsOnCard(characterCard);
                         out.println();
                     }

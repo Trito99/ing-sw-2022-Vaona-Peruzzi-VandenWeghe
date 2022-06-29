@@ -7,10 +7,11 @@ import it.polimi.ingsw.observer.ObservableView;
 import it.polimi.ingsw.view.GUI.GuiManager;
 import it.polimi.ingsw.view.GUI.scene.GenericScene;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
@@ -37,6 +38,10 @@ public class CharacterCardController extends ObservableView implements GenericSc
     }
 
     private CharacterCard card;
+
+    private Map<ImageView,Integer> studentMap = new HashMap<>();
+
+    private int studentSelected;
 
     @FXML
     private Pane PaneCharacterCard;
@@ -104,7 +109,7 @@ public class CharacterCardController extends ObservableView implements GenericSc
         }
     }
 
-    public void visibleStudentPane(ArrayList<Student> studentsOnCard){
+    public void initializeStudentPane(ArrayList<Student> studentsOnCard){
         longPane.setVisible(true);
         shortPane.setVisible(false);
 
@@ -113,7 +118,9 @@ public class CharacterCardController extends ObservableView implements GenericSc
         xCardPane.setDisable(true);
         studentPane.setVisible(true);
         studentPane.setDisable(false);
+
         for(int i=0;i<studentsOnCard.size();i++){
+            studentPane.getChildren().get(i).setVisible(true);
             switch (studentsOnCard.get(i).getsColour()){
                 case GREEN:
                     ((ImageView) studentPane.getChildren().get(i)).setImage(new Image("/images/students/Gstudent.png"));
@@ -131,10 +138,38 @@ public class CharacterCardController extends ObservableView implements GenericSc
                     ((ImageView) studentPane.getChildren().get(i)).setImage(new Image("/images/students/Bstudent.png"));
                     break;
             }
+            studentMap.put(((ImageView) studentPane.getChildren().get(i)),studentsOnCard.get(i).getIdStudent());
+        }
+        switch (card.getCardEffect()){
+            case ABBOT:
+            case COURTESAN:
+                addDragDetected(studentsOnCard);
+                break;
+            case ACROBAT:
+            case BARD:
+                //click;
+                break;
         }
     }
 
-    public void visibleXCardPane(int XCardsOnCard){
+    public void updateStudentsCharacterCard(CharacterCard characterCard){
+        switch(characterCard.getCardEffect()){
+            case ABBOT:
+            case ACROBAT:
+            case COURTESAN:
+                initializeStudentPane(characterCard.getStudentsOnCard());
+                break;
+            case CURATOR:
+                initializeXCardPane(characterCard.getXCardOnCard());
+                break;
+        }
+        if (characterCard.getCoinOnCard()) {
+            coinPane.setVisible(true);
+            coinImagePersonal.setVisible(true);
+        }
+    }
+
+    public void initializeXCardPane(int XCardsOnCard){
         longPane.setVisible(true);
         shortPane.setVisible(false);
 
@@ -183,5 +218,41 @@ public class CharacterCardController extends ObservableView implements GenericSc
 
     public CharacterCard getCard() {
         return card;
+    }
+
+    public Map<ImageView, Integer> getStudentMap() {
+        return studentMap;
+    }
+
+    public int getStudentSelected(){
+        return  studentSelected;
+    }
+
+    private void addDragDetected(ArrayList<Student> studentsOnCard) {
+        for(int i=0;i<studentsOnCard.size();i++){
+            ImageView studentNode = (ImageView) studentPane.getChildren().get(i);
+            studentNode.setOnDragDetected(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    Dragboard db =  studentNode.startDragAndDrop(TransferMode.ANY);
+                    ClipboardContent content = new ClipboardContent();
+                    content.putImage(studentNode.getImage());
+                    db.setContent(content);
+                    studentSelected = studentMap.get(studentNode);
+
+                    mouseEvent.consume();
+                }
+            });
+
+            studentNode.setOnDragDone(new EventHandler<DragEvent>() {
+                public void handle(DragEvent event) {
+                    if (event.getTransferMode() == TransferMode.MOVE) {
+                    }
+                    notifyObserver(obs -> obs.chooseCharacterCard(GuiManager.getMainScene().getCardSelected().getCardEffect().toString(),true));
+                    GuiManager.getMainScene().disabilitateStudentsAndXCards();
+                    event.consume();
+                }
+            });
+        }
     }
 }

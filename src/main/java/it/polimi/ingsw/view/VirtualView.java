@@ -67,8 +67,8 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void showCoin(int coins) {
-        clientHandler.sendMessage(new ShowCoin(coins));
+    public void showCoinAndCharacterCards(int coins, ArrayList<CharacterCard> characterCardsOnTable) {
+        clientHandler.sendMessage(new ShowCoinAndCharacterCards(coins, characterCardsOnTable));
     }
 
     @Override

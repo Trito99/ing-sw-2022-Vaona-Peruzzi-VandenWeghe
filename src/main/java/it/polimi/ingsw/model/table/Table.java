@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.table;
 
 import it.polimi.ingsw.model.character.CardEffect;
-import it.polimi.ingsw.model.cloud.CloudCard;
+import it.polimi.ingsw.model.game.cloud.CloudCard;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
@@ -163,7 +163,7 @@ public class Table implements Serializable {
      * @param characterCards list of all the character card
      */
     public void generateCharacterCardsOnTable(ArrayList<CharacterCard> characterCards){
-        Collections.shuffle(characterCards);
+        //Collections.shuffle(characterCards);
 
         for( int i = 0; i<3; i++){
             characterCardsOnTable.add(characterCards.get(i));

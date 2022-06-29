@@ -26,7 +26,7 @@ public enum MessageType {
     SHOW_PERSONAL_SCHOOL,
     SHOW_ASSISTANT_DECK,
     SHOW_LIST_OF_ISLANDS,
-    SHOW_COIN,
+    SHOW_COIN_AND_CHARACTER_CARDS,
 
     /** Action */
     PLAY_CHARACTER_CARD,
