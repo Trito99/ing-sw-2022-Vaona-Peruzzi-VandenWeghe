@@ -15,46 +15,44 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * This Scene Controller is used to show and update other players' school and trash card
+ * Used in Two Players Mode
+ */
 public class ViewOtherSchoolScene1 extends ObservableView implements GenericScene {
-
     @FXML
     private ImageView ImageTrash1_2Players;
-
     @FXML
     private Pane Pane_2players;
-
     @FXML
     private ImageView blueBackground;
-
     @FXML
     private ImageView coinImage1_2Players;
-
     @FXML
     private Pane coinPane1_2Players;
-
     @FXML
     private Text coinText1_2players;
-
     @FXML
     private Text player1Text;
-
     @FXML
     private Pane player1_2players;
-
     @FXML
     private Pane schoolPane11;
-
     @FXML
     private Pane schoolPane1_2players;
-
     @FXML
     private Pane trashPane1_2Players;
 
+    /**
+     * Initialize player's school
+     */
     @FXML
     public void initialize(){
     }
 
-
+    /**
+     * Updates player's school and trash card
+     */
     public void updatePersonalSchool(Map<String, SchoolController> map) throws IOException {
         FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource("/fxml/school.fxml"));
         loader.setController(map.get(map.keySet().toArray()[0]));

@@ -15,102 +15,84 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.util.Map;
 
-public class ViewOtherSchoolScene3 extends ObservableView implements GenericScene{
+/**
+ * This Scene Controller is used to show and update other players' school and trash card
+ * Used in COOP mode (4 players)
+ */
 
+public class ViewOtherSchoolScene3 extends ObservableView implements GenericScene{
     @FXML
     private ImageView ImageTrash1_4Players;
-
     @FXML
     private ImageView ImageTrash2_4Players;
-
     @FXML
     private ImageView ImageTrash3_4Players;
-
     @FXML
     private Pane Pane_4players;
-
     @FXML
     private ImageView blueBackground;
-
     @FXML
     private ImageView coinImage1_4Players;
-
     @FXML
     private ImageView coinImage2_4Players;
-
     @FXML
     private ImageView coinImage3_4Players;
-
     @FXML
     private Pane coinPane1_4Players;
-
     @FXML
     private Pane coinPane2_4Players;
-
     @FXML
     private Pane coinPane3_4Players;
-
     @FXML
     private Text coinText1_4players;
-
     @FXML
     private Text coinText2_4players;
-
     @FXML
     private Text coinText3_4players;
-
     @FXML
     private Text player1Text4players;
-
     @FXML
     private Pane player1_4players;
-
     @FXML
     private Text player2Text4players;
-
     @FXML
     private Pane player2_4players;
-
     @FXML
     private Text player3Text4players;
-
     @FXML
     private Pane player3_4players;
-
     @FXML
     private Pane schoolPane1_4players;
-
     @FXML
     private Pane schoolPane2_4players;
-
     @FXML
     private Pane schoolPane31;
-
     @FXML
     private Pane schoolPane32;
-
     @FXML
     private Pane schoolPane33;
-
     @FXML
     private Pane schoolPane3_4players;
-
     @FXML
     private Pane trashPane1_4Players;
-
     @FXML
     private Pane trashPane2_4Players;
-
     @FXML
     private Pane trashPane3_4Players;
 
+    /**
+     * Initialize player's school
+     */
     @FXML
     public void initialize(){
 
     }
 
-
+    /**
+     * Updates player's school and trash card
+     */
     public void updatePersonalSchool(Map<String, SchoolController> map) throws IOException {
+
         /** Player 1 */
         FXMLLoader loader1 = new FXMLLoader(StartGUI.class.getResource("/fxml/school.fxml"));
         loader1.setController(map.get(map.keySet().toArray()[0]));

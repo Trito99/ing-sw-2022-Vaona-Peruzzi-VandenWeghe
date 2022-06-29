@@ -47,18 +47,27 @@ public class CloudCards extends ObservableView implements GenericScene {
         this.cloudCards = cloudCards;
     }
 
+    /**
+     * Initialize Cloud cards
+     */
     public void initialize(){
         hide();
         updateStudents(cloudCards);
         addEventHandler(cloudCards);
     }
 
+    /**
+     * Handles selection of a certain Cloud Card
+     */
     private void addEventHandler(ArrayList<CloudCard> cloudCards) {
         for(int i=cloudCards.size();i>0;i--){
             anchorPane.getChildren().get(anchorPane.getChildren().size()-i).addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickCloud);
         }
     }
 
+    /**
+     * Handles the click on a Cloud Card
+     */
     private void clickCloud(Event event){
         for(int i=cloudCards.size();i>0;i--){
             if(event.getSource().equals(anchorPane.getChildren().get(anchorPane.getChildren().size()-i))){
@@ -69,12 +78,19 @@ public class CloudCards extends ObservableView implements GenericScene {
         }
     }
 
+    /**
+     * Disable click on a Cloud Card
+     */
     public void disabilitateCloud(boolean disabilitate){
         for(int i=cloudCards.size();i>0;i--){
             anchorPane.getChildren().get(anchorPane.getChildren().size()-i).setDisable(disabilitate);
         }
     }
 
+    /**
+     * Loads new students on Cloud cards
+     * @param cloudCards
+     */
     public void updateStudents(ArrayList<CloudCard> cloudCards){
         this.cloudCards = cloudCards;
         ArrayList<Student> allStudents = new ArrayList<>();
@@ -117,6 +133,9 @@ public class CloudCards extends ObservableView implements GenericScene {
         }
     }
 
+    /**
+     * Hides panes not used yet
+     */
     private void hide() {
         for (Node node : StudentsPane.getChildren()) {
             node.setVisible(false);

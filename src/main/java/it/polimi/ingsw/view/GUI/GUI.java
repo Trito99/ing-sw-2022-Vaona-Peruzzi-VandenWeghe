@@ -44,6 +44,10 @@ public class GUI extends ObservableView implements View {
         });
     }
 
+    /**
+     * Asks the player's info and the game id that the player wants to join (or create)
+     * @param lobbyMap map for print the information of the lobby
+     */
     @Override
     public void askLobby(Map<String, LobbyForPrint> lobbyMap) {
         SetupGameScene setupGame = new SetupGameScene();
@@ -51,9 +55,11 @@ public class GUI extends ObservableView implements View {
         setupGame.setLobbyMap(lobbyMap);
 
         Platform.runLater(() -> GuiManager.changeRootPane(setupGame, "/fxml/setup_game_scene") );
-
     }
 
+    /**
+     * Asks at the player who creates the lobby the difficulty and the gameMode
+     */
     @Override
     public void askPlayersNumberAndDifficulty() {
         NewGameScene pNandDifficulty = new NewGameScene();
@@ -61,6 +67,11 @@ public class GUI extends ObservableView implements View {
         Platform.runLater(()-> GuiManager.changeRootPane(observers,"/fxml/new_game_scene") );
     }
 
+    /**
+     * Asks at the player to select deck and towers
+     * @param towerColors array with the colors of the towers
+     * @param assistantDeckNames array with the string's name of decks
+     */
     @Override
     public void askTowerColorAndDeck(ArrayList<TColor> towerColors, ArrayList<AssistantDeckName> assistantDeckNames) {
         TowerAndDeckScene towerAndDeckScene = new TowerAndDeckScene();
@@ -75,6 +86,13 @@ public class GUI extends ObservableView implements View {
 
     }
 
+    /**
+     * Shows if the login was successful
+     * @param nickname of the player
+     * @param gameId chosen by the player
+     * @param playerDate of the player
+     * @param wasJoined false if the player hasn't joined a match yet
+     */
     @Override
     public void showLogin(String nickname, String gameId, GregorianCalendar playerDate, boolean wasJoined) {
         if (wasJoined){
@@ -89,6 +107,10 @@ public class GUI extends ObservableView implements View {
         }
     }
 
+    /**
+     * Shows a generic message
+     * @param message to be shown
+     */
     @Override
     public void showMessage(String message) {
         Platform.runLater(() -> MessageScene.display(null,null, message));
@@ -97,11 +119,25 @@ public class GUI extends ObservableView implements View {
         }
     }
 
+    /**
+     * Shows a waiting message
+     * @param message to be shown
+     */
     @Override
     public void showWaitingMessage(String message) {
         Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/waiting_scene") );
     }
 
+    /**
+     * Shows the updated School of the player
+     * @param school of the player
+     * @param nickname of the player
+     * @param trash card of the player
+     * @param difficulty of the match
+     * @param coins coinScore of the player
+     * @param gameMode of the match
+     * @param teamMate of the player (if coop mode)
+     */
     @Override
     public void showPersonalSchool(School school, String nickname, AssistantCard trash, Difficulty difficulty, int coins, GameMode gameMode, String teamMate) {
         SchoolController schoolController = new SchoolController(school,trash, difficulty, coins);
@@ -116,15 +152,23 @@ public class GUI extends ObservableView implements View {
             });
         else
             Platform.runLater(() ->GuiManager.getMainScene().updateOtherSchool(schoolController, gameMode, nickname));
-
-
     }
 
+    /**
+     * Shows the updated list of islands
+     * @param table of the match
+     * @param difficulty of the match
+     */
     @Override
     public void showListOfIsland(Table table, Difficulty difficulty) {
        Platform.runLater(() -> GuiManager.getMainScene().updateIslands(table.getListOfIsland()));
     }
 
+    /**
+     * Shows the updated table of the match
+     * @param table of the match
+     * @param difficulty mode of the match
+     */
     @Override
     public void showTable(Table table, Difficulty difficulty) {
         this.table = table;
@@ -144,12 +188,19 @@ public class GUI extends ObservableView implements View {
         }
     }
 
+    /**
+     * Shows the updated cards in hand of the player
+     * @param deckAssistant of the player
+     */
     @Override
     public void showDeckAssistant(DeckAssistant deckAssistant) {
         ViewDeckScene viewDeckScene = new ViewDeckScene(deckAssistant);
         Platform.runLater(()->GuiManager.getMainScene().updateAssistantCardDeck(viewDeckScene));
     }
 
+    /**
+     * Shows Winning message and disconnects the player
+     */
     @Override
     public void showWinMessage() {
         WinnerScene win = new WinnerScene();
@@ -157,6 +208,10 @@ public class GUI extends ObservableView implements View {
         Platform.runLater(() -> GuiManager.changeRootPane(win, "/fxml/winner_scene"));
     }
 
+    /**
+     * Shows Losing message and disconnects the player
+     * @param nickname of the player that won the match
+     */
     @Override
     public void showLoseMessage(String nickname) {
         LoserScene lost = new LoserScene();
@@ -164,16 +219,27 @@ public class GUI extends ObservableView implements View {
         Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/lose_scene"));
     }
 
+    /**
+     * Shows the player an error message
+     * @param message to be shown
+     */
     @Override
     public void showErrorMessage(String message) {
         Platform.runLater(() -> MessageScene.display("Error","Error", message));
     }
 
+    /**
+     * Shows coins on table
+     * @param coins on table
+     */
     @Override
     public void showCoin(int coins) {
         Platform.runLater(() -> GuiManager.getMainScene().updateCoinOnTable(coins));
     }
 
+    /**
+     * Asks the player which Assistant Card wants to play
+     */
     @Override
     public void askAssistantCardToPlay() {
         Platform.runLater(() -> {
@@ -183,16 +249,31 @@ public class GUI extends ObservableView implements View {
 
     }
 
+    /**
+     * Asks at the player which Character Card wants to play
+     * @param choice false if the player hasn't already decided if he wants to activate a character card,
+     *               true if the player wants to play a certain character card
+     * @param coins of player
+     * @param list of Character Cards on table
+     */
     @Override
     public void askCharacterCardToPlay(boolean choice, int coins, ArrayList<CharacterCard> list) {
 
     }
 
+    /**
+     * Handles the effect of the Herbalist Card and Junkdealer Card
+     * Asks the player which color wants to select
+     * @param color of the students to block in the influence calculation or to remove from the entry
+     */
     @Override
-    public void askColorToBlock(CardEffect cardEffect) {
-
+    public void askColorToBlock(CardEffect color) {
     }
 
+    /**
+     * Asks the player which students and where wants to move
+     * @param entry of the player's school
+     */
     @Override
     public void askPlaceAndStudentForMove(ArrayList<Student> entry) {
         Platform.runLater(() ->
@@ -201,6 +282,12 @@ public class GUI extends ObservableView implements View {
 
     }
 
+    /**
+     * Asks the player how many steps wants to move Mother Earth
+     * @param maxSteps max steps the player can choose
+     * @param table of the match
+     * @param difficulty of the match
+     */
     @Override
     public void askMotherEarthSteps(int maxSteps, Table table, Difficulty difficulty) {
         Platform.runLater(() ->
@@ -209,6 +296,10 @@ public class GUI extends ObservableView implements View {
         showMessage("Move MotherEarth");
     }
 
+    /**
+     * Asks the player which cloud wants to choose
+     * @param table of the match
+     */
     @Override
     public void askCloud(Table table) {
         Platform.runLater(() ->
@@ -217,6 +308,13 @@ public class GUI extends ObservableView implements View {
         showMessage("Choose a Cloud");
     }
 
+    /**
+     * Asks the player which student want to select
+     * @param choice true for herald and curator effect, otherwise false
+     * @param characterCard played in the round
+     * @param indexAcrobat index for the acrobat effect
+     * @param school of current player
+     */
     @Override
     public void askId(boolean choice, CharacterCard characterCard, int indexAcrobat, School school) {
         if (choice) {

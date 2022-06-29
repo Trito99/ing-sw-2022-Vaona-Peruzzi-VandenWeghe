@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Handles the change of each scene in GUI
+ * Handles the change of each Scene in GUI
  */
 public class GuiManager extends ObservableView {
     private static Scene scene;
