@@ -55,7 +55,6 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private ViewDeckScene assistantDeck;
     private  Table table;
     private GameMode gameMode;
-    private GameController gameController;
     private Difficulty difficulty;
     private boolean planning = false;
     private boolean actionStudent = false;
@@ -397,7 +396,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
                                 characterCardController.disableAll();
                                 break;
                             case ABBOT:
-                                characterCardController.activateStudentPane();
+                                characterCardController.activateStudentPane(characterCardsPlaying.get(i).getStudentsOnCard());
                                 break;
                             case HOST:
                                 characterCardController.disableAll();
@@ -409,25 +408,25 @@ public class DashboardScene extends ObservableView implements GenericScene {
                                 characterCardController.disableAll();
                                 break;
                             case CURATOR:
-                                characterCardController.activateXCardPane();
+                                characterCardController.activateXCardPane(characterCardsPlaying.get(i).getXCardOnCard());
                                 break;
                             case CENTAUR:
                                 characterCardController.disableAll();
                                 break;
                             case ACROBAT:
-                                characterCardController.activateStudentPane();
+                                characterCardController.activateStudentPane(characterCardsPlaying.get(i).getStudentsOnCard());
                                 break;
                             case KNIGHT:
                                 characterCardController.disableAll();
                                 break;
                             case HERBALIST:
-                                characterCardController.activateStudentPane();
+                                characterCardController.activateStudentPane(characterCardsPlaying.get(i).getStudentsOnCard());
                                 break;
                             case BARD:
                                 characterCardController.disableAll();
                                 break;
                             case COURTESAN:
-                                characterCardController.activateStudentPane();
+                                characterCardController.activateStudentPane(characterCardsPlaying.get(i).getStudentsOnCard());
                                 break;
                             case JUNKDEALER:
                                 characterCardController.disableAll();
@@ -871,8 +870,8 @@ public class DashboardScene extends ObservableView implements GenericScene {
                     if (event.getTransferMode() == TransferMode.MOVE) {
                     }
                     ArrayList<Integer> possibleIslands = new ArrayList<>();
-                    if((islandMother+maxSteps)>12){
-                        for(int i=1; i<(islandMother+maxSteps-11);i++){
+                    if((islandMother+maxSteps)>table.getListOfIsland().size()){
+                        for(int i=1; i<(islandMother+maxSteps-table.getListOfIsland().size()+1);i++){
                             possibleIslands.add(i);
                         }
                     }
@@ -880,7 +879,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
                     if(steps<0){
                         for(int i=0;i<possibleIslands.size();i++){
                             if(possibleIslands.get(i)==motherDestinationIslandId) {
-                                steps = 12 - islandMother + motherDestinationIslandId;
+                                steps = table.getListOfIsland().size() - islandMother + motherDestinationIslandId;
                                 int finalSteps = steps;
                                 notifyObserver(obs -> obs.chooseMotherEarthSteps(finalSteps,maxSteps,""));
                             }
