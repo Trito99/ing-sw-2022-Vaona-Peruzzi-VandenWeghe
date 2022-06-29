@@ -16,42 +16,32 @@ import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 
+/**
+ * This Scene Controller is used to make the player choose between 2 or more cloud cards
+ */
 public class CloudCards extends ObservableView implements GenericScene {
-
     private ArrayList<CloudCard> cloudCards;
-
     private CloudCard cloudSelected;
-
     @FXML
     private Pane StudentsPane;
-
     @FXML
     private AnchorPane anchorPane;
-
     @FXML
     private ImageView cloud1_2Players;
-
     @FXML
     private ImageView cloud2_2Players;
-
     @FXML
     private ImageView stud1_c1_2Players;
-
     @FXML
     private ImageView stud1_c2_2Players;
-
     @FXML
     private ImageView stud2_c1_2Players;
-
     @FXML
     private ImageView stud2_c2_2Players;
-
     @FXML
     private ImageView stud3_c1_2Players;
-
     @FXML
     private ImageView stud3_c2_2Players;
-
 
     public void setCloudCard(ArrayList<CloudCard> cloudCards){
         this.cloudCards = cloudCards;
@@ -61,7 +51,6 @@ public class CloudCards extends ObservableView implements GenericScene {
         hide();
         updateStudents(cloudCards);
         addEventHandler(cloudCards);
-
     }
 
     private void addEventHandler(ArrayList<CloudCard> cloudCards) {

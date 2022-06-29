@@ -21,19 +21,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Handles the change of each scene in GUI
+ */
 public class GuiManager extends ObservableView {
     private static Scene scene;
-
     private static Map<GenericScene, Stage> newStages = new HashMap<>();
     private static GenericScene activeController;
-
     private static DashboardScene mainController;
     private static Scene mainScene;
     private static Parent mainRoot;
 
     public static <T> T changeRootPane(List<ObserverView> observerViewList, Scene newScene, String fxml) {
         T controller = null;
-
         try {
             FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource(fxml + ".fxml"));
             loader.setLocation(StartGUI.class.getResource(fxml + ".fxml"));
@@ -146,5 +146,4 @@ public class GuiManager extends ObservableView {
     public static DashboardScene getMainScene(){
         return mainController;
     }
-
 }

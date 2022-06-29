@@ -17,67 +17,53 @@ import javafx.scene.text.Text;
 
 import java.util.Locale;
 
+/**
+ * This Scene Controller is used to create a new lobby
+ */
 public class NewGameScene extends ObservableView implements GenericScene {
-
     private int playerNumber = 0;
     private Difficulty difficulty;
 
-
     @FXML
     private ImageView backgroundImage;
-
     @FXML
     private Text connectText;
-
     @FXML
     private Button coopButton;
-
     @FXML
     private Text exitText1;
-
     @FXML
     private Text exitText11;
-
     @FXML
     private Button expertButton;
-
     @FXML
     private Pane expertShadowPane;
-
     @FXML
     private Pane fourShadowPane;
-
     @FXML
     private Text gameText;
-
     @FXML
     private Button nextButton;
-
     @FXML
     private Text playerText;
-
     @FXML
     private Button standardButton;
-
     @FXML
     private Pane standardShadowPane;
-
     @FXML
     private Button threePlayersButton;
-
     @FXML
     private Pane threeShadowPane;
-
     @FXML
     private Text titleText;
-
     @FXML
     private Button twoPlayersButton;
-
     @FXML
     private Pane twoShadowPane;
 
-
+    /**
+     * Initialize buttons and panes present in the Scene
+     */
     @FXML
     public void initialize(){
         nextButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickNext);
@@ -94,6 +80,9 @@ public class NewGameScene extends ObservableView implements GenericScene {
         expertShadowPane.setVisible(false);
     }
 
+    /**
+     * Handles the click on "Two players" button
+     */
     private void clickTwoPlayersButton(Event event){
         fourShadowPane.setVisible(false);
         threeShadowPane.setVisible(false);
@@ -102,6 +91,9 @@ public class NewGameScene extends ObservableView implements GenericScene {
         setPlayerNumber(2);
     }
 
+    /**
+     * Handles the click on "Three players" button
+     */
     private void clickThreePlayersButton(Event event){
         twoShadowPane.setVisible(false);
         fourShadowPane.setVisible(false);
@@ -110,6 +102,9 @@ public class NewGameScene extends ObservableView implements GenericScene {
         setPlayerNumber(3);
     }
 
+    /**
+     * Handles the click on "Four players" button
+     */
     private void clickCoopButton(Event event){
         twoShadowPane.setVisible(false);
         threeShadowPane.setVisible(false);
@@ -118,6 +113,9 @@ public class NewGameScene extends ObservableView implements GenericScene {
         setPlayerNumber(4);
     }
 
+    /**
+     * Handles the click on "Standard Mode" button
+     */
     private void clickStandardButton(Event event){
         expertShadowPane.setVisible(false);
         standardShadowPane.setStyle("-fx-background-color: white");
@@ -125,6 +123,9 @@ public class NewGameScene extends ObservableView implements GenericScene {
         setDifficulty(Difficulty.STANDARDMODE);
     }
 
+    /**
+     * Handles the click on "Expert Mode" button
+     */
     private void clickExpertButton(Event event){
         standardShadowPane.setVisible(false);
         expertShadowPane.setStyle("-fx-background-color: white");
@@ -140,7 +141,9 @@ public class NewGameScene extends ObservableView implements GenericScene {
         this.difficulty = difficulty;
     }
 
-    /** gestisce il click sul pulsante */
+    /**
+     * Handles the click on the Next button
+     */
     private void clickNext(Event event){
         if(playerNumber!=0 && difficulty!=null) {
             disableButtons();
@@ -148,6 +151,9 @@ public class NewGameScene extends ObservableView implements GenericScene {
         }
     }
 
+    /**
+     * Disable all buttons
+     */
     private void disableButtons(){
         nextButton.setDisable(true);
         twoPlayersButton.setDisable(true);

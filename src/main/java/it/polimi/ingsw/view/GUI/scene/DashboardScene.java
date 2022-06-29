@@ -30,13 +30,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This Scene Controller is used to manage the main scene of the game
+ */
 public class DashboardScene extends ObservableView implements GenericScene {
-
     private Map<String,SchoolController> schoolControllers = new HashMap<>();
-
     private CloudCards cloudController;
     private SchoolController personalSchoolController;
-
     private Image temp = null;
     private static Map<String, String> assistantCardMap;
     static {
@@ -52,66 +52,44 @@ public class DashboardScene extends ObservableView implements GenericScene {
         assistantCardMap.put("elephant", "/images/assistantCards/assistant9.png");
         assistantCardMap.put("turtle", "/images/assistantCards/assistant10.png");
     }
-
-
     private ViewDeckScene assistantDeck;
     private  Table table;
     private GameMode gameMode;
     private GameController gameController;
     private Difficulty difficulty;
-
     private boolean planning = false;
-
     private boolean actionStudent = false;
-
     private Map<Pane, ArrayList<Integer>> islandMap = new HashMap<>();
-
     private int studentDestinationIslandId, motherDestinationIslandId, islandMother, maxSteps;
-
-
 
     @FXML
     private Rectangle Bridge10_11;
-
     @FXML
     private Rectangle Bridge11_12;
-
     @FXML
     private Rectangle Bridge12_1;
-
     @FXML
     private Rectangle Bridge1_2;
-
     @FXML
     private Rectangle Bridge2_3;
-
     @FXML
     private Rectangle Bridge3_4;
-
     @FXML
     private Rectangle Bridge4_5;
-
     @FXML
     private Rectangle Bridge5_6;
-
     @FXML
     private Rectangle Bridge6_7;
-
     @FXML
     private Rectangle Bridge7_8;
-
     @FXML
     private Rectangle Bridge8_9;
-
     @FXML
     private Rectangle Bridge9_10;
-
     @FXML
     private ImageView ImageTrashPersonal;
-
     @FXML
     private Text NumberOfXcard;
-
     @FXML
     private Text NumberOfXcard1;
 
@@ -129,274 +107,184 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     @FXML
     private Text NumberOfXcard31;
-
     @FXML
     private Text NumberOfXcard4;
-
     @FXML
     private Text NumberOfXcard5;
-
     @FXML
     private Text NumberOfXcard6;
-
     @FXML
     private Text NumberOfXcard7;
-
     @FXML
     private Text NumberOfXcard8;
-
     @FXML
     private Pane PaneCoinScore;
-
     @FXML
     private Pane PaneIsland1;
-
     @FXML
     private Pane PaneIsland10;
-
     @FXML
     private Pane PaneIsland11;
-
     @FXML
     private Pane PaneIsland12;
-
     @FXML
     private Pane PaneIsland2;
-
     @FXML
     private Pane PaneIsland3;
-
     @FXML
     private Pane PaneIsland4;
-
     @FXML
     private Pane PaneIsland5;
-
     @FXML
     private Pane PaneIsland6;
-
     @FXML
     private Pane PaneIsland7;
-
     @FXML
     private Pane PaneIsland8;
-
     @FXML
     private Pane PaneIsland9;
-
     @FXML
     private Pane PaneTeamMate;
-
     @FXML
     private Pane PaneXcard1;
-
     @FXML
     private Pane PaneXcard10;
-
     @FXML
     private Pane PaneXcard11;
-
     @FXML
     private Pane PaneXcard12;
-
     @FXML
     private Pane PaneXcard2;
-
     @FXML
     private Pane PaneXcard3;
-
     @FXML
     private Pane PaneXcard4;
-
     @FXML
     private Pane PaneXcard5;
-
     @FXML
     private Pane PaneXcard6;
-
     @FXML
     private Pane PaneXcard7;
-
     @FXML
     private Pane PaneXcard8;
-
     @FXML
     private Pane PaneXcard9;
-
     @FXML
     private Text TextCoinscore;
-
     @FXML
     private Text TextTeamMate;
-
     @FXML
     private VBox characterCardLayout;
-
     @FXML
     private Pane cloudPane;
-
     @FXML
     private ImageView coinImagePersonal;
-
     @FXML
     private ImageView coinImageTable;
-
     @FXML
     private Pane coinPanePersonal;
-
     @FXML
     private Pane coinPaneTable;
-
     @FXML
     private Text coinTextPersonal;
-
     @FXML
     private Text coinTextTable;
-
     @FXML
     private Button deckButton;
-
     @FXML
     private ImageView deckLogo;
-
     @FXML
     private ImageView trashLogo;
-
     @FXML
     private ImageView island0;
-
     @FXML
     private ImageView island1;
-
     @FXML
     private ImageView island10;
-
     @FXML
     private ImageView island11;
-
     @FXML
     private ImageView island2;
-
     @FXML
     private ImageView island3;
-
     @FXML
     private ImageView island4;
-
     @FXML
     private ImageView island5;
-
     @FXML
     private ImageView island6;
-
     @FXML
     private ImageView island7;
-
     @FXML
     private ImageView island8;
-
     @FXML
     private ImageView island9;
-
     @FXML
     private Pane islandPane;
-
     @FXML
     private ImageView motherEarth1;
-
     @FXML
     private ImageView motherEarth10;
-
     @FXML
     private ImageView motherEarth11;
-
     @FXML
     private ImageView motherEarth12;
-
     @FXML
     private ImageView motherEarth2;
-
     @FXML
     private ImageView motherEarth3;
-
     @FXML
     private ImageView motherEarth4;
-
     @FXML
     private ImageView motherEarth5;
-
     @FXML
     private ImageView motherEarth6;
-
     @FXML
     private ImageView motherEarth7;
-
     @FXML
     private ImageView motherEarth8;
-
     @FXML
     private ImageView motherEarth9;
-
     @FXML
     private Button otherSchoolButton;
-
     @FXML
     private Pane schoolPane;
-
     @FXML
     private Pane schoolPane1;
-
     @FXML
     private Pane schoolPane11;
-
     @FXML
     private Pane characterPane;
-
     @FXML
     private Pane sxPane;
-
     @FXML
     private Text textCoinsOnTable;
-
     @FXML
     private ImageView tower1;
-
     @FXML
     private ImageView tower10;
-
     @FXML
     private ImageView tower11;
-
     @FXML
     private ImageView tower12;
-
     @FXML
     private ImageView tower2;
-
     @FXML
     private ImageView tower3;
-
     @FXML
     private ImageView tower4;
-
     @FXML
     private ImageView tower5;
-
     @FXML
     private ImageView tower6;
-
     @FXML
     private ImageView tower7;
-
     @FXML
     private ImageView tower8;
-
     @FXML
     private ImageView tower9;
-
     @FXML
     private Pane trashPanePersonalSchool;
-
 
 
     public void updateTable(Table table){
@@ -608,8 +496,6 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }
     }
 
-
-
     public void updateAssistantCardDeck(ViewDeckScene viewDeckScene){
         this.assistantDeck = viewDeckScene;
         switch(viewDeckScene.getDeckAssistant().getDeckName()){
@@ -796,7 +682,6 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }
     }
 
-
     public ViewDeckScene getAssistantDeck(){
         return assistantDeck;
     }
@@ -834,7 +719,6 @@ public class DashboardScene extends ObservableView implements GenericScene {
             }
         }
     }
-
     public void setMotherId(int destinationIsland) {
         boolean present = false;
         for(IslandCard islandCard : table.getListOfIsland()){
@@ -859,7 +743,6 @@ public class DashboardScene extends ObservableView implements GenericScene {
     public int getMotherDestinationIslandId(){
         return motherDestinationIslandId;
     }
-
     public int getIslandMother(){
         return islandMother;
     }

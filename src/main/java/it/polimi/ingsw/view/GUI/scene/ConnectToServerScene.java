@@ -17,7 +17,9 @@ import java.awt.event.KeyEvent;
 
 import static java.lang.System.out;
 
-/** scena che gestisce la connessione al server */
+/**
+ * This Scene Controller is used to allow the player to connect to the server
+ */
 
 public class ConnectToServerScene extends ObservableView implements GenericScene{
 

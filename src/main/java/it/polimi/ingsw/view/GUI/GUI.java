@@ -23,14 +23,18 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Map;
 
+/**
+ * Implements the GUI (graphical user interface)
+ */
 public class GUI extends ObservableView implements View {
     private static ArrayList<String> playerList = new ArrayList<>();
-
     private ArrayList<SchoolController> schools = new ArrayList<>();
-
     private Table table;
     private boolean gameStarted = false;
 
+    /**
+     * Asks the ip address and the server port for the connection to the server
+     */
     @Override
     public void askConnect() {
         ConnectToServerScene connectToServer = new ConnectToServerScene();

@@ -2,8 +2,9 @@ package it.polimi.ingsw.view.GUI.scene;
 
 import it.polimi.ingsw.observer.ObservableView;
 
-/** scena che mostra al giocatore la schermata di fine gioco */
-
+/**
+ * This Scene Controller is used to tell the player he lost the match
+ */
 public class LoserScene extends ObservableView implements GenericScene {
 
 }

@@ -11,9 +11,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
+/**
+ * Starts the GUI
+ */
 public class StartGUI extends Application {
 
+    /**
+     * Starts the GUI
+     */
     @Override
     public void start(Stage stage) {
 

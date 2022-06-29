@@ -1,7 +1,7 @@
 package it.polimi.ingsw.view.GUI.scene;
 
-/** interfaccia usata per definire il controller di ciascuna scena di gioco */
-
+/**
+ * Interface which is used to define all the Scene Controllers
+ */
 public interface GenericScene {
-
 }

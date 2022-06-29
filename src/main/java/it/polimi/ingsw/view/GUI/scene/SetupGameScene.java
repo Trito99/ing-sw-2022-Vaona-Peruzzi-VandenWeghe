@@ -19,10 +19,11 @@ import javafx.scene.text.Text;
 import java.util.GregorianCalendar;
 import java.util.Map;
 
-/** scena che chiede al giocatore a quale lobby connettersi, chiedendo username, data di nascita, gameId */
-
+/**
+ * This Scene Controller is used to take part to a match
+ * It saves all the infos of a new player, allowing him to create a new lobby or to join a lobby already existing
+ */
 public class SetupGameScene extends ObservableView implements GenericScene {
-
     private Map<String, LobbyForPrint> lobbyMap = null;
 
     @FXML
@@ -39,10 +40,8 @@ public class SetupGameScene extends ObservableView implements GenericScene {
     private Text nicknameText;
     @FXML
     private Text titleText;
-
     @FXML
     private Button nextButton;
-
     @FXML
     private TextField nicknameField;
     @FXML
@@ -53,7 +52,6 @@ public class SetupGameScene extends ObservableView implements GenericScene {
     private TextField yyyyField;
     @FXML
     private TextField gameIdField;
-
     @FXML
     private TableView<LobbyForPrint> lobbyList;
     @FXML
@@ -65,15 +63,20 @@ public class SetupGameScene extends ObservableView implements GenericScene {
     @FXML
     private TableColumn<LobbyForPrint, Integer> currentPlayers;
 
-
+    /**
+     * Initialize buttons present in the Scene and generates Lobby
+     */
     @FXML
     public void initialize(){
         nextButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this ::clickNext);
         generateLobbyTable(lobbyMap);
     }
 
+    /**
+     * Generates a new Lobby
+     * @param lobbyMap map of a new lobby
+     */
     private void generateLobbyTable(Map<String, LobbyForPrint> lobbyMap){
-
         gameId.setCellValueFactory(new PropertyValueFactory<>("gameId"));
         difficulty.setCellValueFactory(new PropertyValueFactory<>("difficulty"));
         gameMode.setCellValueFactory(new PropertyValueFactory<>("gameMode"));
@@ -81,6 +84,11 @@ public class SetupGameScene extends ObservableView implements GenericScene {
         lobbyList.setItems(getLobbyList(lobbyMap));
     }
 
+    /**
+     * Returns the list of lobbies available
+     * @param lobbyMap map of a certain lobby
+     * @return a list with lobbies available
+     */
     private ObservableList<LobbyForPrint> getLobbyList(Map<String, LobbyForPrint> lobbyMap){
         ObservableList<LobbyForPrint> lobbyList = FXCollections.observableArrayList();
         if(lobbyMap != null){
@@ -92,7 +100,9 @@ public class SetupGameScene extends ObservableView implements GenericScene {
         return lobbyList;
     }
 
-    /** gestisce il click sul pulsante */
+    /**
+     * Handles the click on the Next button
+     */
     @FXML
     private void clickNext(Event event){
         boolean name = false,birth = false,id = false;
@@ -104,7 +114,6 @@ public class SetupGameScene extends ObservableView implements GenericScene {
         yyyyField.setDisable(true);
         gameIdField.setDisable(true);
 
-        /** non sono sicura se vada qui o nell'override della GUI */
         String nickname = null;
         String gameId = null;
         try{
