@@ -315,8 +315,8 @@ public class Table implements Serializable {
     }
 
     /**
-     * Handles the merge of two islands when they have the same tower's color and updates the list of islands on the table
-     * Called from function JoinIsland when just one island got a tower
+     * Handles the merge of two islands when they have the same towers color and updates the list of islands on the table
+     * Called from function JoinIsland when just one island between the precedent one and the next one, already has a tower on it
      * @param listOfIsland current list of islands on the table
      * @param i first island id
      * @param ii second island id
@@ -325,15 +325,16 @@ public class Table implements Serializable {
         if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(ii).getTowerOnIsland().getTColour())) {
             for (Student student : listOfIsland.get(ii).getStudentOnIsland())
                 listOfIsland.get(i).getStudentOnIsland().add(student);
-                listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + listOfIsland.get(ii).getMergedIsland());
-                listOfIsland.get(i).getListOfMinorIslands().add(listOfIsland.get(ii).getImmutableIdIsland());
-                listOfIsland.remove(ii);
+            listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + listOfIsland.get(ii).getMergedIsland());
+            for(int minorId : listOfIsland.get(ii).getListOfMinorIslands())
+                listOfIsland.get(i).getListOfMinorIslands().add(minorId);
+            listOfIsland.remove(ii);
         }
     }
 
     /**
      * Handles the merge of two or more islands and updates the list of islands on the table
-     * Called from function JoinIsland when both islands got a tower
+     * Called from function JoinIsland when both the precedent island and the next island already have a tower on it
      * @param listOfIsland current list of islands on the table
      * @param i first island id
      * @param ii second island id
@@ -345,14 +346,16 @@ public class Table implements Serializable {
             for (Student student : listOfIsland.get(ii).getStudentOnIsland())
                 listOfIsland.get(i).getStudentOnIsland().add(student);
             listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + listOfIsland.get(ii).getMergedIsland());
-            listOfIsland.get(i).getListOfMinorIslands().add(listOfIsland.get(ii).getImmutableIdIsland());
+            for(int minorId : listOfIsland.get(ii).getListOfMinorIslands())
+                listOfIsland.get(i).getListOfMinorIslands().add(minorId);
             listOfIsland.remove(ii);
         }else if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(iii).getTowerOnIsland().getTColour()) &&
                 listOfIsland.get(i).getTowerOnIsland().getTColour() != listOfIsland.get(ii).getTowerOnIsland().getTColour()) {
             for (Student student : listOfIsland.get(iii).getStudentOnIsland())
                 listOfIsland.get(i).getStudentOnIsland().add(student);
             listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + listOfIsland.get(iii).getMergedIsland());
-            listOfIsland.get(i).getListOfMinorIslands().add(listOfIsland.get(iii).getImmutableIdIsland());
+            for(int minorId : listOfIsland.get(iii).getListOfMinorIslands())
+                listOfIsland.get(i).getListOfMinorIslands().add(minorId);
             listOfIsland.remove(iii);
         }else if (listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(iii).getTowerOnIsland().getTColour()) &&
                 listOfIsland.get(i).getTowerOnIsland().getTColour().equals(listOfIsland.get(ii).getTowerOnIsland().getTColour())) {
@@ -361,8 +364,10 @@ public class Table implements Serializable {
             for (Student student : listOfIsland.get(ii).getStudentOnIsland())
                 listOfIsland.get(i).getStudentOnIsland().add(student);
             listOfIsland.get(i).setMergedIsland(listOfIsland.get(i).getMergedIsland() + listOfIsland.get(ii).getMergedIsland() + listOfIsland.get(iii).getMergedIsland());
-            listOfIsland.get(i).getListOfMinorIslands().add(listOfIsland.get(ii).getImmutableIdIsland());
-            listOfIsland.get(i).getListOfMinorIslands().add(listOfIsland.get(iii).getImmutableIdIsland());
+            for(int minorId : listOfIsland.get(ii).getListOfMinorIslands())
+                listOfIsland.get(i).getListOfMinorIslands().add(minorId);
+            for(int minorId : listOfIsland.get(iii).getListOfMinorIslands())
+                listOfIsland.get(i).getListOfMinorIslands().add(minorId);
             if(i==0){
                 listOfIsland.remove(listOfIsland.size()-1);
                 listOfIsland.remove(ii);
