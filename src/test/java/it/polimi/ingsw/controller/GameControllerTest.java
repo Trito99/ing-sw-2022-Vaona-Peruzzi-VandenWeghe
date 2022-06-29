@@ -37,7 +37,7 @@ public class GameControllerTest {
     private DeckAssistant deckOfPlayer;
     private Table table;
 
-    @BeforeEach
+    /**@BeforeEach
     void setup(){
         gc = new GameController();
         allViews = new ArrayList<>();
@@ -141,7 +141,7 @@ public class GameControllerTest {
         gc.setGameState(GameState.INIT);
         gc.disconnect("Pippo");
         assertEquals(GameState.IN_GAME, gc.getGameState());
-         */
+
     }
 
     @Test
@@ -184,7 +184,7 @@ public class GameControllerTest {
         }
     }
 
-    /** provo ad aggiungere 5 giocatori, e */
+    /** provo ad aggiungere 5 giocatori, e
     @Test
     void extraViewTest(){
         assertFalse(gc.isGameStarted());
@@ -277,7 +277,7 @@ public class GameControllerTest {
         //assertEquals(Difficulty.EXPERTMODE, gc.getGameSession().getDifficulty());
 
     }
-    /** @Test
+    @Test
     void towerColorAndDeckChosen(){
         ClientMessage  message = new TowerColorAndDeckChosen("Gino", TColor.WHITE, AssistantDeckName.WIZARD3);
         gc.getMessage(message);
