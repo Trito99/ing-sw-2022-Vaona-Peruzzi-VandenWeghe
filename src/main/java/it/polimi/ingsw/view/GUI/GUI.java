@@ -115,7 +115,9 @@ public class GUI extends ObservableView implements View {
     public void showMessage(String message) {
         Platform.runLater(() -> MessageScene.display(null,null, message));
         if (message.equals("Tie")){
-            notifyObserver(ObserverView::updateDisconnect);
+            TieScene tie = new TieScene();
+            tie.addAllObservers(observers);
+            Platform.runLater(() -> GuiManager.changeRootPane(tie,"/fxml/tie_scene"));
         }
     }
 
@@ -206,7 +208,8 @@ public class GUI extends ObservableView implements View {
     public void showWinMessage() {
         WinnerScene win = new WinnerScene();
         win.addAllObservers(observers);
-        Platform.runLater(() -> GuiManager.changeRootPane(win, "/fxml/winner_scene"));
+        Platform.runLater(() -> GuiManager.changeRootPane(win,"/fxml/winner_scene"));
+
     }
 
     /**
