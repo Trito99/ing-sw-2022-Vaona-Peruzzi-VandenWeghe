@@ -655,4 +655,68 @@ public class IslandTest {
       }
    }
 
+   @Test
+   public void buildTowerCoop(){
+      IslandCard island = new IslandCard(1);
+      island.setMotherEarthOnIsland(true);
+
+      island.getStudentOnIsland().add(new Student(131,SColor.GREEN));
+      island.getStudentOnIsland().add(new Student(132,SColor.PINK));
+      island.getStudentOnIsland().add(new Student(133,SColor.RED));
+      island.getStudentOnIsland().add(new Student(134,SColor.YELLOW));
+      island.getStudentOnIsland().add(new Student(135,SColor.YELLOW));
+
+      players.clear();
+      players.add(new Player(TColor.WHITE,PlayerNumber.PLAYER1));
+      players.add(new Player(TColor.WHITE,PlayerNumber.PLAYER2));
+      players.add(new Player(TColor.BLACK,PlayerNumber.PLAYER3));
+      players.add(new Player(TColor.BLACK,PlayerNumber.PLAYER4));
+
+      Table testTable = new Table();
+      testTable.getListOfIsland().add(island);
+      testTable.addFinalStudents();
+
+      for(Player player : players)
+         player.generateSchool(table, GameMode.COOP);
+
+      players.get(0).getPersonalSchool().getGTable().add(new Student(136,SColor.GREEN));
+      players.get(0).getPersonalSchool().getRTable().add(new Student(137,SColor.RED));
+      players.get(0).getPersonalSchool().winProf(players, players.get(0),CardEffect.STANDARDMODE);
+
+      players.get(1).getPersonalSchool().getPTable().add(new Student(138,SColor.PINK));
+      players.get(1).getPersonalSchool().winProf(players, players.get(1),CardEffect.STANDARDMODE);
+
+      players.get(3).getPersonalSchool().getYTable().add(new Student(139,SColor.YELLOW));
+      players.get(3).getPersonalSchool().getBTable().add(new Student(140,SColor.BLUE));
+      players.get(3).getPersonalSchool().winProf(players, players.get(3),CardEffect.STANDARDMODE);
+
+      players.get(0).setNickname("Fede");
+      players.get(0).setTeamMate("Tri");
+      players.get(0).setTeamLeader(true);
+      players.get(1).setNickname("Tri");
+      players.get(1).setTeamMate("Fede");
+      players.get(1).setTeamLeader(false);
+      Team team1 = new Team(players.get(0), players.get(1),TColor.WHITE);
+
+      players.get(2).setNickname("Chiara");
+      players.get(2).setTeamMate("Boh");
+      players.get(2).setTeamLeader(true);
+      players.get(3).setNickname("Boh");
+      players.get(3).setTeamMate("Chiara");
+      players.get(3).setTeamLeader(false);
+      Team team2 = new Team(players.get(2), players.get(3),TColor.BLACK);
+
+      ArrayList<Team> teams = new ArrayList<>();
+      teams.add(team1);
+      teams.add(team2);
+
+      assertEquals(players.get(0),team1.getTeamLeader());
+      for(Player p : players)
+         showPersonalSchool(p.getPersonalSchool(),p.getNickname(),p.getTrash());
+
+      assertEquals(team1.getTeamLeader(), island.calculateInfluenceCoop(players,CardEffect.STANDARDMODE,players.get(0),teams, GameMode.COOP));
+      island.buildTowerOnIsland(players,CardEffect.STANDARDMODE,players.get(0),GameMode.COOP,teams);
+      assertEquals(true, island.towerIsOnIsland());
+      assertEquals(TColor.WHITE, island.getTowerOnIsland().getTColour());
+   }
 }
