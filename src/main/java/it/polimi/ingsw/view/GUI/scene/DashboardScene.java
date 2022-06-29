@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.GUI.scene;
 
+import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.*;
 import it.polimi.ingsw.model.island.IslandCard;
@@ -39,7 +40,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     private CharacterCard cardSelected = null;
 
-    private Map<CharacterCard,CharacterCardController> characterCardControllerMap = new HashMap<>();
+    private Map<CardEffect,CharacterCardController> characterCardControllerMap = new HashMap<>();
     private Image temp = null;
     private static Map<String, String> assistantCardMap;
     static {
@@ -296,8 +297,12 @@ public class DashboardScene extends ObservableView implements GenericScene {
      * Updates value of coins on table and shows it
      * @param coins on table
      */
-    public void updateCoinOnTable(int coins){
+    public void updateCoinOnTableAndCharacterCards(int coins, ArrayList<CharacterCard> characterCards){
         coinTextTable.setText(String.valueOf(coins));
+        for(CharacterCard characterCard : characterCards){
+            characterCardControllerMap.get(characterCard.getCardEffect()).updateStudentsCharacterCard(characterCard);
+        }
+
     }
 
     /**
@@ -410,47 +415,29 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
                     switch (characterCardsPlaying.get(i).getCardEffect()) {
                         case STANDARDMODE:
-                            characterCardController.hideAll();
-                            break;
-                        case ABBOT:
-                            characterCardController.visibleStudentPane(characterCardsPlaying.get(i).getStudentsOnCard());
-                            break;
-                        case HOST:
-                            characterCardController.hideAll();
-                            break;
-                        case HERALD:
-                            characterCardController.hideAll();
-                            break;
                         case BEARER:
-                            characterCardController.hideAll();
-                            break;
-                        case CURATOR:
-                            characterCardController.visibleXCardPane(characterCardsPlaying.get(i).getXCardOnCard());
-                            break;
+                        case HERALD:
+                        case HOST:
                         case CENTAUR:
-                            characterCardController.hideAll();
-                            break;
-                        case ACROBAT:
-                            characterCardController.visibleStudentPane(characterCardsPlaying.get(i).getStudentsOnCard());
-                            break;
                         case KNIGHT:
-                            characterCardController.hideAll();
-                            break;
                         case HERBALIST:
-                            characterCardController.visibleStudentPane(characterCardsPlaying.get(i).getStudentsOnCard());
-                            break;
                         case BARD:
-                            characterCardController.hideAll();
-                            break;
-                        case COURTESAN:
-                            characterCardController.visibleStudentPane(characterCardsPlaying.get(i).getStudentsOnCard());
-                            break;
                         case JUNKDEALER:
                             characterCardController.hideAll();
                             break;
+                        case ABBOT:
+                        case ACROBAT:
+                        case COURTESAN:
+                            characterCardController.hideAll();
+                            characterCardController.initializeStudentPane(characterCardsPlaying.get(i).getStudentsOnCard());
+                            break;
+                        case CURATOR:
+                            characterCardController.hideAll();
+                            characterCardController.initializeXCardPane(characterCardsPlaying.get(i).getXCardOnCard());
+                            break;
                     }
                     characterCardLayout.getChildren().add(characterCardImage);
-                    characterCardControllerMap.put(characterCardsPlaying.get(i), characterCardController);
+                    characterCardControllerMap.put(characterCardsPlaying.get(i).getCardEffect(), characterCardController);
                     characterCardLayout.setVisible(true);
                 }
             } catch (IOException e) {
@@ -864,7 +851,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }
     }
 
-    public Map<CharacterCard, CharacterCardController> getCharacterCardControllerMap() {
+    public Map<CardEffect, CharacterCardController> getCharacterCardControllerMap() {
         return characterCardControllerMap;
     }
 
@@ -915,9 +902,22 @@ public class DashboardScene extends ObservableView implements GenericScene {
                             setMotherId(finalId);
                             success = true;
                         } else {
-                            personalSchoolController.setPlaceSelected("ISLAND");
-                            setIslandId(finalId);
-                            success = true;
+                            if(cardSelected!=null){
+                                if(cardSelected.getCardEffect().equals(CardEffect.ABBOT)) {
+                                    if (characterCardControllerMap.get(CardEffect.ABBOT).getStudentMap().containsKey(event.getGestureSource())) {
+                                        setIslandId(finalId);
+                                        success = true;
+                                    }
+                                }else {
+                                    personalSchoolController.setPlaceSelected("ISLAND");
+                                    setIslandId(finalId);
+                                    success = true;
+                                }
+                            }else {
+                                personalSchoolController.setPlaceSelected("ISLAND");
+                                setIslandId(finalId);
+                                success = true;
+                            }
                         }
                     }
                     event.setDropCompleted(success);
@@ -1022,17 +1022,18 @@ public class DashboardScene extends ObservableView implements GenericScene {
         return table;
     }
 
-    void disabilitateStudentsAndXCards() {
+
+    public void disabilitateStudentsAndXCards() {
         if (cardSelected!=null) {
             switch (cardSelected.getCardEffect()) {
                 case ABBOT:
                 case ACROBAT:
                 case HERBALIST:
                 case COURTESAN:
-                    characterCardControllerMap.get(cardSelected).disableStudents(true);
+                    characterCardControllerMap.get(cardSelected.getCardEffect()).disableStudents(true);
                     break;
                 case CURATOR:
-                    characterCardControllerMap.get(cardSelected).disableeXCards(true);
+                    characterCardControllerMap.get(cardSelected.getCardEffect()).disableeXCards(true);
                     break;
             }
         }

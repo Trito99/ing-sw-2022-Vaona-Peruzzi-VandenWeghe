@@ -7,7 +7,7 @@ import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.DeckCharacter;
-import it.polimi.ingsw.model.cloud.CloudCard;
+import it.polimi.ingsw.model.game.cloud.CloudCard;
 import it.polimi.ingsw.model.game.*;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
@@ -369,7 +369,7 @@ public class GameController {
                                 }
                                 if(!full) {
                                     gameSession.moveStudentFromListToHall(gameSession.getPlayer(getActivePlayer()), studentId, gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getEntry());
-                                    virtualView.showCoin(gameSession.getTable().getCoinsOnTable());
+                                    virtualView.showCoinAndCharacterCards(gameSession.getTable().getCoinsOnTable(),gameSession.getTable().getCharacterCardsOnTable());
                                     if(gameSession.getDifficulty().equals(Difficulty.EXPERTMODE) && characterCard!=null) {
                                         gameSession.getPlayer(getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(getActivePlayer()), characterCard.getCardEffect());
                                     }else
@@ -516,7 +516,7 @@ public class GameController {
                                     broadcastMessage(gameSession.getPlayer(getActivePlayer()).getNickname() +" has activated " + characterCard.getCardEffect().toString() + " effect!");
                                     gameSession.playCharacterCard(characterCard.getCardEffect(), CardSelected.getNickname(), -1,-1 , -1, null);
                                     characterCard.setCoinOnCard(true);
-                                    virtualView.showCoin(gameSession.getTable().getCoinsOnTable());
+                                    virtualView.showCoinAndCharacterCards(gameSession.getTable().getCoinsOnTable(),gameSession.getTable().getCharacterCardsOnTable());
                                     cardPlayed=true;
                                     setActionState(savedActionState);
                                     action();
@@ -563,7 +563,8 @@ public class GameController {
                                 movedStudents++;
                             } else {
                                 gameSession.playCharacterCard(characterCard.getCardEffect(),Choice.getNickname(),studentId,Choice.getId(), -1, null);
-                                virtualView.showCoin(gameSession.getTable().getCoinsOnTable());
+                                virtualView.showCoinAndCharacterCards(gameSession.getTable().getCoinsOnTable(),gameSession.getTable().getCharacterCardsOnTable());
+                                virtualView.showListOfIsland(gameSession.getTable(),gameSession.getDifficulty());
                                 cardPlayed=true;
                                 setActionState(savedActionState);
                                 card = false;
@@ -643,7 +644,7 @@ public class GameController {
                                     acrobatIndex++;
                                     gameSession.playCharacterCard(characterCard.getCardEffect(), Choice.getNickname(), studentIdCard, -1, studentId, null);
                                     virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore(), gameSession.getGameMode(), gameSession.getPlayer(getActivePlayer()).getTeamMate());
-                                    virtualView.showCoin(gameSession.getTable().getCoinsOnTable());
+                                    virtualView.showCoinAndCharacterCards(gameSession.getTable().getCoinsOnTable(),gameSession.getTable().getCharacterCardsOnTable());
                                     if (acrobatIndex<max)
                                         virtualView.askId(false, characterCard, acrobatIndex, gameSession.getPlayer(getActivePlayer()).getPersonalSchool());
                                 }else{
@@ -702,7 +703,7 @@ public class GameController {
                                 again = false;
                                 gameSession.playCharacterCard(characterCard.getCardEffect(),getActivePlayer(), studentId,-1,-1, null);
                                 virtualView.showPersonalSchool(gameSession.getPlayer(getActivePlayer()).getPersonalSchool(), "Your ",gameSession.getPlayer(getActivePlayer()).getTrash(), gameSession.getDifficulty(), gameSession.getPlayer(getActivePlayer()).getCoinScore(), gameSession.getGameMode(), gameSession.getPlayer(getActivePlayer()).getTeamMate());
-                                virtualView.showCoin(gameSession.getTable().getCoinsOnTable());
+                                virtualView.showCoinAndCharacterCards(gameSession.getTable().getCoinsOnTable(),gameSession.getTable().getCharacterCardsOnTable());
                                 card = false;
                                 cardPlayed=true;
                                 setActionState(savedActionState);
@@ -731,7 +732,7 @@ public class GameController {
                     if(exists && characterCard.getCardEffect().equals(CardEffect.HERBALIST)){
                         again=false;
                         gameSession.playCharacterCard(characterCard.getCardEffect(), getActivePlayer(), -1,-1,-1, colorChosen);
-                        virtualView.showCoin(gameSession.getTable().getCoinsOnTable());
+                        virtualView.showCoinAndCharacterCards(gameSession.getTable().getCoinsOnTable(),gameSession.getTable().getCharacterCardsOnTable());
                         cardPlayed=true;
                         setActionState(savedActionState);
                         action();
@@ -740,7 +741,7 @@ public class GameController {
                     else if(exists && characterCard.getCardEffect().equals(CardEffect.JUNKDEALER)){
                         again=false;
                         gameSession.playCharacterCard(CardEffect.JUNKDEALER, getActivePlayer(), -1,-1,-1, colorChosen);
-                        virtualView.showCoin(gameSession.getTable().getCoinsOnTable());
+                        virtualView.showCoinAndCharacterCards(gameSession.getTable().getCoinsOnTable(),gameSession.getTable().getCharacterCardsOnTable());
                         gameSession.getPlayer(getActivePlayer()).getPersonalSchool().winProf(gameSession.getListOfPlayers(), gameSession.getPlayer(getActivePlayer()), characterCard.getCardEffect());
 
                         /** show all school updated */

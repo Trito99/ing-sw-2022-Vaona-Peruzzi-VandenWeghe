@@ -93,10 +93,11 @@ public interface View {
     void showErrorMessage(String message);
 
     /**
-     * Shows coins on table
+     * Shows coins and character cards on table
      * @param coins on table
+     * @param characterCardsOnTable on table
      */
-    void showCoin(int coins);
+    void showCoinAndCharacterCards(int coins,ArrayList<CharacterCard> characterCardsOnTable);
 
     /**
      * Asks the player his next action.

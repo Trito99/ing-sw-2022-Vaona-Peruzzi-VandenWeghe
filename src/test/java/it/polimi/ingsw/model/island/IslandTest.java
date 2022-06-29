@@ -2,12 +2,11 @@ package it.polimi.ingsw.model.island;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.character.CardEffect;
-import it.polimi.ingsw.model.cloud.CloudCard;
+import it.polimi.ingsw.model.game.cloud.CloudCard;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
-import it.polimi.ingsw.model.player.Team;
 import it.polimi.ingsw.model.school.Prof;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;

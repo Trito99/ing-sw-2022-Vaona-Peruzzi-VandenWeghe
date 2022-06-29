@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -7,7 +8,10 @@
 
 <AnchorPane prefHeight="190.0" prefWidth="130.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.CardsController.CharacterCardController">
    <children>
-      <ImageView fx:id="cardImage" fitHeight="166.0" fitWidth="145.0" layoutX="75.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cardImage" fitHeight="166.0" fitWidth="145.0" layoutX="75.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
       <Pane fx:id="longPane" layoutX="10.0" layoutY="5.0" prefHeight="165.0" prefWidth="48.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
       <Pane fx:id="shortPane" layoutX="10.0" layoutY="5.0" prefHeight="45.0" prefWidth="48.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
       <Pane fx:id="coinPane" layoutX="19.0" layoutY="11.0" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-border-radius: 100;" styleClass="buttonLayout" stylesheets="@../css/dashboard_style.css">
@@ -25,31 +29,49 @@
                <image>
                   <Image url="@../images/students/Bstudent.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="stud2" fitHeight="17.0" fitWidth="17.0" layoutX="8.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/students/Bstudent.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="stud3" fitHeight="17.0" fitWidth="17.0" layoutX="8.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/students/Bstudent.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="stud4" fitHeight="17.0" fitWidth="17.0" layoutX="8.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/students/Bstudent.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="stud5" fitHeight="17.0" fitWidth="17.0" layoutX="8.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/students/Bstudent.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="stud6" fitHeight="17.0" fitWidth="17.0" layoutX="8.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/students/Bstudent.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
       </Pane>

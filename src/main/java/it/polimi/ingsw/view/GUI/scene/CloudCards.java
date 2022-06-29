@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view.GUI.scene;
 
-import it.polimi.ingsw.model.cloud.CloudCard;
-import it.polimi.ingsw.model.game.Difficulty;
+import it.polimi.ingsw.model.game.cloud.CloudCard;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.observer.ObservableView;
