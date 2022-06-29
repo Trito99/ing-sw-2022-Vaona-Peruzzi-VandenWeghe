@@ -273,6 +273,15 @@ public class GUI extends ObservableView implements View {
                 case CURATOR:
                     GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected()).disableeXCards(false);
                     break;
+                default:
+                    if(GuiManager.getMainScene().isActionStudent()){
+                        GuiManager.getMainScene().getPersonalSchoolController().disableEntry(false);
+                    }else if(GuiManager.getMainScene().isActionMother()){
+                        GuiManager.getMainScene().disabilityMother(GuiManager.getMainScene().getTable(),GuiManager.getMainScene().getMaxSteps(),false);
+                    }else if(GuiManager.getMainScene().isActionCloud()){
+                        GuiManager.getMainScene().getCloudController().disabilitateCloud(false);
+                    }
+                    break;
             }
 
         }
