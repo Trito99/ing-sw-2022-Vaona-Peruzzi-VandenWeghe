@@ -1,8 +1,12 @@
 package it.polimi.ingsw.message;
+
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.table.Table;
 
-
+/**
+ * Extends Server Message
+ * Asks Mother Earth steps
+ */
 public class ChooseMotherEarthSteps extends  ServerMessage {
     private int maxSteps;
     private Table table;

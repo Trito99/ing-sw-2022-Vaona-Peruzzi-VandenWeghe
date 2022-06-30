@@ -2,7 +2,10 @@ package it.polimi.ingsw.message;
 
 import it.polimi.ingsw.model.character.CardEffect;
 
-
+/**
+ * Extends Server Message
+ * Asks the color to block chosen by the player
+ */
 public class ChooseColor extends ServerMessage {
 
     private CardEffect cardEffect;

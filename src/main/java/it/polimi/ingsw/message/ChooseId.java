@@ -1,9 +1,12 @@
 package it.polimi.ingsw.message;
 
-
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.school.School;
 
+/**
+ * Extends Server Message
+ * Asks the student id to move
+ */
 public class ChooseId extends ServerMessage {
 
     private boolean choice;

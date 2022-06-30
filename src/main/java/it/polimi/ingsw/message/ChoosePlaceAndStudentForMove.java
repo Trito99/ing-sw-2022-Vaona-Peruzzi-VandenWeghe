@@ -1,10 +1,13 @@
 package it.polimi.ingsw.message;
 
-
 import it.polimi.ingsw.model.student.Student;
 
 import java.util.ArrayList;
 
+/**
+ * Extends Server Message
+ * Asks where to move a certain student
+ */
 public class ChoosePlaceAndStudentForMove extends ServerMessage {
 
     private ArrayList<Student> entry;

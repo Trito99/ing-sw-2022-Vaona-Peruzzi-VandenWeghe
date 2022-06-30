@@ -2,6 +2,10 @@ package it.polimi.ingsw.message;
 
 import java.util.GregorianCalendar;
 
+/**
+ * Extends Client Message
+ * Notifies the login from a certain user
+ */
 public class LoginRequest extends ClientMessage {
     private String gameId;
     private GregorianCalendar playerDate;

@@ -1,5 +1,9 @@
 package it.polimi.ingsw.message;
 
+/**
+ * Extends Server Message
+ * Asks to play a Character Card
+ */
 public class CharacterCardPlayed extends ClientMessage {
     private String cardNickname;
     private boolean choice;

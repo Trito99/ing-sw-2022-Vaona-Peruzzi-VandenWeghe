@@ -14,7 +14,7 @@ public interface ObserverView {
     /**
      * Tries to log the player to a certain lobby
      */
-    void updateLobby(String nickname, GregorianCalendar playerDate, String gameID);
+    void updateLobby(String nickname, GregorianCalendar playerDate, String gameId);
 
     /**
      * Tries to connect a client (new player) to a server socket
@@ -74,7 +74,7 @@ public interface ObserverView {
      * @param place where the player wants to move the student
      * @param id of the student to move
      */
-    void choosePlaceAndStudentForMove(String place,int id);
+    void choosePlaceAndStudentForMove(String place, int id);
 
     /**
      * Sends a message to the server with a character card's effect which involves moving a certain student

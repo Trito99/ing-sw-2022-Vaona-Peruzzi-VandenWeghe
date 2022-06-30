@@ -1,6 +1,9 @@
 package it.polimi.ingsw.message;
 
-
+/**
+ * Extends Client Message
+ * Notifies the student to move
+ */
 public class IdChosen extends ClientMessage{
     private int id;
     private boolean choice, none;

@@ -1,6 +1,9 @@
 package it.polimi.ingsw.message;
 
-/** questo messaggio contiene una stringa generica */
+/**
+ * Extends Server Message
+ * This message contains a generic waiting String
+ */
 public class StringWaitingMessage extends ServerMessage{
     private String message;
 
