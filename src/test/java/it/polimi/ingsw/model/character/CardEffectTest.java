@@ -13,7 +13,7 @@ class CardEffectTest {
         CharacterCard characterCard = deckCharacter.getCharacterCards().get(11); //JUNKDEALER (cost 3)
         CardEffect cardEffect = characterCard.getCardEffect();
         assertEquals("JUNKDEALER", cardEffect.name());
-        assertEquals(3, characterCard.getCostCharacter());
+        assertEquals(0, characterCard.getCostCharacter());
 
         cardEffect.setCentaurPlayed(true);
         cardEffect.setKnightPlayed(true);

@@ -3,12 +3,13 @@ package it.polimi.ingsw.model.game;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.assistant.AssistantDeckName;
-import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.DeckCharacter;
+import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.player.Team;
+import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;
 import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.SColor;
@@ -21,6 +22,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static it.polimi.ingsw.model.island.IslandTest.*;
+import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
@@ -31,6 +34,78 @@ class GameTest {
     @BeforeEach
     public void init(){
         game = new Game();
+    }
+
+    public void showPersonalSchool(School school, String nickname, AssistantCard trash) {
+
+        out.print("\n****School of "+ nickname + "**** ");
+        out.print("\nEntry: ");
+        for(Student s : school.getEntry()){
+            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | " );
+        }
+        out.print(ANSI_GREEN +"\n\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.GREEN)+ ANSI_GREEN + " Green Table: " + ANSI_RESET);
+        for(Student s : school.getGTable()){
+            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+        }
+
+        out.print(ANSI_RED +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.RED)+ ANSI_RED + " Red Table: " + ANSI_RESET);
+        for(Student s : school.getRTable()){
+            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+        }
+
+        out.print(ANSI_YELLOW +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.YELLOW)+ ANSI_YELLOW + " Yellow Table: " + ANSI_RESET);
+        for(Student s : school.getYTable()){
+            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+        }
+
+        out.print(ANSI_PINK +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.PINK)+ ANSI_PINK + " Pink Table: " + ANSI_RESET);
+        for(Student s : school.getPTable()){
+            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+        }
+
+        out.print(ANSI_BLUE +"\nProf: "+ ANSI_RESET +school.getProfInHall(SColor.BLUE)+ ANSI_BLUE + " Blue Table: " + ANSI_RESET);
+        for(Student s : school.getBTable()){
+            out.print(getStudentAnsiColor(s) + s.getIdStudent() + ANSI_RESET + " | ");
+        }
+
+        out.print("\n\nTowers: ");
+        for(Tower t : school.getTowers()){
+            out.print(getTowerAnsiColor(t) + "T" + ANSI_RESET + " | ");
+        }
+        out.print("(" + school.getTowers().size() + " towers remained)");
+
+        out.print("\n\nTrash Card: ");
+        if (trash!=null)
+            out.print(trash.getAssistantName() +" (TurnValue: "+ trash.getTurnValue() + ", StepME: " + trash.getStepMotherEarth()+")");
+
+        out.println("\n----------------------------------------------");
+    }
+
+    private String getTowerAnsiColor(Tower tower) {
+        switch (tower.getTColour()) {
+            case BLACK:
+                return ANSI_BLACK;
+            case GREY:
+                return ANSI_GREY;
+            default:
+                return ANSI_RESET;
+        }
+    }
+    private String getStudentAnsiColor(Student student) {
+        switch (student.getSColor()) {
+            case GREEN:
+                return ANSI_GREEN;
+            case YELLOW:
+                return ANSI_YELLOW;
+            case RED:
+                return ANSI_RED;
+            case PINK:
+                return ANSI_PINK;
+            case BLUE:
+                return ANSI_BLUE;
+            default:
+                return ANSI_RESET;
+        }
     }
 
     @Test
@@ -258,7 +333,7 @@ class GameTest {
                         game.moveStudentFromListToHall(game.getListOfPlayers().get(i), id.get(pos), game.getListOfPlayers().get(i).getPersonalSchool().getEntry());
                         assertEquals(id.size() - 1, game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size());  /** Controls if the size of the Entry is reduced by one after every cicle */
 
-                        switch (newStudent.getsColour()) {/** Controls if the id of the student added is the same of the id selected in MoveStudentInHall  */
+                        switch (newStudent.getSColor()) {/** Controls if the id of the student added is the same of the id selected in MoveStudentInHall  */
                             case GREEN:
                                 assertEquals(id.get(pos), game.getListOfPlayers().get(i).getPersonalSchool().getGTable().get(game.getListOfPlayers().get(i).getPersonalSchool().getGTable().size() - 1).getIdStudent());
                                 break;
@@ -403,6 +478,7 @@ class GameTest {
         table.addFinalStudents();
         table.getCharacterCardsOnTable().addAll(deckCharacter.getCharacterCards());
         game.setTable(table);
+        game.setDifficulty(Difficulty.EXPERTMODE);
 
         CharacterCard abbotCard = deckCharacter.getCharacterCards().get(0);
         CharacterCard curatorCard = deckCharacter.getCharacterCards().get(4);
@@ -431,6 +507,70 @@ class GameTest {
         game.getListOfPlayers().add(p1);
         game.getListOfPlayers().add(p2);
 
-        //game.playCharacterCard();
+        /**Abbot Test */
+        abbotCard.getStudentsOnCard().add(new Student(1,SColor.GREEN));
+        abbotCard.getStudentsOnCard().add(new Student(2,SColor.YELLOW));
+        IslandCard island = new IslandCard(1);
+        game.getTable().getListOfIsland().add(island);
+        game.playCharacterCard(abbotCard.getCardEffect(), "Federico", 2, 1, -1, null);
+        assertEquals(1,island.getStudentOnIsland().size());
+        assertEquals(SColor.YELLOW, island.getStudentOnIsland().get(0).getSColor());
+        assertEquals(2,abbotCard.getStudentsOnCard().size());
+
+        /**Curator Test */
+        curatorCard.setXCardOnCard(4);
+        game.playCharacterCard(curatorCard.getCardEffect(), "Federico", -1, 1, -1, null);
+        assertEquals(true,island.isXCardOnIsland());
+        assertEquals(1,island.getXCardCounter());
+        assertEquals(3,curatorCard.getXCardOnCard());
+
+        /** Acrobat Test */
+        acrobatCard.getStudentsOnCard().add(new Student(15,SColor.GREEN));
+        acrobatCard.getStudentsOnCard().add(new Student(23,SColor.YELLOW));
+        game.playCharacterCard(acrobatCard.getCardEffect(), "Federico", 23, -1, 1, null);
+        assertEquals(7,p1.getPersonalSchool().getEntry().size());
+        assertEquals(23,p1.getPersonalSchool().getEntry().get(6).getIdStudent());
+        assertEquals(2,acrobatCard.getStudentsOnCard().size());
+        assertEquals(SColor.GREEN, acrobatCard.getStudentsOnCard().get(0).getSColor());
+        assertEquals(SColor.GREEN, acrobatCard.getStudentsOnCard().get(1).getSColor());
+
+        /** Bard Test */
+        p1.getPersonalSchool().getBTable().add(new Student(40,SColor.BLUE));
+        game.playCharacterCard(bardCard.getCardEffect(), "Federico", 40, -1, 5, null); /** Pink in entry changed with blue in hall */
+        assertEquals(1,p1.getPersonalSchool().numberOfStudentsInHall(SColor.PINK));
+        assertEquals(7,p1.getPersonalSchool().getEntry().size());
+
+        /** Courtesan Test */
+        courtesanCard.getStudentsOnCard().add(new Student(22,SColor.PINK));
+        assertEquals(1,courtesanCard.getStudentsOnCard().size());
+        game.playCharacterCard(courtesanCard.getCardEffect(), "Federico", 22, -1, -1, null);
+        assertEquals(2,p1.getPersonalSchool().numberOfStudentsInHall(SColor.PINK));
+        assertEquals(1,courtesanCard.getStudentsOnCard().size());
+
+        /** JunkDealer Test */
+        p1.getPersonalSchool().getBTable().add(new Student(50,SColor.BLUE));
+        p1.getPersonalSchool().getBTable().add(new Student(51,SColor.BLUE));
+        p1.getPersonalSchool().getBTable().add(new Student(52,SColor.BLUE));
+        p1.getPersonalSchool().getYTable().add(new Student(60,SColor.YELLOW));
+        p1.getPersonalSchool().getRTable().add(new Student(50,SColor.RED));
+        p1.getPersonalSchool().getRTable().add(new Student(50,SColor.RED));
+        p1.getPersonalSchool().getRTable().add(new Student(50,SColor.RED));
+        p1.getPersonalSchool().getRTable().add(new Student(50,SColor.RED));
+        assertEquals(4,p1.getPersonalSchool().numberOfStudentsInHall(SColor.RED));
+        assertEquals(2,p1.getPersonalSchool().numberOfStudentsInHall(SColor.PINK));
+        assertEquals(3,p1.getPersonalSchool().numberOfStudentsInHall(SColor.BLUE));
+        assertEquals(1,p1.getPersonalSchool().numberOfStudentsInHall(SColor.YELLOW));
+
+        game.playCharacterCard(junkDealerCard.getCardEffect(), "Federico", -1, -1, -1, SColor.BLUE);
+        assertEquals(0,p1.getPersonalSchool().numberOfStudentsInHall(SColor.BLUE));
+
+        game.playCharacterCard(junkDealerCard.getCardEffect(), "Federico", -1, -1, -1, SColor.YELLOW);
+        assertEquals(0,p1.getPersonalSchool().numberOfStudentsInHall(SColor.YELLOW));
+
+        game.playCharacterCard(junkDealerCard.getCardEffect(), "Federico", -1, -1, -1, SColor.PINK);
+        assertEquals(0,p1.getPersonalSchool().numberOfStudentsInHall(SColor.PINK));
+
+        game.playCharacterCard(junkDealerCard.getCardEffect(), "Federico", -1, -1, -1, SColor.RED);
+        assertEquals(1,p1.getPersonalSchool().numberOfStudentsInHall(SColor.RED));
     }
 }

@@ -3,7 +3,7 @@ package it.polimi.ingsw.model.table;
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.DeckCharacter;
-import it.polimi.ingsw.model.game.cloud.CloudCard;
+import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.island.IslandCard;
@@ -50,7 +50,7 @@ public class TableTest{
         assertEquals(10, table.getBag().size());   /**Tests if there are 10 students in the bag*/
 
         for(Student s : table.getBag()){    /**Tests if there are 2 students for each color*/
-            switch (s.getsColour()){
+            switch (s.getSColor()){
                 case GREEN:
                     countgreen++;
                     break;
@@ -115,7 +115,7 @@ public class TableTest{
         assertNotNull(table.getBag());
         assertNotNull(table.getBag().get(119));
         for(Student s : table.getBag()){
-            switch (s.getsColour()){
+            switch (s.getSColor()){
                 case GREEN:
                     countgreen++;
                     break;

@@ -14,7 +14,9 @@ A JavaDoc is available at the following index:
 ### UML
 The following UML Diagrams were respectively developed during the planning phase of the project and after completion.
 
-[Final UML](link)
+[Final Model UML](deliverables/UML/model_initialUML.jpg)     
+[Final Server UML](deliverables/UML/Server_finalUML.jpg)    
+[Final Controller UML](deliverables/UML/Controller_finalUML.jpg)
 
 ## Game modes
 * Multiplayer mode

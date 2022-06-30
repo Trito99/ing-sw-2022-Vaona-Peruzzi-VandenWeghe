@@ -113,7 +113,7 @@ public class IslandCard implements Serializable {
                         } else {
                             /** if already present check if the tower has to change color or not */
                             if (!playerFound.getTColor().equals(towerOnIsland.getTColour())) {
-                                changeTowerColour(listOfPlayer, playerFound);
+                                changeTowerColor(listOfPlayer, playerFound);
                             }
                         }
                     }
@@ -130,7 +130,7 @@ public class IslandCard implements Serializable {
      * @param listOfPlayers list of player of the match
      * @param playerBuilder the player that has influence and has to place a tower
      */
-    private void changeTowerColour(ArrayList<Player> listOfPlayers, Player playerBuilder){        //cambio colore della torre se è cambiata l'influenza sull'isola
+    private void changeTowerColor(ArrayList<Player> listOfPlayers, Player playerBuilder){        //cambio colore della torre se è cambiata l'influenza sull'isola
         Player prevPlayer = null; /** Player that has the towers on island before */
 
         for(Player player : listOfPlayers){
@@ -179,7 +179,7 @@ public class IslandCard implements Serializable {
         for(Player p : listOfPlayers){
             int countTot = 0;
             for(i=0; i<studentOnIsland.size(); i++) {
-                switch (studentOnIsland.get(i).getsColour()) {   /** checks student color */
+                switch (studentOnIsland.get(i).getSColor()) {   /** checks student color */
                    /** if The player has the prof of the color of the student and the color isn't blocked (herbalist effect) increments the count of the influence */
                 case GREEN:
                         if (p.getPersonalSchool().getProfInHall(SColor.GREEN) && !SColor.GREEN.isColorBlocked()) {

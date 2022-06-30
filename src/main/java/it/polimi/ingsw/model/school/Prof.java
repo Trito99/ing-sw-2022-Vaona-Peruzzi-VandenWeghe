@@ -20,7 +20,7 @@ public class Prof implements Serializable {
         sColor = sColor2;
     }
 
-    public SColor getSColour() {
+    public SColor getSColor() {
         return sColor;
     }
 
@@ -28,7 +28,7 @@ public class Prof implements Serializable {
         return isInHall;
     }
 
-    public void setInHall(boolean inHall) {
-        this.isInHall = inHall;
+    public void setInHall(boolean isInHall) {
+        this.isInHall = isInHall;
     }
 }

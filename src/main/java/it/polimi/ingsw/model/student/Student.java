@@ -23,7 +23,7 @@ public class Student implements Serializable {
         return idStudent;
     }
 
-    public SColor getsColour() {
+    public SColor getSColor() {
         return sColor;
     }
 }
