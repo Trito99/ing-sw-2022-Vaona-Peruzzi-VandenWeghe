@@ -41,7 +41,7 @@ public class CharacterCardController extends ObservableView implements GenericSc
 
     private Map<ImageView,Integer> studentMap = new HashMap<>();
 
-    private int studentSelected;
+    private int studentSelected = 131;
 
     @FXML
     private Pane PaneCharacterCard;
@@ -107,6 +107,11 @@ public class CharacterCardController extends ObservableView implements GenericSc
             GuiManager.getMainScene().getCloudController().disabilitateCloud(true);
             notifyObserver(obs -> obs.chooseCloudCard(-1, "CHARACTER CARD"));
         }
+        if(card.getCardEffect().equals(CardEffect.ACROBAT)) {
+            GuiManager.getMainScene().getPersonalSchoolController().addMouseEventToStudentsOfEntry();
+            GuiManager.getMainScene().getPersonalSchoolController().disableEntry(true);
+            notifyObserver(obs -> obs.chooseCharacterCard(GuiManager.getMainScene().getCardSelected().getCardEffect().toString(), true));
+        }
     }
 
     public void initializeStudentPane(ArrayList<Student> studentsOnCard){
@@ -146,6 +151,8 @@ public class CharacterCardController extends ObservableView implements GenericSc
                 addDragDetected(studentsOnCard);
                 break;
             case ACROBAT:
+                addMouseEvent(studentsOnCard);
+                break;
             case BARD:
                 //click;
                 break;
@@ -255,4 +262,22 @@ public class CharacterCardController extends ObservableView implements GenericSc
             });
         }
     }
+    private void addMouseEvent(ArrayList<Student> studentsOnCard) {
+        for(int i=0;i<studentsOnCard.size();i++){
+            ImageView studentNode = (ImageView) studentPane.getChildren().get(i);
+            studentNode.addEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClicked);
+        }
+    }
+
+
+    private <T extends Event> void studentClicked(T t) {
+        studentSelected=studentMap.get(t.getSource());
+        disableStudents(true);
+
+    }
+
+    public void setStudentSelected(int studentSelected) {
+        this.studentSelected = studentSelected;
+    }
+
 }
