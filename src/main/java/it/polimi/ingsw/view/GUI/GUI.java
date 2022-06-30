@@ -35,6 +35,8 @@ public class GUI extends ObservableView implements View {
     private Table table;
     private boolean gameStarted = false;
 
+    int studentAcrobat1 = 131, studentAcrobat2 = 131;
+
     /**
      * Asks the ip address and the server port for the connection to the server
      */
@@ -272,25 +274,21 @@ public class GUI extends ObservableView implements View {
                 case ACROBAT:
                 case COURTESAN:
                     GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(false);
+                    GuiManager.getMainScene().reactivateActionPhase();
                     break;
                 case CURATOR:
                     GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableeXCards(false);
+                    GuiManager.getMainScene().reactivateActionPhase();
                     break;
                 case HERBALIST:
                 case BARD:
                     break;
                 case HERALD:
                     GuiManager.getMainScene().addMouseEventToIslands();
+                    GuiManager.getMainScene().reactivateActionPhase();
                     break;
                 default:
                     notifyObserver(obs -> obs.chooseCharacterCard(GuiManager.getMainScene().getCardSelected().getCardEffect().toString(),choice));
-                    /**if(GuiManager.getMainScene().isActionStudent()){
-                        GuiManager.getMainScene().getPersonalSchoolController().disableEntry(false);
-                    }else if(GuiManager.getMainScene().isActionMother()){
-                        GuiManager.getMainScene().disabilityMother(GuiManager.getMainScene().getTable(),GuiManager.getMainScene().getMaxSteps(),false);
-                    }else if(GuiManager.getMainScene().isActionCloud()){
-                        GuiManager.getMainScene().getCloudController().disabilitateCloud(false);
-                    }*/
                     break;
             }
 
@@ -368,8 +366,13 @@ public class GUI extends ObservableView implements View {
                 notifyObserver(obs -> obs.chooseId(GuiManager.getMainScene().getStudentDestinationIslandId(),choice, indexAcrobat, false));
         }else{
             if (characterCard.getCardEffect().equals(CardEffect.ACROBAT)) {
+                GuiManager.getMainScene().getPersonalSchoolController().disableEntry(true);
+                GuiManager.getMainScene().getCharacterCardControllerMap().get(CardEffect.ACROBAT).disableStudents(true);
                 if(indexAcrobat %2==1) {
-
+                    studentAcrobat1 = GuiManager.getMainScene().getCharacterCardControllerMap().get(CardEffect.ACROBAT).getStudentSelected();
+                    notifyObserver(obs -> obs.chooseId(studentAcrobat1, choice, indexAcrobat, false));
+                    GuiManager.getMainScene().getCharacterCardControllerMap().get(CardEffect.ACROBAT).setStudentSelected(131);
+                    GuiManager.getMainScene().getPersonalSchoolController().setStudentSelectedForSwitch(131);
                 }else {
 
                 }

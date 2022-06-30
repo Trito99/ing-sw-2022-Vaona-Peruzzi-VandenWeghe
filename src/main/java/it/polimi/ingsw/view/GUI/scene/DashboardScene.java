@@ -14,6 +14,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -37,11 +38,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private Map<String,SchoolController> schoolControllersMap = new HashMap<>();
     private CloudCards cloudController;
     private SchoolController personalSchoolController;
-
     private CharacterCard cardSelected = null;
-
-    private Map<Pane,Integer> islandListMap = new HashMap<>();
-
     private Map<CardEffect,CharacterCardController> characterCardControllerMap = new HashMap<>();
     private Image temp = null;
     private static Map<String, String> assistantCardMap;
@@ -63,7 +60,8 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private GameMode gameMode;
     private Difficulty difficulty;
     private boolean planning = false, actionStudent = false, actionMother = false, actionCloud = false;
-    private Map<Pane, ArrayList<Integer>> islandMap = new HashMap<>();
+    private Map<Pane, ArrayList<Integer>> islandListOfStudentsIdMap = new HashMap<>();
+    private Map<Pane,Integer> islandIdMap = new HashMap<>();
     private int studentDestinationIslandId, motherDestinationIslandId, islandMother, maxSteps;
 
 
@@ -687,7 +685,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
                             temp = PaneIsland12;
                             break;
                     }
-                    for(int i : islandMap.get(temp)){
+                    for(int i : islandListOfStudentsIdMap.get(temp)){
                         for(int pos  = 0; pos<studentsOnIsland.size() ;pos++){
                             if(studentsOnIsland.get(pos).getIdStudent()==i)
                                 studentsOnIsland.remove(studentsOnIsland.get(pos));
@@ -712,12 +710,12 @@ public class DashboardScene extends ObservableView implements GenericScene {
             for(Student student : studentsOnIsland){
                 if (island.getChildren().indexOf(island.getChildren().get(studentsOnIsland.indexOf(student)))!=(island.getChildren().size()-1) && island.getChildren().indexOf(island.getChildren().get(studentsOnIsland.indexOf(student)))!=(island.getChildren().size()-2)) {
                     island.getChildren().get(studentsOnIsland.indexOf(student)).setVisible(true);
-                    if(!(islandMap.containsKey(island))) {
-                        islandMap.put(island, new ArrayList<>());
-                        islandMap.get(island).add(student.getIdStudent());
+                    if(!(islandListOfStudentsIdMap.containsKey(island))) {
+                        islandListOfStudentsIdMap.put(island, new ArrayList<>());
+                        islandListOfStudentsIdMap.get(island).add(student.getIdStudent());
                     }else{
-                        if(!(islandMap.get(island).contains(student.getIdStudent())));
-                            islandMap.get(island).add(student.getIdStudent());
+                        if(!(islandListOfStudentsIdMap.get(island).contains(student.getIdStudent())));
+                            islandListOfStudentsIdMap.get(island).add(student.getIdStudent());
                     }
                     switch (student.getsColour()) {
                         case GREEN:
@@ -1031,13 +1029,14 @@ public class DashboardScene extends ObservableView implements GenericScene {
     public void addMouseEventToIslands(){
         for(int i=1;i<13;i++) {
             Pane island = ((Pane) islandPane.getChildren().get(24 + i));
-            islandListMap.put(island,i);
+            islandIdMap.put(island,i);
             island.addEventHandler(MouseEvent.MOUSE_CLICKED, this::islandClicked);
+            island.setCursor(Cursor.HAND);
         }
     }
 
     private void islandClicked(Event event){
-        setIslandId(islandListMap.get(event.getSource()));
+        setIslandId(islandIdMap.get(event.getSource()));
         removeMouseEventFromIslands();
     }
 
@@ -1045,8 +1044,9 @@ public class DashboardScene extends ObservableView implements GenericScene {
         notifyObserver(obs -> obs.chooseCharacterCard(cardSelected.getCardEffect().toString(),true));
         for(int i=1;i<13;i++) {
             Pane island = ((Pane) islandPane.getChildren().get(24 + i));
-            islandListMap.remove(island);
+            islandIdMap.remove(island);
             island.removeEventHandler(MouseEvent.MOUSE_CLICKED, this::islandClicked);
+            island.setCursor(Cursor.DEFAULT);
         }
     }
 
@@ -1114,6 +1114,15 @@ public class DashboardScene extends ObservableView implements GenericScene {
                     characterCardControllerMap.get(cardSelected.getCardEffect()).disableeXCards(true);
                     break;
             }
+        }
+    }
+    public void reactivateActionPhase(){
+        if(isActionStudent()){
+            personalSchoolController.disableEntry(false);
+        }else if(isActionMother()){
+            disabilityMother(GuiManager.getMainScene().getTable(),GuiManager.getMainScene().getMaxSteps(),false);
+        }else if(isActionCloud()){
+            cloudController.disabilitateCloud(false);
         }
     }
 }

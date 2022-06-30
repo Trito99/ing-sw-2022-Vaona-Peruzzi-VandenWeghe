@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.GUI.scene;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
+import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.school.Prof;
 import it.polimi.ingsw.model.school.School;
@@ -8,6 +9,7 @@ import it.polimi.ingsw.model.school.Tower;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.observer.ObservableView;
 import it.polimi.ingsw.view.GUI.GuiManager;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -28,6 +30,8 @@ public class SchoolController extends ObservableView implements GenericScene {
     private School school;
     private boolean dragDone = false;
     private int studentSelected;
+
+    private int studentSelectedForSwitch = 131;
     private String placeSelected;
     private int coinsOfPlayer;
     private AssistantCard trash;
@@ -405,6 +409,7 @@ public class SchoolController extends ObservableView implements GenericScene {
                     content.putImage(((ImageView) studentNode).getImage());
                     db.setContent(content);
                     studentSelected = entryMap.get((ImageView) studentNode);
+                    GuiManager.getMainScene().disabilitateStudentsAndXCards();
 
                     mouseEvent.consume();
                 }
@@ -471,4 +476,30 @@ public class SchoolController extends ObservableView implements GenericScene {
         });
     }
 
+    public void addMouseEventToStudentsOfEntry(){
+        for(Student student : school.getEntry()) {
+            ImageView studentNode = (ImageView) entry.getChildren().get(school.getEntry().indexOf(student));
+            studentNode.addEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClicked);
+        }
+    }
+
+    private <T extends Event> void studentClicked(T t) {
+        studentSelectedForSwitch = entryMap.get(t.getSource());
+        disableEntry(true);
+    }
+
+    public void removeMouseEventToStudentsOfEntry(){
+        for(Student student : school.getEntry()) {
+            ImageView studentNode = (ImageView) entry.getChildren().get(school.getEntry().indexOf(student));
+            studentNode.removeEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClicked);
+        }
+    }
+
+    public int getStudentSelectedForSwitch() {
+        return studentSelectedForSwitch;
+    }
+
+    public void setStudentSelectedForSwitch(int studentSelectedForSwitch) {
+        this.studentSelectedForSwitch = studentSelectedForSwitch;
+    }
 }
