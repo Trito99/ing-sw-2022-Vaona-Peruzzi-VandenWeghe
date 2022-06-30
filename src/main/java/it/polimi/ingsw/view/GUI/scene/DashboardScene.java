@@ -508,7 +508,6 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }else{
             schoolControllersMap.put(nickname,controller);
         }
-
     }
 
     /**
@@ -1050,7 +1049,10 @@ public class DashboardScene extends ObservableView implements GenericScene {
         return table;
     }
 
-
+    /**
+     * Handles Character card's effects
+     * Disabilitates students and X cards on a certain Character card
+     */
     public void disabilitateStudentsAndXCards() {
         if (cardSelected!=null) {
             switch (cardSelected.getCardEffect()) {

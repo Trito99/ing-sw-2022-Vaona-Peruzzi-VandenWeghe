@@ -17,13 +17,16 @@ public class WinnerScene extends ObservableView implements GenericScene {
     @FXML
     private Button closeButton;
 
+    /**
+     * Initialize buttons and panes present in the Scene
+     */
     public void initialize(){
         closeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::buttonClose);
     }
 
     /**
-     * Handles the click on the close button.
-     * @param event the mouse click event.
+     * Handles the click on the close button
+     * @param event the mouse click event
      */
     private void buttonClose(Event event){
         System.exit(0);
