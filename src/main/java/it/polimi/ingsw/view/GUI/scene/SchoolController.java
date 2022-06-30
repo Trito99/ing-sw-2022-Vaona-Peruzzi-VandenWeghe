@@ -409,7 +409,6 @@ public class SchoolController extends ObservableView implements GenericScene {
                     content.putImage(((ImageView) studentNode).getImage());
                     db.setContent(content);
                     studentSelected = entryMap.get((ImageView) studentNode);
-                    GuiManager.getMainScene().disabilitateStudentsAndXCards();
 
                     mouseEvent.consume();
                 }

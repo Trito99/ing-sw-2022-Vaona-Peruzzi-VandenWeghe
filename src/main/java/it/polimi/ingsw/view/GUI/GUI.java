@@ -302,6 +302,11 @@ public class GUI extends ObservableView implements View {
      */
     @Override
     public void askColorToBlock(CardEffect color) {
+        ColorChoice colorChoice = new ColorChoice();
+        colorChoice.addAllObservers(observers);
+        Platform.runLater(() -> {GuiManager.newStagePane(colorChoice, "/fxml/color_choice_scene");
+            GuiManager.getMainScene().reactivateActionPhase();});
+
     }
 
     /**

@@ -760,18 +760,14 @@ public class GameController {
                                 }
                             }
                         }
+                        virtualView.showCoinAndCharacterCards(gameSession.getTable().getCoinsOnTable(),gameSession.getTable().getCharacterCardsOnTable());
 
                         for (VirtualView vv : allVirtualView.values()) {
                             if (vv!=virtualView)
                                 vv.showMessage(getActivePlayer()+" has played the JUNKDEALER Character Card for the color "+ colorChosen);
                         }
                         cardPlayed=true;
-                        if(movedStudents!=-1)
-                            setActionState(ActionState.STUDENT);
-                        else {
-                            setActionState(ActionState.MOTHERNATURE);
-                            movedStudents++;
-                        }
+                        setActionState(savedActionState);
                         action();
                     }
                     else {
