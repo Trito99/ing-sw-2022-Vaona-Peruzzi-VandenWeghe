@@ -64,226 +64,265 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private Map<Pane,Integer> islandIdMap = new HashMap<>();
     private int studentDestinationIslandId, motherDestinationIslandId, islandMother, maxSteps;
 
+
     @FXML
     private Rectangle Bridge10_11;
+
     @FXML
     private Rectangle Bridge11_12;
+
     @FXML
     private Rectangle Bridge12_1;
+
     @FXML
     private Rectangle Bridge1_2;
+
     @FXML
     private Rectangle Bridge2_3;
+
     @FXML
     private Rectangle Bridge3_4;
+
     @FXML
     private Rectangle Bridge4_5;
+
     @FXML
     private Rectangle Bridge5_6;
+
     @FXML
     private Rectangle Bridge6_7;
+
     @FXML
     private Rectangle Bridge7_8;
+
     @FXML
     private Rectangle Bridge8_9;
+
     @FXML
     private Rectangle Bridge9_10;
+
     @FXML
     private ImageView ImageTrashPersonal;
-    @FXML
-    private Text NumberOfXcard;
-    @FXML
-    private Text NumberOfXcard1;
-    @FXML
-    private Text NumberOfXcard11;
-    @FXML
-    private Text NumberOfXcard12;
-    @FXML
-    private Text NumberOfXcard2;
-    @FXML
-    private Text NumberOfXcard3;
-    @FXML
-    private Text NumberOfXcard31;
-    @FXML
-    private Text NumberOfXcard4;
-    @FXML
-    private Text NumberOfXcard5;
-    @FXML
-    private Text NumberOfXcard6;
-    @FXML
-    private Text NumberOfXcard7;
-    @FXML
-    private Text NumberOfXcard8;
+
     @FXML
     private Pane PaneCoinScore;
+
     @FXML
     private Pane PaneIsland1;
+
     @FXML
     private Pane PaneIsland10;
+
     @FXML
     private Pane PaneIsland11;
+
     @FXML
     private Pane PaneIsland12;
+
     @FXML
     private Pane PaneIsland2;
+
     @FXML
     private Pane PaneIsland3;
+
     @FXML
     private Pane PaneIsland4;
+
     @FXML
     private Pane PaneIsland5;
+
     @FXML
     private Pane PaneIsland6;
+
     @FXML
     private Pane PaneIsland7;
+
     @FXML
     private Pane PaneIsland8;
+
     @FXML
     private Pane PaneIsland9;
+
     @FXML
     private Pane PaneTeamMate;
-    @FXML
-    private Pane PaneXcard1;
-    @FXML
-    private Pane PaneXcard10;
-    @FXML
-    private Pane PaneXcard11;
-    @FXML
-    private Pane PaneXcard12;
-    @FXML
-    private Pane PaneXcard2;
-    @FXML
-    private Pane PaneXcard3;
-    @FXML
-    private Pane PaneXcard4;
-    @FXML
-    private Pane PaneXcard5;
-    @FXML
-    private Pane PaneXcard6;
-    @FXML
-    private Pane PaneXcard7;
-    @FXML
-    private Pane PaneXcard8;
-    @FXML
-    private Pane PaneXcard9;
+
     @FXML
     private Text TextCoinscore;
+
     @FXML
     private Text TextTeamMate;
+
     @FXML
     private VBox characterCardLayout;
-    @FXML
-    private Pane cloudPane;
-    @FXML
-    private ImageView coinImagePersonal;
-    @FXML
-    private ImageView coinImageTable;
-    @FXML
-    private Pane coinPanePersonal;
-    @FXML
-    private Pane coinPaneTable;
-    @FXML
-    private Text coinTextPersonal;
-    @FXML
-    private Text coinTextTable;
-    @FXML
-    private Button deckButton;
-    @FXML
-    private ImageView deckLogo;
-    @FXML
-    private ImageView trashLogo;
-    @FXML
-    private ImageView island0;
-    @FXML
-    private ImageView island1;
-    @FXML
-    private ImageView island10;
-    @FXML
-    private ImageView island11;
-    @FXML
-    private ImageView island2;
-    @FXML
-    private ImageView island3;
-    @FXML
-    private ImageView island4;
-    @FXML
-    private ImageView island5;
-    @FXML
-    private ImageView island6;
-    @FXML
-    private ImageView island7;
-    @FXML
-    private ImageView island8;
-    @FXML
-    private ImageView island9;
-    @FXML
-    private Pane islandPane;
-    @FXML
-    private ImageView motherEarth1;
-    @FXML
-    private ImageView motherEarth10;
-    @FXML
-    private ImageView motherEarth11;
-    @FXML
-    private ImageView motherEarth12;
-    @FXML
-    private ImageView motherEarth2;
-    @FXML
-    private ImageView motherEarth3;
-    @FXML
-    private ImageView motherEarth4;
-    @FXML
-    private ImageView motherEarth5;
-    @FXML
-    private ImageView motherEarth6;
-    @FXML
-    private ImageView motherEarth7;
-    @FXML
-    private ImageView motherEarth8;
-    @FXML
-    private ImageView motherEarth9;
-    @FXML
-    private Button otherSchoolButton;
-    @FXML
-    private Pane schoolPane;
-    @FXML
-    private Pane schoolPane1;
-    @FXML
-    private Pane schoolPane11;
+
     @FXML
     private Pane characterPane;
+
+    @FXML
+    private Pane cloudPane;
+
+    @FXML
+    private ImageView coinImagePersonal;
+
+    @FXML
+    private ImageView coinImageTable;
+
+    @FXML
+    private Pane coinPanePersonal;
+
+    @FXML
+    private Pane coinPaneTable;
+
+    @FXML
+    private Text coinTextPersonal;
+
+    @FXML
+    private Text coinTextTable;
+
+    @FXML
+    private Button deckButton;
+
+    @FXML
+    private ImageView deckLogo;
+
+    @FXML
+    private ImageView island0;
+
+    @FXML
+    private ImageView island1;
+
+    @FXML
+    private ImageView island10;
+
+    @FXML
+    private ImageView island11;
+
+    @FXML
+    private ImageView island2;
+
+    @FXML
+    private ImageView island3;
+
+    @FXML
+    private ImageView island4;
+
+    @FXML
+    private ImageView island5;
+
+    @FXML
+    private ImageView island6;
+
+    @FXML
+    private ImageView island7;
+
+    @FXML
+    private ImageView island8;
+
+    @FXML
+    private ImageView island9;
+
+    @FXML
+    private Pane islandPane;
+
+    @FXML
+    private ImageView motherEarth1;
+
+    @FXML
+    private ImageView motherEarth10;
+
+    @FXML
+    private ImageView motherEarth11;
+
+    @FXML
+    private ImageView motherEarth12;
+
+    @FXML
+    private ImageView motherEarth2;
+
+    @FXML
+    private ImageView motherEarth3;
+
+    @FXML
+    private ImageView motherEarth4;
+
+    @FXML
+    private ImageView motherEarth5;
+
+    @FXML
+    private ImageView motherEarth6;
+
+    @FXML
+    private ImageView motherEarth7;
+
+    @FXML
+    private ImageView motherEarth8;
+
+    @FXML
+    private ImageView motherEarth9;
+
+    @FXML
+    private Button otherSchoolButton;
+
+    @FXML
+    private Pane schoolPane;
+
+    @FXML
+    private Pane schoolPane1;
+
+    @FXML
+    private Pane schoolPane11;
+
     @FXML
     private Pane sxPane;
+
     @FXML
     private Text textCoinsOnTable;
+
     @FXML
     private ImageView tower1;
+
     @FXML
     private ImageView tower10;
+
     @FXML
     private ImageView tower11;
+
     @FXML
     private ImageView tower12;
+
     @FXML
     private ImageView tower2;
+
     @FXML
     private ImageView tower3;
+
     @FXML
     private ImageView tower4;
+
     @FXML
     private ImageView tower5;
+
     @FXML
     private ImageView tower6;
+
     @FXML
     private ImageView tower7;
+
     @FXML
     private ImageView tower8;
+
     @FXML
     private ImageView tower9;
+
+    @FXML
+    private ImageView trashLogo;
+
     @FXML
     private Pane trashPanePersonalSchool;
+
     @FXML
     private Pane turnPane;
+
     @FXML
     private Text turnText;
 
@@ -306,7 +345,11 @@ public class DashboardScene extends ObservableView implements GenericScene {
         for(CharacterCard characterCard : characterCards){
             characterCardControllerMap.get(characterCard.getCardEffect()).updateStudentsCharacterCard(characterCard);
         }
+    }
 
+    public void updateRoundText(String message){
+        turnText.setText(message);
+        turnText.setVisible(true);
     }
 
     public void updateTurn(String message){
@@ -839,6 +882,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
         Bridge11_12.setDisable(true);
         Bridge12_1.setVisible(false);
         Bridge12_1.setDisable(true);
+        turnText.setVisible(false);
     }
 
     /**
@@ -1057,7 +1101,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
      * Handles Character card's effects
      * Disabilitates students and X cards on a certain Character card
      */
-    public void disabilitateStudentsAndXCards() {
+    public void disableStudentsAndXCards() {
         if (cardSelected!=null) {
             switch (cardSelected.getCardEffect()) {
                 case ABBOT:

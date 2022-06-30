@@ -212,19 +212,17 @@ public class IslandCard implements Serializable {
 
             /** KNIGHT EFFECT */
             if(cardEffectPlayed.isKnightPlayed() && p.equals(activePlayer)) {
-                p.setInfluenceOnIsland(countTot + 2);
+                countTot = countTot + 2;
             }
-            else
-                p.setInfluenceOnIsland(countTot);
 
             /** CENTAUR EFFECT */
             if(towerIsOnIsland) {
                 if (p.getTColor().equals(towerOnIsland.getTColour()) && !cardEffectPlayed.isCentaurPlayed()) {
                     /** Adds influence of the towers if centaur effect isn't activated */
                     countTot += mergedIsland;
-                    p.setInfluenceOnIsland(countTot);
                 }
             }
+            p.setInfluenceOnIsland(countTot);
         }
 
         for(SColor c : SColor.values()){            /** Disable Herbalist effect */
