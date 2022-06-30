@@ -117,7 +117,7 @@ public class GUI extends ObservableView implements View {
     @Override
     public void showMessage(String message) {
         Platform.runLater(() -> MessageScene.display(null,null, message));
-        if (message.equals("Tie")){
+        if (message.equals("Something went wrong.") || message.equals("**** TIE ****")){
             TieScene tie = new TieScene();
             tie.addAllObservers(observers);
             Platform.runLater(() -> GuiManager.changeRootPane(tie,"/fxml/tie_scene"));

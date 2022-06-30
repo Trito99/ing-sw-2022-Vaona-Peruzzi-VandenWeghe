@@ -1,13 +1,10 @@
 package it.polimi.ingsw.view.GUI.scene;
 
 import it.polimi.ingsw.observer.ObservableView;
-import it.polimi.ingsw.observer.ObserverView;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-
-import java.util.HashMap;
 
 /**
  * This Scene Controller is used to tell the player he won the match
