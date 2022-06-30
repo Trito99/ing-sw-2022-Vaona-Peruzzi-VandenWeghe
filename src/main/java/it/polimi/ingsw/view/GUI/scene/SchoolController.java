@@ -463,6 +463,7 @@ public class SchoolController extends ObservableView implements GenericScene {
                     setPlaceSelected("SCHOOL");
                     success = true;
                 }
+
                 event.setDropCompleted(success);
 
                 event.consume();

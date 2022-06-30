@@ -381,7 +381,7 @@ public class GUI extends ObservableView implements View {
                 }
             }
             else if (characterCard.getCardEffect().equals(CardEffect.COURTESAN)){
-
+                notifyObserver(obs -> obs.chooseId(GuiManager.getMainScene().getCharacterCardControllerMap().get(CardEffect.COURTESAN).getStudentSelected(), choice, indexAcrobat, true));
             }
             else {
                 notifyObserver(obs -> obs.chooseId(GuiManager.getMainScene().getCharacterCardControllerMap().get(CardEffect.ABBOT).getStudentSelected(), choice, indexAcrobat, true));

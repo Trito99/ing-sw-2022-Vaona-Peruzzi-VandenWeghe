@@ -526,13 +526,17 @@ public class GameController {
                             characterCardAlreadyPlayed = true;
                         } else {
                             again = true;
-                            if (exists && !empty && !cantPlay)
+                            if (exists && !empty && !cantPlay) {
                                 virtualView.showMessage("\n⚠️You don't have enough coins for this card ⚠️");
-                            else if (!exists && !changeIdea)
+                                setActionState(savedActionState);
+                                action();
+                            }else if (!exists && !changeIdea)
                                 virtualView.showMessage("\n⚠️Effect not present. Try again ⚠️");
-                            else if (empty )
+                            else if (empty ) {
                                 virtualView.showMessage("\n⚠️Card selected is empty ⚠️");
-                            else if(cantPlay) {
+                                setActionState(savedActionState);
+                                action();
+                            }else if(cantPlay) {
                                 characterCard.setCoinOnCard(false);
                                 gameSession.getPlayer(getActivePlayer()).setCoinScore(gameSession.getPlayer(getActivePlayer()).getCoinScore() + 1);
                                 virtualView.showMessage("\n⚠️You can't play bard effect if you don't have any students in hall. Choose another effect ⚠️");

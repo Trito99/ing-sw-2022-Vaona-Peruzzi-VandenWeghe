@@ -165,7 +165,7 @@ public class Table implements Serializable {
     public void generateCharacterCardsOnTable(ArrayList<CharacterCard> characterCards){
         //Collections.shuffle(characterCards);
 
-        for( int i = 0; i<3; i++){
+        for( int i = 9; i<12; i++){
             characterCardsOnTable.add(characterCards.get(i));
         }
 
