@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
+import it.polimi.ingsw.model.player.Team;
 import it.polimi.ingsw.model.school.Prof;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;

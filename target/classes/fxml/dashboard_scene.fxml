@@ -1309,5 +1309,13 @@
             <Font name="Helvetica" size="20.0" />
          </font>
       </Text>
+      <Button fx:id="quitButton" layoutX="839.0" layoutY="639.0" mnemonicParsing="false" opacity="0.68" prefHeight="37.0" prefWidth="153.0" style="-fx-background-color: #ffbb00; -fx-background-radius: 10; -fx-border-color: black; -fx-border-radius: 10;" text="Quit">
+         <font>
+            <Font name="Bell MT" size="36.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>
