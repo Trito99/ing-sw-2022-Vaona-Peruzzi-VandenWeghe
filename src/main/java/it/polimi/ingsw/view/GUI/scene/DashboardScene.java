@@ -282,6 +282,10 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private ImageView tower9;
     @FXML
     private Pane trashPanePersonalSchool;
+    @FXML
+    private Pane turnPane;
+    @FXML
+    private Pane turnTextPane;
 
     /**
      * Updates Table including the islands
@@ -397,7 +401,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
             PaneCoinScore.setVisible(false);
             coinTextPersonal.setVisible(false);
             coinTextPersonal.setDisable(true);
-            ImageTrashPersonal.setVisible(false); /***/
+            ImageTrashPersonal.setVisible(false);
             characterCardLayout.setVisible(false);
             characterPane.setVisible(false);
         }else{
@@ -1022,7 +1026,10 @@ public class DashboardScene extends ObservableView implements GenericScene {
         return table;
     }
 
-
+    /**
+     * Handles Character card's effects
+     * Disabilitates students and X cards on a certain Character card
+     */
     public void disabilitateStudentsAndXCards() {
         if (cardSelected!=null) {
             switch (cardSelected.getCardEffect()) {
