@@ -506,7 +506,6 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }else{
             schoolControllersMap.put(nickname,controller);
         }
-
     }
 
     /**
