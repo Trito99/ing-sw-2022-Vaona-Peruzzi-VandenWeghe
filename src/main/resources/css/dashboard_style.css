@@ -20,10 +20,27 @@
     -fx-background-radius: 20;
 }
 
-buttonTrans{
+.buttonTrans{
     -fx-border-radius: 20;
     -fx-background-color: transparent;
     -fx-background-radius: 25;
+}
+
+.buttonStudent{
+    -fx-background-color: transparent;
+    -fx-opacity: 0.45;
+    -fx-background-radius: 100;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 3px;
+    -fx-border-radius: 100;
+    -fx-border-style: solid;
+}
+
+.studentShadowPane{
+    -fx-background-radius: 20;
+    -fx-background-radius: 100;
+    -fx-background-color: black;
+    -fx-opacity: 0.45;
 }
 
 .separator *.line{
@@ -49,4 +66,9 @@ buttonTrans{
     -fx-background-radius: 20;
     -fx-background-color: black;
     -fx-opacity: 0.45;
+}
+
+.button:selected:focused{
+    -fx-background-color: #E4E4E4;
+    -fx-background-radius: 25;
 }

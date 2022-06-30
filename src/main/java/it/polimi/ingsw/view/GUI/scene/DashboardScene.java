@@ -354,6 +354,10 @@ public class DashboardScene extends ObservableView implements GenericScene {
         turnText.setVisible(true);
     }
 
+    public void updateTurn(String message){
+        turnText.setText(message);
+    }
+
     /**
      * Updates player's personal school
      * @param controller of player's school
