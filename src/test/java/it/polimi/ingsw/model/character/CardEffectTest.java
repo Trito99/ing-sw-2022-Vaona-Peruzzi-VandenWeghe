@@ -10,10 +10,10 @@ class CardEffectTest {
     void setAllFalse() {
         DeckCharacter deckCharacter = new DeckCharacter();
         deckCharacter.generateCharacterDeck();
-        CharacterCard characterCard = deckCharacter.getCharacterCards().get(0); //ABBOT (cost 1)
+        CharacterCard characterCard = deckCharacter.getCharacterCards().get(11); //JUNKDEALER (cost 3)
         CardEffect cardEffect = characterCard.getCardEffect();
-        assertEquals("ABBOT", cardEffect.name());
-        assertEquals(1, characterCard.getCostCharacter());
+        assertEquals("JUNKDEALER", cardEffect.name());
+        assertEquals(3, characterCard.getCostCharacter());
 
         cardEffect.setCentaurPlayed(true);
         cardEffect.setKnightPlayed(true);

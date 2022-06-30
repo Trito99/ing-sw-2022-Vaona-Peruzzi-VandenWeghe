@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.character.CardEffect;
+import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.DeckCharacter;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
@@ -177,93 +178,6 @@ class GameTest {
 
     }
 
-    /** Da Fare: Test di playCharacterCard */
-    @RepeatedTest(100)
-    void playCharacterCardTest(){
-        
-        Table table = new Table();
-        Random rn = new Random();
-        for (int index = 0; index < 2; index++) {
-            int r;
-            game.getListOfPlayers().clear();
-            table.getBag().clear();
-            table.getListOfIsland().clear();
-            table.generateIslandCards();
-            table.addFinalStudents();
-            table.generateMotherEarth();
-            game.setGameMode(GameMode.values()[index]);
-            table.generateCloudNumber(GameMode.values()[index]);
-            DeckCharacter deckCharacter = new DeckCharacter();
-            deckCharacter.generateCharacterDeck();
-            table.generateCharacterCardsOnTable(deckCharacter.getCharacterCards());
-            for (int i = 0; i < index + 2; i++) {
-                game.addPlayer(new Player(TColor.values()[i], PlayerNumber.values()[i]));
-                game.getListOfPlayers().get(i).generateSchool(table, GameMode.values()[index]);
-                switch(i){
-                    case(1):
-                        game.getListOfPlayers().get(i).setNickname("Gino");
-                        break;
-                    case(2):
-                        game.getListOfPlayers().get(i).setNickname("Pino");
-                        break;
-                    case(3):
-                        game.getListOfPlayers().get(i).setNickname("Tino");
-                        break;
-                }
-            }
-            for (int i = 0; i < index + 2; i++) {      /** Students are positioned randomly in the different Tables */
-                for (int s = 1; s < 6; s++) {
-                    r = rn.nextInt(3) + 1;
-                    switch (s) {
-                        case 1:
-                            for (int t = 1; t < r; t++) {
-                                game.getListOfPlayers().get(i).getPersonalSchool().getGTable().add(table.getBag().get(0));
-                                table.getBag().remove(0);
-                            }
-                            break;
-                        case 2:
-                            for (int t = 1; t < r; t++) {
-                                game.getListOfPlayers().get(i).getPersonalSchool().getRTable().add(table.getBag().get(0));
-                                table.getBag().remove(0);
-                            }
-                            break;
-                        case 3:
-                            for (int t = 1; t < r; t++) {
-                                game.getListOfPlayers().get(i).getPersonalSchool().getYTable().add(table.getBag().get(0));
-                                table.getBag().remove(0);
-                            }
-                            break;
-                        case 4:
-                            for (int t = 1; t < r; t++) {
-                                game.getListOfPlayers().get(i).getPersonalSchool().getPTable().add(table.getBag().get(0));
-                                table.getBag().remove(0);
-                            }
-                            break;
-                        case 5:
-                            for (int t = 1; t < r; t++) {
-                                game.getListOfPlayers().get(i).getPersonalSchool().getBTable().add(table.getBag().get(0));
-                                table.getBag().remove(0);
-                            }
-                            break;
-                    }
-                }
-            }
-            for (int i = 0; i < 12; i++) {  /** Moves random number of students on Islands. */
-                r = rn.nextInt(3)+1;
-                for (int n = 0; n < r; n++) {
-                    table.getListOfIsland().get(i).getStudentOnIsland().add(table.getBag().get(0));
-                    table.getBag().remove(0);
-                }
-            }
-            for (int i = 0; i < index+2; i++) {
-                game.getListOfPlayers().get(i).getPersonalSchool().winProf(game.getListOfPlayers(),game.getListOfPlayers().get(i), CardEffect.STANDARDMODE);
-            }
-
-           /** if(table.g null)
-            game.playCharacterCard(CardEffect.CENTAUR, "Gino"); */
-        }
-    }
-
     @RepeatedTest(100)
     void moveStudentFromListToIslandTest(){
         Random rn = new Random();
@@ -409,5 +323,114 @@ class GameTest {
                 }
             }
         }
+    }
+
+    @Test
+    void generateTowerColorsAndAssistant() {
+        game.setGameMode(GameMode.TWOPLAYERS);
+        int playersNumber = Game.initializePlayerNumber(game.getGameMode());
+        assertEquals(2,playersNumber);
+    game.generateTowerColorsAndAssistant();
+    assertEquals(2,game.getTowerColors().size());
+    assertEquals(TColor.WHITE,game.getTowerColors().get(0));
+    assertEquals(TColor.BLACK,game.getTowerColors().get(1));
+    assertEquals(4,game.getAssistantDeckNames().size());
+
+    game.setGameMode(GameMode.COOP);
+    game.getTowerColors().clear();
+    game.getAssistantDeckNames().clear();
+    game.generateTowerColorsAndAssistant();
+    assertEquals(4,game.getTowerColors().size());
+    }
+
+    @Test
+    void playCharacterBooleanTest() {
+        DeckCharacter deckCharacter = new DeckCharacter();
+        deckCharacter.generateCharacterDeck();
+        Table table = new Table();
+        table.generateBagInit();
+        table.addFinalStudents();
+        table.getCharacterCardsOnTable().addAll(deckCharacter.getCharacterCards());
+        game.setTable(table);
+
+        CharacterCard hostCard = deckCharacter.getCharacterCards().get(1);
+        CharacterCard bearerCard = deckCharacter.getCharacterCards().get(3);
+        CharacterCard centaurCard = deckCharacter.getCharacterCards().get(5);
+        CharacterCard knightCard = deckCharacter.getCharacterCards().get(7);
+        CharacterCard herbalistCard = deckCharacter.getCharacterCards().get(8);
+
+        Player p1 = new Player(TColor.WHITE,PlayerNumber.PLAYER1);
+        p1.setNickname("Federico");
+        p1.setCoinScore(20);
+        p1.generateSchool(table,GameMode.TWOPLAYERS);
+        p1.getPersonalSchool().getEntry().clear();
+        p1.getPersonalSchool().getEntry().add(new Student(1,SColor.GREEN));
+        p1.getPersonalSchool().getEntry().add(new Student(2,SColor.GREEN));
+        p1.getPersonalSchool().getEntry().add(new Student(3,SColor.PINK));
+        p1.getPersonalSchool().getEntry().add(new Student(4,SColor.PINK));
+        p1.getPersonalSchool().getEntry().add(new Student(5,SColor.PINK));
+        p1.getPersonalSchool().getEntry().add(new Student(6,SColor.BLUE));
+        p1.getPersonalSchool().getEntry().add(new Student(7,SColor.RED));
+
+        Player p2 = new Player(TColor.BLACK,PlayerNumber.PLAYER2);
+        p2.generateSchool(table,GameMode.TWOPLAYERS);
+
+        game.getListOfPlayers().add(p1);
+        game.getListOfPlayers().add(p2);
+
+        game.playCharacterCard(bearerCard.getCardEffect(), "Federico", -1, -1, -1, null);
+        assertEquals(true,bearerCard.getCardEffect().isBearerPlayed());
+
+        game.playCharacterCard(centaurCard.getCardEffect(), "Federico", -1, -1, -1, null);
+        assertEquals(true,centaurCard.getCardEffect().isCentaurPlayed());
+
+        game.playCharacterCard(knightCard.getCardEffect(), "Federico", -1, -1, -1, null);
+        assertEquals(true,knightCard.getCardEffect().isKnightPlayed());
+
+        game.playCharacterCard(hostCard.getCardEffect(), "Federico", -1, -1, -1, null);
+        assertEquals(true,hostCard.getCardEffect().isHostPlayed());
+
+        game.playCharacterCard(herbalistCard.getCardEffect(), "Federico", -1, -1, -1, SColor.GREEN);
+        assertEquals(true,SColor.GREEN.isColorBlocked());
+    }
+
+    @Test
+    void playCharacterCardTest(){
+        DeckCharacter deckCharacter = new DeckCharacter();
+        deckCharacter.generateCharacterDeck();
+        Table table = new Table();
+        table.generateBagInit();
+        table.addFinalStudents();
+        table.getCharacterCardsOnTable().addAll(deckCharacter.getCharacterCards());
+        game.setTable(table);
+
+        CharacterCard abbotCard = deckCharacter.getCharacterCards().get(0);
+        CharacterCard curatorCard = deckCharacter.getCharacterCards().get(4);
+        CharacterCard acrobatCard = deckCharacter.getCharacterCards().get(6);
+        CharacterCard bardCard = deckCharacter.getCharacterCards().get(9);
+        CharacterCard courtesanCard = deckCharacter.getCharacterCards().get(10);
+        CharacterCard junkDealerCard = deckCharacter.getCharacterCards().get(11);
+
+
+        Player p1 = new Player(TColor.WHITE,PlayerNumber.PLAYER1);
+        p1.setNickname("Federico");
+        p1.setCoinScore(20);
+        p1.generateSchool(table,GameMode.TWOPLAYERS);
+        p1.getPersonalSchool().getEntry().clear();
+        p1.getPersonalSchool().getEntry().add(new Student(1,SColor.GREEN));
+        p1.getPersonalSchool().getEntry().add(new Student(2,SColor.GREEN));
+        p1.getPersonalSchool().getEntry().add(new Student(3,SColor.PINK));
+        p1.getPersonalSchool().getEntry().add(new Student(4,SColor.PINK));
+        p1.getPersonalSchool().getEntry().add(new Student(5,SColor.PINK));
+        p1.getPersonalSchool().getEntry().add(new Student(6,SColor.BLUE));
+        p1.getPersonalSchool().getEntry().add(new Student(7,SColor.RED));
+
+        Player p2 = new Player(TColor.BLACK,PlayerNumber.PLAYER2);
+        p2.generateSchool(table,GameMode.TWOPLAYERS);
+
+        game.getListOfPlayers().add(p1);
+        game.getListOfPlayers().add(p2);
+
+        //game.playCharacterCard();
     }
 }
