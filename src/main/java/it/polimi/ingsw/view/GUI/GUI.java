@@ -116,12 +116,16 @@ public class GUI extends ObservableView implements View {
      */
     @Override
     public void showMessage(String message) {
-        Platform.runLater(() -> MessageScene.display(null,null, message));
         if (message.equals("Something went wrong.") || message.equals("**** TIE ****")){
             TieScene tie = new TieScene();
             tie.addAllObservers(observers);
             Platform.runLater(() -> GuiManager.changeRootPane(tie,"/fxml/tie_scene"));
         }
+        else if(message.substring(0,6).equals("\nRound"))
+            Platform.runLater(() -> GuiManager.getMainScene().updateRoundText(message));
+        else
+            Platform.runLater(() -> MessageScene.display(null,null, message));
+
     }
 
     /**
