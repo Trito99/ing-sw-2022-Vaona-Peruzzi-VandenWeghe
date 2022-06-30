@@ -1304,6 +1304,10 @@
          </font>
       </Text>
       <Pane fx:id="turnPane" layoutX="30.0" layoutY="33.0" prefHeight="88.0" prefWidth="157.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Pane fx:id="turnTextPane" layoutX="37.0" layoutY="38.0" prefHeight="75.0" prefWidth="144.0" />
+      <Text fx:id="turnText" fill="#ffffffbd" layoutX="42.0" layoutY="59.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.3" text="Text message showing the current turn" wrappingWidth="135.0">
+         <font>
+            <Font name="Helvetica" size="20.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

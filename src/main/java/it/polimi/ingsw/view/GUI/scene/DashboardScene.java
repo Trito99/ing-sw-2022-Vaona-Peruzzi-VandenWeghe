@@ -40,6 +40,8 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     private CharacterCard cardSelected = null;
 
+    private Map<Pane,Integer> islandListMap = new HashMap<>();
+
     private Map<CardEffect,CharacterCardController> characterCardControllerMap = new HashMap<>();
     private Image temp = null;
     private static Map<String, String> assistantCardMap;
@@ -506,7 +508,6 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }else{
             schoolControllersMap.put(nickname,controller);
         }
-
     }
 
     /**
@@ -979,6 +980,28 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }
     }
 
+    public void addMouseEventToIslands(){
+        for(int i=1;i<13;i++) {
+            Pane island = ((Pane) islandPane.getChildren().get(24 + i));
+            islandListMap.put(island,i);
+            island.addEventHandler(MouseEvent.MOUSE_CLICKED, this::islandClicked);
+        }
+    }
+
+    private void islandClicked(Event event){
+        setIslandId(islandListMap.get(event.getSource()));
+        removeMouseEventFromIslands();
+    }
+
+    public void removeMouseEventFromIslands(){
+        notifyObserver(obs -> obs.chooseCharacterCard(cardSelected.getCardEffect().toString(),true));
+        for(int i=1;i<13;i++) {
+            Pane island = ((Pane) islandPane.getChildren().get(24 + i));
+            islandListMap.remove(island);
+            island.removeEventHandler(MouseEvent.MOUSE_CLICKED, this::islandClicked);
+        }
+    }
+
     /**
      * Handles Mother Earth's new position
      * @param o object referring Mother Earth's pawn
@@ -1026,7 +1049,10 @@ public class DashboardScene extends ObservableView implements GenericScene {
         return table;
     }
 
-
+    /**
+     * Handles Character card's effects
+     * Disabilitates students and X cards on a certain Character card
+     */
     public void disabilitateStudentsAndXCards() {
         if (cardSelected!=null) {
             switch (cardSelected.getCardEffect()) {
