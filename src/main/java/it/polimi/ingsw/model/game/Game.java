@@ -318,7 +318,8 @@ public class Game {
                 characterCardPlayed.getCardEffect().setCentaurPlayed(true);
                 break;
 
-            case ACROBAT: /** exchange a student from the entry with a student on the Acrobat card */
+            /** exchange a student from the entry with a student on the Acrobat card */
+            case ACROBAT:
                 Student StudentChoice = null;
                 Student toChange = null;
                 for(Student student : characterCardPlayed.getStudentsOnCard()){
