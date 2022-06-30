@@ -21,6 +21,7 @@ import java.util.Map;
 public class CharacterCardController extends ObservableView implements GenericScene {
 
     private static Map<CardEffect, String> characterCardMap;
+
     static {
         characterCardMap = new HashMap<>();
         characterCardMap.put(CardEffect.ABBOT, "/images/characterCards/abbot.jpg");
@@ -28,7 +29,8 @@ public class CharacterCardController extends ObservableView implements GenericSc
         characterCardMap.put(CardEffect.HERALD, "/images/characterCards/herald.jpg");
         characterCardMap.put(CardEffect.BEARER, "/images/characterCards/bearer.jpg");
         characterCardMap.put(CardEffect.CURATOR, "/images/characterCards/curator.jpg");
-        characterCardMap.put(CardEffect.CENTAUR, "/images/characterCards/centaur.jpg");;
+        characterCardMap.put(CardEffect.CENTAUR, "/images/characterCards/centaur.jpg");
+        ;
         characterCardMap.put(CardEffect.ACROBAT, "/images/characterCards/acrobat.jpg");
         characterCardMap.put(CardEffect.KNIGHT, "/images/characterCards/knight.jpg");
         characterCardMap.put(CardEffect.HERBALIST, "/images/characterCards/herbalist.jpg");
@@ -39,9 +41,11 @@ public class CharacterCardController extends ObservableView implements GenericSc
 
     private CharacterCard card;
 
-    private Map<ImageView,Integer> studentMap = new HashMap<>();
+    private Map<ImageView, Integer> studentMap = new HashMap<>();
 
-    private int studentSelected = 131;
+    private int studentSelected;
+
+    private int[] studentSelectedForSwitch = new int[3];
 
     @FXML
     private Pane PaneCharacterCard;
@@ -89,32 +93,27 @@ public class CharacterCardController extends ObservableView implements GenericSc
     public void initialize() {
     }
 
-    public void setData(CharacterCard card){
+    public void setData(CharacterCard card) {
         this.card = card;
         cardImage.setImage(new Image(characterCardMap.get(card.getCardEffect())));
-        cardImage.addEventHandler(MouseEvent.MOUSE_CLICKED,this::clickCard);
+        cardImage.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickCard);
     }
 
-    public void clickCard(Event event){
+    public void clickCard(Event event) {
         GuiManager.getMainScene().setCardSelected(this.card);
-        if(GuiManager.getMainScene().isActionStudent()){
+        if (GuiManager.getMainScene().isActionStudent()) {
             GuiManager.getMainScene().getPersonalSchoolController().disableEntry(true);
             notifyObserver(obs -> obs.choosePlaceAndStudentForMove("CHARACTER CARD", -1));
-        }else if(GuiManager.getMainScene().isActionMother()){
-            GuiManager.getMainScene().disabilityMother(GuiManager.getMainScene().getTable(),GuiManager.getMainScene().getMaxSteps(),true);
+        } else if (GuiManager.getMainScene().isActionMother()) {
+            GuiManager.getMainScene().disabilityMother(GuiManager.getMainScene().getTable(), GuiManager.getMainScene().getMaxSteps(), true);
             notifyObserver(obs -> obs.chooseMotherEarthSteps(-1, -1, "CHARACTER CARD"));
-        }else if(GuiManager.getMainScene().isActionCloud()){
+        } else if (GuiManager.getMainScene().isActionCloud()) {
             GuiManager.getMainScene().getCloudController().disabilitateCloud(true);
             notifyObserver(obs -> obs.chooseCloudCard(-1, "CHARACTER CARD"));
         }
-        if(card.getCardEffect().equals(CardEffect.ACROBAT)) {
-            GuiManager.getMainScene().getPersonalSchoolController().addMouseEventToStudentsOfEntry();
-            GuiManager.getMainScene().getPersonalSchoolController().disableEntry(true);
-            notifyObserver(obs -> obs.chooseCharacterCard(GuiManager.getMainScene().getCardSelected().getCardEffect().toString(), true));
-        }
     }
 
-    public void initializeStudentPane(ArrayList<Student> studentsOnCard){
+    public void initializeStudentPane(ArrayList<Student> studentsOnCard) {
         longPane.setVisible(true);
         shortPane.setVisible(false);
 
@@ -124,9 +123,9 @@ public class CharacterCardController extends ObservableView implements GenericSc
         studentPane.setVisible(true);
         studentPane.setDisable(false);
 
-        for(int i=0;i<studentsOnCard.size();i++){
+        for (int i = 0; i < studentsOnCard.size(); i++) {
             studentPane.getChildren().get(i).setVisible(true);
-            switch (studentsOnCard.get(i).getSColor()){
+            switch (studentsOnCard.get(i).getsColour()) {
                 case GREEN:
                     ((ImageView) studentPane.getChildren().get(i)).setImage(new Image("/images/students/Gstudent.png"));
                     break;
@@ -143,9 +142,9 @@ public class CharacterCardController extends ObservableView implements GenericSc
                     ((ImageView) studentPane.getChildren().get(i)).setImage(new Image("/images/students/Bstudent.png"));
                     break;
             }
-            studentMap.put(((ImageView) studentPane.getChildren().get(i)),studentsOnCard.get(i).getIdStudent());
+            studentMap.put(((ImageView) studentPane.getChildren().get(i)), studentsOnCard.get(i).getIdStudent());
         }
-        switch (card.getCardEffect()){
+        switch (card.getCardEffect()) {
             case ABBOT:
             case COURTESAN:
                 addDragDetected(studentsOnCard);
@@ -159,8 +158,8 @@ public class CharacterCardController extends ObservableView implements GenericSc
         }
     }
 
-    public void updateStudentsCharacterCard(CharacterCard characterCard){
-        switch(characterCard.getCardEffect()){
+    public void updateStudentsCharacterCard(CharacterCard characterCard) {
+        switch (characterCard.getCardEffect()) {
             case ABBOT:
             case ACROBAT:
             case COURTESAN:
@@ -176,7 +175,7 @@ public class CharacterCardController extends ObservableView implements GenericSc
         }
     }
 
-    public void initializeXCardPane(int XCardsOnCard){
+    public void initializeXCardPane(int XCardsOnCard) {
         longPane.setVisible(true);
         shortPane.setVisible(false);
 
@@ -185,12 +184,12 @@ public class CharacterCardController extends ObservableView implements GenericSc
         studentPane.setDisable(true);
         xCardPane.setVisible(true);
         xCardPane.setDisable(false);
-        for(int i=0;i<XCardsOnCard;i++){
+        for (int i = 0; i < XCardsOnCard; i++) {
             xCardPane.getChildren().get(i).setVisible(true);
         }
     }
 
-    public void hideAll(){
+    public void hideAll() {
         longPane.setVisible(false);
         shortPane.setVisible(true);
 
@@ -199,29 +198,23 @@ public class CharacterCardController extends ObservableView implements GenericSc
         studentPane.setDisable(true);
         xCardPane.setVisible(false);
         xCardPane.setDisable(true);
-        for(int i=0;i<xCardPane.getChildren().size();i++){
+        for (int i = 0; i < xCardPane.getChildren().size(); i++) {
             xCardPane.getChildren().get(i).setVisible(false);
             xCardPane.getChildren().get(i).setDisable(true);
         }
-        for(int i=0;i<studentPane.getChildren().size();i++){
+        for (int i = 0; i < studentPane.getChildren().size(); i++) {
             studentPane.getChildren().get(i).setVisible(false);
             studentPane.getChildren().get(i).setDisable(true);
         }
     }
 
-    public void disableStudents(boolean disable){
-        for(int i=0;i<studentPane.getChildren().size();i++){
+    public void disableStudents(boolean disable) {
+        for (int i = 0; i < studentPane.getChildren().size(); i++) {
             if (studentPane.getChildren().get(i).isVisible())
                 studentPane.getChildren().get(i).setDisable(disable);
         }
     }
 
-    public void disableXCards(boolean disable){
-        for(int i=0;i<xCardPane.getChildren().size();i++){
-            if (xCardPane.getChildren().get(i).isVisible())
-                xCardPane.getChildren().get(i).setDisable(disable);
-        }
-    }
 
     public CharacterCard getCard() {
         return card;
@@ -231,17 +224,17 @@ public class CharacterCardController extends ObservableView implements GenericSc
         return studentMap;
     }
 
-    public int getStudentSelected(){
-        return  studentSelected;
+    public int getStudentSelected() {
+        return studentSelected;
     }
 
     private void addDragDetected(ArrayList<Student> studentsOnCard) {
-        for(int i=0;i<studentsOnCard.size();i++){
+        for (int i = 0; i < studentsOnCard.size(); i++) {
             ImageView studentNode = (ImageView) studentPane.getChildren().get(i);
             studentNode.setOnDragDetected(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    Dragboard db =  studentNode.startDragAndDrop(TransferMode.ANY);
+                    Dragboard db = studentNode.startDragAndDrop(TransferMode.ANY);
                     ClipboardContent content = new ClipboardContent();
                     content.putImage(studentNode.getImage());
                     db.setContent(content);
@@ -255,29 +248,50 @@ public class CharacterCardController extends ObservableView implements GenericSc
                 public void handle(DragEvent event) {
                     if (event.getTransferMode() == TransferMode.MOVE) {
                     }
-                    notifyObserver(obs -> obs.chooseCharacterCard(GuiManager.getMainScene().getCardSelected().getCardEffect().toString(),true));
-                    GuiManager.getMainScene().disableStudentsAndXCards();
+                    notifyObserver(obs -> obs.chooseCharacterCard(GuiManager.getMainScene().getCardSelected().getCardEffect().toString(), true));
+                    if (GuiManager.getMainScene().getCardSelected() != null)
+                        GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(true);
                     event.consume();
                 }
             });
         }
     }
+
     private void addMouseEvent(ArrayList<Student> studentsOnCard) {
-        for(int i=0;i<studentsOnCard.size();i++){
+        for (int i = 0; i < studentsOnCard.size(); i++) {
             ImageView studentNode = (ImageView) studentPane.getChildren().get(i);
             studentNode.addEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClicked);
         }
     }
 
+    private int acrobatIndex = 0;
 
     private <T extends Event> void studentClicked(T t) {
-        studentSelected=studentMap.get(t.getSource());
+        studentSelectedForSwitch[acrobatIndex] = studentMap.get(t.getSource());
         disableStudents(true);
+        GuiManager.getMainScene().getPersonalSchoolController().disableEntry(false);
+        for(ImageView student : GuiManager.getMainScene().getPersonalSchoolController().getEntryMap().keySet()){
+            int id = GuiManager.getMainScene().getPersonalSchoolController().getEntryMap().get(student);
+            for(int i=0; i<3;i++){
+                if (GuiManager.getMainScene().getPersonalSchoolController().getStudentSelectedForSwitch()[i]==id)
+                    student.setDisable(true);
+            }
+        }
+        acrobatIndex++;
+        if (acrobatIndex==3){
+            acrobatIndex=0;
+        }
+    }
 
+    public int getAcrobatIndex(){
+        return acrobatIndex;
     }
 
     public void setStudentSelected(int studentSelected) {
         this.studentSelected = studentSelected;
     }
 
+    public int[] getStudentSelectedForSwitch() {
+        return studentSelectedForSwitch;
+    }
 }

@@ -30,7 +30,7 @@ public class SchoolController extends ObservableView implements GenericScene {
     private boolean dragDone = false;
     private int studentSelected;
 
-    private int studentSelectedForSwitch = 131;
+    private int[] studentSelectedForSwitch = new int[3];
     private String placeSelected;
     private int coinsOfPlayer;
     private AssistantCard trash;
@@ -408,6 +408,7 @@ public class SchoolController extends ObservableView implements GenericScene {
                     content.putImage(((ImageView) studentNode).getImage());
                     db.setContent(content);
                     studentSelected = entryMap.get((ImageView) studentNode);
+                    GuiManager.getMainScene().disableCharacter();
 
                     mouseEvent.consume();
                 }
@@ -481,23 +482,40 @@ public class SchoolController extends ObservableView implements GenericScene {
         }
     }
 
+    private int acrobatIndex=0;
+
+    public int getAcrobatIndex(){
+        return acrobatIndex;
+    }
+
     private <T extends Event> void studentClicked(T t) {
-        studentSelectedForSwitch = entryMap.get(t.getSource());
+        studentSelectedForSwitch[acrobatIndex] = entryMap.get(t.getSource());
         disableEntry(true);
+        GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(false);
+        for(ImageView student : GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).getStudentMap().keySet()){
+            int id = GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).getStudentMap().get(student);
+            for(int i=0; i<3;i++){
+                if (GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).getStudentSelectedForSwitch()[i]==id)
+                    student.setDisable(true);
+            }
+        }
+        acrobatIndex++;
+        if (acrobatIndex==3){
+            removeMouseEventToStudentsOfEntry();
+            GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(true);
+            notifyObserver(obs -> obs.chooseCharacterCard(GuiManager.getMainScene().getCardSelected().getCardEffect().toString(),true));
+        }
     }
 
     public void removeMouseEventToStudentsOfEntry(){
+        acrobatIndex=0;
         for(Student student : school.getEntry()) {
             ImageView studentNode = (ImageView) entry.getChildren().get(school.getEntry().indexOf(student));
             studentNode.removeEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClicked);
         }
     }
 
-    public int getStudentSelectedForSwitch() {
+    public int[] getStudentSelectedForSwitch() {
         return studentSelectedForSwitch;
-    }
-
-    public void setStudentSelectedForSwitch(int studentSelectedForSwitch) {
-        this.studentSelectedForSwitch = studentSelectedForSwitch;
     }
 }
