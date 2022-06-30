@@ -40,6 +40,8 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     private CharacterCard cardSelected = null;
 
+    private Map<Pane,Integer> islandListMap = new HashMap<>();
+
     private Map<CardEffect,CharacterCardController> characterCardControllerMap = new HashMap<>();
     private Image temp = null;
     private static Map<String, String> assistantCardMap;
@@ -975,6 +977,28 @@ public class DashboardScene extends ObservableView implements GenericScene {
                     event.consume();
                 }
             });
+        }
+    }
+
+    public void addMouseEventToIslands(){
+        for(int i=1;i<13;i++) {
+            Pane island = ((Pane) islandPane.getChildren().get(24 + i));
+            islandListMap.put(island,i);
+            island.addEventHandler(MouseEvent.MOUSE_CLICKED, this::islandClicked);
+        }
+    }
+
+    private void islandClicked(Event event){
+        setIslandId(islandListMap.get(event.getSource()));
+        removeMouseEventFromIslands();
+    }
+
+    public void removeMouseEventFromIslands(){
+        notifyObserver(obs -> obs.chooseCharacterCard(cardSelected.getCardEffect().toString(),true));
+        for(int i=1;i<13;i++) {
+            Pane island = ((Pane) islandPane.getChildren().get(24 + i));
+            islandListMap.remove(island);
+            island.removeEventHandler(MouseEvent.MOUSE_CLICKED, this::islandClicked);
         }
     }
 

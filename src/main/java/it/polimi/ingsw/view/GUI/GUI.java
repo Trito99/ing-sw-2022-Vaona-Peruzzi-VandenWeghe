@@ -117,7 +117,7 @@ public class GUI extends ObservableView implements View {
     @Override
     public void showMessage(String message) {
         Platform.runLater(() -> MessageScene.display(null,null, message));
-        if (message.equals("Tie")){
+        if (message.equals("Something went wrong.") || message.equals("**** TIE ****")){
             TieScene tie = new TieScene();
             tie.addAllObservers(observers);
             Platform.runLater(() -> GuiManager.changeRootPane(tie,"/fxml/tie_scene"));
@@ -280,15 +280,18 @@ public class GUI extends ObservableView implements View {
                 case HERBALIST:
                 case BARD:
                     break;
+                case HERALD:
+                    GuiManager.getMainScene().addMouseEventToIslands();
+                    break;
                 default:
                     notifyObserver(obs -> obs.chooseCharacterCard(GuiManager.getMainScene().getCardSelected().getCardEffect().toString(),choice));
-                    if(GuiManager.getMainScene().isActionStudent()){
+                    /**if(GuiManager.getMainScene().isActionStudent()){
                         GuiManager.getMainScene().getPersonalSchoolController().disableEntry(false);
                     }else if(GuiManager.getMainScene().isActionMother()){
                         GuiManager.getMainScene().disabilityMother(GuiManager.getMainScene().getTable(),GuiManager.getMainScene().getMaxSteps(),false);
                     }else if(GuiManager.getMainScene().isActionCloud()){
                         GuiManager.getMainScene().getCloudController().disabilitateCloud(false);
-                    }
+                    }*/
                     break;
             }
 
@@ -359,7 +362,7 @@ public class GUI extends ObservableView implements View {
         if (choice) {
             if (characterCard != null) {
                 if (characterCard.getCardEffect().equals(CardEffect.HERALD))
-                    System.out.print("\nHERALD EFFECT\nIn which island do you want to calculate influence?\n");
+                    notifyObserver(obs -> obs.chooseId(GuiManager.getMainScene().getStudentDestinationIslandId(),choice, indexAcrobat, false));
                 if (characterCard.getCardEffect().equals(CardEffect.CURATOR))
                     System.out.print("\nCURATOR EFFECT\nIn which island do you want to place the forbidden card?\n");
             } else
