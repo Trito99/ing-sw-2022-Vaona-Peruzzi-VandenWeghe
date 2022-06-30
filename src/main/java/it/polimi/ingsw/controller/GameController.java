@@ -7,7 +7,7 @@ import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.DeckCharacter;
-import it.polimi.ingsw.model.game.cloud.CloudCard;
+import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.*;
 import it.polimi.ingsw.model.island.IslandCard;
 import it.polimi.ingsw.model.player.Player;
@@ -319,7 +319,7 @@ public class GameController {
                         if(student.getIdStudent() == Choice.getId()) {
                             present = true;
                             studentId = student.getIdStudent();
-                            studentColor = student.getsColour();
+                            studentColor = student.getSColor();
                         }
                     }
 
@@ -760,14 +760,18 @@ public class GameController {
                                 }
                             }
                         }
-                        virtualView.showCoinAndCharacterCards(gameSession.getTable().getCoinsOnTable(),gameSession.getTable().getCharacterCardsOnTable());
 
                         for (VirtualView vv : allVirtualView.values()) {
                             if (vv!=virtualView)
                                 vv.showMessage(getActivePlayer()+" has played the JUNKDEALER Character Card for the color "+ colorChosen);
                         }
                         cardPlayed=true;
-                        setActionState(savedActionState);
+                        if(movedStudents!=-1)
+                            setActionState(ActionState.STUDENT);
+                        else {
+                            setActionState(ActionState.MOTHEREARTH);
+                            movedStudents++;
+                        }
                         action();
                     }
                     else {
@@ -883,7 +887,7 @@ public class GameController {
     private void allStudentsMoved() {
         if (movedStudents == gameSession.getTable().getCloudNumber().get(0).getNumberOfSpaces()) {
             movedStudents = 0;
-            setActionState(ActionState.MOTHERNATURE);
+            setActionState(ActionState.MOTHEREARTH);
         }
         action();
     }
@@ -959,7 +963,7 @@ public class GameController {
                 case CHARACTER:
                     allVirtualView.get(getActivePlayer()).askCharacterCardToPlay(false, gameSession.getPlayer(getActivePlayer()).getCoinScore(), gameSession.getTable().getCharacterCardsOnTable());
                     break;
-                case MOTHERNATURE:
+                case MOTHEREARTH:
                     if(characterCard!=null && characterCard.getCardEffect().isBearerPlayed())
                         allVirtualView.get(getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(getActivePlayer()).getTrash().getStepMotherEarth() + 2, gameSession.getTable(), gameSession.getDifficulty());
                     else

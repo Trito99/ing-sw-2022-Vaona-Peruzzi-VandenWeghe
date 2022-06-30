@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.table;
 
 import it.polimi.ingsw.model.character.CardEffect;
-import it.polimi.ingsw.model.game.cloud.CloudCard;
+import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;

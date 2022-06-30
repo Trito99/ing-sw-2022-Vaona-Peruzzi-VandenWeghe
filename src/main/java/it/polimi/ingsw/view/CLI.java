@@ -5,7 +5,7 @@ import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
-import it.polimi.ingsw.model.game.cloud.CloudCard;
+import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.island.IslandCard;
@@ -845,7 +845,7 @@ public class CLI extends ObservableView implements View {
      * @return the Ansi color to use for the "Show methods"
      */
     private String getStudentAnsiColor(Student student) {
-        switch (student.getsColour()) {
+        switch (student.getSColor()) {
             case GREEN:
                 return ANSI_GREEN;
             case YELLOW:

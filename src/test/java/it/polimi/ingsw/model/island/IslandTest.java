@@ -3,7 +3,7 @@ package it.polimi.ingsw.model.island;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
-import it.polimi.ingsw.model.game.cloud.CloudCard;
+import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.Player;
@@ -132,7 +132,7 @@ public class IslandTest {
    }
 
    private String getStudentAnsiColor(Student student) {
-      switch (student.getsColour()) {
+      switch (student.getSColor()) {
          case GREEN:
             return ANSI_GREEN;
          case YELLOW:
@@ -342,7 +342,7 @@ public class IslandTest {
                for (Prof prof : player.getPersonalSchool().getProfOfPlayer()) {
                   if (prof.getIsInHall()) {
                      for (Student student : table.getListOfIsland().get(i).getStudentOnIsland()) {
-                        if (student.getsColour() == prof.getSColour())
+                        if (student.getSColor() == prof.getSColor())
                            s++;
                      }
                   }

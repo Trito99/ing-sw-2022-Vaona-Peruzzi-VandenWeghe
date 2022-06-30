@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view.GUI.scene;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
-import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.school.Prof;
 import it.polimi.ingsw.model.school.School;
@@ -229,7 +228,7 @@ public class SchoolController extends ObservableView implements GenericScene {
     private void updateEntry(){
         for(Student student : school.getEntry()){
             entry.getChildren().get(school.getEntry().indexOf(student)).setVisible(true);
-            switch(student.getsColour()){
+            switch(student.getSColor()){
                 case GREEN:
                     ((ImageView) entry.getChildren().get(school.getEntry().indexOf(student))).setImage(green_1.getImage());
                     break;
@@ -288,7 +287,7 @@ public class SchoolController extends ObservableView implements GenericScene {
     private void updateProf() {
         for (Prof prof : school.getProfOfPlayer()){
             if(prof.getIsInHall()){
-                switch(prof.getSColour()){
+                switch(prof.getSColor()){
                     case GREEN:
                         green_prof.setVisible(true);
                         break;

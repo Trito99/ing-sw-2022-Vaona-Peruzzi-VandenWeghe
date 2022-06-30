@@ -9,6 +9,9 @@ public class DeckCharacter {
 
     private ArrayList<CharacterCard> characterCards;
 
+    /**
+     * Default constructor
+     */
     public DeckCharacter(){
         this.characterCards = new ArrayList<>();
     }

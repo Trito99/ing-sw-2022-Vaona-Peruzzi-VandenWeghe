@@ -1,6 +1,6 @@
 package it.polimi.ingsw.view.GUI.scene;
 
-import it.polimi.ingsw.model.game.cloud.CloudCard;
+import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.observer.ObservableView;
@@ -110,7 +110,7 @@ public class CloudCards extends ObservableView implements GenericScene {
             if(s.getIdStudent()!=131) {
                 StudentsPane.getChildren().get(allStudents.indexOf(s)).setVisible(true);
                 StudentsPane.getChildren().get(allStudents.indexOf(s)).setDisable(false);
-                switch (s.getsColour()) {
+                switch (s.getSColor()) {
                     case GREEN:
                         ((ImageView) (StudentsPane.getChildren().get(allStudents.indexOf(s)))).setImage(new Image("/images/students/Gstudent.png"));
                         break;

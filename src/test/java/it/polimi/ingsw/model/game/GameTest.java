@@ -3,7 +3,6 @@ package it.polimi.ingsw.model.game;
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.assistant.DeckAssistant;
 import it.polimi.ingsw.model.assistant.AssistantDeckName;
-import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.character.DeckCharacter;
 import it.polimi.ingsw.model.player.Player;
@@ -258,7 +257,7 @@ class GameTest {
                         game.moveStudentFromListToHall(game.getListOfPlayers().get(i), id.get(pos), game.getListOfPlayers().get(i).getPersonalSchool().getEntry());
                         assertEquals(id.size() - 1, game.getListOfPlayers().get(i).getPersonalSchool().getEntry().size());  /** Controls if the size of the Entry is reduced by one after every cicle */
 
-                        switch (newStudent.getsColour()) {/** Controls if the id of the student added is the same of the id selected in MoveStudentInHall  */
+                        switch (newStudent.getSColor()) {/** Controls if the id of the student added is the same of the id selected in MoveStudentInHall  */
                             case GREEN:
                                 assertEquals(id.get(pos), game.getListOfPlayers().get(i).getPersonalSchool().getGTable().get(game.getListOfPlayers().get(i).getPersonalSchool().getGTable().size() - 1).getIdStudent());
                                 break;

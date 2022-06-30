@@ -276,13 +276,10 @@ public class GUI extends ObservableView implements View {
                     GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(false);
                     GuiManager.getMainScene().reactivateActionPhase();
                     break;
-                case CURATOR:
-                    GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableeXCards(false);
-                    GuiManager.getMainScene().reactivateActionPhase();
-                    break;
                 case BARD:
                     break;
                 case HERALD:
+                case CURATOR:
                     GuiManager.getMainScene().addMouseEventToIslands();
                     GuiManager.getMainScene().reactivateActionPhase();
                     break;
@@ -365,7 +362,7 @@ public class GUI extends ObservableView implements View {
                 if (characterCard.getCardEffect().equals(CardEffect.HERALD))
                     notifyObserver(obs -> obs.chooseId(GuiManager.getMainScene().getStudentDestinationIslandId(),choice, indexAcrobat, false));
                 if (characterCard.getCardEffect().equals(CardEffect.CURATOR))
-                    System.out.print("\nCURATOR EFFECT\nIn which island do you want to place the forbidden card?\n");
+                    notifyObserver(obs -> obs.chooseId(GuiManager.getMainScene().getStudentDestinationIslandId(),choice, indexAcrobat, false));
             } else
                 notifyObserver(obs -> obs.chooseId(GuiManager.getMainScene().getStudentDestinationIslandId(),choice, indexAcrobat, false));
         }else{

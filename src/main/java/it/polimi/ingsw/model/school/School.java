@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.school;
 
 import it.polimi.ingsw.model.character.CardEffect;
-import it.polimi.ingsw.model.game.cloud.CloudCard;
+import it.polimi.ingsw.model.cloud.CloudCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
@@ -252,7 +252,7 @@ public class School implements Serializable {
      */
     public boolean getProfInHall(SColor color){
         for(Prof p : profOfPlayer) {
-            if (p.getSColour().equals(color))
+            if (p.getSColor().equals(color))
                 return p.getIsInHall();
         }
         return false;

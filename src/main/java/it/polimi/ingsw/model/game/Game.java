@@ -117,7 +117,6 @@ public class Game {
         return playerList;
     }
 
-
     /**
      * Adds a player in players' list of the game
      * @param player to add
@@ -238,7 +237,7 @@ public class Game {
             if (id == s.getIdStudent())
                 student = s;
         }
-        switch(student.getsColour()) {
+        switch(student.getSColor()) {
             case GREEN:
                 playerMoving.getPersonalSchool().getGTable().add(student);
                 getCoinFromStudentMove(playerMoving, playerMoving.getPersonalSchool().getGTable());
@@ -378,7 +377,7 @@ public class Game {
                         studentEntry = student;
                     }
                 }
-                switch(studentHall.getsColour()){
+                switch(studentHall.getSColor()){
                     case GREEN:
                         activePlayer.getPersonalSchool().getGTable().remove(studentHall);
                         break;

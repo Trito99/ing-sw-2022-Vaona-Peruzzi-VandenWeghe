@@ -5,7 +5,7 @@ package it.polimi.ingsw.model.game;
  */
 public enum ActionState {
     STUDENT,
-    MOTHERNATURE,
+    MOTHEREARTH,
     CLOUDCARD,
     CHARACTER
 }
