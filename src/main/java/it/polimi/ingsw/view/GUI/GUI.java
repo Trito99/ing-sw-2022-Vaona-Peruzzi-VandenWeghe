@@ -280,7 +280,6 @@ public class GUI extends ObservableView implements View {
                     GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableeXCards(false);
                     GuiManager.getMainScene().reactivateActionPhase();
                     break;
-                case HERBALIST:
                 case BARD:
                     break;
                 case HERALD:
