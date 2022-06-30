@@ -7,12 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
-import java.util.HashMap;
-
-/**
- * This Scene Controller is used to tell the player he won the match
- */
-public class WinnerScene extends ObservableView implements GenericScene {
+public class TieScene extends ObservableView implements GenericScene {
 
     @FXML
     private Button closeButton;
