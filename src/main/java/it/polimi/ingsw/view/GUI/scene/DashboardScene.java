@@ -984,6 +984,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
                 @Override
                 public void handle(MouseEvent mouseEvent) {
+                    GuiManager.getMainScene().disableCharacter();
                     Dragboard db =  motherNature.startDragAndDrop(TransferMode.ANY);
                     ClipboardContent content = new ClipboardContent();
                     content.putImage(((ImageView) motherNature).getImage());
@@ -1101,21 +1102,6 @@ public class DashboardScene extends ObservableView implements GenericScene {
      * Handles Character card's effects
      * Disabilitates students and X cards on a certain Character card
      */
-    public void disableStudentsAndXCards() {
-        if (cardSelected!=null) {
-            switch (cardSelected.getCardEffect()) {
-                case ABBOT:
-                case ACROBAT:
-                case HERBALIST:
-                case COURTESAN:
-                    characterCardControllerMap.get(cardSelected.getCardEffect()).disableStudents(true);
-                    break;
-                case CURATOR:
-                    characterCardControllerMap.get(cardSelected.getCardEffect()).disableeXCards(true);
-                    break;
-            }
-        }
-    }
     public void reactivateActionPhase(){
         if(isActionStudent()){
             personalSchoolController.disableEntry(false);
@@ -1123,6 +1109,28 @@ public class DashboardScene extends ObservableView implements GenericScene {
             disabilityMother(GuiManager.getMainScene().getTable(),GuiManager.getMainScene().getMaxSteps(),false);
         }else if(isActionCloud()){
             cloudController.disabilitateCloud(false);
+        }
+    }
+
+    public void disableCharacter(){
+        if(GuiManager.getMainScene().getCardSelected()!=null){
+            GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(true);
+            if(GuiManager.getMainScene().getCardSelected().getCardEffect().equals(CardEffect.ACROBAT)) {
+                int index1 = GuiManager.getMainScene().getPersonalSchoolController().getAcrobatIndex();
+                int index2 = GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).getAcrobatIndex();
+                if ((index1 + index2) == 5 || (index1 + index2) == 4) {
+                    GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).getStudentSelectedForSwitch()[2] = -1;
+                    GuiManager.getMainScene().getPersonalSchoolController().getStudentSelectedForSwitch()[2] = -1;
+                } else if ((index1 + index2) == 3 || (index1 + index2) == 2) {
+                    GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).getStudentSelectedForSwitch()[2] = -1;
+                    GuiManager.getMainScene().getPersonalSchoolController().getStudentSelectedForSwitch()[2] = -1;
+                    GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).getStudentSelectedForSwitch()[1] = -1;
+                    GuiManager.getMainScene().getPersonalSchoolController().getStudentSelectedForSwitch()[1] = -1;
+                }
+                GuiManager.getMainScene().getPersonalSchoolController().removeMouseEventToStudentsOfEntry();
+                GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(true);
+                notifyObserver(obs -> obs.chooseCharacterCard(GuiManager.getMainScene().getCardSelected().getCardEffect().toString(), true));
+            }
         }
     }
 }
