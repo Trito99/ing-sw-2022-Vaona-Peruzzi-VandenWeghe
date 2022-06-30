@@ -287,7 +287,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     @FXML
     private Pane turnPane;
     @FXML
-    private Pane turnTextPane;
+    private Text turnText;
 
     /**
      * Updates Table including the islands
@@ -309,6 +309,10 @@ public class DashboardScene extends ObservableView implements GenericScene {
             characterCardControllerMap.get(characterCard.getCardEffect()).updateStudentsCharacterCard(characterCard);
         }
 
+    }
+
+    public void updateTurn(String message){
+        turnText.setText(message);
     }
 
     /**
