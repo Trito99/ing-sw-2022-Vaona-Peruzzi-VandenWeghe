@@ -1,8 +1,11 @@
 package it.polimi.ingsw.message;
 
-
 import it.polimi.ingsw.model.table.Table;
 
+/**
+ * Extends server Message
+ * Asks the Cloud card chosen by a player
+ */
 public class ChooseCloudCard extends ServerMessage {
 
     private Table table;

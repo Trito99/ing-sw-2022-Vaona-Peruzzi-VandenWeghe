@@ -1,11 +1,14 @@
 package it.polimi.ingsw.message;
 
+/**
+ * Enumeration which identifies every kind of message between the client and the server
+ */
 public enum MessageType {
     /** messages of the game */
     LOGIN,
     LOGIN_RESULT,
     PLAYERS_NUMBER_AND_DIFFICULTY_CHOSEN,
-    ASSISTANTCARD_PLAYED,
+    ASSISTANT_CARD_PLAYED,
     CHARACTER_CARD_PLAYED,
     CLOUD_CHOSEN,
     COLOR_CHOSEN,

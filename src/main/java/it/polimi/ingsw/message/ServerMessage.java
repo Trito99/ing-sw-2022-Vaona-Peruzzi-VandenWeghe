@@ -2,12 +2,13 @@ package it.polimi.ingsw.message;
 
 import java.io.Serializable;
 
-/** mostra tutti i messaggi forniti dal server */
-
+/**
+ * Shows all the messages from the server
+ */
 public class ServerMessage extends GeneralMessage implements Serializable {
 
-    public ServerMessage(MessageType msg){
-        super(msg);
+    public ServerMessage(MessageType message){
+        super(message);
     }
 
 }

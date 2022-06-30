@@ -12,7 +12,6 @@ import java.util.function.Consumer;
 
 public abstract class ObservableView {
     protected final List<ObserverView> observers = new ArrayList<>();
-    protected StartGUI main;
 
     /**
      * Adds an observer

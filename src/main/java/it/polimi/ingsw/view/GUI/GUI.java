@@ -84,11 +84,6 @@ public class GUI extends ObservableView implements View {
         Platform.runLater(() -> GuiManager.changeRootPane(towerAndDeckScene, "/fxml/tower_and_deck_scene") );
     }
 
-    @Override
-    public void askAction() {
-
-    }
-
     /**
      * Shows if the login was successful
      * @param nickname of the player

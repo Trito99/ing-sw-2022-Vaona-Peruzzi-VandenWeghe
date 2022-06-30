@@ -5,6 +5,10 @@ import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.school.School;
 
+/**
+ * Extends Server message
+ * Shows each player's personal school
+ */
 public class ShowPersonalSchool extends ServerMessage {
     private School school;
     private String nickname;

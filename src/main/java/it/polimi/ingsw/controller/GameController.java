@@ -261,7 +261,7 @@ public class GameController {
                 break;
 
             case PLANNING:
-                if(receivedMessage.getMessageType() == MessageType.ASSISTANTCARD_PLAYED){
+                if(receivedMessage.getMessageType() == MessageType.ASSISTANT_CARD_PLAYED){
                     AssistantCardPlayed CardSelected = (AssistantCardPlayed) receivedMessage;
                     int indexOfCurrentPlayer=gameSession.getListOfPlayers().indexOf(gameSession.getPlayer(receivedMessage.getNickname()));
                     /** Boolean to manage the error of choice that the client could make */
@@ -909,14 +909,6 @@ public class GameController {
     }
 
     /**
-     * Returns the game state
-     * @return current game state
-     */
-    public GameState getGameState() {
-        return gameState;
-    }
-
-    /**
      * Sets the new Game State
      * @param gameState updated
      */
@@ -930,14 +922,6 @@ public class GameController {
      */
     public Game getGameSession() {
         return gameSession;
-    }
-
-    /**
-     * Sets the new Game object
-     * @param gameSession updated
-     */
-    public void setGameSession(Game gameSession) {
-        this.gameSession = gameSession;
     }
 
     /**
