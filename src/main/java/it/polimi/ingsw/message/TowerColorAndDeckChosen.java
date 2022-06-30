@@ -3,6 +3,10 @@ package it.polimi.ingsw.message;
 import it.polimi.ingsw.model.assistant.AssistantDeckName;
 import it.polimi.ingsw.model.school.TColor;
 
+/**
+ * Extends Client Message
+ * Notifies tower color and deck assistant chosen by a player
+ */
 public class TowerColorAndDeckChosen extends ClientMessage {
     private TColor towerColor;
     private AssistantDeckName assistantDeckName;

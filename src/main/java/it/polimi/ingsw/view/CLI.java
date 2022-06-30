@@ -399,13 +399,6 @@ public class CLI extends ObservableView implements View {
     }
 
     /**
-     * Asks the player his next action.
-     */
-    @Override
-    public void askAction() {
-    }
-
-    /**
      * Shows coins and character cards on table
      * @param coins on table
      * @param characterCardsOnTable on table

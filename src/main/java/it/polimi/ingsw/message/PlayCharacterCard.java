@@ -4,6 +4,10 @@ import it.polimi.ingsw.model.character.CharacterCard;
 
 import java.util.ArrayList;
 
+/**
+ * Extends ServerMessage
+ * Notifies the Character Card played
+ */
 public class PlayCharacterCard extends ServerMessage {
 
     private boolean choice;

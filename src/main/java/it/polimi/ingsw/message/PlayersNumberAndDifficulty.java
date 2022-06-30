@@ -2,6 +2,10 @@ package it.polimi.ingsw.message;
 
 import it.polimi.ingsw.model.game.Difficulty;
 
+/**
+ * Extends Client Message
+ * Notifies the number of players and the difficulty of the match chosen by the player
+ */
 public class PlayersNumberAndDifficulty extends ClientMessage {
     private int playersNumber;
     private Difficulty difficulty;

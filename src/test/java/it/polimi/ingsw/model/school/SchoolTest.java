@@ -1,9 +1,11 @@
 package it.polimi.ingsw.model.school;
 
 import it.polimi.ingsw.model.character.CardEffect;
+import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.game.cloud.CloudCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerNumber;
 import it.polimi.ingsw.model.student.SColor;
@@ -261,6 +263,57 @@ class SchoolTest {
             }
         }
 
+    }
+    @Test
+    public void moveStudentFromCloudToEntry(){
+        CloudCard cloudCard = new CloudCard(0, 3);
+        cloudCard.getStudentOnCloud().add(new Student(1,SColor.GREEN));
+        cloudCard.getStudentOnCloud().add(new Student(2,SColor.RED));
+        cloudCard.getStudentOnCloud().add(new Student(3,SColor.YELLOW));
+
+        Player p1 = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
+        p1.generateSchool(table, GameMode.TWOPLAYERS);
+        assertEquals(7,p1.getPersonalSchool().getEntry().size());
+
+        p1.getPersonalSchool().getEntry().clear();
+        p1.getPersonalSchool().moveStudentFromCloudToEntry(cloudCard);
+
+        assertEquals(3,p1.getPersonalSchool().getEntry().size());
+        assertEquals(0,cloudCard.getStudentOnCloud().size());
+    }
+
+    @Test
+    public void winProfHostTest(){
+        Player p1 = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
+        Player p2 = new Player(TColor.BLACK, PlayerNumber.PLAYER2);
+        p1.getPersonalSchool().getProfOfPlayer().add(new Prof(SColor.GREEN));
+        p1.getPersonalSchool().getProfOfPlayer().add(new Prof(SColor.RED));
+        p1.getPersonalSchool().getProfOfPlayer().add(new Prof(SColor.YELLOW));
+        p1.getPersonalSchool().getProfOfPlayer().add(new Prof(SColor.YELLOW));
+        p1.getPersonalSchool().getProfOfPlayer().add(new Prof(SColor.PINK));
+        p2.getPersonalSchool().getProfOfPlayer().add(new Prof(SColor.GREEN));
+        p2.getPersonalSchool().getProfOfPlayer().add(new Prof(SColor.RED));
+        p2.getPersonalSchool().getProfOfPlayer().add(new Prof(SColor.YELLOW));
+        p2.getPersonalSchool().getProfOfPlayer().add(new Prof(SColor.YELLOW));
+        p2.getPersonalSchool().getProfOfPlayer().add(new Prof(SColor.PINK));
+
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(p1);
+        players.add(p2);
+
+        p1.getPersonalSchool().getGTable().add(new Student(2,SColor.GREEN));
+        p2.getPersonalSchool().getGTable().add(new Student(4,SColor.GREEN));
+
+        CharacterCard hostCard = new CharacterCard(0, CardEffect.HOST, "");
+        hostCard.getCardEffect().setHostPlayed(true);
+
+        assertEquals(false,p1.getPersonalSchool().getProfInHall(SColor.GREEN));
+        p1.getPersonalSchool().winProf(players,p1,hostCard.getCardEffect());
+        assertEquals(true,p1.getPersonalSchool().getProfInHall(SColor.GREEN));
+        assertEquals(5,p1.getPersonalSchool().numberOfProf());
+        p2.getPersonalSchool().getGTable().add(new Student(8,SColor.YELLOW));
+        p2.getPersonalSchool().winProf(players,p1,hostCard.getCardEffect());
+        assertEquals(4,p1.getPersonalSchool().numberOfProf());
     }
 
 }

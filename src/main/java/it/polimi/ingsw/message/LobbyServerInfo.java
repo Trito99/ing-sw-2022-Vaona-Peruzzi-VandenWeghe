@@ -4,6 +4,10 @@ import it.polimi.ingsw.network.LobbyForPrint;
 
 import java.util.Map;
 
+/**
+ * Extends Server Message
+ * Contains lobby's info to show
+ */
 public class LobbyServerInfo extends ServerMessage {
 
     private Map<String, LobbyForPrint> lobbyMap;

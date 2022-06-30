@@ -97,12 +97,7 @@ public interface View {
      * @param coins on table
      * @param characterCardsOnTable on table
      */
-    void showCoinAndCharacterCards(int coins,ArrayList<CharacterCard> characterCardsOnTable);
-
-    /**
-     * Asks the player his next action.
-     */
-    void askAction();
+    void showCoinAndCharacterCards(int coins, ArrayList<CharacterCard> characterCardsOnTable);
 
     /**
      * Asks the ip address and the server port for the connection to the server

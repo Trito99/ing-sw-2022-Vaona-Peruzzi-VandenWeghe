@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * Default Observable class
- * */
+ */
 
 public class Observable {
 

@@ -657,7 +657,7 @@ public class IslandTest {
    }
 
    @Test
-   public void buildTowerCoop(){
+   public void buildTowerCoopAndChangeTowerColorAndEffects(){
       IslandCard island = new IslandCard(1);
       island.setMotherEarthOnIsland(true);
 
@@ -716,10 +716,18 @@ public class IslandTest {
          showPersonalSchool(p.getPersonalSchool(),p.getNickname(),p.getTrash());
 
       assertEquals(team1.getTeamLeader(), island.calculateInfluenceCoop(players,CardEffect.STANDARDMODE,players.get(0),teams, GameMode.COOP));
-      CharacterCard characterCard= new CharacterCard(0,CardEffect.KNIGHT,"");
-      characterCard.getCardEffect().setKnightPlayed(true);
+
+      CharacterCard centaurCard = new CharacterCard(0,CardEffect.CENTAUR,"");
+      centaurCard.getCardEffect().setCentaurPlayed(true);
+
+     /**Knight Test */
+      CharacterCard knightCard = new CharacterCard(0,CardEffect.KNIGHT,"");
+      knightCard.getCardEffect().setKnightPlayed(true);
 
       island.buildTowerOnIsland(players,CardEffect.STANDARDMODE,players.get(0),GameMode.COOP,teams);
+      island.getStudentOnIsland().add(new Student(166,SColor.BLUE));
+      assertEquals(null, island.calculateInfluenceCoop(players,centaurCard.getCardEffect(),players.get(0),teams, GameMode.COOP));
+      island.getStudentOnIsland().remove(island.getStudentOnIsland().size()-1);
       assertEquals(true, island.towerIsOnIsland());
       assertEquals(TColor.WHITE, island.getTowerOnIsland().getTColour());
 
@@ -733,6 +741,39 @@ public class IslandTest {
       for(Student s : island.getStudentOnIsland())
          out.println(getStudentAnsiColor(s)+s.getIdStudent());
 
-      assertEquals(players.get(0), island.calculateInfluence(players,characterCard.getCardEffect(),players.get(0),GameMode.TWOPLAYERS));
+      assertEquals(players.get(0), island.calculateInfluence(players, knightCard.getCardEffect(),players.get(0),GameMode.TWOPLAYERS));
+
+      /** Centaur test */
+
+      centaurCard.getCardEffect().setCentaurPlayed(true);
+      assertEquals(players.get(1), island.calculateInfluence(players, centaurCard.getCardEffect(),players.get(0),GameMode.TWOPLAYERS));
+      centaurCard.getCardEffect().setCentaurPlayed(true);
+      /** ChangeColorTower Test */
+      island.buildTowerOnIsland(players,centaurCard.getCardEffect(),players.get(0),GameMode.TWOPLAYERS, null);
+      assertEquals(true, island.towerIsOnIsland());
+      assertEquals(TColor.BLACK, island.getTowerOnIsland().getTColour());
+
+      /** Herald Test */
+      IslandCard islandHerald = new IslandCard(1);
+      islandHerald.getStudentOnIsland().add(new Student(131,SColor.GREEN));
+      islandHerald.getStudentOnIsland().add(new Student(132,SColor.RED));
+      islandHerald.getStudentOnIsland().add(new Student(133,SColor.RED));
+      islandHerald.getStudentOnIsland().add(new Student(134,SColor.YELLOW));
+      islandHerald.getStudentOnIsland().add(new Student(135,SColor.YELLOW));
+      CharacterCard heraldCard = new CharacterCard(0,CardEffect.HERALD, "");
+
+      testTable.getListOfIsland().remove(0);
+      testTable.getListOfIsland().add(islandHerald);
+
+      islandHerald.buildTowerOnIsland(players,heraldCard.getCardEffect(),players.get(0),GameMode.TWOPLAYERS,null);
+      assertEquals(true, islandHerald.towerIsOnIsland());
+      assertEquals(TColor.WHITE, islandHerald.getTowerOnIsland().getTColour());
+      assertEquals(false,islandHerald.getMotherEarthOnIsland());
+
+
+      /** Knight with 0 students test */
+      knightCard.getCardEffect().setKnightPlayed(true);
+      island.getStudentOnIsland().clear();
+      assertEquals(players.get(0),island.calculateInfluence(players, knightCard.getCardEffect(),players.get(0),GameMode.TWOPLAYERS));
    }
 }

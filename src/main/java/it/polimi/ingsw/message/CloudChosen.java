@@ -1,5 +1,9 @@
 package it.polimi.ingsw.message;
 
+/**
+ * Extends Client Message
+ * Notifies the cloud card chosen by a player
+ */
 public class CloudChosen extends ClientMessage {
     private int id;
     private String string;

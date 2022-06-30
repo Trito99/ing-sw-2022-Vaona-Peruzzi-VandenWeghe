@@ -2,8 +2,10 @@ package it.polimi.ingsw.message;
 
 import java.util.GregorianCalendar;
 
-/** mostra se il login è avvenuto correttamente*/
-
+/**
+ * Extends Server Message
+ * Shows if the login was successful
+ */
 public class LoginResult extends ServerMessage{
     private boolean joined;
     private String nickname;

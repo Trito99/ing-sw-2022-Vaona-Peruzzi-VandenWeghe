@@ -1,5 +1,9 @@
 package it.polimi.ingsw.message;
 
+/**
+ * Extends Client Message
+ * Notifies where to move a certain student
+ */
 public class PlaceAndStudentForMoveChosen extends ClientMessage {
     private String place;
     private int id;

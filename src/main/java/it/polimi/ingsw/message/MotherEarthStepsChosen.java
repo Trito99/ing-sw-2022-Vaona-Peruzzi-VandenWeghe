@@ -1,6 +1,9 @@
 package it.polimi.ingsw.message;
 
-
+/**
+ * Extends Server Message
+ * Notifies Mother Earth steps chosen by the player
+ */
 public class MotherEarthStepsChosen extends ClientMessage{
     private int steps, maxSteps;
     private String string;

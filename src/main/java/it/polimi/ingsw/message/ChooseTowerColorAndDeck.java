@@ -5,6 +5,10 @@ import it.polimi.ingsw.model.school.TColor;
 
 import java.util.ArrayList;
 
+/**
+ * Extends Server Message
+ * Asks to choose tower color and Assistant Deck
+ */
 public class ChooseTowerColorAndDeck extends ServerMessage {
     private ArrayList<TColor> towerColors;
     private ArrayList<AssistantDeckName> assistantDeckNames;

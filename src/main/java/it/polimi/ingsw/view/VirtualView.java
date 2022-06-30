@@ -92,10 +92,6 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void askAction() {
-    }
-
-    @Override
     public void askConnect() {
     }
 

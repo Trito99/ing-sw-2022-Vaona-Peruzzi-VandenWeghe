@@ -1,5 +1,10 @@
 package it.polimi.ingsw.message;
 
+/**
+ * Extends Client Message
+ * Notifies the color blocked by the player
+ * Used in Expert Mode
+ */
 public class ColorBlocked extends ClientMessage {
     private String color;
 

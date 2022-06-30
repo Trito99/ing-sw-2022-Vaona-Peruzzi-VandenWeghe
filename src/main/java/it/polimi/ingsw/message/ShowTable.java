@@ -3,6 +3,10 @@ package it.polimi.ingsw.message;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.table.Table;
 
+/**
+ * Extends Server Message
+ * Shows the current situation on table
+ */
 public class ShowTable extends ServerMessage{
     private Table table;
     private Difficulty difficulty;

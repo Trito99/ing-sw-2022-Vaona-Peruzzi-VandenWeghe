@@ -1,5 +1,9 @@
 package it.polimi.ingsw.message;
 
+/**
+ * Extends Server Message
+ * This message contains a generic error String
+ */
 public class Error extends ServerMessage{
     private String message;
 
