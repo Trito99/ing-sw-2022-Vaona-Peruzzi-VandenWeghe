@@ -22,7 +22,7 @@
             <Font name="Helvetica" size="39.0" />
          </font>
       </Text>
-      <Button fx:id="btm_close" layoutX="564.0" layoutY="543.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="153.0" style="-fx-background-color: #ffbb00; -fx-background-radius: 10; -fx-border-color: black; -fx-border-radius: 10;" text="close">
+      <Button fx:id="closeButton" layoutX="564.0" layoutY="543.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="153.0" style="-fx-background-color: #ffbb00; -fx-background-radius: 10; -fx-border-color: black; -fx-border-radius: 10;" text="close">
          <font>
             <Font name="Bell MT" size="36.0" />
          </font>

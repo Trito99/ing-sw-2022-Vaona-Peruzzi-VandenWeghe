@@ -210,7 +210,7 @@ public class GUI extends ObservableView implements View {
     @Override
     public void showWinMessage() {
         WinnerScene win = new WinnerScene();
-        win.addAllObservers(observers);
+        notifyObserver(ObserverView::updateDisconnect);
         Platform.runLater(() -> GuiManager.changeRootPane(win,"/fxml/winner_scene"));
 
     }
@@ -222,8 +222,8 @@ public class GUI extends ObservableView implements View {
     @Override
     public void showLoseMessage(String nickname) {
         LoserScene lost = new LoserScene();
-        lost.addAllObservers(observers);
-        Platform.runLater(() -> GuiManager.changeRootPane(observers, "/fxml/lose_scene"));
+        notifyObserver(ObserverView::updateDisconnect);
+        Platform.runLater(() -> GuiManager.changeRootPane(lost, "/fxml/loser_scene"));
     }
 
     /**
@@ -254,7 +254,6 @@ public class GUI extends ObservableView implements View {
             GuiManager.getMainScene().setPlanning(true);
             GuiManager.getMainScene().getAssistantDeck().addAllObservers(observers);});
         showMessage("PLANNING PHASE\nChoose an Assistant Card");
-
     }
 
     /**
