@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.island;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
 import it.polimi.ingsw.model.character.CardEffect;
+import it.polimi.ingsw.model.character.CharacterCard;
 import it.polimi.ingsw.model.game.cloud.CloudCard;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
@@ -704,7 +705,7 @@ public class IslandTest {
       players.get(3).setNickname("Boh");
       players.get(3).setTeamMate("Chiara");
       players.get(3).setTeamLeader(false);
-      Team team2 = new Team(players.get(2), players.get(3),TColor.BLACK);
+      Team team2 = new Team(players.get(2), players.get(3), TColor.BLACK);
 
       ArrayList<Team> teams = new ArrayList<>();
       teams.add(team1);
@@ -715,8 +716,23 @@ public class IslandTest {
          showPersonalSchool(p.getPersonalSchool(),p.getNickname(),p.getTrash());
 
       assertEquals(team1.getTeamLeader(), island.calculateInfluenceCoop(players,CardEffect.STANDARDMODE,players.get(0),teams, GameMode.COOP));
+      CharacterCard characterCard= new CharacterCard(0,CardEffect.KNIGHT,"");
+      characterCard.getCardEffect().setKnightPlayed(true);
+
       island.buildTowerOnIsland(players,CardEffect.STANDARDMODE,players.get(0),GameMode.COOP,teams);
       assertEquals(true, island.towerIsOnIsland());
       assertEquals(TColor.WHITE, island.getTowerOnIsland().getTColour());
+
+      players.remove(1);
+      players.remove(1);
+      island.getStudentOnIsland().add(new Student(145,SColor.BLUE));
+      out.println("KNIGHT TEST");
+      for(Player p : players)
+         showPersonalSchool(p.getPersonalSchool(),p.getNickname(),p.getTrash());
+
+      for(Student s : island.getStudentOnIsland())
+         out.println(getStudentAnsiColor(s)+s.getIdStudent());
+
+      assertEquals(players.get(0), island.calculateInfluence(players,characterCard.getCardEffect(),players.get(0),GameMode.TWOPLAYERS));
    }
 }
