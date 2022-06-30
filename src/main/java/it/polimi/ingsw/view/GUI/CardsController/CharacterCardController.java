@@ -216,12 +216,6 @@ public class CharacterCardController extends ObservableView implements GenericSc
         }
     }
 
-    public void disableeXCards(boolean disable){
-        for(int i=0;i<xCardPane.getChildren().size();i++){
-            if (xCardPane.getChildren().get(i).isVisible())
-                xCardPane.getChildren().get(i).setDisable(disable);
-        }
-    }
 
     public CharacterCard getCard() {
         return card;
