@@ -26,8 +26,6 @@ public class WinnerScene extends ObservableView implements GenericScene {
      * @param event the mouse click event.
      */
     private void buttonClose(Event event){
-        notifyObserver(ObserverView::updateDisconnect);
-
         System.exit(0);
     }
 
