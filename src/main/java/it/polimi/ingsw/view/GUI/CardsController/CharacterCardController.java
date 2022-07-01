@@ -105,7 +105,7 @@ public class CharacterCardController extends ObservableView implements GenericSc
             GuiManager.getMainScene().getPersonalSchoolController().disableEntry(true);
             notifyObserver(obs -> obs.choosePlaceAndStudentForMove("CHARACTER CARD", -1));
         } else if (GuiManager.getMainScene().isActionMother()) {
-            GuiManager.getMainScene().disabilityMother(GuiManager.getMainScene().getTable(), GuiManager.getMainScene().getMaxSteps(), true);
+            GuiManager.getMainScene().disabilitateMother(GuiManager.getMainScene().getTable(), GuiManager.getMainScene().getMaxSteps(), true);
             notifyObserver(obs -> obs.chooseMotherEarthSteps(-1, -1, "CHARACTER CARD"));
         } else if (GuiManager.getMainScene().isActionCloud()) {
             GuiManager.getMainScene().getCloudController().disabilitateCloud(true);
@@ -152,9 +152,6 @@ public class CharacterCardController extends ObservableView implements GenericSc
             case ACROBAT:
                 addMouseEvent(studentsOnCard);
                 break;
-            case BARD:
-                //click;
-                break;
         }
     }
 
@@ -163,9 +160,11 @@ public class CharacterCardController extends ObservableView implements GenericSc
             case ABBOT:
             case ACROBAT:
             case COURTESAN:
+                hideAll();
                 initializeStudentPane(characterCard.getStudentsOnCard());
                 break;
             case CURATOR:
+                hideAll();
                 initializeXCardPane(characterCard.getXCardOnCard());
                 break;
         }
@@ -247,10 +246,10 @@ public class CharacterCardController extends ObservableView implements GenericSc
             studentNode.setOnDragDone(new EventHandler<DragEvent>() {
                 public void handle(DragEvent event) {
                     if (event.getTransferMode() == TransferMode.MOVE) {
+                        notifyObserver(obs -> obs.chooseCharacterCard(GuiManager.getMainScene().getCardSelected().getCardEffect().toString(), true));
+                        if (GuiManager.getMainScene().getCardSelected() != null)
+                            GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(true);
                     }
-                    notifyObserver(obs -> obs.chooseCharacterCard(GuiManager.getMainScene().getCardSelected().getCardEffect().toString(), true));
-                    if (GuiManager.getMainScene().getCardSelected() != null)
-                        GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(true);
                     event.consume();
                 }
             });
