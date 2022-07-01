@@ -26,4 +26,5 @@ public class Student implements Serializable {
     public SColor getSColor() {
         return sColor;
     }
+
 }

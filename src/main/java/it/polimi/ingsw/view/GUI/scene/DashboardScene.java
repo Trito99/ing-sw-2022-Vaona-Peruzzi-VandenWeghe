@@ -147,6 +147,42 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private Pane PaneTeamMate;
 
     @FXML
+    private Pane PaneXCard1;
+
+    @FXML
+    private Pane PaneXCard10;
+
+    @FXML
+    private Pane PaneXCard11;
+
+    @FXML
+    private Pane PaneXCard12;
+
+    @FXML
+    private Pane PaneXCard2;
+
+    @FXML
+    private Pane PaneXCard3;
+
+    @FXML
+    private Pane PaneXCard4;
+
+    @FXML
+    private Pane PaneXCard5;
+
+    @FXML
+    private Pane PaneXCard6;
+
+    @FXML
+    private Pane PaneXCard7;
+
+    @FXML
+    private Pane PaneXCard8;
+
+    @FXML
+    private Pane PaneXCard9;
+
+    @FXML
     private Text TextCoinscore;
 
     @FXML
@@ -178,6 +214,42 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     @FXML
     private Text coinTextTable;
+
+    @FXML
+    private Text coinTextTable1;
+
+    @FXML
+    private Text coinTextTable11;
+
+    @FXML
+    private Text coinTextTable12;
+
+    @FXML
+    private Text coinTextTable121;
+
+    @FXML
+    private Text coinTextTable1211;
+
+    @FXML
+    private Text coinTextTable1212;
+
+    @FXML
+    private Text coinTextTable1213;
+
+    @FXML
+    private Text coinTextTable12131;
+
+    @FXML
+    private Text coinTextTable12132;
+
+    @FXML
+    private Text coinTextTable12133;
+
+    @FXML
+    private Text coinTextTable12134;
+
+    @FXML
+    private Text coinTextTable12135;
 
     @FXML
     private Button deckButton;
@@ -325,6 +397,42 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     @FXML
     private Text turnText;
+
+    @FXML
+    private ImageView xCard1;
+
+    @FXML
+    private ImageView xCard10;
+
+    @FXML
+    private ImageView xCard11;
+
+    @FXML
+    private ImageView xCard12;
+
+    @FXML
+    private ImageView xCard2;
+
+    @FXML
+    private ImageView xCard3;
+
+    @FXML
+    private ImageView xCard4;
+
+    @FXML
+    private ImageView xCard5;
+
+    @FXML
+    private ImageView xCard6;
+
+    @FXML
+    private ImageView xCard7;
+
+    @FXML
+    private ImageView xCard8;
+
+    @FXML
+    private ImageView xCard9;
 
     /**
      * Updates Table including the islands
@@ -717,7 +825,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
                         if(!(islandListOfStudentsIdMap.get(island).contains(student.getIdStudent())));
                             islandListOfStudentsIdMap.get(island).add(student.getIdStudent());
                     }
-                    switch (student.getsColour()) {
+                    switch (student.getSColor()) {
                         case GREEN:
                             ((ImageView) island.getChildren().get(studentsOnIsland.indexOf(student))).setImage(new Image("/images/students/Gstudent.png"));
                             break;
