@@ -271,12 +271,16 @@ public class GUI extends ObservableView implements View {
         }else{
             switch(GuiManager.getMainScene().getCardSelected().getCardEffect()){
                 case ABBOT:
-                case ACROBAT:
                 case COURTESAN:
                     GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(false);
                     GuiManager.getMainScene().reactivateActionPhase();
                     break;
                 case BARD:
+                case ACROBAT:
+                    GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(false);
+                    GuiManager.getMainScene().reactivateActionPhase();
+                    GuiManager.getMainScene().getPersonalSchoolController().addMouseEventToStudentsOfEntry();
+                    GuiManager.getMainScene().getPersonalSchoolController().disableEntry(true);
                     break;
                 case HERALD:
                 case CURATOR:
@@ -367,15 +371,14 @@ public class GUI extends ObservableView implements View {
                 notifyObserver(obs -> obs.chooseId(GuiManager.getMainScene().getStudentDestinationIslandId(),choice, indexAcrobat, false));
         }else{
             if (characterCard.getCardEffect().equals(CardEffect.ACROBAT)) {
-                GuiManager.getMainScene().getPersonalSchoolController().disableEntry(true);
-                GuiManager.getMainScene().getCharacterCardControllerMap().get(CardEffect.ACROBAT).disableStudents(true);
-                if(indexAcrobat %2==1) {
-                    studentAcrobat1 = GuiManager.getMainScene().getCharacterCardControllerMap().get(CardEffect.ACROBAT).getStudentSelected();
-                    notifyObserver(obs -> obs.chooseId(studentAcrobat1, choice, indexAcrobat, false));
-                    GuiManager.getMainScene().getCharacterCardControllerMap().get(CardEffect.ACROBAT).setStudentSelected(131);
-                    GuiManager.getMainScene().getPersonalSchoolController().setStudentSelectedForSwitch(131);
-                }else {
-
+                if(GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).getStudentSelectedForSwitch()[indexAcrobat/2]!=-1) {
+                    if (indexAcrobat % 2 == 1) {
+                        notifyObserver(obs -> obs.chooseId(GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).getStudentSelectedForSwitch()[indexAcrobat / 2], choice, indexAcrobat, false));
+                    } else {
+                        notifyObserver(obs -> obs.chooseId(GuiManager.getMainScene().getPersonalSchoolController().getStudentSelectedForSwitch()[indexAcrobat / 2], choice, indexAcrobat, false));
+                    }
+                }else{
+                    notifyObserver(obs -> obs.chooseId(-2, choice, indexAcrobat, true));
                 }
             }
             else if (characterCard.getCardEffect().equals(CardEffect.BARD)) {
