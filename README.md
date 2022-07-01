@@ -9,15 +9,16 @@ The project consists in the implementation of the Eriantys board game through a 
 
 ### JavaDoc
 A JavaDoc is available at the following index:
-[JavDoc](link)
+[JavDoc](deliverables/JavaDoc)
 
 ### UML
 The following UML Diagrams were respectively developed during the planning phase of the project and after completion.
 
 [Final Model UML](deliverables/UML/model_initialUML.jpg)     
 [Final Server UML](deliverables/UML/Server_finalUML.jpg)    
-[Final Controller UML](deliverables/UML/Controller_finalUML.jpg)
-[ingsw UML](deliverables/UML/ingsw.png)
+[Final Client UML](deliverables/UML/Client_finalUML.jpg)  
+[Final Controller UML](deliverables/UML/Controller_finalUML.jpg)  
+[High level UML](deliverables/UML/ingsw.png)
 
 ## Game modes
 * Multiplayer mode
