@@ -47,7 +47,7 @@ The following UML Diagrams were respectively developed during the planning phase
 ### Client
 * The client can be executed by typing from the terminal the following command:
 ```
-java -jar eriantys-client.jar
+java -jar GC25-client.jar
 ```
 The user can then choose between the CLI and the GUI by simply typing their acronym.
 
@@ -56,11 +56,11 @@ Due to the presence of ANSI colors, the CLI can be correctly used in UNIX enviro
 ### Server
 * The server can be executed by typing from the terminal the following command which starts the server on port 4000 and on the localhost:
 ```
-java -jar eriantys-server.jar
+java -jar GC25-server.jar
 ```
 If the user would like to set a different _port number_ and _ip address_, he can do so by typing the command with the following arguments:
 ```
-java -jar eriantys-server.jar port_number ip_address
+java -jar GC25-server.jar port_number device_name
 ```
 
 ## Requirements
