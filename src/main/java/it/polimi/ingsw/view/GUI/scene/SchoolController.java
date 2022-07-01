@@ -408,8 +408,10 @@ public class SchoolController extends ObservableView implements GenericScene {
                     content.putImage(((ImageView) studentNode).getImage());
                     db.setContent(content);
                     studentSelected = entryMap.get((ImageView) studentNode);
-                    GuiManager.getMainScene().disableCharacter();
-
+                    if(GuiManager.getMainScene().getCardSelected()!=null){
+                        GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(true);
+                        GuiManager.getMainScene().disableDoneButton(true);
+                    }
                     mouseEvent.consume();
                 }
             });
@@ -520,6 +522,7 @@ public class SchoolController extends ObservableView implements GenericScene {
             }
             acrobatIndex++;
             if (acrobatIndex == 3) {
+                GuiManager.getMainScene().disableDoneButton(true);
                 removeMouseEventToStudentsOfEntry();
                 GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(true);
                 notifyObserver(obs -> obs.chooseCharacterCard(GuiManager.getMainScene().getCardSelected().getCardEffect().toString(), true));
@@ -580,6 +583,7 @@ public class SchoolController extends ObservableView implements GenericScene {
             }
             acrobatIndexHall++;
             if (acrobatIndexHall == 2) {
+                GuiManager.getMainScene().disableDoneButton(true);
                 removeMouseEventToStudentsOfEntry();
                 removeMouseEventToLastStudentsOfHall();
                 disableEntry(true);

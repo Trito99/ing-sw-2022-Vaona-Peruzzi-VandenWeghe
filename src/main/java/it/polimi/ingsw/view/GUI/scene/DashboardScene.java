@@ -258,6 +258,12 @@ public class DashboardScene extends ObservableView implements GenericScene {
     private ImageView deckLogo;
 
     @FXML
+    private Button doneButton;
+
+    @FXML
+    private Text doneText;
+
+    @FXML
     private ImageView island0;
 
     @FXML
@@ -1068,6 +1074,9 @@ public class DashboardScene extends ObservableView implements GenericScene {
         PaneXCard10.setVisible(false);
         PaneXCard11.setVisible(false);
         PaneXCard12.setVisible(false);
+        doneButton.setVisible(false);
+        doneText.setVisible(false);
+        doneButton.setDisable(true);
     }
 
     /**
@@ -1175,7 +1184,10 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    GuiManager.getMainScene().disableCharacter();
+                    if(cardSelected!=null) {
+                        characterCardControllerMap.get(cardSelected.getCardEffect()).disableStudents(true);
+                        disableDoneButton(true);
+                    }
                     Dragboard db =  motherNature.startDragAndDrop(TransferMode.ANY);
                     ClipboardContent content = new ClipboardContent();
                     content.putImage(((ImageView) motherNature).getImage());
@@ -1300,6 +1312,25 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }else if(isActionCloud()){
             cloudController.disabilitateCloud(false);
         }
+    }
+
+    public void disableDoneButton(boolean disable){
+        if(!disable){
+            doneButton.setVisible(!disable);
+            doneButton.setDisable(disable);
+            doneText.setVisible(!disable);
+            doneButton.addEventHandler(MouseEvent.MOUSE_CLICKED,this::doneClicked);
+        }else{
+            doneButton.setVisible(!disable);
+            doneButton.setDisable(disable);
+            doneText.setVisible(!disable);
+            doneButton.removeEventHandler(MouseEvent.MOUSE_CLICKED,this::doneClicked);
+        }
+    }
+
+    private void doneClicked(Event event){
+        disableCharacter();
+        disableDoneButton(true);
     }
 
     public void disableCharacter(){

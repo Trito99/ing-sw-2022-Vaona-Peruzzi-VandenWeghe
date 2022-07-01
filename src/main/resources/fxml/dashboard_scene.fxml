@@ -1256,13 +1256,16 @@
                </children>
             </Pane>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Pane>
       <Pane fx:id="schoolPane1" layoutX="204.0" layoutY="535.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="176.0" prefWidth="446.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
       <Pane fx:id="schoolPane" layoutX="215.0" layoutY="546.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="421.0" style="-fx-background-color: transparent;" />
       <Pane fx:id="characterPane" layoutX="1145.0" layoutY="153.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="126.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
       <VBox fx:id="characterCardLayout" layoutX="1078.0" layoutY="164.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="182.0" style="-fx-background-color: transparent;" styleClass="pane" />
       <Pane fx:id="schoolPane11" layoutX="1145.0" layoutY="16.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="126.0" prefWidth="126.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Text fill="#ffffffbd" layoutX="1141.0" layoutY="76.0" stroke="#e3cfe5bd" strokeLineCap="ROUND" strokeWidth="0.8" text="view other's school" textAlignment="CENTER" wrappingWidth="142.59356236163643">
+      <Text fill="#ffffffbd" layoutX="1141.0" layoutY="76.0" stroke="#e3cfe5bd" strokeLineCap="ROUND" strokeWidth="0.8" text="VIEW SCHOOLS" textAlignment="CENTER" wrappingWidth="142.59356236163643">
          <font>
             <Font name="Helvetica" size="21.0" />
          </font>
@@ -1303,7 +1306,7 @@
             <Font name="Helvetica" size="22.0" />
          </font>
       </Text>
-      <Pane fx:id="turnPane" layoutX="23.0" layoutY="33.0" prefHeight="91.0" prefWidth="172.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Pane fx:id="turnPane" layoutX="23.0" layoutY="20.0" prefHeight="91.0" prefWidth="172.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
       <Text fx:id="turnText" fill="#ffffffbd" layoutX="27.0" layoutY="40.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.3" text="Text message showing the current turn" textAlignment="CENTER" wrappingWidth="165.57421875">
          <font>
             <Font name="Helvetica" size="20.0" />
@@ -1477,5 +1480,18 @@
             </Text>
          </children>
       </Pane>
+      <Text fx:id="doneText" layoutX="679.0" layoutY="631.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Done">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Button fx:id="doneButton" layoutX="669.0" layoutY="603.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="56.0" stylesheets="@../css/style.css">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

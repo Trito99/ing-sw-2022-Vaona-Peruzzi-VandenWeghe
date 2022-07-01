@@ -271,6 +271,7 @@ public class GUI extends ObservableView implements View {
                 case ABBOT:
                 case COURTESAN:
                     GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(false);
+                    GuiManager.getMainScene().disableDoneButton(true);
                     GuiManager.getMainScene().reactivateActionPhase();
                     break;
                 case ACROBAT:
@@ -278,18 +279,24 @@ public class GUI extends ObservableView implements View {
                     GuiManager.getMainScene().reactivateActionPhase();
                     GuiManager.getMainScene().getPersonalSchoolController().addMouseEventToStudentsOfEntry();
                     GuiManager.getMainScene().getPersonalSchoolController().disableEntry(true);
+                    GuiManager.getMainScene().disableDoneButton(false);
                     break;
                 case BARD:
                     GuiManager.getMainScene().getPersonalSchoolController().addMouseEventToStudentsOfEntry();
                     GuiManager.getMainScene().getPersonalSchoolController().addMouseEventToLastStudentsOfHall();
                     GuiManager.getMainScene().getPersonalSchoolController().disableEntry(false);
+                    GuiManager.getMainScene().disableDoneButton(false);
                     break;
                 case HERALD:
                 case CURATOR:
+                    GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(false);
+                    GuiManager.getMainScene().disableDoneButton(true);
                     GuiManager.getMainScene().addMouseEventToIslands();
                     GuiManager.getMainScene().reactivateActionPhase();
                     break;
                 default:
+                    GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(false);
+                    GuiManager.getMainScene().disableDoneButton(true);
                     notifyObserver(obs -> obs.chooseCharacterCard(GuiManager.getMainScene().getCardSelected().getCardEffect().toString(),choice));
                     break;
             }

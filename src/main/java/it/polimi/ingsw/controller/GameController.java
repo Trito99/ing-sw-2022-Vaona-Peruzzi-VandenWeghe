@@ -333,7 +333,8 @@ public class GameController {
                             virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getEntry());
                         }
                         else {
-                            savedActionState = getActionState();
+                            if (!(getActionState().equals(ActionState.CHARACTER)))
+                                savedActionState = getActionState();
                             setActionState(ActionState.CHARACTER);
                             action();
                         }
@@ -793,7 +794,8 @@ public class GameController {
                             virtualView.askMotherEarthSteps(gameSession.getPlayer(getActivePlayer()).getTrash().getStepMotherEarth(), gameSession.getTable(), gameSession.getDifficulty());
                         }
                         else {
-                            savedActionState = getActionState();
+                            if (!(getActionState().equals(ActionState.CHARACTER)))
+                                savedActionState = getActionState();
                             setActionState(ActionState.CHARACTER);
                             action();
                         }
@@ -843,7 +845,8 @@ public class GameController {
                             virtualView.askCloud(gameSession.getTable());
                         }
                         else {
-                            savedActionState = getActionState();
+                            if (!(getActionState().equals(ActionState.CHARACTER)))
+                                savedActionState = getActionState();
                             setActionState(ActionState.CHARACTER);
                             action();
                         }
@@ -1021,9 +1024,9 @@ public class GameController {
                 }
             }
             if (s.equals(getActivePlayer()))
-                allVirtualView.get(s).showMessage("\nRound "+round+" | Your Turn");
+                allVirtualView.get(s).showMessage("\nRound "+round+" |\nYour Turn");
             else
-                allVirtualView.get(s).showMessage("\nRound "+round+" | Turn of " + getActivePlayer());
+                allVirtualView.get(s).showMessage("\nRound "+round+" |\nTurn of " + getActivePlayer());
         }
     }
 

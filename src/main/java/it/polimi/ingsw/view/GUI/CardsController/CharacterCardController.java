@@ -247,8 +247,10 @@ public class CharacterCardController extends ObservableView implements GenericSc
                 public void handle(DragEvent event) {
                     if (event.getTransferMode() == TransferMode.MOVE) {
                         notifyObserver(obs -> obs.chooseCharacterCard(GuiManager.getMainScene().getCardSelected().getCardEffect().toString(), true));
-                        if (GuiManager.getMainScene().getCardSelected() != null)
+                        if (GuiManager.getMainScene().getCardSelected() != null) {
                             GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(true);
+                            GuiManager.getMainScene().disableDoneButton(true);
+                        }
                     }
                     event.consume();
                 }
