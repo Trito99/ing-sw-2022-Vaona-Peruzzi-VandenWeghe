@@ -1304,7 +1304,7 @@
          </font>
       </Text>
       <Pane fx:id="turnPane" layoutX="23.0" layoutY="33.0" prefHeight="91.0" prefWidth="172.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Text fx:id="turnText" fill="#ffffffbd" layoutX="27.0" layoutY="60.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.3" text="Text message showing the current turn" textAlignment="CENTER" wrappingWidth="165.57421875">
+      <Text fx:id="turnText" fill="#ffffffbd" layoutX="27.0" layoutY="40.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.3" text="Text message showing the current turn" textAlignment="CENTER" wrappingWidth="165.57421875">
          <font>
             <Font name="Helvetica" size="20.0" />
          </font>

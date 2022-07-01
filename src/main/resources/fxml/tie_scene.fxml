@@ -16,19 +16,24 @@
             <Image url="@../images/BG_Clouds_Blur.png" />
          </image>
       </ImageView>
-      <Pane layoutX="340.0" layoutY="239.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="600.0" styleClass="layout" stylesheets="@../css/style.css" />
-      <Button fx:id="closeButton" layoutX="564.0" layoutY="571.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="153.0" style="-fx-background-color: #ffbb00; -fx-background-radius: 10; -fx-border-color: black; -fx-border-radius: 10;" text="close">
+      <Pane layoutX="337.0" layoutY="178.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="600.0" styleClass="layout" stylesheets="@../css/style.css" />
+      <Text fx:id="endMessageText" fill="#ffffffbd" layoutX="504.0" layoutY="303.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="IT'S A TIE! NOBODY WON" textAlignment="CENTER" wrappingWidth="265.6390380859375">
          <font>
-            <Font name="Bell MT" size="36.0" />
+            <Font name="Helvetica" size="39.0" />
+         </font>
+      </Text>
+      <Text fx:id="exitText" fill="WHITE" layoutX="618.0" layoutY="537.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="0.6" text="Exit" textAlignment="CENTER">
+         <font>
+            <Font name="Helvetica" size="25.0" />
+         </font>
+      </Text>
+      <Button fx:id="closeButton" layoutX="540.0" layoutY="502.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" opacity="0.54" prefHeight="49.0" prefWidth="200.0" stylesheets="@../css/style.css">
+         <font>
+            <Font name="Helvetica" size="25.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Text fx:id="endMessageText" fill="#ffffffbd" layoutX="522.0" layoutY="350.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="IT'S A TIE! NO ONE WIN" textAlignment="CENTER" wrappingWidth="235.6390380859375">
-         <font>
-            <Font name="Helvetica" size="39.0" />
-         </font>
-      </Text>
    </children>
 </AnchorPane>
