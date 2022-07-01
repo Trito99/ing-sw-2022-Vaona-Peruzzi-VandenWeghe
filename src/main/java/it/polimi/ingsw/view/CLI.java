@@ -30,7 +30,7 @@ import static java.lang.System.out;
  */
 public class CLI extends ObservableView implements View {
     private final List<String> commandList;
-    private static final String WRONG_INPUT = "⚠️Wrong input, Type again  ⚠️";
+    private static final String WRONG_INPUT = "Wrong input, Type again  ";
 
     public static final  String ANSI_RESET = "\u001B[0m";
     public static final  String ANSI_GREEN = "\u001B[32m";
@@ -62,7 +62,7 @@ public class CLI extends ObservableView implements View {
                 "   \\_\\                                                 __/ |           /_/  \n" +
                 "                                                      |___/                 " +
                 "\n");
-        out.println(ANSI_RESET + "😛  Welcome to Eriantys!! 😛 ");
+        out.println(ANSI_RESET + "  Welcome to Eriantys!!  ");
         askConnect();
     }
 
@@ -307,7 +307,7 @@ public class CLI extends ObservableView implements View {
      */
     @Override
     public void showWinMessage() {
-        out.print("\n****🎉 YOU WIN 🎉****");
+        out.print("\n**** YOU WIN ****");
         notifyObserver(ObserverView::updateDisconnect);
     }
 
@@ -317,7 +317,7 @@ public class CLI extends ObservableView implements View {
      */
     @Override
     public void showLoseMessage(String nickname) {
-        out.print("\n****😞 YOU LOSE 😞****");
+        out.print("\n**** YOU LOSE ****");
         out.print("\n"+ nickname +" WINS!");
         notifyObserver(ObserverView::updateDisconnect);
     }
