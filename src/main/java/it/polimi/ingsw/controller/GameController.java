@@ -441,13 +441,13 @@ public class GameController {
                                 characterCard = cc;
                             }
                         }
-                        /** client change idea and don't want to buy a card */
+                        /** client changes idea and doesn't want to buy a card */
                         if (CardSelected.getCardNickname().equals("NONE")){
                             changeIdea = true;
                             setActionState(savedActionState);
                             action();
                         }
-                        /** if the card selected is bard check if the player has any students in the hall */
+                        /** if the card selected is bard checks if the player has any students in the hall */
                         else if (CardSelected.getCardNickname().equals("BARD")){
                             cantPlay = true;
                             for(SColor s : SColor.values()){
@@ -531,7 +531,7 @@ public class GameController {
                                 virtualView.showMessage("\nYou don't have enough coins for this card ");
                                 setActionState(savedActionState);
                                 action();
-                            }else if (!exists && !changeIdea)
+                            }else if (!exists)
                                 virtualView.showMessage("\nEffect not present. Try again ");
                             else if (empty ) {
                                 virtualView.showMessage("\nCard selected is empty ");
@@ -541,9 +541,8 @@ public class GameController {
                                 characterCard.setCoinOnCard(false);
                                 gameSession.getPlayer(getActivePlayer()).setCoinScore(gameSession.getPlayer(getActivePlayer()).getCoinScore() + 1);
                                 virtualView.showMessage("\nYou can't play bard effect if you don't have any students in hall. Choose another effect ");
-                            }
-                            if (!changeIdea)
-                            virtualView.askCharacterCardToPlay(true, -1, null);
+                            }else if (changeIdea)
+                                virtualView.askCharacterCardToPlay(true, -1, null);
                         }
                     }
                 }
