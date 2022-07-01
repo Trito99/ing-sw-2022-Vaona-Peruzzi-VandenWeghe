@@ -767,12 +767,7 @@ public class GameController {
                                 vv.showMessage(getActivePlayer()+" has played the JUNKDEALER Character Card for the color "+ colorChosen);
                         }
                         cardPlayed=true;
-                        if(movedStudents!=-1)
-                            setActionState(ActionState.STUDENT);
-                        else {
-                            setActionState(ActionState.MOTHEREARTH);
-                            movedStudents++;
-                        }
+                        setActionState(savedActionState);
                         action();
                     }
                     else {
