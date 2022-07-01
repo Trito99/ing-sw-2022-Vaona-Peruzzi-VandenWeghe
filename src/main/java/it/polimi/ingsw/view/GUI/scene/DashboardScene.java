@@ -1238,6 +1238,13 @@ public class DashboardScene extends ObservableView implements GenericScene {
                 GuiManager.getMainScene().getPersonalSchoolController().removeMouseEventToStudentsOfEntry();
                 GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(true);
                 notifyObserver(obs -> obs.chooseCharacterCard(GuiManager.getMainScene().getCardSelected().getCardEffect().toString(), true));
+            }else if(GuiManager.getMainScene().getCardSelected().getCardEffect().equals(CardEffect.BARD)){
+                int index1 = GuiManager.getMainScene().getPersonalSchoolController().getAcrobatIndex();
+                int index2 = GuiManager.getMainScene().getPersonalSchoolController().getAcrobatIndexHall();
+                if ((index1 + index2) == 3 || (index1 + index2) == 2) {
+                    GuiManager.getMainScene().getPersonalSchoolController().getStudentSelectedForSwitch()[1] = -1;
+                    GuiManager.getMainScene().getPersonalSchoolController().getStudentSelectedForSwitchHall()[1] = -1;
+                }
             }
         }
     }
