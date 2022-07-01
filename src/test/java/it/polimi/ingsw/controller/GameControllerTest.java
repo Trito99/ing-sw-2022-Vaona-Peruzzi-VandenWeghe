@@ -26,18 +26,81 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class GameControllerTest {
     private GameController gc;
-    private ArrayList <VirtualView> allViews;
-    private VirtualView singleView;
-    private VirtualView extraView;
-    private ClientHandlerInterface clientHandler;
-    HashMap<String, VirtualView> allVirtualView;
-    private Game gameSession;
-    private GameState gameState;
-    int roundIndex;
-    private DeckAssistant deckOfPlayer;
-    private Table table;
 
-    /**@BeforeEach
+    @Test
+    @BeforeEach
+    public void init(){
+        gc = new GameController();
+    }
+
+    @Test
+    public void generateTable(){
+        Game gameSession = new Game();
+        gameSession.getTable().generateBagInit();
+        assertNotNull(gameSession.getTable().getBag());
+
+        gameSession.getTable().generateIslandCards();
+        assertNotNull(gameSession.getTable().getListOfIsland());
+
+        gameSession.getTable().generateMotherEarth();
+        assertNotNull(gameSession.getTable().getPosMotherEarth());
+
+        gameSession.getTable().extractStudentsInit();
+        for(int i = 0; i < 12; i++){
+            assertNotNull(gameSession.getTable().getListOfIsland().get(i).getStudentOnIsland());
+        }
+
+        gameSession.getTable().addFinalStudents();
+        assertNotNull(gameSession.getTable().getBag());
+    }
+
+    @Test
+    public void generatePlayer(){
+        Game gameSession = new Game();
+        gameSession.setDifficulty(Difficulty.STANDARDMODE);
+        for(int i=1; i<5; i++){
+            gameSession.addPlayer(new Player(null, PlayerNumber.values()[gameSession.getListOfPlayers().size()]));
+            gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname("");
+            gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(new GregorianCalendar(1999, 02, 01));
+
+            assertEquals(Difficulty.STANDARDMODE, gameSession.getDifficulty());
+            assertNotNull(gameSession.getListOfPlayers());
+            assertNotNull(gameSession.getListOfPlayers().get(i-1));
+            assertNotNull(gameSession.getListOfPlayers().get(i-1).getNickname());
+            assertNotNull(gameSession.getListOfPlayers().get(i-1).getPlayerDate());
+            assertNull(gameSession.getListOfPlayers().get(i-1).getTColor());
+            assertEquals(i, gameSession.getListOfPlayers().size());
+        }
+
+        gameSession.getListOfPlayers().clear();
+        gameSession.setDifficulty(Difficulty.EXPERTMODE);
+        gameSession.getTable().setCoinsOnTable(20);
+
+        for(int i=1; i<5; i++){
+            gameSession.addPlayer(new Player(null, PlayerNumber.values()[gameSession.getListOfPlayers().size()]));
+            gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setNickname("");
+            gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setPlayerDate(new GregorianCalendar(1999, 02, 01));
+
+            if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)) {
+                gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()-1).setCoinScore(1);
+                gameSession.getTable().decreaseCoinsOnTable(1);
+            }
+
+            assertEquals(Difficulty.EXPERTMODE, gameSession.getDifficulty());
+            assertNotNull(gameSession.getListOfPlayers());
+            assertNotNull(gameSession.getListOfPlayers().get(i-1));
+            assertNotNull(gameSession.getListOfPlayers().get(i-1).getNickname());
+            assertNotNull(gameSession.getListOfPlayers().get(i-1).getPlayerDate());
+            assertNull(gameSession.getListOfPlayers().get(i-1).getTColor());
+            assertEquals(i, gameSession.getListOfPlayers().size());
+            assertEquals(1, gameSession.getListOfPlayers().get(i-1).getCoinScore());
+            assertEquals(20-i, gameSession.getTable().getCoinsOnTable());
+        }
+    }
+
+
+    /**
+    @BeforeEach
     void setup(){
         gc = new GameController();
         allViews = new ArrayList<>();

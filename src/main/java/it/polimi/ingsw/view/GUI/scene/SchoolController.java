@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.GUI.scene;
 
 import it.polimi.ingsw.model.assistant.AssistantCard;
+import it.polimi.ingsw.model.character.CardEffect;
 import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.school.Prof;
 import it.polimi.ingsw.model.school.School;
@@ -29,13 +30,15 @@ public class SchoolController extends ObservableView implements GenericScene {
     private School school;
     private boolean dragDone = false;
     private int studentSelected;
-
     private int[] studentSelectedForSwitch = new int[3];
+
+    private int[] studentSelectedForSwitchHall = new int[2];
     private String placeSelected;
     private int coinsOfPlayer;
     private AssistantCard trash;
     private Difficulty difficulty;
     private Map<ImageView,Integer> entryMap = new HashMap<>();
+    private Map<ImageView,Integer> hallMap = new HashMap<>();
 
     @FXML
     private ImageView blue_1;
@@ -226,6 +229,7 @@ public class SchoolController extends ObservableView implements GenericScene {
      * Updates school's entry
      */
     private void updateEntry(){
+        entryMap.clear();
         for(Student student : school.getEntry()){
             entry.getChildren().get(school.getEntry().indexOf(student)).setVisible(true);
             switch(student.getSColor()){
@@ -253,30 +257,26 @@ public class SchoolController extends ObservableView implements GenericScene {
      * Updates school's hall
      */
     private void updateHall() {
+        hallMap.clear();
         for(Student student : school.getGTable()){
             green_table.getChildren().get(school.getGTable().indexOf(student)).setVisible(true);
-            //green_table.getChildren().get(school.getGTable().indexOf(student)).setDisable(false);
-            //entryMap.put((ImageView) entry.getChildren().get(school.getEntry().indexOf(student)),student.getIdStudent());
+            hallMap.put((ImageView) green_table.getChildren().get(school.getGTable().indexOf(student)),student.getIdStudent());
         }
         for(Student student : school.getRTable()){
             red_table.getChildren().get(school.getRTable().indexOf(student)).setVisible(true);
-            //red_table.getChildren().get(school.getRTable().indexOf(student)).setDisable(false);
-            //entryMap.put((ImageView) entry.getChildren().get(school.getEntry().indexOf(student)),student.getIdStudent());
+            hallMap.put((ImageView) red_table.getChildren().get(school.getRTable().indexOf(student)),student.getIdStudent());
         }
         for(Student student : school.getYTable()){
             yellow_table.getChildren().get(school.getYTable().indexOf(student)).setVisible(true);
-            //yellow_table.getChildren().get(school.getYTable().indexOf(student)).setDisable(false);
-            //entryMap.put((ImageView) entry.getChildren().get(school.getEntry().indexOf(student)),student.getIdStudent());
+            hallMap.put((ImageView) yellow_table.getChildren().get(school.getYTable().indexOf(student)),student.getIdStudent());
         }
         for(Student student : school.getPTable()){
             pink_table.getChildren().get(school.getPTable().indexOf(student)).setVisible(true);
-            //pink_table.getChildren().get(school.getPTable().indexOf(student)).setDisable(false);
-            //entryMap.put((ImageView) entry.getChildren().get(school.getEntry().indexOf(student)),student.getIdStudent());
+            hallMap.put((ImageView) pink_table.getChildren().get(school.getPTable().indexOf(student)),student.getIdStudent());
         }
         for(Student student : school.getBTable()){
             blue_table.getChildren().get(school.getBTable().indexOf(student)).setVisible(true);
-            //blue_table.getChildren().get(school.getBTable().indexOf(student)).setDisable(false);
-            //entryMap.put((ImageView) entry.getChildren().get(school.getEntry().indexOf(student)),student.getIdStudent());
+            hallMap.put((ImageView) blue_table.getChildren().get(school.getBTable().indexOf(student)),student.getIdStudent());
         }
 
     }
@@ -482,29 +482,63 @@ public class SchoolController extends ObservableView implements GenericScene {
         }
     }
 
+    public void addMouseEventToLastStudentsOfHall(){
+        if(!school.getGTable().isEmpty())
+            green_table.getChildren().get(school.getGTable().size()-1).addEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+        if(!school.getRTable().isEmpty())
+            red_table.getChildren().get(school.getGTable().size()-1).addEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+        if(!school.getYTable().isEmpty())
+            yellow_table.getChildren().get(school.getGTable().size()-1).addEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+        if(!school.getPTable().isEmpty())
+            pink_table.getChildren().get(school.getGTable().size()-1).addEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+        if(!school.getBTable().isEmpty())
+            blue_table.getChildren().get(school.getGTable().size()-1).addEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+    }
+
     private int acrobatIndex=0;
+    private int acrobatIndexHall=0;
 
     public int getAcrobatIndex(){
+        return acrobatIndex;
+    }
+
+    public int getAcrobatIndexHall(){
         return acrobatIndex;
     }
 
     private <T extends Event> void studentClicked(T t) {
         studentSelectedForSwitch[acrobatIndex] = entryMap.get(t.getSource());
         disableEntry(true);
-        GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(false);
-        for(ImageView student : GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).getStudentMap().keySet()){
-            int id = GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).getStudentMap().get(student);
-            for(int i=0; i<3;i++){
-                if (GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).getStudentSelectedForSwitch()[i]==id)
-                    student.setDisable(true);
+        if(GuiManager.getMainScene().getCardSelected().getCardEffect().equals(CardEffect.ACROBAT)) {
+            GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(false);
+            for (ImageView student : GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).getStudentMap().keySet()) {
+                int id = GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).getStudentMap().get(student);
+                for (int i = 0; i < 3; i++) {
+                    if (GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).getStudentSelectedForSwitch()[i] == id)
+                        student.setDisable(true);
+                }
+            }
+            acrobatIndex++;
+            if (acrobatIndex == 3) {
+                removeMouseEventToStudentsOfEntry();
+                GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(true);
+                notifyObserver(obs -> obs.chooseCharacterCard(GuiManager.getMainScene().getCardSelected().getCardEffect().toString(), true));
+            }
+        } else if(GuiManager.getMainScene().getCardSelected().getCardEffect().equals(CardEffect.BARD)) {
+            disableHall(false);
+            for(ImageView student : hallMap.keySet()){
+                int id = hallMap.get(student);
+                for(int i=0; i<2;i++){
+                    if (studentSelectedForSwitchHall[i]==id)
+                        student.setDisable(true);
+                }
+            }
+            acrobatIndex++;
+            if (acrobatIndex == 2) {
+                acrobatIndex=0;
             }
         }
-        acrobatIndex++;
-        if (acrobatIndex==3){
-            removeMouseEventToStudentsOfEntry();
-            GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(true);
-            notifyObserver(obs -> obs.chooseCharacterCard(GuiManager.getMainScene().getCardSelected().getCardEffect().toString(),true));
-        }
+
     }
 
     public void removeMouseEventToStudentsOfEntry(){
@@ -515,7 +549,57 @@ public class SchoolController extends ObservableView implements GenericScene {
         }
     }
 
+    public void removeMouseEventToLastStudentsOfHall(){
+        acrobatIndexHall=0;
+        green_table.getChildren().get(school.getGTable().size()-1).removeEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+        red_table.getChildren().get(school.getGTable().size()-1).removeEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+        yellow_table.getChildren().get(school.getGTable().size()-1).removeEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+        pink_table.getChildren().get(school.getGTable().size()-1).removeEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+        blue_table.getChildren().get(school.getGTable().size()-1).removeEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+    }
+
     public int[] getStudentSelectedForSwitch() {
         return studentSelectedForSwitch;
+    }
+
+    public int[] getStudentSelectedForSwitchHall() {
+        return studentSelectedForSwitchHall;
+    }
+
+    private <T extends Event> void studentClickedHall(T t) {
+        studentSelectedForSwitchHall[acrobatIndexHall] = hallMap.get(t.getSource());
+        disableHall(true);
+        if(GuiManager.getMainScene().getCardSelected().getCardEffect().equals(CardEffect.BARD)) {
+            disableEntry(false);
+            for(ImageView student : entryMap.keySet()){
+                int id = entryMap.get(student);
+                for(int i=0; i<2;i++){
+                    if (studentSelectedForSwitch[i]==id)
+                        student.setDisable(true);
+                }
+            }
+            acrobatIndexHall++;
+            if (acrobatIndexHall == 2) {
+                removeMouseEventToStudentsOfEntry();
+                removeMouseEventToLastStudentsOfHall();
+                disableEntry(true);
+                notifyObserver(obs -> obs.chooseCharacterCard(GuiManager.getMainScene().getCardSelected().getCardEffect().toString(), true));
+            }
+        }
+
+    }
+
+
+    public void disableHall(boolean disable){
+        if(!school.getGTable().isEmpty())
+            green_table.getChildren().get(school.getGTable().size()-1).setDisable(disable);
+        if(!school.getRTable().isEmpty())
+            red_table.getChildren().get(school.getGTable().size()-1).setDisable(disable);
+        if(!school.getYTable().isEmpty())
+            yellow_table.getChildren().get(school.getGTable().size()-1).setDisable(disable);
+        if(!school.getPTable().isEmpty())
+            pink_table.getChildren().get(school.getGTable().size()-1).setDisable(disable);
+        if(!school.getBTable().isEmpty())
+            blue_table.getChildren().get(school.getGTable().size()-1).setDisable(disable);
     }
 }

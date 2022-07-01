@@ -25,7 +25,7 @@ The following UML Diagrams were respectively developed during the planning phase
 * Standard mode
     * Play a game without the implementation of additional functions
 * Expert mode
-    * Play a game with the implementation of additional functions
+    * Play a game with the implementation of additional functions (coins and character cards)
   
 
 ## User Interfaces

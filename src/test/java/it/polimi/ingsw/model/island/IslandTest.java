@@ -656,7 +656,7 @@ public class IslandTest {
       }
    }
 
-   /**@Test
+   @Test
    public void buildTowerCoopAndChangeTowerColorAndEffects(){
       IslandCard island = new IslandCard(1);
       island.setMotherEarthOnIsland(true);
@@ -720,7 +720,7 @@ public class IslandTest {
       CharacterCard centaurCard = new CharacterCard(0,CardEffect.CENTAUR,"");
       centaurCard.getCardEffect().setCentaurPlayed(true);
 
-     /**Knight Test
+     /**Knight Test */
       CharacterCard knightCard = new CharacterCard(0,CardEffect.KNIGHT,"");
       knightCard.getCardEffect().setKnightPlayed(true);
 
@@ -743,17 +743,16 @@ public class IslandTest {
 
       assertEquals(players.get(0), island.calculateInfluence(players, knightCard.getCardEffect(),players.get(0),GameMode.TWOPLAYERS));
 
-      /** Centaur test
-
+      /** Centaur test*/
       centaurCard.getCardEffect().setCentaurPlayed(true);
       assertEquals(players.get(1), island.calculateInfluence(players, centaurCard.getCardEffect(),players.get(0),GameMode.TWOPLAYERS));
       centaurCard.getCardEffect().setCentaurPlayed(true);
-      /** ChangeColorTower Test
+      /** ChangeColorTower Test */
       island.buildTowerOnIsland(players,centaurCard.getCardEffect(),players.get(0),GameMode.TWOPLAYERS, null);
       assertEquals(true, island.towerIsOnIsland());
       assertEquals(TColor.BLACK, island.getTowerOnIsland().getTColour());
 
-      /** Herald Test
+      /** Herald Test */
       IslandCard islandHerald = new IslandCard(1);
       islandHerald.getStudentOnIsland().add(new Student(131,SColor.GREEN));
       islandHerald.getStudentOnIsland().add(new Student(132,SColor.RED));
@@ -771,9 +770,9 @@ public class IslandTest {
       assertEquals(false,islandHerald.getMotherEarthOnIsland());
 
 
-      /** Knight with 0 students test
+      /** Knight with 0 students test */
       knightCard.getCardEffect().setKnightPlayed(true);
       island.getStudentOnIsland().clear();
       assertEquals(players.get(0),island.calculateInfluence(players, knightCard.getCardEffect(),players.get(0),GameMode.TWOPLAYERS));
-   } */
+   }
 }
