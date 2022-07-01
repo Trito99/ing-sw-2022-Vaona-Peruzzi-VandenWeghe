@@ -95,14 +95,14 @@ public class ViewDeckScene  extends ObservableView implements GenericScene  {
 
     /**
      * Default constructor
-     * @param deckAssistant player's Deck Assistant
+     * @param deckAssistant players Deck Assistant
      */
     public ViewDeckScene(DeckAssistant deckAssistant) {
         this.deckAssistant = deckAssistant;
     }
 
     /**
-     * Initialize player's Deck Assistant and buttons present in the Scene
+     * Initialize players Deck Assistant and buttons present in the Scene
      */
     @FXML
     public void initialize(){

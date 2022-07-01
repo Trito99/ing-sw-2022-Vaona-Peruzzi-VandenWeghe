@@ -128,7 +128,7 @@ public interface View {
     void askAssistantCardToPlay();
 
     /**
-     * Asks at the player which Character Card wants to play
+     * Asks at the player which Character Card he wants to play
      * @param choice false if the player hasn't already decided if he wants to activate a character card,
      *               true if the player wants to play a certain character card
      * @param coins of player
@@ -164,8 +164,8 @@ public interface View {
     void askPlaceAndStudentForMove(ArrayList<Student> entry);
 
     /**
-     * Asks the player which student wants to select
-     * @param choice true for herald and curator effect, otherwise false
+     * Asks the player which island he wants to select (or student on card for cards)
+     * @param choice true for the selection of an island (that includes the effect of herald and curator) otherwise
      * @param characterCard played in the round
      * @param indexAcrobat index for the acrobat effect
      * @param school of current player

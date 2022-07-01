@@ -81,7 +81,7 @@ public class ViewOtherSchoolScene3 extends ObservableView implements GenericScen
     private Pane trashPane3_4Players;
 
     /**
-     * Initialize player's school
+     * Initialize players school
      */
     @FXML
     public void initialize(){
@@ -89,7 +89,7 @@ public class ViewOtherSchoolScene3 extends ObservableView implements GenericScen
     }
 
     /**
-     * Updates player's school and trash card
+     * Updates players school and trash card
      */
     public void updatePersonalSchool(Map<String, SchoolController> map) throws IOException {
 

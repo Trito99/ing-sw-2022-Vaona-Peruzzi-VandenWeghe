@@ -462,7 +462,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }
     }
     /**
-     * Shows the number of the round and wich players turn it is
+     * Shows the number of the round and which players turn it is
      * @param message with the info
      */
     public void updateRoundText(String message){

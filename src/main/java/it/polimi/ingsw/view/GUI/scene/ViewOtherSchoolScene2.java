@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * This Scene Controller is used to show and update other players' school and trash card
+ * This Scene Controller is used to show and update other players school and trash card
  * Used in Three Players Mode
  */
 public class ViewOtherSchoolScene2 extends ObservableView implements GenericScene{
@@ -62,14 +62,14 @@ public class ViewOtherSchoolScene2 extends ObservableView implements GenericScen
     private Pane trashPane2_3Players;
 
     /**
-     * Initialize player's school
+     * Initialize players school
      */
     @FXML
     public void initialize(){
     }
 
     /**
-     * Updates player's school and trash card
+     * Updates players school and trash card
      */
     public void updatePersonalSchool(Map<String, SchoolController> map) throws IOException {
 

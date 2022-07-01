@@ -60,7 +60,7 @@ public class StartGUI extends Application {
     }
 
     /**
-     * Disconnects the client and call the endGame
+     * Disconnects the client and calls the endGame
      */
     public void disconnect(){
 

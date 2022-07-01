@@ -364,8 +364,8 @@ public class GUI extends ObservableView implements View {
     }
 
     /**
-     * Asks the player which student he wants to select
-     * @param choice true for herald and curator effect, otherwise false
+     * Asks the player which island he wants to select (or student on card for cards)
+     * @param choice true for the selection of an island (that includes the effect of herald and curator) otherwise
      * @param characterCard played in the round
      * @param indexAcrobat index for the acrobat effect
      * @param school of current player

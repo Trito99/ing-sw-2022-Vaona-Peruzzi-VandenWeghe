@@ -110,7 +110,7 @@ public class CLI extends ObservableView implements View {
     }
 
     /**
-     * Asks the player's info and the game id that the player wants to join (or create)
+     * Asks the players info and the game id that the player wants to join (or create)
      * @param lobbyMap map for print the information of the lobby
      */
     @Override
@@ -216,7 +216,7 @@ public class CLI extends ObservableView implements View {
     }
 
     /**
-     * Asks at the player to select deck and towers
+     * Asks the player to select deck and towers
      * @param towerColors array with the colors of the towers
      * @param assistantDeckNames array with the string's name of decks
      */
@@ -427,7 +427,7 @@ public class CLI extends ObservableView implements View {
     }
 
     /**
-     * Asks at the player which Character Card wants to play
+     * Asks at the player which Character Card he wants to play
      * @param choice false if the player hasn't already decided if he wants to activate a character card,
      *               true if the player wants to play a certain character card
      * @param coins of player
@@ -549,8 +549,8 @@ public class CLI extends ObservableView implements View {
     }
 
     /**
-     * Asks the player which students and where wants to move
-     * @param entry of the player's school
+     * Asks the player which students he wants to move and where
+     * @param entry of the players school
      */
     @Override
     public void askPlaceAndStudentForMove(ArrayList<Student> entry) {
@@ -577,8 +577,8 @@ public class CLI extends ObservableView implements View {
     }
 
     /**
-     * Asks the player which student want to select
-     * @param choice true for herald and curator effect, otherwise false
+     * Asks the player which island he wants to select (or student on card for cards)
+     * @param choice true for the selection of an island (that includes the effect of herald and curator) otherwise
      * @param characterCard played in the round
      * @param indexAcrobat index for the acrobat effect
      * @param school of current player
@@ -658,7 +658,7 @@ public class CLI extends ObservableView implements View {
     }
 
     /**
-     * Prints the school's hall
+     * Prints the schools hall
      * @param school of the player
      */
     private void printHall(School school) {
@@ -689,7 +689,7 @@ public class CLI extends ObservableView implements View {
     }
 
     /**
-     * Prints the school's towerZone
+     * Prints the schools towerZone
      * @param towers of the school
      */
     private void printTowers(ArrayList<Tower> towers){
