@@ -140,7 +140,7 @@ public class CloudCards extends ObservableView implements GenericScene {
     }
 
     /**
-     * Hides panes not used yet
+     * Hides nodes not used yet
      */
     private void hide() {
         for (Node node : StudentsPane.getChildren()) {

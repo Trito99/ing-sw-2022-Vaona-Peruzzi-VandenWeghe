@@ -330,7 +330,7 @@ public class SchoolController extends ObservableView implements GenericScene {
     }
 
     /**
-     * Hides panes that are not used yet
+     * Hides nodes that are not used yet
      */
     private void hide(){
         for(Node node : entry.getChildren()){

@@ -1022,7 +1022,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     }
 
     /**
-     * Hides panes that are not used yet
+     * Hides nodes that are not used yet
      * @param table of the match
      */
     public void hide(Table table){
