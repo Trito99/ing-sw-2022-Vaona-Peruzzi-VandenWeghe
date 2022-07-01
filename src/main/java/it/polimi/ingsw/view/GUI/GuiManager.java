@@ -32,6 +32,14 @@ public class GuiManager extends ObservableView {
     private static Scene mainScene;
     private static Parent mainRoot;
 
+    /** sets the new scene
+     *
+     * @param observerViewList list of observers
+     * @param newScene the new scene to set
+     * @param fxml fxml file to load
+     * @return
+     * @param <T> event T
+     */
     public static <T> T changeRootPane(List<ObserverView> observerViewList, Scene newScene, String fxml) {
         T controller = null;
         try {
@@ -50,14 +58,32 @@ public class GuiManager extends ObservableView {
         return controller;
     }
 
+    /** sets the new scene
+     *
+     * @param observerList list of observer
+     * @param fxml file fxml to load
+     * @return
+     * @param <T> event
+     */
     public static <T> T changeRootPane(List<ObserverView> observerList, String fxml) {
         return changeRootPane(observerList, scene, fxml);
     }
 
+    /** sets the new scene
+     *
+     * @param controller the new controller of the new scene
+     * @param fxml file fxml to load
+     */
     public static void changeRootPane(GenericScene controller, String fxml) {
         changeRootPane(controller, scene, fxml);
     }
 
+    /** sets the new scene
+     *
+     * @param controller the new controller of the new scene
+     * @param scene the scene to assign at the gui manager
+     * @param fxml file fxml to load
+     */
     public static void changeRootPane(GenericScene controller, Scene scene, String fxml) {
         try {
             FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource(fxml + ".fxml"));
@@ -74,6 +100,11 @@ public class GuiManager extends ObservableView {
         }
     }
 
+    /** sets the new scene
+     *
+     * @param controller the new controller of the new scene
+     * @param fxml the fxml file to load
+     */
     public static void newStagePane(GenericScene controller, String fxml) {
         try {
             for(GenericScene genericScene : newStages.keySet()){
@@ -92,11 +123,19 @@ public class GuiManager extends ObservableView {
         }
     }
 
+    /**
+     * Close the stage of the controller
+     * @param controller controller to close
+     */
     public static void closeStage(GenericScene controller){
         newStages.get(controller).close();
     }
 
-
+    /**changes the Main scene
+     *
+     * @param observerList list of observer
+     * @param <T> event
+     */
     public static <T> void changeRootMainScene(List<ObserverView> observerList) {
         T controller;
         if(mainController==null){
@@ -123,11 +162,23 @@ public class GuiManager extends ObservableView {
         }
     }
 
+    /** sets the new scene
+     *
+     * @param observerList list of observers
+     * @param event event
+     * @param fxml file fxml to load
+     * @return
+     * @param <T> event
+     */
     public static <T> T changeRootPane(List<ObserverView> observerList, Event event, String fxml) {
         Scene newScene = ((Node) event.getSource()).getScene();
         return changeRootPane(observerList, newScene, fxml);
     }
 
+    /** return the Main scene
+     *
+     * @return the Main scene
+     */
     public static DashboardScene getMainScene(){
         return mainController;
     }
