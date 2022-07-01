@@ -1303,11 +1303,179 @@
             <Font name="Helvetica" size="22.0" />
          </font>
       </Text>
-      <Pane fx:id="turnPane" layoutX="30.0" layoutY="33.0" prefHeight="88.0" prefWidth="157.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
-      <Text fx:id="turnText" fill="#ffffffbd" layoutX="42.0" layoutY="59.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.3" text="Text message showing the current turn" wrappingWidth="135.0">
+      <Pane fx:id="turnPane" layoutX="23.0" layoutY="33.0" prefHeight="91.0" prefWidth="172.0" styleClass="pane" stylesheets="@../css/dashboard_style.css" />
+      <Text fx:id="turnText" fill="#ffffffbd" layoutX="27.0" layoutY="60.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.3" text="Text message showing the current turn" textAlignment="CENTER" wrappingWidth="165.57421875">
          <font>
             <Font name="Helvetica" size="20.0" />
          </font>
       </Text>
+      <Pane fx:id="PaneXCard6" layoutX="577.0" layoutY="350.0" prefHeight="66.0" prefWidth="82.0">
+         <children>
+            <ImageView fitHeight="32.0" fitWidth="37.0" layoutX="28.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" fx:id="xCard6">
+               <image>
+                  <Image url="@../images/Divieto.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="coinTextTable1" fill="#ffffffbd" layoutX="50.0" layoutY="43.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="2.0" text="0" textAlignment="CENTER" wrappingWidth="45.6390380859375">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="PaneXCard5" layoutX="712.0" layoutY="345.0" prefHeight="66.0" prefWidth="82.0">
+         <children>
+            <ImageView fitHeight="32.0" fitWidth="37.0" layoutX="28.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" fx:id="xCard5">
+               <image>
+                  <Image url="@../images/Divieto.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="coinTextTable11" fill="#ffffffbd" layoutX="50.0" layoutY="43.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="2.0" text="0" textAlignment="CENTER" wrappingWidth="45.6390380859375">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="PaneXCard4" layoutX="810.0" layoutY="315.0" prefHeight="66.0" prefWidth="82.0">
+         <children>
+            <ImageView fitHeight="32.0" fitWidth="37.0" layoutX="28.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" fx:id="xCard4">
+               <image>
+                  <Image url="@../images/Divieto.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="coinTextTable12" fill="#ffffffbd" layoutX="50.0" layoutY="43.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="2.0" text="0" textAlignment="CENTER" wrappingWidth="45.6390380859375">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="PaneXCard3" layoutX="850.0" layoutY="270.0" prefHeight="66.0" prefWidth="82.0">
+         <children>
+            <ImageView fitHeight="32.0" fitWidth="37.0" layoutX="28.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" fx:id="xCard3">
+               <image>
+                  <Image url="@../images/Divieto.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="coinTextTable121" fill="#ffffffbd" layoutX="50.0" layoutY="43.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="2.0" text="0" textAlignment="CENTER" wrappingWidth="45.6390380859375">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="PaneXCard2" layoutX="830.0" layoutY="200.0" prefHeight="66.0" prefWidth="82.0">
+         <children>
+            <ImageView fitHeight="32.0" fitWidth="37.0" layoutX="28.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" fx:id="xCard2">
+               <image>
+                  <Image url="@../images/Divieto.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="coinTextTable1211" fill="#ffffffbd" layoutX="50.0" layoutY="43.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="2.0" text="0" textAlignment="CENTER" wrappingWidth="45.6390380859375">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="PaneXCard1" layoutX="770.0" layoutY="165.0" prefHeight="66.0" prefWidth="82.0">
+         <children>
+            <ImageView fitHeight="32.0" fitWidth="37.0" layoutX="28.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" fx:id="xCard1">
+               <image>
+                  <Image url="@../images/Divieto.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="coinTextTable1212" fill="#ffffffbd" layoutX="50.0" layoutY="43.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="2.0" text="0" textAlignment="CENTER" wrappingWidth="45.6390380859375">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="PaneXCard12" layoutX="655.0" layoutY="140.0" prefHeight="66.0" prefWidth="82.0">
+         <children>
+            <ImageView fitHeight="32.0" fitWidth="37.0" layoutX="28.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" fx:id="xCard12">
+               <image>
+                  <Image url="@../images/Divieto.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="coinTextTable1213" fill="#ffffffbd" layoutX="50.0" layoutY="43.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="2.0" text="0" textAlignment="CENTER" wrappingWidth="45.6390380859375">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="PaneXCard11" layoutX="525.0" layoutY="145.0" prefHeight="66.0" prefWidth="82.0">
+         <children>
+            <ImageView fitHeight="32.0" fitWidth="37.0" layoutX="28.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" fx:id="xCard11">
+               <image>
+                  <Image url="@../images/Divieto.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="coinTextTable12131" fill="#ffffffbd" layoutX="50.0" layoutY="43.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="2.0" text="0" textAlignment="CENTER" wrappingWidth="45.6390380859375">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="PaneXCard10" layoutX="445.0" layoutY="160.0" prefHeight="66.0" prefWidth="82.0">
+         <children>
+            <ImageView fitHeight="32.0" fitWidth="37.0" layoutX="28.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" fx:id="xCard10">
+               <image>
+                  <Image url="@../images/Divieto.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="coinTextTable12132" fill="#ffffffbd" layoutX="50.0" layoutY="43.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="2.0" text="0" textAlignment="CENTER" wrappingWidth="45.6390380859375">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="PaneXCard9" layoutX="366.0" layoutY="220.0" prefHeight="66.0" prefWidth="82.0">
+         <children>
+            <ImageView fitHeight="32.0" fitWidth="37.0" layoutX="28.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" fx:id="xCard9">
+               <image>
+                  <Image url="@../images/Divieto.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="coinTextTable12133" fill="#ffffffbd" layoutX="50.0" layoutY="43.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="2.0" text="0" textAlignment="CENTER" wrappingWidth="45.6390380859375">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="PaneXCard8" layoutX="382.0" layoutY="305.0" prefHeight="66.0" prefWidth="82.0">
+         <children>
+            <ImageView fitHeight="32.0" fitWidth="37.0" layoutX="28.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" fx:id="xCard8">
+               <image>
+                  <Image url="@../images/Divieto.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="coinTextTable12134" fill="#ffffffbd" layoutX="50.0" layoutY="43.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="2.0" text="0" textAlignment="CENTER" wrappingWidth="45.6390380859375">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="PaneXCard7" layoutX="455.0" layoutY="330.0" prefHeight="66.0" prefWidth="82.0">
+         <children>
+            <ImageView fitHeight="32.0" fitWidth="37.0" layoutX="28.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" fx:id="xCard7">
+               <image>
+                  <Image url="@../images/Divieto.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="coinTextTable12135" fill="#ffffffbd" layoutX="50.0" layoutY="43.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="2.0" text="0" textAlignment="CENTER" wrappingWidth="45.6390380859375">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
