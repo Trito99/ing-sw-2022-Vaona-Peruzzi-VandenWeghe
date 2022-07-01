@@ -19,12 +19,12 @@
          </image>
       </ImageView>
       <Pane layoutX="397.0" layoutY="132.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="328.0" prefWidth="518.0" styleClass="layout" stylesheets="@../css/style.css" />
-      <TextField fx:id="ipAddressField" layoutX="434.0" layoutY="230.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="444.0" promptText="127.0.0.1" style="-fx-background-radius: 6;" text="localhost">
+      <TextField fx:id="ipAddressField" layoutX="434.0" layoutY="230.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="444.0" promptText="127.0.0.1" style="-fx-background-radius: 6;">
          <font>
             <Font name="Helvetica" size="24.0" />
          </font>
       </TextField>
-      <TextField fx:id="portNumberField" layoutX="434.0" layoutY="359.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="444.0" promptText="4000" style="-fx-background-radius: 6;" text="4000">
+      <TextField fx:id="portNumberField" layoutX="434.0" layoutY="359.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="444.0" promptText="4000" style="-fx-background-radius: 6;">
          <font>
             <Font name="Helvetica" size="24.0" />
          </font>
