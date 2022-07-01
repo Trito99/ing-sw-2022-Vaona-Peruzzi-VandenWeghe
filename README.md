@@ -16,8 +16,9 @@ The following UML Diagrams were respectively developed during the planning phase
 
 [Final Model UML](deliverables/UML/model_initialUML.jpg)     
 [Final Server UML](deliverables/UML/Server_finalUML.jpg)    
-[Final Controller UML](deliverables/UML/Controller_finalUML.jpg)
-[ingsw UML](deliverables/UML/ingsw.png)
+[Final Client UML](deliverables/UML/Client_finalUML.jpg)  
+[Final Controller UML](deliverables/UML/Controller_finalUML.jpg)  
+[High level UML](deliverables/UML/ingsw.png)
 
 ## Game modes
 * Multiplayer mode
