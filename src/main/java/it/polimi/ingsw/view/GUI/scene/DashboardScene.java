@@ -717,7 +717,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
                         if(!(islandListOfStudentsIdMap.get(island).contains(student.getIdStudent())));
                             islandListOfStudentsIdMap.get(island).add(student.getIdStudent());
                     }
-                    switch (student.getsColour()) {
+                    switch (student.getSColor()) {
                         case GREEN:
                             ((ImageView) island.getChildren().get(studentsOnIsland.indexOf(student))).setImage(new Image("/images/students/Gstudent.png"));
                             break;
