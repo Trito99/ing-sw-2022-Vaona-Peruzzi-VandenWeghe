@@ -42,6 +42,7 @@ The following UML Diagrams were respectively developed during the planning phase
 
 ### How to run the program
 
+### Client
 * The client can be executed by typing from the terminal the following command:
 ```
 java -jar eriantys-client.jar
@@ -51,18 +52,13 @@ The user can then choose between the CLI and the GUI by simply typing their acro
 Due to the presence of ANSI colors, the CLI can be correctly used in UNIX environments or in Windows 10 build 16257 (or later) with the ENABLE_VIRTUAL_TERMINAL_PROCESSING flag enabled.
 
 ### Server
-The server can be executed by typing from the terminal the following command which starts the server on port 4000 and on the localhost:
+* The server can be executed by typing from the terminal the following command which starts the server on port 4000 and on the localhost:
 ```
 java -jar eriantys-server.jar
 ```
 If the user would like to set a different _port number_ and _ip address_, he can do so by typing the command with the following arguments:
 ```
 java -jar eriantys-server.jar port_number ip_address
-```
-### Client
-If the user would like to specify a different _port number_ and _ip address_, he can do so by typing the command with the following arguments:
-```
-java -jar eriantys-client.jar port_number ip_address
 ```
 
 ## Requirements
