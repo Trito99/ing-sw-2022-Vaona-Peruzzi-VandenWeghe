@@ -12,6 +12,7 @@ import it.polimi.ingsw.view.GUI.GuiManager;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -484,17 +485,27 @@ public class SchoolController extends ObservableView implements GenericScene {
         }
     }
 
-    public void addMouseEventToLastStudentsOfHall(){
-        if(!school.getGTable().isEmpty())
-            green_table.getChildren().get(school.getGTable().size()-1).addEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
-        if(!school.getRTable().isEmpty())
-            red_table.getChildren().get(school.getGTable().size()-1).addEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
-        if(!school.getYTable().isEmpty())
-            yellow_table.getChildren().get(school.getGTable().size()-1).addEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
-        if(!school.getPTable().isEmpty())
-            pink_table.getChildren().get(school.getGTable().size()-1).addEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
-        if(!school.getBTable().isEmpty())
-            blue_table.getChildren().get(school.getGTable().size()-1).addEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+    public void addMouseEventToLastStudentsOfHall() {
+        if (!school.getGTable().isEmpty()) {
+            green_table.getChildren().get(school.getGTable().size() - 1).addEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+            green_table.getChildren().get(school.getGTable().size() - 1).setCursor(Cursor.HAND);
+        }
+        if (!school.getRTable().isEmpty()) {
+            red_table.getChildren().get(school.getGTable().size() - 1).addEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+            red_table.getChildren().get(school.getGTable().size() - 1).setCursor(Cursor.HAND);
+        }
+        if (!school.getYTable().isEmpty()) {
+            yellow_table.getChildren().get(school.getGTable().size() - 1).addEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+            yellow_table.getChildren().get(school.getGTable().size() - 1).setCursor(Cursor.HAND);
+        }
+        if (!school.getPTable().isEmpty()) {
+            pink_table.getChildren().get(school.getGTable().size() - 1).addEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+            pink_table.getChildren().get(school.getGTable().size() - 1).setCursor(Cursor.HAND);
+        }
+        if (!school.getBTable().isEmpty()) {
+            blue_table.getChildren().get(school.getGTable().size() - 1).addEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+            blue_table.getChildren().get(school.getGTable().size() - 1).setCursor(Cursor.HAND);
+        }
     }
 
     private int acrobatIndex=0;
@@ -554,11 +565,26 @@ public class SchoolController extends ObservableView implements GenericScene {
 
     public void removeMouseEventToLastStudentsOfHall(){
         acrobatIndexHall=0;
-        green_table.getChildren().get(school.getGTable().size()-1).removeEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
-        red_table.getChildren().get(school.getGTable().size()-1).removeEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
-        yellow_table.getChildren().get(school.getGTable().size()-1).removeEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
-        pink_table.getChildren().get(school.getGTable().size()-1).removeEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
-        blue_table.getChildren().get(school.getGTable().size()-1).removeEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+        if (!school.getGTable().isEmpty()) {
+            green_table.getChildren().get(school.getGTable().size() - 1).removeEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+            green_table.getChildren().get(school.getGTable().size() - 1).setCursor(Cursor.DEFAULT);
+        }
+        if (!school.getRTable().isEmpty()) {
+            red_table.getChildren().get(school.getGTable().size() - 1).removeEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+            red_table.getChildren().get(school.getGTable().size() - 1).setCursor(Cursor.DEFAULT);
+        }
+        if (!school.getYTable().isEmpty()) {
+            yellow_table.getChildren().get(school.getGTable().size() - 1).removeEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+            yellow_table.getChildren().get(school.getGTable().size() - 1).setCursor(Cursor.DEFAULT);
+        }
+        if (!school.getPTable().isEmpty()) {
+            pink_table.getChildren().get(school.getGTable().size() - 1).removeEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+            pink_table.getChildren().get(school.getGTable().size() - 1).setCursor(Cursor.DEFAULT);
+        }
+        if (!school.getBTable().isEmpty()) {
+            blue_table.getChildren().get(school.getGTable().size() - 1).removeEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
+            blue_table.getChildren().get(school.getGTable().size() - 1).setCursor(Cursor.DEFAULT);
+        }
     }
 
     public int[] getStudentSelectedForSwitch() {

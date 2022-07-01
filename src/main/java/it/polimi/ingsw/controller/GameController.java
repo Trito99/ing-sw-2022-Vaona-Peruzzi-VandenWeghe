@@ -236,7 +236,7 @@ public class GameController {
                         }
                     }
                     else {
-                        virtualView.showMessage("\n⚠️Tower Color or Assistant Deck isn't available ⚠️");
+                        virtualView.showMessage("\nTower Color or Assistant Deck isn't available ");
                         virtualView.askTowerColorAndDeck(gameSession.getTowerColors(), gameSession.getAssistantDeckNames());
                         again = true;
                     }
@@ -290,12 +290,12 @@ public class GameController {
                             gameSession.playAssistantCard(CardSelected.getCardNickname(), receivedMessage.getNickname());
                             virtualView.showDeckAssistant(gameSession.getPlayer(getActivePlayer()).getDeckOfPlayer());
                         } else {
-                            virtualView.showMessage("\n⚠️Card already played by another player. Try again ⚠️");
+                            virtualView.showMessage("\nCard already played by another player. Try again ");
                             virtualView.askAssistantCardToPlay();
                             again = true;
                         }
                     }else{
-                        virtualView.showMessage("\n⚠️Card doesn't exist or has already been played. Try again ⚠️");
+                        virtualView.showMessage("\nCard doesn't exist or has already been played. Try again ");
                         virtualView.askAssistantCardToPlay();
                         again = true;
                     }
@@ -325,11 +325,11 @@ public class GameController {
 
                     if(Choice.getPlace().equals("CHARACTER CARD")){
                         if(gameSession.getDifficulty().equals(Difficulty.STANDARDMODE)) {
-                            virtualView.showMessage("⚠️You are playing the standard mode, you can't use character cards! ⚠️");
+                            virtualView.showMessage("You are playing the standard mode, you can't use character cards! ");
                             virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getEntry());
                         }
                         else if(characterCardAlreadyPlayed){
-                            virtualView.showMessage("⚠️You can't activate 2 effects in a round! ⚠️");
+                            virtualView.showMessage("You can't activate 2 effects in a round! ");
                             virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getEntry());
                         }
                         else {
@@ -383,7 +383,7 @@ public class GameController {
                                     movedStudents++;
                                     allStudentsMoved();
                                 }else{
-                                    virtualView.showMessage("⚠️Table already full. Select another student ⚠️");
+                                    virtualView.showMessage("Table already full. Select another student ");
                                     again = true;
                                     virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getEntry());
                                 }
@@ -391,14 +391,14 @@ public class GameController {
                                 virtualView.askId(true,null,-1, null);
                             }
                         } else {
-                            virtualView.showMessage("\n⚠️Wrong input  ⚠️");
+                            virtualView.showMessage("\nWrong input  ");
                             again = true;
 
                             virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getEntry());
                         }
                     }
                     else if(!Choice.getPlace().equals("CHARACTER CARD")){
-                        virtualView.showMessage("\n⚠️Student selected is not available ⚠️");
+                        virtualView.showMessage("\nStudent selected is not available ");
                         again = true;
                         virtualView.askPlaceAndStudentForMove(gameSession.getPlayer(getActivePlayer()).getPersonalSchool().getEntry());
                     }
@@ -422,7 +422,7 @@ public class GameController {
                             if(playable)
                                 virtualView.askCharacterCardToPlay(true, -1, null);
                             else{
-                                virtualView.showMessage("\n⚠️You don't have enough coins for any card ⚠️");
+                                virtualView.showMessage("\nYou don't have enough coins for any card ");
                                 setActionState(savedActionState);
                                 action();
                             }
@@ -430,7 +430,7 @@ public class GameController {
                             setActionState(savedActionState);
                             action();
                         }else{
-                            virtualView.showMessage("\n⚠️Wrong input  ⚠️");
+                            virtualView.showMessage("\nWrong input  ");
                             virtualView.askCharacterCardToPlay(false, gameSession.getPlayer(getActivePlayer()).getCoinScore(), gameSession.getTable().getCharacterCardsOnTable());
                         }
                     }else {
@@ -528,19 +528,19 @@ public class GameController {
                         } else {
                             again = true;
                             if (exists && !empty && !cantPlay) {
-                                virtualView.showMessage("\n⚠️You don't have enough coins for this card ⚠️");
+                                virtualView.showMessage("\nYou don't have enough coins for this card ");
                                 setActionState(savedActionState);
                                 action();
                             }else if (!exists && !changeIdea)
-                                virtualView.showMessage("\n⚠️Effect not present. Try again ⚠️");
+                                virtualView.showMessage("\nEffect not present. Try again ");
                             else if (empty ) {
-                                virtualView.showMessage("\n⚠️Card selected is empty ⚠️");
+                                virtualView.showMessage("\nCard selected is empty ");
                                 setActionState(savedActionState);
                                 action();
                             }else if(cantPlay) {
                                 characterCard.setCoinOnCard(false);
                                 gameSession.getPlayer(getActivePlayer()).setCoinScore(gameSession.getPlayer(getActivePlayer()).getCoinScore() + 1);
-                                virtualView.showMessage("\n⚠️You can't play bard effect if you don't have any students in hall. Choose another effect ⚠️");
+                                virtualView.showMessage("\nYou can't play bard effect if you don't have any students in hall. Choose another effect ");
                             }
                             if (!changeIdea)
                             virtualView.askCharacterCardToPlay(true, -1, null);
@@ -576,7 +576,7 @@ public class GameController {
                             }
                             allStudentsMoved();
                         } else {
-                            virtualView.showMessage("⚠️Island selected doesn't exist. Select another island ⚠️");
+                            virtualView.showMessage("Island selected doesn't exist. Select another island ");
                             again = true;
                             virtualView.askId(true, characterCard,-1, null);
                         }
@@ -593,7 +593,7 @@ public class GameController {
                                 again = false;
                                 virtualView.askId(true,null,-1, null);
                             }else {
-                                virtualView.showMessage("\n⚠️Student selected is not available ⚠️");
+                                virtualView.showMessage("\nStudent selected is not available ");
                                 again = true;
                                 virtualView.askId(false,characterCard,-1, null);
                             }
@@ -654,9 +654,9 @@ public class GameController {
                                         virtualView.askId(false, characterCard, acrobatIndex, gameSession.getPlayer(getActivePlayer()).getPersonalSchool());
                                 }else{
                                     if (characterCard.getCardEffect().equals(CardEffect.ACROBAT))
-                                        virtualView.showMessage("\n⚠️Student selected is not available ⚠️");
+                                        virtualView.showMessage("\nStudent selected is not available ");
                                     else
-                                        virtualView.showMessage("\n⚠️Student selected is not available or isn't the last on the table you selected ⚠️");
+                                        virtualView.showMessage("\nStudent selected is not available or isn't the last on the table you selected ");
                                     again = true;
                                     virtualView.askId(false,characterCard,acrobatIndex, gameSession.getPlayer(getActivePlayer()).getPersonalSchool());
                                 }
@@ -688,7 +688,7 @@ public class GameController {
                                         setActionState(savedActionState);
                                         action();
                                     }else{
-                                        virtualView.showMessage("\n⚠️Student selected is not available ⚠️");
+                                        virtualView.showMessage("\nStudent selected is not available ");
                                         again = true;
                                         virtualView.askId(false, characterCard, acrobatIndex, gameSession.getPlayer(getActivePlayer()).getPersonalSchool());
                                     }
@@ -715,7 +715,7 @@ public class GameController {
                                 action();
 
                             }else {
-                                virtualView.showMessage("\n⚠️Student selected is not available ⚠️");
+                                virtualView.showMessage("\nStudent selected is not available ");
                                 again = true;
                                 virtualView.askId(false,characterCard,-1, null);
                             }
@@ -777,7 +777,7 @@ public class GameController {
                     }
                     else {
                         again = true;
-                        virtualView.showMessage("\n⚠️Color selected doesn't exists! ⚠️ ");
+                        virtualView.showMessage("\nColor selected doesn't exists!  ");
                         virtualView.askColorToBlock(characterCard.getCardEffect());
                     }
                 }
@@ -786,11 +786,11 @@ public class GameController {
 
                     if (step.getString().equals("CHARACTER CARD")) {
                         if(gameSession.getDifficulty().equals(Difficulty.STANDARDMODE)) {
-                            virtualView.showMessage("⚠️You are playing the standard mode, you can't use character cards! ⚠️");
+                            virtualView.showMessage("You are playing the standard mode, you can't use character cards! ");
                             virtualView.askMotherEarthSteps(gameSession.getPlayer(getActivePlayer()).getTrash().getStepMotherEarth(), gameSession.getTable(), gameSession.getDifficulty());
                         }
                         else if(characterCardAlreadyPlayed){
-                            virtualView.showMessage("⚠️You can't activate 2 effects in a round! ⚠️");
+                            virtualView.showMessage("You can't activate 2 effects in a round! ");
                             virtualView.askMotherEarthSteps(gameSession.getPlayer(getActivePlayer()).getTrash().getStepMotherEarth(), gameSession.getTable(), gameSession.getDifficulty());
                         }
                         else {
@@ -803,7 +803,7 @@ public class GameController {
 
                     else{
                         if (step.getSteps() > step.getMaxSteps()) {
-                            virtualView.showMessage("\n⚠️Steps selected more than maximum available ⚠️");
+                            virtualView.showMessage("\nSteps selected more than maximum available ");
                             again = true;
                             if (characterCard != null && characterCard.getCardEffect().isBearerPlayed()) {
                                 allVirtualView.get(getActivePlayer()).askMotherEarthSteps(gameSession.getPlayer(getActivePlayer()).getTrash().getStepMotherEarth() + 2, gameSession.getTable(), gameSession.getDifficulty());
@@ -837,11 +837,11 @@ public class GameController {
 
                     if (Cloud.getString().equals("CHARACTER CARD")) {
                         if(gameSession.getDifficulty().equals(Difficulty.STANDARDMODE)) {
-                            virtualView.showMessage("⚠️You are playing the standard mode, you can't use character cards! ⚠️");
+                            virtualView.showMessage("You are playing the standard mode, you can't use character cards! ");
                             virtualView.askCloud(gameSession.getTable());
                         }
                         else if(characterCardAlreadyPlayed){
-                            virtualView.showMessage("⚠️You can't activate 2 effects in a round! ⚠️");
+                            virtualView.showMessage("You can't activate 2 effects in a round! ");
                             virtualView.askCloud(gameSession.getTable());
                         }
                         else {
@@ -864,7 +864,7 @@ public class GameController {
                             gameSession.getPlayer(getActivePlayer()).getPersonalSchool().moveStudentFromCloudToEntry(gameSession.getTable().getCloudNumber().get(Cloud.getId() - 1));
                             turnFinished = true;
                         } else {
-                            virtualView.showMessage("\n⚠️Cloud is empty or doesn't exist ⚠️");
+                            virtualView.showMessage("\nCloud is empty or doesn't exist ");
                             again = true;
                             virtualView.askCloud(gameSession.getTable());
                         }
@@ -876,7 +876,7 @@ public class GameController {
                 }
                 break;
             default:
-                String message = "⚠️Error! ⚠️";
+                String message = "Error! ";
                 for (VirtualView vv : allVirtualView.values()) {
                     vv.showMessage(message);
                 }
