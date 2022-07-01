@@ -76,6 +76,7 @@ public class CloudCards extends ObservableView implements GenericScene {
                 notifyObserver(obs -> obs.chooseCloudCard(cloudSelected.getIdCloud(), ""));
                 disabilitateCloud(true);
                 GuiManager.getMainScene().setActionCloud(false);
+                GuiManager.getMainScene().disabilitateCharacterCards(true);
             }
         }
     }

@@ -442,6 +442,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
         this.table = table;
         cloudController.updateStudents(table.getCloudNumber());
         updateIslands(table.getListOfIsland());
+
     }
 
     /**
@@ -598,6 +599,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
                     characterCardLayout.getChildren().add(characterCardImage);
                     characterCardControllerMap.put(characterCardsPlaying.get(i).getCardEffect(), characterCardController);
                     characterCardLayout.setVisible(true);
+                    disabilitateCharacterCards(true);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -865,6 +867,69 @@ public class DashboardScene extends ObservableView implements GenericScene {
                         break;
                 }
             }
+            if(islandCard.isXCardOnIsland()){
+                if (PaneIsland1.equals(island)) {
+                    PaneXCard1.setVisible(true);
+                    PaneXCard1.getChildren().get(0).setVisible(true);
+                    PaneXCard1.getChildren().get(1).setVisible(true);
+                    ((Text) PaneXCard1.getChildren().get(1)).setText(String.valueOf(islandCard.getXCardCounter()));
+                } else if (PaneIsland2.equals(island)) {
+                    PaneXCard2.setVisible(true);
+                    PaneXCard2.getChildren().get(0).setVisible(true);
+                    PaneXCard2.getChildren().get(1).setVisible(true);
+                    ((Text) PaneXCard2.getChildren().get(1)).setText(String.valueOf(islandCard.getXCardCounter()));
+                } else if (PaneIsland3.equals(island)) {
+                    PaneXCard3.setVisible(true);
+                    PaneXCard3.getChildren().get(0).setVisible(true);
+                    PaneXCard3.getChildren().get(1).setVisible(true);
+                    ((Text) PaneXCard3.getChildren().get(1)).setText(String.valueOf(islandCard.getXCardCounter()));
+                } else if (PaneIsland4.equals(island)) {
+                    PaneXCard4.setVisible(true);
+                    PaneXCard4.getChildren().get(0).setVisible(true);
+                    PaneXCard4.getChildren().get(1).setVisible(true);
+                    ((Text) PaneXCard4.getChildren().get(1)).setText(String.valueOf(islandCard.getXCardCounter()));
+                } else if (PaneIsland5.equals(island)) {
+                    PaneXCard5.setVisible(true);
+                    PaneXCard5.getChildren().get(0).setVisible(true);
+                    PaneXCard5.getChildren().get(1).setVisible(true);
+                    ((Text) PaneXCard5.getChildren().get(1)).setText(String.valueOf(islandCard.getXCardCounter()));
+                } else if (PaneIsland6.equals(island)) {
+                    PaneXCard6.setVisible(true);
+                    PaneXCard6.getChildren().get(0).setVisible(true);
+                    PaneXCard6.getChildren().get(1).setVisible(true);
+                    ((Text) PaneXCard6.getChildren().get(1)).setText(String.valueOf(islandCard.getXCardCounter()));
+                } else if (PaneIsland7.equals(island)) {
+                    PaneXCard7.setVisible(true);
+                    PaneXCard7.getChildren().get(0).setVisible(true);
+                    PaneXCard7.getChildren().get(1).setVisible(true);
+                    ((Text) PaneXCard7.getChildren().get(1)).setText(String.valueOf(islandCard.getXCardCounter()));
+                } else if (PaneIsland8.equals(island)) {
+                    PaneXCard8.setVisible(true);
+                    PaneXCard8.getChildren().get(0).setVisible(true);
+                    PaneXCard8.getChildren().get(1).setVisible(true);
+                    ((Text) PaneXCard8.getChildren().get(1)).setText(String.valueOf(islandCard.getXCardCounter()));
+                } else if (PaneIsland9.equals(island)) {
+                    PaneXCard9.setVisible(true);
+                    PaneXCard9.getChildren().get(0).setVisible(true);
+                    PaneXCard9.getChildren().get(1).setVisible(true);
+                    ((Text) PaneXCard9.getChildren().get(1)).setText(String.valueOf(islandCard.getXCardCounter()));
+                } else if (PaneIsland10.equals(island)) {
+                    PaneXCard10.setVisible(true);
+                    PaneXCard10.getChildren().get(0).setVisible(true);
+                    PaneXCard10.getChildren().get(1).setVisible(true);
+                    ((Text) PaneXCard10.getChildren().get(1)).setText(String.valueOf(islandCard.getXCardCounter()));
+                } else if (PaneIsland11.equals(island)) {
+                    PaneXCard11.setVisible(true);
+                    PaneXCard11.getChildren().get(0).setVisible(true);
+                    PaneXCard11.getChildren().get(1).setVisible(true);
+                    ((Text) PaneXCard11.getChildren().get(1)).setText(String.valueOf(islandCard.getXCardCounter()));
+                } else if (PaneIsland12.equals(island)) {
+                    PaneXCard12.setVisible(true);
+                    PaneXCard12.getChildren().get(0).setVisible(true);
+                    PaneXCard12.getChildren().get(1).setVisible(true);
+                    ((Text) PaneXCard12.getChildren().get(1)).setText(String.valueOf(islandCard.getXCardCounter()));
+                }
+            }
         }
     }
 
@@ -991,6 +1056,18 @@ public class DashboardScene extends ObservableView implements GenericScene {
         Bridge12_1.setVisible(false);
         Bridge12_1.setDisable(true);
         turnText.setVisible(false);
+        PaneXCard1.setVisible(false);
+        PaneXCard2.setVisible(false);
+        PaneXCard3.setVisible(false);
+        PaneXCard4.setVisible(false);
+        PaneXCard5.setVisible(false);
+        PaneXCard6.setVisible(false);
+        PaneXCard7.setVisible(false);
+        PaneXCard8.setVisible(false);
+        PaneXCard9.setVisible(false);
+        PaneXCard10.setVisible(false);
+        PaneXCard11.setVisible(false);
+        PaneXCard12.setVisible(false);
     }
 
     /**
@@ -999,7 +1076,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
      * @param maxSteps Mother earth can do according to the last Assistant Card played by the player
      * @param disability set true when done Mother Earth is on an invalid position
      */
-    public void disabilityMother(Table table, int maxSteps, boolean disability) {
+    public void disabilitateMother(Table table, int maxSteps, boolean disability) {
         this.table = table;
         this.maxSteps = maxSteps;
         for (IslandCard islandCard : table.getListOfIsland()) {
@@ -1007,6 +1084,12 @@ public class DashboardScene extends ObservableView implements GenericScene {
             if (islandCard.getMotherEarthOnIsland()) {
                 island.getChildren().get(island.getChildren().size() - 1).setDisable(disability);
             }
+        }
+    }
+
+    public void disabilitateCharacterCards(boolean disable){
+        for(Node node : characterCardLayout.getChildren()){
+            node.setDisable(disable);
         }
     }
 
@@ -1107,27 +1190,26 @@ public class DashboardScene extends ObservableView implements GenericScene {
             motherNature.setOnDragDone(new EventHandler<DragEvent>() {
                 public void handle(DragEvent event) {
                     if (event.getTransferMode() == TransferMode.MOVE) {
-                    }
-                    ArrayList<Integer> possibleIslands = new ArrayList<>();
-                    if((islandMother+maxSteps)>table.getListOfIsland().size()){
-                        for(int i=1; i<(islandMother+maxSteps-table.getListOfIsland().size()+1);i++){
-                            possibleIslands.add(i);
-                        }
-                    }
-                    int steps = (motherDestinationIslandId-islandMother);
-                    if(steps<0){
-                        for(int i=0;i<possibleIslands.size();i++){
-                            if(possibleIslands.get(i)==motherDestinationIslandId) {
-                                steps = table.getListOfIsland().size() - islandMother + motherDestinationIslandId;
-                                int finalSteps = steps;
-                                notifyObserver(obs -> obs.chooseMotherEarthSteps(finalSteps,maxSteps,""));
+                        ArrayList<Integer> possibleIslands = new ArrayList<>();
+                        if ((islandMother + maxSteps) > table.getListOfIsland().size()) {
+                            for (int i = 1; i < (islandMother + maxSteps - table.getListOfIsland().size() + 1); i++) {
+                                possibleIslands.add(i);
                             }
                         }
+                        int steps = (motherDestinationIslandId - islandMother);
+                        if (steps < 0) {
+                            for (int i = 0; i < possibleIslands.size(); i++) {
+                                if (possibleIslands.get(i) == motherDestinationIslandId) {
+                                    steps = table.getListOfIsland().size() - islandMother + motherDestinationIslandId;
+                                    int finalSteps = steps;
+                                    notifyObserver(obs -> obs.chooseMotherEarthSteps(finalSteps, maxSteps, ""));
+                                }
+                            }
 
-                    }
-                    else if(steps > 0) {
-                        int finalSteps1 = steps;
-                        notifyObserver(obs -> obs.chooseMotherEarthSteps(finalSteps1,maxSteps,""));
+                        } else if (steps > 0) {
+                            int finalSteps1 = steps;
+                            notifyObserver(obs -> obs.chooseMotherEarthSteps(finalSteps1, maxSteps, ""));
+                        }
                     }
                     event.consume();
                 }
@@ -1214,7 +1296,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
         if(isActionStudent()){
             personalSchoolController.disableEntry(false);
         }else if(isActionMother()){
-            disabilityMother(GuiManager.getMainScene().getTable(),GuiManager.getMainScene().getMaxSteps(),false);
+            disabilitateMother(GuiManager.getMainScene().getTable(),GuiManager.getMainScene().getMaxSteps(),false);
         }else if(isActionCloud()){
             cloudController.disabilitateCloud(false);
         }

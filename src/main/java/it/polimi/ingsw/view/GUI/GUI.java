@@ -21,10 +21,7 @@ import javafx.application.Platform;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 import java.util.Map;
-
-import static java.lang.System.out;
 
 /**
  * Implements the GUI (graphical user interface)
@@ -253,6 +250,7 @@ public class GUI extends ObservableView implements View {
     public void askAssistantCardToPlay() {
         Platform.runLater(() -> {
             GuiManager.getMainScene().setPlanning(true);
+            GuiManager.getMainScene().disabilitateCharacterCards(true);
             GuiManager.getMainScene().getAssistantDeck().addAllObservers(observers);});
         showMessage("PLANNING PHASE\nChoose an Assistant Card");
     }
@@ -321,7 +319,8 @@ public class GUI extends ObservableView implements View {
     public void askPlaceAndStudentForMove(ArrayList<Student> entry) {
         Platform.runLater(() ->
             {GuiManager.getMainScene().getPersonalSchoolController().disableEntry(false);
-            GuiManager.getMainScene().setActionStudent(true);});
+            GuiManager.getMainScene().setActionStudent(true);
+                GuiManager.getMainScene().disabilitateCharacterCards(false);});
         showMessage("ACTION PHASE\nMove a student from your entry ");
 
     }
@@ -337,7 +336,7 @@ public class GUI extends ObservableView implements View {
         Platform.runLater(() ->
             {GuiManager.getMainScene().getPersonalSchoolController().disableEntry(true);
             GuiManager.getMainScene().setActionStudent(false);
-            GuiManager.getMainScene().disabilityMother(table,maxSteps,false);
+            GuiManager.getMainScene().disabilitateMother(table,maxSteps,false);
             GuiManager.getMainScene().setActionMother(true);});
         showMessage("Move MotherEarth");
     }
@@ -349,7 +348,7 @@ public class GUI extends ObservableView implements View {
     @Override
     public void askCloud(Table table) {
         Platform.runLater(() ->
-            {GuiManager.getMainScene().disabilityMother(table,GuiManager.getMainScene().getMaxSteps(),true);
+            {GuiManager.getMainScene().disabilitateMother(table,GuiManager.getMainScene().getMaxSteps(),true);
             GuiManager.getMainScene().setActionMother(false);
             GuiManager.getMainScene().getCloudController().disabilitateCloud(false);
             GuiManager.getMainScene().setActionCloud(true);});

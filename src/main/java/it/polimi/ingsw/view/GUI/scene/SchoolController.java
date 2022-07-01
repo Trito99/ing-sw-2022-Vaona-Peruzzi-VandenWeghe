@@ -417,8 +417,8 @@ public class SchoolController extends ObservableView implements GenericScene {
             studentNode.setOnDragDone(new EventHandler<DragEvent>() {
                 public void handle(DragEvent event) {
                     if (event.getTransferMode() == TransferMode.MOVE) {
+                        notifyObserver(obs -> obs.choosePlaceAndStudentForMove(placeSelected,studentSelected));
                     }
-                    notifyObserver(obs -> obs.choosePlaceAndStudentForMove(placeSelected,studentSelected));
                     event.consume();
                 }
             });

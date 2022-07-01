@@ -26,67 +26,123 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class GameControllerTest {
     private GameController gc;
-    private ArrayList <VirtualView> allViews;
-    private VirtualView singleView;
-    private VirtualView extraView;
-    private ClientHandlerInterface clientHandler;
-    HashMap<String, VirtualView> allVirtualView;
-    private Game gameSession;
-    private GameState gameState;
-    int roundIndex;
-    private DeckAssistant deckOfPlayer;
-    private Table table;
 
-    /**@BeforeEach
-    void setup(){
+    @Test
+    @BeforeEach
+    public void init() {
         gc = new GameController();
-        allViews = new ArrayList<>();
-        LobbyServer lobbyServer = new LobbyServer();
-        allVirtualView = new HashMap<>();
-        gameSession = new Game();
-        roundIndex = 0;
-
-        clientHandler = new ClientHandlerInterface(){
-            @Override
-            public void disconnect() {
-            }
-
-            @Override
-            public void sendMessage(GeneralMessage message) {
-            }
-        };
-
-        for(int i = 0; i < 4; i++){
-            allViews.add(new VirtualView(clientHandler));
-        }
-        singleView = new VirtualView(clientHandler);
-        extraView = new VirtualView(clientHandler);
-
-        table = new Table();
-        deckOfPlayer = new DeckAssistant(AssistantDeckName.WIZARD1);
-        table.addFinalStudents();
-        table.generateIslandCards();
-        table.generateMotherEarth();
-
-        Player player = new Player(null,PlayerNumber.PLAYER1);
-        player.setNickname("Gino");
-        allVirtualView.put(player.getNickname(), singleView);
     }
 
     @Test
-    void gameSession(){
-        gameState = GameState.INIT;
-        GameController gc = new GameController();
+    public void generateTable() {
+        Game gameSession = new Game();
+        gameSession.getTable().generateBagInit();
+        assertNotNull(gameSession.getTable().getBag());
+
+        gameSession.getTable().generateIslandCards();
+        assertNotNull(gameSession.getTable().getListOfIsland());
+
+        gameSession.getTable().generateMotherEarth();
+        assertNotNull(gameSession.getTable().getPosMotherEarth());
+
+        gameSession.getTable().extractStudentsInit();
+        for (int i = 0; i < 12; i++) {
+            assertNotNull(gameSession.getTable().getListOfIsland().get(i).getStudentOnIsland());
+        }
+
+        gameSession.getTable().addFinalStudents();
+        assertNotNull(gameSession.getTable().getBag());
+    }
+
+    @Test
+    public void generatePlayer() {
+        Game gameSession = new Game();
+        gameSession.setDifficulty(Difficulty.STANDARDMODE);
+        for (int i = 1; i < 5; i++) {
+            gameSession.addPlayer(new Player(null, PlayerNumber.values()[gameSession.getListOfPlayers().size()]));
+            gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size() - 1).setNickname("");
+            gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size() - 1).setPlayerDate(new GregorianCalendar(1999, 02, 01));
+
+            assertEquals(Difficulty.STANDARDMODE, gameSession.getDifficulty());
+            assertNotNull(gameSession.getListOfPlayers());
+            assertNotNull(gameSession.getListOfPlayers().get(i - 1));
+            assertNotNull(gameSession.getListOfPlayers().get(i - 1).getNickname());
+            assertNotNull(gameSession.getListOfPlayers().get(i - 1).getPlayerDate());
+            assertNull(gameSession.getListOfPlayers().get(i - 1).getTColor());
+            assertEquals(i, gameSession.getListOfPlayers().size());
+        }
+
+        gameSession.getListOfPlayers().clear();
+        gameSession.setDifficulty(Difficulty.EXPERTMODE);
+        gameSession.getTable().setCoinsOnTable(20);
+
+        for (int i = 1; i < 5; i++) {
+            gameSession.addPlayer(new Player(null, PlayerNumber.values()[gameSession.getListOfPlayers().size()]));
+            gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size() - 1).setNickname("");
+            gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size() - 1).setPlayerDate(new GregorianCalendar(1999, 02, 01));
+
+            if (gameSession.getDifficulty().equals(Difficulty.EXPERTMODE)) {
+                gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size() - 1).setCoinScore(1);
+                gameSession.getTable().decreaseCoinsOnTable(1);
+            }
+
+            assertEquals(Difficulty.EXPERTMODE, gameSession.getDifficulty());
+            assertNotNull(gameSession.getListOfPlayers());
+            assertNotNull(gameSession.getListOfPlayers().get(i - 1));
+            assertNotNull(gameSession.getListOfPlayers().get(i - 1).getNickname());
+            assertNotNull(gameSession.getListOfPlayers().get(i - 1).getPlayerDate());
+            assertNull(gameSession.getListOfPlayers().get(i - 1).getTColor());
+            assertEquals(i, gameSession.getListOfPlayers().size());
+            assertEquals(1, gameSession.getListOfPlayers().get(i - 1).getCoinScore());
+            assertEquals(20 - i, gameSession.getTable().getCoinsOnTable());
+        }
+    }
+
+
+    /**
+     * @BeforeEach void setup(){
+     * gc = new GameController();
+     * allViews = new ArrayList<>();
+     * LobbyServer lobbyServer = new LobbyServer();
+     * allVirtualView = new HashMap<>();
+     * gameSession = new Game();
+     * roundIndex = 0;
+     * <p>
+     * clientHandler = new ClientHandlerInterface(){
+     * @Override public void disconnect() {
+     * }
+     * @Override public void sendMessage(GeneralMessage message) {
+     * }
+     * };
+     * <p>
+     * for(int i = 0; i < 4; i++){
+     * allViews.add(new VirtualView(clientHandler));
+     * }
+     * singleView = new VirtualView(clientHandler);
+     * extraView = new VirtualView(clientHandler);
+     * <p>
+     * table = new Table();
+     * deckOfPlayer = new DeckAssistant(AssistantDeckName.WIZARD1);
+     * table.addFinalStudents();
+     * table.generateIslandCards();
+     * table.generateMotherEarth();
+     * <p>
+     * Player player = new Player(null,PlayerNumber.PLAYER1);
+     * player.setNickname("Gino");
+     * allVirtualView.put(player.getNickname(), singleView);
+     * }
+     */
+
+    @Test
+    void setActionState() {
+        Game gameSession = new Game();
+        GameState gameState = GameState.INIT;
         gc.getGameSession();
         assertNotNull(gc.getGameSession());
 
-        gc.setGameSession(gameSession);
-        assertNotNull(gc.getGameSession());
-        assertEquals(gameSession, gc.getGameSession());
-
-        gc.setActionState(ActionState.MOTHERNATURE);
+        gc.setActionState(ActionState.MOTHEREARTH);
         assertNotNull(gc.getActionState());
-        assertEquals(ActionState.MOTHERNATURE, gc.getActionState());
+        assertEquals(ActionState.MOTHEREARTH, gc.getActionState());
 
         gc.setActionState(ActionState.STUDENT);
         assertNotNull(gc.getActionState());
@@ -97,91 +153,71 @@ public class GameControllerTest {
         assertEquals(ActionState.CLOUDCARD, gc.getActionState());
     }
 
-    @Test
-    void gameState(){
-        GameController gc = new GameController();
-        gameState = GameState.INIT;
 
-        gc.getGameState();
-        assertNotNull(gc.getGameState());
+    @Test
+    void isGameStarted() {
+        Game gameSession = new Game();
 
         gc.setGameState(GameState.INIT);
-        assertNotNull(gc.getGameState());
-        assertEquals(GameState.INIT, gc.getGameState());
+        assertNotNull(gc.isGameStarted());
+        assertEquals(false, gc.isGameStarted());
 
         gc.setGameState(GameState.PLANNING);
-        assertNotNull(gc.getGameState());
-        assertEquals(GameState.PLANNING, gc.getGameState());
+        assertNotNull(gc.isGameStarted());
+        assertEquals(true, gc.isGameStarted());
+        assertNotEquals(false, gc.isGameStarted());
 
         gc.setGameState(GameState.ACTION);
-        assertNotNull(gc.getGameState());
-        assertEquals(GameState.ACTION, gc.getGameState());
+        assertNotNull(gc.isGameStarted());
+        assertEquals(true, gc.isGameStarted());
+        assertNotEquals(false, gc.isGameStarted());
 
         gc.setGameState(GameState.END_GAME);
-        assertNotNull(gc.getGameState());
-        assertEquals(GameState.END_GAME, gc.getGameState());
-
-        /** test in disconnect
-        Game game = new Game();
-        Player player1 = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
-        player1.setNickname("Pippo");
-        player1.setPlayerDate(new GregorianCalendar(2000, 01, 01));
-        game.addPlayer(player1);
-        Player player2 = new Player(TColor.BLACK, PlayerNumber.PLAYER2);
-        player2.setNickname("Pluto");
-        player2.setPlayerDate(new GregorianCalendar(2001, 01, 01));
-        game.addPlayer(player2);
-        Player player3 = new Player(TColor.GREY, PlayerNumber.PLAYER3);
-        player3.setNickname("Paperino");
-        player3.setPlayerDate(new GregorianCalendar(2002, 01, 01));
-        game.addPlayer(player3);
-
-        TurnController turn = new TurnController(gc);
-        gc.startTurn();
-        gc.setGameState(GameState.INIT);
-        gc.disconnect("Pippo");
-        assertEquals(GameState.IN_GAME, gc.getGameState());
-
+        assertNotNull(gc.isGameStarted());
+        assertEquals(false, gc.isGameStarted());
     }
+
 
     @Test
     void planning(){
-        GameController gc = new GameController();
-        gameState = GameState.INIT;
+        //Table table = new Table();
+        gc.generateTable();
+        gc.setGameState(GameState.INIT);
 
         Player player1 = new Player(TColor.WHITE, PlayerNumber.PLAYER1);
         player1.setNickname("Gino");
-        gameSession.addPlayer(player1);
+        gc.getGameSession().addPlayer(player1);
 
         Player player2 = new Player(TColor.BLACK, PlayerNumber.PLAYER2);
         player2.setNickname("Paolo");
-        gameSession.addPlayer(player2);
+        gc.getGameSession().addPlayer(player2);
 
-        Table table = new Table();
+        assertEquals(2, gc.getGameSession().getListOfPlayers().size());
+
         DeckAssistant deckAssistant1 = new DeckAssistant(AssistantDeckName.WIZARD1);
         ArrayList<AssistantCard> assistantCards1 = new ArrayList<>();
         DeckAssistant deckAssistant2 = new DeckAssistant(AssistantDeckName.WIZARD2);
         ArrayList<AssistantCard> assistantCards2 = new ArrayList<>();
-        table.generateIslandCards();
+        gc.getGameSession().getTable().generateIslandCards();
 
-        gameSession.setTable(table);
-        gameSession.getPlayer("Gino").setDeckOfPlayer(deckAssistant1);
-        gameSession.getPlayer("Gino").getDeckOfPlayer().getCardsInHand().clear();
-        gameSession.getPlayer("Paolo").setDeckOfPlayer(deckAssistant2);
-        gameSession.getPlayer("Paolo").getDeckOfPlayer().getCardsInHand().clear();
+        gc.getGameSession().getPlayer("Gino").setDeckOfPlayer(deckAssistant1);
+        assertNotNull(gc.getGameSession().getPlayer("Gino").getDeckOfPlayer());
+        assertEquals(deckAssistant1, gc.getGameSession().getPlayer("Gino").getDeckOfPlayer());
+        gc.getGameSession().getPlayer("Gino").getDeckOfPlayer().getCardsInHand().clear();
+        assertEquals(0, gc.getGameSession().getPlayer("Gino").getDeckOfPlayer().getCardsInHand().size());
 
-        assertNotNull(gc.getGameState());
+        gc.getGameSession().getPlayer("Paolo").setDeckOfPlayer(deckAssistant2);
+        assertNotNull(gc.getGameSession().getPlayer("Paolo").getDeckOfPlayer());
+        assertEquals(deckAssistant2, gc.getGameSession().getPlayer("Paolo").getDeckOfPlayer());
+        gc.getGameSession().getPlayer("Paolo").getDeckOfPlayer().getCardsInHand().clear();
+        assertEquals(0, gc.getGameSession().getPlayer("Paolo").getDeckOfPlayer().getCardsInHand().size());
+
+        assertNotNull(gc.isGameStarted());
+        assertEquals(false, gc.isGameStarted());
 
         gc.setGameState(GameState.PLANNING);
-
-        assertNotNull(gc.getGameState());
-        assertEquals(GameState.PLANNING, gc.getGameState());
-
-        for(String s : allVirtualView.keySet()){
-            if (!s.equals(gc.getActivePlayer())){
-                assertNotNull(allVirtualView.get(s));
-            }
-        }
+        assertNotNull(gc.isGameStarted());
+        assertEquals(true, gc.isGameStarted());
     }
 
     /** provo ad aggiungere 5 giocatori, e
