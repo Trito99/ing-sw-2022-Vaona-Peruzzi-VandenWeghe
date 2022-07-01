@@ -467,6 +467,7 @@ class GameTest {
 
         game.playCharacterCard(herbalistCard.getCardEffect(), "Federico", -1, -1, -1, SColor.GREEN);
         assertEquals(true,SColor.GREEN.isColorBlocked());
+        SColor.GREEN.unlockColor();
     }
 
     @Test
