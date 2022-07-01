@@ -125,7 +125,7 @@ public class CharacterCardController extends ObservableView implements GenericSc
 
         for (int i = 0; i < studentsOnCard.size(); i++) {
             studentPane.getChildren().get(i).setVisible(true);
-            switch (studentsOnCard.get(i).getsColour()) {
+            switch (studentsOnCard.get(i).getSColor()) {
                 case GREEN:
                     ((ImageView) studentPane.getChildren().get(i)).setImage(new Image("/images/students/Gstudent.png"));
                     break;
