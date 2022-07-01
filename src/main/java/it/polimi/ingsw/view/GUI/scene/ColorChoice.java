@@ -2,7 +2,6 @@ package it.polimi.ingsw.view.GUI.scene;
 
 import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.observer.ObservableView;
-import it.polimi.ingsw.observer.ObserverView;
 import it.polimi.ingsw.view.GUI.GuiManager;
 import javafx.event.Event;
 import javafx.fxml.FXML;
