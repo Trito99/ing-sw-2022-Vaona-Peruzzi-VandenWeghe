@@ -144,12 +144,12 @@ public class CLI extends ObservableView implements View {
 
 
                 if(birthYear < 1900 || birthYear > 2021){
-                    out.print("⚠️Error in selecting the date of birth! Try again. ⚠️\n");
+                    out.print("Error in selecting the date of birth! Try again. \n");
                     ye = true;
                 }
             } catch (IllegalArgumentException exception){
                 ye = true;
-                out.print("⚠️Error in selecting the date of birth! Try again. ⚠️\n");
+                out.print("Error in selecting the date of birth! Try again. \n");
             } catch (Exception exception){
                 ye = true;
                 out.println(WRONG_INPUT);
