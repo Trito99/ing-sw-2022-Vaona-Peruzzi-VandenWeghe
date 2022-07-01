@@ -47,7 +47,7 @@ The following UML Diagrams were respectively developed during the planning phase
 ### Client
 * The client can be executed by typing from the terminal the following command:
 ```
-java -jar GC25-client.jar
+java -jar GC25_client.jar
 ```
 The user can then choose between the CLI and the GUI by simply typing their acronym.
 
@@ -58,11 +58,11 @@ CLI Command for Character Card:
 ### Server
 * The server can be executed by typing from the terminal the following command which starts the server on port 4000 and on the localhost:
 ```
-java -jar GC25-server.jar
+java -jar GC25_server.jar
 ```
 If the user would like to set a different _port number_ and _ip address_, he can do so by typing the command with the following arguments:
 ```
-java -jar GC25-server.jar port_number device_name
+java -jar GC25_server.jar port_number device_name
 ```
 
 ## Requirements
