@@ -44,14 +44,14 @@ public class ViewOtherSchoolScene1 extends ObservableView implements GenericScen
     private Pane trashPane1_2Players;
 
     /**
-     * Initialize player's school
+     * Initialize players school
      */
     @FXML
     public void initialize(){
     }
 
     /**
-     * Updates player's school and trash card
+     * Updates players school and trash card
      */
     public void updatePersonalSchool(Map<String, SchoolController> map) throws IOException {
         FXMLLoader loader = new FXMLLoader(StartGUI.class.getResource("/fxml/school.fxml"));
