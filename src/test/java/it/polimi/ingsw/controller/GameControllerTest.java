@@ -172,7 +172,6 @@ public class GameControllerTest {
 
     @Test
     void planning(){
-        //Table table = new Table();
         gc.generateTable();
         gc.setGameState(GameState.INIT);
 
@@ -305,13 +304,20 @@ public class GameControllerTest {
         //assertEquals(Difficulty.EXPERTMODE, gc.getGameSession().getDifficulty());
 
     }
+     */
+    /**
     @Test
     void towerColorAndDeckChosen(){
-        ClientMessage  message = new TowerColorAndDeckChosen("Gino", TColor.WHITE, AssistantDeckName.WIZARD3);
-        gc.getMessage(message);
-        assertEquals(TColor.WHITE, gameSession.getPlayer("Gino").getTColor());
-        assertEquals(AssistantDeckName.WIZARD3, gameSession.getPlayer("Gino").getDeckOfPlayer().getDeckName());
+        Game gameSession = new Game();
+        gameSession.setDifficulty(Difficulty.STANDARDMODE);
+        gameSession.addPlayer(new Player(null, PlayerNumber.values()[gameSession.getListOfPlayers().size()]));
+        gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()).setNickname("Gino");
+        gameSession.getListOfPlayers().get(gameSession.getListOfPlayers().size()).setPlayerDate(new GregorianCalendar(1999, 02, 01));
 
-    } */
+        ClientMessage message = new TowerColorAndDeckChosen("Gino", TColor.WHITE, AssistantDeckName.WIZARD3);
+        gc.getMessage(message);
+        assertEquals(TColor.WHITE, gc.getGameSession().getListOfPlayers().get(1).getTColor());
+        //assertEquals(AssistantDeckName.WIZARD3, gc.getPlayer("Gino").getDeckOfPlayer().getDeckName());
+    }*/
 
 }
