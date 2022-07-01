@@ -207,7 +207,7 @@ public class SchoolController extends ObservableView implements GenericScene {
     }
 
     /**
-     * Initialize player's school
+     * Initialize players school
      */
     public void initialize(){
         hide();
@@ -217,7 +217,7 @@ public class SchoolController extends ObservableView implements GenericScene {
     }
 
     /**
-     * Updates school's situation
+     * Updates schools situation
      */
     private void updateSchool(){
         updateEntry();
@@ -227,7 +227,7 @@ public class SchoolController extends ObservableView implements GenericScene {
     }
 
     /**
-     * Updates school's entry
+     * Updates schools entry
      */
     private void updateEntry(){
         entryMap.clear();
@@ -255,7 +255,7 @@ public class SchoolController extends ObservableView implements GenericScene {
     }
 
     /**
-     * Updates school's hall
+     * Updates schools hall
      */
     private void updateHall() {
         hallMap.clear();
@@ -283,7 +283,7 @@ public class SchoolController extends ObservableView implements GenericScene {
     }
 
     /**
-     * Updates Professor's hall
+     * Updates Professors hall
      */
     private void updateProf() {
         for (Prof prof : school.getProfOfPlayer()){
@@ -310,7 +310,7 @@ public class SchoolController extends ObservableView implements GenericScene {
     }
 
     /**
-     * Updates school's Tower Zone
+     * Updates schools Tower Zone
      */
     private void updateTowerZone() {
         for(Tower tower : school.getTowers()){
@@ -330,7 +330,7 @@ public class SchoolController extends ObservableView implements GenericScene {
     }
 
     /**
-     * Hides panes not used yet
+     * Hides panes that are not used yet
      */
     private void hide(){
         for(Node node : entry.getChildren()){
@@ -367,7 +367,7 @@ public class SchoolController extends ObservableView implements GenericScene {
     }
 
     /**
-     * Disables moves in school's entry
+     * Disables moves in school entry
      */
     public void disableEntry(boolean disable){
         for(Student student : school.getEntry()) {
@@ -429,7 +429,7 @@ public class SchoolController extends ObservableView implements GenericScene {
     }
 
     /**
-     * Enables drag over of students
+     * Enables drag over hall of students
      */
     private void addDragOver(){
         hall.setOnDragOver(new EventHandler<DragEvent>() {
@@ -478,6 +478,9 @@ public class SchoolController extends ObservableView implements GenericScene {
         });
     }
 
+    /**
+     * Adds mouse event to students of the entry
+     */
     public void addMouseEventToStudentsOfEntry(){
         for(Student student : school.getEntry()) {
             ImageView studentNode = (ImageView) entry.getChildren().get(school.getEntry().indexOf(student));
@@ -485,6 +488,9 @@ public class SchoolController extends ObservableView implements GenericScene {
         }
     }
 
+    /**
+     * Adds mouse event to the last students of each table
+     */
     public void addMouseEventToLastStudentsOfHall() {
         if (!school.getGTable().isEmpty()) {
             green_table.getChildren().get(school.getGTable().size() - 1).addEventHandler(MouseEvent.MOUSE_CLICKED, this::studentClickedHall);
@@ -521,6 +527,11 @@ public class SchoolController extends ObservableView implements GenericScene {
         return acrobatIndex;
     }
 
+
+    /**
+     * Handles the click on the students of the entry.
+     * @param t the mouse click event.
+     */
     private <T extends Event> void studentClicked(T t) {
         studentSelectedForSwitch[acrobatIndex] = entryMap.get(t.getSource());
         disableEntry(true);
@@ -557,6 +568,9 @@ public class SchoolController extends ObservableView implements GenericScene {
 
     }
 
+    /**
+     * Removes mouse event of the students of the entry
+     */
     public void removeMouseEventToStudentsOfEntry(){
         acrobatIndex=0;
         for(Student student : school.getEntry()) {
@@ -565,6 +579,9 @@ public class SchoolController extends ObservableView implements GenericScene {
         }
     }
 
+    /**
+     * Removes mouse event of the last student of each table
+     */
     public void removeMouseEventToLastStudentsOfHall(){
         acrobatIndexHall=0;
         if (!school.getGTable().isEmpty()) {
@@ -597,6 +614,10 @@ public class SchoolController extends ObservableView implements GenericScene {
         return studentSelectedForSwitchHall;
     }
 
+    /**
+     * Handles the click on the last student of each table.
+     * @param t the mouse click event.
+     */
     private <T extends Event> void studentClickedHall(T t) {
         studentSelectedForSwitchHall[acrobatIndexHall] = hallMap.get(t.getSource());
         disableHall(true);
@@ -621,7 +642,10 @@ public class SchoolController extends ObservableView implements GenericScene {
 
     }
 
-
+    /**
+     * Enables or disables last student of each table
+     * @param disable boolean that enables or disables the last student of each table
+     */
     public void disableHall(boolean disable){
         if(!school.getGTable().isEmpty())
             green_table.getChildren().get(school.getGTable().size()-1).setDisable(disable);

@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
 /**
- * This Scene Controller is used to tell the player he lost the match
+ * This Scene Controller is used to tell the player that he has lost the match
  */
 public class LoserScene extends ObservableView implements GenericScene {
 
