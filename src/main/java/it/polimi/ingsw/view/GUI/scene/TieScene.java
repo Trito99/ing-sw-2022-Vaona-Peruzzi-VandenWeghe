@@ -18,6 +18,7 @@ public class TieScene extends ObservableView implements GenericScene {
     /**
      * Initialize buttons present in the Scene
      */
+    @FXML
     public void initialize(){
         closeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::buttonClose);
     }
