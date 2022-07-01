@@ -9,6 +9,7 @@ import it.polimi.ingsw.model.game.Difficulty;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.school.School;
 import it.polimi.ingsw.model.school.TColor;
+import it.polimi.ingsw.model.student.SColor;
 import it.polimi.ingsw.model.student.Student;
 import it.polimi.ingsw.model.table.Table;
 import it.polimi.ingsw.network.LobbyForPrint;

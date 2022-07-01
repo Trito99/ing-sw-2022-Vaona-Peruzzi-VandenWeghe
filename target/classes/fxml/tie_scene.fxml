@@ -17,7 +17,7 @@
          </image>
       </ImageView>
       <Pane layoutX="337.0" layoutY="178.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="600.0" styleClass="layout" stylesheets="@../css/style.css" />
-      <Text fx:id="endMessageText" fill="#ffffffbd" layoutX="504.0" layoutY="303.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="IT'S A TIE! NOBODY WON" textAlignment="CENTER" wrappingWidth="265.6390380859375">
+      <Text fx:id="endMessageText" fill="#ffffffbd" layoutX="504.0" layoutY="286.0" stroke="#ffffffbd" strokeLineCap="ROUND" strokeWidth="1.3" text="IT'S A TIE! NOBODY WON" textAlignment="CENTER" wrappingWidth="265.6390380859375">
          <font>
             <Font name="Helvetica" size="39.0" />
          </font>

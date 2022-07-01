@@ -34,9 +34,9 @@ The following UML Diagrams were respectively developed during the planning phase
 
 ## Advanced Functions
 
+* Game for up to 4 players
 * Multiple games
 * 12 Character Cards (in Expert Mode)
-* Game for up to 4 players
 
 ## Executing program
 
@@ -44,7 +44,7 @@ The following UML Diagrams were respectively developed during the planning phase
 
 * The client can be executed by typing from the terminal the following command:
 ```
-java -jar eriantys.jar
+java -jar eriantys-client.jar
 ```
 The user can then choose between the CLI and the GUI by simply typing their acronym.
 
@@ -53,11 +53,16 @@ Due to the presence of ANSI colors, the CLI can be correctly used in UNIX enviro
 ### Server
 The server can be executed by typing from the terminal the following command which starts the server on port 4000 and on the localhost:
 ```
-java -jar eriantys-client.jar
+java -jar eriantys-server.jar
 ```
+If the user would like to set a different _port number_ and _ip address_, he can do so by typing the command with the following arguments:
+```
+java -jar eriantys-server.jar port_number ip_address
+```
+### Client
 If the user would like to specify a different _port number_ and _ip address_, he can do so by typing the command with the following arguments:
 ```
-java -jar eriantys-client.jar <port_number> <ip_address>
+java -jar eriantys-client.jar port_number ip_address
 ```
 
 ## Requirements
@@ -84,7 +89,7 @@ This project is written in Java/JavaFx and is built using Maven. Unit test are w
 ## Coverage view
 
 * Only relevant methods have been tested
-  ![corevage image](link "coverage")
+  ![corevage image](deliverables/Images/coverage_test.jpg "coverage")
 
 
 
