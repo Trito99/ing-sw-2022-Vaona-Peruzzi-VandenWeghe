@@ -379,18 +379,6 @@ public class SchoolController extends ObservableView implements GenericScene {
         return entryMap;
     }
 
-    public int getStudentSelected() {
-        return studentSelected;
-    }
-
-    public void setStudentSelected(int studentSelected) {
-        this.studentSelected = studentSelected;
-    }
-
-    public String getPlaceSelected() {
-        return placeSelected;
-    }
-
     public void setPlaceSelected(String placeSelected) {
         this.placeSelected = placeSelected;
     }
