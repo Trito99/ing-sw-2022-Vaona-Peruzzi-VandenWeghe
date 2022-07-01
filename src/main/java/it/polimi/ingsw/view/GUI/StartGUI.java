@@ -59,6 +59,9 @@ public class StartGUI extends Application {
         stage.show();
     }
 
+    /**
+     * Disconnects the client and call the endGame
+     */
     public void disconnect(){
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
