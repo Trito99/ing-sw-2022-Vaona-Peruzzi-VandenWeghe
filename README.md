@@ -52,6 +52,8 @@ java -jar GC25-client.jar
 The user can then choose between the CLI and the GUI by simply typing their acronym.
 
 Due to the presence of ANSI colors, the CLI can be correctly used in UNIX environments or in Windows 10 build 16257 (or later) with the ENABLE_VIRTUAL_TERMINAL_PROCESSING flag enabled.
+CLI Command for Character Card: 
+- CHARACTER CARD 
 
 ### Server
 * The server can be executed by typing from the terminal the following command which starts the server on port 4000 and on the localhost:
