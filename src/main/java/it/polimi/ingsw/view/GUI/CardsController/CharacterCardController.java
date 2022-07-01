@@ -17,7 +17,9 @@ import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * This Scene Controller is used to manage the different cards
+ */
 public class CharacterCardController extends ObservableView implements GenericScene {
 
     private static Map<CardEffect, String> characterCardMap;
@@ -93,12 +95,20 @@ public class CharacterCardController extends ObservableView implements GenericSc
     public void initialize() {
     }
 
+    /**
+     * Sets the image for the specific card and adds an event handler
+     * @param card specific card
+     */
     public void setData(CharacterCard card) {
         this.card = card;
         cardImage.setImage(new Image(characterCardMap.get(card.getCardEffect())));
         cardImage.addEventHandler(MouseEvent.MOUSE_CLICKED, this::clickCard);
     }
 
+    /**
+     * Handles the click on the card.
+     * @param event the mouse click event.
+     */
     public void clickCard(Event event) {
         GuiManager.getMainScene().setCardSelected(this.card);
         if (GuiManager.getMainScene().isActionStudent()) {
@@ -113,6 +123,10 @@ public class CharacterCardController extends ObservableView implements GenericSc
         }
     }
 
+    /**
+     * Initializes the students on the card
+     * @param studentsOnCard students on specific character card
+     */
     public void initializeStudentPane(ArrayList<Student> studentsOnCard) {
         longPane.setVisible(true);
         shortPane.setVisible(false);
@@ -155,6 +169,10 @@ public class CharacterCardController extends ObservableView implements GenericSc
         }
     }
 
+    /**
+     * Updates the students on the card
+     * @param characterCard specific character card
+     */
     public void updateStudentsCharacterCard(CharacterCard characterCard) {
         switch (characterCard.getCardEffect()) {
             case ABBOT:
@@ -174,6 +192,10 @@ public class CharacterCardController extends ObservableView implements GenericSc
         }
     }
 
+    /**
+     * Initializes the XCards on the card
+     * @param XCardsOnCard Forbidden cards on specific character card
+     */
     public void initializeXCardPane(int XCardsOnCard) {
         longPane.setVisible(true);
         shortPane.setVisible(false);
@@ -188,6 +210,9 @@ public class CharacterCardController extends ObservableView implements GenericSc
         }
     }
 
+    /**
+     * Hides nodes that are not used yet
+     */
     public void hideAll() {
         longPane.setVisible(false);
         shortPane.setVisible(true);
@@ -207,6 +232,10 @@ public class CharacterCardController extends ObservableView implements GenericSc
         }
     }
 
+    /**
+     * Disables or enables students on character card
+     * @param disable boolean that enables or disables
+     */
     public void disableStudents(boolean disable) {
         for (int i = 0; i < studentPane.getChildren().size(); i++) {
             if (studentPane.getChildren().get(i).isVisible())
@@ -227,6 +256,9 @@ public class CharacterCardController extends ObservableView implements GenericSc
         return studentSelected;
     }
 
+    /**
+     * Enables drag event of students on card
+     */
     private void addDragDetected(ArrayList<Student> studentsOnCard) {
         for (int i = 0; i < studentsOnCard.size(); i++) {
             ImageView studentNode = (ImageView) studentPane.getChildren().get(i);
@@ -258,6 +290,9 @@ public class CharacterCardController extends ObservableView implements GenericSc
         }
     }
 
+    /**
+     * Adds a mouse event to the students on card
+     */
     private void addMouseEvent(ArrayList<Student> studentsOnCard) {
         for (int i = 0; i < studentsOnCard.size(); i++) {
             ImageView studentNode = (ImageView) studentPane.getChildren().get(i);
@@ -267,6 +302,10 @@ public class CharacterCardController extends ObservableView implements GenericSc
 
     private int acrobatIndex = 0;
 
+    /**
+     * Handles the click on the studen.
+     * @param t the mouse click event.
+     */
     private <T extends Event> void studentClicked(T t) {
         studentSelectedForSwitch[acrobatIndex] = studentMap.get(t.getSource());
         disableStudents(true);
@@ -286,10 +325,6 @@ public class CharacterCardController extends ObservableView implements GenericSc
 
     public int getAcrobatIndex(){
         return acrobatIndex;
-    }
-
-    public void setStudentSelected(int studentSelected) {
-        this.studentSelected = studentSelected;
     }
 
     public int[] getStudentSelectedForSwitch() {
