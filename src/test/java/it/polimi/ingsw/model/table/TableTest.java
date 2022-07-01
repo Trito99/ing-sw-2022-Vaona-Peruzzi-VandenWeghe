@@ -500,11 +500,4 @@ public class TableTest{
             }
         }
     }
-
-    /** controlla i costCharacter
-     for( CharacterCard card : deckCharacter.getCharacterCards()){
-     if( card.getCardEffect().equals(CardEffect.BACCO)){
-     assertEquals(1, card.getCostCharacter());
-     }
-     } */
 }
