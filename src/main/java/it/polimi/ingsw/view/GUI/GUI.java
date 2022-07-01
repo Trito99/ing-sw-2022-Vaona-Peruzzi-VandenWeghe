@@ -257,7 +257,7 @@ public class GUI extends ObservableView implements View {
     }
 
     /**
-     * Asks at the player which Character Card wants to play
+     * Asks at the player which Character Card he wants to play
      * @param choice false if the player hasn't already decided if he wants to activate a character card,
      *               true if the player wants to play a certain character card
      * @param coins of player
@@ -307,7 +307,7 @@ public class GUI extends ObservableView implements View {
 
     /**
      * Handles the effect of the Herbalist Card and Junkdealer Card
-     * Asks the player which color wants to select
+     * Asks the player which color he wants to select
      * @param color of the students to block in the influence calculation or to remove from the entry
      */
     @Override
@@ -320,7 +320,7 @@ public class GUI extends ObservableView implements View {
     }
 
     /**
-     * Asks the player which students and where wants to move
+     * Asks the player which students  he wants to move and where
      * @param entry of the player's school
      */
     @Override
@@ -334,7 +334,7 @@ public class GUI extends ObservableView implements View {
     }
 
     /**
-     * Asks the player how many steps wants to move Mother Earth
+     * Asks the player how many steps he wants to move Mother Earth
      * @param maxSteps max steps the player can choose
      * @param table of the match
      * @param difficulty of the match
@@ -350,7 +350,7 @@ public class GUI extends ObservableView implements View {
     }
 
     /**
-     * Asks the player which cloud wants to choose
+     * Asks the player which cloud he wants to choose
      * @param table of the match
      */
     @Override
@@ -364,7 +364,7 @@ public class GUI extends ObservableView implements View {
     }
 
     /**
-     * Asks the player which student want to select
+     * Asks the player which student he wants to select
      * @param choice true for herald and curator effect, otherwise false
      * @param characterCard played in the round
      * @param indexAcrobat index for the acrobat effect

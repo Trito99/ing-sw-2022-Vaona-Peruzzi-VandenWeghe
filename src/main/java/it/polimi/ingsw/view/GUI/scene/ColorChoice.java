@@ -73,7 +73,7 @@ public class ColorChoice extends ObservableView implements GenericScene {
     }
 
     /**
-     * Handles the click on the close button.
+     * Handles the click on the color button.
      * @param event the mouse click event.
      */
     private void colorClicked(Event event){
@@ -117,6 +117,10 @@ public class ColorChoice extends ObservableView implements GenericScene {
             GuiManager.closeStage(this);
         }
     }
+
+    /**
+     * Hides panes not used yet
+     */
 
     private void hide(){
         greenColorShadow.setVisible(false);

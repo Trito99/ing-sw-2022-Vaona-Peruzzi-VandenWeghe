@@ -461,7 +461,10 @@ public class DashboardScene extends ObservableView implements GenericScene {
             characterCardControllerMap.get(characterCard.getCardEffect()).updateStudentsCharacterCard(characterCard);
         }
     }
-
+    /**
+     * Shows the number of the round and wich players turn it is
+     * @param message with the info
+     */
     public void updateRoundText(String message){
         turnText.setText(message);
         turnText.setVisible(true);
@@ -472,10 +475,10 @@ public class DashboardScene extends ObservableView implements GenericScene {
     }
 
     /**
-     * Updates player's personal school
-     * @param controller of player's school
-     * @param gameMode game mode of the mach
-     * @param teamMate name of the other team's player
+     * Updates players personal school
+     * @param controller of players school
+     * @param gameMode game mode of the match
+     * @param teamMate name of the teammate
      * @throws IOException
      */
     public void updatePersonalSchool(SchoolController controller, GameMode gameMode, String teamMate) throws IOException {
@@ -504,7 +507,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     }
 
     /**
-     * Initialize Table of the match
+     * Initializes Table of the match
      * Places Cloud cards and Character cards (if Expert Mode)
      * @param difficulty mode of the match
      * @param table of the match
@@ -614,7 +617,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     }
 
     /**
-     * Initialize buttons present in the Scene and enables student's drag over
+     * Initialize buttons present in the Scene and enables students drag event
      */
     @FXML
     public void initialize(){
@@ -631,8 +634,8 @@ public class DashboardScene extends ObservableView implements GenericScene {
     }
 
     /**
-     * Handles the click on the "View other's school" button
-     * @param event opens a new scene showing other players' schools
+     * Handles the click on the "View schools" button
+     * @param event opens a new scene showing the schools of other players
      * @throws IOException
      */
     private void otherSchoolClicked(Event event) throws IOException {
@@ -656,7 +659,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     }
 
     /**
-     * Updates other players' schools
+     * Updates the schools of other players
      * @param controller school controller of each school
      * @param gameMode game mode of the match
      * @param nickname of the player
@@ -673,7 +676,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
 
     /**
      * Handles the click on the Assistant Deck button
-     * @param event opens a new scene showing player's personal Assistant Deck allowing the player to play a certain Assistant Card
+     * @param event opens a new scene showing players personal Assistant Deck allowing the player to play a certain Assistant Card
      */
     private void deckButtonClicked(Event event){
         GuiManager.newStagePane(assistantDeck, "/fxml/view_deck_scene");
@@ -705,7 +708,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     }
 
     /**
-     * Returns the new list of islands when two or more islands merge
+     * Updates the gui of the islands
      * @param listOfIslands list of the islands after one or more merges
      */
     public void updateIslands(ArrayList<IslandCard> listOfIslands) {
@@ -964,8 +967,8 @@ public class DashboardScene extends ObservableView implements GenericScene {
     }
 
     /**
-     * Returns the new student position on a certain island
-     * @param destinationIsland id island where will be placed the student
+     * Sets the correct id for the island chosed
+     * @param destinationIsland id of the island that has been chosen in gui
      */
     public void setIslandId(int destinationIsland) {
         boolean present = false;
@@ -986,8 +989,8 @@ public class DashboardScene extends ObservableView implements GenericScene {
     }
 
     /**
-     * Returns the new Mother Earth position on a certain island
-     * @param destinationIsland id island where will be placed Mother Earth
+     * Sets the correct id for the island chosed
+     * @param destinationIsland id of the island that has been chosen in gui
      */
     public void setMotherId(int destinationIsland) {
         boolean present = false;
@@ -1010,15 +1013,8 @@ public class DashboardScene extends ObservableView implements GenericScene {
         return studentDestinationIslandId;
     }
 
-    public int getMotherDestinationIslandId(){
-        return motherDestinationIslandId;
-    }
-    public int getIslandMother(){
-        return islandMother;
-    }
-
     /**
-     * Return the maximum number of steps Mother Earth can do
+     * Returns the maximum number of steps that Mother Earth can do
      * @return number of steps of Mother Earth
      */
     public int getMaxSteps(){
@@ -1026,7 +1022,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     }
 
     /**
-     * Hides panes not used yet
+     * Hides panes that are not used yet
      * @param table of the match
      */
     public void hide(Table table){
@@ -1080,22 +1076,27 @@ public class DashboardScene extends ObservableView implements GenericScene {
     }
 
     /**
-     * Disables moving Mother Earth
+     * Disables Mother Earth
      * @param table of the match
      * @param maxSteps Mother earth can do according to the last Assistant Card played by the player
-     * @param disability set true when done Mother Earth is on an invalid position
+     * @param disable boolean that enables or disables Mother Earth
      */
-    public void disabilitateMother(Table table, int maxSteps, boolean disability) {
+    public void disabilitateMother(Table table, int maxSteps, boolean disable) {
         this.table = table;
         this.maxSteps = maxSteps;
         for (IslandCard islandCard : table.getListOfIsland()) {
             Pane island = (Pane) islandPane.getChildren().get(24 + islandCard.getImmutableIdIsland());
             if (islandCard.getMotherEarthOnIsland()) {
-                island.getChildren().get(island.getChildren().size() - 1).setDisable(disability);
+                island.getChildren().get(island.getChildren().size() - 1).setDisable(disable);
             }
         }
     }
 
+
+    /**
+     * Disables character cards
+     * @param disable boolean that enables or disables the character cards
+     */
     public void disabilitateCharacterCards(boolean disable){
         for(Node node : characterCardLayout.getChildren()){
             node.setDisable(disable);
@@ -1107,8 +1108,8 @@ public class DashboardScene extends ObservableView implements GenericScene {
     }
 
     /**
-     * Enables drag over of students on island
-     * Enables drag over of Mother Earth on island
+     * Enables drag event of students
+     * Enables drag event of Mother Earth
      */
     private void addDragOver(){
         Pane island = null;
@@ -1229,6 +1230,9 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }
     }
 
+    /**
+     * Adds Mouse Event to Islands
+     */
     public void addMouseEventToIslands(){
         for(int i=1;i<13;i++) {
             Pane island = ((Pane) islandPane.getChildren().get(24 + i));
@@ -1237,12 +1241,19 @@ public class DashboardScene extends ObservableView implements GenericScene {
             island.setCursor(Cursor.HAND);
         }
     }
-
+    /**
+     * Handles the click on the island.
+     * @param event the mouse click event.
+     */
     private void islandClicked(Event event){
         setIslandId(islandIdMap.get(event.getSource()));
         removeMouseEventFromIslands();
     }
 
+
+    /**
+     * Removes Mouse Event to Islands
+     */
     public void removeMouseEventFromIslands(){
         notifyObserver(obs -> obs.chooseCharacterCard(cardSelected.getCardEffect().toString(),true));
         for(int i=1;i<13;i++) {
@@ -1254,9 +1265,8 @@ public class DashboardScene extends ObservableView implements GenericScene {
     }
 
     /**
-     * Handles Mother Earth's new position
-     * @param o object referring Mother Earth's pawn
-     * @return Mother Earth's new position
+     * @param o object referring Mother Earth's pane
+     * @return if the source of the drag event is a "mother earth"
      */
     private boolean equalsMother(Object o){
         return (o.equals(motherEarth1) || o.equals(motherEarth2) || o.equals(motherEarth3) || o.equals(motherEarth4) ||
@@ -1301,8 +1311,7 @@ public class DashboardScene extends ObservableView implements GenericScene {
     }
 
     /**
-     * Handles Character card's effects
-     * Disabilitates students and X cards on a certain Character card
+     * Reactivates the action phase after a card has been selected
      */
     public void reactivateActionPhase(){
         if(isActionStudent()){
@@ -1313,6 +1322,11 @@ public class DashboardScene extends ObservableView implements GenericScene {
             cloudController.disabilitateCloud(false);
         }
     }
+
+    /**
+     * Disables done dutton
+     * @param disable boolean that enables or disables done button
+     */
 
     public void disableDoneButton(boolean disable){
         if(!disable){
@@ -1328,12 +1342,20 @@ public class DashboardScene extends ObservableView implements GenericScene {
         }
     }
 
+
+    /**
+     * Handles the click on the done button.
+     * @param event the mouse click event.
+     */
     private void doneClicked(Event event){
-        disableCharacter();
+        disableSwitchStudents();
         disableDoneButton(true);
     }
 
-    public void disableCharacter(){
+    /**
+     * Handles the case of less students selected for switch in bard and acrobat card
+     */
+    public void disableSwitchStudents(){
         if(GuiManager.getMainScene().getCardSelected()!=null){
             GuiManager.getMainScene().getCharacterCardControllerMap().get(GuiManager.getMainScene().getCardSelected().getCardEffect()).disableStudents(true);
             if(GuiManager.getMainScene().getCardSelected().getCardEffect().equals(CardEffect.ACROBAT)) {

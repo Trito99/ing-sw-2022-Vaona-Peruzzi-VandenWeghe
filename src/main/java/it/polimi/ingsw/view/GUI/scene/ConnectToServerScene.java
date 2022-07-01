@@ -48,7 +48,8 @@ public class ConnectToServerScene extends ObservableView implements GenericScene
     }
 
     /**
-     * Handles the click on the Connect button
+     * Handles the click on the connect button.
+     * @param event the mouse click event.
      */
     private void clickConnect(Event event){
         try {
